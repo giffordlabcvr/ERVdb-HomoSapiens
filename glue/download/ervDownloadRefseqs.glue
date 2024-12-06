@@ -1,0 +1,5 @@
+create module -f modules/ervNcbiImporterReferences.xml ervNcbiImporter
+
+# Download NCBI sequences 
+module ervNcbiImporter import
+

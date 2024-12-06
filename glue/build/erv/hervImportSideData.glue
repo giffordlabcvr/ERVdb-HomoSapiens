@@ -1,0 +1,9 @@
+  create module -f modules/build/erv/ervSideDataImporter.xml ervSideDataImporter
+  
+  run script glue/build/erv/hervLoadRefConData.js
+
+  # Load data for the complete RV genome sequences
+  module ervSideDataImporter 
+    populate -f tabular/herv-side-data.tsv
+    exit
+

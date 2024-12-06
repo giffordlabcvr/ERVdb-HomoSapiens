@@ -1,0 +1,8 @@
+delete module xrvNcbiImporter
+
+create module -f modules/build/xrv/xrvNcbiImporterReferences.xml xrvNcbiImporter
+
+# Download NCBI sequences 
+module xrvNcbiImporter import
+
+export source ncbi-refseqs-xrv

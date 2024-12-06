@@ -1,0 +1,38 @@
+<!-- Retroviridae genus reference sequences from NCBI -->
+<ncbiImporter>
+  <giNumberFieldName>gb_gi_number</giNumberFieldName>
+  <sequenceFormat>GENBANK_XML</sequenceFormat>
+  <sourceName>ncbi-erv-refseq</sourceName>
+  <specificPrimaryAccessions>
+
+	<primaryAccession>AF053745</primaryAccession>
+	<primaryAccession>AF480925</primaryAccession>
+	<primaryAccession>AJ236112</primaryAccession>
+	<primaryAccession>AJ236115</primaryAccession>
+	<primaryAccession>AJ236117</primaryAccession>
+	<primaryAccession>AJ236118</primaryAccession>
+	<primaryAccession>AJ236128 </primaryAccession>
+	<primaryAccession>AJ236131</primaryAccession>
+	<primaryAccession>AJ236132</primaryAccession>
+	<primaryAccession>AY820048</primaryAccession>
+	<primaryAccession>AY820104</primaryAccession>
+	<primaryAccession>AY820111</primaryAccession>
+	<primaryAccession>DQ280312 </primaryAccession>
+	<primaryAccession>HM160080</primaryAccession>
+	<primaryAccession>KC128847</primaryAccession>
+	<primaryAccession>KC128848</primaryAccession>
+	<primaryAccession>KC128848</primaryAccession>
+	<primaryAccession>KC128849</primaryAccession>
+	<primaryAccession>KC128853</primaryAccession>
+	<primaryAccession>KC128854</primaryAccession>
+	<primaryAccession>KC128855</primaryAccession>
+	<primaryAccession>M23385</primaryAccession>
+	<primaryAccession>X99935</primaryAccession>
+	<primaryAccession>GQ222416</primaryAccession>
+	<primaryAccession>NC_027117</primaryAccession>
+
+  </specificPrimaryAccessions>  
+  <sequenceIdField>PRIMARY_ACCESSION</sequenceIdField>
+</ncbiImporter>
+
+

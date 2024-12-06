@@ -1,0 +1,31 @@
+  
+# ERV-specific schema extensions
+schema-project retroviridae
+  run file glue/build/erv/hervSchemaExtensions.glue
+  exit
+  
+# Build HERV project  
+project retroviridae
+
+  # Import ERV consensus and reference sequences
+  run file glue/build/erv/hervImportSources.glue
+
+  # Import metadata from tabular
+  run file glue/build/erv/hervImportSideData.glue
+  
+  # Declare references
+  run file glue/build/erv/hervReferences.glue  
+
+  # Import reference feature locations from tabular file
+  module featureLocationTextToGlue transform tabular/erv/herv_reference_feature_locations.tsv -r
+
+  # Declare constrained alignments
+  run file glue/build/erv/ervAlignmentTree.glue
+
+  # Compute constrained tip alignments
+  #run file glue/build/erv/ervDeriveConstrainedMsas.glue
+  
+ 
+  validate
+  
+  exit
