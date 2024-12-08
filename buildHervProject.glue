@@ -17,13 +17,13 @@ project retroviridae
   run file glue/build/erv/hervReferences.glue  
 
   # Import reference feature locations from tabular file
-  module featureLocationTextToGlue transform tabular/erv/herv_reference_feature_locations.tsv -r
+  module featureLocationTextToGlue transform tabular/herv_reference_feature_locations.tsv -r
 
   # Declare constrained alignments
-  run file glue/build/erv/ervAlignmentTree.glue
+  #run file glue/build/erv/hervAlignments.glue
 
   # Compute constrained tip alignments
-  #run file glue/build/erv/ervDeriveConstrainedMsas.glue
+  #run file glue/build/erv/computeConstrainedMsas.glue
   
  
   validate

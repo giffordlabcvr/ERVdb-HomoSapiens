@@ -1,16 +1,16 @@
   ### Declare ERV reference sequencess
     	
   ## Betaretrovirus
-  create reference REF_HERVK_HML2          erv-refseqs-beta HERVK-HML2
-  create reference REF_HERVK_HML1          erv-refseqs-beta HERVK-HML1
-  create reference REF_HERVK_HML3          erv-refseqs-beta HERVK-HML3
-  create reference REF_HERVK_HML4          erv-refseqs-beta HERVK-HML4
-  create reference REF_HERVK_HML5          erv-refseqs-beta HERVK-HML5
-  create reference REF_HERVK_HML6          erv-refseqs-beta HERVK-HML6
-  create reference REF_HERVK_HML7          erv-refseqs-beta HERVK-HML7
-  create reference REF_HERVK_HML8          erv-refseqs-beta HERVK-HML8
-  create reference REF_HERVK_HML9          erv-refseqs-beta HERVK-HML9
-  create reference REF_HERVK_HML10         erv-refseqs-beta HERVK-HML10
+  create reference REF_HERVK_HML2          erv-refseqs-beta HERV-K-HML2
+  create reference REF_HERVK_HML1          erv-refseqs-beta HERV-K-HML1
+  create reference REF_HERVK_HML3          erv-refseqs-beta HERV-K-HML3
+  create reference REF_HERVK_HML4          erv-refseqs-beta HERV-K-HML4
+  create reference REF_HERVK_HML5          erv-refseqs-beta HERV-K-HML5
+  create reference REF_HERVK_HML6          erv-refseqs-beta HERV-K-HML6
+  create reference REF_HERVK_HML7          erv-refseqs-beta HERV-K-HML7
+  create reference REF_HERVK_HML8          erv-refseqs-beta HERV-K-HML8
+  create reference REF_HERVK_HML9          erv-refseqs-beta HERV-K-HML9
+  create reference REF_HERVK_HML10         erv-refseqs-beta HERV-K-HML10
 
   ## Gammaretrovirus
   create reference REF_HERVT               erv-refseqs-gamma HERV-T
