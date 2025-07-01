@@ -1,9 +1,0 @@
-  # Import ERV consensus and reference sequences
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-eta
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-gamma
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-iota
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-lambda
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-rho
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-sigma
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-theta
-  import source sources/erv/fasta-refseqs-erv/homo-sapiens/erv-refseqs-zeta

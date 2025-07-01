@@ -1,0 +1,6 @@
+
+  # Import reference sequence data from GenBank XML
+  create module -f modules/hervSideDataImporterLoci.xml
+  module hervSideDataImporterLoci
+    populate -f tabular/herv_locus_data.tsv
+    exit
