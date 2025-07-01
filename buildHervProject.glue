@@ -16,6 +16,12 @@ project ervdb
 
   # Add imported ERV sequences to alignments
   #run file glue/build/erv/ervAlignmentTreeHomoSapiens.glue
+
+  # Compute alignments
+  
+  # Build phylogenies
+  
+  # Compute variations
   
   validate
   
