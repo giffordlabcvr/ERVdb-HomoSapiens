@@ -9,10 +9,13 @@ project ervdb
   run script glue/hervSetSequenceLengths.js 
 
   # Link to locus data table
-  run script glue/hervLinkSequences.js
+  run script glue/hervLinkSeqsToLocusTable.js
 
   # Import metadata about loci from tabular
   run file glue/hervImportSideData.glue
+
+  # Link locus sequences to retrovirus taxonomy table
+  run script glue/hervLinkSeqsToRvTaxTable.js
 
   # Add imported ERV sequences to alignments
   #run file glue/build/erv/ervAlignmentTreeHomoSapiens.glue
