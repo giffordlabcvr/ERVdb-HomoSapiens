@@ -1,4 +1,4 @@
-sequenceID	classification	classification_mod	tax_level	scaffold	start	end
+sequenceid	classification	classification_mod	tax_level	scaffold	start	end
 RBRT72938	Archaeobetaretrovirus	Archaeobetaretrovirus	subgenus	chr3	46374261	46377488
 RBRT16190	Betaretrovirus	Betaretrovirus	genus	chr11	19003238	19006100
 RBRT51600	Betaretrovirus	Betaretrovirus	genus	chr19	24085275	24088870
