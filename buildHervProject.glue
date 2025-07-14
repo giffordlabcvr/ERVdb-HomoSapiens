@@ -3,7 +3,7 @@
 project ervdb
 
   # Import classified HERV loci
-  import source sources/homo_sapiens/
+  run file glue/hervImportSources.glue
 
   # Set lengths
   run script glue/hervSetSequenceLengths.js 
@@ -18,7 +18,7 @@ project ervdb
   run script glue/hervLinkSeqsToRvTaxTable.js
 
   # Add imported ERV sequences to alignments
-  #run file glue/build/erv/ervAlignmentTreeHomoSapiens.glue
+  #run file glue/ervAlignmentTreeHomoSapiens.glue
 
   # Compute alignments
   
