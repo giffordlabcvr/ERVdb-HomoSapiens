@@ -1,68 +1,132 @@
+// Path to input tabular file
 var inputPath = "tabular/herv_locus_data.tsv";
-var tableObjs = [];
 var sourceName = "homo_sapiens";
+var tableObjs = [];
 
-glue.inMode("module/tabularUtility", function() {
-	tableObjs = glue.tableToObjects(glue.command(["load-tabular", inputPath]));
+// Mapping of taxonomic levels to custom-table names
+var taxLevelToTable = {
+    "species": "rv_species",
+    "subgenus": "rv_subgenus",
+    "genus": "rv_genus",
+    "subfamily": "rv_subfamily",
+    "clade": "rv_clade"
+};
+
+// Step 1: Build taxonomy lookup from reference sequences
+var taxonomyLookup = {};
+
+var refSeqsResult = glue.command([
+    "list", "sequence", "-w", "source.name like '%-refseqs-%'"
+]);
+
+_.each(refSeqsResult.listResult.row, function(ref) {
+    var sourceName = ref.value[0];
+    var refSeqId = ref.value[1];
+
+    glue.inMode("sequence/" + sourceName + "/" + refSeqId, function() {
+        var speciesIdResult = glue.command(["show", "property", "rv_species.id"]);
+        var speciesId = speciesIdResult["propertyValueResult"]["value"];
+
+        if (!speciesId) {
+            glue.log("WARNING", "Reference sequence " + refSeqId + " has no rv_species.id property.");
+            return;
+        }
+
+        taxonomyLookup[speciesId] = { "species": speciesId };
+
+        _.each(["subgenus", "genus", "subfamily", "clade"], function(level) {
+            var propertyName = "rv_" + level + ".id";
+            try {
+                var propResult = glue.command(["show", "property", propertyName]);
+                var levelId = propResult["propertyValueResult"]["value"];
+                if (levelId) {
+                    taxonomyLookup[speciesId][level] = levelId;
+                }
+            } catch (e) {
+                // Property may not exist—ignore
+            }
+        });
+    });
 });
 
-var taxLevelToTable = {
-	"species": "rv_species",
-	"subgenus": "rv_subgenus",
-	"genus": "rv_genus",
-	"subfamily": "rv_subfamily",
-	"clade": "rv_clade"
-};
+glue.log("INFO", "Taxonomy lookup populated for " + _.keys(taxonomyLookup).length + " species.");
+
+// Step 2: Process locus sequences and set complete taxonomy links
 
 var linkedCount = 0;
 var missingTaxa = 0;
 var failedSeqs = 0;
 
 _.each(tableObjs, function(row) {
-	var levelRaw = row["tax_level"];
-	var taxonIdRaw = row["classification_mod"];
-	var seqIdRaw = row["sequenceid"];
 
-	// Guard against undefined/null
-	if (!levelRaw || !taxonIdRaw || !seqIdRaw) {
-		glue.log("WARNING", "Missing required field in row: " + JSON.stringify(row));
-		return;
-	}
 
-	var level = levelRaw.toLowerCase().trim();
-	var taxonId = taxonIdRaw.trim();
-	var seqId = seqIdRaw.trim();
-	var taxTable = taxLevelToTable[level];
 
-	if (!taxTable) {
-		glue.log("WARNING", "Unrecognized taxonomy level: " + level + " in row: " + JSON.stringify(row));
-		return;
-	}
+glue.log("INFO", row);
+die
 
-	// Debug log to show what the script is trying to link
-	glue.log("FINE", "Attempting to link sequence '" + seqId + "' to " + taxTable + " / " + taxonId);
+    var levelRaw = row["tax_level"];
+    var taxonIdRaw = row["classification_mod"];
+    var seqIdRaw = row["sequenceid"];
 
-	try {
-		glue.command(["list", "custom-table-row", taxTable, "-w", "id = '" + taxonId + "'"]);
-	} catch (e) {
-		glue.log("INFO", "No taxonomy row found for: " + taxTable + " / " + taxonId + " (sequenceID: " + seqId + ")");
-		missingTaxa++;
-		return;
-	}
+    if (!levelRaw || !taxonIdRaw || !seqIdRaw) {
+        glue.log("WARNING", "Missing required field in row: " + JSON.stringify(row));
+        return;
+    }
 
-	try {
-		glue.inMode("sequence/" + sourceName + "/" + seqId, function() {
-		  glue.command(["set", "link-target", taxTable, "custom-table-row/" + taxTable + "/" + taxonId]);
-		});
-		
-		
-		linkedCount++;
-	} catch (e) {
-		glue.log("WARNING", "Failed to link sequence: " + seqId + " to " + taxTable + " / " + taxonId);
-		failedSeqs++;
-	}
+    var level = levelRaw.toLowerCase().trim();
+    var taxonId = taxonIdRaw.trim();
+    var seqId = seqIdRaw.trim();
+
+    var taxTable = taxLevelToTable[level];
+    if (!taxTable) {
+        glue.log("WARNING", "Unrecognized taxonomy level: " + level + " in row: " + JSON.stringify(row));
+        return;
+    }
+
+    var resolvedTaxonomy = null;
+
+    if (level === "species") {
+        resolvedTaxonomy = taxonomyLookup[taxonId];
+        if (!resolvedTaxonomy) {
+            glue.log("INFO", "Species ID not found in lookup: " + taxonId);
+            missingTaxa++;
+            return;
+        }
+    } else {
+        // Find first matching species in lookup where that level matches taxonId
+        _.each(taxonomyLookup, function(taxData) {
+            if (taxData[level] === taxonId) {
+                resolvedTaxonomy = taxData;
+                return false; // break
+            }
+        });
+
+        if (!resolvedTaxonomy) {
+            glue.log("INFO", "No species with " + level + " = " + taxonId + " found in lookup.");
+            missingTaxa++;
+            return;
+        }
+    }
+
+    // Link available taxonomy levels for this sequence
+    try {
+        glue.inMode("sequence/" + sourceName + "/" + seqId, function() {
+            _.each(["species", "subgenus", "genus", "subfamily", "clade"], function(taxLevel) {
+                var value = resolvedTaxonomy[taxLevel];
+                if (value) {
+                    var table = taxLevelToTable[taxLevel];
+                    glue.command(["set", "link-target", table, "custom-table-row/" + table + "/" + value]);
+                    glue.log("FINE", "Linked " + seqId + " to " + table + " / " + value);
+                }
+            });
+        });
+        linkedCount++;
+    } catch (e) {
+        glue.log("WARNING", "Failed to link sequence: " + seqId + " " + e);
+        failedSeqs++;
+    }
 });
 
 glue.log("INFO", "Linking complete. Sequences linked: " + linkedCount +
-                  ", missing taxonomy rows: " + missingTaxa +
-                  ", failed sequence links: " + failedSeqs);
+    ", missing taxonomy rows: " + missingTaxa +
+    ", failed sequence links: " + failedSeqs);
