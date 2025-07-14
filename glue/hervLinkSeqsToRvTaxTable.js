@@ -3,6 +3,10 @@ var inputPath = "tabular/herv_locus_data.tsv";
 var sourceName = "homo_sapiens";
 var tableObjs = [];
 
+glue.inMode("module/tabularUtility", function() {
+	tableObjs = glue.tableToObjects(glue.command(["load-tabular", inputPath]));
+});
+
 // Mapping of taxonomic levels to custom-table names
 var taxLevelToTable = {
     "species": "rv_species",
@@ -59,11 +63,6 @@ var failedSeqs = 0;
 
 _.each(tableObjs, function(row) {
 
-
-
-glue.log("INFO", row);
-die
-
     var levelRaw = row["tax_level"];
     var taxonIdRaw = row["classification_mod"];
     var seqIdRaw = row["sequenceid"];
@@ -85,28 +84,37 @@ die
 
     var resolvedTaxonomy = null;
 
-    if (level === "species") {
-        resolvedTaxonomy = taxonomyLookup[taxonId];
-        if (!resolvedTaxonomy) {
-            glue.log("INFO", "Species ID not found in lookup: " + taxonId);
-            missingTaxa++;
-            return;
-        }
-    } else {
-        // Find first matching species in lookup where that level matches taxonId
-        _.each(taxonomyLookup, function(taxData) {
-            if (taxData[level] === taxonId) {
-                resolvedTaxonomy = taxData;
-                return false; // break
-            }
-        });
+	var allowedLevels = [];
+	if (level === "species") {
+		allowedLevels = ["species", "subgenus", "genus", "subfamily", "clade"];
+	} else if (level === "subgenus") {
+		allowedLevels = ["subgenus", "genus", "subfamily", "clade"];
+	} else if (level === "genus") {
+		allowedLevels = ["genus", "subfamily", "clade"];
+	} else if (level === "subfamily") {
+		allowedLevels = ["subfamily", "clade"];
+	} else if (level === "clade") {
+		allowedLevels = ["clade"];
+	}
 
-        if (!resolvedTaxonomy) {
-            glue.log("INFO", "No species with " + level + " = " + taxonId + " found in lookup.");
-            missingTaxa++;
-            return;
-        }
-    }
+	if (level === "species") {
+		resolvedTaxonomy = {};
+		_.each(allowedLevels, function(taxLevel) {
+			var val = taxonomyLookup[taxonId] ? taxonomyLookup[taxonId][taxLevel] : null;
+			if (val) resolvedTaxonomy[taxLevel] = val;
+		});
+	} else {
+		_.each(taxonomyLookup, function(taxData) {
+			if (taxData[level] === taxonId) {
+				resolvedTaxonomy = {};
+				_.each(allowedLevels, function(taxLevel) {
+					var val = taxData[taxLevel];
+					if (val) resolvedTaxonomy[taxLevel] = val;
+				});
+				return false; // break
+			}
+		});
+	}
 
     // Link available taxonomy levels for this sequence
     try {
