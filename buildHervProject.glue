@@ -18,13 +18,10 @@ project ervdb
   run script glue/hervLinkSeqsToRvTaxTable.js
 
   # Add imported ERV sequences to alignments
-  #run file glue/ervAlignmentTreeHomoSapiens.glue
+  run file glue/hervAddLocusSeqsToAlignments.glue
 
   # Compute alignments
-  
-  # Build phylogenies
-  
-  # Compute variations
+  run file glue/hervComputeAlignments.glue
   
   validate
   

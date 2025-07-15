@@ -1,0 +1,67 @@
+#~# Clade I
+
+# Gammaretrovirus
+
+compute alignment AL_SPECIES_HERVT   rvCompoundAligner
+compute alignment AL_SPECIES_HERVE   rvCompoundAligner
+compute alignment AL_SPECIES_HERVR   rvCompoundAligner
+
+# Zetaretrovirus
+
+compute alignment AL_SPECIES_HERVH   rvCompoundAligner
+compute alignment AL_SPECIES_HERVFb  rvCompoundAligner
+compute alignment AL_SPECIES_HERVXA  rvCompoundAligner
+compute alignment AL_SPECIES_HERVW   rvCompoundAligner
+compute alignment AL_SPECIES_HERV9   rvCompoundAligner
+compute alignment AL_SPECIES_HERV30  rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_HERV46  rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_HERV4   rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_HERV35  rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_MER52   rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_MER84   rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_MER66   rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_MER57   rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_PRIMA41 rvCompoundAlignerNoOrfs
+
+# Iotaretrovirus
+
+compute alignment AL_SPECIES_HERVI   rvCompoundAligner
+
+# Rhoretrovirus
+
+compute alignment AL_SPECIES_HERVRb  rvCompoundAligner
+compute alignment AL_SPECIES_HERV39  rvCompoundAlignerNoOrfs
+
+# Thetaretrovirus
+
+compute alignment AL_SPECIES_HERVLb  rvCompoundAligner
+compute alignment AL_SPECIES_HERV24  rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_PRIMA4  rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_MER21   rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_MER34   rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_MER89   rvCompoundAlignerNoOrfs
+
+#~# Clade II
+
+compute alignment AL_SPECIES_HERVK_HML1 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML2 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML3 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML4 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML5 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML6 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML7 rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_HERVK_HML8 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML9 rvCompoundAligner
+compute alignment AL_SPECIES_HERVK_HML10 rvCompoundAligner
+
+
+#~# Clade III
+
+compute alignment AL_SPECIES_HERVS  rvCompoundAligner
+compute alignment AL_SPECIES_HERVL  rvCompoundAlignerNoEnv
+compute alignment AL_SPECIES_HERVU3 rvCompoundAligner
+
+#~# No ORFs
+
+compute alignment AL_SPECIES_HERV1 rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_HERV16 rvCompoundAlignerNoOrfs
