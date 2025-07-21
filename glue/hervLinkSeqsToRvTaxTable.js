@@ -3,12 +3,11 @@ var inputPath = "tabular/herv_locus_data.tsv";
 var tableObjs = [];
 
 glue.inMode("module/tabularUtility", function() {
-	tableObjs = glue.tableToObjects(glue.command(["load-tabular", inputPath]));
+    tableObjs = glue.tableToObjects(glue.command(["load-tabular", inputPath]));
 });
 
 // Mapping of taxonomic levels to custom-table names
 var taxLevelToTable = {
-
     "species": "rv_species",
     "subgenus": "rv_subgenus",
     "genus": "rv_genus",
@@ -24,10 +23,10 @@ var refSeqsResult = glue.command([
 ]);
 
 _.each(refSeqsResult.listResult.row, function(ref) {
-    var sourceName = ref.value[0];
+    var refSource = ref.value[0];
     var refSeqId = ref.value[1];
 
-    glue.inMode("sequence/" + sourceName + "/" + refSeqId, function() {
+    glue.inMode("sequence/" + refSource + "/" + refSeqId, function() {
         var speciesIdResult = glue.command(["show", "property", "rv_species.id"]);
         var speciesId = speciesIdResult["propertyValueResult"]["value"];
 
@@ -55,6 +54,8 @@ _.each(refSeqsResult.listResult.row, function(ref) {
 
 glue.log("INFO", "Taxonomy lookup populated for " + _.keys(taxonomyLookup).length + " species.");
 
+// Step 2: Process locus sequences and set taxonomy links
+
 var linkedCount = 0;
 var missingTaxa = 0;
 var failedSeqs = 0;
@@ -74,69 +75,65 @@ _.each(tableObjs, function(row) {
     var level = levelRaw.toLowerCase().trim();
     var taxonId = taxonIdRaw.trim();
 
-    // ✅ Always set these fields
-    glue.inMode("sequence/" + source + "/" + seqId, function() {
-        glue.command(["set", "field", "mod_classification", taxonId]);
-        glue.command(["set", "field", "tax_level", levelRaw]);
-    });
-
-    var taxTable = taxLevelToTable[level];
-    if (!taxTable) {
-        glue.log("FINE", "No taxonomic link required for level: " + level + " (e.g., mosaic/unclassified)");
+    // ✅ Set mod_classification and tax_level fields regardless of linkage success
+    try {
+        glue.inMode("sequence/" + source + "/" + seqId, function() {
+            glue.command(["set", "field", "mod_classification", taxonId]);
+            glue.command(["set", "field", "tax_level", levelRaw]);
+        });
+    } catch (e) {
+        glue.log("WARNING", "Failed to set mod_classification/tax_level for sequence " + seqId + ": " + e);
+        failedSeqs++;
         return;
     }
 
+    // If the tax_level is not one of the core taxonomic ranks, skip linkage but count success
+    if (!(level in taxLevelToTable)) {
+        linkedCount++;
+        return;
+    }
+
+    var taxTable = taxLevelToTable[level];
     var resolvedTaxonomy = null;
 
-	var allowedLevels = [];
-	if (level === "species") {
-		allowedLevels = ["species", "subgenus", "genus", "subfamily", "clade"];
-	} else if (level === "subgenus") {
-		allowedLevels = ["subgenus", "genus", "subfamily", "clade"];
-	} else if (level === "genus") {
-		allowedLevels = ["genus", "subfamily", "clade"];
-	} else if (level === "subfamily") {
-		allowedLevels = ["subfamily", "clade"];
-	} else if (level === "clade") {
-		allowedLevels = ["clade"];
-	}
+    var allowedLevels = [];
+    if (level === "species") {
+        allowedLevels = ["species", "subgenus", "genus", "subfamily", "clade"];
+    } else if (level === "subgenus") {
+        allowedLevels = ["subgenus", "genus", "subfamily", "clade"];
+    } else if (level === "genus") {
+        allowedLevels = ["genus", "subfamily", "clade"];
+    } else if (level === "subfamily") {
+        allowedLevels = ["subfamily", "clade"];
+    } else if (level === "clade") {
+        allowedLevels = ["clade"];
+    }
 
-	if (level === "species") {
-		resolvedTaxonomy = {};
-		_.each(allowedLevels, function(taxLevel) {
-			var val = taxonomyLookup[taxonId] ? taxonomyLookup[taxonId][taxLevel] : null;
-			if (val) resolvedTaxonomy[taxLevel] = val;
-		});
-	} else {
-		_.each(taxonomyLookup, function(taxData) {
-			if (taxData[level] === taxonId) {
-				resolvedTaxonomy = {};
-				_.each(allowedLevels, function(taxLevel) {
-					var val = taxData[taxLevel];
-					if (val) resolvedTaxonomy[taxLevel] = val;
-				});
-				return false; // break
-			}
-		});
-	}
-
-	if (!resolvedTaxonomy) {
-		glue.log("WARNING", "Could not resolve taxonomy for " + taxonId + " at level " + level + " for sequence " + seqId);
-		missingTaxa++;
-		return;
-	}
+    // Lookup full lineage from species entry
+    if (level === "species") {
+        resolvedTaxonomy = {};
+        _.each(allowedLevels, function(taxLevel) {
+            var val = taxonomyLookup[taxonId] ? taxonomyLookup[taxonId][taxLevel] : null;
+            if (val) resolvedTaxonomy[taxLevel] = val;
+        });
+    } else {
+        // Find a species that maps to the same higher-level taxon
+        _.each(taxonomyLookup, function(taxData) {
+            if (taxData[level] === taxonId) {
+                resolvedTaxonomy = {};
+                _.each(allowedLevels, function(taxLevel) {
+                    var val = taxData[taxLevel];
+                    if (val) resolvedTaxonomy[taxLevel] = val;
+                });
+                return false; // break
+            }
+        });
+    }
 
     try {
-        glue.inMode("sequence/" + sourceName + "/" + seqId, function() {
-
-            // Set mod_classification and tax_level fields
-            glue.command(["set", "field", "mod_classification", taxonId]);
-            glue.command(["set", "field", "tax_level", level]);
-            glue.log("FINE", "Set mod_classification=" + taxonId + ", tax_level=" + level + " for " + seqId);
-
-            // Link all resolved taxonomy levels
+        glue.inMode("sequence/" + source + "/" + seqId, function() {
             _.each(["species", "subgenus", "genus", "subfamily", "clade"], function(taxLevel) {
-                var value = resolvedTaxonomy[taxLevel];
+                var value = resolvedTaxonomy ? resolvedTaxonomy[taxLevel] : null;
                 if (value) {
                     var table = taxLevelToTable[taxLevel];
                     glue.command(["set", "link-target", table, "custom-table-row/" + table + "/" + value]);
@@ -146,11 +143,11 @@ _.each(tableObjs, function(row) {
         });
         linkedCount++;
     } catch (e) {
-        glue.log("WARNING", "Failed to process sequence " + seqId + ": " + e);
+        glue.log("WARNING", "Failed to link taxonomy for sequence " + seqId + ": " + e);
         failedSeqs++;
     }
+
 });
 
 glue.log("INFO", "Linking complete. Sequences linked: " + linkedCount +
-    ", missing taxonomy rows: " + missingTaxa +
-    ", failed sequence links: " + failedSeqs);
+    ", failed links: " + failedSeqs);
