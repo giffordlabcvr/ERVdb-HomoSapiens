@@ -21,7 +21,7 @@ project ervdb
   run file glue/hervAddLocusSeqsToAlignments.glue
 
   # Compute alignments
-  run file glue/hervComputeAlignments.glue
+  #run file glue/hervComputeAlignments.glue
   
   validate
   

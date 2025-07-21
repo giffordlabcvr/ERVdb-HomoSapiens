@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fastaAlignmentExporter>
+    <idTemplate>${sequence.sequenceID}.${sequence.rv_genus.id}.${sequence.rv_species.name}.${sequence.renderProperty('raw_classification')}.${sequence.length}</idTemplate>
+</fastaAlignmentExporter>

@@ -13,6 +13,7 @@ compute alignment AL_SPECIES_HERVFb  rvCompoundAligner
 compute alignment AL_SPECIES_HERVXA  rvCompoundAligner
 compute alignment AL_SPECIES_HERVW   rvCompoundAligner
 compute alignment AL_SPECIES_HERV9   rvCompoundAligner
+
 compute alignment AL_SPECIES_HERV30  rvCompoundAlignerNoOrfs
 compute alignment AL_SPECIES_HERV46  rvCompoundAlignerNoOrfs
 compute alignment AL_SPECIES_HERV4   rvCompoundAlignerNoOrfs
@@ -49,7 +50,7 @@ compute alignment AL_SPECIES_HERVK_HML3 rvCompoundAligner
 compute alignment AL_SPECIES_HERVK_HML4 rvCompoundAligner
 compute alignment AL_SPECIES_HERVK_HML5 rvCompoundAligner
 compute alignment AL_SPECIES_HERVK_HML6 rvCompoundAligner
-compute alignment AL_SPECIES_HERVK_HML7 rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_HERVK_HML7 rvCompoundAligner
 compute alignment AL_SPECIES_HERVK_HML8 rvCompoundAligner
 compute alignment AL_SPECIES_HERVK_HML9 rvCompoundAligner
 compute alignment AL_SPECIES_HERVK_HML10 rvCompoundAligner
@@ -63,5 +64,5 @@ compute alignment AL_SPECIES_HERVU3 rvCompoundAligner
 
 #~# No ORFs
 
-compute alignment AL_SPECIES_HERV1 rvCompoundAlignerNoOrfs
+compute alignment AL_SPECIES_HERV1  rvCompoundAlignerNoOrfs
 compute alignment AL_SPECIES_HERV16 rvCompoundAlignerNoOrfs

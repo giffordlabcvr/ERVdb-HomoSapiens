@@ -2,6 +2,6 @@
   # Import sources
   
   import source sources/homo_sapiens/
-  #import source sources/homo_sapiens_mosaic/
-  #import source sources/homo_sapiens_ltr/
-  #import source sources/homo_sapiens_malr/
+  import source sources/homo_sapiens_mosaic/
+  import source sources/homo_sapiens_malr/
+  import source sources/homo_sapiens_ltr/

@@ -11,6 +11,11 @@
     </textFileColumn>
 
     <textFileColumn>
+        <header>sequenceid</header>
+        <property>internal_id</property>
+    </textFileColumn>
+
+    <textFileColumn>
         <header>classification</header>
         <property>raw_classification</property>
     </textFileColumn>
