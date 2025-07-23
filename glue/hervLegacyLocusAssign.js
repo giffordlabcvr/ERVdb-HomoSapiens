@@ -1,7 +1,9 @@
 var inputPath = "tabular/legacy-list.tsv";
 var tableObjs = [];
 
-// Load the tabular legacy ID file
+// Track used legacy keys to enforce uniqueness
+var legacyKeys = {};
+
 glue.inMode("module/tabularUtility", function() {
     tableObjs = glue.tableToObjects(glue.command(["load-tabular", inputPath]));
 });
@@ -17,8 +19,6 @@ tableObjs.forEach(function(locus) {
         "scaffold = '" + scaffold + "' and " +
         start + " <= end_position and " +
         end + " >= start_position";
-
-    //glue.log("INFO", "Trying: " + whereClause);
 
     var result = glue.command([
         "list", "custom-table-row", "locus_data",
@@ -62,55 +62,57 @@ tableObjs.forEach(function(locus) {
             }
 
             lineageCode = lineageCode.replace(/-/g, "");
-            var newSeqID = "ERV-" + lineageCode + "." + mnemonic + "-HomSap";
+            var legacyKey = lineageCode + ":" + mnemonic;
 
+            if (legacyKeys[legacyKey]) {
+                glue.log("WARNING", "Skipping duplicate legacy ID: " + legacyKey + " (would become ERV-" + lineageCode + "." + mnemonic + "-HomSap)");
+                return;
+            }
+
+            legacyKeys[legacyKey] = true;
+
+            var newSeqID = "ERV-" + lineageCode + "." + mnemonic + "-HomSap";
             glue.log("INFO", "Assigning legacy ID " + newSeqID + " to internal ID: " + internalID);
 
-            // Set locus ID fields, aliases and HGNC ID on locus_data row
             glue.inMode("custom-table-row/locus_data/" + internalID, function() {
 
-				// Record all aliases (including both approved and others)
-				var approvedSymbol = locus["approved_symbol"];
-				var aliasSymbolsRaw = locus["alias_symbol"];
+                // Alias assignment
+                var approvedSymbol = locus["approved_symbol"];
+                var aliasSymbolsRaw = locus["alias_symbol"];
+                var aliasSet = {};
 
-				// Start with an empty set to avoid duplicates
-				var aliasSet = {};
+                if (approvedSymbol && approvedSymbol.trim() !== "") {
+                    aliasSet[approvedSymbol.trim()] = true;
+                }
 
-				if (approvedSymbol && approvedSymbol.trim() !== "") {
-					aliasSet[approvedSymbol.trim()] = true;
-				}
+                if (aliasSymbolsRaw && aliasSymbolsRaw.trim() !== "") {
+                    var aliasParts = aliasSymbolsRaw.split(",");
+                    aliasParts.forEach(function(symbol) {
+                        var trimmed = symbol.trim();
+                        if (trimmed !== "") {
+                            aliasSet[trimmed] = true;
+                        }
+                    });
+                }
 
-				if (aliasSymbolsRaw && aliasSymbolsRaw.trim() !== "") {
-					var aliasParts = aliasSymbolsRaw.split(",");
-					aliasParts.forEach(function(symbol) {
-						var trimmed = symbol.trim();
-						if (trimmed !== "") {
-							aliasSet[trimmed] = true;
-						}
-					});
-				}
+                var allAliases = Object.keys(aliasSet).join(", ");
+                if (allAliases !== "") {
+                    glue.command(["set", "field", "aliases", allAliases]);
+                } else {
+                    glue.log("FINE", "No alias symbols to set for " + newSeqID);
+                }
 
-				var allAliases = Object.keys(aliasSet).join(", ");
-
-				if (allAliases !== "") {
-					glue.command(["set", "field", "aliases", allAliases]);
-				} else {
-					glue.log("FINE", "No alias symbols to set for " + newSeqID);
-				}
-
-				// Set HGNC id
+                // HGNC ID
                 var hgncVal = locus["hgnc_id"];
                 if (hgncVal) {
                     glue.command(["set", "field", "hgnc_id", hgncVal]);
                 }
- 
- 			
-                glue.command(["set", "field", "erv_locus_id", newSeqID]);
-				glue.command(["set", "field", "assignment_status", "legacy_assigned"]);
- 				glue.command(["set", "field", "lineage_id", lineageCode]);
-				glue.command(["set", "field", "numeric_id", mnemonic]);
 
- 
+                // Set fields
+                glue.command(["set", "field", "erv_locus_id", newSeqID]);
+                glue.command(["set", "field", "assignment_status", "legacy_assigned"]);
+                glue.command(["set", "field", "lineage_id", lineageCode]);
+                glue.command(["set", "field", "numeric_id", mnemonic]);
             });
         }
 

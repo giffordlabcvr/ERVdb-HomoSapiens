@@ -58,7 +58,7 @@ toAssign.listResult.row.forEach(function(row) {
 	
 			glue.command(["set", "field", "erv_locus_id", newLocusID]);
 			glue.command(["set", "field", "assignment_status", "assigned"]);
-			glue.command(["set", "field", "lineage_id", lineageCode]);
+			glue.command(["set", "field", "lineage_id", modClassification]);
 			glue.command(["set", "field", "numeric_id", counter]);
 
 
