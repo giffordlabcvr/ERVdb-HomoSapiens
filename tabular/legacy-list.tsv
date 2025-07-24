@@ -1,149 +1,143 @@
-organism	assembly	type	approved_name	approved_symbol	alias_symbol	erv-taxonomic-component	mnenomic-number	hgnc_id	ncbi_gene_id	strand	scaffold	extract_start	extract_end
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 6			K.HML2	6			positive	chr1	13458305	13467826
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 7	ERVW-7		W	7	HGNC:49246	106144589	positive	chr1	46851453	46856998
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 1	ERVK-1	c1_A,  HERVK-116	K.HML2	116	HGNC:39000	100862690	positive	chr1	75842771	75849143
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 8	ERVW-8		W	8	HGNC:49247	106144559	positive	chr1	89390211	89397564
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K11 member 1	ERVK11-1			1	HGNC:43647	100859922	positive	chr1	110247853	110252173
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 1	ERVK9-1			1	HGNC:50898	111188150	positive	chr1	150630654	150631285
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 7	ERVK-7	HERV-K(III), HERV-K102	K.HML2	102	HGNC:31828	449619	negative	chr1	155596457	155605636
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 18	ERVK-18	c1_C, HERV-K18, HERVK-110	K.HML2	110	HGNC:39025	100775105	positive	chr1	160660575	160669806
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 12			K.HML2	12			negative	chr1	166574603	166580258
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 9	ERVW-9		W	9	HGNC:49248	106699568	positive	chr1	178110352	178112194
-Homo sapiens	hg19	Provirus	endogenous retrovirus group MER61 member 1	ERVMER61-1	TP53LC07		1	HGNC:27919	339476	positive	chr1	187610358	187612992
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 10	ERVW-10		W	10	HGNC:49249	106144579	positive	chr1	205835459	205844935
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 11	ERVW-11		W	11	HGNC:49250	106144560	positive	chr1	227812214	227821260
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 16	ERVK-16	c10_A., M3.8	K.HML2	16	HGNC:39023	100616411	negative	chr10	6866141	6875603
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 103		HERVK103	K.HML2	103			positive	chr10	27182399	27183380
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 5	ERVH-5		H	5	HGNC:39057	100862699	positive	chr10	27754712	27757008
-Homo sapiens	hg19	Provirus	endogenous retrovirus group S71 member 2	ERVS71-2	HERV-HC2	T	2	HGNC:41526	100616200	positive	chr10	38230496	38230791
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 17	ERVK-17	c10_B	K.HML2	17	HGNC:39024	100862686	negative	chr10	101585489	101587716
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 7			K.HML2	7			negative	chr11	3468656	3478209
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 4	ERVK3-4	HML6-c11		4	HGNC:39109	100616106	negative	chr11	7924011	7924334
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 27	ERVK-27		K.HML2	27	HGNC:44980	106144566	negative	chr11	62135963	62150563
-Homo sapiens	hg19	Provirus	endogenous retrovirus group 9 member 1	ERV9-1	pTR2		1	HGNC:39060	100616497	positive	chr11	67390298	67394204
-Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 2	ERVE-2			2	HGNC:39048	100862691	negative	chr11	67612675	67615320
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 6	ERVW-6		W	6	HGNC:39045	100616198	negative	chr11	77569259	77574524
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 25	ERVK-25	c11_A	K.HML2	118	HGNC:39039	100862683	positive	chr11	101565794	101575259
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 20	ERVK-20	c11_B	K.HML2	37	HGNC:39031	100616444	negative	chr11	118591724	118600883
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 23	ERVW-23		W	23	HGNC:49311	106144603	positive	chr12	8914009	8921064
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 50			K.HML2	50			negative	chr12	34772555	34782217
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 24	ERVW-24		W	24	HGNC:49312	106144564	positive	chr12	51296258	51307150
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 21, envelope	ERVK-21	c12_A, envK1, HERVK119	K.HML2	119	HGNC:39035	100616103	negative	chr12	58721242	58730698
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 5	ERVK3-5	HML6-c12		5	HGNC:39110	100616412	negative	chr12	112259651	112259984
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 42			K.HML2	42			negative	chr12	133667120	133673132
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 25	ERVW-25		W	25	HGNC:49313	106144605	positive	chr13	37530786	37533118
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 71			K.HML2	71			negative	chr14	24480625	24484121
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 26	ERVW-26		W	26	HGNC:49314	106144572	positive	chr14	45488688	45492897
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 2	ERVK3-2	HML6-c14		2	HGNC:39040	100862697	positive	chr14	70279954	70282683
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 27	ERVW-27		W	27	HGNC:49315	106144565	positive	chr14	91692008	91693212
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 7	ERVH-7	TCONS_00022381	H	7	HGNC:39059	100862698	negative	chr14	92511119	92516158
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 4	ERVH-4	HERV-HD1	H	4	HGNC:21344	51359	positive	chr14	99452044	99457077
-Homo sapiens	hg19	Provirus	endogenous retrovirus group 18 member 1	ERV18-1			1	HGNC:41524	100133791	positive	chr15	54202966	54206909
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 4	ERVW-4	C187-23	W	4	HGNC:39043	100616496	positive	chr15	55597079	55604574
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K13 member 1	ERVK13-1			1	HGNC:27548	100507321	negative	chr16	2708390	2722572
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 4034			K.HML2	4034			positive	chr16	2976160	2977661
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 9	ERVK9-9	TCONS_00025543	9	9	HGNC:51158	111188137	negative	chr17	6779397	6780027
-Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 1	ERVE-1	HERV-E1, HERVE1, TCONS_00025599	E	1	HGNC:14602	85314	negative	chr17	26557587	26559832
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 28	ERVW-28		W	28	HGNC:49316	105694156	positive	chr17	35689889	35693622
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 10	ERVK9-10			10	HGNC:51159	111188144	negative	chr17	47248932	47249567
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 29	ERVW-29		W	29	HGNC:49378	106144583	positive	chr18	13656680	13657837
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 22	ERVK-22	c19_A	K.HML2	22	HGNC:39036	100616445	positive	chr19	385095	387637
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 7	ERVK3-7	HML6-c19B		7	HGNC:39112	100616199	negative	chr19	9622047	9622385
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 52			K.HML2	52			positive	chr19	20387400	20397512
-Homo sapiens	hg19	Provirus	endogenous retrovirus group S71 member 1, envelope	ERVS71-1	envT	T	1	HGNC:41525	105372315	positive	chr19	20480255	20481117
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 113			K.HML2	113			negative	chr19	21841536	21841542
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 51			K.HML2	51			positive	chr19	22757824	22764561
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 19			K.HML2	19			negative	chr19	28128498	28137361
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 28	ERVK-28			28	HGNC:44981	106707175	negative	chr19	28135954	28136531
-Homo sapiens	hg19	Provirus		ERV4700	ENSG00000266976 lncRNA		4700			positive	chr19	29097595	29106136
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 29	ERVK-29		K.HML2	29	HGNC:44982	106144555	positive	chr19	37597549	37607066
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 11	ERVK9-11			11	HGNC:51160	111188141	negative	chr19	39426730	39427348
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 6	ERVK3-6	HML6-c19A		6	HGNC:39111	100616107	negative	chr19	52311587	52311924
-Homo sapiens	hg19	Provirus	endogenous retrovirus group FRD member 2	ERVFRD-2	FLJ45949	FRD	2	HGNC:35201	107985332	positive	chr19	53510765	53516433
-Homo sapiens	hg19	Provirus	endogenous retrovirus group V member 1, envelope	ERVV-1	FLJ32214, HERV-V1, ENVV1	V	1	HGNC:26501	147664	positive	chr19	53517174	53519376
-Homo sapiens	hg19	Provirus	endogenous retrovirus group V member 2, envelope	ERVV-2	ENVV2	V	2	HGNC:39051	100271846	positive	chr19	53547993	53554933
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 13			K.HML2	13			positive	chr19	53862348	53868044
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 1	ERVK3-1	HERV-K(HML6-1)		1	HGNC:30466	105372481	positive	chr19	58816743	58828178
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 2	ERVK9-2			2	HGNC:50908	111188149	positive	chr2	20126709	20127340
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 12	ERVW-12		W	12	HGNC:49251	106144580	positive	chr2	53983779	53988562
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 13	ERVW-13		W	13	HGNC:49252	106144576	positive	chr2	112796922	112802566
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 10, envelope	ERVH-10	envH3, envH/p59	H	10	HGNC:53423		positive	chr2	155723544	155731248
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 8, envelope	ERVH-8	envH1	H	8	HGNC:53421		negative	chr2	166563971	166572761
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 14	ERVW-14		W	14	HGNC:49253	106144561	positive	chr2	178273972	178277886
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 30	ERVK-30		K.HML2	30	HGNC:51378	106144591	positive	chr2	187385634	187387099
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 8	ERVK3-8			8	HGNC:39113	100616108	negative	chr20	25379489	25379824
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 59			K.HML2	59			positive	chr20	32714750	32724384
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 23	ERVK-23	c21_A	K.HML2	23	HGNC:39037	100616197	negative	chr21	19933916	19934992
-Homo sapiens	hg19	Provirus	endogenous retrovirus group 48 member 1, envelope	ERVH48-1	SUPYN		1	HGNC:17216	90625	negative	chr21	44336913	44345740
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 24	ERVK-24	c22_A, HERV-K101	K.HML2	101	HGNC:39038	100862684	positive	chr22	18926187	18934279
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 345			K.HML2	345			positive	chr22	23879930	23888810
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 2	ERVK-2	c3_A	K.HML2	2	HGNC:39001	100616100	negative	chr3	9889346	9896236
-Homo sapiens	hg19	Provirus	endogenous retrovirus group PABLB member 1, envelope	ERVPABLB-1	envR(b)		1	HGNC:39042	100862693	negative	chr3	16811648	16812243
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 5	ERVK-5	HERV-K(II)	K.HML2	5	HGNC:13757	60358	positive	chr3	101409738	101420859
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 3	ERVK-3	c3_B	K.HML2	106	HGNC:39002	100862689	negative	chr3	112743479	112752282
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 4	ERVK-4	HERV-K(I)	K.HML2	4	HGNC:13756	60359	positive	chr3	125608304	125619438
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 3	ERVW-3	CL4	W	3	HGNC:39041	100862696	positive	chr3	141538631	141540355
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 13	ERVK-13	c3_D	K.HML2	13	HGNC:39008	100861467	negative	chr3	148281477	148285396
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 9, envelope	ERVH-9	envH2	H	9	HGNC:53422		negative	chr3	166540223	166547792
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 5	ERVW-5	CL2	W	5	HGNC:39044	100862695	positive	chr3	178772378	178777943
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 3	ERVK9-3			3	HGNC:50909	111188148	negative	chr3	184731488	184732117
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 11	ERVK-11	c3_E, N8.4	K.HML2	117	HGNC:39006	100862688	negative	chr3	185280336	185289515
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 77			K.HML2	77			negative	chr4	3980069	3988631
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 15	ERVW-15		W	15	HGNC:49254	106144597	positive	chr4	8422091	8429492
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 17			K.HML2	17			positive	chr4	9123515	9133075
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 50			K.HML2	50			positive	chr4	9659588	9668650
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 1	ERVH-1	HERV-H4p15.2	H	1	HGNC:39053	100616446	negative	chr4	23724532	23728952
-Homo sapiens	hg19	Provirus	endogenous retrovirus group MER34 member 1, envelope	ERVMER34-1	envMER34, HEMO		1	HGNC:42970	100288413	negative	chr4	53608720	53617592
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 16	ERVW-16		W	16	HGNC:49255	106144581	positive	chr4	133803454	133810293
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 12	ERVK-12		K.HML2	12	HGNC:39007	100616442	positive	chr4	165916840	165924068
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 5	ERVK9-5			5	HGNC:51154	111188147	negative	chr5	1578855	1579485
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 104			K.HML2	104			negative	chr5	30487114	30496205
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 4	ERVK9-4			4	HGNC:50910	111188143	negative	chr5	34782791	34783397
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 3	ERVK3-3	HML6-c5		3	HGNC:39108	100616462	positive	chr5	70871465	70871802
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 31	ERVK-31		K.HML2	31	HGNC:51379	106144590	positive	chr5	92792380	92793912
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 18			K.HML2	18			negative	chr5	154016502	154024214
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 10	ERVK-10		K.HML2	107	HGNC:39004	100616101	negative	chr5	156084717	156093896
-Homo sapiens	hg19	Provirus	endogenous retrovirus group FRD member 1, envelope	ERVFRD-1	HERV-W/FRD, HERV-FRD, envFRD, ERVFRDE1, syncytin-2	FRD	1	HGNC:33823	405754	negative	chr6	11102722	11105864
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 69			K.HML2	69			positive	chr6	28650367	28660735
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 12	ERVK9-12			12	HGNC:53627	105375011	positive	chr6	29843501	29844033
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 35587			K.HML2	35587			negative	chr6	42861409	42871367
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 23			K.HML2	23			positive	chr6	57623896	57628704
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 3	ERVH-3	HERV-H/F, TCONS_l2_00025412	H	3	HGNC:39055	100289683	negative	chr6	68591209	68599037
-Homo sapiens	hg19	Provirus	long intergenic non-protein coding RNA 1610	LINC01610	EVADR		1610	HGNC:51676	101928353	positive	chr6	71103905	71109120
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 32, envelope	ERVK-32	envK4, HERV-K109		109	HGNC:53424	110006328	negative	chr6	78426662	78436083
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 19, envelope	ERVK-19	P1.8, HERV-K(C19), envK3	K.HML2	19	HGNC:39026	105376906	negative	chr6	78427019	78436083
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 9	ERVK-9			9	HGNC:39005	100616102	negative	chr6	78430450	78432161
-Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 4	ERVE-4		E	4	HGNC:39050	100616105	positive	chr6	89372192	89380624
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 17	ERVW-17		W	17	HGNC:49256	106144567	positive	chr6	106676011	106683689
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 6	ERVK9-6			6	HGNC:51155	111188146	positive	chr6	111242742	111243387
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 18	ERVW-18		W	18	HGNC:49306	106144562	positive	chr6	143400937	143408849
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 19	ERVW-19		W	19	HGNC:49307	106144571	positive	chr6	167304567	167311741
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 6, env / K.108	ERVK-6	HERV-K(HML-2.HOM), HERV-K108, HERV-K(C7), envK2	K.HML2	108	HGNC:13915	64006	negative	chr7	4620811	4631528
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 108	ERVK-6	HERV-K(HML-2.HOM), HERV-K108, HERV-K(C7), envK2	K.HML2	108	HGNC:13915	64006	negative	chr7	4630561	4640031
-Homo sapiens	hg19	Provirus	endogenous retrovirus group FH21 member 1	ERVFH21-1	HERV-F(XA34)	F	21	HGNC:39047	100616104	negative	chr7	12628860	12633987
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 7	ERVK9-7			7	HGNC:51156	111188142	positive	chr7	35950680	35951312
-Homo sapiens	hg19	Provirus	endogenous retrovirus group 3 member 1, envelope	ERV3-1	H-PLK, HERV-R, ERV-R, envR	R	1	HGNC:3454	2086	negative	chr7	64450734	64467065
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 1, envelope	ERVW-1	HERV-W, HERV-W-ENV, HERVW, HERV-7q, envW	W	1	HGNC:13525	30816	positive	chr7	92097312	92107506
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 14	ERVK-14	c7_B	K.HML2	14	HGNC:39019	100862687	negative	chr7	104388369	104393266
-Homo sapiens	hg19	Provirus	endogenous retrovirus group 3 member 2	ERV3-2	KIAA1466		2	HGNC:22218	57612	positive	chr7	134862422	134866711
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 15	ERVK-15	c7_C, P1.10	K.HML2	15	HGNC:39022	100616443	negative	chr7	141450926	141455903
-Homo sapiens	hg19	Provirus	endogenous retrovirus group FC1 member 1, envelope	ERVFC1-1	FLJ42291, envF(c)2, TCONS_l2_00027524	Fc	1	HGNC:38137	346547	negative	chr7	153108319	153111048
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 8, envelope	ERVK-8	HERV-K115, envK6	K.HML2	115	HGNC:32302	619465	negative	chr8	7355397	7364859
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 27			K.HML2	27			positive	chr8	8054700	8055725
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 26	ERVK-26		K.HML2	26	HGNC:44979	103539957	negative	chr8	12081113	12081622
-Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 3	ERVE-3		E	3	HGNC:39049	100862700	negative	chr8	12343258	12350376
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 70			K.HML2	70			negative	chr8	47175650	47183661
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 8	ERVK9-8			8	HGNC:51157	111188145	positive	chr8	54988029	54988656
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 20	ERVW-20		W	20	HGNC:49308	106144604	positive	chr8	74734099	74734838
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 21	ERVW-21		W	21	HGNC:49309	106144587	positive	chr8	81651950	81655427
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 29			K.HML2	29			negative	chr8	146246648	146254211
-Homo sapiens	hg19	Provirus	endogenous retrovirus group FRD member 3	ERVFRD-3		FRD	3	HGNC:49792	100533725	positive	chr9	21930389	21932738
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 22	ERVW-22		W	22	HGNC:49310	106144563	positive	chr9	35640301	35642824
-Homo sapiens	hg19	Provirus	endogenous retrovirus group I member 1	ERVI-1		I	1	HGNC:39052	100131068	negative	chr9	90652790	90659200
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 31			K.HML2	31			positive	chr9	131612515	131619736
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 30			K.HML2	30			negative	chr9	139674766	139684228
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 105			K.HML2	105			positive	chrUnknown	175210	176178
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 2	ERVH-2	HERV-HX	H	2	HGNC:39054	100616461	negative	chrX	4462210	4463549
-Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 2	ERVW-2	NTrenv	W	2	HGNC:37653	100379323	positive	chrX	106295360	106298101
-Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 63			K.HML2	63			positive	chrX	153817163	153819562
-Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 6	ERVH-6		H	6	HGNC:39058	51581	negative	chrY	23200175	23206610
+organism	assembly	type	approved_name	approved_symbol	alias_symbol	erv-taxonomic-component	mnenomic-number	hgnc_id	ncbi_gene_id	strand	scaffold	extract_start	extract_end	extra
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 6			K.HML2	6			positive	chr1	13458305	13467826	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 7	ERVW-7		W	7	HGNC:49246	106144589	positive	chr1	46851453	46856998	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 1	ERVK-1	c1_A,  HERVK-116	K.HML2	116	HGNC:39000	100862690	positive	chr1	75842771	75849143	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 8	ERVW-8		W	8	HGNC:49247	106144559	positive	chr1	89390211	89397564	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K11 member 1	ERVK11-1			1	HGNC:43647	100859922	positive	chr1	110247853	110252173	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 1	ERVK9-1			1	HGNC:50898	111188150	positive	chr1	150630654	150631285	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 7	ERVK-7	HERV-K(III), HERV-K102	K.HML2	102	HGNC:31828	449619	negative	chr1	155596457	155605636	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 18	ERVK-18	c1_C, HERV-K18, HERVK-110	K.HML2	110	HGNC:39025	100775105	positive	chr1	160660575	160669806	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 12			K.HML2	12			negative	chr1	166574603	166580258	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 9	ERVW-9		W	9	HGNC:49248	106699568	positive	chr1	178110352	178112194	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 10	ERVW-10		W	10	HGNC:49249	106144579	positive	chr1	205835459	205844935	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 11	ERVW-11		W	11	HGNC:49250	106144560	positive	chr1	227812214	227821260	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 16	ERVK-16	c10_A., M3.8	K.HML2	16	HGNC:39023	100616411	negative	chr10	6866141	6875603	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 103		HERVK103	K.HML2	103			positive	chr10	27182399	27183380	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 5	ERVH-5		H	5	HGNC:39057	100862699	positive	chr10	27754712	27757008	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group S71 member 2	ERVS71-2	HERV-HC2	T	2	HGNC:41526	100616200	positive	chr10	38230496	38230791	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 17	ERVK-17	c10_B	K.HML2	17	HGNC:39024	100862686	negative	chr10	101585489	101587716	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 7			K.HML2	7			negative	chr11	3468656	3478209	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 4	ERVK3-4	HML6-c11		4	HGNC:39109	100616106	negative	chr11	7924011	7924334	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 27	ERVK-27		K.HML2	27	HGNC:44980	106144566	negative	chr11	62135963	62150563	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group 9 member 1	ERV9-1	pTR2		1	HGNC:39060	100616497	positive	chr11	67390298	67394204	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 2	ERVE-2			2	HGNC:39048	100862691	negative	chr11	67612675	67615320	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 6	ERVW-6		W	6	HGNC:39045	100616198	negative	chr11	77569259	77574524	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 25	ERVK-25	c11_A	K.HML2	118	HGNC:39039	100862683	positive	chr11	101565794	101575259	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 20	ERVK-20	c11_B	K.HML2	37	HGNC:39031	100616444	negative	chr11	118591724	118600883	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 23	ERVW-23		W	23	HGNC:49311	106144603	positive	chr12	8914009	8921064	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 50			K.HML2	50			negative	chr12	34772555	34782217	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 24	ERVW-24		W	24	HGNC:49312	106144564	positive	chr12	51296258	51307150	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 21, envelope	ERVK-21	c12_A, envK1, HERVK119	K.HML2	119	HGNC:39035	100616103	negative	chr12	58721242	58730698	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 5	ERVK3-5	HML6-c12		5	HGNC:39110	100616412	negative	chr12	112259651	112259984	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 42			K.HML2	42			negative	chr12	133667120	133673132	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 25	ERVW-25		W	25	HGNC:49313	106144605	positive	chr13	37530786	37533118	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 71			K.HML2	71			negative	chr14	24480625	24484121	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 26	ERVW-26		W	26	HGNC:49314	106144572	positive	chr14	45488688	45492897	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 2	ERVK3-2	HML6-c14		2	HGNC:39040	100862697	positive	chr14	70279954	70282683	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 27	ERVW-27		W	27	HGNC:49315	106144565	positive	chr14	91692008	91693212	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 7	ERVH-7	TCONS_00022381	H	7	HGNC:39059	100862698	negative	chr14	92511119	92516158	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 4	ERVH-4	HERV-HD1	H	4	HGNC:21344	51359	positive	chr14	99452044	99457077	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group 18 member 1	ERV18-1			1	HGNC:41524	100133791	positive	chr15	54202966	54206909	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 4	ERVW-4	C187-23	W	4	HGNC:39043	100616496	positive	chr15	55597079	55604574	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K13 member 1	ERVK13-1			1	HGNC:27548	100507321	negative	chr16	2708390	2722572	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 4034			K.HML2	4034			positive	chr16	2976160	2977661	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 9	ERVK9-9	TCONS_00025543	9	9	HGNC:51158	111188137	negative	chr17	6779397	6780027	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 1	ERVE-1	HERV-E1, HERVE1, TCONS_00025599	E	1	HGNC:14602	85314	negative	chr17	26557587	26559832	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 28	ERVW-28		W	28	HGNC:49316	105694156	positive	chr17	35689889	35693622	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 10	ERVK9-10			10	HGNC:51159	111188144	negative	chr17	47248932	47249567	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 29	ERVW-29		W	29	HGNC:49378	106144583	positive	chr18	13656680	13657837	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 22	ERVK-22	c19_A	K.HML2	22	HGNC:39036	100616445	positive	chr19	385095	387637	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 7	ERVK3-7	HML6-c19B		7	HGNC:39112	100616199	negative	chr19	9622047	9622385	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 52			K.HML2	52			positive	chr19	20387400	20397512	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group S71 member 1, envelope	ERVS71-1	envT	T	1	HGNC:41525	105372315	positive	chr19	20480255	20481117	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 51			K.HML2	51			positive	chr19	22757824	22764561	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 19			K.HML2	19			negative	chr19	28128498	28137361	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 28	ERVK-28			28	HGNC:44981	106707175	negative	chr19	28135954	28136531	
+Homo sapiens	hg19	Provirus		ERV4700	ENSG00000266976 lncRNA		4700			positive	chr19	29097595	29106136	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 29	ERVK-29		K.HML2	29	HGNC:44982	106144555	positive	chr19	37597549	37607066	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 11	ERVK9-11			11	HGNC:51160	111188141	negative	chr19	39426730	39427348	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 6	ERVK3-6	HML6-c19A		6	HGNC:39111	100616107	negative	chr19	52311587	52311924	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group FRD member 2	ERVFRD-2	FLJ45949	FRD	2	HGNC:35201	107985332	positive	chr19	53510765	53516433	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group V member 1, envelope	ERVV-1	FLJ32214, HERV-V1, ENVV1	V	1	HGNC:26501	147664	positive	chr19	53517174	53519376	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group V member 2, envelope	ERVV-2	ENVV2	V	2	HGNC:39051	100271846	positive	chr19	53547993	53554933	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 13			K.HML2	13			positive	chr19	53862348	53868044	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 1	ERVK3-1	HERV-K(HML6-1)		1	HGNC:30466	105372481	positive	chr19	58816743	58828178	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 2	ERVK9-2			2	HGNC:50908	111188149	positive	chr2	20126709	20127340	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 12	ERVW-12		W	12	HGNC:49251	106144580	positive	chr2	53983779	53988562	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 13	ERVW-13		W	13	HGNC:49252	106144576	positive	chr2	112796922	112802566	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 10, envelope	ERVH-10	envH3, envH/p59	H	10	HGNC:53423		positive	chr2	155723544	155731248	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 8, envelope	ERVH-8	envH1	H	8	HGNC:53421		negative	chr2	166563971	166572761	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 14	ERVW-14		W	14	HGNC:49253	106144561	positive	chr2	178273972	178277886	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 8	ERVK3-8			8	HGNC:39113	100616108	negative	chr20	25379489	25379824	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 59			K.HML2	59			positive	chr20	32714750	32724384	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 23	ERVK-23	c21_A	K.HML2	23	HGNC:39037	100616197	negative	chr21	19933916	19934992	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group 48 member 1, envelope	ERVH48-1	SUPYN		1	HGNC:17216	90625	negative	chr21	44336913	44345740	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 24	ERVK-24	c22_A, HERV-K101	K.HML2	101	HGNC:39038	100862684	positive	chr22	18926187	18934279	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 345			K.HML2	345			positive	chr22	23879930	23888810	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 2	ERVK-2	c3_A	K.HML2	2	HGNC:39001	100616100	negative	chr3	9889346	9896236	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group PABLB member 1, envelope	ERVPABLB-1	envR(b)		1	HGNC:39042	100862693	negative	chr3	16811648	16812243	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 5	ERVK-5	HERV-K(II)	K.HML2	5	HGNC:13757	60358	positive	chr3	101409738	101420859	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 3	ERVK-3	c3_B	K.HML2	106	HGNC:39002	100862689	negative	chr3	112743479	112752282	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 4	ERVK-4	HERV-K(I)	K.HML2	4	HGNC:13756	60359	positive	chr3	125608304	125619438	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 3	ERVW-3	CL4	W	3	HGNC:39041	100862696	positive	chr3	141538631	141540355	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 13	ERVK-13	c3_D	K.HML2	13	HGNC:39008	100861467	negative	chr3	148281477	148285396	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 9, envelope	ERVH-9	envH2	H	9	HGNC:53422		negative	chr3	166540223	166547792	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 5	ERVW-5	CL2	W	5	HGNC:39044	100862695	positive	chr3	178772378	178777943	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 3	ERVK9-3			3	HGNC:50909	111188148	negative	chr3	184731488	184732117	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 11	ERVK-11	c3_E, N8.4	K.HML2	117	HGNC:39006	100862688	negative	chr3	185280336	185289515	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 77			K.HML2	77			negative	chr4	3980069	3988631	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 15	ERVW-15		W	15	HGNC:49254	106144597	positive	chr4	8422091	8429492	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 17			K.HML2	17			positive	chr4	9123515	9133075	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 50			K.HML2	50			positive	chr4	9659588	9668650	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 1	ERVH-1	HERV-H4p15.2	H	1	HGNC:39053	100616446	negative	chr4	23724532	23728952	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group MER34 member 1, envelope	ERVMER34-1	envMER34, HEMO		1	HGNC:42970	100288413	negative	chr4	53608720	53617592	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 16	ERVW-16		W	16	HGNC:49255	106144581	positive	chr4	133803454	133810293	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 12	ERVK-12		K.HML2	12	HGNC:39007	100616442	positive	chr4	165916840	165924068	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 5	ERVK9-5			5	HGNC:51154	111188147	negative	chr5	1578855	1579485	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 104			K.HML2	104			negative	chr5	30487114	30496205	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 4	ERVK9-4			4	HGNC:50910	111188143	negative	chr5	34782791	34783397	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K3 member 3	ERVK3-3	HML6-c5		3	HGNC:39108	100616462	positive	chr5	70871465	70871802	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 31	ERVK-31		K.HML2	31	HGNC:51379	106144590	positive	chr5	92792380	92793912	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 18			K.HML2	18			negative	chr5	154016502	154024214	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 10	ERVK-10		K.HML2	107	HGNC:39004	100616101	negative	chr5	156084717	156093896	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group FRD member 1, envelope	ERVFRD-1	HERV-W/FRD, HERV-FRD, envFRD, ERVFRDE1, syncytin-2	FRD	1	HGNC:33823	405754	negative	chr6	11102722	11105864	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 69			K.HML2	69			positive	chr6	28650367	28660735	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 12	ERVK9-12			12	HGNC:53627	105375011	positive	chr6	29843501	29844033	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 35587			K.HML2	35587			negative	chr6	42861409	42871367	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 23			K.HML2	23			positive	chr6	57623896	57628704	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 3	ERVH-3	HERV-H/F, TCONS_l2_00025412	H	3	HGNC:39055	100289683	negative	chr6	68591209	68599037	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 32, envelope	ERVK-32	envK4, HERV-K109		109	HGNC:53424	110006328	negative	chr6	78426662	78436083	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 19, envelope	ERVK-19	P1.8, HERV-K(C19), envK3	K.HML2	19	HGNC:39026	105376906	negative	chr6	78427019	78436083	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 9	ERVK-9			9	HGNC:39005	100616102	negative	chr6	78430450	78432161	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 4	ERVE-4		E	4	HGNC:39050	100616105	positive	chr6	89372192	89380624	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 17	ERVW-17		W	17	HGNC:49256	106144567	positive	chr6	106676011	106683689	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 6	ERVK9-6			6	HGNC:51155	111188146	positive	chr6	111242742	111243387	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 18	ERVW-18		W	18	HGNC:49306	106144562	positive	chr6	143400937	143408849	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 19	ERVW-19		W	19	HGNC:49307	106144571	positive	chr6	167304567	167311741	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 6, env / K.108	ERVK-6	HERV-K(HML-2.HOM), HERV-K108, HERV-K(C7), envK2	K.HML2	108	HGNC:13915	64006	negative	chr7	4620811	4631528	left
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 108	ERVK-6	HERV-K(HML-2.HOM), HERV-K108, HERV-K(C7), envK2	K.HML2	108	HGNC:13915	64006	negative	chr7	4630561	4640031	right
+Homo sapiens	hg19	Provirus	endogenous retrovirus group FH21 member 1	ERVFH21-1	HERV-F(XA34)	F	21	HGNC:39047	100616104	negative	chr7	12628860	12633987	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 7	ERVK9-7			7	HGNC:51156	111188142	positive	chr7	35950680	35951312	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group 3 member 1, envelope	ERV3-1	H-PLK, HERV-R, ERV-R, envR	R	1	HGNC:3454	2086	negative	chr7	64450734	64467065	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 1, envelope	ERVW-1	HERV-W, HERV-W-ENV, HERVW, HERV-7q, envW	W	1	HGNC:13525	30816	positive	chr7	92097312	92107506	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 14	ERVK-14	c7_B	K.HML2	14	HGNC:39019	100862687	negative	chr7	104388369	104393266	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group 3 member 2	ERV3-2	KIAA1466		2	HGNC:22218	57612	positive	chr7	134862422	134866711	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 15	ERVK-15	c7_C, P1.10	K.HML2	15	HGNC:39022	100616443	negative	chr7	141450926	141455903	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group FC1 member 1, envelope	ERVFC1-1	FLJ42291, envF(c)2, TCONS_l2_00027524	Fc	1	HGNC:38137	346547	negative	chr7	153108319	153111048	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 8, envelope	ERVK-8	HERV-K115, envK6	K.HML2	115	HGNC:32302	619465	negative	chr8	7355397	7364859	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 27			K.HML2	27			positive	chr8	8054700	8055725	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 26	ERVK-26		K.HML2	26	HGNC:44979	103539957	negative	chr8	12081113	12081622	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group E member 3	ERVE-3		E	3	HGNC:39049	100862700	negative	chr8	12343258	12350376	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 70			K.HML2	70			negative	chr8	47175650	47183661	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K9, member 8	ERVK9-8			8	HGNC:51157	111188145	positive	chr8	54988029	54988656	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 21	ERVW-21		W	21	HGNC:49309	106144587	positive	chr8	81651950	81655427	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 29			K.HML2	29			negative	chr8	146246648	146254211	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group FRD member 3	ERVFRD-3		FRD	3	HGNC:49792	100533725	positive	chr9	21930389	21932738	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 22	ERVW-22		W	22	HGNC:49310	106144563	positive	chr9	35640301	35642824	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group I member 1	ERVI-1		I	1	HGNC:39052	100131068	negative	chr9	90652790	90659200	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 31			K.HML2	31			positive	chr9	131612515	131619736	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 30			K.HML2	30			negative	chr9	139674766	139684228	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 2	ERVH-2	HERV-HX	H	2	HGNC:39054	100616461	negative	chrX	4462210	4463549	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group W member 2	ERVW-2	NTrenv	W	2	HGNC:37653	100379323	positive	chrX	106295360	106298101	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group K member 63			K.HML2	63			positive	chrX	153817163	153819562	
+Homo sapiens	hg19	Provirus	endogenous retrovirus group H member 6	ERVH-6		H	6	HGNC:39058	51581	negative	chrY	23200175	23206610	
