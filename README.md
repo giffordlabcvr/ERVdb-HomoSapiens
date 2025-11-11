@@ -1,7 +1,8 @@
 # HERVdb  
 *A GLUE-based reference and locus resource for human endogenous retroviruses (HERVs)*  
 
-**HERVdb** extends the [ERVdb](https://github.com/giffordlabcvr/ervdb) reference scaffold to incorporate **all classified human endogenous retrovirus (HERV) loci**.  
+**HERVdb** extends the [ERVdb](https://github.com/giffordlabcvr/ervdb) reference scaffold to incorporate **all classified human endogenous retrovirus (HERV) loci**.
+
 It anchors these loci to the **reconstructed ancestral reference genomes** and **phylogenetic alignments** defined in ERVdb, creating a reproducible framework for studying retroviral diversity within the *Homo sapiens* genome.
 
 * * * * *
