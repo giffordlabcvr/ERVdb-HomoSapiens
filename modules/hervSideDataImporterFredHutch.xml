@@ -6,23 +6,18 @@
     
     <textFileColumn>
         <identifier>true</identifier>
-        <header>sequenceid</header>
+        <header>idx</header>
         <property>sequenceID</property>
     </textFileColumn>
 
     <textFileColumn>
-        <header>sequenceid</header>
-        <property>internal_id</property>
-    </textFileColumn>
-
-    <textFileColumn>
-        <header>classification</header>
-        <property>raw_classification</property>
-    </textFileColumn>
-
-    <textFileColumn>
-        <header>scaffold</header>
+        <header>chrom</header>
         <property>locus_data.scaffold</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>strand</header>
+        <property>locus_data.orientation</property>
     </textFileColumn>
 
     <textFileColumn>
