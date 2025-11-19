@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<textFilePopulator>
+
+    <columnDelimiterRegex>\t</columnDelimiterRegex>
+    
+    <textFileColumn>
+        <identifier>true</identifier>
+        <header>sequenceid</header>
+        <property>sequenceID</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>sequenceid</header>
+        <property>internal_id</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>classification</header>
+        <property>raw_classification</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>scaffold</header>
+        <property>locus_data.scaffold</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>start</header>
+        <property>locus_data.start_position</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>end</header>
+        <property>locus_data.end_position</property>
+    </textFileColumn>
+
+    <skipMissing>true</skipMissing>
+
+</textFilePopulator>
+
