@@ -41,24 +41,24 @@ tableObjs.forEach(function(locus) {
 
             var sourceName = seqResult.listResult.row[0].value[0];
 
-            // Get mod_classification from sequence table
+            // Get classification from locus table
             var lineageCode = null;
             var modClassResult = glue.command([
-                "list", "sequence", "mod_classification",
-                "-w", "sequenceID = '" + internalID + "' and source.name = '" + sourceName + "'"
+                "list", "custom-table-row", "locus_data",  
+                "-w", "id = '" + internalID + "'"
             ]);
 
             if ("listResult" in modClassResult && "row" in modClassResult.listResult && modClassResult.listResult.row.length > 0) {
-                var modClassification = modClassResult.listResult.row[0].value[0];
-                if (modClassification && modClassification.trim() !== "") {
-                    lineageCode = modClassification.trim();
+                var classification = modClassResult.listResult.row[0].value[0];
+                if (classification && classification.trim() !== "") {
+                    lineageCode = classification.trim();
                 } else {
                     lineageCode = locus["erv-taxonomic-component"];
-                    glue.log("WARNING", "mod_classification is blank for " + internalID + "; falling back to input value: " + lineageCode);
+                    glue.log("WARNING", "classification is blank for " + internalID + "; falling back to input value: " + lineageCode);
                 }
             } else {
                 lineageCode = locus["erv-taxonomic-component"];
-                glue.log("WARNING", "Could not retrieve mod_classification for " + internalID + "; falling back to input value: " + lineageCode);
+                glue.log("WARNING", "Could not retrieve classification for " + internalID + "; falling back to input value: " + lineageCode);
             }
 
             lineageCode = lineageCode.replace(/-/g, "");

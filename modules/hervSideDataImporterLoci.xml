@@ -16,12 +16,12 @@
     </textFileColumn>
 
     <textFileColumn>
-        <header>classification</header>
-        <property>raw_classification</property>
+        <header>names_decision</header>
+        <property>locus_data.classification</property>
     </textFileColumn>
 
     <textFileColumn>
-        <header>scaffold</header>
+        <header>chrom</header>
         <property>locus_data.scaffold</property>
     </textFileColumn>
 
@@ -33,6 +33,11 @@
     <textFileColumn>
         <header>end</header>
         <property>locus_data.end_position</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>strand</header>
+        <property>locus_data.orientation</property>
     </textFileColumn>
 
     <skipMissing>true</skipMissing>
