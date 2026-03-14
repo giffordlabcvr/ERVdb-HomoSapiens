@@ -2,69 +2,69 @@
 
 # Gammaretrovirus
 
-alignment AL_SPECIES_HERVT  add member -w "rv_species.id = 'HERV-T'"
-alignment AL_SPECIES_HERVE  add member -w "rv_species.id = 'HERV-E'"
-alignment AL_SPECIES_HERVR  add member -w "rv_species.id = 'HERV-R'"
-alignment AL_SPECIES_HERV1  add member -w "rv_species.id = 'HERV-1'"
+alignment AL_SPECIES_HERVT  add member -w "locus_data.classification = 'HERV-T'"
+alignment AL_SPECIES_HERVE  add member -w "locus_data.classification = 'HERV-E'"
+alignment AL_SPECIES_HERVR  add member -w "locus_data.classification = 'HERV-R'"
+alignment AL_SPECIES_HERV1  add member -w "locus_data.classification = 'HERV-1'"
 
 # Zetaretrovirus
 
-alignment AL_SPECIES_HERVFa add member -w "rv_species.id = 'HERV-Fa'"
-alignment AL_SPECIES_HERVFb add member -w "rv_species.id = 'HERV-Fb'"
-alignment AL_SPECIES_HERVFc add member -w "rv_species.id = 'HERV-Fc'"
-alignment AL_SPECIES_HERVXA add member -w "rv_species.id = 'HERV-XA'"
-alignment AL_SPECIES_HERVH  add member -w "rv_species.id = 'HERV-H'"
+alignment AL_SPECIES_HERVFa add member -w "locus_data.classification = 'HERV-Fa'"
+alignment AL_SPECIES_HERVFb add member -w "locus_data.classification = 'HERV-Fb'"
+alignment AL_SPECIES_HERVFc add member -w "locus_data.classification = 'HERV-Fc'"
+alignment AL_SPECIES_HERVXA add member -w "locus_data.classification = 'HERV-XA'"
+alignment AL_SPECIES_HERVH  add member -w "locus_data.classification = 'HERV-H'"
 
-alignment AL_SPECIES_HERV9  add member -w "rv_species.id = 'HERV-9'"
-alignment AL_SPECIES_HERVW  add member -w "rv_species.id = 'HERV-W'"
+alignment AL_SPECIES_HERV9  add member -w "locus_data.classification = 'HERV-9'"
+alignment AL_SPECIES_HERVW  add member -w "locus_data.classification = 'HERV-W'"
 
-alignment AL_SPECIES_HERV30 add member -w "rv_species.id = 'HERV-30'"
-alignment AL_SPECIES_HERV46 add member -w "rv_species.id = 'HERV-46'"
-alignment AL_SPECIES_HERV4  add member -w "rv_species.id = 'HERV-4'"
-alignment AL_SPECIES_HERV35 add member -w "rv_species.id = 'HERV-35'"
-alignment AL_SPECIES_MER52  add member -w "rv_species.id = 'MER-52'"
-alignment AL_SPECIES_MER84  add member -w "rv_species.id = 'MER-84'"
-alignment AL_SPECIES_MER66  add member -w "rv_species.id = 'MER-66'"
-alignment AL_SPECIES_MER57  add member -w "rv_species.id = 'MER-57'"
-alignment AL_SPECIES_PRIMA41 add member -w "rv_species.id = 'PRIMA41'"
+alignment AL_SPECIES_HERV30 add member -w "locus_data.classification = 'HERV-30'"
+alignment AL_SPECIES_HERV46 add member -w "locus_data.classification = 'HERV-46'"
+alignment AL_SPECIES_HERV4  add member -w "locus_data.classification = 'HERV-4'"
+alignment AL_SPECIES_HERV35 add member -w "locus_data.classification = 'HERV-35'"
+alignment AL_SPECIES_MER52  add member -w "locus_data.classification = 'MER-52'"
+alignment AL_SPECIES_MER84  add member -w "locus_data.classification = 'MER-84'"
+alignment AL_SPECIES_MER66  add member -w "locus_data.classification = 'MER-66'"
+alignment AL_SPECIES_MER57  add member -w "locus_data.classification = 'MER-57'"
+alignment AL_SPECIES_PRIMA41 add member -w "locus_data.classification = 'PRIMA41'"
 
 
 # Iotaretrovirus
 
-alignment AL_SPECIES_HERVI  add member -w "rv_species.id = 'HERV-I'"
-#alignment AL_SPECIES_HERVADP  add member -w "rv_species.id = 'HERV-ADP'"
+alignment AL_SPECIES_HERVI  add member -w "locus_data.classification = 'HERV-I'"
+#alignment AL_SPECIES_HERVADP  add member -w "locus_data.classification = 'HERV-ADP'"
 
 # Rhoretrovirus
 
-alignment AL_SPECIES_HERVRb add member -w "rv_species.id = 'HERV-Rb'"
-alignment AL_SPECIES_HERV39 add member -w "rv_species.id = 'HERV-39'"
+alignment AL_SPECIES_HERVRb add member -w "locus_data.classification = 'HERV-Rb'"
+alignment AL_SPECIES_HERV39 add member -w "locus_data.classification = 'HERV-39'"
 
 # Thetaretrovirus
 
-alignment AL_SPECIES_HERVLb add member -w "rv_species.id = 'HERV-Lb'"
-alignment AL_SPECIES_HERV24 add member -w "rv_species.id = 'HERV-24'"
-alignment AL_SPECIES_PRIMA4 add member -w "rv_species.id = 'PRIMA4'"
-alignment AL_SPECIES_MER21  add member -w "rv_species.id = 'MER-21'"
-alignment AL_SPECIES_MER34  add member -w "rv_species.id = 'MER-34'"
-alignment AL_SPECIES_MER89  add member -w "rv_species.id = 'MER-89'"
+alignment AL_SPECIES_HERVLb add member -w "locus_data.classification = 'HERV-Lb'"
+alignment AL_SPECIES_HERV24 add member -w "locus_data.classification = 'HERV-24'"
+alignment AL_SPECIES_PRIMA4 add member -w "locus_data.classification = 'PRIMA4'"
+alignment AL_SPECIES_MER21  add member -w "locus_data.classification = 'MER-21'"
+alignment AL_SPECIES_MER34  add member -w "locus_data.classification = 'MER-34'"
+alignment AL_SPECIES_MER89  add member -w "locus_data.classification = 'MER-89'"
 
 #~# Clade II
 
-alignment AL_SPECIES_HERVK_HML1  add member -w "rv_species.id = 'HERV-K-HML1'"
-alignment AL_SPECIES_HERVK_HML2  add member -w "rv_species.id = 'HERV-K-HML2'"
-alignment AL_SPECIES_HERVK_HML3  add member -w "rv_species.id = 'HERV-K-HML3'"
-alignment AL_SPECIES_HERVK_HML4  add member -w "rv_species.id = 'HERV-K-HML4'"
-alignment AL_SPECIES_HERVK_HML5  add member -w "rv_species.id = 'HERV-K-HML5'"
-alignment AL_SPECIES_HERVK_HML6  add member -w "rv_species.id = 'HERV-K-HML6'"
-alignment AL_SPECIES_HERVK_HML7  add member -w "rv_species.id = 'HERV-K-HML7'"
-alignment AL_SPECIES_HERVK_HML8  add member -w "rv_species.id = 'HERV-K-HML8'"
-alignment AL_SPECIES_HERVK_HML9  add member -w "rv_species.id = 'HERV-K-HML9'"
-alignment AL_SPECIES_HERVK_HML10 add member -w "rv_species.id = 'HERV-K-HML10'"
+alignment AL_SPECIES_HERVK_HML1  add member -w "locus_data.classification = 'HERV-K-HML1'"
+alignment AL_SPECIES_HERVK_HML2  add member -w "locus_data.classification = 'HERV-K-HML2'"
+alignment AL_SPECIES_HERVK_HML3  add member -w "locus_data.classification = 'HERV-K-HML3'"
+alignment AL_SPECIES_HERVK_HML4  add member -w "locus_data.classification = 'HERV-K-HML4'"
+alignment AL_SPECIES_HERVK_HML5  add member -w "locus_data.classification = 'HERV-K-HML5'"
+alignment AL_SPECIES_HERVK_HML6  add member -w "locus_data.classification = 'HERV-K-HML6'"
+alignment AL_SPECIES_HERVK_HML7  add member -w "locus_data.classification = 'HERV-K-HML7'"
+alignment AL_SPECIES_HERVK_HML8  add member -w "locus_data.classification = 'HERV-K-HML8'"
+alignment AL_SPECIES_HERVK_HML9  add member -w "locus_data.classification = 'HERV-K-HML9'"
+alignment AL_SPECIES_HERVK_HML10 add member -w "locus_data.classification = 'HERV-K-HML10'"
 
 #~# Clade III
 
-alignment AL_SPECIES_HERV16 add member -w "rv_species.id = 'HERV-16'"
-alignment AL_SPECIES_HERVL  add member -w "rv_species.id = 'HERV-L'"
-alignment AL_SPECIES_HERVS  add member -w "rv_species.id = 'HERV-S'"
-alignment AL_SPECIES_HERVU3 add member -w "rv_species.id = 'HERV-U3'"
+alignment AL_SPECIES_HERV16 add member -w "locus_data.classification = 'HERV-16'"
+alignment AL_SPECIES_HERVL  add member -w "locus_data.classification = 'HERV-L'"
+alignment AL_SPECIES_HERVS  add member -w "locus_data.classification = 'HERV-S'"
+alignment AL_SPECIES_HERVU3 add member -w "locus_data.classification = 'HERV-U3'"
 

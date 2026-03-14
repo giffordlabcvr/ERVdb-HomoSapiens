@@ -11,11 +11,6 @@
     </textFileColumn>
 
     <textFileColumn>
-        <header>sequenceid</header>
-        <property>internal_id</property>
-    </textFileColumn>
-
-    <textFileColumn>
         <header>names_decision</header>
         <property>locus_data.classification</property>
     </textFileColumn>

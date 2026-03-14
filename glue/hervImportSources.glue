@@ -2,3 +2,4 @@
   # Import sources
   
   import source sources/fr_rt4_samerow
+  import source sources/fr_samename

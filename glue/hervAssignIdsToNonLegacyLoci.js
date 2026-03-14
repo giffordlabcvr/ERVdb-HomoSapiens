@@ -25,15 +25,14 @@ existing.listResult.row.forEach(function(row) {
 // Step 2: Assign to unassigned sequences
 var toAssign = glue.command([
   "list", "custom-table-row", "locus_data", "id", "classification",
-  "-w", "classification != null and assignment_status != 'legacy_assigned' or assignment_status = null)"
+  "-w", "classification != null and assignment_status != 'legacy_assigned' or assignment_status = null"
 ]);
 
 
 toAssign.listResult.row.forEach(function(row) {
     try {
         var sequenceID = row.value[0];
-        var sourceName = row.value[1];
-        var classification = row.value[2];
+        var classification = row.value[1];
 
         var cleanLineage = classification.replace(/[^A-Za-z0-9]/g, "");
 
