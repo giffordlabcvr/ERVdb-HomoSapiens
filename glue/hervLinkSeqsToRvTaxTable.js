@@ -80,8 +80,8 @@ _.each(sources, function(sourceName) {
 		var taxonId = taxonIdRaw.trim();
 
 		// Set classification and tax_level fields regardless of linkage success
-		try {
-			glue.inMode("sequence/" + sourceName + "/" + seqId, function() {
+		try {		
+			glue.inMode("custom-table-row/locus_data/" + seqId, function() {
 				glue.command(["set", "field", "classification", taxonId]);
 				glue.command(["set", "field", "tax_level", levelRaw]);
 			});

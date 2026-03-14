@@ -26,6 +26,12 @@ project ervdb
 
   # Compute alignments
   #run file glue/hervComputeAlignments.glue
+
+  # Compute alignments
+  run file glue/hervComputeAlignments.glue
+  
+  # Record feature presence
+  #run file glue/hervRecordFeaturePresence.glue
   
   validate
   
