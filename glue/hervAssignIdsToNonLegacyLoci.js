@@ -1,9 +1,9 @@
-// Step 1: Index already-used numbers by cleaned mod_classification
+// Step 1: Index already-used numbers by classification
 var usedNumbersByLineage = {};
 
 var existing = glue.command([
-  "list", "sequence", "sequenceID", "locus_data.erv_locus_id", "mod_classification",
-  "-w", "locus_data.assignment_status = 'legacy_assigned'"
+  "list", "custom-table-row", "locus_data", "id", "erv_locus_id", "classification",
+  "-w", "assignment_status = 'legacy_assigned'"
 ]);
 
 existing.listResult.row.forEach(function(row) {
@@ -24,18 +24,17 @@ existing.listResult.row.forEach(function(row) {
 
 // Step 2: Assign to unassigned sequences
 var toAssign = glue.command([
-  "list", "sequence", "sequenceID", "source.name", "mod_classification",
-  "-w", "source.name = 'homo_sapiens' and mod_classification != null and (locus_data.assignment_status != 'legacy_assigned' or locus_data.assignment_status = null)"
+  "list", "custom-table-row", "locus_data", "id", "classification",
+  "-w", "classification != null and assignment_status != 'legacy_assigned' or assignment_status = null"
 ]);
 
 
 toAssign.listResult.row.forEach(function(row) {
     try {
         var sequenceID = row.value[0];
-        var sourceName = row.value[1];
-        var modClassification = row.value[2];
+        var classification = row.value[1];
 
-        var cleanLineage = modClassification.replace(/[^A-Za-z0-9]/g, "");
+        var cleanLineage = classification.replace(/[^A-Za-z0-9]/g, "");
 
         if (!(cleanLineage in usedNumbersByLineage)) {
             usedNumbersByLineage[cleanLineage] = {};
@@ -48,7 +47,7 @@ toAssign.listResult.row.forEach(function(row) {
         }
         usedNumbersByLineage[cleanLineage][counter] = true;
 
-		lineageCode = modClassification.replace(/-/g, "");
+		lineageCode = classification.replace(/-/g, "");
         var newLocusID = "ERV-" + lineageCode + "." + counter + "-HomSap";
 
         glue.log("INFO", "Assigning: " + sequenceID + " → " + newLocusID);
@@ -58,7 +57,7 @@ toAssign.listResult.row.forEach(function(row) {
 	
 			glue.command(["set", "field", "erv_locus_id", newLocusID]);
 			glue.command(["set", "field", "assignment_status", "assigned"]);
-			glue.command(["set", "field", "lineage_id", modClassification]);
+			glue.command(["set", "field", "lineage_id", classification]);
 			glue.command(["set", "field", "numeric_id", counter]);
 
 

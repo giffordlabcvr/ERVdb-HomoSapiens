@@ -1,5 +1,6 @@
 // Define the sources to process
-var sources = ["homo_sapiens", "homo_sapiens_ltr", "homo_sapiens_malr", "homo_sapiens_mosaic"];
+//var sources = ["homo_sapiens", "homo_sapiens_ltr", "homo_sapiens_malr", "homo_sapiens_mosaic"];
+var sources = ["fr_rt4_samerow", "fr_samename"];
 
 // Loop through each source
 _.each(sources, function(sourceName) {

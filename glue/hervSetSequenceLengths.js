@@ -1,4 +1,4 @@
-var sources = ["homo_sapiens_mosaic", "homo_sapiens_malr", "homo_sapiens_ltr", "homo_sapiens"];
+var sources = ["fr_rt4_samerow", "fr_samename"];
 
 _.each(sources, function(sourceName) {
 	var seqIDs = glue.getTableColumn(

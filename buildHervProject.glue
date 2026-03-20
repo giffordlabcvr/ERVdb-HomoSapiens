@@ -20,12 +20,18 @@ project ervdb
   # Add imported ERV sequences to alignments
   run file glue/hervAddLocusSeqsToAlignments.glue
 
-  # Assign IDs
+  # Assign Legacy IDs
   run script glue/hervLegacyLocusAssign.js
   run script glue/hervAssignIdsToNonLegacyLoci.js
 
   # Compute alignments
   #run file glue/hervComputeAlignments.glue
+
+  # Compute alignments
+  run file glue/hervComputeAlignments.glue
+  
+  # Record feature presence
+  #run file glue/hervRecordFeaturePresence.glue
   
   validate
   
