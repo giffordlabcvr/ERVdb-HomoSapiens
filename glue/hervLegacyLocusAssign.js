@@ -21,7 +21,7 @@ tableObjs.forEach(function(locus) {
         end + " >= start_position";
 
     var result = glue.command([
-        "list", "custom-table-row", "locus_data",
+        "list", "custom-table-row", "locus",
         "--whereClause", whereClause
     ]);
 
@@ -44,7 +44,7 @@ tableObjs.forEach(function(locus) {
             // Get classification from locus table
             var lineageCode = null;
             var modClassResult = glue.command([
-                "list", "custom-table-row", "locus_data",  
+                "list", "custom-table-row", "locus",  
                 "-w", "id = '" + internalID + "'"
             ]);
 
@@ -74,7 +74,7 @@ tableObjs.forEach(function(locus) {
             var newSeqID = "ERV-" + lineageCode + "." + mnemonic + "-HomSap";
             glue.log("INFO", "Assigning legacy ID " + newSeqID + " to internal ID: " + internalID);
 
-            glue.inMode("custom-table-row/locus_data/" + internalID, function() {
+            glue.inMode("custom-table-row/locus/" + internalID, function() {
 
                 // Alias assignment
                 var approvedSymbol = locus["approved_symbol"];

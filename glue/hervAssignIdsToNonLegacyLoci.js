@@ -2,7 +2,7 @@
 var usedNumbersByLineage = {};
 
 var existing = glue.command([
-  "list", "custom-table-row", "locus_data", "id", "erv_locus_id", "classification",
+  "list", "custom-table-row", "erv_locus_data", "id", "erv_locus_id", "classification",
   "-w", "assignment_status = 'legacy_assigned'"
 ]);
 
@@ -24,7 +24,7 @@ existing.listResult.row.forEach(function(row) {
 
 // Step 2: Assign to unassigned sequences
 var toAssign = glue.command([
-  "list", "custom-table-row", "locus_data", "id", "classification",
+  "list", "custom-table-row", "erv_locus_data", "id", "classification",
   "-w", "classification != null and assignment_status != 'legacy_assigned' or assignment_status = null"
 ]);
 
@@ -52,8 +52,8 @@ toAssign.listResult.row.forEach(function(row) {
 
         glue.log("INFO", "Assigning: " + sequenceID + " → " + newLocusID);
 
-	   // Set locus ID fields, aliases and HGNC ID on locus_data row
-		glue.inMode("custom-table-row/locus_data/" + sequenceID, function() {
+	   // Set locus ID fields, aliases and HGNC ID on erv_locus_data row
+		glue.inMode("custom-table-row/erv_locus_data/" + sequenceID, function() {
 	
 			glue.command(["set", "field", "erv_locus_id", newLocusID]);
 			glue.command(["set", "field", "assignment_status", "assigned"]);

@@ -13,7 +13,7 @@ var taxLevelToTable = {
 var taxonomyLookup = {};
 
 var refSeqsResult = glue.command([
-	"list", "sequence", "-w", "source.name like '%-refseqs-%'"
+	"list", "sequence", "-w", "source.name like '%-refseqs-%' and source.name != 'erv-refseqs-ltr'"
 ]);
 
 _.each(refSeqsResult.listResult.row, function(ref) {
@@ -79,14 +79,14 @@ _.each(sources, function(sourceName) {
 		var level = levelRaw.toLowerCase().trim();
 		var taxonId = taxonIdRaw.trim();
 
-		// Set classification and tax_level fields regardless of linkage success
+		// Set lineage_id and tax_level fields regardless of linkage success
 		try {		
-			glue.inMode("custom-table-row/locus_data/" + seqId, function() {
-				glue.command(["set", "field", "classification", taxonId]);
+			glue.inMode("custom-table-row/erv_locus/" + seqId, function() {
+				glue.command(["set", "field", "lineage_id", taxonId]);
 				glue.command(["set", "field", "tax_level", levelRaw]);
 			});
 		} catch (e) {
-			glue.log("WARNING", "Failed to set classification/tax_level for sequence " + seqId + ": " + e);
+			glue.log("WARNING", "Failed to set lineage_id/tax_level for sequence " + seqId + ": " + e);
 			failedSeqs++;
 			return;
 		}
@@ -158,7 +158,5 @@ _.each(sources, function(sourceName) {
 
 
 });
-
-
 
 

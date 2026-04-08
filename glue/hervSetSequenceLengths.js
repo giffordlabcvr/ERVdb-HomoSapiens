@@ -10,6 +10,8 @@ _.each(sources, function(sourceName) {
 		glue.inMode("/sequence/"+sourceName+"/"+sequenceID, function() {
 			var length = glue.command("show length").lengthResult.length;
 			glue.command(["set", "field", "length", length]);
+            glue.command(["set", "field", "sequence_kind", '[proviral_locus']);
+
 		});
 	});
 });
