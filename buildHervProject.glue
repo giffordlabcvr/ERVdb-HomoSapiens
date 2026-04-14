@@ -6,7 +6,7 @@ project ervdb
   run file glue/hervImportSources.glue
 
   # Set lengths
-  run script glue/hervSetSequenceLengths.js 
+  run script glue/hervSetSequenceLengthsAndKinds.js 
 
   # Link to locus data table
   run script glue/hervLinkSeqsToLocusTable.js
@@ -14,21 +14,19 @@ project ervdb
   # Import metadata about loci from tabular
   run file glue/hervImportSideData.glue
 
-  # Link locus sequences to retrovirus taxonomy table
-  run script glue/hervLinkSeqsToRvTaxTable.js
-
-  # Add imported ERV sequences to alignments
-  run file glue/hervAddLocusSeqsToAlignments.glue
+  # Link loci to curated lineage concepts
+  run script glue/hervLinkLociToErvLineages.js
+  #run script glue/hervLinkLociToLtrLineages.js
 
   # Assign Legacy IDs
-  run script glue/hervLegacyLocusAssign.js
-  run script glue/hervAssignIdsToNonLegacyLoci.js
+  #run script glue/hervLegacyLocusAssign.js
+  #run script glue/hervAssignIdsToNonLegacyLoci.js
+
+  # Add imported ERV sequences to alignments
+  #run file glue/hervAddLocusSeqsToAlignments.glue
 
   # Compute alignments
   #run file glue/hervComputeAlignments.glue
-
-  # Compute alignments
-  run file glue/hervComputeAlignments.glue
   
   # Record feature presence
   #run file glue/hervRecordFeaturePresence.glue

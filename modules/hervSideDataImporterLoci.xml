@@ -32,7 +32,12 @@
 
     <textFileColumn>
         <header>names_decision</header>
-        <property>erv_locus.lineage_id</property>
+        <property>erv_locus.raw_classification</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>tax_level</header>
+        <property>erv_locus.tax_level</property>
     </textFileColumn>
 
 
