@@ -3,73 +3,15 @@
 
 	#~# Clade I
 
-	# Gammaretrovirus
-
-	record feature-presence AL_SPECIES_HERVT   --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVE   --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVR   --recursive --featureName whole_genome --descendentFeatures
-
-	# Zetaretrovirus
-
-	record feature-presence AL_SPECIES_HERVH   --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVFb  --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVXA  --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVW   --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERV9   --recursive --featureName whole_genome --descendentFeatures
-
-	record feature-presence AL_SPECIES_HERV30  --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_HERV46  --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_HERV4   --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_HERV35  --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_MER52   --recursive --featureName whole_genome --d
-	escendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_MER84   --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_MER66   --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_MER57   --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_PRIMA41 --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-
-	# Iotaretrovirus
-
-	record feature-presence AL_SPECIES_HERVI   --recursive --featureName whole_genome --descendentFeatures
-
-	# Rhoretrovirus
-
-	record feature-presence AL_SPECIES_HERVRb  --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERV39  --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-
-	# Thetaretrovirus
-
-	record feature-presence AL_SPECIES_HERVLb  --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERV24  --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_PRIMA4  --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_MER21   --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_MER34   --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_MER89   --recursive --featureName whole_genome --descendentFeaturesNoOrfs
+	record feature-presence AL_ROOT_CLADE_I --recursive --featureName whole_genome --descendentFeatures
 
 	#~# Clade II
 
-	record feature-presence AL_SPECIES_HERVK_HML1 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML2 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML3 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML4 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML5 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML6 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML7 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML8 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML9 --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVK_HML10 --recursive --featureName whole_genome --descendentFeatures
-
+	record feature-presence AL_ROOT_CLADE_II --recursive --featureName whole_genome --descendentFeatures
 
 	#~# Clade III
 
-	record feature-presence AL_SPECIES_HERVS  --recursive --featureName whole_genome --descendentFeatures
-	record feature-presence AL_SPECIES_HERVL  --recursive --featureName whole_genome --descendentFeaturesNoEnv
-	record feature-presence AL_SPECIES_HERVU3 --recursive --featureName whole_genome --descendentFeatures
-
-	#~# No ORFs
-
-	record feature-presence AL_SPECIES_HERV1  --recursive --featureName whole_genome --descendentFeaturesNoOrfs
-	record feature-presence AL_SPECIES_HERV16 --recursive --featureName whole_genome --descendentFeaturesNoOrfs
+	record feature-presence AL_ROOT_CLADE_III --recursive --featureName whole_genome --descendentFeatures
 
 	exit
 	
