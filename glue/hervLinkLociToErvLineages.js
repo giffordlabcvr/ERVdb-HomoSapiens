@@ -1,11 +1,12 @@
 // glue/hervLinkLociToErvLineages.js
 //
-// Link HERV loci to ERV internal lineages via erv_locus_lineage_assoc.
+// Link HERV loci to ERV internal lineages via erv_locus_lineage_assoc,
+// using erv_locus.classification as the driver.
 //
 // Assumptions:
 // 1. sequence rows are already linked to erv_locus rows
 // 2. erv_locus row ID == sequenceID
-// 3. erv_locus.raw_classification contains an imported lineage label
+// 3. erv_locus.classification contains a cleaned lineage label
 // 4. erv_lineage rows already exist
 // 5. optional: erv_lineage_alias rows may exist to support name resolution
 //
@@ -15,7 +16,8 @@
 //   - try erv_lineage_alias lookup using candidate names
 //
 // Notes:
-//   - loci with blank / null raw_classification are skipped
+//   - loci with blank / null classification are skipped
+//   - loci whose classification is broad/non-lineage (e.g. mosaic) are skipped
 //   - loci whose target erv_lineage cannot be resolved are reported and skipped
 //   - existing association rows are reused
 
@@ -139,7 +141,7 @@ function findLineageByAlias(aliasName) {
     return norm(getCell(rows[0], colIndex));
 }
 
-function candidateLineageIds(importedId) {
+function candidateLineageIds(classification) {
     var candidates = [];
     var seen = {};
 
@@ -154,7 +156,7 @@ function candidateLineageIds(importedId) {
         }
     }
 
-    var raw = norm(importedId);
+    var raw = norm(classification);
     if(raw == null) {
         return candidates;
     }
@@ -162,48 +164,58 @@ function candidateLineageIds(importedId) {
     // exact
     addCandidate(raw);
 
-    // HERV-K(HML2) -> HERV-K-HML2
-    var hmlMatch = raw.match(/^HERV-K\(HML([0-9]+)\)$/i);
-    if(hmlMatch) {
-        addCandidate("HERV-K-HML" + hmlMatch[1]);
-    }
-
-    // Generic bracket flattening: X(Y) -> X-Y
+    // generic bracket flattening
     addCandidate(raw.replace(/\(([^\)]+)\)/g, "-$1").replace(/--+/g, "-"));
 
-    // PRIMA41 -> PRIMA-41
-    var primaNum = raw.match(/^PRIMA([0-9]+)$/i);
-    if(primaNum) {
-        addCandidate("PRIMA-" + primaNum[1]);
+    // HERV-K(HML2) / HERVK-HML2 / HERVK_HML2 -> HERV-K-HML2
+    var m = raw.match(/^HERV-K\(HML([0-9]+)\)$/i);
+    if(m) {
+        addCandidate("HERV-K-HML" + m[1]);
     }
 
-    // PRIMAX -> PRIMA-X
-    var primaLetter = raw.match(/^PRIMA([A-Z])$/i);
-    if(primaLetter) {
-        addCandidate("PRIMA-" + primaLetter[1].toUpperCase());
+    m = raw.match(/^HERVK[-_]?HML([0-9]+)$/i);
+    if(m) {
+        addCandidate("HERV-K-HML" + m[1]);
     }
 
-    // HERVK-HML2 / HERVK_HML2 -> HERV-K-HML2
-    var hervk = raw.match(/^HERVK[-_]?HML([0-9]+)$/i);
-    if(hervk) {
-        addCandidate("HERV-K-HML" + hervk[1]);
+    // PRIMA41 / PRIMAX
+    m = raw.match(/^PRIMA([0-9]+)$/i);
+    if(m) {
+        addCandidate("PRIMA-" + m[1]);
+    }
+
+    m = raw.match(/^PRIMA([A-Z])$/i);
+    if(m) {
+        addCandidate("PRIMA-" + m[1].toUpperCase());
     }
 
     return candidates;
 }
 
-function resolveErvLineageId(importedId) {
-    var candidates = candidateLineageIds(importedId);
+function isNonLineageClassification(classification) {
+    var c = norm(classification);
+    if(c == null) {
+        return true;
+    }
+    var low = c.toLowerCase();
+    return (
+        low === "mosaic" ||
+        low === "unresolved" ||
+        low === "unknown" ||
+        low === "other"
+    );
+}
+
+function resolveErvLineageId(classification) {
+    var candidates = candidateLineageIds(classification);
     var i, aliasMatch;
 
-    // direct erv_lineage ID match
     for(i = 0; i < candidates.length; i++) {
         if(customRowExistsById("erv_lineage", candidates[i])) {
             return candidates[i];
         }
     }
 
-    // alias lookup
     for(i = 0; i < candidates.length; i++) {
         aliasMatch = findLineageByAlias(candidates[i]);
         if(aliasMatch != null && customRowExistsById("erv_lineage", aliasMatch)) {
@@ -219,44 +231,52 @@ _.each(sources, function(sourceName) {
     log("Processing source: " + sourceName);
 
     var seqIds = sequenceIdsForSource(sourceName);
+    var linkedCount = 0;
+    var skippedCount = 0;
 
     _.each(seqIds, function(seqId) {
 
         var locusId = seqId;
 
-        // Check locus exists
         if(!customRowExistsById("erv_locus", locusId)) {
             log("Skipping " + sourceName + "/" + seqId + ": no erv_locus row found");
+            skippedCount++;
             return;
         }
 
-        // Read imported lineage label from erv_locus.raw_classification
-        var importedLineageId = norm(
+        var classification = norm(
             getSingleFieldValue(
                 "erv_locus",
                 "id = '" + escapeQuotes(locusId) + "'",
-                "raw_classification"
+                "classification"
             )
         );
 
-        if(importedLineageId == null) {
-            log("Skipping " + sourceName + "/" + seqId + ": no raw_classification set on erv_locus");
+        if(classification == null) {
+            log("Skipping " + sourceName + "/" + seqId + ": no classification set on erv_locus");
+            skippedCount++;
             return;
         }
 
-        // Resolve to canonical erv_lineage ID
-        var resolvedLineageId = resolveErvLineageId(importedLineageId);
+        if(isNonLineageClassification(classification)) {
+            log("Skipping " + sourceName + "/" + seqId +
+                ": classification '" + classification + "' is not a specific erv_lineage");
+            skippedCount++;
+            return;
+        }
+
+        var resolvedLineageId = resolveErvLineageId(classification);
         if(resolvedLineageId == null) {
             log("Skipping " + sourceName + "/" + seqId +
-                ": target erv_lineage '" + importedLineageId + "' not found after normalization");
+                ": target erv_lineage '" + classification + "' not found after normalization");
+            skippedCount++;
             return;
         }
 
-        if(resolvedLineageId !== importedLineageId) {
-            log("Resolved lineage '" + importedLineageId + "' -> '" + resolvedLineageId + "'");
+        if(resolvedLineageId !== classification) {
+            log("Resolved lineage '" + classification + "' -> '" + resolvedLineageId + "'");
         }
 
-        // Create or reuse association row
         var assocId = safeAssocId(locusId, resolvedLineageId);
         var assocExists = customRowExistsById("erv_locus_lineage_assoc", assocId);
 
@@ -268,7 +288,6 @@ _.each(sources, function(sourceName) {
                 "erv_locus_lineage_assoc row: " + assocId);
         }
 
-        // Link association row to locus + lineage
         if(!DRY_RUN) {
             glue.inMode("custom-table-row/erv_locus_lineage_assoc/" + assocId, function() {
                 glue.command([
@@ -280,12 +299,17 @@ _.each(sources, function(sourceName) {
                     "custom-table-row/erv_lineage/" + resolvedLineageId
                 ]);
                 glue.command(["set", "field", "association_role", "primary"]);
-                glue.command(["set", "field", "evidence", "imported_raw_classification"]);
-                glue.command(["set", "field", "confidence", "high"]);
+                glue.command(["set", "field", "evidence", "classification"]);
             });
         }
 
         log((DRY_RUN ? "[DRY RUN] Would link " : "Linked ") +
             locusId + " -> " + resolvedLineageId);
+
+        linkedCount++;
     });
+
+    log("Completed source " + sourceName +
+        ": linked=" + linkedCount +
+        ", skipped=" + skippedCount);
 });

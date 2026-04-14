@@ -11,11 +11,14 @@ project ervdb
   # Link to locus data table
   run script glue/hervLinkSeqsToLocusTable.js
 
-  # Import metadata about loci from tabular
+  # Import metadata about loci from tabular 
   run file glue/hervImportSideData.glue
+  run script glue/hervPopulateLocusFields.js
 
-  # Link loci to curated lineage concepts
+  # Link loci to curated ERV provirus lineage concepts
   run script glue/hervLinkLociToErvLineages.js
+
+  # Link loci to curated LTR lineage concepts
   #run script glue/hervLinkLociToLtrLineages.js
 
   # Assign Legacy IDs
@@ -23,7 +26,7 @@ project ervdb
   #run script glue/hervAssignIdsToNonLegacyLoci.js
 
   # Add imported ERV sequences to alignments
-  #run file glue/hervAddLocusSeqsToAlignments.glue
+  run file glue/hervAddLocusSeqsToAlignments.glue
 
   # Compute alignments
   #run file glue/hervComputeAlignments.glue
