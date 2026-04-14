@@ -25,7 +25,7 @@ project ervdb
   run script glue/addErvLociToLineageAlignments.js
 
   # Compute alignments
-  #run file glue/hervComputeAlignments.glue
+  run script glue/computeErvLineageAlignments.js
   
   # Record feature presence
   #run file glue/hervRecordFeaturePresence.glue
