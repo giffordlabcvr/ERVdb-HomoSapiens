@@ -21,18 +21,18 @@ project ervdb
   # Link loci to curated LTR lineage concepts
   #run script glue/hervLinkLociToLtrLineages.js
 
-  # Assign Legacy IDs
-  #run script glue/hervLegacyLocusAssign.js
-  #run script glue/hervAssignIdsToNonLegacyLoci.js
-
   # Add imported ERV sequences to alignments
-  run file glue/hervAddLocusSeqsToAlignments.glue
+  run script glue/addErvLociToLineageAlignments.js
 
   # Compute alignments
   #run file glue/hervComputeAlignments.glue
   
   # Record feature presence
   #run file glue/hervRecordFeaturePresence.glue
+
+  # Assign Missillac IDs
+  #run script glue/hervLegacyLocusAssign.js
+  #run script glue/hervAssignIdsToNonLegacyLoci.js
   
   validate
   
