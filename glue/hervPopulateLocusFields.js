@@ -16,7 +16,7 @@
 //
 // Safe to rerun: yes
 
-var sources = ["fr_rt4_samerow", "fr_samename"];
+var sources = ["fr_rt4_samerow", "fr_samename", "fr_only1id"];
 var DRY_RUN = false;
 
 var DEFAULT_HOST_SPECIES = "Homo sapiens";
