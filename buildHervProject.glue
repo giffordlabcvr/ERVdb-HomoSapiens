@@ -22,13 +22,13 @@ project ervdb
   #run script glue/hervLinkLociToLtrLineages.js
 
   # Add imported ERV sequences to alignments
-  run script glue/addErvLociToLineageAlignments.js
+  #run script glue/addErvLociToLineageAlignments.js
 
   # Compute alignments
-  run script glue/computeErvLineageAlignments.js
+  #run script glue/computeErvLineageAlignments.js
   
   # Record feature presence
-  run file glue/hervRecordFeaturePresence.glue
+  #run file glue/hervRecordFeaturePresence.glue
 
   # Assign Missillac IDs
   #run script glue/hervLegacyLocusAssign.js
