@@ -5,5 +5,6 @@
     populate -f tabular/dbm_merge/fr_rt4_samerow.tsv
     populate -f tabular/dbm_merge/fr_samename.tsv
     populate -f tabular/dbm_merge/fr_only1id.tsv
+    populate -f tabular/dbm_merge/r_rt4_phyloclade.tsv
     exit
     

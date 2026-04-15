@@ -6,17 +6,20 @@
 // - Uses sequence source name to derive assignment_status and assignment_basis
 // - Normalizes raw_classification into classification
 // - Sets fixed values for locus_type, host_species, genome_build
+// - Derives tax_level for certain broad classifications (e.g. Clade-I)
 //
 // Assumptions:
 // - erv_locus.id == sequence.sequenceID
 // - imported locus sequences live in sources such as:
 //     fr_rt4_samerow
 //     fr_samename
+//     fr_only1id
+//     r_rt4_phyloclade
 // - raw_classification is already populated on erv_locus
 //
 // Safe to rerun: yes
 
-var sources = ["fr_rt4_samerow", "fr_samename", "fr_only1id"];
+var sources = ["fr_rt4_samerow", "fr_samename", "fr_only1id", "r_rt4_phyloclade"];
 var DRY_RUN = false;
 
 var DEFAULT_HOST_SPECIES = "Homo sapiens";
@@ -121,6 +124,9 @@ function getAssignmentStatus(sourceName) {
     if(sourceName === "fr_rt4_samerow" || sourceName === "fr_samename") {
         return "fully_resolved";
     }
+    if(sourceName === "r_rt4_phyloclade") {
+        return "resolved";
+    }
     return null;
 }
 
@@ -130,6 +136,9 @@ function getAssignmentBasis(sourceName) {
     }
     if(sourceName === "fr_samename") {
         return "samename";
+    }
+    if(sourceName === "r_rt4_phyloclade") {
+        return "rt4_phyloclade";
     }
     return null;
 }
@@ -151,7 +160,10 @@ function normalizeClassification(rawClassification) {
         "HERV-K(HML9)": "HERV-K-HML9",
         "HERV-K(HML10)": "HERV-K-HML10",
         "PRIMA41": "PRIMA-41",
-        "PRIMAX": "PRIMA-X"
+        "PRIMAX": "PRIMA-X",
+        "Clade I": "Clade-I",
+        "Clade II": "Clade-II",
+        "Clade III": "Clade-III"
     };
 
     if(exactMap[raw] != null) {
@@ -178,7 +190,23 @@ function normalizeClassification(rawClassification) {
         return "HERV-K-HML" + m[1];
     }
 
+    m = raw.match(/^Clade\s+([IVX]+)$/i);
+    if(m) {
+        return "Clade-" + m[1].toUpperCase();
+    }
+
     return raw;
+}
+
+function inferTaxLevel(classification) {
+    var c = norm(classification);
+    if(c == null) {
+        return null;
+    }
+    if(c === "Clade-I" || c === "Clade-II" || c === "Clade-III") {
+        return "clade";
+    }
+    return null;
 }
 
 _.each(sources, function(sourceName) {
@@ -208,6 +236,7 @@ _.each(sources, function(sourceName) {
         );
 
         var classification = normalizeClassification(rawClassification);
+        var taxLevel = inferTaxLevel(classification);
         var assignmentStatus = getAssignmentStatus(sourceName);
         var assignmentBasis = getAssignmentBasis(sourceName);
 
@@ -226,12 +255,16 @@ _.each(sources, function(sourceName) {
                 if(classification != null) {
                     glue.command(["set", "field", "classification", classification]);
                 }
+                if(taxLevel != null) {
+                    glue.command(["set", "field", "tax_level", taxLevel]);
+                }
             });
         }
 
         log((DRY_RUN ? "[DRY RUN] Would update " : "Updated ") +
             locusId +
             " classification=" + classification +
+            " tax_level=" + taxLevel +
             " assignment_status=" + assignmentStatus +
             " assignment_basis=" + assignmentBasis);
 

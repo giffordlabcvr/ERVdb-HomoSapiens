@@ -1,5 +1,5 @@
 // Define the sources to process
-var sources = ["fr_rt4_samerow", "fr_samename", "fr_only1id"];
+var sources = ["fr_rt4_samerow", "fr_samename", "fr_only1id", "r_rt4_phyloclade"];
 
 // Loop through each source
 _.each(sources, function(sourceName) {
