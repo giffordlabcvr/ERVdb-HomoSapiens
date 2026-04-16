@@ -3,25 +3,25 @@
 project ervdb
 
   # Import classified HERV loci
-  run file glue/hervImportSources.glue
+  run file glue/build/hervImportSources.glue
 
   # Set lengths
-  run script glue/hervSetSequenceLengthsAndKinds.js 
+  run script glue/build/hervSetSequenceLengthsAndKinds.js 
 
   # Link to locus data table
-  run script glue/hervLinkSeqsToLocusTable.js
+  run script glue/build/hervLinkSeqsToLocusTable.js
 
   # Import metadata about loci from tabular 
-  run file glue/hervImportSideData.glue
+  run file glue/build/hervImportSideData.glue
 
   # Link loci to curated ERV provirus lineage concepts
-  #run script glue/hervLinkLociToErvLineages.js
+  #run script glue/build/hervLinkLociToErvLineages.js
 
   # Link loci to curated LTR lineage concepts
-  #run file glue/constructLineageMsas.glue
+  #run file glue/build/constructLineageMsas.glue
 
   # Assign Missillac IDs
-  #run file glue/assignMissillacIds.glue
+  #run file glue/build/assignMissillacIds.glue
   
   validate
   

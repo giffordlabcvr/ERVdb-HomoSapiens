@@ -1,0 +1,9 @@
+
+  # Add imported ERV loci to lineage-level alignments
+  run script glue/build/addHervLociToLineageAlignments.js
+
+  # Compute lineage-level alignments
+  run script glue/build/computeHervLineageAlignments.js
+  
+  # Record feature presence in alignment members
+  run file glue/build/hervRecordFeaturePresence.glue

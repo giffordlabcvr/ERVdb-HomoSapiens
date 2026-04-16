@@ -1,4 +1,14 @@
-var sources = ["fr_rt4_samerow", "fr_samename", "fr_only1id", "r_rt4_phyloclade", "r_rt4_phyloclade"]; 
+var sources = [
+    "fr_rt4_samerow",
+    "fr_samename",
+    "fr_only1id",
+    "fr_harlequin",
+    
+    "r_rt4_phyloclade",
+    "r_rt4_phylosubgroup",
+    "r_rt4_phylogroup",
+    "r_rt4_phyloname"
+];
 
 _.each(sources, function(sourceName) {
 	var seqIDs = glue.getTableColumn(

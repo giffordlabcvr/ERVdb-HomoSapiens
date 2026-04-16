@@ -5,6 +5,11 @@
   import source sources/fr_rt4_samerow
   import source sources/fr_samename
   import source sources/fr_only1id
+  import source sources/fr_harlequin
    
   # Resolved
   import source sources/r_rt4_phyloclade
+  import source sources/r_rt4_phylogroup
+  import source sources/r_rt4_phylosubgroup
+  import source sources/r_rt4_phyloname
+  

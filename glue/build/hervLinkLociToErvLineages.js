@@ -21,7 +21,18 @@
 //   - loci whose target erv_lineage cannot be resolved are reported and skipped
 //   - existing association rows are reused
 
-var sources = ["fr_rt4_samerow", "fr_samename", "fr_only1id", "r_rt4_phyloclade"];
+var sources = [
+    "fr_rt4_samerow",
+    "fr_samename",
+    "fr_only1id",
+    "fr_harlequin",
+    
+    "r_rt4_phyloclade",
+    "r_rt4_phylosubgroup",
+    "r_rt4_phylogroup",
+    "r_rt4_phyloname"
+];
+
 var DRY_RUN = false;
 
 function log(msg) {

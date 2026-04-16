@@ -5,7 +5,11 @@
     populate -f tabular/dbm_merge/fr_rt4_samerow.tsv
     populate -f tabular/dbm_merge/fr_samename.tsv
     populate -f tabular/dbm_merge/fr_only1id.tsv
+    populate -f tabular/dbm_merge/fr_harlequin.tsv
+    populate -f tabular/dbm_merge/r_rt4_phyloname.tsv
+    populate -f tabular/dbm_merge/r_rt4_phylogroup.tsv
+    populate -f tabular/dbm_merge/r_rt4_phylosubgroup.tsv
     populate -f tabular/dbm_merge/r_rt4_phyloclade.tsv
     exit
 
-  run script glue/hervPopulateLocusFields.js
+  run script glue/build/hervPopulateLocusFields.js
