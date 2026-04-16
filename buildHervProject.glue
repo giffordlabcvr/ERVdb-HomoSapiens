@@ -13,26 +13,15 @@ project ervdb
 
   # Import metadata about loci from tabular 
   run file glue/hervImportSideData.glue
-  run script glue/hervPopulateLocusFields.js
 
   # Link loci to curated ERV provirus lineage concepts
-  run script glue/hervLinkLociToErvLineages.js
+  #run script glue/hervLinkLociToErvLineages.js
 
   # Link loci to curated LTR lineage concepts
-  #run script glue/hervLinkLociToLtrLineages.js
-
-  # Add imported ERV sequences to alignments
-  #run script glue/addErvLociToLineageAlignments.js
-
-  # Compute alignments
-  #run script glue/computeErvLineageAlignments.js
-  
-  # Record feature presence
-  #run file glue/hervRecordFeaturePresence.glue
+  #run file glue/constructLineageMsas.glue
 
   # Assign Missillac IDs
-  #run script glue/hervLegacyLocusAssign.js
-  #run script glue/hervAssignIdsToNonLegacyLoci.js
+  #run file glue/assignMissillacIds.glue
   
   validate
   

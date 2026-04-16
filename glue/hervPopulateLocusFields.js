@@ -120,12 +120,16 @@ function sequenceIdsForSource(sourceName) {
     return seqIds;
 }
 
+
 function getAssignmentStatus(sourceName) {
     if(sourceName === "fr_rt4_samerow" || sourceName === "fr_samename") {
         return "fully_resolved";
     }
     if(sourceName === "r_rt4_phyloclade") {
         return "resolved";
+    }
+    if(sourceName === "fr_only1id") {
+        return "partial";   // <-- new
     }
     return null;
 }
@@ -140,8 +144,12 @@ function getAssignmentBasis(sourceName) {
     if(sourceName === "r_rt4_phyloclade") {
         return "rt4_phyloclade";
     }
+    if(sourceName === "fr_only1id") {
+        return "only1id";   // <-- new
+    }
     return null;
 }
+
 
 function normalizeClassification(rawClassification) {
     var raw = norm(rawClassification);
