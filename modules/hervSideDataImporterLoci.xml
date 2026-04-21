@@ -36,12 +36,15 @@
     </textFileColumn>
 
     <textFileColumn>
-        <header>tax_level</header>
+        <header>phylo_level</header>
         <property>erv_locus.tax_level</property>
     </textFileColumn>
 
+    <textFileColumn>
+        <header>case</header>
+        <property>erv_locus.merge_status</property>
+    </textFileColumn>
 
     <skipMissing>true</skipMissing>
 
 </textFilePopulator>
-
