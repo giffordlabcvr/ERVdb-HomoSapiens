@@ -1,0 +1,42 @@
+
+  #~# Clean-up
+
+	  delete module ervRaxmlPhylogenyGeneratorAa
+	  delete module ervRaxmlPhylogenyGeneratorNucs
+  
+  # Genus-level masking modules
+
+	  delete module ervSelectorAlphaGagProAa
+
+  #~# Create nucleotide phylogeny build modules
+  
+  # Clade I
+
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervtGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHerveGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervrGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervRbGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHerviGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervhGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervFaGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervFbGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervFcGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervLbGenomeNucs.xml
+
+  # Clade II
+
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml1GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml2GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml3GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml4GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml7GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml8GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml9GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervkhml10GenomeNucs.xml
+
+
+  # Clade III
+
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervLGenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervU3GenomeNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/analyse/ervSelectorHervSGenomeNucs.xml

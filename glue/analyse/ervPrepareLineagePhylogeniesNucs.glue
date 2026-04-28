@@ -1,0 +1,46 @@
+  delete module ervPhyloUtility
+  delete module ervFigTreeAnnotationExporter
+  
+  create module -f modules/analyse/ervPhyloUtility.xml
+  create module -f modules/analyse/ervFigTreeAnnotationExporter.xml
+
+  module ervPhyloUtility
+  
+	# midpoint rooting
+
+	reroot-phylogeny \
+      --inputFile trees/lineage/ervSpumaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/lineage/ervSpumaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+ 	reroot-phylogeny \
+      --inputFile trees/lineage/ervAlphaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/lineage/ervAlphaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	reroot-phylogeny \
+      --inputFile trees/lineage/ervBetaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/lineage/ervBetaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	reroot-phylogeny \
+      --inputFile trees/lineage/ervDeltaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/lineage/ervDeltaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	reroot-phylogeny \
+      --inputFile trees/lineage/ervGammaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/lineage/ervGammaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+    exit
+    
+  
+  # Export annotations
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Spumavirus -f trees/lineage/AL_GENUS_Spumavirus.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Lentivirus -f trees/lineage/AL_GENUS_Lentivirus.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Alpharetrovirus -f trees/lineage/AL_GENUS_Alpharetrovirus.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Betaretrovirus -f trees/lineage/AL_GENUS_Betaretrovirus.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Gammaretrovirus -f trees/lineage/AL_GENUS_Gammaretrovirus.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Deltaretrovirus -f trees/lineage/AL_GENUS_Deltaretrovirus.annotations.tsv
+

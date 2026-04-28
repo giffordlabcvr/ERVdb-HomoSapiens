@@ -1,0 +1,9 @@
+
+  # Create modules
+  run file glue/analyse/createPhylogenyModules.glue
+
+  # Compute phylogenies
+  run file glue/analyse/ervComputeLineagePhylogeniesNucs.glue
+
+  # Re-root phylogenies and export FigTree annotations
+  run file glue/analyse/ervPrepareLineagePhylogeniesNucs.glue

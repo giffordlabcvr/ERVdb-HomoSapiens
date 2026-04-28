@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alignmentColumnsSelector>
+
+    <relRefName>REF_HERVKHML4</relRefName>
+ 
+    <aminoAcidRegionSelector>
+        <featureName>gag</featureName>
+        <startCodon>1</startCodon>
+        <endCodon>667</endCodon>
+    </aminoAcidRegionSelector>
+  
+</alignmentColumnsSelector>
+

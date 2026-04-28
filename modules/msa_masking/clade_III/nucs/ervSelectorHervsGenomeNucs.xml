@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alignmentColumnsSelector>
+
+    <relRefName>REF_HERVS/relRefName>
+ 
+    <aminoAcidRegionSelector>
+        <featureName>pol</featureName>
+        <startCodon>1</startCodon>
+        <endCodon>1204</endCodon>
+    </aminoAcidRegionSelector>
+
+  
+</alignmentColumnsSelector>
+
