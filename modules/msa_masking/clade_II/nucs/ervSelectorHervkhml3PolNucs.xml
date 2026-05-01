@@ -3,11 +3,12 @@
 
     <relRefName>REF_HERVKHML3</relRefName>
  
-    <aminoAcidRegionSelector>
-        <featureName>env</featureName>
-        <startCodon>1</startCodon>
-        <endCodon>682</endCodon>
-    </aminoAcidRegionSelector>
+    <!-- Partition 1 -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>2768</startNt>
+        <endNt>5608</endNt>
+    </nucleotideRegionSelector>
   
 </alignmentColumnsSelector>
 

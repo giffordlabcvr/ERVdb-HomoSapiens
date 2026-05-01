@@ -3,12 +3,12 @@
 
     <relRefName>REF_HERVKHML8</relRefName>
  
-    <aminoAcidRegionSelector>
-        <featureName>pol</featureName>
-        <startCodon>1</startCodon>
-        <endCodon>957</endCodon>
-    </aminoAcidRegionSelector>
-
+    <!-- Partition 1 Pol -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>1742</startNt>
+        <endNt>4447</endNt>
+    </nucleotideRegionSelector>
   
 </alignmentColumnsSelector>
 

@@ -47,13 +47,13 @@
     #-o trees/lineage/hervFcGagNucs.tree NEWICK_BOOTSTRAPS
 
     #~# Zetaretroviruses  (W/9/30)  
-    generate nucleotide phylogeny AL_LINEAGE_HERVW -s ervSelectorHervWPolNucs \
-    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    -o trees/lineage/hervWPolNucs.tree NEWICK_BOOTSTRAPS
+    #generate nucleotide phylogeny AL_LINEAGE_HERVW -s ervSelectorHervWPolNucs \
+    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    #-o trees/lineage/hervWPolNucs.tree NEWICK_BOOTSTRAPS
 
-    generate nucleotide phylogeny AL_LINEAGE_HERV9 -s ervSelectorHerv9PolNucs \
-    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    -o trees/lineage/herv9PolNucs.tree NEWICK_BOOTSTRAPS
+    #generate nucleotide phylogeny AL_LINEAGE_HERV9 -s ervSelectorHerv9PolNucs \
+    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    #-o trees/lineage/herv9PolNucs.tree NEWICK_BOOTSTRAPS
 
   # Clade II
 
@@ -103,19 +103,19 @@
 
   # Clade III
   
- 	#~# Lambdaretroviruses
-    generate nucleotide phylogeny AL_LINEAGE_HERVL -s ervSelectorHervLPolNucs \
+ 	#~# Sigmaretroviruses
+    generate nucleotide phylogeny AL_LINEAGE_HERVS -s ervSelectorHervSPolNucs \
     -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    -o trees/lineage/hervLPolNucs.tree NEWICK_BOOTSTRAPS
+    -o trees/lineage/hervSPolNucs.tree NEWICK_BOOTSTRAPS
 
     generate nucleotide phylogeny AL_LINEAGE_HERVU3 -s ervSelectorHervU3PolNucs \
     -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
     -o trees/lineage/hervU3PolNucs.tree NEWICK_BOOTSTRAPS
 
- 	#~# Sigmaretroviruses
-    generate nucleotide phylogeny AL_LINEAGE_HERVS -s ervSelectorHervSPolNucs \
+ 	#~# Lambdaretroviruses
+    generate nucleotide phylogeny AL_LINEAGE_HERVL -s ervSelectorHervLPolNucs \
     -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    -o trees/lineage/hervSPolNucs.tree NEWICK_BOOTSTRAPS
+    -o trees/lineage/hervLPolNucs.tree NEWICK_BOOTSTRAPS
 
     exit
     

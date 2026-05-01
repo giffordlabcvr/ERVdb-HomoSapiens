@@ -3,11 +3,12 @@
 
     <relRefName>REF_HERVKHML4</relRefName>
  
-    <aminoAcidRegionSelector>
-        <featureName>gag</featureName>
-        <startCodon>1</startCodon>
-        <endCodon>667</endCodon>
-    </aminoAcidRegionSelector>
+    <!-- Partition 1 -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>4651</startNt>
+        <endNt>7260</endNt>
+    </nucleotideRegionSelector>
   
 </alignmentColumnsSelector>
 
