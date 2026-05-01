@@ -38,10 +38,10 @@
     #  --midpoint \
     #  --outputFile trees/lineage/hervFaNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
 
-	#reroot-phylogeny \
-    #  --inputFile trees/lineage/hervFbPolNucs.tree NEWICK_BOOTSTRAPS \
-    #  --midpoint \
-    #  --outputFile trees/lineage/hervFbPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+	reroot-phylogeny \
+      --inputFile trees/lineage/hervFbPolNucs.tree NEWICK_BOOTSTRAPS \
+	  --midpoint \
+      --outputFile trees/lineage/hervFbPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
 
 	#reroot-phylogeny \
     #  --inputFile trees/lineage/hervFcPolNucs.tree NEWICK_BOOTSTRAPS \
