@@ -1,46 +1,64 @@
-  delete module ervPhyloUtility
-  delete module ervFigTreeAnnotationExporter
-  
-  create module -f modules/analyse/ervPhyloUtility.xml
-  create module -f modules/analyse/ervFigTreeAnnotationExporter.xml
 
   module ervPhyloUtility
   
 	# midpoint rooting
 
 	reroot-phylogeny \
-      --inputFile trees/lineage/ervSpumaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --inputFile trees/lineage/hervTPolNucs.tree NEWICK_BOOTSTRAPS \
       --midpoint \
-      --outputFile trees/lineage/ervSpumaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+      --outputFile trees/lineage/hervTPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
 
  	reroot-phylogeny \
-      --inputFile trees/lineage/ervAlphaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --inputFile trees/lineage/hervEPolNucs.tree NEWICK_BOOTSTRAPS \
       --midpoint \
-      --outputFile trees/lineage/ervAlphaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+      --outputFile trees/lineage/hervEPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	#reroot-phylogeny \
+    #  --inputFile trees/lineage/hervRPolNucs.tree NEWICK_BOOTSTRAPS \
+    #  --midpoint \
+    #  --outputFile trees/lineage/hervRPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	#reroot-phylogeny \
+    #  --inputFile trees/lineage/hervRbPolNucs.tree NEWICK_BOOTSTRAPS \
+    #  --midpoint \
+    #  --outputFile trees/lineage/hervRbPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
 
 	reroot-phylogeny \
-      --inputFile trees/lineage/ervBetaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --inputFile trees/lineage/hervIPolNucs.tree NEWICK_BOOTSTRAPS \
       --midpoint \
-      --outputFile trees/lineage/ervBetaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+      --outputFile trees/lineage/hervIPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
 
 	reroot-phylogeny \
-      --inputFile trees/lineage/ervDeltaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --inputFile trees/lineage/hervHPolNucs.tree NEWICK_BOOTSTRAPS \
       --midpoint \
-      --outputFile trees/lineage/ervDeltaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+      --outputFile trees/lineage/hervHPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
 
-	reroot-phylogeny \
-      --inputFile trees/lineage/ervGammaPolNucs.tree NEWICK_BOOTSTRAPS \
-      --midpoint \
-      --outputFile trees/lineage/ervGammaPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+	#reroot-phylogeny \
+    #  --inputFile trees/lineage/hervFaPolNucs.tree NEWICK_BOOTSTRAPS \
+    #  --midpoint \
+    #  --outputFile trees/lineage/hervFaNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	#reroot-phylogeny \
+    #  --inputFile trees/lineage/hervFbPolNucs.tree NEWICK_BOOTSTRAPS \
+    #  --midpoint \
+    #  --outputFile trees/lineage/hervFbPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	#reroot-phylogeny \
+    #  --inputFile trees/lineage/hervFcPolNucs.tree NEWICK_BOOTSTRAPS \
+    #  --midpoint \
+    #  --outputFile trees/lineage/hervFcPolNucsMidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
 
     exit
     
   
   # Export annotations
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Spumavirus -f trees/lineage/AL_GENUS_Spumavirus.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Lentivirus -f trees/lineage/AL_GENUS_Lentivirus.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Alpharetrovirus -f trees/lineage/AL_GENUS_Alpharetrovirus.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Betaretrovirus -f trees/lineage/AL_GENUS_Betaretrovirus.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Gammaretrovirus -f trees/lineage/AL_GENUS_Gammaretrovirus.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_GENUS_Deltaretrovirus -f trees/lineage/AL_GENUS_Deltaretrovirus.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVT -f trees/lineage/AL_LINEAGE_HERVT.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVE -f trees/lineage/AL_LINEAGE_HERVE.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVR -f trees/lineage/AL_LINEAGE_HERVR.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVRb1 -f trees/lineage/AL_LINEAGE_HERVRb1.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVI -f trees/lineage/AL_LINEAGE_HERVI.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVH -f trees/lineage/AL_LINEAGE_HERVH.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVFa -f trees/lineage/AL_LINEAGE_HERVFa.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVFb -f trees/lineage/AL_LINEAGE_HERVFb.annotations.tsv
+  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVFc -f trees/lineage/AL_LINEAGE_HERVFc.annotations.tsv
 

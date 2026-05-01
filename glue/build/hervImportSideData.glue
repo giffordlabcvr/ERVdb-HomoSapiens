@@ -17,7 +17,7 @@
     populate -f tabular/locus/merge/herv8K/r-phyloclade-ur-notinrt4.tsv
     populate -f tabular/locus/merge/herv8K/r-phylogroup-ur-notinrt4.tsv
     populate -f tabular/locus/merge/herv8K/r-phyloname-ur-notinrt4.tsv
-    populate -f tabular/locus/merge/herv8K/r-r-phylosubgrp-ur-notinrt4.tsv
+    populate -f tabular/locus/merge/herv8K/r-phylosubgrp-ur-notinrt4.tsv
     populate -f tabular/locus/merge/herv8K/ur-notinrt4.tsv
     exit
   
