@@ -1,0 +1,5 @@
+taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
+alignment/AL_LINEAGE_HERVKHML10/member/erv-refseqs-beta/HERV-K-HML10	HERV-K-HML10	Betaretrovirus kappacatarrhini	-	-	-	II	Betaretrovirus	-|Betaretrovirus kappacatarrhini	-|HERV-K-HML9	-|Betaretrovirus	-|Kappa
+alignment/AL_LINEAGE_HERVKHML10/member/fr_rt4_samerow/RBRT185205	RBRT185205	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+alignment/AL_LINEAGE_HERVKHML10/member/fr_samename/RBRT20933	RBRT20933	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+alignment/AL_LINEAGE_HERVKHML10/member/fr_samename/RBRT89669	RBRT89669	-	-	-	-	-	-	-|-	-|-	-|-	-|-
