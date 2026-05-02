@@ -1,45 +1,45 @@
-taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
-alignment/AL_LINEAGE_HERVR/member/erv-refseqs-gamma/HERV-R	HERV-R	Gammaretrovirus etacatarrhini	-	-	-	I	Gammaretrovirus	-|Gammaretrovirus etacatarrhini	-|HERV-1	-|Gammaretrovirus	-|Eta
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT101044	RBRT101044	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT120033	RBRT120033	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT124142	RBRT124142	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT142293	RBRT142293	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT142384	RBRT142384	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT15938	RBRT15938	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT202378	RBRT202378	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT204220	RBRT204220	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT227255	RBRT227255	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT230661	RBRT230661	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT232143	RBRT232143	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT236633	RBRT236633	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT246597	RBRT246597	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT307447	RBRT307447	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT314201	RBRT314201	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT317073	RBRT317073	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT317795	RBRT317795	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT326557	RBRT326557	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT327863	RBRT327863	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT34640	RBRT34640	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT374881	RBRT374881	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT439504	RBRT439504	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT442060	RBRT442060	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT442216	RBRT442216	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT444154	RBRT444154	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT445504	RBRT445504	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT445507	RBRT445507	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT445511	RBRT445511	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT448363	RBRT448363	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT467705	RBRT467705	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT508641	RBRT508641	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT509996	RBRT509996	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT509998	RBRT509998	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510275	RBRT510275	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510365	RBRT510365	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510665	RBRT510665	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510878	RBRT510878	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510880	RBRT510880	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT511190	RBRT511190	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT511192	RBRT511192	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT512559	RBRT512559	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT88382	RBRT88382	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT969	RBRT969	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+taxon	sequenceID	classification	scaffold
+alignment/AL_LINEAGE_HERVR/member/erv-refseqs-gamma/HERV-R	HERV-R	-	-
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT101044	RBRT101044	HERV-R	chr3
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT120033	RBRT120033	HERV-R	chr4
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT124142	RBRT124142	HERV-R	chr4
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT142293	RBRT142293	HERV-R	chr4
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT142384	RBRT142384	HERV-R	chr4
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT15938	RBRT15938	HERV-R	chr1
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT202378	RBRT202378	HERV-R	chr6
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT204220	RBRT204220	HERV-R	chr6
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT227255	RBRT227255	HERV-R	chr7
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT230661	RBRT230661	HERV-R	chr7
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT232143	RBRT232143	HERV-R	chr7
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT236633	RBRT236633	HERV-R	chr7
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT246597	RBRT246597	HERV-R	chr8
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT307447	RBRT307447	HERV-R	chr10
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT314201	RBRT314201	HERV-R	chr11
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT317073	RBRT317073	HERV-R	chr11
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT317795	RBRT317795	HERV-R	chr11
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT326557	RBRT326557	HERV-R	chr11
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT327863	RBRT327863	HERV-R	chr11
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT34640	RBRT34640	HERV-R	chr1
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT374881	RBRT374881	HERV-R	chr14
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT439504	RBRT439504	HERV-R	chr18
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT442060	RBRT442060	HERV-R	chr19
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT442216	RBRT442216	HERV-R	chr19
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT444154	RBRT444154	HERV-R	chr19
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT445504	RBRT445504	HERV-R	chr19
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT445507	RBRT445507	HERV-R	chr19
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT445511	RBRT445511	HERV-R	chr19
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT448363	RBRT448363	HERV-R	chr19
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT467705	RBRT467705	HERV-R	chr21
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT508641	RBRT508641	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT509996	RBRT509996	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT509998	RBRT509998	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510275	RBRT510275	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510365	RBRT510365	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510665	RBRT510665	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510878	RBRT510878	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT510880	RBRT510880	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT511190	RBRT511190	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT511192	RBRT511192	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT512559	RBRT512559	HERV-R	chrY
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT88382	RBRT88382	HERV-R	chr3
+alignment/AL_LINEAGE_HERVR/member/fr_rt4_samerow/RBRT969	RBRT969	HERV-R	chr1

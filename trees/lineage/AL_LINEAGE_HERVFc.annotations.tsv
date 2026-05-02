@@ -1,9 +1,9 @@
-taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
-alignment/AL_LINEAGE_HERVFc/member/erv-refseqs-zeta/HERV-Fc	HERV-Fc	HERV-Fc	-	-	-	I	Zetaretrovirus	-|HERV-Fc	-|HERV-Fc	-|Zetaretrovirus	-|HERVHF
-alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT229347	RBRT229347	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT236645	RBRT236645	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT312265	RBRT312265	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT484422	RBRT484422	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT509918	RBRT509918	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT511217	RBRT511217	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT71323	RBRT71323	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+taxon	sequenceID	classification	scaffold
+alignment/AL_LINEAGE_HERVFc/member/erv-refseqs-zeta/HERV-Fc	HERV-Fc	-	-
+alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT229347	RBRT229347	HERV-Fc	chr7
+alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT236645	RBRT236645	HERV-Fc	chr7
+alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT312265	RBRT312265	HERV-Fc	chr11
+alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT484422	RBRT484422	HERV-Fc	chrX
+alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT509918	RBRT509918	HERV-Fc	chrY
+alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT511217	RBRT511217	HERV-Fc	chrY
+alignment/AL_LINEAGE_HERVFc/member/fr_rt4_samerow/RBRT71323	RBRT71323	HERV-Fc	chr2

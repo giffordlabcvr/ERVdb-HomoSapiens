@@ -1,28 +1,28 @@
-taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
-alignment/AL_LINEAGE_HERVI/member/erv-refseqs-iota/HERV-I	HERV-I	HERV-I	-	-	-	I	Iotaretrovirus	-|HERV-I	-|HERV-I	-|Iotaretrovirus	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT102331	RBRT102331	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT117481	RBRT117481	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT156683	RBRT156683	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT16744	RBRT16744	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT226729	RBRT226729	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT264573	RBRT264573	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT27640	RBRT27640	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT283150	RBRT283150	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT31908	RBRT31908	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT333757	RBRT333757	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT350960	RBRT350960	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT355330	RBRT355330	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT394682	RBRT394682	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT394845	RBRT394845	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT397652	RBRT397652	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT397655	RBRT397655	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT397662	RBRT397662	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT407423	RBRT407423	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT415332	RBRT415332	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT430009	RBRT430009	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT441277	RBRT441277	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_only1id/RBRT485685	RBRT485685	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT510098	RBRT510098	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT83111	RBRT83111	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT88993	RBRT88993	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT89025	RBRT89025	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+taxon	sequenceID	classification	scaffold
+alignment/AL_LINEAGE_HERVI/member/erv-refseqs-iota/HERV-I	HERV-I	-	-
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT102331	RBRT102331	HERV-I	chr3
+alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT117481	RBRT117481	HERV-I	chr4
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT156683	RBRT156683	HERV-I	chr5
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT16744	RBRT16744	HERV-I	chr1
+alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT226729	RBRT226729	HERV-I	chr7
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT264573	RBRT264573	HERV-I	chr8
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT27640	RBRT27640	HERV-I	chr1
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT283150	RBRT283150	HERV-I	chr9
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT31908	RBRT31908	HERV-I	chr1
+alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT333757	RBRT333757	HERV-I	chr12
+alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT350960	RBRT350960	HERV-I	chr12
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT355330	RBRT355330	HERV-I	chr12
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT394682	RBRT394682	HERV-I	chr15
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT394845	RBRT394845	HERV-I	chr15
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT397652	RBRT397652	HERV-I	chr15
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT397655	RBRT397655	HERV-I	chr15
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT397662	RBRT397662	HERV-I	chr15
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT407423	RBRT407423	HERV-I	chr16
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT415332	RBRT415332	HERV-I	chr16
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT430009	RBRT430009	HERV-I	chr18
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT441277	RBRT441277	HERV-I	chr19
+alignment/AL_LINEAGE_HERVI/member/fr_only1id/RBRT485685	RBRT485685	HERV-I	chrX
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT510098	RBRT510098	HERV-I	chrY
+alignment/AL_LINEAGE_HERVI/member/fr_samename/RBRT83111	RBRT83111	HERV-I	chr3
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT88993	RBRT88993	HERV-I	chr3
+alignment/AL_LINEAGE_HERVI/member/fr_rt4_samerow/RBRT89025	RBRT89025	HERV-I	chr3

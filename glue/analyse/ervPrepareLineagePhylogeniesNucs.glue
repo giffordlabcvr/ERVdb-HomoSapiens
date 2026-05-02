@@ -1,3 +1,5 @@
+  delete module ervFigTreeAnnotationExporterLocus
+  create module -f modules/analyse/ervFigTreeAnnotationExporterLocus.xml
 
   module ervPhyloUtility
   
@@ -122,25 +124,31 @@
     
   
   # Export annotations
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVT -f trees/lineage/AL_LINEAGE_HERVT.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVE -f trees/lineage/AL_LINEAGE_HERVE.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVR -f trees/lineage/AL_LINEAGE_HERVR.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVRb1 -f trees/lineage/AL_LINEAGE_HERVRb1.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVI -f trees/lineage/AL_LINEAGE_HERVI.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVH -f trees/lineage/AL_LINEAGE_HERVH.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVFa -f trees/lineage/AL_LINEAGE_HERVFa.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVFb -f trees/lineage/AL_LINEAGE_HERVFb.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVFc -f trees/lineage/AL_LINEAGE_HERVFc.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVW -f trees/lineage/AL_LINEAGE_HERVW.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERV9 -f trees/lineage/AL_LINEAGE_HERV9.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERV30 -f trees/lineage/AL_LINEAGE_HERV30.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML1 -f trees/lineage/AL_LINEAGE_HERVKHML1.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML2 -f trees/lineage/AL_LINEAGE_HERVKHML2.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML3 -f trees/lineage/AL_LINEAGE_HERVKHML3.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML4 -f trees/lineage/AL_LINEAGE_HERVKHML4.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML5 -f trees/lineage/AL_LINEAGE_HERVKHML5.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML6 -f trees/lineage/AL_LINEAGE_HERVKHML6.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML7 -f trees/lineage/AL_LINEAGE_HERVKHML7.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML8 -f trees/lineage/AL_LINEAGE_HERVKHML8.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML9 -f trees/lineage/AL_LINEAGE_HERVKHML9.annotations.tsv
-  module ervFigTreeAnnotationExporter export figtree-annotation AL_LINEAGE_HERVKHML10 -f trees/lineage/AL_LINEAGE_HERVKHML10.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVT -f trees/lineage/AL_LINEAGE_HERVT.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVE -f trees/lineage/AL_LINEAGE_HERVE.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVR -f trees/lineage/AL_LINEAGE_HERVR.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVRb1 -f trees/lineage/AL_LINEAGE_HERVRb1.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVI -f trees/lineage/AL_LINEAGE_HERVI.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVH -f trees/lineage/AL_LINEAGE_HERVH.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVFa -f trees/lineage/AL_LINEAGE_HERVFa.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVFb -f trees/lineage/AL_LINEAGE_HERVFb.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVFc -f trees/lineage/AL_LINEAGE_HERVFc.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVW -f trees/lineage/AL_LINEAGE_HERVW.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERV9 -f trees/lineage/AL_LINEAGE_HERV9.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERV30 -f trees/lineage/AL_LINEAGE_HERV30.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML1 -f trees/lineage/AL_LINEAGE_HERVKHML1.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML2 -f trees/lineage/AL_LINEAGE_HERVKHML2.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML3 -f trees/lineage/AL_LINEAGE_HERVKHML3.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML4 -f trees/lineage/AL_LINEAGE_HERVKHML4.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML5 -f trees/lineage/AL_LINEAGE_HERVKHML5.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML6 -f trees/lineage/AL_LINEAGE_HERVKHML6.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML7 -f trees/lineage/AL_LINEAGE_HERVKHML7.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML8 -f trees/lineage/AL_LINEAGE_HERVKHML8.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML9 -f trees/lineage/AL_LINEAGE_HERVKHML9.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVKHML10 -f trees/lineage/AL_LINEAGE_HERVKHML10.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVL -f trees/lineage/AL_LINEAGE_HERVL.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVS -f trees/lineage/AL_LINEAGE_HERVS.annotations.tsv
+  module ervFigTreeAnnotationExporterLocus export figtree-annotation AL_LINEAGE_HERVU3 -f trees/lineage/AL_LINEAGE_HERVU3.annotations.tsv
+
+
+

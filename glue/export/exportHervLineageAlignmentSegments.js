@@ -9,88 +9,97 @@ var OUT = "web-app/herv_lineage_alignment_segments.tsv";
 var FileWriter = Java.type("java.io.FileWriter");
 var PrintWriter = Java.type("java.io.PrintWriter");
 
-function rows(cmdResult) {
-  if(!cmdResult.listResult || !cmdResult.listResult.row) {
-    return [];
-  }
-  return cmdResult.listResult.row;
+function log(msg) {
+    glue.log("INFO", msg);
 }
 
-function val(row, i) {
-  return row.value[i];
+function queryObjects(cmdWords) {
+    return glue.tableToObjects(glue.command(cmdWords));
 }
 
-function tsv(x) {
-  if(x === null || x === undefined) {
-    return "";
-  }
-  return String(x).replace(/\t/g, " ").replace(/\r?\n/g, " ");
+function tsv(value) {
+    if(value === null || value === undefined) {
+        return "";
+    }
+    return String(value).replace(/\t/g, " ").replace(/\r?\n/g, " ");
 }
 
 var out = new PrintWriter(new FileWriter(OUT));
 
 out.println([
-  "alignment_name",
-  "parent_alignment",
-  "ref_name",
-  "member_source",
-  "member_sequence",
-  "segment_index",
-  "ref_start",
-  "ref_end",
-  "member_start",
-  "member_end"
+    "alignment_name",
+    "parent_alignment",
+    "ref_name",
+    "member_source",
+    "member_sequence",
+    "segment_index",
+    "ref_start",
+    "ref_end",
+    "member_start",
+    "member_end"
 ].join("\t"));
 
-var alnResult = glue.command([
-  "list", "alignment",
-  "-w", WHERE,
-  "name", "parent.name", "refSequence.name"
+// -----------------------------------------------------------------------------
+// Main
+// -----------------------------------------------------------------------------
+
+var alignments = queryObjects([
+    "list", "alignment",
+    "-w", WHERE,
+    "name", "parent.name", "refSequence.name",
+    "-s", "name"
 ]);
 
-rows(alnResult).forEach(function(alnRow) {
+log("Found " + alignments.length + " HERV lineage alignments");
 
-  var alnName = val(alnRow, 0);
-  var parentName = val(alnRow, 1);
-  var refName = val(alnRow, 2);
+_.each(alignments, function(aln) {
 
-  var memberResult = glue.command([
-    "alignment", alnName,
-    "list", "member"
-  ]);
+    var alnName = aln.name;
+    var parentName = aln["parent.name"];
+    var refName = aln["refSequence.name"];
 
-  rows(memberResult).forEach(function(memberRow) {
+    log("Exporting segments for " + alnName);
 
-    var sourceName = val(memberRow, 1);
-    var sequenceID = val(memberRow, 2);
+    glue.inMode("/alignment/" + alnName, function() {
 
-    var segResult = glue.command([
-      "alignment", alnName,
-      "member", sourceName, sequenceID,
-      "list", "segment"
-    ]);
+        var members = queryObjects([
+            "list", "member"
+        ]);
 
-    var segIndex = 0;
+        _.each(members, function(member) {
 
-    rows(segResult).forEach(function(segRow) {
-      segIndex++;
+            var sourceName = member["sequence.source.name"];
+            var sequenceID = member["sequence.sequenceID"];
 
-      out.println([
-        alnName,
-        parentName,
-        refName,
-        sourceName,
-        sequenceID,
-        segIndex,
-        val(segRow, 0),
-        val(segRow, 1),
-        val(segRow, 2),
-        val(segRow, 3)
-      ].map(tsv).join("\t"));
+            glue.inMode("/member/" + sourceName + "/" + sequenceID, function() {
+
+                var segments = queryObjects([
+                    "list", "segment"
+                ]);
+
+                var segmentIndex = 0;
+
+                _.each(segments, function(segment) {
+                    segmentIndex++;
+
+                    out.println([
+                        alnName,
+                        parentName,
+                        refName,
+                        sourceName,
+                        sequenceID,
+                        segmentIndex,
+                        segment.refStart,
+                        segment.refEnd,
+                        segment.memberStart,
+                        segment.memberEnd
+                    ].map(tsv).join("\t"));
+                });
+            });
+        });
     });
-  });
 });
 
 out.close();
 
-glue.logInfo("Exported HERV lineage alignment segment details to " + OUT);
+log("Exported HERV lineage alignment segment details to " + OUT);

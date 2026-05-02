@@ -1,140 +1,140 @@
-taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
-alignment/AL_LINEAGE_HERVW/member/erv-refseqs-zeta/HERV-W	HERV-W	HERV-W	-	-	-	I	Zetaretrovirus	-|HERV-W	-|HERV-W	-|Zetaretrovirus	-|HERVW9
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT100844	RBRT100844	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT103768	RBRT103768	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT104324	RBRT104324	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT105683	RBRT105683	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT107682	RBRT107682	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT108665	RBRT108665	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT110508	RBRT110508	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT113450	RBRT113450	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT116564	RBRT116564	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT123264	RBRT123264	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT123930	RBRT123930	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT125808	RBRT125808	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT128921	RBRT128921	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT130556	RBRT130556	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT133159	RBRT133159	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT135917	RBRT135917	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT138729	RBRT138729	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT140898	RBRT140898	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT142044	RBRT142044	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT144875	RBRT144875	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT155170	RBRT155170	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT172205	RBRT172205	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT176705	RBRT176705	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT178292	RBRT178292	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_only1id/RBRT184005	RBRT184005	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT189730	RBRT189730	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT189864	RBRT189864	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT191658	RBRT191658	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT191742	RBRT191742	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT192074	RBRT192074	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT199423	RBRT199423	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT203976	RBRT203976	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT204331	RBRT204331	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT206774	RBRT206774	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT21023	RBRT21023	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT210941	RBRT210941	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT224529	RBRT224529	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT226733	RBRT226733	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT232700	RBRT232700	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT234355	RBRT234355	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT240382	RBRT240382	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT240663	RBRT240663	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_only1id/RBRT244569	RBRT244569	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT249474	RBRT249474	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT257671	RBRT257671	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT26245	RBRT26245	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT263756	RBRT263756	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT263959	RBRT263959	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT26925	RBRT26925	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT269892	RBRT269892	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT275853	RBRT275853	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT277514	RBRT277514	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT286525	RBRT286525	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT294970	RBRT294970	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT303159	RBRT303159	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT303203	RBRT303203	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT304084	RBRT304084	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT305931	RBRT305931	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT306986	RBRT306986	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT308876	RBRT308876	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT3104	RBRT3104	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT313855	RBRT313855	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT323418	RBRT323418	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT323655	RBRT323655	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT326022	RBRT326022	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT326546	RBRT326546	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT331913	RBRT331913	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT335975	RBRT335975	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT336233	RBRT336233	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_only1id/RBRT336234	RBRT336234	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT339631	RBRT339631	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT341597	RBRT341597	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT343156	RBRT343156	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT351927	RBRT351927	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT353265	RBRT353265	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT357979	RBRT357979	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT374792	RBRT374792	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT375992	RBRT375992	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT3764	RBRT3764	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT377542	RBRT377542	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT377940	RBRT377940	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT383662	RBRT383662	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT387779	RBRT387779	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT388678	RBRT388678	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT39096	RBRT39096	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT395367	RBRT395367	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT398857	RBRT398857	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT399541	RBRT399541	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT414556	RBRT414556	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT418330	RBRT418330	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT418417	RBRT418417	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT427825	RBRT427825	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT428554	RBRT428554	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT432109	RBRT432109	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT43659	RBRT43659	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT441996	RBRT441996	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT442149	RBRT442149	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT442229	RBRT442229	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT442338	RBRT442338	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT446650	RBRT446650	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT455760	RBRT455760	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT46082	RBRT46082	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT462735	RBRT462735	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT464591	RBRT464591	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT467549	RBRT467549	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT469988	RBRT469988	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT481049	RBRT481049	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT482928	RBRT482928	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT485032	RBRT485032	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT487518	RBRT487518	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT491193	RBRT491193	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT492830	RBRT492830	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT495984	RBRT495984	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT496264	RBRT496264	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT501584	RBRT501584	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT510043	RBRT510043	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT512100	RBRT512100	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT51755	RBRT51755	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT59979	RBRT59979	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT66219	RBRT66219	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT66787	RBRT66787	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT69113	RBRT69113	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT6989	RBRT6989	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT70524	RBRT70524	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT71833	RBRT71833	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT7190	RBRT7190	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT78171	RBRT78171	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT80956	RBRT80956	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT82190	RBRT82190	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT88638	RBRT88638	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT90279	RBRT90279	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT90726	RBRT90726	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT90778	RBRT90778	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT91922	RBRT91922	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT92553	RBRT92553	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT93895	RBRT93895	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT94726	RBRT94726	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT97941	RBRT97941	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+taxon	sequenceID	classification	scaffold
+alignment/AL_LINEAGE_HERVW/member/erv-refseqs-zeta/HERV-W	HERV-W	-	-
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT100844	RBRT100844	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT103768	RBRT103768	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT104324	RBRT104324	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT105683	RBRT105683	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT107682	RBRT107682	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT108665	RBRT108665	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT110508	RBRT110508	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT113450	RBRT113450	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT116564	RBRT116564	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT123264	RBRT123264	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT123930	RBRT123930	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT125808	RBRT125808	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT128921	RBRT128921	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT130556	RBRT130556	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT133159	RBRT133159	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT135917	RBRT135917	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT138729	RBRT138729	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT140898	RBRT140898	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT142044	RBRT142044	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT144875	RBRT144875	HERV-W	chr4
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT155170	RBRT155170	HERV-W	chr5
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT172205	RBRT172205	HERV-W	chr5
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT176705	RBRT176705	HERV-W	chr5
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT178292	RBRT178292	HERV-W	chr5
+alignment/AL_LINEAGE_HERVW/member/fr_only1id/RBRT184005	RBRT184005	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT189730	RBRT189730	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT189864	RBRT189864	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT191658	RBRT191658	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT191742	RBRT191742	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT192074	RBRT192074	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT199423	RBRT199423	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT203976	RBRT203976	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT204331	RBRT204331	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT206774	RBRT206774	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT21023	RBRT21023	HERV-W	chr1
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT210941	RBRT210941	HERV-W	chr6
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT224529	RBRT224529	HERV-W	chr7
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT226733	RBRT226733	HERV-W	chr7
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT232700	RBRT232700	HERV-W	chr7
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT234355	RBRT234355	HERV-W	chr7
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT240382	RBRT240382	HERV-W	chr7
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT240663	RBRT240663	HERV-W	chr7
+alignment/AL_LINEAGE_HERVW/member/fr_only1id/RBRT244569	RBRT244569	HERV-W	chr8
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT249474	RBRT249474	HERV-W	chr8
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT257671	RBRT257671	HERV-W	chr8
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT26245	RBRT26245	HERV-W	chr1
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT263756	RBRT263756	HERV-W	chr8
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT263959	RBRT263959	HERV-W	chr8
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT26925	RBRT26925	HERV-W	chr1
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT269892	RBRT269892	HERV-W	chr9
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT275853	RBRT275853	HERV-W	chr9
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT277514	RBRT277514	HERV-W	chr9
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT286525	RBRT286525	HERV-W	chr9
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT294970	RBRT294970	HERV-W	chr10
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT303159	RBRT303159	HERV-W	chr10
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT303203	RBRT303203	HERV-W	chr10
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT304084	RBRT304084	HERV-W	chr10
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT305931	RBRT305931	HERV-W	chr10
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT306986	RBRT306986	HERV-W	chr10
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT308876	RBRT308876	HERV-W	chr10
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT3104	RBRT3104	HERV-W	chr1
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT313855	RBRT313855	HERV-W	chr11
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT323418	RBRT323418	HERV-W	chr11
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT323655	RBRT323655	HERV-W	chr11
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT326022	RBRT326022	HERV-W	chr11
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT326546	RBRT326546	HERV-W	chr11
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT331913	RBRT331913	HERV-W	chr11
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT335975	RBRT335975	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT336233	RBRT336233	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_only1id/RBRT336234	RBRT336234	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT339631	RBRT339631	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT341597	RBRT341597	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT343156	RBRT343156	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT351927	RBRT351927	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT353265	RBRT353265	HERV-W	chr12
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT357979	RBRT357979	HERV-W	chr13
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT374792	RBRT374792	HERV-W	chr14
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT375992	RBRT375992	HERV-W	chr14
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT3764	RBRT3764	HERV-W	chr1
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT377542	RBRT377542	HERV-W	chr14
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT377940	RBRT377940	HERV-W	chr14
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT383662	RBRT383662	HERV-W	chr14
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT387779	RBRT387779	HERV-W	chr14
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT388678	RBRT388678	HERV-W	chr14
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT39096	RBRT39096	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT395367	RBRT395367	HERV-W	chr15
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT398857	RBRT398857	HERV-W	chr15
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT399541	RBRT399541	HERV-W	chr15
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT414556	RBRT414556	HERV-W	chr16
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT418330	RBRT418330	HERV-W	chr17
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT418417	RBRT418417	HERV-W	chr17
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT427825	RBRT427825	HERV-W	chr18
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT428554	RBRT428554	HERV-W	chr18
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT432109	RBRT432109	HERV-W	chr18
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT43659	RBRT43659	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT441996	RBRT441996	HERV-W	chr19
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT442149	RBRT442149	HERV-W	chr19
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT442229	RBRT442229	HERV-W	chr19
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT442338	RBRT442338	HERV-W	chr19
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT446650	RBRT446650	HERV-W	chr19
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT455760	RBRT455760	HERV-W	chr20
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT46082	RBRT46082	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT462735	RBRT462735	HERV-W	chr20
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT464591	RBRT464591	HERV-W	chr21
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT467549	RBRT467549	HERV-W	chr21
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT469988	RBRT469988	HERV-W	chr21
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT481049	RBRT481049	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT482928	RBRT482928	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT485032	RBRT485032	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT487518	RBRT487518	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT491193	RBRT491193	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT492830	RBRT492830	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT495984	RBRT495984	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT496264	RBRT496264	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT501584	RBRT501584	HERV-W	chrX
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT510043	RBRT510043	HERV-W	chrY
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT512100	RBRT512100	HERV-W	chrY
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT51755	RBRT51755	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT59979	RBRT59979	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT66219	RBRT66219	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT66787	RBRT66787	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT69113	RBRT69113	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT6989	RBRT6989	HERV-W	chr1
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT70524	RBRT70524	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT71833	RBRT71833	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT7190	RBRT7190	HERV-W	chr1
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT78171	RBRT78171	HERV-W	chr2
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT80956	RBRT80956	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT82190	RBRT82190	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT88638	RBRT88638	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT90279	RBRT90279	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT90726	RBRT90726	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT90778	RBRT90778	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT91922	RBRT91922	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT92553	RBRT92553	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT93895	RBRT93895	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT94726	RBRT94726	HERV-W	chr3
+alignment/AL_LINEAGE_HERVW/member/fr_rt4_samerow/RBRT97941	RBRT97941	HERV-W	chr3

@@ -4,57 +4,51 @@
 		<annotationName>sequenceID</annotationName>
 		<valueFreemarkerTemplate>${renderNestedProperty('sequence.sequenceID')}</valueFreemarkerTemplate>
 	</figTreeAnnotation>
-	
-	<figTreeAnnotation>
-		<annotationName>erv_lineage</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_lineage.rv_species.id')}</valueFreemarkerTemplate>
-	</figTreeAnnotation>
 
 	<figTreeAnnotation>
-		<annotationName>species</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.xrv_isolate.rv_species.id')}</valueFreemarkerTemplate>
-	</figTreeAnnotation>
-
-	<figTreeAnnotation>
-		<annotationName>name</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.xrv_isolate.rv_species.name')}</valueFreemarkerTemplate>
-	</figTreeAnnotation>
-
-	<figTreeAnnotation>
-		<annotationName>full_name</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.xrv_isolate.rv_species.full_name')}</valueFreemarkerTemplate>
-	</figTreeAnnotation>
-
-	<figTreeAnnotation>
-		<annotationName>clade</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_lineage.rv_species.rv_clade.id')}</valueFreemarkerTemplate>
-	</figTreeAnnotation>
-
-	<figTreeAnnotation>
-		<annotationName>genus</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_lineage.rv_species.rv_genus.id')}</valueFreemarkerTemplate>
+		<annotationName>classification</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.classification')}</valueFreemarkerTemplate>
 	</figTreeAnnotation>
 	
 	<figTreeAnnotation>
-		<annotationName>combined-erv-xrv-species</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.xrv_isolate.rv_species.id')}|${renderNestedProperty('sequence.erv_lineage.rv_species.id')}</valueFreemarkerTemplate>
+		<annotationName>scaffold</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.scaffold')}</valueFreemarkerTemplate>
+	</figTreeAnnotation>
+
+	<!--<figTreeAnnotation>
+		<annotationName>orientation</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.orientation')}</valueFreemarkerTemplate>
 	</figTreeAnnotation>
 
 	<figTreeAnnotation>
-		<annotationName>combined-erv-xrv-name</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.xrv_isolate.rv_species.name')}|${renderNestedProperty('sequence.erv_lineage.rv_species.name')}</valueFreemarkerTemplate>
-	</figTreeAnnotation>
-	
-	<figTreeAnnotation>
-		<annotationName>combined-erv-xrv-genus</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.xrv_isolate.rv_species.rv_genus.id')}|${renderNestedProperty('sequence.erv_lineage.rv_species.rv_genus.id')}</valueFreemarkerTemplate>
-	</figTreeAnnotation>
-	
-	<figTreeAnnotation>
-		<annotationName>combined-erv-xrv-subgenus</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.xrv_isolate.rv_species.rv_subgenus.id')}|${renderNestedProperty('sequence.erv_lineage.rv_species.rv_subgenus.id')}</valueFreemarkerTemplate>
+		<annotationName>orientation</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.orientation')}</valueFreemarkerTemplate>
 	</figTreeAnnotation>
 
-	
+	<figTreeAnnotation>
+		<annotationName>locus_type</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.locus_type')}</valueFreemarkerTemplate>
+	</figTreeAnnotation>
+
+	<figTreeAnnotation>
+		<annotationName>locus_category</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.locus_category')}</valueFreemarkerTemplate>
+	</figTreeAnnotation>
+
+	<figTreeAnnotation>
+		<annotationName>curation_tier</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.curation_tier')}</valueFreemarkerTemplate>
+	</figTreeAnnotation>
+
+	<figTreeAnnotation>
+		<annotationName>orthology_group</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.orthology_group')}</valueFreemarkerTemplate>
+	</figTreeAnnotation>
+
+	<figTreeAnnotation>
+		<annotationName>missillac_id</annotationName>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.missillac_id')}</valueFreemarkerTemplate>
+	</figTreeAnnotation> -->
+
 </figTreeAnnotationExporter>
 

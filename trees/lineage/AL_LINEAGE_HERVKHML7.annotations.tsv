@@ -1,27 +1,27 @@
-taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
-alignment/AL_LINEAGE_HERVKHML7/member/erv-refseqs-beta/HERV-K-HML7	HERV-K-HML7	Betaretrovirus kappacatarrhini	-	-	-	II	Betaretrovirus	-|Betaretrovirus kappacatarrhini	-|HERV-K-HML9	-|Betaretrovirus	-|Kappa
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT134026	RBRT134026	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT138758	RBRT138758	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT171642	RBRT171642	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT17352	RBRT17352	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT178483	RBRT178483	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT192934	RBRT192934	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT206998	RBRT206998	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT229289	RBRT229289	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT325524	RBRT325524	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT328754	RBRT328754	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT336014	RBRT336014	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT394217	RBRT394217	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446416	RBRT446416	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446433	RBRT446433	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446453	RBRT446453	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446466	RBRT446466	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446497	RBRT446497	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446518	RBRT446518	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT45681	RBRT45681	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT492989	RBRT492989	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT496205	RBRT496205	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT511479	RBRT511479	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT512097	RBRT512097	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT90755	RBRT90755	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT92891	RBRT92891	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+taxon	sequenceID	classification	scaffold
+alignment/AL_LINEAGE_HERVKHML7/member/erv-refseqs-beta/HERV-K-HML7	HERV-K-HML7	-	-
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT134026	RBRT134026	HERV-K-HML7	chr4
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT138758	RBRT138758	HERV-K-HML7	chr4
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT171642	RBRT171642	HERV-K-HML7	chr5
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT17352	RBRT17352	HERV-K-HML7	chr1
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT178483	RBRT178483	HERV-K-HML7	chr5
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT192934	RBRT192934	HERV-K-HML7	chr6
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT206998	RBRT206998	HERV-K-HML7	chr6
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT229289	RBRT229289	HERV-K-HML7	chr7
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT325524	RBRT325524	HERV-K-HML7	chr11
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT328754	RBRT328754	HERV-K-HML7	chr11
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT336014	RBRT336014	HERV-K-HML7	chr12
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT394217	RBRT394217	HERV-K-HML7	chr15
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446416	RBRT446416	HERV-K-HML7	chr19
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446433	RBRT446433	HERV-K-HML7	chr19
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446453	RBRT446453	HERV-K-HML7	chr19
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446466	RBRT446466	HERV-K-HML7	chr19
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446497	RBRT446497	HERV-K-HML7	chr19
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT446518	RBRT446518	HERV-K-HML7	chr19
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT45681	RBRT45681	HERV-K-HML7	chr2
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT492989	RBRT492989	HERV-K-HML7	chrX
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT496205	RBRT496205	HERV-K-HML7	chrX
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT511479	RBRT511479	HERV-K-HML7	chrY
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT512097	RBRT512097	HERV-K-HML7	chrY
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT90755	RBRT90755	HERV-K-HML7	chr3
+alignment/AL_LINEAGE_HERVKHML7/member/fr_rt4_samerow/RBRT92891	RBRT92891	HERV-K-HML7	chr3

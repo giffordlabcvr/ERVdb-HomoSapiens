@@ -1,16 +1,16 @@
-taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
-alignment/AL_LINEAGE_HERVFa/member/erv-refseqs-zeta/HERV-Fa	HERV-Fa	HERV-Fa	-	-	-	I	Zetaretrovirus	-|HERV-Fa	-|HERV-Fa	-|Zetaretrovirus	-|HERVHF
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT2589	RBRT2589	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT268742	RBRT268742	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT268851	RBRT268851	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT317124	RBRT317124	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT324453	RBRT324453	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT389456	RBRT389456	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT408622	RBRT408622	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT483098	RBRT483098	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT487589	RBRT487589	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT490451	RBRT490451	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT490463	RBRT490463	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT490505	RBRT490505	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT512081	RBRT512081	-	-	-	-	-	-	-|-	-|-	-|-	-|-
-alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT89396	RBRT89396	-	-	-	-	-	-	-|-	-|-	-|-	-|-
+taxon	sequenceID	classification	scaffold
+alignment/AL_LINEAGE_HERVFa/member/erv-refseqs-zeta/HERV-Fa	HERV-Fa	-	-
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT2589	RBRT2589	HERV-Fa	chr1
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT268742	RBRT268742	HERV-Fa	chr8
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT268851	RBRT268851	HERV-Fa	chr8
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT317124	RBRT317124	HERV-Fa	chr11
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT324453	RBRT324453	HERV-Fa	chr11
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT389456	RBRT389456	HERV-Fa	chr14
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT408622	RBRT408622	HERV-Fa	chr16
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT483098	RBRT483098	HERV-Fa	chrX
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT487589	RBRT487589	HERV-Fa	chrX
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT490451	RBRT490451	HERV-Fa	chrX
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT490463	RBRT490463	HERV-Fa	chrX
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT490505	RBRT490505	HERV-Fa	chrX
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT512081	RBRT512081	HERV-Fa	chrY
+alignment/AL_LINEAGE_HERVFa/member/fr_rt4_samerow/RBRT89396	RBRT89396	HERV-Fa	chr3
