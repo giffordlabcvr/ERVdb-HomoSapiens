@@ -8,6 +8,9 @@ project ervdb
   # Export aligned segments for lineage level alignments
   run script glue/export/exportHervLineageAlignmentSegments.js
 
+  # Export alignments 
+  run file glue/export/exportAlignments.glue
+  
   validate
   
   exit

@@ -24,12 +24,39 @@ function tsv(value) {
     return String(value).replace(/\t/g, " ").replace(/\r?\n/g, " ");
 }
 
+// -----------------------------------------------------------------------------
+// Index reference name -> reference sequence length
+// -----------------------------------------------------------------------------
+
+var refLengthsByRefName = {};
+
+var refRows = queryObjects([
+    "list", "reference",
+    "name", "sequence.sequenceID", "sequence.length",
+    "-w", "sequence.sequence_kind = 'erv_ref'"
+]);
+
+_.each(refRows, function(row) {
+    refLengthsByRefName[row.name] = {
+        sequenceID: row["sequence.sequenceID"],
+        length: row["sequence.length"]
+    };
+});
+
+log("Indexed lengths for " + refRows.length + " ERV references");
+
+// -----------------------------------------------------------------------------
+// Output
+// -----------------------------------------------------------------------------
+
 var out = new PrintWriter(new FileWriter(OUT));
 
 out.println([
     "alignment_name",
     "parent_alignment",
     "ref_name",
+    "ref_sequence",
+    "ref_length",
     "member_source",
     "member_sequence",
     "segment_index",
@@ -57,6 +84,18 @@ _.each(alignments, function(aln) {
     var alnName = aln.name;
     var parentName = aln["parent.name"];
     var refName = aln["refSequence.name"];
+
+	var refSequenceID = null;
+	var refLength = null;
+
+	var refInfo = refLengthsByRefName[refName];
+
+	if(refInfo !== null && refInfo !== undefined) {
+		refSequenceID = refInfo.sequenceID;
+		refLength = refInfo.length;
+	} else {
+		log("No indexed reference length found for reference '" + refName + "' on " + alnName);
+	}
 
     log("Exporting segments for " + alnName);
 
@@ -86,6 +125,8 @@ _.each(alignments, function(aln) {
                         alnName,
                         parentName,
                         refName,
+                        refSequenceID,
+                        refLength,
                         sourceName,
                         sequenceID,
                         segmentIndex,
