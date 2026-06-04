@@ -1,0 +1,42 @@
+Hit ID	Dfam Designation of Gag ORF HERV Groupa	Provirusb	Location of Gag ORF(GRCh38.p13)	Strand	Orthology	ORF Conservation
+HSA1_gag1	HERV-H (partial gag)		55023242–55024501	+	Homininae	Human Specific
+HSA1_gag2	HERV-K (HML-2)	1p31.1	75378614–75380197	+	Human Specific	Human Specific
+HSA1_gag3	HERV-9NC		154673229–154674548	+	Human Specific	Human Specific
+HSA1_gag4	HERV-K (HML-2)	1q22	155632734–155634038	−	Human Specific	Human Specific
+HSA1_gag5	HERV-H (partial gag)		183613715–183614944	+	Homininae	Human Specific
+HSA1_gag6	HERV-K13		237917591–237919054	+	Homininae	Hominini
+HSA2_gag1	HERV-E (pol,partial gag)		158882965–158884236	+	Hominidae	Homininae
+HSA2_gag2	HERV-9		202498491–202499780	+	Hominidae	Human Specific
+HSA3_gag1	HERV-K (HML-2) (gag, dUTPase)	3p25.3	9851020–9853113	−	Hominidae	Human Specific
+HSA3_gag2	HERV-K (HML-2)	3q12.3	101693005–101695008	+	Homininae	Homininae
+HSA3_gag3	HERV-K (HML-2)	3q13.2	113030248–113032332	−	Human Specific	Human Specific
+HSA3_gag4	HERV-K11 (gag, dUTPase, pro)		130449221–130451068	−	Hominidae	Human Specific
+HSA3_gag5	HERV-K (HML-2) (gag, dUTPase, pro)	3q27.2	185567810–185570893	−	Human Specific	Human Specific
+HSA4_gag1	HERV-K11 (pol, partial gag)		64145040–64146809	−	Hominoidae	Human Specific
+HSA4_gag2	HERV-17 (pol, partial gag)		85353157–85354584	−	Catarrhini	Human Specific
+HSA5_gag1	HERV-S71		95710726–95712081	−	Hominoidea	Hominini
+HSA5_gag2	HERV-K (HML-2)	5q33.3	156663774–156665774	−	Human Specific	Human Specific
+HSA6_gag1	HERV-K		77723263–77725263	−	Human Specific	Human Specific
+HSA7_gag1	HERV-K(HML-2)	7p22.1a	4588786–4590090	−	Human Specific	Human Specific
+HSA8_gag1	HERV-K(HML-2)	8p23.1a	7504291–7506234	−	Human Specific	Human Specific
+HSA8_gag2	HERV-K(HML-2)	8p23.1b	8198347–8199615	+	Homininae	Human Specific
+HSA8_gag3	HERV-K(HML-2)	8p23.1c	12223547–12224818	−	Homininae	Human Specific
+HSA8_gag4	HERV-K(HML-2)	8p23.1d	12466057–12467328	−	Homininae	Human Specific
+HSA9_gag1	HERV-E		135442339–135443550	−	Hominoidae	Human Specific
+HSA10_gag1	HERV-K(HML-2)	10q24.2	99825872–99827437	−	Human Specific	Human Specific
+HSA11_gag1	HERV-Fc2		5929216–5930448	+	Homininae	Human Specific
+HSA11_gag2	HERV-K(HML-2)	11q22.1	101696870–101698174	+	Human Specific	Human Specific
+HSA11_gag3	HERV-K(HML-2)	11q23.3	118727068–118728381	−	Homininae	Homininae
+HSA12_gag1	HERV-K(HML-2)	12q14.1	58333804–58336072	−	Human Specific	Human Specific
+HSA13_gag1	HERV-H (partial gag)		86358566–86359789	+	Homininae	Human Specific
+HSA14_gag1	HERV-I (partial gag)		18349411–18350967	+	Gag: Catarrhini	Human Specific
+HSA19_gag1	HERV-9 (pol, partial gag)		18580605–18581828	+	Hominoidea	Homininae
+HSA19_gag2	HERV-FH21		20094153–20095379	−	Homininae	Human Specific
+HSA19_gag3	HERV-K13(HML-2)	19p12.c	21886667–21889372	−	Hominidae	Human Specific
+HSA19_gag4	HERV-K(HML-2)	19q11	27644310–27646310	−	Human Specific	Human Specific
+HSA19_gag5	MER50		53009305–53010798	+	Simiiformes	Simiiformes
+HSA22_gag1	HERV-I (partial gag)		15280221–15281648	+	Gag: Catarrhini	Human Specific
+HSA22_gag2	HERV-K(HML-2)	22q11.21	18939785–18941785	+	Human Specific	Human Specific
+HSA22_gag3	HERV-K(HML-2)	22q11.23	23538874–23540745	+	Homininae	Homininae
+HSAX_gag1	HERV-Fc2		97842167–97843579	+	Homininae	Hominini
+HSAX_gag2	HERV-K3		141197579–141198778	−	Catarrhini	Hominini

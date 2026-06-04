@@ -1,0 +1,18 @@
+HML8 loci most conserved Open Reading Frames.
+	gag 	pro 	pol 	env
+	shift/stop 	aa lenght 	shift/stop 	aa lenght 	shift/stop 	aa lenght 	shift/stop 	aa lenght
+1p13.3 			0/0 	321/335 				
+3q13.13 	0/1 	55/703 (*25) 						
+4q13.1 	0/1 	179/703 (*25) 						
+4q13.3 							0/1 	223/706 (*222)
+4q31.1 					0/1 	136/910 (*46) 		
+4q32.3 	0/0 	80/703 						
+5p13.1 			0/0 	329/335 				
+5q14.1 							0/0 	237/708
+11q22.1 			0/0 	335/335 				
+12q15 							0/0 	164/708
+19q11a 			0/1 	160/335 (*58) 				
+Yq11.221 			0/1 	264/335 (*196) 				
+Open in a new tab
+
+HML8 ORFs showing either no shifts and internal stop codons (0/0, in bold) or one single internal stop codon (0/1) are reported with the aa length of the correspondent putative protein with respect to the ancestral reference. When present, the position of internal stops (*) is reported between brackets.

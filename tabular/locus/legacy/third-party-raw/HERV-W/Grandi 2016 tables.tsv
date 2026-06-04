@@ -1,0 +1,216 @@
+Table 1.
+
+Recurrent mutations in HERV-W subgroup 2 LTRs
+Position (nt)a 	Substitutionb 	Frequencyc
+PVd subgroup 2 	PGe subgroup 2 	Solo LTRs subgroup 2 	Subgroup 1
+43 	C>T 	100 	100 	98 	0.7
+95 	C>T 	100 	95.8 	96 	3.4
+100 	T>C 	97.3 	100 	95 	2.2
+180 	C>T 	97.3 	100 	95 	0
+254 	A>G 	97.3 	96 	87 	1.4
+706 	A>G 	97.4 	73.3 	88 	1.7
+765 	G>A 	95 	73.3 	90 	1.7
+		Frequencyc
+Position (nt) 	Substitutionb 	PVd subgroup 2A 	PVd subgroup 2B 	Subgroup 1
+Type 2A additional mutations 				
+456 	C>T 	100 	41.7 	10.5
+498 	A>G 	92.6 	33.3 	3.5
+Position (nt)a 	Substitutionb 	PVd subgroup 2B 	PVd subgroup 2A 	Subgroup 1
+Type 2B additional mutations 				
+133 	A>G 	100 	48.1 	0
+188 	C>A 	90 	19.2 	0
+252 	C>G 	90 	40.7 	1.7
+Open in a new tab
+
+
+Open in a new tab
+
+Table 3.
+
+HERV-W genomic context: insertions into human non-coding genes
+HERV-W 	Human gene 	Gene function and associations
+1p12 (−) 	LOC101929147 Int 4 (+) 	Uncharacterized antisense long non-coding RNA
+1p13.3* (−) 	TCONS_00000271 Int 3 (+) 	Large intergenic non coding RNA
+1q32.1 (−) 	LOC284581 Int 1 (+)b 	Uncharacterized antisense long non-coding RNA
+2q11.2 (−) 	STARD7-AS1 Int1 (+)b 	StAR-related lipid transfer domain protein 7 antisense long non coding RNA (LOC285033)
+2q24.3 (−) 	TCONS_00004484 Int 1 (−) 	Long intergenic non coding RNA
+2q31.2b (+) 	MIR548 N Int 1 (+)b 	Homo sapiens microRNA 548n
+3q25.1b (+) 	CLRN1-AS1 Int 1 (+) 	CLRN1 antisense non-coding RNA
+4p13* (−) 	TCONS_00007753 Int 1 (−) 	Long intergenic non coding RNA
+4q23 (−) 	LOC100507053 Int 1 (+) 	Uncharacterized antisense long non-coding RNA
+4q28.3 (+) 	TCONS_00007833 Int 1 (−) 	Long intergenic non coding RNA
+4q32.3 (+) 	MIR5684 Int 2 (+) 	MicroRNA involved in post-transcriptional regulation of gene expression
+6q15 (−) 	TCONS_00011526 Ex 1, Int 1 (−) 	Long intergenic non coding RNA
+6q27a° (+) 	TCONS_l2_00024517 Int 2, Ex 3 (+)
+TCONS_l2_00024518 Int 1, Ex 2 (+)
+TCONS_l2_00024519 Int 1 (+) 	Long intergenic non coding RNAs
+7p14.2* (+) 	DQ594967 Ex 1(−)b 	Antisense non coding RNA
+8q12.1 (−) 	TCONS_00015019 Int 1 (−)
+AC022555.1 (−) 	Long intergenic non coding RNA
+Pseudogene
+9p21.3 (+) 	LOC441389 Int 5 Ex 6 (+)b 	Uncharacterized long non-coding RNA
+10q11.22 (−) 	TCONS_00017977 Int 1 (−) 	Long intergenic non coding RNA
+11q14.2 (−) 	PRSS23 Int 2 (+) 	Protease serine 23 near-coding RNA
+11q23.3 (−) 	TMPRSS4-AS1 Int 2 (−)b 	Antisense non-coding RNA
+13q21.33* (+) 	LINC00383 Ex 1, Int 1 (+) 	Long intergenic non coding RNA
+13q31.3° (+) 	TCONS_00021873 Int 2 (+) 	Long intergenic non coding RNA
+21q21.1* (−) 	MIR548XHG Ex 1, Int 1 (−) 	MIRNA548X host gene long non-coding RNA
+14q22.1 (+) 	AL163953.3 Int 3 (+) 	Long non-coding RNA
+19p12d (+) 	AK125686 Int 2 (−)b 	Antisense non coding RNA
+Xq13.3* (−) 	TCONS_00016997 Ex 1–2, Int 1 (+)
+AL451105.1 (−) 	Long intergenic non coding RNA
+Pseudogene
+Open in a new tab
+
+Proviruses and undefined sequences are labeled respectively with * and °. For HERV-W sequences and genes, the strand direction is reported into round brackets
+
+aAlready reported in Li et al. [70]
+
+bAlready reported in Schmitt et al. [20]
+
+
+Table 4.
+
+HERV-W genomic context: transcription factor (TF) binding sites
+HERV-W 	TF recognized 	Position 	Score (0–1000)
+2p12a* 	POLR2A 	chr2:76098843–76099352 	803
+2q22.2* 	E2F1 	chr2:143661226–143661546 	958
+3p22.2* 	CTCF 	chr3:38331061–38331485 	900
+4p16.1* 	POLR2A 	chr4:8429472–8430544 	1000
+TCF7L2 	chr4:8424096–8424592 	922
+6p12.2* 	TFAP2C 	chr6:52783052–52783485 	1000
+FOXA2 	chr6:52783244–52783462 	848
+STAT3 	chr6:52784270–52784579 	808
+6q14.3* 	STAT3 	chr6:85427859–85428174 	1000
+CEBPB 	chr6:85427862–85428118 	817
+7q21.1* 	TCF7L2 	chr7:92103429–92103733 	1000
+7q31.1a 	TCF7L2 	chr7:107981247–107981830 	1000
+E2F1 	chr7:107981308–107981897 	1000
+7q33* 	YY1 	chr7: 34270591–134271127 	1000
+7q36.1* 	FOXA1 	chr7:149370177–149370408 	1000
+9q22.1 	TCF7L2 	chr9:91556701–91556965 	1000
+10q21.2* 	GATA3 	chr10:62797340–62797529 	1000
+E2F1 	chr10:62796837–62797697 	806
+10q23.1* 	GATA1 	chr10:86284672–86285183 	1000
+MAFK 	chr10:86285572–86285911 	1000
+MAFF 	chr10:86285647–86285793 	1000
+TBL1XR1 	chr10:86284785–86285185 	824
+10q24.1 	TAL1 	chr2:97480654–97480806 	928
+TEAD4 	chr10:97480630–97480810 	859
+10q21.3 	MAFK 	chr10:65805045–65805364 	1000
+21q21.1* 	TFAP2C 	chr21:20128637–20128925 	1000
+YY1 	chr21:20131977–20132464 	859
+Open in a new tab
+
+
+Table 5.
+
+Env puteins analysis
+Sequence 	ORF length (amino acids) 	Stop 	Shift
+7q21.2* 	538 	0 	0
+1p32.3b* 	559 	3 	2
+6q21a 	552 	4 	2
+15q21.3 	543 	2 	2
+4q13.3* 	542 	0 	2
+5q11.2 	542 	0 	4
+5q21.3* 	542 	6 	2
+12q13.12* 	542 	2 	1
+14q21.2* 	542 	3 	1
+Xq22.3b 	542 	1 	0
+3q11.2* 	541 	1 	3
+4q31.1* 	541 	2 	2
+17q12b 	540 	2 	2
+Xp22.31 	529 	0 	6
+20q13.2 	483 	0 	1
+11p15.4 	475 	2 	3
+3p24.1* 	466 	2 	0
+9q31.3 	462 	3 	1
+3q23a 	453 	2 	1
+4q32.3 	443 	1 	2
+1q32.3a 	361 	0 	3
+5p12* 	355 	6 	0
+1p34.2 	352 	2 	1
+Xq27.1 	352 	4 	1
+4q21.22* 	320 	0 	1
+17q12a 	296 	0 	2
+9q22.31 	267 	1 	0
+Open in a new tab
+
+Proviruses are labeled with *, Syncytin-1 ORF is highlighted in bold. Underlined sequences retain an ORF without internal stop codons; italic sequences did not present frameshifts
+
+
+Table 6.
+
+HERV-W loci homology of previously described MSRV sequences and probes
+MSRV GenBank entry 	HERV-W locus/loci 	Query cover 	n° of discordant bases 	Mapped portion in LTR17-HERV17-LTR17
+AF127227 (544 bp) 	3q23a* (99.5 %) 	1–544 	3 	env (8208–8752)
+AF127228 (1932 bp) 	Xq22.3b* (99.6 %) 	1–1932 	9 	pol-env (5444–5838 and 7682–9200)
+AF127229 (2004 bp) 	3p12.3* (99.9 %) 	1–1084 	2 	pol-env-3′ LTR (5452–6792 and 8290–8318 and 9115–9732)
+18q21.32* (99.9 %) 	1055–2004 	2
+AF123882 (2477 bp) 	12q21.3* (99.8 %) 	1–2477 	7 	pol-env (5720–8199)
+AF331500 (1629 bp) 	Xq22.3b* (99.7 %) 	1–1332 	4 	env (7720–9348)
+5p12* (99.4 %) 	1308–1629 	2
+AF123881 (1511 bp) 	3q26.32* (99.9 %) 	1–1511 	2 	gag-pro (2765–4269)
+AF009668 (2304 bp) 	1p34.2 (99.1 %) 	1–633 	6 	pro-pol (4178–6480)
+2p12a (100 %) 	623–736 	0
+2p24.2 (100 %) 	717–871 	0
+6q27b (98.5 %) 	837–1424 	11
+6q15 (97.2 %) 	1415–1763 	10
+3p12.3 (99.4 %) 	1719–2304 	4
+AF009666 (324 bp) 	1p34.2 (99.5 %) 	1–324 	3 	pro-pol (4178–4521)
+AF009667 (118 bp) 	17q22 (98.2 %) 	1–118 	2 	pol (5031–5148)
+AF123880 (1003 bp) 	5p12 (99.6 %) 	1–203 	1 	5′ LTR (255–803)
+3p24.1 (100 %) 	198–593 	1
+3q26.32 (98 %) 	592–1003 	11
+AF072494 pol probe (678 bp) 	6q21b (99.6 %) 	1–678 	5 	pol (4660–5338)
+AF072496 gag probe (536 bp) 	6q21b (99.6 %) 	1–536 	2 	pre gag-gag(2706–3199)
+AF072497 pro probe (364 bp) 	1p34.2 (99.2 %) 	1–364 	4 	pro-pol (4166–4522 and 5641–5549)
+AF072498 env probe (591 bp) 	Xq22.3b (99.5 %) 	1–591 	3 	env (8606–9196)
+Open in a new tab
+
+Previously published MSRV sequences and probes (column 1) were analyzed for their homology to one/more HERV-W locus/loci by BLAT search, considering the best match in human genome (reported in column 2 near to each HERV-W element). The MSRV elements portion similar to HERV-W locus/loci (column 3) as the number of discordant nucleotides with respect to the identified HERV-W locus/loci (column 4) and the correspondent positions in the LTR17-HERV17-LTR17 reference (column 5) were obtained through Mafft alignment and Geneious platform analysis. MSRV sequences were characterized through the analysis of each element with respect to the whole HERV-W dataset with Recco software
+
+* Already investigated by Laufer et al. [89]
+
+° 95 % similarity with AF135487, a retroviral-related sequence reported to be schizophrenia associated and mapped to multiple sites
+
+The MSRV sequences containing an env gene (or a portion of it) and showing highest identity with one of the HERV-W loci analyzed for Env puteins were manually translated and aligned with the correspondent HERV-W Env putein and the Syncytin-1 protein for further comparison (Additional file 7: Fig. S6). Interestingly, with respect to the Syncytin-1 sequence the HERV-W puteins and the correspondent MSRV putein shared the great majority of amino acid substitutions, and often the same amino acid change was common to all sequences analyzed. AF127227 and 3q23a share the same frameshift at position 270 of Syncytin-1 sequence. Moreover, AF127227 and AF127228 showed an internal stop codon at the same position observed in 3q23a and Xq22.3b, respectively (position 39, W in Syncytin-1). Differently, AF331500 lacks this internal stop codon presenting, like Syncytin-1, a W in this position. As already observed for HERV-W, also MSRV Env puteins showed at least one amino acid change in all domains relevant to Syncytin-1 biological activity. Given the proposed MSRV Env proteins role in pathogenesis, the presence of shared recurrent substitutions, possibly preventing the MSRV Env puteins functionality as compared to Syncytin-1, opens further questions that will have to be addressed. Overall, while more MSRV RNA expression studies are needed, the here reported HERV-W genomic map and characterization is a further step to properly assess the MSRV/HERV-W role in the context of MS.
+
+
+
+
+
+
+
+
+
+
+Authors thank Jens Mayer for useful discussions and critical observations.
+Competing interests
+
+The authors declare that they have no competing interests.
+Additional files
+12977_2016_301_MOESM1_ESM.docx (54.3KB, docx)
+
+10.1186/s12977-016-0301-x HERV-W elements identification in Human Genome assembly GRch37/hg19.
+12977_2016_301_MOESM2_ESM.tif (1.9MB, tif)
+
+10.1186/s12977-016-0301-x Phylogenetic neighbor joining trees of proviral and pseudogenic (A) gag, (B) pol and (C) env genes. RepBase HERV17 consensus is labeled with a black square.
+12977_2016_301_MOESM3_ESM.tif (6.5MB, tif)
+
+10.1186/s12977-016-0301-x Phylogenetic neighbor joining trees of about 800 HERV-W LTRs retrieved from GRCh37/hg19 assembly. LTR17 consensus is labeled with a black square.
+12977_2016_301_MOESM4_ESM.tif (636.2KB, tif)
+
+10.1186/s12977-016-0301-x Env puteins analysis with respect to Syncytin-1 (locus 7q21.2). In Syncytin-1 ORF the domains mostly involved in the protein structure and function are annotated: Leader Peptide (LP), Binding Domain motif (BD), SU and TM disulphide bounds motifs (dS), Furin cleavage site (FCS), fusion core N- and C- terminal Heptad Repeats (NHR and CHR), Immunosuppressive domain (IM), Transmembrane unit (TM), Intracytoplasmic Tail (CYT) and the relative Syncytin-1 specific deletion (LQMV del). In Env puteins amino acid substitutions and internal stop codons with respect to Syncytin-1 are labeled with colored and black lines, respectively. The reading frames are reported below each sequence with a number and an arrow.
+12977_2016_301_MOESM5_ESM.tif (13.9MB, tif)
+
+10.1186/s12977-016-0301-x Residues-visible version of Env puteins analysis with respect to Syncytin-1 (locus 7q21.2). In Syncytin-1 ORF the domains mostly involved in the protein structure and function are annotated: Leader Peptide (LP), Binding Domain motif (BD), SU and TM disulphide bounds motifs (dS), Furin cleavage site (FCS), fusion core N- and C- terminal Heptad Repeats (NHR and CHR), Immunosuppressive domain (IM), Transmembrane unit (TM), Intracytoplasmic Tail (CYT) and the relative Syncytin-1 specific deletion (LQMV del). In Env puteins amino acid substitutions and internal stop codons with respect to Syncytin-1 are labeled with colored and black squares, respectively. The reading frames are reported below each sequence with a number and an arrow. The orange arrow indicates the Env portion frequently maintained in presence of flanking huge recurrent deletions.
+12977_2016_301_MOESM6_ESM.tif (1.5MB, tif)
+
+10.1186/s12977-016-0301-x HERV-W Env puteins maintained portion comparison with respect to Syncytin-1 ammino acid sequence. Amino acid substitutions are labeled with colored and squares. A consensus sequence is shown above Syncytin-1.
+12977_2016_301_MOESM7_ESM.tif (1.3MB, tif)
+
+10.1186/s12977-016-0301-x MSRV Env puteins analysis with respect to the most similar HERV-W loci Env puteins and Syncytin-1 (locus 7q21.2). In Syncytin-1 ORF the domains mostly involved in the protein structure and function are annotated: Leader Peptide (LP), Binding Domain motif (BD), SU and TM disulphide bounds motifs (dS), Furin cleavage site (FCS), fusion core N- and C- terminal Heptad Repeats (NHR and CHR), Immunosuppressive domain (IM), Transmembrane unit (TM), Intracytoplasmic Tail (CYT) and the relative Syncytin-1 specific deletion (LQMV del). In Env puteins amino acid substitutions and internal stop codons with respect to Syncytin-1 are labeled with colored and black squares, respectively. The reading frames are reported below each sequence with a number and an arrow. The orange arrow indicates the Env portion frequently maintained in presence of flanking huge recurrent deletions.
+12977_2016_301_MOESM8_ESM.docx (23.5KB, docx)
+
+10.1186/s12977-016-0301-x HERV-W proposed consensus in Fasta format. HERV-W group general proviral consensus sequence (HERVW_PVcons) and HERV-W subgroups 1 and 2 consensus sequences (HERVW_SG1cons and HERVW_SG2cons, respectively) generated starting from our HERV-W sequences datase
