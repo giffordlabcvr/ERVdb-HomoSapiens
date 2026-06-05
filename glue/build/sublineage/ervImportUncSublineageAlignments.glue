@@ -13,31 +13,4 @@
     # Clade II Subgenera
     import AL_UNC_SUBGENUS_Kappa        -f alignments/subgenus/kappa-genome+ervs.aln.fna
      
-    #~# Genus-level alignments
-    
-    # Clade I Genera
-    import AL_UNC_GENUS_Gamma_ERV       -f alignments/genus/gamma-gagpol+ervs.aln.fna
-    import AL_UNC_GENUS_Rho_ERV         -f alignments/genus/rho-pol.aln.fna
-    import AL_UNC_GENUS_Zeta_ERV        -f alignments/genus/zeta-pol.aln.fna
-    #import AL_UNC_GENUS_Iota_ERV        -f alignments/genus/iota-pol.aln.fna
-    #import AL_UNC_GENUS_Rho_ERV        -f alignments/genus/rho-pol.aln.fna
-    import AL_UNC_GENUS_Theta_ERV       -f alignments/genus/theta-pol.aln.fna
-    import AL_UNC_GENUS_Epsilon_ERV     -f alignments/genus/epsilon-internal.aln.fna
-
-    # Clade II Genera
-    import AL_UNC_GENUS_Alpha_ERV       -f alignments/genus/alpha-gagpol+ervs.aln.fna
-    import AL_UNC_GENUS_Beta_ERV        -f alignments/genus/beta-pol+ervs.aln.fna    
-	import AL_UNC_GENUS_Delta_ERV       -f alignments/genus/delta-gagpol+ervs.aln.fna
-    import AL_UNC_GENUS_Lenti_ERV       -f alignments/genus/lenti-gagpol+ervs.aln.fna 
-
-    # Clade III Genera
-    import AL_UNC_GENUS_Spuma_ERV       -f alignments/genus/spuma-genome+ervs.aln.fna
-    import AL_UNC_GENUS_Lambda_ERV      -f alignments/genus/lambda-genome.aln.fna
-    #import AL_UNC_GENUS_Sigma_ERV       -f alignments/genus/sigma-genome+ervs.aln.fna
-
-    #~# Major clade-level alignments
-    import AL_UNC_ROOT_CLADE_I          -f alignments/clade/clade-I.aln.fna
-    import AL_UNC_ROOT_CLADE_II         -f alignments/clade/clade-II.aln.fna
-    import AL_UNC_ROOT_CLADE_III        -f alignments/clade/clade-III.aln.fna
-
     exit
