@@ -1,0 +1,38 @@
+
+  # ERV lineages found in the human genome
+  
+  # Gammaretrovirus
+  run file glue/build/erv/feature_locations/gammaretrovirus/HERV-T.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/HERV-R.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/HERV-E.glue
+
+  # Rho
+  run file glue/build/erv/feature_locations/rho/HERV-Rb1.glue
+
+  # Zeta
+  run file glue/build/erv/feature_locations/zeta/HERV-Fa.glue
+  run file glue/build/erv/feature_locations/zeta/HERV-Fb.glue
+  run file glue/build/erv/feature_locations/zeta/HERV-Fc.glue
+  run file glue/build/erv/feature_locations/zeta/HERV-XA.glue
+  run file glue/build/erv/feature_locations/zeta/HERV-H.glue
+  run file glue/build/erv/feature_locations/zeta/HERV-W.glue
+  run file glue/build/erv/feature_locations/zeta/HERV-9.glue
+  #run file glue/build/erv/feature_locations/zeta/HERV-30.glue
+  #run file glue/build/erv/feature_locations/zeta/HERV-P.glue
+  #run file glue/build/erv/feature_locations/zeta/HERV-FRD.glue
+
+  # Betaretrovirus
+  run file glue/build/erv/feature_locations/betaretrovirus/HERV-K.glue
+  run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML5.glue
+  run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML6.glue
+
+  # Iota
+  run file glue/build/erv/feature_locations/iota/HERV-I.glue
+  run file glue/build/erv/feature_locations/iota/HERV-ADP.glue
+
+  # Lambda
+  run file glue/build/erv/feature_locations/lambda/HERV-U3.glue
+  run file glue/build/erv/feature_locations/lambda/HERV-L.glue
+
+  # Sigma
+  run file glue/build/erv/feature_locations/sigma/HERV-S.glue

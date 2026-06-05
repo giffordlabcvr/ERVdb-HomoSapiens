@@ -1,0 +1,23 @@
+reference REF_HERVADP
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 7590
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 461 2014
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 2018 5521
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 5565 7574
+    exit
+
+  exit

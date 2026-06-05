@@ -1,0 +1,87 @@
+
+  #~# CLADE
+  
+  alignment AL_ROOT_CLADE_I
+    derive segments AL_UNC_ROOT_CLADE_I --allMembers --mergeStrategy OVERWRITE
+    exit
+  
+  alignment AL_ROOT_CLADE_II
+    derive segments AL_UNC_ROOT_CLADE_II --allMembers --mergeStrategy OVERWRITE
+    exit
+  
+  alignment AL_ROOT_CLADE_II
+    derive segments AL_UNC_ROOT_CLADE_II --allMembers --mergeStrategy OVERWRITE
+    exit
+    
+
+  #~# GENUS
+
+  # Clade I Genera
+    
+  alignment AL_GENUS_Gammaretrovirus
+    derive segments AL_UNC_GENUS_Gamma_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  alignment AL_GENUS_Rhoretrovirus
+    derive segments AL_UNC_GENUS_Rho_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  #alignment AL_GENUS_Iota
+  #  derive segments AL_UNC_GENUS_Iota_ERV --allMembers --mergeStrategy OVERWRITE
+  #  exit
+
+  alignment AL_GENUS_Zetaretrovirus
+    derive segments AL_UNC_GENUS_Zeta_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  #alignment AL_GENUS_Theta
+  #  derive segments AL_UNC_GENUS_Theta_ERV --allMembers --mergeStrategy OVERWRITE
+  #  exit
+  
+  alignment AL_GENUS_Epsilonretrovirus
+    derive segments AL_UNC_GENUS_Epsilon_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  # Clade II Genera
+    
+  alignment AL_GENUS_Alpharetrovirus
+    derive segments AL_UNC_GENUS_Alpha_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  alignment AL_GENUS_Betaretrovirus
+    derive segments AL_UNC_GENUS_Beta_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  alignment AL_GENUS_Deltaretrovirus
+    derive segments AL_UNC_GENUS_Delta_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  alignment AL_GENUS_Lentivirus
+    derive segments AL_UNC_GENUS_Lenti_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  # Clade III Genera
+    
+  alignment AL_GENUS_Spumavirus
+    derive segments AL_UNC_GENUS_Spuma_ERV --allMembers --mergeStrategy OVERWRITE
+    exit
+
+  #alignment AL_GENUS_Lambda
+  #  derive segments AL_UNC_GENUS_Lambda_ERV --allMembers --mergeStrategy OVERWRITE
+  #  exit
+
+  #alignment AL_GENUS_Sigma
+  #  derive segments AL_UNC_GENUS_Sigma_ERV --allMembers --mergeStrategy OVERWRITE
+  #  exit
+
+  #~# SUBGENUS
+  
+  alignment AL_SUBGENUS_Kappa
+    derive segments AL_UNC_SUBGENUS_Kappa --allMembers --mergeStrategy OVERWRITE
+    exit
+    
+  alignment AL_SUBGENUS_Eta
+    derive segments AL_UNC_SUBGENUS_Eta --allMembers --mergeStrategy OVERWRITE
+    exit
+
+

@@ -1,0 +1,131 @@
+  reference REF_PSIV2
+
+	add feature-location whole_genome
+	feature-location whole_genome
+	  add segment 1	8102
+	  exit
+  
+  	add feature-location 5LTR
+	feature-location 5LTR
+	  add segment 1	404
+	  exit
+
+	add feature-location PBS
+	feature-location PBS
+	  add segment 407 424
+	  exit
+
+	add feature-location gag
+	feature-location gag
+	  add segment 473 1795
+	  exit
+  
+	add feature-location MA
+	feature-location MA
+	  add segment 473 844
+	  exit
+  
+	add feature-location CA
+	feature-location CA
+	  add segment 845 1504
+	  exit
+  
+	add feature-location NC
+	feature-location NC
+	  add segment 1505 1795
+	  exit
+  
+    add feature-location gag-pol
+    feature-location gag-pol
+      add segment 473 1672 --spliceIndex 1
+      add segment 1673 1677 --translationModifier lentiGagPolTranslationModifier --spliceIndex 2
+      add segment 1678 4977 --spliceIndex 3
+      exit
+     
+    add feature-location FS
+    feature-location FS  
+      add segment 1669 1772
+      exit
+    
+    add feature-location FS-slippery-seq
+    feature-location FS-slippery-seq  
+      add segment 1669 1675
+      exit
+
+    add feature-location FS-stemloop
+    feature-location FS-stemloop  
+      add segment 1681 1772
+      exit
+
+	add feature-location pro-pol
+	feature-location pro-pol
+	  add segment 1795 4977
+	  exit
+
+	add feature-location pro
+	feature-location pro
+	  add segment 1795 2091
+	  exit
+
+	add feature-location pol
+	feature-location pol
+	  add segment 2092 4977
+	  exit
+
+	add feature-location RT
+	feature-location RT
+	  add segment 2092 3402
+	  exit
+
+	add feature-location RNaseH
+	feature-location RNaseH
+	  add segment 3403 3756
+	  exit
+
+	add feature-location DU
+	feature-location DU
+	  add segment 3757 4149
+	  exit
+
+	add feature-location IN
+	feature-location IN
+	  add segment 4150 4977
+	  exit
+
+	add feature-location vif
+	feature-location vif
+	  add segment 4970 5569
+	  exit
+
+	add feature-location env
+	feature-location env
+	  add segment 5727 7646
+	  exit
+	  
+ 	add feature-location SU
+	feature-location SU
+	  add segment 5727 7013
+	  exit
+	  
+ 	add feature-location TM
+	feature-location TM
+	  add segment 7014 7646
+	  exit
+
+	add feature-location orfx
+	feature-location orfx
+	  add segment 7606 7950
+	  exit
+  
+	add feature-location PPT
+	feature-location PPT
+	  add segment 7659 7675
+	  exit
+ 
+	add feature-location 3LTR
+	feature-location 3LTR
+	  add segment 7681 8102
+	  exit
+    
+
+	exit 

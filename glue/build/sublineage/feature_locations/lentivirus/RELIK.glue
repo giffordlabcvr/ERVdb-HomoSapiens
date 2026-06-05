@@ -1,0 +1,156 @@
+  reference REF_RELIK
+
+	add feature-location whole_genome
+	feature-location whole_genome
+	  add segment 1	8867
+	  exit
+  
+	add feature-location 5LTR
+	feature-location 5LTR
+	  add segment 1	496
+	  exit
+  
+	add feature-location TATA_box
+	feature-location TATA_box
+	  add segment 247 254
+	  exit
+  
+	add feature-location TAR
+	feature-location TAR
+	  add segment 278 385
+	  exit
+
+	add feature-location PBS
+	feature-location PBS
+	  add segment 499 518
+	  exit
+  
+	add feature-location gag
+	feature-location gag
+	  add segment 597 2030
+	  exit
+  
+	add feature-location MA
+	feature-location MA
+	  add segment 597 1025
+	  exit
+  
+	add feature-location CA
+	feature-location CA
+	  add segment 1026 1748
+	  exit
+  
+	add feature-location NC
+	feature-location NC
+	  add segment 1749 2030
+	  exit
+  
+    add feature-location gag-pol
+    feature-location gag-pol
+      add segment 597 1880 --spliceIndex 1
+      add segment 1881 1885 --translationModifier lentiGagPolTranslationModifier --spliceIndex 2
+      add segment 1886 5212 --spliceIndex 3
+      exit
+     
+    add feature-location FS
+    feature-location FS  
+      add segment 1880 1912
+      exit
+    
+    add feature-location FS-slippery-seq
+    feature-location FS-slippery-seq  
+      add segment 1880 1886
+      exit
+
+    add feature-location FS-stemloop
+    feature-location FS-stemloop  
+      add segment 1887 1912
+      exit
+      
+	add feature-location pro-pol
+	feature-location pro-pol
+	  add segment 1880 5212
+	  exit
+
+	add feature-location pro
+	feature-location pro
+	  add segment 1880 2335
+	  exit
+
+	add feature-location pol
+	feature-location pol
+	  add segment 2336 5212
+	  exit
+
+	add feature-location RT
+	feature-location RT
+	  add segment 2336 3631
+	  exit
+
+	add feature-location RNaseH
+	feature-location RNaseH
+	  add segment 3632 4018
+	  exit
+
+	add feature-location DU
+	feature-location DU
+	  add segment 4019 4387
+	  exit
+
+	add feature-location IN
+	feature-location IN
+	  add segment 4388 5212
+	  exit
+  
+	add feature-location vif
+	feature-location vif
+	  add segment 5215 5469
+	  exit
+  
+	add feature-location tat
+	feature-location tat
+	  add segment 5597 5821
+	  exit
+  	  
+ 	add feature-location env
+	feature-location env
+	  add segment 5732 8341
+	  exit
+
+	add feature-location SP
+	feature-location SP
+	  add segment 5732 5941
+	  exit
+	    
+ 	add feature-location SU
+	feature-location SU
+	  add segment 5732 7537
+	  exit
+	  
+ 	add feature-location TM
+	feature-location TM
+	  add segment 7538 8341
+	  exit
+	  
+	add feature-location RRE
+	feature-location RRE
+	  add segment 7459 7750
+	  exit
+
+	add feature-location rev
+	feature-location rev
+	  add segment 8143 8376
+	  exit
+ 	  
+	add feature-location PPT
+	feature-location PPT
+	  add segment 8350 8371
+	  exit
+ 
+	add feature-location 3LTR
+	feature-location 3LTR
+	  add segment 8371 8867
+	  exit
+    
+	exit 
+

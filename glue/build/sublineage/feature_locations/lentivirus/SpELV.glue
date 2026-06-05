@@ -1,0 +1,81 @@
+  reference REF_SpELV
+
+	add feature-location whole_genome
+	feature-location whole_genome
+	  add segment 1	4110
+	  exit
+  
+	add feature-location 5LTR
+	feature-location 5LTR
+	  add segment 1	481
+	  exit
+
+	add feature-location TAR
+	feature-location TAR
+	  add segment 196 268
+	  exit
+
+	add feature-location PBS
+	feature-location PBS
+	  add segment 506 523
+	  exit
+ 
+ 	add feature-location gag
+	feature-location gag
+	  add segment 713 2125
+	  exit
+  
+	add feature-location MA
+	feature-location MA
+	  add segment 713 1219
+	  exit
+  
+	add feature-location CA
+	feature-location CA
+	  add segment 1220 1786
+	  exit
+  
+	add feature-location NC
+	feature-location NC
+	  add segment 1787 2125
+	  exit
+
+	add feature-location pro-pol
+	feature-location pro-pol
+	  add segment 2092 4110
+	  exit
+  
+    add feature-location gag-pol
+    feature-location gag-pol
+      add segment 713 2098 --spliceIndex 1
+      add segment 2099 2103 --translationModifier lentiGagPolTranslationModifier --spliceIndex 2
+      add segment 2104 4110 --spliceIndex 3
+      exit
+     
+
+	add feature-location pro
+	feature-location pro
+	  add segment 2092 2424
+	  exit
+
+	add feature-location pol
+	feature-location pol
+	  add segment 2425 4110
+	  exit
+
+	add feature-location RT
+	feature-location RT
+	  add segment 2425 3717
+	  exit
+
+	add feature-location RNaseH
+	feature-location RNaseH
+	  add segment 3718 4068
+	  exit
+
+	add feature-location DU
+	feature-location DU
+	  add segment 4069 4110
+	  exit
+
+	exit

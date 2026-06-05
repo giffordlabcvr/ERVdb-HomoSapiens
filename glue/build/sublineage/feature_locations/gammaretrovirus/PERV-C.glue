@@ -1,0 +1,39 @@
+reference REF_PERVC
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8769
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 8 559
+    exit
+
+  add feature-location LEA
+  feature-location LEA
+    add segment 560 1080
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 1081 2655
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 2803 6240
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 6116 8080
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 8145 8769
+    exit
+
+  exit
+

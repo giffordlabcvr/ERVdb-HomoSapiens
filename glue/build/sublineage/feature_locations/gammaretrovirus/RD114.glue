@@ -1,0 +1,38 @@
+reference REF_RD114
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8406
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 482
+    exit
+
+  add feature-location LEA
+  feature-location LEA
+    add segment 483 946
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 947 2599
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 3122 6166
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 6201 7898
+    exit
+    
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 7925 8406
+    exit
+
+  exit

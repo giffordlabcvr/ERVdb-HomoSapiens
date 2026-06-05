@@ -1,0 +1,39 @@
+reference REF_CeratotheriumRb
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8390
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 431
+    exit
+
+  add feature-location LEA
+  feature-location LEA
+    add segment 432 2048
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 2049 3605
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 4135 7272
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 7257 8129
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 8198 8390
+    exit
+    
+  exit
+

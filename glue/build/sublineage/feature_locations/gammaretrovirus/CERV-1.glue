@@ -1,0 +1,38 @@
+reference REF_CERV1
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8278
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 380
+    exit
+
+  add feature-location LEA
+  feature-location LEA
+    add segment 381 663
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 664 3432
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 3433 6189
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 6180 7853
+    exit
+    
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 7960 8278
+    exit
+
+  exit

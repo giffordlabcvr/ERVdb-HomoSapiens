@@ -1,0 +1,25 @@
+reference REF_EqERVRb
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8711
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 1439 3418
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 3434 7075
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 7115 8518
+    exit
+
+  exit
+
+

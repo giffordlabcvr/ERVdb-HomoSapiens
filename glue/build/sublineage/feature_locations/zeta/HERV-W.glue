@@ -1,0 +1,38 @@
+reference REF_HERVW
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 10172
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 782
+    exit
+
+  add feature-location LEA
+  feature-location LEA
+    add segment 783 2916
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 2917 3969
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 4091 7810
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 7838 9409
+    exit
+    
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 9462 10172
+    exit
+
+  exit

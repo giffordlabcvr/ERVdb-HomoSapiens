@@ -1,0 +1,48 @@
+reference REF_newtEFV
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 9615
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 883
+    exit
+
+  add feature-location LEA
+  feature-location LEA
+    add segment 884 1105
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 1106 2518
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 2555 6188
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 6024 9047
+    exit
+
+  add feature-location Orf2
+  feature-location Orf2
+    add segment 9010 9240
+    exit
+
+  add feature-location Orf1
+  feature-location Orf1
+    add segment 9161 9592
+    exit
+    
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 9629 10428
+    exit
+
+  exit

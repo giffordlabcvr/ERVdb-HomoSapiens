@@ -1,0 +1,34 @@
+reference REF_PERVE
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8065
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 434
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 259 2658
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 2660 6622
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 6623 7597
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 7635 8065
+    exit
+
+  exit
+

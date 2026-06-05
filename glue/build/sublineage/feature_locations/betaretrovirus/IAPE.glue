@@ -1,0 +1,29 @@
+reference REF_IAPE
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8320
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 647 2021
+    exit
+
+  add feature-location pro
+  feature-location pro
+    add segment 2023 2428
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 2428 5095
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 5371 7519
+    exit
+
+  exit
+

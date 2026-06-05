@@ -1,0 +1,9 @@
+  delete module ervSideDataImporter
+  create module -f modules/build/erv/ervSideDataImporter.xml ervSideDataImporter
+
+  # Load data for the complete ERV genome sequences
+  module ervSideDataImporter 
+    populate -f tabular/erv/herv_lineage_data.tsv
+    populate -f tabular/erv/nonhuman_erv_lineage_data.tsv
+    exit
+

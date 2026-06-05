@@ -1,0 +1,18 @@
+  reference REF_MinERVa
+
+    add feature-location whole_genome
+    feature-location whole_genome
+      add segment 1 2910
+      exit
+
+    add feature-location 5LTR
+    feature-location 5LTR
+      add segment 1 599
+      exit
+
+    add feature-location gag
+    feature-location gag
+      add segment 802 2091
+      exit
+      
+  exit 

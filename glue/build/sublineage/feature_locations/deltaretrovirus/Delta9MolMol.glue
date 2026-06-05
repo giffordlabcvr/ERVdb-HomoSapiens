@@ -1,0 +1,75 @@
+  reference REF_Delta9MolMol
+
+    add feature-location whole_genome
+    feature-location whole_genome
+      add segment 1 9173
+      exit
+
+    add feature-location 5LTR
+    feature-location 5LTR
+      add segment 1 1121
+      exit
+
+    add feature-location PBS
+    feature-location PBS
+      add segment 1124 1141
+      exit
+
+    add feature-location gag
+    feature-location gag
+      add segment 1205 2407
+      exit
+
+    add feature-location pro
+    feature-location pro
+      add segment 2344 2895
+      exit
+ 
+    add feature-location pol
+    feature-location pol
+      add segment 2874 5411
+      exit
+
+    add feature-location gag-pro
+    feature-location gag-pro
+      add segment 1205 2395 --spliceIndex 1
+      add segment 2396 2400 --translationModifier deltaGagPolTranslationModifier --spliceIndex 2
+      add segment 2401 2895 --spliceIndex 3
+      exit     
+
+    add feature-location gag-pro-pol
+    feature-location gag-pro-pol
+      add segment 1205 2395 --spliceIndex 1
+      add segment 2396 2400 --translationModifier deltaGagPolTranslationModifier --spliceIndex 2
+      add segment 2401 2868 --spliceIndex 3
+      add segment 2869 2873 --translationModifier deltaGagPolTranslationModifier --spliceIndex 4
+      add segment 2874 5411 --spliceIndex 5
+      exit     
+
+    add feature-location env
+    feature-location env
+      add segment 5412 7007
+      exit
+ 
+    add feature-location hbz
+    feature-location hbz
+      add segment 7480 7944
+      exit
+
+    add feature-location rex
+    feature-location rex
+      add segment 7050 7679
+      exit
+
+    add feature-location tax
+    feature-location tax
+      add segment 7697 8740
+      exit
+
+    add feature-location 3LTR
+      feature-location 3LTR
+      add segment 8053 9173
+      exit
+          
+  exit 
+

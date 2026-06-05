@@ -1,0 +1,96 @@
+  reference REF_MELVmpf
+
+	add feature-location whole_genome
+	feature-location whole_genome
+	  add segment 1	9113
+	  exit
+  
+	add feature-location 5LTR
+	feature-location 5LTR
+	  add segment 1	584
+	  exit
+
+	add feature-location PBS
+	feature-location PBS
+	  add segment 587 606
+	  exit
+
+	add feature-location TATA_box
+	feature-location TATA_box
+	  add segment 239 245
+	  exit
+
+	add feature-location TAR
+	feature-location TAR
+	  add segment 281 442
+	  exit
+
+	add feature-location gag
+	feature-location gag
+	  add segment 724 2097
+	  exit
+  
+    add feature-location gag-pol
+    feature-location gag-pol
+      add segment 724 2070 --spliceIndex 1
+      add segment 2071 2075 --translationModifier lentiGagPolTranslationModifier --spliceIndex 2
+      add segment 2076 5261 --spliceIndex 3
+      exit
+     
+    add feature-location FS
+    feature-location FS  
+      add segment 2065 2169
+      exit
+    
+    add feature-location FS-slippery-seq
+    feature-location FS-slippery-seq  
+      add segment 2065 2071
+      exit
+
+    add feature-location FS-stemloop
+    feature-location FS-stemloop  
+      add segment 2084 2169
+      exit
+
+	add feature-location pro-pol
+	feature-location pro-pol
+	  add segment 1944 5261
+	  exit
+
+	add feature-location pro
+	feature-location pro
+	  add segment 1944 2468
+	  exit
+
+	add feature-location pol
+	feature-location pol
+	  add segment 2469 5261
+	  exit
+
+	add feature-location vif
+	feature-location vif
+	  add segment 5401 5850
+	  exit
+
+	add feature-location env
+	feature-location env
+	  add segment 6083 8665
+	  exit
+
+	add feature-location SP
+	feature-location SP
+	  add segment 6083 6310
+	  exit
+	  
+	add feature-location RRE
+	feature-location RRE
+	  add segment 8041 8281
+	  exit
+
+	add feature-location 3LTR
+	feature-location 3LTR
+	  add segment 8873 9113
+	  exit
+    
+	exit 
+

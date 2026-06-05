@@ -1,0 +1,48 @@
+
+  # Non-Human ERVs
+  
+  # Gammaretrovirus
+  run file glue/build/erv/feature_locations/gammaretrovirus/PERV-E.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/PERV-C.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/KwERV.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/CfERV.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/RD114.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/CERV-1.glue
+  run file glue/build/erv/feature_locations/gammaretrovirus/CERV-2.glue
+
+  # Rho
+  run file glue/build/erv/feature_locations/rho/EqERV-Rb.glue
+  run file glue/build/erv/feature_locations/rho/Ceratotherium-Rb.glue
+
+  # Zeta
+  run file glue/build/erv/feature_locations/zeta/CfERV-Fc.glue
+
+  # Alpharetrovirus
+  run file glue/build/erv/feature_locations/alpharetrovirus/TgERV-F.glue
+
+  # Betaretrovirus
+  run file glue/build/erv/feature_locations/betaretrovirus/mysTR.glue
+  #run file glue/build/erv/feature_locations/betaretrovirus/Mus-D.glue
+  #run file glue/build/erv/feature_locations/betaretrovirus/IAPE.glue
+  #run file glue/build/erv/feature_locations/betaretrovirus/RERV-H.glue
+
+  # Deltaretrovirus
+  run file glue/build/erv/feature_locations/deltaretrovirus/Delta3MurAur.glue
+  run file glue/build/erv/feature_locations/deltaretrovirus/Delta6PlaMin.glue
+  run file glue/build/erv/feature_locations/deltaretrovirus/Delta9MolMol.glue
+  run file glue/build/erv/feature_locations/deltaretrovirus/MinERVa.glue
+
+  # Lentivirus
+  run file glue/build/erv/feature_locations/lentivirus/DELV.glue
+  run file glue/build/erv/feature_locations/lentivirus/MELVmpf.glue
+  run file glue/build/erv/feature_locations/lentivirus/PSIV2.glue
+  run file glue/build/erv/feature_locations/lentivirus/pSIVgml.glue
+  run file glue/build/erv/feature_locations/lentivirus/RELIK.glue
+  run file glue/build/erv/feature_locations/lentivirus/SpELV.glue
+
+  # Lambda
+  run file glue/build/erv/feature_locations/lambda/MuERV-L.glue
+
+  # Spumaretrovirus
+  run file glue/build/erv/feature_locations/spumavirus/CoeEFV.glue
+
