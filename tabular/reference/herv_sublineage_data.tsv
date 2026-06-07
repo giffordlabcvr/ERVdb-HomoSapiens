@@ -12,28 +12,28 @@ HERV-Lb2	ERV-1.Theta.Lb.2	HERV-Lb2	human endogenous retrovirus Lb2	sublineage	HE
 LOR-1	ERV-1.Theta.Lb.LOR1	LOR-1	LOR-1		LOR-1	reference	8120	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
 LTR-37	ERV-1.Theta.Lb.37	LTR-37	LTR-37	fragsub	LTR-37	reference	4060	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
 LTR-43	ERV-1.Theta.Lb.43	LTR-43	LTR-43	fragsub	LTR-43	reference	4798	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-101	ERV-1.Theta.Lb.101	MER-101	mammalian endogenous retrovirus 101	sublineage	MER-101	reference	6639	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-21	ERV-1.Theta.Lb.21	MER-21	mammalian endogenous retrovirus 21	fragsub	MER-21	reference	933	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-31	ERV-1.Theta.Lb.31	MER-31	mammalian endogenous retrovirus 31	fragsub	MER-31	reference	4936	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-34B	ERV-1.Theta.Lb.34b	MER-34B	mammalian endogenous retrovirus 34B	fragsub	MER-34B	reference	5356	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-4	ERV-1.Theta.Lb.MER4	MER-4	mammalian endogenous retrovirus 4	fragsub	MER-4	reference	6387	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-4B	ERV-1.Theta.Lb.MER4b	MER-4B	mammalian endogenous retrovirus 4B	fragsub	MER-4B	reference	6758	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-61	ERV-1.Theta.Lb.MER61	MER-61	mammalian endogenous retrovirus 61	sublineage	MER-61	reference	5217	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-65	ERV-1.Theta.Lb.MER66	MER-65	mammalian endogenous retrovirus 65	sublineage	MER-65	reference	4871	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	YES	no	4
-MER-89	ERV-1.Theta.Lb.MER89	MER-89	mammalian endogenous retrovirus 89	fragsub	MER-89	reference	7048	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-101	ERV-1.Theta.Lb.101	MER-101	medium reiteration frequency repeat 101	sublineage	MER-101	reference	6639	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-21	ERV-1.Theta.Lb.21	MER-21	medium reiteration frequency repeat 21	fragsub	MER-21	reference	933	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-31	ERV-1.Theta.Lb.31	MER-31	medium reiteration frequency repeat 31	fragsub	MER-31	reference	4936	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-34B	ERV-1.Theta.Lb.34b	MER-34B	medium reiteration frequency repeat 34B	fragsub	MER-34B	reference	5356	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-4	ERV-1.Theta.Lb.MER4	MER-4	medium reiteration frequency repeat 4	fragsub	MER-4	reference	6387	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-4B	ERV-1.Theta.Lb.MER4b	MER-4B	medium reiteration frequency repeat 4B	fragsub	MER-4B	reference	6758	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-61	ERV-1.Theta.Lb.MER61	MER-61	medium reiteration frequency repeat 61	sublineage	MER-61	reference	5217	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-65	ERV-1.Theta.Lb.MER66	MER-65	medium reiteration frequency repeat 65	sublineage	MER-65	reference	4871	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	YES	no	4
+MER-89	ERV-1.Theta.Lb.MER89	MER-89	medium reiteration frequency repeat 89	fragsub	MER-89	reference	7048	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	no	4
 PRIMA-X	ERV-1.Zeta.primax	PRIMA-X	PRIMA-X	sublineage	PRIMA-X	reference	4102	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				YES	YES	no	3
-MER-52A	ERV-1.Zeta.HF.52A	MER-52A	mammalian endogenous retrovirus 52A	fragsub	MER-52A	reference	4981	I	Orthoretrovirinae	Zetaretrovirus	HERVHF	Consensus	REPBASE				YES	no	no	3
+MER-52A	ERV-1.Zeta.HF.52A	MER-52A	medium reiteration frequency repeat 52A	fragsub	MER-52A	reference	4981	I	Orthoretrovirinae	Zetaretrovirus	HERVHF	Consensus	REPBASE				YES	no	no	3
 HERV-G25	ERV-1.Zeta.W9.G25	HERV-G25	human endogenous retrovirus G25	sublineage	HERV-G25	reference	6996	I	Orthoretrovirinae	Zetaretrovirus	HERVW9	Consensus	REPBASE				YES	no	no	3
 HUERS-P1	ERV-1.Zeta.W9.huersP1	HUERS-P1	HUERS-P1	sublineage?	HUERS-P1	reference	11027	I	Orthoretrovirinae	Zetaretrovirus	HERVW9	Consensus	REPBASE				no RT	no	no	4
 HUERS-P2	ERV-1.Zeta.W9.huersP2	HUERS-P2	HUERS-P2	sublineage?	HUERS-P2	reference	8987	I	Orthoretrovirinae	Zetaretrovirus	HERVW9	Consensus	REPBASE				no RT	no	no	4
 HUERS-P3B	ERV-1.Zeta.W9.huersP3b	HUERS-P3B	HUERS-P3B	dup (HERV-P)?	HUERS-P3B	reference	7418	I	Orthoretrovirinae	Zetaretrovirus	HERVW9	Consensus	REPBASE				YES	no	no	2
 HERV-19	ERV-1.Zeta.19	HERV-19	human endogenous retrovirus 19	lineage?	HERV-19	reference	5586	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
 HERV-35	ERV-1.Zeta.35	HERV-35	human endogenous retrovirus 35	lineage?	HERV-35	reference	6918	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-41	ERV-1.Zeta.MER41	MER-41	mammalian endogenous retrovirus 41	fragsub	MER-41	reference	3944	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-57	ERV-1.Zeta.MER57	MER-57	mammalian endogenous retrovirus 57		MER-57	reference	7133	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-83A	ERV-1.Zeta.MER83A	MER-83A	mammalian endogenous retrovirus 83A	fragsub	MER-83A	reference	4285	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-83B	ERV-1.Zeta.MER83B	MER-83B	mammalian endogenous retrovirus 83B	fragsub	MER-83B	reference	4880	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
-MER-84	ERV-1.Zeta.MER84	MER-84	mammalian endogenous retrovirus 84	fragsub	MER-84	reference	2880	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				YES	YES	no	3
+MER-41	ERV-1.Zeta.MER41	MER-41	medium reiteration frequency repeat 41	fragsub	MER-41	reference	3944	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-57	ERV-1.Zeta.MER57	MER-57	medium reiteration frequency repeat 57	fragsub	MER-57	reference	7133	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-83A	ERV-1.Zeta.MER83A	MER-83A	medium reiteration frequency repeat 83A	fragsub	MER-83A	reference	4285	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-83B	ERV-1.Zeta.MER83B	MER-83B	medium reiteration frequency repeat 83B	fragsub	MER-83B	reference	4880	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	no	4
+MER-84	ERV-1.Zeta.MER84	MER-84	medium reiteration frequency repeat 84	fragsub	MER-84	reference	2880	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				YES	YES	no	3
 PRIMA-41	ERV-1.Zeta.prima41	PRIMA-41	PRIMA-41	fragsub	PRIMA-41	reference	8665	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				YES	no	no	3
 HERV-K-HML1	ERV-2.Beta.K.HML1	HERV-K-HML1	endogenous betaretrovirus K Catarrhini	sublineage	Betaretrovirus kappacatarrhini	reference	7048	II	Orthoretrovirinae	Betaretrovirus	Kappa	Consensus	REPBASE				YES	no	YES	1
 HERV-K-HML10	ERV-2.Beta.K.HML10	HERV-K-HML10	endogenous betaretrovirus K Catarrhini	sublineage	Betaretrovirus kappacatarrhini	reference	6364	II	Orthoretrovirinae	Betaretrovirus	Kappa	Consensus	majority_consensus	7			YES	no	YES	1
@@ -54,6 +54,6 @@ HERV-L40	ERV-3.Lambda.40	HERV-L40	human endogenous retrovirus L40	sublineage	HER
 HERV-L53	ERV-3.Lambda.53	HERV-L53	human endogenous retrovirus L53	fragsub	HERV-L53	reference	3329	III	Orthoretrovirinae	Lambdaretrovirus		Reference	REPBASE				partial	no	no	4
 HERV-L68	ERV-3.Lambda.68	HERV-L68	human endogenous retrovirus L68	fragsub	HERV-L68	reference	3037	III	Orthoretrovirinae	Lambdaretrovirus		Reference	REPBASE				no RT	no	no	4
 HERV-L74	ERV-3.Lambda.74	HERV-L74	human endogenous retrovirus L74	sublineage	HERV-L74	reference	5685	III	Orthoretrovirinae	Lambdaretrovirus		Reference	REPBASE				no RT	no	no	4
-MER-70	ERV-3.Lambda.70	MER-70	mammalian endogenous retrovirus 70	fragsub	MER-70	reference	5023	III	Orthoretrovirinae	Lambdaretrovirus		Reference	REPBASE				YES	no	no	3
-MER-76	ERV-3.Lambda.76	MER-76	mammalian endogenous retrovirus 76	sublineage	MER-76	reference	6189	III	Orthoretrovirinae	Lambdaretrovirus		Reference	REPBASE				no RT	no	no	4
+MER-70	ERV-3.Lambda.70	MER-70	medium reiteration frequency repeat 70	fragsub	MER-70	reference	5023	III	Orthoretrovirinae	Lambdaretrovirus		Reference	REPBASE				YES	no	no	3
+MER-76	ERV-3.Lambda.76	MER-76	medium reiteration frequency repeat 76	sublineage	MER-76	reference	6189	III	Orthoretrovirinae	Lambdaretrovirus		Reference	REPBASE				no RT	no	no	4
 ERV-L47	ERV-3.Lambda.47	ERV-L47	endogenous retrovirus L47	sublineage	ERV-L47	reference	5246	III	Orthoretrovirinae	Sigmaretrovirus		Reference	REPBASE				YES	no	no	3

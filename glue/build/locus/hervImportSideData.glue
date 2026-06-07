@@ -1,6 +1,6 @@
 
   # Import reference sequence data from GenBank XML
-  create module -f modules/build/hervSideDataImporterLoci.xml
+  create module -f modules/build/locus/hervSideDataImporterLoci.xml
   
   module hervSideDataImporterLoci
     populate -f tabular/locus/merge/herv8K/fr_rt4_samerow.tsv
