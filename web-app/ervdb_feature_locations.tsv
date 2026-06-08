@@ -1,12 +1,4 @@
 record_id	reference	source_name	sequence_id	sequence_length	feature	segment_index	ref_start	ref_end	translation_modifier_name	splice_index	transcription_index	nt_length	aa_length	codon_count	has_translation	has_stop	has_internal_stop	has_ambiguity	missing_codon_nts	missing_amino_acid	exported_coding_fasta
-REF_CeratotheriumRb|whole_genome	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	whole_genome	1	1	8390		1	1				false						false
-REF_CeratotheriumRb|LEA	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	LEA	1	432	2048		1	1				false						false
-REF_CeratotheriumRb|pro	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	pro	1	3622	4134		1	1	513	171	171	true	true	true	false	false	false	true
-REF_CeratotheriumRb|pol	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	pol	1	4135	7272		1	1	3138	1046	1046	true	true	true	false	false	false	true
-REF_CeratotheriumRb|gag	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	gag	1	2049	3605		1	1	1557	519	519	true	true	true	false	false	false	true
-REF_CeratotheriumRb|env	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	env	1	7257	8129		1	1	873	291	291	true	true	true	false	false	false	true
-REF_CeratotheriumRb|5LTR	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	5LTR	1	1	431		1	1				false						false
-REF_CeratotheriumRb|3LTR	REF_CeratotheriumRb	erv-refseqs-rho	Ceratotherium-Rb	8390	3LTR	1	8198	8390		1	1				false						false
 REF_CERV1|whole_genome	REF_CERV1	erv-refseqs-gamma	CERV-1	8278	whole_genome	1	1	8278		1	1				false						false
 REF_CERV1|LEA	REF_CERV1	erv-refseqs-gamma	CERV-1	8278	LEA	1	381	663		1	1				false						false
 REF_CERV1|pol	REF_CERV1	erv-refseqs-gamma	CERV-1	8278	pol	1	3433	6189		1	1	2757	919	919	true	true	false	false	false	false	true
@@ -29,8 +21,8 @@ REF_CfERV|5LTR	REF_CfERV	erv-refseqs-gamma	CfERV	6045	5LTR	1	1	378		1	1				false
 REF_CfERV|3LTR	REF_CfERV	erv-refseqs-gamma	CfERV	6045	3LTR	1	5670	6045		1	1				false						false
 REF_CfERVFc|whole_genome	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	whole_genome	1	1	6711		1	1				false						false
 REF_CfERVFc|LEA	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	LEA	1	379	867		1	1				false						false
-REF_CfERVFc|pol	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	pol	1	2410	6399		1	1	3990	1330	1330	true	true	true	false	false	false	true
-REF_CfERVFc|gag	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	gag	1	743	2410		1	1	1668	556	556	true	true	true	false	false	false	true
+REF_CfERVFc|pol	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	pol	1	2411	6400		1	1	3990	1330	1330	true	true	true	false	false	false	true
+REF_CfERVFc|gag	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	gag	1	744	2411		1	1	1668	556	556	true	false	false	false	false	false	true
 REF_CfERVFc|5LTR	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	5LTR	1	1	412		1	1				false						false
 REF_CfERVFc|3LTR	REF_CfERVFc	erv-refseqs-zeta	CfERV-Fc	6711	3LTR	1	6301	6711		1	1				false						false
 REF_CoeEFV|whole_genome	REF_CoeEFV	erv-refseqs-spuma	CoeEFV	10428	whole_genome	1	1	10428		1	1				false						false
@@ -112,32 +104,59 @@ REF_DELV|CA	REF_DELV	erv-refseqs-lenti	DELV	10002	CA	1	1022	1618		1	1	597	199	19
 REF_DELV|FS-stemloop	REF_DELV	erv-refseqs-lenti	DELV	10002	FS-stemloop	1	1867	1893		1	1				false						false
 REF_DELV|FS-slippery-seq	REF_DELV	erv-refseqs-lenti	DELV	10002	FS-slippery-seq	1	1831	1837		1	1				false						false
 REF_EqERVL|whole_genome	REF_EqERVL	erv-refseqs-lambda	EqERV-L	8753	whole_genome	1	1	8753		1	1				false						false
+REF_EqERVL|DU	REF_EqERVL	erv-refseqs-lambda	EqERV-L	8753	DU	1	5914	6777		1	1	864	288	288	true	true	true	false	false	false	true
+REF_EqERVL|pol	REF_EqERVL	erv-refseqs-lambda	EqERV-L	8753	pol	1	1279	5913		1	1	4635	1545	1545	true	true	true	false	false	false	true
+REF_EqERVL|gag	REF_EqERVL	erv-refseqs-lambda	EqERV-L	8753	gag	1	526	1278		1	1	753	251	251	true	true	true	false	false	false	true
+REF_EqERVL|env	REF_EqERVL	erv-refseqs-lambda	EqERV-L	8753	env	1	6781	8226		1	1	1446	482	482	true	true	true	false	false	false	true
+REF_EqERVL|5LTR	REF_EqERVL	erv-refseqs-lambda	EqERV-L	8753	5LTR	1	1	525		1	1				false						false
+REF_EqERVL|3LTR	REF_EqERVL	erv-refseqs-lambda	EqERV-L	8753	3LTR	1	8228	8753		1	1				false						false
 REF_EqERVLb|whole_genome	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	whole_genome	1	1	9480		1	1				false						false
+REF_EqERVLb|LEA	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	LEA	1	535	1392		1	1				false						false
+REF_EqERVLb|pro	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	pro	1	3507	3830		1	1	324	108	108	true	true	true	false	false	false	true
+REF_EqERVLb|pol	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	pol	1	3830	6982		1	1	3153	1051	1051	true	true	true	true	false	false	true
+REF_EqERVLb|gag	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	gag	1	1393	3507		1	1	2115	705	705	true	true	true	true	false	false	true
+REF_EqERVLb|env	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	env	1	6981	9011		1	1	2031	677	677	true	true	true	true	false	false	true
+REF_EqERVLb|5LTR	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	5LTR	1	1	534		1	1				false						false
+REF_EqERVLb|3LTR	REF_EqERVLb	erv-refseqs-theta	EqERV-Lb	9480	3LTR	1	9013	9480		1	1				false						false
 REF_EqERVRb|whole_genome	REF_EqERVRb	erv-refseqs-rho	EqERV-Rb	8711	whole_genome	1	1	8711		1	1				false						false
 REF_EqERVRb|pol	REF_EqERVRb	erv-refseqs-rho	EqERV-Rb	8711	pol	1	3434	7075		1	1	3642	1214	1214	true	true	true	true	false	false	true
 REF_EqERVRb|gag	REF_EqERVRb	erv-refseqs-rho	EqERV-Rb	8711	gag	1	1439	3418		1	1	1980	660	660	true	true	true	true	false	false	true
 REF_EqERVRb|env	REF_EqERVRb	erv-refseqs-rho	EqERV-Rb	8711	env	1	7115	8518		1	1	1404	468	468	true	true	true	true	false	false	true
-REF_EqERVS|whole_genome	REF_EqERVS	erv-refseqs-sigma	EqERV-S	6579	whole_genome	1	1	6579		1	1				false						false
 REF_EqERVZeta|whole_genome	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	whole_genome	1	1	8758		1	1				false						false
-REF_ERV316A3|whole_genome	REF_ERV316A3	erv-refseqs-lambda	ERV-3-16A3	6070	whole_genome	1	1	6070		1	1				false						false
-REF_HERV1|whole_genome	REF_HERV1	erv-refseqs-gamma	HERV-1	9611	whole_genome	1	1	9611		1	1				false						false
-REF_HERV16|whole_genome	REF_HERV16	erv-refseqs-lambda	HERV-16	4996	whole_genome	1	1	4996		1	1				false						false
+REF_EqERVZeta|LEA	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	LEA	1	645	1633		1	1				false						false
+REF_EqERVZeta|pro	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	pro	1	3179	3499		1	1	321	107	107	true	false	false	false	false	false	true
+REF_EqERVZeta|pol	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	pol	1	3500	6766		1	1	3267	1089	1089	true	true	true	true	false	false	true
+REF_EqERVZeta|gag	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	gag	1	1634	3178		1	1	1545	515	515	true	true	false	true	false	false	true
+REF_EqERVZeta|env	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	env	1	6797	8200		1	1	1404	468	468	true	true	false	true	false	false	true
+REF_EqERVZeta|5LTR	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	5LTR	1	1	644		1	1				false						false
+REF_EqERVZeta|3LTR	REF_EqERVZeta	erv-refseqs-zeta	EqERV-Zeta	8758	3LTR	1	8304	8758		1	1				false						false
+REF_GLN|whole_genome	REF_GLN	erv-refseqs-gamma	GLN	8415	whole_genome	1	1	8415		1	1				false						false
+REF_GLN|LEA	REF_GLN	erv-refseqs-gamma	GLN	8415	LEA	1	794	955		1	1				false						false
+REF_GLN|pro	REF_GLN	erv-refseqs-gamma	GLN	8415	pro	1	2570	2938		1	1	369	123	123	true	false	false	false	false	false	true
+REF_GLN|pol	REF_GLN	erv-refseqs-gamma	GLN	8415	pol	1	2714	6112		1	1	3399	1133	1133	true	true	false	false	false	false	true
+REF_GLN|gag	REF_GLN	erv-refseqs-gamma	GLN	8415	gag	1	866	2569		1	1	1704	568	568	true	true	false	false	false	false	true
+REF_GLN|env	REF_GLN	erv-refseqs-gamma	GLN	8415	env	1	5979	7943		1	1	1965	655	655	true	true	false	false	false	false	true
+REF_GLN|5LTR	REF_GLN	erv-refseqs-gamma	GLN	8415	5LTR	1	1	431		1	1				false						false
+REF_GLN|3LTR	REF_GLN	erv-refseqs-gamma	GLN	8415	3LTR	1	7986	8415		1	1				false						false
+REF_GLN|ZK	REF_GLN	erv-refseqs-gamma	GLN	8415	ZK	1	2468	2521		1	1				false						false
+REF_GLN|TM	REF_GLN	erv-refseqs-gamma	GLN	8415	TM	1	7344	7943		1	1	600	200	200	true	true	false	false	false	false	true
+REF_GLN|SU	REF_GLN	erv-refseqs-gamma	GLN	8415	SU	1	6055	7344		1	1	1290	430	430	true	true	true	false	false	false	true
+REF_GLN|RT	REF_GLN	erv-refseqs-gamma	GLN	8415	RT	1	2939	4927		1	1	1989	663	663	true	false	false	false	false	false	true
+REF_GLN|RNaseH	REF_GLN	erv-refseqs-gamma	GLN	8415	RNaseH	1	4472	4909		1	1	438	146	146	true	false	false	false	false	false	true
+REF_GLN|NC	REF_GLN	erv-refseqs-gamma	GLN	8415	NC	1	2411	2524		1	1	114	38	38	true	false	false	false	false	false	true
+REF_GLN|MA	REF_GLN	erv-refseqs-gamma	GLN	8415	MA	1	956	1336		1	1	381	127	127	true	false	false	false	false	false	true
+REF_GLN|IN	REF_GLN	erv-refseqs-gamma	GLN	8415	IN	1	4976	6100		1	1	1125	375	375	true	false	false	false	false	false	true
+REF_GLN|CA	REF_GLN	erv-refseqs-gamma	GLN	8415	CA	1	1622	2410		1	1	789	263	263	true	false	false	false	false	false	true
 REF_HERV24|whole_genome	REF_HERV24	erv-refseqs-theta	HERV-24	7575	whole_genome	1	1	7575		1	1				false						false
 REF_HERV30|whole_genome	REF_HERV30	erv-refseqs-zeta	HERV-30	9226	whole_genome	1	1	9226		1	1				false						false
-REF_HERV35|whole_genome	REF_HERV35	erv-refseqs-zeta	HERV-35	6918	whole_genome	1	1	6918		1	1				false						false
-REF_HERV39|whole_genome	REF_HERV39	erv-refseqs-rho	HERV-39	9084	whole_genome	1	1	9084		1	1				false						false
 REF_HERV4|whole_genome	REF_HERV4	erv-refseqs-zeta	HERV-4	14089	whole_genome	1	1	14089		1	1				false						false
 REF_HERV46|whole_genome	REF_HERV46	erv-refseqs-zeta	HERV-46	6985	whole_genome	1	1	6985		1	1				false						false
 REF_HERV9|whole_genome	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	whole_genome	1	1	8959		1	1				false						false
 REF_HERV9|LEA	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	LEA	1	566	1981		1	1				false						false
-REF_HERV9|pol	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	pol	1	3443	7018		1	1	3576	1192	1192	true	true	true	false	false	false	true
+REF_HERV9|pol	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	pol	1	2569	6216		1	1	3648	1216	1216	true	true	true	false	false	false	true
 REF_HERV9|gag	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	gag	1	1982	3442		1	1	1461	487	487	true	true	false	false	false	false	true
-REF_HERV9|env	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	env	1	7028	8959		1	1	1932	644	644	true	true	true	false	false	false	true
+REF_HERV9|env	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	env	1	3443	7018		1	1	3576	1192	1192	true	true	true	false	false	false	true
 REF_HERV9|5LTR	REF_HERV9	erv-refseqs-zeta	HERV-9	8959	5LTR	1	1	565		1	1				false						false
-REF_HERVADP|whole_genome	REF_HERVADP	erv-refseqs-iota	HERV-ADP	7590	whole_genome	1	1	7590		1	1				false						false
-REF_HERVADP|pol	REF_HERVADP	erv-refseqs-iota	HERV-ADP	7590	pol	1	2018	5521		1	1	3504	1168	1168	true	true	false	false	false	false	true
-REF_HERVADP|gag	REF_HERVADP	erv-refseqs-iota	HERV-ADP	7590	gag	1	461	2014		1	1	1554	518	518	true	false	false	false	false	false	true
-REF_HERVADP|env	REF_HERVADP	erv-refseqs-iota	HERV-ADP	7590	env	1	5565	7574		1	1	2010	670	670	true	true	false	false	false	false	true
 REF_HERVE|whole_genome	REF_HERVE	erv-refseqs-gamma	HERV-E	8843	whole_genome	1	1	8843		1	1				false						false
 REF_HERVE|LEA	REF_HERVE	erv-refseqs-gamma	HERV-E	8843	LEA	1	496	1086		1	1				false						false
 REF_HERVE|pol	REF_HERVE	erv-refseqs-gamma	HERV-E	8843	pol	1	2653	6264		1	1	3612	1204	1204	true	true	true	false	false	false	true
@@ -154,7 +173,7 @@ REF_HERVFb|LEA	REF_HERVFb	erv-refseqs-zeta	HERV-Fb	7081	LEA	1	384	806		1	1				fa
 REF_HERVFb|pol	REF_HERVFb	erv-refseqs-zeta	HERV-Fb	7081	pol	1	4544	5578		1	1	1035	345	345	true	true	true	false	false	false	true
 REF_HERVFb|gag	REF_HERVFb	erv-refseqs-zeta	HERV-Fb	7081	gag	1	720	2543		1	1	1824	608	608	true	true	false	false	false	false	true
 REF_HERVFb|env	REF_HERVFb	erv-refseqs-zeta	HERV-Fb	7081	env	1	5579	6592		1	1	1014	338	338	true	true	true	false	false	false	true
-REF_HERVFb|5LTR	REF_HERVFb	erv-refseqs-zeta	HERV-Fb	7081	5LTR	1	1	383		1	1				false						false
+REF_HERVFb|5LTR	REF_HERVFb	erv-refseqs-zeta	HERV-Fb	7081	5LTR	1	1	448		1	1				false						false
 REF_HERVFb|3LTR	REF_HERVFb	erv-refseqs-zeta	HERV-Fb	7081	3LTR	1	6697	7081		1	1				false						false
 REF_HERVFc|whole_genome	REF_HERVFc	erv-refseqs-zeta	HERV-Fc	8527	whole_genome	1	1	8527		1	1				false						false
 REF_HERVFc|LEA	REF_HERVFc	erv-refseqs-zeta	HERV-Fc	8527	LEA	1	457	852		1	1				false						false
@@ -173,50 +192,19 @@ REF_HERVH|5LTR	REF_HERVH	erv-refseqs-zeta	HERV-H	9021	5LTR	1	1	448		1	1				false
 REF_HERVH|3LTR	REF_HERVH	erv-refseqs-zeta	HERV-H	9021	3LTR	1	8585	9021		1	1				false						false
 REF_HERVI|whole_genome	REF_HERVI	erv-refseqs-iota	HERV-I	9053	whole_genome	1	1	9053		1	1				false						false
 REF_HERVI|LEA	REF_HERVI	erv-refseqs-iota	HERV-I	9053	LEA	1	514	1175		1	1				false						false
-REF_HERVI|pol	REF_HERVI	erv-refseqs-iota	HERV-I	9053	pol	1	3144	6155		1	1	3012	1004	1004	true	true	true	false	false	false	true
-REF_HERVI|gag	REF_HERVI	erv-refseqs-iota	HERV-I	9053	gag	1	1176	3146		1	1	1971	657	657	true	true	true	false	false	false	true
+REF_HERVI|pol	REF_HERVI	erv-refseqs-iota	HERV-I	9053	pol	1	3143	6154		1	1	3012	1004	1004	true	true	true	false	false	false	true
+REF_HERVI|gag	REF_HERVI	erv-refseqs-iota	HERV-I	9053	gag	1	1175	3145		1	1	1971	657	657	true	true	true	false	false	false	true
 REF_HERVI|env	REF_HERVI	erv-refseqs-iota	HERV-I	9053	env	1	6158	8536		1	1	2379	793	793	true	true	false	false	false	false	true
 REF_HERVI|5LTR	REF_HERVI	erv-refseqs-iota	HERV-I	9053	5LTR	1	1	513		1	1				false						false
 REF_HERVI|3LTR	REF_HERVI	erv-refseqs-iota	HERV-I	9053	3LTR	1	8537	9053		1	1				false						false
-REF_HERVKHML1|whole_genome	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	whole_genome	1	1	7048		1	1				false						false
-REF_HERVKHML1|LEA	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	LEA	1	345	492		1	1				false						false
-REF_HERVKHML1|pro	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	pro	1	2001	2948		1	1	948	316	316	true	true	false	true	false	false	true
-REF_HERVKHML1|pol	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	pol	1	2876	5527		1	1	2652	884	884	true	true	true	false	false	false	true
-REF_HERVKHML1|gag	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	gag	1	493	2142		1	1	1650	550	550	true	true	false	true	false	false	true
-REF_HERVKHML1|env	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	env	1	5488	6492		1	1	1005	335	335	true	true	true	false	false	false	true
-REF_HERVKHML1|5LTR	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	5LTR	1	1	344		1	1				false						false
-REF_HERVKHML1|3LTR	REF_HERVKHML1	erv-refseqs-beta	HERV-K-HML1	7048	3LTR	1	6441	7048		1	1				false						false
-REF_HERVKHML10|whole_genome	REF_HERVKHML10	erv-refseqs-beta	HERV-K-HML10	6364	whole_genome	1	1	6364		1	1				false						false
-REF_HERVKHML10|LEA	REF_HERVKHML10	erv-refseqs-beta	HERV-K-HML10	6364	LEA	1	549	758		1	1				false						false
-REF_HERVKHML10|pol	REF_HERVKHML10	erv-refseqs-beta	HERV-K-HML10	6364	pol	1	1331	4132		1	1	2802	934	934	true	true	true	true	false	false	true
-REF_HERVKHML10|gag	REF_HERVKHML10	erv-refseqs-beta	HERV-K-HML10	6364	gag	1	758	1330		1	1	573	191	191	true	true	true	false	false	false	true
-REF_HERVKHML10|env	REF_HERVKHML10	erv-refseqs-beta	HERV-K-HML10	6364	env	1	4133	5539		1	1	1407	469	469	true	true	true	false	false	false	true
-REF_HERVKHML10|5LTR	REF_HERVKHML10	erv-refseqs-beta	HERV-K-HML10	6364	5LTR	1	1	548		1	1				false						false
-REF_HERVKHML10|3LTR	REF_HERVKHML10	erv-refseqs-beta	HERV-K-HML10	6364	3LTR	1	5817	6364		1	1				false						false
-REF_HERVKHML2|whole_genome	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	whole_genome	1	1	9472		1	1				false						false
-REF_HERVKHML2|LEA	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	LEA	1	969	1111		1	1				false						false
-REF_HERVKHML2|pro	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	pro	1	2913	3917		1	1	1005	335	335	true	true	true	false	false	false	true
-REF_HERVKHML2|pol	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	pol	1	3879	6749		1	1	2871	957	957	true	true	false	false	false	false	true
-REF_HERVKHML2|gag	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	gag	1	1112	3112		1	1	2001	667	667	true	true	false	false	false	false	true
-REF_HERVKHML2|env	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	env	1	6451	8550		1	1	2100	700	700	true	true	false	false	false	false	true
-REF_HERVKHML2|5LTR	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	5LTR	1	1	968		1	1				false						false
-REF_HERVKHML2|3LTR	REF_HERVKHML2	erv-refseqs-beta	HERV-K-HML2	9472	3LTR	1	8505	9472		1	1				false						false
-REF_HERVKHML3|whole_genome	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	whole_genome	1	1	7045		1	1				false						false
-REF_HERVKHML3|LEA	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	LEA	1	512	633		1	1				false						false
-REF_HERVKHML3|pro	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	pro	1	1932	2876		1	1	945	315	315	true	true	false	false	false	false	true
-REF_HERVKHML3|pol	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	pol	1	2768	5608		1	1	2841	947	947	true	true	false	false	false	false	true
-REF_HERVKHML3|gag	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	gag	1	664	2070		1	1	1407	469	469	true	true	false	false	false	false	true
-REF_HERVKHML3|env	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	env	1	5394	6614		1	1	1221	407	407	true	true	false	true	false	false	true
-REF_HERVKHML3|5LTR	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	5LTR	1	1	511		1	1				false						false
-REF_HERVKHML3|3LTR	REF_HERVKHML3	erv-refseqs-beta	HERV-K-HML3	7045	3LTR	1	6535	7045		1	1				false						false
-REF_HERVKHML4|whole_genome	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	whole_genome	1	1	10243		1	1				false						false
-REF_HERVKHML4|LEA	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	LEA	1	1022	1170		1	1				false						false
-REF_HERVKHML4|pro	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	pro	1	3929	4648		1	1	720	240	240	true	true	true	false	false	false	true
-REF_HERVKHML4|pol	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	pol	1	4651	7260		1	1	2610	870	870	true	true	true	false	false	false	true
-REF_HERVKHML4|gag	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	gag	1	1171	3927		1	1	2757	919	919	true	true	false	false	false	false	true
-REF_HERVKHML4|env	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	env	1	7176	9296		1	1	2121	707	707	true	true	false	false	false	false	true
-REF_HERVKHML4|5LTR	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	5LTR	1	1	1021		1	1				false						false
-REF_HERVKHML4|3LTR	REF_HERVKHML4	erv-refseqs-beta	HERV-K-HML4	10243	3LTR	1	9297	10243		1	1				false						false
+REF_HERVK|whole_genome	REF_HERVK	erv-refseqs-beta	HERV-K	9472	whole_genome	1	1	9472		1	1				false						false
+REF_HERVK|LEA	REF_HERVK	erv-refseqs-beta	HERV-K	9472	LEA	1	969	1111		1	1				false						false
+REF_HERVK|pro	REF_HERVK	erv-refseqs-beta	HERV-K	9472	pro	1	2913	3917		1	1	1005	335	335	true	true	true	false	false	false	true
+REF_HERVK|pol	REF_HERVK	erv-refseqs-beta	HERV-K	9472	pol	1	3879	6749		1	1	2871	957	957	true	true	false	false	false	false	true
+REF_HERVK|gag	REF_HERVK	erv-refseqs-beta	HERV-K	9472	gag	1	1112	3112		1	1	2001	667	667	true	true	false	false	false	false	true
+REF_HERVK|env	REF_HERVK	erv-refseqs-beta	HERV-K	9472	env	1	6451	8550		1	1	2100	700	700	true	true	false	false	false	false	true
+REF_HERVK|5LTR	REF_HERVK	erv-refseqs-beta	HERV-K	9472	5LTR	1	1	968		1	1				false						false
+REF_HERVK|3LTR	REF_HERVK	erv-refseqs-beta	HERV-K	9472	3LTR	1	8505	9472		1	1				false						false
 REF_HERVKHML5|whole_genome	REF_HERVKHML5	erv-refseqs-beta	HERV-K-HML5	7761	whole_genome	1	1	7761		1	1				false						false
 REF_HERVKHML5|LEA	REF_HERVKHML5	erv-refseqs-beta	HERV-K-HML5	7761	LEA	1	497	640		1	1				false						false
 REF_HERVKHML5|pol	REF_HERVKHML5	erv-refseqs-beta	HERV-K-HML5	7761	pol	1	2026	5445		1	1	3420	1140	1140	true	true	true	false	false	false	true
@@ -231,26 +219,6 @@ REF_HERVKHML6|gag	REF_HERVKHML6	erv-refseqs-beta	HERV-K-HML6	8214	gag	1	651	2504
 REF_HERVKHML6|env	REF_HERVKHML6	erv-refseqs-beta	HERV-K-HML6	8214	env	1	5998	7962		1	1	1965	655	655	true	true	false	false	false	false	true
 REF_HERVKHML6|5LTR	REF_HERVKHML6	erv-refseqs-beta	HERV-K-HML6	8214	5LTR	1	1	421		1	1				false						false
 REF_HERVKHML6|3LTR	REF_HERVKHML6	erv-refseqs-beta	HERV-K-HML6	8214	3LTR	1	7963	8214		1	1				false						false
-REF_HERVKHML7|whole_genome	REF_HERVKHML7	erv-refseqs-beta	HERV-K-HML7	8355	whole_genome	1	1	8355		1	1				false						false
-REF_HERVKHML7|LEA	REF_HERVKHML7	erv-refseqs-beta	HERV-K-HML7	8355	LEA	1	235	412		1	1				false						false
-REF_HERVKHML7|pol	REF_HERVKHML7	erv-refseqs-beta	HERV-K-HML7	8355	pol	1	2333	6076		1	1	3744	1248	1248	true	true	true	false	false	false	true
-REF_HERVKHML7|gag	REF_HERVKHML7	erv-refseqs-beta	HERV-K-HML7	8355	gag	1	413	2332		1	1	1920	640	640	true	true	true	false	false	false	true
-REF_HERVKHML7|env	REF_HERVKHML7	erv-refseqs-beta	HERV-K-HML7	8355	env	1	6077	8119		1	1	2043	681	681	true	true	true	false	false	false	true
-REF_HERVKHML7|5LTR	REF_HERVKHML7	erv-refseqs-beta	HERV-K-HML7	8355	5LTR	1	1	234		1	1				false						false
-REF_HERVKHML7|3LTR	REF_HERVKHML7	erv-refseqs-beta	HERV-K-HML7	8355	3LTR	1	8122	8355		1	1				false						false
-REF_HERVKHML8|whole_genome	REF_HERVKHML8	erv-refseqs-beta	HERV-K-HML8	7274	whole_genome	1	1	7274		1	1				false						false
-REF_HERVKHML8|pol	REF_HERVKHML8	erv-refseqs-beta	HERV-K-HML8	7274	pol	1	1742	4447		1	1	2706	902	902	true	true	true	false	false	false	true
-REF_HERVKHML8|gag	REF_HERVKHML8	erv-refseqs-beta	HERV-K-HML8	7274	gag	1	1026	1754		1	1	729	243	243	true	true	true	false	false	false	true
-REF_HERVKHML8|env	REF_HERVKHML8	erv-refseqs-beta	HERV-K-HML8	7274	env	1	4449	6404		1	1	1956	652	652	true	true	true	false	false	false	true
-REF_HERVKHML8|5LTR	REF_HERVKHML8	erv-refseqs-beta	HERV-K-HML8	7274	5LTR	1	1	1025		1	1				false						false
-REF_HERVKHML8|3LTR	REF_HERVKHML8	erv-refseqs-beta	HERV-K-HML8	7274	3LTR	1	6405	7274		1	1				false						false
-REF_HERVKHML9|whole_genome	REF_HERVKHML9	erv-refseqs-beta	HERV-K-HML9	8214	whole_genome	1	1	8214		1	1				false						false
-REF_HERVKHML9|LEA	REF_HERVKHML9	erv-refseqs-beta	HERV-K-HML9	8214	LEA	1	538	780		1	1				false						false
-REF_HERVKHML9|pol	REF_HERVKHML9	erv-refseqs-beta	HERV-K-HML9	8214	pol	1	2192	6028		1	1	3837	1279	1279	true	true	true	false	false	false	true
-REF_HERVKHML9|gag	REF_HERVKHML9	erv-refseqs-beta	HERV-K-HML9	8214	gag	1	781	2190		1	1	1410	470	470	true	true	true	false	false	false	true
-REF_HERVKHML9|env	REF_HERVKHML9	erv-refseqs-beta	HERV-K-HML9	8214	env	1	6030	7724		1	1	1695	565	565	true	true	true	false	false	false	true
-REF_HERVKHML9|5LTR	REF_HERVKHML9	erv-refseqs-beta	HERV-K-HML9	8214	5LTR	1	1	537		1	1				false						false
-REF_HERVKHML9|3LTR	REF_HERVKHML9	erv-refseqs-beta	HERV-K-HML9	8214	3LTR	1	7726	8214		1	1				false						false
 REF_HERVL|whole_genome	REF_HERVL	erv-refseqs-lambda	HERV-L	6489	whole_genome	1	1	6489		1	1				false						false
 REF_HERVL|LEA	REF_HERVL	erv-refseqs-lambda	HERV-L	6489	LEA	1	445	488		1	1				false						false
 REF_HERVL|pol	REF_HERVL	erv-refseqs-lambda	HERV-L	6489	pol	1	2234	5674		1	1	3441	1147	1147	true	true	true	false	false	false	true
@@ -264,7 +232,6 @@ REF_HERVLb1|gag	REF_HERVLb1	erv-refseqs-theta	HERV-Lb1	9773	gag	1	1466	2884		1	1
 REF_HERVLb1|env	REF_HERVLb1	erv-refseqs-theta	HERV-Lb1	9773	env	1	6740	8866		1	1	2127	709	709	true	true	false	false	false	false	true
 REF_HERVLb1|5LTR	REF_HERVLb1	erv-refseqs-theta	HERV-Lb1	9773	5LTR	1	1	690		1	1				false						false
 REF_HERVLb1|3LTR	REF_HERVLb1	erv-refseqs-theta	HERV-Lb1	9773	3LTR	1	9084	9773		1	1				false						false
-REF_HERVLb2|whole_genome	REF_HERVLb2	erv-refseqs-theta	HERV-Lb2	9161	whole_genome	1	1	9161		1	1				false						false
 REF_HERVP|whole_genome	REF_HERVP	erv-refseqs-zeta	HERV-P	6523	whole_genome	1	1	6523		1	1				false						false
 REF_HERVR|whole_genome	REF_HERVR	erv-refseqs-gamma	HERV-R	9607	whole_genome	1	1	9607		1	1				false						false
 REF_HERVR|LEA	REF_HERVR	erv-refseqs-gamma	HERV-R	9607	LEA	1	594	1338		1	1				false						false
@@ -307,6 +274,7 @@ REF_HERVW|LEA	REF_HERVW	erv-refseqs-zeta	HERV-W	10172	LEA	1	783	2916		1	1				fal
 REF_HERVW|pol	REF_HERVW	erv-refseqs-zeta	HERV-W	10172	pol	1	4091	7810		1	1	3720	1240	1240	true	true	true	false	false	false	true
 REF_HERVW|gag	REF_HERVW	erv-refseqs-zeta	HERV-W	10172	gag	1	2917	3969		1	1	1053	351	351	true	false	false	false	false	false	true
 REF_HERVW|env	REF_HERVW	erv-refseqs-zeta	HERV-W	10172	env	1	7838	9409		1	1	1572	524	524	true	true	true	false	false	false	true
+REF_HERVW|5LTR	REF_HERVW	erv-refseqs-zeta	HERV-W	10172	5LTR	1	1	782		1	1				false						false
 REF_HERVW|3LTR	REF_HERVW	erv-refseqs-zeta	HERV-W	10172	3LTR	1	9462	10172		1	1				false						false
 REF_HERVXA|whole_genome	REF_HERVXA	erv-refseqs-zeta	HERV-XA	8762	whole_genome	1	1	8762		1	1				false						false
 REF_HERVXA|LEA	REF_HERVXA	erv-refseqs-zeta	HERV-XA	8762	LEA	1	479	1414		1	1				false						false
@@ -315,7 +283,6 @@ REF_HERVXA|gag	REF_HERVXA	erv-refseqs-zeta	HERV-XA	8762	gag	1	1415	2521		1	1	110
 REF_HERVXA|env	REF_HERVXA	erv-refseqs-zeta	HERV-XA	8762	env	1	6329	8290		1	1	1962	654	654	true	true	true	false	false	false	true
 REF_HERVXA|5LTR	REF_HERVXA	erv-refseqs-zeta	HERV-XA	8762	5LTR	1	1	478		1	1				false						false
 REF_HERVXA|3LTR	REF_HERVXA	erv-refseqs-zeta	HERV-XA	8762	3LTR	1	8288	8762		1	1				false						false
-REF_IAPE|whole_genome	REF_IAPE	erv-refseqs-beta	IAPE	8320	whole_genome	1	1	8320		1	1				false						false
 REF_KwERV|whole_genome	REF_KwERV	erv-refseqs-gamma	KwERV	8273	whole_genome	1	1	8273		1	1				false						false
 REF_KwERV|LEA	REF_KwERV	erv-refseqs-gamma	KwERV	8273	LEA	1	436	848		1	1				false						false
 REF_KwERV|pol	REF_KwERV	erv-refseqs-gamma	KwERV	8273	pol	1	2433	5936		1	1	3504	1168	1168	true	true	true	false	false	false	true
@@ -343,40 +310,54 @@ REF_MELVmpf|RRE	REF_MELVmpf	erv-refseqs-lenti	MELVmpf	9113	RRE	1	8041	8281		1	1	
 REF_MELVmpf|FS	REF_MELVmpf	erv-refseqs-lenti	MELVmpf	9113	FS	1	2065	2169		1	1				false						false
 REF_MELVmpf|FS-stemloop	REF_MELVmpf	erv-refseqs-lenti	MELVmpf	9113	FS-stemloop	1	2084	2169		1	1				false						false
 REF_MELVmpf|FS-slippery-seq	REF_MELVmpf	erv-refseqs-lenti	MELVmpf	9113	FS-slippery-seq	1	2065	2071		1	1				false						false
-REF_MER21|whole_genome	REF_MER21	erv-refseqs-theta	MER-21	933	whole_genome	1	1	933		1	1				false						false
 REF_MER34|whole_genome	REF_MER34	erv-refseqs-theta	MER-34	8207	whole_genome	1	1	8207		1	1				false						false
-REF_MER52A|whole_genome	REF_MER52A	erv-refseqs-zeta	MER-52A	4981	whole_genome	1	1	4981		1	1				false						false
-REF_MER57|whole_genome	REF_MER57	erv-refseqs-zeta	MER-57	7133	whole_genome	1	1	7133		1	1				false						false
 REF_MER66|whole_genome	REF_MER66	erv-refseqs-zeta	MER-66	10415	whole_genome	1	1	10415		1	1				false						false
-REF_MER84|whole_genome	REF_MER84	erv-refseqs-zeta	MER-84	2880	whole_genome	1	1	2880		1	1				false						false
-REF_MER89|whole_genome	REF_MER89	erv-refseqs-theta	MER-89	7048	whole_genome	1	1	7048		1	1				false						false
 REF_MinERVa|whole_genome	REF_MinERVa	erv-refseqs-delta	MinERVa	2996	whole_genome	1	1	2910		1	1				false						false
 REF_MinERVa|gag	REF_MinERVa	erv-refseqs-delta	MinERVa	2996	gag	1	802	2091		1	1	1290	430	430	true	true	true	false	false	false	true
 REF_MinERVa|5LTR	REF_MinERVa	erv-refseqs-delta	MinERVa	2996	5LTR	1	1	599		1	1				false						false
 REF_MMERV|whole_genome	REF_MMERV	erv-refseqs-gamma	MMERV	8665	whole_genome	1	1	8665		1	1				false						false
+REF_MMERV|LEA	REF_MMERV	erv-refseqs-gamma	MMERV	8665	LEA	1	748	1042		1	1				false						false
+REF_MMERV|pro	REF_MMERV	erv-refseqs-gamma	MMERV	8665	pro	1	2614	2952		1	1	339	113	113	true	false	false	false	false	false	true
+REF_MMERV|pol	REF_MMERV	erv-refseqs-gamma	MMERV	8665	pol	1	2635	6156		1	1	3522	1174	1174	true	true	false	false	false	false	true
+REF_MMERV|gag	REF_MMERV	erv-refseqs-gamma	MMERV	8665	gag	1	1042	2592		1	1	1551	517	517	true	true	false	false	false	false	true
+REF_MMERV|env	REF_MMERV	erv-refseqs-gamma	MMERV	8665	env	1	6008	8083		1	1	2076	692	692	true	true	false	false	false	false	true
+REF_MMERV|5LTR	REF_MMERV	erv-refseqs-gamma	MMERV	8665	5LTR	1	1	551		1	1				false						false
+REF_MMERV|3LTR	REF_MMERV	erv-refseqs-gamma	MMERV	8665	3LTR	1	8116	8665		1	1				false						false
+REF_MMERV|ZK	REF_MMERV	erv-refseqs-gamma	MMERV	8665	ZK	1	2497	2550		1	1				false						false
+REF_MMERV|TM	REF_MMERV	erv-refseqs-gamma	MMERV	8665	TM	1	7499	8083		1	1	585	195	195	true	true	false	false	false	false	true
+REF_MMERV|SU	REF_MMERV	erv-refseqs-gamma	MMERV	8665	SU	1	6008	7498		1	1	1491	497	497	true	false	false	false	false	false	true
+REF_MMERV|RT	REF_MMERV	erv-refseqs-gamma	MMERV	8665	RT	1	2953	4944		1	1	1992	664	664	true	false	false	false	false	false	true
+REF_MMERV|RNaseH	REF_MMERV	erv-refseqs-gamma	MMERV	8665	RNaseH	1	4489	4926		1	1	438	146	146	true	false	false	false	false	false	true
+REF_MMERV|NC	REF_MMERV	erv-refseqs-gamma	MMERV	8665	NC	1	2428	2589		1	1	162	54	54	true	false	false	false	false	false	true
+REF_MMERV|MHR	REF_MMERV	erv-refseqs-gamma	MMERV	8665	MHR	1	2065	2112		1	1				false						false
+REF_MMERV|MA	REF_MMERV	erv-refseqs-gamma	MMERV	8665	MA	1	1042	1419		1	1	378	126	126	true	false	false	false	false	false	true
+REF_MMERV|ISD	REF_MMERV	erv-refseqs-gamma	MMERV	8665	ISD	1	6851	6910		1	1				false						false
+REF_MMERV|IN	REF_MMERV	erv-refseqs-gamma	MMERV	8665	IN	1	4945	6156		1	1	1212	404	404	true	true	false	false	false	false	true
+REF_MMERV|CA	REF_MMERV	erv-refseqs-gamma	MMERV	8665	CA	1	1672	2430		1	1	759	253	253	true	false	false	false	false	false	true
 REF_MuERVC|whole_genome	REF_MuERVC	erv-refseqs-gamma	MuERV-C	7954	whole_genome	1	1	7954		1	1				false						false
+REF_MuERVC|pol	REF_MuERVC	erv-refseqs-gamma	MuERV-C	7954	pol	1	1195	5475		1	1	4281	1427	1427	true	true	true	false	false	false	true
+REF_MuERVC|gag	REF_MuERVC	erv-refseqs-gamma	MuERV-C	7954	gag	1	1043	2005		1	1	963	321	321	true	true	true	false	false	false	true
+REF_MuERVC|3LTR	REF_MuERVC	erv-refseqs-gamma	MuERV-C	7954	3LTR	1	5661	6234		1	1				false						false
 REF_MuERVL|whole_genome	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	whole_genome	1	1	6471		1	1				false						false
 REF_MuERVL|LEA	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	LEA	1	496	536		1	1				false						false
-REF_MuERVL|DU	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	DU	1	5214	5798		1	1	585	195	195	true	true	true	false	false	false	true
-REF_MuERVL|pro	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	pro	1	2216	2635		1	1	420	140	140	true	true	true	false	false	false	true
-REF_MuERVL|pol	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	pol	1	2217	5798		1	1	3582	1194	1194	true	true	true	false	false	false	true
-REF_MuERVL|gag	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	gag	1	537	2285		1	1	1749	583	583	true	true	true	false	false	false	true
+REF_MuERVL|DU	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	DU	1	5215	5799		1	1	585	195	195	true	false	false	false	false	false	true
+REF_MuERVL|pro	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	pro	1	2217	2636		1	1	420	140	140	true	true	true	false	false	false	true
+REF_MuERVL|pol	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	pol	1	2218	5799		1	1	3582	1194	1194	true	true	true	false	false	false	true
+REF_MuERVL|gag	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	gag	1	538	2286		1	1	1749	583	583	true	true	true	false	false	false	true
 REF_MuERVL|5LTR	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	5LTR	1	1	495		1	1				false						false
 REF_MuERVL|3LTR	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	3LTR	1	5977	6471		1	1				false						false
-REF_MuERVL|RT	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	RT	1	2634	3617		1	1	984	328	328	true	true	true	false	false	false	true
-REF_MuERVL|RNaseH	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	RNaseH	1	3618	4733		1	1	1116	372	372	true	true	true	false	false	false	true
-REF_MuERVL|IN	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	IN	1	4734	5213		1	1	480	160	160	true	true	true	false	false	false	true
+REF_MuERVL|RT	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	RT	1	2635	3618		1	1	984	328	328	true	false	false	false	false	false	true
+REF_MuERVL|RNaseH	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	RNaseH	1	3619	4734		1	1	1116	372	372	true	false	false	false	false	false	true
+REF_MuERVL|IN	REF_MuERVL	erv-refseqs-lambda	MuERV-L	6471	IN	1	4735	5214		1	1	480	160	160	true	false	false	false	false	false	true
 REF_MuRRS|whole_genome	REF_MuRRS	erv-refseqs-gamma	MuRRS	5689	whole_genome	1	1	5689		1	1				false						false
+REF_MuRRS|pol	REF_MuRRS	erv-refseqs-gamma	MuRRS	5689	pol	1	1924	4440		1	1	2517	839	839	true	true	true	false	false	false	true
+REF_MuRRS|gag	REF_MuRRS	erv-refseqs-gamma	MuRRS	5689	gag	1	728	1921		1	1	1194	398	398	true	true	true	false	false	false	true
 REF_MURVY|whole_genome	REF_MURVY	erv-refseqs-gamma	MURVY	8718	whole_genome	1	1	8718		1	1				false						false
-REF_MusD|whole_genome	REF_MusD	erv-refseqs-beta	MusD	7398	whole_genome	1	1	7398		1	1				false						false
-REF_mysTR|whole_genome	REF_mysTR	erv-refseqs-beta	mysTR	7806	whole_genome	1	1	7806		1	1				false						false
-REF_mysTR|LEA	REF_mysTR	erv-refseqs-beta	mysTR	7806	LEA	1	284	647		1	1				false						false
-REF_mysTR|pro	REF_mysTR	erv-refseqs-beta	mysTR	7806	pro	1	2024	2428		1	1	405	135	135	true	true	false	false	false	false	true
-REF_mysTR|pol	REF_mysTR	erv-refseqs-beta	mysTR	7806	pol	1	2429	5095		1	1	2667	889	889	true	true	false	false	false	false	true
-REF_mysTR|gag	REF_mysTR	erv-refseqs-beta	mysTR	7806	gag	1	648	2021		1	1	1374	458	458	true	true	true	false	false	false	true
-REF_mysTR|env	REF_mysTR	erv-refseqs-beta	mysTR	7806	env	1	5372	7519		1	1	2148	716	716	true	true	true	false	false	false	true
-REF_mysTR|5LTR	REF_mysTR	erv-refseqs-beta	mysTR	7806	5LTR	1	1	283		1	1				false						false
-REF_mysTR|3LTR	REF_mysTR	erv-refseqs-beta	mysTR	7806	3LTR	1	7520	7806		1	1				false						false
+REF_MURVY|pol	REF_MURVY	erv-refseqs-gamma	MURVY	8718	pol	1	2695	5694		1	1	3000	1000	1000	true	true	true	false	false	false	true
+REF_MURVY|gag	REF_MURVY	erv-refseqs-gamma	MURVY	8718	gag	1	1139	2356		1	1	1218	406	406	true	true	true	false	false	false	true
+REF_MURVY|env	REF_MURVY	erv-refseqs-gamma	MURVY	8718	env	1	6507	7643		1	1	1137	379	379	true	true	true	false	false	false	true
+REF_MURVY|5LTR	REF_MURVY	erv-refseqs-gamma	MURVY	8718	5LTR	1	8097	8705		1	1				false						false
+REF_MURVY|3LTR	REF_MURVY	erv-refseqs-gamma	MURVY	8718	3LTR	1	1	625		1	1				false						false
 REF_PERVC|whole_genome	REF_PERVC	erv-refseqs-gamma	PERV-C	8774	whole_genome	1	1	8769		1	1				false						false
 REF_PERVC|LEA	REF_PERVC	erv-refseqs-gamma	PERV-C	8774	LEA	1	560	1080		1	1				false						false
 REF_PERVC|pol	REF_PERVC	erv-refseqs-gamma	PERV-C	8774	pol	1	2803	6240		1	1	3438	1146	1146	true	true	false	false	false	false	true
@@ -384,7 +365,6 @@ REF_PERVC|gag	REF_PERVC	erv-refseqs-gamma	PERV-C	8774	gag	1	1081	2655		1	1	1575	
 REF_PERVC|env	REF_PERVC	erv-refseqs-gamma	PERV-C	8774	env	1	6116	8080		1	1	1965	655	655	true	true	false	false	false	false	true
 REF_PERVC|5LTR	REF_PERVC	erv-refseqs-gamma	PERV-C	8774	5LTR	1	8	559		1	1				false						false
 REF_PERVC|3LTR	REF_PERVC	erv-refseqs-gamma	PERV-C	8774	3LTR	1	8145	8769		1	1				false						false
-REF_PRIMA41|whole_genome	REF_PRIMA41	erv-refseqs-zeta	PRIMA-41	8665	whole_genome	1	1	8665		1	1				false						false
 REF_PSIV2|whole_genome	REF_PSIV2	erv-refseqs-lenti	PSIV2	8102	whole_genome	1	1	8102		1	1				false						false
 REF_PSIV2|orfx	REF_PSIV2	erv-refseqs-lenti	PSIV2	8102	orfx	1	7606	7950		1	1				false						false
 REF_PSIV2|DU	REF_PSIV2	erv-refseqs-lenti	PSIV2	8102	DU	1	3757	4149		1	1	393	131	131	true	true	true	false	false	false	true
@@ -475,7 +455,6 @@ REF_RELIK|FS	REF_RELIK	erv-refseqs-lenti	RELIK	8912	FS	1	1880	1912		1	1				false
 REF_RELIK|CA	REF_RELIK	erv-refseqs-lenti	RELIK	8912	CA	1	1026	1748		1	1	723	241	241	true	false	false	false	false	false	true
 REF_RELIK|FS-stemloop	REF_RELIK	erv-refseqs-lenti	RELIK	8912	FS-stemloop	1	1887	1912		1	1				false						false
 REF_RELIK|FS-slippery-seq	REF_RELIK	erv-refseqs-lenti	RELIK	8912	FS-slippery-seq	1	1880	1886		1	1				false						false
-REF_RERVH|whole_genome	REF_RERVH	erv-refseqs-beta	RERV-H	6300	whole_genome	1	1	6300		1	1				false						false
 REF_SpELV|whole_genome	REF_SpELV	erv-refseqs-lenti	SpELV	4110	whole_genome	1	1	4110		1	1				false						false
 REF_SpELV|DU	REF_SpELV	erv-refseqs-lenti	SpELV	4110	DU	1	4069	4110		1	1	42	14	14	true	false	false	false	false	false	true
 REF_SpELV|pro-pol	REF_SpELV	erv-refseqs-lenti	SpELV	4110	pro-pol	1	2092	4110		1	1	2019	673	673	true	true	true	false	false	false	true
@@ -493,3 +472,11 @@ REF_SpELV|RNaseH	REF_SpELV	erv-refseqs-lenti	SpELV	4110	RNaseH	1	3718	4068		1	1	
 REF_SpELV|NC	REF_SpELV	erv-refseqs-lenti	SpELV	4110	NC	1	1787	2125		1	1	339	113	113	true	true	true	false	false	false	true
 REF_SpELV|MA	REF_SpELV	erv-refseqs-lenti	SpELV	4110	MA	1	713	1219		1	1	507	169	169	true	false	false	false	false	false	true
 REF_SpELV|CA	REF_SpELV	erv-refseqs-lenti	SpELV	4110	CA	1	1220	1786		1	1	567	189	189	true	false	false	false	false	false	true
+REF_TgERVF|whole_genome	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	whole_genome	1	1	8164		1	1				false						false
+REF_TgERVF|LEA	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	LEA	1	357	500		1	1				false						false
+REF_TgERVF|pro	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	pro	1	2828	3172		1	1	345	115	115	true	true	false	false	false	false	true
+REF_TgERVF|pol	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	pol	1	3178	5733		1	1	2556	852	852	true	true	false	false	false	false	true
+REF_TgERVF|gag	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	gag	1	501	2825		1	1	2325	775	775	true	true	false	false	false	false	true
+REF_TgERVF|env	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	env	1	5748	7640		1	1	1893	631	631	true	true	false	false	false	false	true
+REF_TgERVF|5LTR	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	5LTR	1	1	356		1	1				false						false
+REF_TgERVF|3LTR	REF_TgERVF	erv-refseqs-alpha	TgERV-F	8164	3LTR	1	7809	8164		1	1				false						false
