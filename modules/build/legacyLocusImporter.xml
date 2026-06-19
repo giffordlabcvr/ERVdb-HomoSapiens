@@ -1,0 +1,45 @@
+<ecmaFunctionInvoker>
+
+    <scriptFileName>legacyLocusImporter.js</scriptFileName>
+
+    <function>
+        <name>loadLegacyLocusFile</name>
+
+        <parameter>
+            <name>inputPath</name>
+        </parameter>
+
+        <parameter>
+            <name>legacySource</name>
+        </parameter>
+
+        <parameter>
+            <name>pubmedId</name>
+        </parameter>
+
+        <parameter>
+            <name>hostSpecies</name>
+        </parameter>
+
+        <parameter>
+            <name>genomeBuild</name>
+        </parameter>
+
+        <parameter>
+            <name>createOrthologyCalibrations</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+    <function>
+        <name>clearLegacySource</name>
+
+        <parameter>
+            <name>legacySource</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+</ecmaFunctionInvoker>

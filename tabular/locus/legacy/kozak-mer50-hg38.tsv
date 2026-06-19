@@ -1,0 +1,8 @@
+Dfam designation	Gene	scaffold	start	end	orientation	orthology
+MER50	gag	ChrX	83161089	83161913	+	Simiiformes
+MER50	pre-gag	ChrX	84708729	84709383	-	Catarrhini
+MER50	gag	ChrX	84707334	84708555	-	Catarrhini
+MER50	pre-gag	ChrX	98578387	98578970	-	Simiiformes
+MER50	gag	ChrX	98577295	98577791	-	Simiiformes
+MER50	gag	Chr5	59311710	59313003	+	Simiiformes
+MER50	gag	Chr20	36984411	36985174	+	Simiiformes

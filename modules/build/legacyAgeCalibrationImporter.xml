@@ -1,0 +1,23 @@
+<ecmaFunctionInvoker>
+
+    <scriptFileName>legacyAgeCalibrationImporter.js</scriptFileName>
+
+    <function>
+        <name>importGrandiHml6Dates</name>
+
+        <parameter>
+            <name>inputPath</name>
+        </parameter>
+
+        <parameter>
+            <name>legacySource</name>
+        </parameter>
+
+        <parameter>
+            <name>pubmedId</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+</ecmaFunctionInvoker>
