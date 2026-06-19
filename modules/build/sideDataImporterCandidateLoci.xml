@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<textFilePopulator>
+
+    <columnDelimiterRegex>\t</columnDelimiterRegex>
+
+    <textFileColumn>
+        <identifier>true</identifier>
+        <header>id</header>
+        <property>id</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>case_status</header>
+        <property>case_status</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>chrom</header>
+        <property>chrom</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>clade_out</header>
+        <property>clade_out</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>curatedns</header>
+        <property>curatedns</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>digs_ids</header>
+        <property>digs_ids</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>end_position</header>
+        <property>end_position</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>genes</header>
+        <property>genes</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>genes_order</header>
+        <property>genes_order</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>genes_simplified</header>
+        <property>genes_simplified</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>group_out</header>
+        <property>group_out</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>length</header>
+        <property>length</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>makes_mosaic</header>
+        <property>makes_mosaic</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>names</header>
+        <property>names</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>names_decision</header>
+        <property>names_decision</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>phylogeny_name</header>
+        <property>phylogeny_name</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>repbase_ids</header>
+        <property>repbase_ids</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>retrotector_ids</header>
+        <property>retrotector_ids</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>start_position</header>
+        <property>start_position</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>status</header>
+        <property>status</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>strand</header>
+        <property>strand</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>subgroup_out</header>
+        <property>subgroup_out</property>
+    </textFileColumn>
+
+</textFilePopulator>
+
