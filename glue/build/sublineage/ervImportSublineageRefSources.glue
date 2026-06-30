@@ -1,22 +1,24 @@
 
   #~# Import sublineage LTR sequences (FASTA)
   
-  import source sources/ltr/ltr-refseqs-erv-sub/
+  import source sources/ltr/ltr_refseqs_erv1_sublineage/
+  import source sources/ltr/ltr_refseqs_erv2_sublineage/
+  import source sources/ltr/ltr_refseqs_erv3_sublineage/
 
   #~# Import sublineage reference sequences (FASTA)
 
   # Clade I
-  import source sources/erv/erv-refseqs-theta-sub/
-  import source sources/erv/erv-refseqs-zeta-sub/
-  import source sources/erv/erv-refseqs-gamma-sub/
-  import source sources/erv/erv-refseqs-iota-sub/
-  import source sources/erv/erv-refseqs-rho-sub/
+  import source sources/references/erv-refseqs-theta-sub/
+  import source sources/references/erv-refseqs-zeta-sub/
+  import source sources/references/erv-refseqs-gamma-sub/
+  import source sources/references/erv-refseqs-rho-sub/
+  import source sources/references/erv-refseqs-iota-sub/
 
   # Clade II
-  import source sources/erv/erv-refseqs-beta-sub/
+  import source sources/references/erv-refseqs-beta-sub/
 
   # Clade III
-  import source sources/erv/erv-refseqs-lambda-sub/
+  import source sources/references/erv-refseqs-lambda-sub/
 
   # Unclassified
-  import source sources/erv/erv-refseqs-unc-sub/
+  import source sources/references/erv-refseqs-unc-sub/

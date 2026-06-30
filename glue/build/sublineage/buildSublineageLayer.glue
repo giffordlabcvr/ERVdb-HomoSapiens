@@ -1,42 +1,42 @@
 
   # Import ERV sublineage reference sequences
-  run file glue/build/erv/ervImportSublineageRefSources.glue
+  run file glue/build/sublineage/ervImportSublineageRefSources.glue
 
   # Link reference sequences to lineage/ltr custom tables as appropriate
-  run script glue/build/erv/ervLinkSublineageReferences.js
+  run script glue/build/sublineage/ervLinkSublineageReferences.js
 
   # Set reference sequence lengths and kinds
-  run script glue/build/erv/setErvSequenceLengthsAndKinds.js 
+  run script glue/build/sublineage/setErvSequenceLengthsAndKinds.js 
 
   # Extend the rv_taxonomy table and link erv sublineage sequence entries to it
-  run script glue/build/erv/loadErvSublineageTaxonomy.js
+  run script glue/build/sublineage/loadErvSublineageTaxonomy.js
   
   # Populate the lineage aliases table for the sublineages
-  run script glue/build/erv/loadErvSublineageLineageAliases.js
+  run script glue/build/sublineage/loadErvSublineageAliases.js
 
   # Map ERV sublineage and LTR relationships
-  #run script glue/build/erv/loadErvSublineageLtrRelationships.js
+  run script glue/build/sublineage/loadErvSublineageLtrRelationships.js
 
   # Import ERV sublineage-specific data
-  run file glue/build/erv/ervImportSublineageSideData.glue
+  run file glue/build/sublineage/ervImportSublineageSideData.glue
   
   # Declare reference sequences for ERV sublineages
-  run script glue/build/erv/ervDeclareSublineageReferences.js
+  run script glue/build/sublineage/ervDeclareSublineageReferences.js
 
   # Import reference feature locations
-  run file glue/build/erv/ervImportSublineageReferenceFeatureLocations.glue
+  run file glue/build/sublineage/ervImportSublineageReferenceFeatureLocations.glue
 
   # Add ERV sublineage reference sequences to constrained alignment tree
-  run script glue/build/erv/ervExtendAlignmentTree.js  
+  #run script glue/build/sublineage/ervExtendAlignmentTree.js  
 
   # Import lineage-level alignments containing sublineage members
-  #run file glue/build/erv/ervImportUncSublineageAlignments.glue
+  #run file glue/build/sublineage/ervImportUncSublineageAlignments.glue
   
   # Derive constrained sublineage alignments from unconstrained sublineage alignments
-  #run file glue/build/erv/ervDeriveConstrainedSublineageMsas.glue
+  #run file glue/build/sublineage/ervDeriveConstrainedSublineageMsas.glue
 
   # Record feature coverage in constrained sublineage alignments
-  #run file glue/build/erv/ervRecordFeaturePresence.glue
+  #run file glue/build/sublineage/ervRecordFeaturePresence.glue
   
   validate
   

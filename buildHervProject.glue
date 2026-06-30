@@ -1,9 +1,9 @@
   
-# Build HERV project  
+# Build ERVdb-HomoSapiens extension to ERVdb project  
 project ervdb
 
   # Incorporate HERV sublineage data
-  #run file glue/build/sublineage/buildSublineageLayer.glue
+  run file glue/build/sublineage/buildSublineageLayer.glue
 
   # Incorporate HERV locus data
   run file glue/build/locus/buildLocusLayer.glue

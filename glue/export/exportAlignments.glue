@@ -4,13 +4,13 @@
   
   module fastaAlignmentExporterLineage 
 
-	export AL_LINEAGE_HERV1   -a -o web-app/alignments/AL_LINEAGE_HERV1.aln.fna
+	#export AL_LINEAGE_HERV1   -a -o web-app/alignments/AL_LINEAGE_HERV1.aln.fna
 	export AL_LINEAGE_HERVT   -a -o web-app/alignments/AL_LINEAGE_HERVT.aln.fna
 	export AL_LINEAGE_HERVE   -a -o web-app/alignments/AL_LINEAGE_HERVE.aln.fna
 	export AL_LINEAGE_HERVR   -a -o web-app/alignments/AL_LINEAGE_HERVR.aln.fna
-	export AL_LINEAGE_HERVRb1 -a -o web-app/alignments/AL_LINEAGE_HERVRb1.aln.fna
+	export AL_LINEAGE_HERVRb  -a -o web-app/alignments/AL_LINEAGE_HERVRb1.aln.fna
 	export AL_LINEAGE_HERVI   -a -o web-app/alignments/AL_LINEAGE_HERVI.aln.fna
-	export AL_LINEAGE_HERVADP -a -o web-app/alignments/AL_LINEAGE_HERVADP.aln.fna
+	#export AL_LINEAGE_HERVADP -a -o web-app/alignments/AL_LINEAGE_HERVADP.aln.fna
 	export AL_LINEAGE_HERVFa  -a -o web-app/alignments/AL_LINEAGE_HERVFa.aln.fna
 	export AL_LINEAGE_HERVFb  -a -o web-app/alignments/AL_LINEAGE_HERVFb.aln.fna
 	export AL_LINEAGE_HERVFc  -a -o web-app/alignments/AL_LINEAGE_HERVFc.aln.fna
@@ -19,18 +19,19 @@
 	export AL_LINEAGE_HERVW   -a -o web-app/alignments/AL_LINEAGE_HERVW.aln.fna
 	export AL_LINEAGE_HERV9   -a -o web-app/alignments/AL_LINEAGE_HERV9.aln.fna
 	export AL_LINEAGE_HERV30  -a -o web-app/alignments/AL_LINEAGE_HERV30.aln.fna
-	export AL_LINEAGE_HERVLb1 -a -o web-app/alignments/AL_LINEAGE_HERVLb1.aln.fna
+	export AL_LINEAGE_HERVLb  -a -o web-app/alignments/AL_LINEAGE_HERVLb1.aln.fna
 
-	export AL_LINEAGE_HERVKHML1  -a -o web-app/alignments/AL_LINEAGE_HERVKHML1.aln.fna
-	export AL_LINEAGE_HERVKHML2  -a -o web-app/alignments/AL_LINEAGE_HERVKHML2.aln.fna
-	export AL_LINEAGE_HERVKHML3  -a -o web-app/alignments/AL_LINEAGE_HERVKHML3.aln.fna
-	export AL_LINEAGE_HERVKHML4  -a -o web-app/alignments/AL_LINEAGE_HERVKHML4.aln.fna
 	export AL_LINEAGE_HERVKHML5  -a -o web-app/alignments/AL_LINEAGE_HERVKHML5.aln.fna
 	export AL_LINEAGE_HERVKHML6  -a -o web-app/alignments/AL_LINEAGE_HERVKHML6.aln.fna
-	export AL_LINEAGE_HERVKHML7  -a -o web-app/alignments/AL_LINEAGE_HERVKHML7.aln.fna
-	export AL_LINEAGE_HERVKHML8  -a -o web-app/alignments/AL_LINEAGE_HERVKHML8.aln.fna
-	export AL_LINEAGE_HERVKHML9  -a -o web-app/alignments/AL_LINEAGE_HERVKHML9.aln.fna
-	export AL_LINEAGE_HERVKHML10 -a -o web-app/alignments/AL_LINEAGE_HERVKHML10.aln.fna
+
+	#export AL_LINEAGE_HERVKHML1  -a -o web-app/alignments/AL_LINEAGE_HERVKHML1.aln.fna
+	#export AL_LINEAGE_HERVKHML2  -a -o web-app/alignments/AL_LINEAGE_HERVKHML2.aln.fna
+	#export AL_LINEAGE_HERVKHML3  -a -o web-app/alignments/AL_LINEAGE_HERVKHML3.aln.fna
+	#export AL_LINEAGE_HERVKHML4  -a -o web-app/alignments/AL_LINEAGE_HERVKHML4.aln.fna
+	#export AL_LINEAGE_HERVKHML7  -a -o web-app/alignments/AL_LINEAGE_HERVKHML7.aln.fna
+	#export AL_LINEAGE_HERVKHML8  -a -o web-app/alignments/AL_LINEAGE_HERVKHML8.aln.fna
+	#export AL_LINEAGE_HERVKHML9  -a -o web-app/alignments/AL_LINEAGE_HERVKHML9.aln.fna
+	#export AL_LINEAGE_HERVKHML10 -a -o web-app/alignments/AL_LINEAGE_HERVKHML10.aln.fna
 
 	export AL_LINEAGE_HERVS   -a -o web-app/alignments/AL_LINEAGE_HERVS.aln.fna
 	export AL_LINEAGE_HERVL   -a -o web-app/alignments/AL_LINEAGE_HERVL.aln.fna

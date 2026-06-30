@@ -1,10 +1,11 @@
 /**
- * Populate lineage-side custom tables from ERV reference sources.
+ * Populate lineage-side custom tables from ERV/LTR sublineage reference sources.
  *
  * Behaviour:
- * - For sources matching 'erv-refseqs-*' except 'erv-refseqs-ltr':
+ * - For sources matching ^erv-refseqs-.*-sub$:
  *     create/find erv_lineage rows and link sequences to them
- * - For source 'erv-refseqs-ltr':
+ *     set entity_level = 'sublineage'
+ * - For sources matching ^ltr_refseqs_erv[123]_sublineage$:
  *     create/find ltr_lineage rows and link sequences to them
  *
  * Assumes:
@@ -14,82 +15,109 @@
  */
 
 function log(msg) {
-    glue.logInfo(msg);
+	glue.logInfo(msg);
 }
 
 function escapeQuotes(value) {
-    return value.replace(/'/g, "\\'");
+	return value.replace(/'/g, "\\'");
 }
 
 function customRowExists(tableName, rowId) {
-    var result = glue.command([
-        "list", "custom-table-row", tableName,
-        "-w", "id = '" + escapeQuotes(rowId) + "'"
-    ]);
-    return result.listResult &&
-        result.listResult.row &&
-        result.listResult.row.length > 0;
+	var result = glue.command([
+		"list", "custom-table-row", tableName,
+		"-w", "id = '" + escapeQuotes(rowId) + "'"
+	]);
+
+	return result.listResult &&
+		result.listResult.row &&
+		result.listResult.row.length > 0;
 }
 
 function createCustomRowIfMissing(tableName, rowId) {
-    if(!customRowExists(tableName, rowId)) {
-        glue.command(["create", "custom-table-row", tableName, rowId]);
-        log("Created " + tableName + "/" + rowId);
-    }
+	if(!customRowExists(tableName, rowId)) {
+		glue.command(["create", "custom-table-row", tableName, rowId]);
+		log("Created " + tableName + "/" + rowId);
+	}
 }
 
-function listErvReferenceSources() {
-    var sourceObjs = glue.tableToObjects(glue.command(["list", "source"]));
+function setFieldIfExists(tableName, rowId, fieldName, value) {
+	try {
+		glue.inMode("custom-table-row/" + tableName + "/" + rowId, function() {
+			glue.command(["set", "field", fieldName, value]);
+		});
+	} catch(e) {
+		// Field may not exist; ignore.
+	}
+}
 
-    return _.chain(sourceObjs)
-        .map(function(source) { return source.name; })
-        .filter(function(sourceName) {
-            return /^erv-refseqs-/.test(sourceName);
-        })
-        .value();
+function isErvSublineageSource(sourceName) {
+	return /^erv-refseqs-.*-sub$/.test(sourceName);
+}
+
+function isLtrSublineageSource(sourceName) {
+	return /^ltr_refseqs_erv[123]_sublineage$/.test(sourceName);
+}
+
+function listSublineageReferenceSources() {
+	var sourceObjs = glue.tableToObjects(glue.command(["list", "source"]));
+
+	return _.chain(sourceObjs)
+		.map(function(source) { return source.name; })
+		.filter(function(sourceName) {
+			return isErvSublineageSource(sourceName) ||
+				isLtrSublineageSource(sourceName);
+		})
+		.sortBy(function(sourceName) { return sourceName; })
+		.value();
 }
 
 function listSequenceIdsForSource(sourceName) {
-    var result = glue.command([
-        "list", "sequence",
-        "-w", "source.name = '" + escapeQuotes(sourceName) + "'"
-    ]);
-    return glue.getTableColumn(result, "sequenceID");
+	var result = glue.command([
+		"list", "sequence",
+		"-w", "source.name = '" + escapeQuotes(sourceName) + "'"
+	]);
+
+	return glue.getTableColumn(result, "sequenceID");
 }
 
 function processSource(sourceName) {
-    var isLtrSource = (sourceName === "erv-refseqs-ltr");
-    var targetTable = isLtrSource ? "ltr_lineage" : "erv_lineage";
-    var targetLink = isLtrSource ? "ltr_lineage" : "erv_lineage";
-    var refType = isLtrSource ? "LTR" : "ERV";
 
-    var seqIds = listSequenceIdsForSource(sourceName);
+	var isLtrSource = isLtrSublineageSource(sourceName);
 
-    log("Processing source " + sourceName +
-        " (" + seqIds.length + " sequences; targetTable=" + targetTable + ")");
+	var targetTable = isLtrSource ? "ltr_lineage" : "erv_lineage";
+	var targetLink = isLtrSource ? "ltr_lineage" : "erv_lineage";
+	var refType = isLtrSource ? "LTR_SUBLINEAGE" : "ERV_SUBLINEAGE";
 
-    _.each(seqIds, function(seqId) {
-        createCustomRowIfMissing(targetTable, seqId);
+	var seqIds = listSequenceIdsForSource(sourceName);
 
-        // Optional: populate reftype if field exists on target table
-        glue.inMode("custom-table-row/" + targetTable + "/" + seqId, function() {
-            try {
-                glue.command(["set", "field", "reftype", refType]);
-            } catch (e) {
-                // ignore if field absent or not wanted yet
-            }
-        });
+	log("Processing source " + sourceName +
+		" (" + seqIds.length + " sequences; targetTable=" + targetTable + ")");
 
-        glue.inMode("sequence/" + sourceName + "/" + seqId, function() {
-            glue.command([
-                "set", "link-target",
-                targetLink,
-                "custom-table-row/" + targetTable + "/" + seqId
-            ]);
-        });
-    });
+	_.each(seqIds, function(seqId) {
+
+		createCustomRowIfMissing(targetTable, seqId);
+
+		if(isLtrSource) {
+			setFieldIfExists("ltr_lineage", seqId, "reftype", refType);
+			setFieldIfExists("ltr_lineage", seqId, "entity_level", "sublineage");
+		} else {
+			setFieldIfExists("erv_lineage", seqId, "reftype", refType);
+			setFieldIfExists("erv_lineage", seqId, "entity_level", "sublineage");
+		}
+
+		glue.inMode("sequence/" + sourceName + "/" + seqId, function() {
+			glue.command([
+				"set", "link-target",
+				targetLink,
+				"custom-table-row/" + targetTable + "/" + seqId
+			]);
+		});
+	});
 }
 
 // Run
-var ervSources = listErvReferenceSources();
-_.each(ervSources, processSource);
+var sublineageSources = listSublineageReferenceSources();
+
+log("Found " + sublineageSources.length + " sublineage reference sources");
+
+_.each(sublineageSources, processSource);

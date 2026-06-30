@@ -1,25 +1,27 @@
-// glue/build/erv/loadErvLtrRelationships.js
+// glue/build/erv/loadErvSublineageLtrRelationships.js
 //
-// Load ERV <-> LTR associations from tabular/erv/erv-ltr_relationships.tsv
+// Load ERV sublineage <-> LTR associations from:
+//
+//   tabular/reference/herv_sublineage_ltr_relationships.tsv
 //
 // For each row:
 // 1. create/get ltr_lineage row
 // 2. try to link matching LTR sequence from configured LTR sources
 // 3. create/get erv_lineage_ltr_assoc row
-// 4. link assoc row to erv_lineage and ltr_lineage
+// 4. link assoc row to erv_sublineage and ltr_lineage
 // 5. populate association metadata
 //
 // Assumes:
-// - erv_lineage rows already exist
+// - erv_sublineage rows already exist
 // - ltr_lineage custom table exists
 // - erv_lineage_ltr_assoc custom table exists
 // - sequence -> ltr_lineage link exists
+// - erv_lineage_ltr_assoc -> erv_sublineage link exists
 
-var INPUT_FILE = "tabular/erv/erv-ltr_relationships.tsv";
+var INPUT_FILE = "tabular/reference/herv_sublineage_ltr_data_all.tsv";
 
-// Search these sources in order.
-// The first exact sequenceID match found will be used.
 var LTR_SOURCES = [
+	"ltr-refseqs-erv-sub",
 	"ltr-refseqs-erv",
 	"ltr-refseqs-erranti",
 	"ltr-refseqs-malr",
@@ -164,60 +166,68 @@ var ltrLineageCount = 0;
 var assocCreatedOrUpdatedCount = 0;
 var linkedLtrSeqCount = 0;
 var missingLtrSeqCount = 0;
-var missingErvLineageCount = 0;
+var missingErvSublineageCount = 0;
 var skippedRowCount = 0;
 
 _.each(rows, function(row) {
 
 	var assocId = norm(row["id"]);
-	var ervLineageId = norm(row["erv_lineage.id"]);
-	var ervLtrLineageId = norm(row["ltr_lineage.id"]);
+	var ervSublineageId = norm(row["erv_sublineage.id"]);
+	var ltrLineageId = norm(row["ltr_lineage.id"]);
 	var associationType = norm(row["association_type"]);
 	var evidence = norm(row["evidence"]);
 
-	if(assocId == null || ervLineageId == null || ervLtrLineageId == null) {
+	if(assocId == null || ervSublineageId == null || ltrLineageId == null) {
 		skippedRowCount++;
 		log("Skipping incomplete row: id=" + assocId +
-			", erv_lineage.id=" + ervLineageId +
-			", ltr_lineage.id=" + ervLtrLineageId);
+			", erv_sublineage.id=" + ervSublineageId +
+			", ltr_lineage.id=" + ltrLineageId);
 		return;
 	}
 
 	assocRowCount++;
 	ltrLineageCount++;
 
-	// 1. create/get ltr_lineage row
-	createCustomRowIfMissing("ltr_lineage", ervLtrLineageId);
+	createCustomRowIfMissing("ltr_lineage", ltrLineageId);
 
-	// Optional default metadata
-	setCustomFieldIfPresent("ltr_lineage", ervLtrLineageId, "reference_method", "repbase");
+	setCustomFieldIfPresent("ltr_lineage", ltrLineageId, "reference_method", "repbase");
 
-	// 2. try to find matching LTR sequence and link it
-	var seqRef = findLtrSequenceRef(ervLtrLineageId);
+	var seqRef = findLtrSequenceRef(ltrLineageId);
 	if(seqRef != null) {
-		setSequenceCustomLinkIfPresent(seqRef, "ltr_lineage", "ltr_lineage", ervLtrLineageId);
+		setSequenceCustomLinkIfPresent(seqRef, "ltr_lineage", "ltr_lineage", ltrLineageId);
 		linkedLtrSeqCount++;
 		log("Linked LTR sequence " + seqRef.sourceName + "/" + seqRef.sequenceID +
-			" -> ltr_lineage/" + ervLtrLineageId);
+			" -> ltr_lineage/" + ltrLineageId);
 	} else {
 		missingLtrSeqCount++;
-		log("Missing LTR sequence for ltr_lineage.id '" + ervLtrLineageId + "'");
+		log("Missing LTR sequence for ltr_lineage.id '" + ltrLineageId + "'");
 	}
 
-	// 3. only create association if erv_lineage row exists
-	if(!customRowExists("erv_lineage", ervLineageId)) {
-		missingErvLineageCount++;
-		log("Missing erv_lineage row '" + ervLineageId +
+	if(!customRowExists("erv_sublineage", ervSublineageId)) {
+		missingErvSublineageCount++;
+		log("Missing erv_sublineage row '" + ervSublineageId +
 			"' while processing assoc '" + assocId + "'");
 		return;
 	}
 
-	// 4. create/get association row and link both sides
 	createCustomRowIfMissing("erv_lineage_ltr_assoc", assocId);
-	setCustomLinkIfPresent("erv_lineage_ltr_assoc", assocId, "erv_lineage", "erv_lineage", ervLineageId);
-	setCustomLinkIfPresent("erv_lineage_ltr_assoc", assocId, "ltr_lineage", "ltr_lineage", ervLtrLineageId);
 
-	// 5. metadata from input table
+	setCustomLinkIfPresent(
+		"erv_lineage_ltr_assoc",
+		assocId,
+		"erv_sublineage",
+		"erv_sublineage",
+		ervSublineageId
+	);
+
+	setCustomLinkIfPresent(
+		"erv_lineage_ltr_assoc",
+		assocId,
+		"ltr_lineage",
+		"ltr_lineage",
+		ltrLineageId
+	);
+
 	setCustomFieldIfPresent("erv_lineage_ltr_assoc", assocId, "association_type", associationType);
 	setCustomFieldIfPresent("erv_lineage_ltr_assoc", assocId, "evidence", evidence);
 
@@ -230,5 +240,5 @@ log("LTR lineage rows processed: " + ltrLineageCount);
 log("Association rows created/updated: " + assocCreatedOrUpdatedCount);
 log("Linked LTR sequences: " + linkedLtrSeqCount);
 log("Missing LTR sequences: " + missingLtrSeqCount);
-log("Missing erv_lineage rows: " + missingErvLineageCount);
+log("Missing erv_sublineage rows: " + missingErvSublineageCount);
 log("Skipped incomplete rows: " + skippedRowCount);
