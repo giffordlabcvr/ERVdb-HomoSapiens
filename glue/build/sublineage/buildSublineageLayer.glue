@@ -39,5 +39,4 @@
   #run file glue/build/sublineage/ervRecordFeaturePresence.glue
   
   validate
-  
-  exit
+
