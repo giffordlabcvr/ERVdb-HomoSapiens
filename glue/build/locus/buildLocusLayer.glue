@@ -1,3 +1,4 @@
+
   # Import classified HERV loci
   run file glue/build/locus/hervImportSources.glue
 
@@ -17,7 +18,7 @@
   run file glue/build/locus/constructLineageMsas.glue
 
   # Assign Missillac IDs
-  #run file glue/build/locus/assignMissillacIds.glue
+  run file glue/build/locus/assignMissillacIds.glue
 
   # Map legacy ERV overlaps
 
