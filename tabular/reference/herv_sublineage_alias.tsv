@@ -14,8 +14,6 @@ HERV-38	sublineage	HERV38	repbase
 HERV-39	sublineage	HERV39	repbase
 HERV-52	sublineage	HERV52	repbase
 HERV-57	sublineage	HERV57	repbase
-HERV-ADP	sublineage	hervadp	retrotector
-HERV-ADP	sublineage	HERVP71A	repbase
 HERV-G25	sublineage	HERVG25	repbase
 HERV-G25	sublineage	LTR25	repbase
 HERV-G25	sublineage	ltr25	retrotector
@@ -56,5 +54,3 @@ MER-89	sublineage	mer89	retrotector
 PRIMA-41	sublineage	PRIMA41	repbase
 PRIMA-41	sublineage	prima41	retrotector
 PRIMA-X	sublineage	PRIMAX	repbase
-RRHERV-I	sublineage	HERV15	repbase
-RRHERV-I	sublineage	HUMRIRT	other

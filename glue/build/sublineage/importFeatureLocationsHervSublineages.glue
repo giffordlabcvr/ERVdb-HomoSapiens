@@ -1,8 +1,18 @@
+
+
+  # Thetaretrovirus
+
+
+  # Iotaretrovirus
+
+
+  # Zetaretrovirus
+
+
+  # Thetaretrovirus
+
+
   # Betaretrovirus
-  run file glue/build/erv/feature_locations/betaretrovirus/mysTR.glue
-  #run file glue/build/erv/feature_locations/betaretrovirus/Mus-D.glue
-  #run file glue/build/erv/feature_locations/betaretrovirus/IAPE.glue
-  #run file glue/build/erv/feature_locations/betaretrovirus/RERV-H.glue
   run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML1.glue
   run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML2.glue
   run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML3.glue
@@ -11,3 +21,4 @@
   run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML8.glue
   run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML9.glue
   #run file glue/build/erv/feature_locations/betaretrovirus/HERV-K-HML10.glue
+ 
