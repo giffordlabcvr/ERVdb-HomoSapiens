@@ -1,0 +1,16 @@
+ 
+  #~# Build subgenus level phylogenies
+  
+  # Clade I
+  
+  # Gammaretrovirus Eta
+  #module ervRaxmlPhylogenyGeneratorNucs
+  #  generate nucleotide phylogeny AL_SUBGENUS_Eta -s ervSelectorEtaPolNucs -a -o trees/subgenus/ervEtaPolNucs.tree NEWICK_BOOTSTRAPS
+  #  exit
+    
+  # Clade II
+    
+  # Betaretrovirus Kappa
+  module ervRaxmlPhylogenyGeneratorNucs
+    generate nucleotide phylogeny AL_SUBGENUS_Kappa -s ervSelectorKappaPolNucs -a -o trees/subgenus/ervKappaPolNucs.tree NEWICK_BOOTSTRAPS
+    exit
