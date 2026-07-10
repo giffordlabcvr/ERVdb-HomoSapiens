@@ -1,6 +1,6 @@
-// glue/build/erv/loadErvSublineageTaxonomy.js
+// glue/build/sublineage/loadErvSublineageTaxonomy.js
 //
-// Load ERV sublineage taxonomy from:
+// Load taxonomy links for ERV sublineage-like rows from:
 //
 //   tabular/reference/herv_sublineage_data.tsv
 //
@@ -8,12 +8,13 @@
 //   - create taxonomy rows in rv_* tables
 //   - populate rv_species rows
 //   - populate higher-level taxonomy links
-//   - link erv_sublineage -> rv_species
-//   - optionally link erv_sublineage directly to higher taxonomic ranks
+//   - link matching erv_lineage rows to rv_species
+//   - optionally link erv_lineage rows directly to higher taxonomic ranks
 //
 // Assumptions:
-//   - erv_sublineage row IDs match sequenceID
-//   - representative sequences are already linked separately via sequence -> erv_sublineage
+//   - sublineage / annotation_group / repeat_group rows are stored in erv_lineage
+//   - erv_lineage row IDs match sequenceID
+//   - representative sequences are linked separately via sequence -> erv_lineage
 
 var INPUT_PATH = "tabular/reference/herv_sublineage_data.tsv";
 
@@ -140,29 +141,29 @@ _.each(taxRows, function(row) {
 });
 
 // --------------------------------------------------
-// Pass 3: link erv_sublineage -> taxonomy
+// Pass 3: link erv_lineage rows -> taxonomy
 // --------------------------------------------------
 
 _.each(taxRows, function(row) {
 
-	var sublineageId = norm(row["sequenceID"]);
+	var lineageId = norm(row["sequenceID"]);
 	var speciesId = norm(row["species"]);
 	var cladeId = norm(row["clade"]);
 	var subfamilyId = norm(row["subfamily"]);
 	var genusId = norm(row["genus"]);
 	var subgenusId = norm(row["subgenus"]);
 
-	if(sublineageId === null) {
+	if(lineageId === null) {
 		glue.logInfo("Skipping row with missing sequenceID: " + JSON.stringify(row));
 		return;
 	}
 	if(speciesId === null) {
-		glue.logInfo("Skipping erv_sublineage '" + sublineageId + "' because species is missing");
+		glue.logInfo("Skipping erv_lineage row '" + lineageId + "' because species is missing");
 		return;
 	}
 
 	try {
-		glue.inMode(customRowPath("erv_sublineage", sublineageId), function() {
+		glue.inMode(customRowPath("erv_lineage", lineageId), function() {
 			setLinkIfPresent("rv_species", customRowPath("rv_species", speciesId));
 
 			if(subgenusId !== null) {
@@ -179,6 +180,6 @@ _.each(taxRows, function(row) {
 			}
 		});
 	} catch(e) {
-		glue.logInfo("Could not link erv_sublineage '" + sublineageId + "' to taxonomy");
+		glue.logInfo("Could not link erv_lineage row '" + lineageId + "' to taxonomy");
 	}
 });

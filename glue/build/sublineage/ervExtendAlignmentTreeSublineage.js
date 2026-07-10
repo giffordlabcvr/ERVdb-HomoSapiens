@@ -116,13 +116,13 @@ function parentAlignmentNameForRow(row) {
 	// Preferred: place under subgenus-level constrained alignment if present.
 	var subgenus = norm(row["subgenus"]);
 	if(subgenus != null) {
-		return "AL_" + sanitize(subgenus);
+		return "AL_SUBGENUS_" + sanitize(subgenus);
 	}
 
 	// Fallback: genus-level alignment.
 	var genus = norm(row["genus"]);
 	if(genus != null) {
-		return "AL_" + sanitize(genus);
+		return "AL_GENUS_" + sanitize(genus);
 	}
 
 	// Final fallback: clade-level alignment.
@@ -133,7 +133,6 @@ function parentAlignmentNameForRow(row) {
 
 	return null;
 }
-
 function shouldInclude(row) {
 	var entityType = norm(row["entity_type"]);
 	var status = norm(row["status"]);
@@ -221,9 +220,8 @@ _.each(rows, function(row) {
 	runCmd([
 		"create", "alignment",
 		alignmentName,
-		"-p", parentAlignmentName,
 		"-r", refName,
-		"--constrained"
+		"-p", parentAlignmentName
 	]);
 
 	createdAlignmentCount++;

@@ -12,7 +12,6 @@
   import source sources/references/erv-refseqs-zeta-sub/
   import source sources/references/erv-refseqs-gamma-sub/
   import source sources/references/erv-refseqs-rho-sub/
-  import source sources/references/erv-refseqs-iota-sub/
 
   # Clade II
   import source sources/references/erv-refseqs-beta-sub/

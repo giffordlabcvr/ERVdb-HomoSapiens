@@ -1,9 +1,9 @@
   delete module unconstrainedAlignmentImporter
-  create module -f modules/build/rv/rvUnconstrainedAlignmentImporter.xml unconstrainedAlignmentImporter
+  create module -f modules/build/hervUnconstrainedAlignmentImporter.xml
 
   #~# Internal
   
-  module unconstrainedAlignmentImporter
+  module hervUnconstrainedAlignmentImporter
 
     #~# Subgenus-level alignments
     
