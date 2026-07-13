@@ -1,15 +1,27 @@
 // Define the sources to process
 var sources = [
+
+    // Fully resolved
     "fr_rt4_samerow",
     "fr_samename",
     "fr_only1id",
     "fr_harlequin",
-    
+
+    // Partially resolved
     "r_rt4_phyloclade",
-    "r_rt4_phylosubgroup",
     "r_rt4_phylogroup",
-    "r_rt4_phyloname"
+    "r_rt4_phylosubgroup",
+    "r_rt4_phyloname",
+
+    // Other
+    "r-mosiac-grp-subgrp-ur-notinrt4",
+    "r-phyloclade-ur-notinrt4_files",
+    "r-phylogroup-ur-notinrt4_files",
+    "r-phyloname-ur-notinrt4_files",
+    "r-phylosubgrp-ur-notinrt4_files",
+    "ur-notinrt4_files"
 ];
+
 
 // Loop through each source
 _.each(sources, function(sourceName) {
