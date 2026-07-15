@@ -24,16 +24,16 @@
   run script glue/build/sublineage/ervDeclareSublineageReferences.js
 
   # Import reference feature locations
-  run file glue/build/sublineage/ervImportSublineageReferenceFeatureLocations.glue
+  run file glue/build/sublineage/ervImportFeatureLocations.glue
 
   # Import lineage-level alignments containing sublineage members
   run file glue/build/sublineage/ervImportUncSublineageAlignments.glue
-  
-  # Derive constrained sublineage alignments from unconstrained sublineage alignments
-  run file glue/build/sublineage/ervDeriveConstrainedSublineageMsas.glue
 
   # Add ERV sublineage reference sequences to constrained alignment tree
   run script glue/build/sublineage/ervExtendAlignmentTreeSublineage.js  
+  
+  # Derive constrained sublineage alignments from unconstrained sublineage alignments
+  run file glue/build/sublineage/ervDeriveConstrainedSublineageMsas.glue
 
   # Record feature coverage in constrained sublineage alignments
   #run file glue/build/sublineage/ervRecordFeaturePresence.glue

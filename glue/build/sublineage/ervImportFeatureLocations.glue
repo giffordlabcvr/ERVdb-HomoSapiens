@@ -3,4 +3,4 @@
   module featureLocationTextToGlue transform tabular/reference/herv_reference_feature_locations_sublineage.tsv -r 
   
   # Explicitly defined reference sequence location declarations
-  #run file glue/build/reference/importFeatureLocationsHervSublineages.glue
+  run file glue/build/sublineage/importFeatureLocationsHervSublineages.glue

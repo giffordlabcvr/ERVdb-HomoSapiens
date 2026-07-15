@@ -201,8 +201,9 @@ function alignmentNameForRow(row) {
 			JSON.stringify(row);
 	}
 
-	return "AL_" + cleanAlignmentId;
+	return "AL_LINEAGE_" + cleanAlignmentId;
 }
+
 
 function parentAlignmentNameForRow(row) {
 

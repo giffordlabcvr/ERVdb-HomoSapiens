@@ -1,38 +1,39 @@
-reference REF_HERVKHML2
+reference REF_HERVKHML8
 
   add feature-location whole_genome
   feature-location whole_genome
-    add segment 1 8214
+    add segment 1 7274
     exit
 
   add feature-location 5LTR
   feature-location 5LTR
-    add segment 1 421
+    add segment 1 865
     exit
 
   add feature-location LEA
   feature-location LEA
-    add segment 422 650
+    add segment 866 1026
     exit
 
   add feature-location gag
   feature-location gag
-    add segment 651 2504
+    add segment 1027 1755
     exit
 
   add feature-location pol
   feature-location pol
-    add segment 2505 5996
+    add segment 1743 4448
     exit
 
   add feature-location env
   feature-location env
-    add segment 5998 7962
+    add segment 4450 6405
     exit
 
   add feature-location 3LTR
   feature-location 3LTR
-    add segment 7963 8214
+    add segment 6406 7274
     exit
     
   exit
+
