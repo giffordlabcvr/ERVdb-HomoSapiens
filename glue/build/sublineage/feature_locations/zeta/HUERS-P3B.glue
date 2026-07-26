@@ -1,39 +1,39 @@
-reference REF_HERVKHML10
+reference REF_HUERSP3B
 
   add feature-location whole_genome
   feature-location whole_genome
-    add segment 1 6364
+    add segment 1 10437
     exit
 
   add feature-location 5LTR
   feature-location 5LTR
-    add segment 1 548
+    add segment 1 794
     exit
 
   add feature-location LEA
   feature-location LEA
-    add segment 549 758
+    add segment 795 1465
     exit
 
   add feature-location gag
   feature-location gag
-    add segment 759 1331
+    add segment 1466 3787
     exit
 
   add feature-location pol
   feature-location pol
-    add segment 1332 4133
+    add segment 3788 6858
     exit
 
   add feature-location env
   feature-location env
-    add segment 4134 5540
+    add segment 6860 9541
     exit
 
   add feature-location 3LTR
   feature-location 3LTR
-    add segment 5817 6364
+    add segment 9648 10437
     exit
-    
+
   exit
 

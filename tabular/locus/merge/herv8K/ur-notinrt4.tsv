@@ -1,2 +1,0 @@
-sequenceid	chrom	strand	start	end	names	genes	size	idxRBT	genes_uniq	names_re	names_re_unique	case	names_decision	clade	group	subgroup	phylogeny_name	phylo_level	db_support	curatedNS	status	tax_level
-RBRT423242	chr17	-	53031248	53031724	REF_Galidia-ERVGalidia-ERV	gag	476	R5637	gag	"ERVGalidia-ERV,REF_Galidia"	"ERVGalidia-ERV,REF_Galidia"	Unresolved (not in RT4-phylo)	"ERVGalidia-ERV,REF_Galidia"	Unresolved	Unresolved	Unresolved	Unresolved	"NA,NA"	R	1	ERV
