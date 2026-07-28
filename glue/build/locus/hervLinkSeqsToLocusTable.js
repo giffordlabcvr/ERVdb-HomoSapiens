@@ -1,6 +1,9 @@
 // Define the sources to process
 var sources = [
 
+	// Filtered big set 60K
+    "filtered_2026_07",
+
     // Fully resolved
     "fr_rt4_samerow",
     "fr_samename",

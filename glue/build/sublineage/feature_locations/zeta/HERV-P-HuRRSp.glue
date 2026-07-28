@@ -1,0 +1,18 @@
+reference REF_HERVP
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 6523
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 779
+    exit
+    
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 5715 6523
+    exit
+
+  exit
