@@ -1,22 +1,25 @@
 
   #~# Import sources
-  
+
+  # Filtered loci version 1 (2026-07-28)
+  import source  /Users/rob/Sources/erv/filtered_2026_07
+    
   # Fully resolved
-  import source sources/loci/fr_rt4_samerow
-  import source sources/loci/fr_samename
-  import source sources/loci/fr_only1id
-  import source sources/loci/fr_harlequin
+  #import source sources/loci/fr_rt4_samerow
+  #import source sources/loci/fr_samename
+  #import source sources/loci/fr_only1id
+  #import source sources/loci/fr_harlequin
    
   # Partially resolved 
-  import source sources/loci/r_rt4_phyloclade
-  import source sources/loci/r_rt4_phylogroup
-  import source sources/loci/r_rt4_phylosubgroup
-  import source sources/loci/r_rt4_phyloname
+  #import source sources/loci/r_rt4_phyloclade
+  #import source sources/loci/r_rt4_phylogroup
+  #import source sources/loci/r_rt4_phylosubgroup
+  #import source sources/loci/r_rt4_phyloname
    
   # Other
-  import source sources/loci/r-mosiac-grp-subgrp-ur-notinrt4
-  import source sources/loci/r-phyloclade-ur-notinrt4_files
-  import source sources/loci/r-phylogroup-ur-notinrt4_files
-  import source sources/loci/r-phyloname-ur-notinrt4_files
-  import source sources/loci/r-phylosubgrp-ur-notinrt4_files
-  import source sources/loci/ur-notinrt4_files  
+  #import source sources/loci/r-mosiac-grp-subgrp-ur-notinrt4
+  #import source sources/loci/r-phyloclade-ur-notinrt4_files
+  #import source sources/loci/r-phylogroup-ur-notinrt4_files
+  #import source sources/loci/r-phyloname-ur-notinrt4_files
+  #import source sources/loci/r-phylosubgrp-ur-notinrt4_files
+  #import source sources/loci/ur-notinrt4_files  
