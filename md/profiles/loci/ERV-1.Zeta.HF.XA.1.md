@@ -1,6 +1,6 @@
 # ERV-1.Zeta.HF.XA.1 (ERVFH21-1)
 
-**ERV-1.Zeta.HF.XA.1** is a human endogenous retrovirus locus belonging to the **ERV-1.Zeta.HF.XA** lineage. It corresponds to the locus assigned the HGNC gene symbol **ERVFH21-1** and was historically identified as **HERV-F(XA34)**. This locus has been studied because it is transcriptionally active and was among the earliest HERV-F-related insertions to be molecularly characterised.
+**ERV-1.Zeta.HF.XA.1** is a human endogenous retrovirus locus belonging to the **ERV-1.Zeta.HF.XA** lineage. It corresponds to the locus assigned the HGNC gene symbol **ERVFH21-1** and was historically identified as **HERV-F(XA34)** (PMID: 8760409). This locus has been studied because it is transcriptionally active and was among the earliest HERV-F-related insertions to be molecularly characterised.
 
 ERV-1.Zeta.HF.XA.1 is located on chromosome 7 and comprises a substantially complete proviral structure flanked by long terminal repeats (LTRs). Although it retains recognisable **gag**, **pro**, **pol** and **env** genes, all have accumulated mutations during their residence in the human genome and the provirus is not considered capable of producing an infectious virus. The **env** gene contains a large internal deletion together with additional frameshifts and premature stop codons, while **pol** is also disrupted. Despite this structural degradation, the locus preserves much of the ancestral proviral organisation, making it one of the best-characterised representatives of the ERV-1.Zeta.HF.XA lineage.
 
