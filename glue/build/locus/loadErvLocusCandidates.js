@@ -3,7 +3,7 @@
 // Streaming loader for large HERV RBRT/Missillac-style table.
 //
 // Input:
-//   tabular/locus/merge/herv513K/HERVs-RBRT-name.tsv
+//   tabular/locus/HERVs-RBRT-name.tsv
 //
 // Keeps rows if they match either:
 //   - an existing erv_lineage id
@@ -19,7 +19,7 @@
 //
 // No links or sequences are created.
 
-var INPUT_PATH = "tabular/locus/merge/herv513K/HERVs-RBRT-name.tsv";
+var INPUT_PATH = "tabular/locus/HERVs-RBRT-name.tsv";
 
 var BufferedReader = Java.type("java.io.BufferedReader");
 var FileReader = Java.type("java.io.FileReader");

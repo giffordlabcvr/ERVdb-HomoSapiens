@@ -1,4 +1,7 @@
 var sources = [
+
+    "filtered_2026_07",
+
     "fr_rt4_samerow",
     "fr_samename",
     "fr_only1id",
@@ -20,7 +23,7 @@ _.each(sources, function(sourceName) {
 		glue.inMode("/sequence/"+sourceName+"/"+sequenceID, function() {
 			var length = glue.command("show length").lengthResult.length;
 			glue.command(["set", "field", "length", length]);
-            glue.command(["set", "field", "sequence_kind", 'proviral_locus']);
+            glue.command(["set", "field", "sequence_kind", 'erv_locus']);
 
 		});
 	});
