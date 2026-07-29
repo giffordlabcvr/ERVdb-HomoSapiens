@@ -2,21 +2,21 @@
 //
 // Load ERV sublineage <-> LTR associations from:
 //
-//   tabular/reference/herv_sublineage_ltr_relationships.tsv
+//   tabular/reference/herv_sublineage_ltr_data_all.tsv
 //
 // For each row:
 // 1. create/get ltr_lineage row
 // 2. try to link matching LTR sequence from configured LTR sources
 // 3. create/get erv_lineage_ltr_assoc row
-// 4. link assoc row to erv_sublineage and ltr_lineage
+// 4. link assoc row to erv_lineage and ltr_lineage
 // 5. populate association metadata
 //
 // Assumes:
-// - erv_sublineage rows already exist
+// - erv_lineage rows already exist
 // - ltr_lineage custom table exists
 // - erv_lineage_ltr_assoc custom table exists
 // - sequence -> ltr_lineage link exists
-// - erv_lineage_ltr_assoc -> erv_sublineage link exists
+// - erv_lineage_ltr_assoc -> erv_lineage link exists
 
 var INPUT_FILE = "tabular/reference/herv_sublineage_ltr_data_all.tsv";
 
@@ -30,6 +30,26 @@ var DRY_RUN = false;
 
 function log(msg) {
 	glue.logInfo(msg);
+}
+
+function makeAssocId(
+	ervSublineageId,
+	ltrLineageId
+) {
+	return sanitiseId(
+		ervSublineageId +
+		"__" +
+		ltrLineageId
+	);
+}
+
+function sanitiseId(value) {
+	return (
+		"" + value
+	).replace(
+		/[^A-Za-z0-9._-]/g,
+		"_"
+	);
 }
 
 function norm(value) {
@@ -167,19 +187,76 @@ var missingLtrSeqCount = 0;
 var missingErvSublineageCount = 0;
 var skippedRowCount = 0;
 
+
 _.each(rows, function(row) {
 
-	var assocId = norm(row["id"]);
-	var ervSublineageId = norm(row["erv_sublineage.id"]);
-	var ltrLineageId = norm(row["ltr_lineage.id"]);
-	var associationType = norm(row["association_type"]);
-	var evidence = norm(row["evidence"]);
+	var ltrLineageId =
+		norm(row["LTR_name"]);
 
-	if(assocId == null || ervSublineageId == null || ltrLineageId == null) {
+	var ervSublineageId =
+		norm(row["linked_element_name"]);
+
+	var associationType =
+		norm(row["assoc_category"]);
+
+	var evidence =
+		norm(row["flag"]);
+
+	var linkedElementStatus =
+		norm(row["linked_element_status"]);
+
+	/*
+	 * This loader is specifically for sublineage-LTR relationships.
+	 * Ignore rows assigned to a different relationship level.
+	 */
+
+	if(
+		linkedElementStatus != null &&
+		linkedElementStatus.toLowerCase() !== "sublineage"
+	) {
 		skippedRowCount++;
-		log("Skipping incomplete row: id=" + assocId +
-			", erv_sublineage.id=" + ervSublineageId +
-			", ltr_lineage.id=" + ltrLineageId);
+
+		log(
+			"Skipping non-sublineage relationship: LTR=" +
+			ltrLineageId +
+			", linked element=" +
+			ervSublineageId +
+			", status=" +
+			linkedElementStatus
+		);
+
+		return;
+	}
+
+	var assocId = null;
+
+	if(
+		ervSublineageId != null &&
+		ltrLineageId != null
+	) {
+		assocId =
+			makeAssocId(
+				ervSublineageId,
+				ltrLineageId
+			);
+	}
+
+	if(
+		assocId == null ||
+		ervSublineageId == null ||
+		ltrLineageId == null
+	) {
+		skippedRowCount++;
+
+		log(
+			"Skipping incomplete row: id=" +
+			assocId +
+			", erv_lineage.id=" +
+			ervSublineageId +
+			", ltr_lineage.id=" +
+			ltrLineageId
+		);
+
 		return;
 	}
 
@@ -201,9 +278,9 @@ _.each(rows, function(row) {
 		log("Missing LTR sequence for ltr_lineage.id '" + ltrLineageId + "'");
 	}
 
-	if(!customRowExists("erv_sublineage", ervSublineageId)) {
+	if(!customRowExists("erv_lineage", ervSublineageId)) {
 		missingErvSublineageCount++;
-		log("Missing erv_sublineage row '" + ervSublineageId +
+		log("Missing erv_lineage row '" + ervSublineageId +
 			"' while processing assoc '" + assocId + "'");
 		return;
 	}
@@ -213,8 +290,8 @@ _.each(rows, function(row) {
 	setCustomLinkIfPresent(
 		"erv_lineage_ltr_assoc",
 		assocId,
-		"erv_sublineage",
-		"erv_sublineage",
+		"erv_lineage",
+		"erv_lineage",
 		ervSublineageId
 	);
 
@@ -238,5 +315,5 @@ log("LTR lineage rows processed: " + ltrLineageCount);
 log("Association rows created/updated: " + assocCreatedOrUpdatedCount);
 log("Linked LTR sequences: " + linkedLtrSeqCount);
 log("Missing LTR sequences: " + missingLtrSeqCount);
-log("Missing erv_sublineage rows: " + missingErvSublineageCount);
+log("Missing erv_lineage rows: " + missingErvSublineageCount);
 log("Skipped incomplete rows: " + skippedRowCount);

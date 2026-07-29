@@ -1,15 +1,15 @@
 
   # Import classified HERV loci
-  run file glue/build/locus/hervImportSources.glue
+  run file glue/build/locus/hervImportLocusSources.glue
 
   # Set sequence lengths and kinds
-  run script glue/build/locus/hervSetSequenceLengthsAndKinds.js 
+  run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js 
 
   # Link to locus data table
   run script glue/build/locus/hervLinkSeqsToLocusTable.js
 
   # Import metadata about loci from tabular 
-  run file glue/build/locus/hervImportSideData.glue
+  run file glue/build/locus/hervImportLocusSideData.glue
 
   # Link loci to curated ERV provirus lineage concepts
   run script glue/build/locus/hervLinkLociToErvLineages.js
