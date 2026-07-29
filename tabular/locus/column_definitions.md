@@ -1,7 +1,19 @@
 # Column definitions
 
-## idx
+## locus_id
 ID beginning with "RBRT" (relates to order of steps in pipeline: RB for DIGS "R"-Repbase "B" overlap, then RBRT for RB-Retrotector "RT").
+
+## curatedNS
+1 indicating one of the 8,617 high-support HERVs
+
+## DIGS
+If containing elements from DIGS, the R### value corresponding to DIGS Consolidated idx
+
+## Repbase
+If containing elements from Repbase, the B### value corresponding to the Repbase idx
+
+## Retrotector
+If containing elements from Retrotector, the T### value corresponding to Retrotector idx
 
 ## chrom
 Chromosome.
@@ -21,14 +33,11 @@ Original names given by different naming systems from DIGS, Repbase and/or Retro
 ## genes
 Genes reported by DIGS, Repbase and/or Retrotector, separated by commas and ordered by start appearance of each element.
 
-## idxRBT
-IDs from starting databases (R: DIGS, B: Repbase, T: Retrotector). Used to map which HERV elements from which databases were joined into one sole RBRT HERV element; separated by commas and ordered by start appearance of each element.
+## genes_order
+Shows the order of the genes in the element based on start coordinate of the individual hits' genes that form the merged element. Where (int) means there is an unspecified Repbase internal region/gene present. Consecutive duplicate genes are collapsed. Example: LTR-gag-pol-pro-RT-pol-env-TM-LTR(int)
 
-## names_re
-Names after going through corresponding regular expression functions to match RT4-phylo.
-
-## names_re_unique
-Same as before, but unique names only.
+## genes_simplified
+A simplified version of genes_order that collapses all internal genes as 'int'. Example: LTR-int-LTR. Elements with only (int) and an LTR are simplified to LTR-int order. 
 
 ## case
 Classification pipeline main result. Here, "fully resolved" is for cases where name decision resulted in choosing one sole name corresponding to one sole row in the RT4phylo table. "Resolved" refers to the mosaic cases.
@@ -36,29 +45,22 @@ Classification pipeline main result. Here, "fully resolved" is for cases where n
 ## names_decision
 Name decision that matches RT4-phylo.
 
-## phylo_level_diff
-Phylogeny level (name, subgroup, group, or clade) at which at least two overlapped elements differed, making the case mosaic.
+## status
+ERV if merged element contains any internal genes or contains a DIGS LTR-LTR hit, else LTR (Solo LTRs)
 
-## composition
-Whether each overlapped element was an "int" or just an "ltr", in start-ascending order.
+## clade out
+Clade of each hit in the element based on RT4-phylo, separated by commas
 
-## composition_simple
-Same as before, but with collapsed information while retaining repetition.
+## group out
+Group of each hit in the element based on RT4-phylo, separated by commas
 
-## has_int
-Whether the case contains an int.
+## subgroup out
+Subgroup of each hit in the element based on RT4-phylo, separated by commas
 
-## ltr_within
-Whether composition has "int-ltr-int".
+## phylogeny_name
+Phylogeny_name of each hit in the element based on RT4-phylo, separated by commas. Replaced by name if no phylogeny_name exists for that hit
 
-## ints_diff_phylo_level
-TRUE if at least two ints came from two different phylogeny levels, thus making it mosaic.
+## makes_mosaic
+For elements with case 'mosaic' this indicates whether LTRs or internal regions make the element mosaic. 'LTR' if an LTR in the element is a different RT4-phylo row than another LTR or an internal region. 'int' if two internal regions have different RT4-phylo rows
 
-## ltr_makes_mosaic
-TRUE if ints_diff_phylo_level and ltr_na_makes_mosaic; a case in which LTRs from different phylogeny levels make it mosaic.
-
-## ltr_na_makes_mosaic
-TRUE if what makes the case mosaic is the presence of "LTR-only" or "Unclassified" LTRs.
-
-## mosaic_level
-Mosaic level.
+* * * * *
