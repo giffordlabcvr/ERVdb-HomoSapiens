@@ -1,6 +1,5 @@
 referenceName	featureName	startNT	endNT	sequenceID	Clade	Genus
-REF_HERV1	whole_genome	1	9611	HERV-1	Clade I	Gammaretrovirus
-REF_HERV39	whole_genome	1	9084	HERV-39	Clade I	Rhoretrovirus
+REF_HERV39	whole_genome	1	9084	HERV-39	Clade I	Unclassified
 REF_MER21	whole_genome	1	933	MER-21	Clade I	Thetaretrovirus
 REF_MER89	whole_genome	1	7048	MER-89	Clade I	Thetaretrovirus
 REF_HERV35	whole_genome	1	6918	HERV-35	Clade I	Zetaretrovirus

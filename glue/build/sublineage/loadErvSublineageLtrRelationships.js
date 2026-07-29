@@ -21,11 +21,9 @@
 var INPUT_FILE = "tabular/reference/herv_sublineage_ltr_data_all.tsv";
 
 var LTR_SOURCES = [
-	"ltr-refseqs-erv-sub",
-	"ltr-refseqs-erv",
-	"ltr-refseqs-erranti",
-	"ltr-refseqs-malr",
-	"ltr-refseqs-orphan"
+	"ltr_refseqs_erv1_sublineage",
+	"ltr_refseqs_erv2_sublineage",
+	"ltr_refseqs_erv3_sublineage"
 ];
 
 var DRY_RUN = false;
