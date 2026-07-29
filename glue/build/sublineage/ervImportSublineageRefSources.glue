@@ -1,23 +1,23 @@
 
   #~# Import sublineage LTR sequences (FASTA)
   
-  import source sources/ltr/ltr_refseqs_erv1_sublineage/
-  import source sources/ltr/ltr_refseqs_erv2_sublineage/
-  import source sources/ltr/ltr_refseqs_erv3_sublineage/
+  import source sources/sublineage/ltr/ltr_refseqs_erv1_sublineage/
+  import source sources/sublineage/ltr/ltr_refseqs_erv2_sublineage/
+  import source sources/sublineage/ltr/ltr_refseqs_erv3_sublineage/
 
   #~# Import sublineage reference sequences (FASTA)
 
   # Clade I
-  import source sources/references/erv-refseqs-theta-sub/
-  import source sources/references/erv-refseqs-zeta-sub/
-  import source sources/references/erv-refseqs-gamma-sub/
-  import source sources/references/erv-refseqs-rho-sub/
+  import source sources/sublineage/references/erv-refseqs-theta-sub/
+  import source sources/sublineage/references/erv-refseqs-zeta-sub/
+  import source sources/sublineage/references/erv-refseqs-gamma-sub/
+  import source sources/sublineage/references/erv-refseqs-rho-sub/
 
-  # Clade II
-  import source sources/references/erv-refseqs-beta-sub/
+  # Clade II (none known)
+  #import source sources/sublineage/references/erv-refseqs-beta-sub/
 
   # Clade III
-  import source sources/references/erv-refseqs-lambda-sub/
+  import source sources/sublineage/references/erv-refseqs-lambda-sub/
 
   # Unclassified
-  import source sources/references/erv-refseqs-unc-sub/
+  import source sources/sublineage/references/erv-refseqs-unc-sub/
