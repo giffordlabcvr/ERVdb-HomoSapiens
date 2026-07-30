@@ -1,12 +1,12 @@
 // glue/build/locus/loadFilteredErvLocusCandidates.js
 //
 // Load filtered ERV/LTR candidate loci from:
-//   tabular/locus/filtered_ervs.tsv
+//   tabular/locus/HERVs-RBRT-filtered.tsv
 //
 // This loads directly into custom table erv_locus_candidate.
 // It does not require sequences and does not create links.
 
-var INPUT_PATH = "tabular/locus/filtered_ervs.tsv";
+var INPUT_PATH = "tabular/locus/HERVs-RBRT-filtered.tsv";
 
 var BufferedReader = Java.type("java.io.BufferedReader");
 var FileReader = Java.type("java.io.FileReader");
