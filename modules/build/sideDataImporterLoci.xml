@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<textFilePopulator>
+
+    <columnDelimiterRegex>\t</columnDelimiterRegex>
+
+    <textFileColumn>
+        <identifier>true</identifier>
+        <header>id</header>
+        <property>sequenceId</property>
+    </textFileColumn>
+
+    <!-- Genomic coordinates -->
+
+    <textFileColumn>
+        <header>chrom</header>
+        <property>erv_locus_candidate.chrom</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>strand</header>
+        <property>erv_locus_candidate.strand</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>start_position</header>
+        <property>erv_locus_candidate.start_position</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>end_position</header>
+        <property>erv_locus_candidate.end_position</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>length</header>
+        <property>erv_locus_candidate.length</property>
+    </textFileColumn>
+
+    <!-- Source annotation content -->
+
+    <textFileColumn>
+        <header>names</header>
+        <property>erv_locus_candidate.names</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>genes</header>
+        <property>erv_locus_candidate.genes</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>genes_order</header>
+        <property>erv_locus_candidate.genes_order</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>genes_simplified</header>
+        <property>erv_locus_candidate.genes_simplified</property>
+    </textFileColumn>
+
+    <!-- Classification -->
+
+    <textFileColumn>
+        <header>case_status</header>
+        <property>erv_locus_candidate.case_status</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>names_decision</header>
+        <property>erv_locus_candidate.names_decision</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>status</header>
+        <property>erv_locus_candidate.status</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>clade_out</header>
+        <property>erv_locus_candidate.clade_out</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>group_out</header>
+        <property>erv_locus_candidate.group_out</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>subgroup_out</header>
+        <property>erv_locus_candidate.subgroup_out</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>phylogeny_name</header>
+        <property>erv_locus_candidate.phylogeny_name</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>makes_mosaic</header>
+        <property>erv_locus_candidate.makes_mosaic</property>
+    </textFileColumn>
+
+    <!-- Database support -->
+
+    <textFileColumn>
+        <header>curatedns</header>
+        <property>erv_locus_candidate.curatedns</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>digs_ids</header>
+        <property>erv_locus_candidate.digs_ids</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>repbase_ids</header>
+        <property>erv_locus_candidate.repbase_ids</property>
+    </textFileColumn>
+
+    <textFileColumn>
+        <header>retrotector_ids</header>
+        <property>erv_locus_candidate.retrotector_ids</property>
+    </textFileColumn>
+
+</textFilePopulator>

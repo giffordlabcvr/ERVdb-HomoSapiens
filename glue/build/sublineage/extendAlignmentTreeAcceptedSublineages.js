@@ -4,7 +4,6 @@
 // alignment tree.
 //
 // Inclusion rule:
-//   - entity_type = sublineage
 //   - status = accepted
 //
 // Input:
@@ -40,6 +39,9 @@
 //
 // Parent-alignment membership is cached on demand. Each parent alignment is
 // queried at most once during the run.
+// Parent alignment:
+//   - subgenus, genus or clade alignment where classified
+//   - no parent where the classification is explicitly Unclassified
 //
 // Set DRY_RUN to true to report intended changes without modifying the
 // project.
@@ -125,12 +127,10 @@ function loadRows() {
 
 function shouldInclude(row) {
 
-	var entityType = norm(row["entity_type"]);
 	var status = norm(row["status"]);
 
-	return entityType === "sublineage" && status === "accepted";
+	return status === "accepted";
 }
-
 
 /*
  * Entity-existence functions
@@ -204,34 +204,85 @@ function alignmentNameForRow(row) {
 	return "AL_LINEAGE_" + cleanAlignmentId;
 }
 
+function isUnclassified(value) {
 
-function parentAlignmentNameForRow(row) {
+	var normalisedValue = norm(value);
+
+	return normalisedValue != null &&
+		normalisedValue.toLowerCase() === "unclassified";
+}
+
+
+function parentAlignmentForRow(row) {
 
 	/*
-	 * Prefer the most specific available constrained alignment.
+	 * An explicitly unclassified lineage belongs at the root of the
+	 * constrained alignment tree.
 	 */
 
 	var subgenus = norm(row["subgenus"]);
 
-	if(subgenus != null) {
-		return "AL_SUBGENUS_" + sanitize(subgenus);
+	if(isUnclassified(subgenus)) {
+		return {
+			rootLevel: true,
+			parentAlignmentName: null
+		};
 	}
+
+	if(subgenus != null) {
+		return {
+			rootLevel: false,
+			parentAlignmentName:
+				"AL_SUBGENUS_" + sanitize(subgenus)
+		};
+	}
+
 
 	var genus = norm(row["genus"]);
 
-	if(genus != null) {
-		return "AL_GENUS_" + sanitize(genus);
+	if(isUnclassified(genus)) {
+		return {
+			rootLevel: true,
+			parentAlignmentName: null
+		};
 	}
+
+	if(genus != null) {
+		return {
+			rootLevel: false,
+			parentAlignmentName:
+				"AL_GENUS_" + sanitize(genus)
+		};
+	}
+
 
 	var clade = norm(row["clade"]);
 
-	if(clade != null) {
-		return "AL_CLADE_" + sanitize(clade);
+	if(isUnclassified(clade)) {
+		return {
+			rootLevel: true,
+			parentAlignmentName: null
+		};
 	}
 
-	return null;
-}
+	if(clade != null) {
+		return {
+			rootLevel: false,
+			parentAlignmentName:
+				"AL_CLADE_" + sanitize(clade)
+		};
+	}
 
+
+	/*
+	 * No usable classification was supplied.
+	 */
+
+	return {
+		rootLevel: false,
+		parentAlignmentName: null
+	};
+}
 
 /*
  * Alignment cache
@@ -612,14 +663,28 @@ _.each(rows, function(row) {
 	var alignmentName =
 		alignmentNameForRow(row);
 
+	var parentResolution =
+		parentAlignmentForRow(row);
+
+	var rootLevel =
+		parentResolution.rootLevel;
+
 	var parentAlignmentName =
-		parentAlignmentNameForRow(row);
+		parentResolution.parentAlignmentName;
+
+
+	/*
+	 * Only non-root alignments require a parent alignment.
+	 */
 
 	if(
-		parentAlignmentName == null ||
-		!alignmentExists(
-			alignmentMap,
-			parentAlignmentName
+		!rootLevel &&
+		(
+			parentAlignmentName == null ||
+			!alignmentExists(
+				alignmentMap,
+				parentAlignmentName
+			)
 		)
 	) {
 
@@ -633,7 +698,6 @@ _.each(rows, function(row) {
 
 		return;
 	}
-
 
 	/*
 	 * If the child alignment already exists, no further action is needed.
@@ -670,19 +734,22 @@ _.each(rows, function(row) {
 	 * parent alignment AL_y
 	 */
 
-	var membershipResult =
-		ensureReferenceIsAlignmentMember(
-			memberMap,
-			parentAlignmentName,
-			referenceName
-		);
+	if(!rootLevel) {
 
-	if(membershipResult === "existing") {
-		existingParentMembershipCount++;
-	} else if(membershipResult === "added") {
-		addedParentMembershipCount++;
-	} else if(membershipResult === "dry-run") {
-		dryRunParentMembershipCount++;
+		var membershipResult =
+			ensureReferenceIsAlignmentMember(
+				memberMap,
+				parentAlignmentName,
+				referenceName
+			);
+
+		if(membershipResult === "existing") {
+			existingParentMembershipCount++;
+		} else if(membershipResult === "added") {
+			addedParentMembershipCount++;
+		} else if(membershipResult === "dry-run") {
+			dryRunParentMembershipCount++;
+		}
 	}
 
 
@@ -690,24 +757,28 @@ _.each(rows, function(row) {
 	 * Create the constrained child alignment.
 	 */
 
-	if(DRY_RUN) {
+	var createAlignmentCommand = [
+		"create",
+		"alignment",
+		alignmentName,
+		"-r",
+		referenceName
+	];
 
-		runCmd([
-			"create",
-			"alignment",
-			alignmentName,
-			"-r",
-			referenceName,
+	if(!rootLevel) {
+
+		createAlignmentCommand.push(
 			"-p",
 			parentAlignmentName
-		]);
+		);
+	}
+
+
+	if(DRY_RUN) {
+
+		runCmd(createAlignmentCommand);
 
 		dryRunAlignmentCount++;
-
-		/*
-		 * Update the cache so that subsequent rows in the same dry run see
-		 * the intended alignment-tree state.
-		 */
 
 		addAlignmentToCache(
 			alignmentMap,
@@ -719,15 +790,8 @@ _.each(rows, function(row) {
 		return;
 	}
 
-	runCmd([
-		"create",
-		"alignment",
-		alignmentName,
-		"-r",
-		referenceName,
-		"-p",
-		parentAlignmentName
-	]);
+
+	runCmd(createAlignmentCommand);
 
 	addAlignmentToCache(
 		alignmentMap,
@@ -738,14 +802,27 @@ _.each(rows, function(row) {
 
 	createdAlignmentCount++;
 
-	log(
-		"Created constrained alignment " +
-		alignmentName +
-		" under " +
-		parentAlignmentName +
-		" with reference " +
-		referenceName
-	);
+	if(rootLevel) {
+
+		log(
+			"Created root constrained alignment " +
+			alignmentName +
+			" with reference " +
+			referenceName
+		);
+	}
+	else {
+
+		log(
+			"Created constrained alignment " +
+			alignmentName +
+			" under " +
+			parentAlignmentName +
+			" with reference " +
+			referenceName
+		);
+	}
+
 });
 
 
