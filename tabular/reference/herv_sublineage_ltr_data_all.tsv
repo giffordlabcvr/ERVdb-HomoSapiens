@@ -49,7 +49,6 @@ LTR8	LTR8	erv_1	HUERS-P1	HUERS-P1	sublineage	Zeta	NA
 LTR8A	LTR8A	erv_1	HUERS-P1	HUERS-P1	sublineage	Zeta	NA	
 LTR8B	LTR8B	erv_1	HUERS-P1	HUERS-P1	sublineage	Zeta	NA	
 LTR1	LTR1	erv_1	HUERS-P2	HUERS-P2	sublineage	Zeta	NA	
-LTR1A1	LTR1A1	erv_1	HUERS-P2	HUERS-P2	sublineage	Zeta	NA	
 LTR1A2	LTR1A2	erv_1	HUERS-P2	HUERS-P2	sublineage	Zeta	NA	
 LTR1B	LTR1B	erv_1	HUERS-P2	HUERS-P2	sublineage	Zeta	NA	
 LTR1B0	LTR1B0	erv_1	HUERS-P2	HUERS-P2	sublineage	Zeta	NA	
@@ -88,7 +87,7 @@ MER83C	MER83C	erv_1	MER-83B	MER-83B	sublineage	Zeta	NA
 MER84	MER84	erv_1	MER-84	MER-84	sublineage	Zeta	NA	
 MLT2B2	MLT2B2	erv_3	ERV-L	ERV-L	sublineage	Lambda	NA	
 MLT2B4	MLT2B4	erv_3	ERV-Lb4	ERV-Lb4	sublineage	Lambda	NA	
-MLT2E	MLT2E	erv_3	ERV-Le	ERV-Le	sublineage	Lambda	NA	
+MLT2E	MLT2E	erv_3	ERV-L	ERV-L	sublineage	Lambda	NA	
 ERV3-16A3_LTR	ERV3-16A3_LTR	erv_3	ERV3-16A3	ERV3-16A3	sublineage	Lambda	NA	
 LTR16A	LTR16A	erv_3	ERV3-16A3	ERV3-16A3	sublineage	Lambda	NA	
 LTR16A1	LTR16A1	erv_3	ERV3-16A3	ERV3-16A3	sublineage	Lambda	NA	
@@ -111,9 +110,7 @@ LTR40C	LTR40c	erv_3	HERV-L40	HERV-L40	sublineage	Lambda	NA
 MER68	MER68	erv_3	HERV-L68	HERV-L68	sublineage	Lambda	NA	
 MER68B	MER68B	erv_3	HERV-L68	HERV-L68	sublineage	Lambda	NA	
 MER68C	MER68C	erv_3	HERV-L68	HERV-L68	sublineage	Lambda	NA	
-MER74C	MER74C	erv_3	HERVL74	HERVL74	sublineage	Lambda	NA	
-LTR53	LTR53	erv_3	LTR-53	LTR-53	sublineage	Lambda	NA	
-LTR53B	LTR53B	erv_3	LTR-53	LTR-53	sublineage	Lambda	NA	
+MER74C	MER74C	erv_3	HERV-L74	HERVL74	sublineage	Lambda	NA	
 MER70A	MER70A	erv_3	MER-70	MER-70	sublineage	Lambda	NA	
 MER70B	MER70B	erv_3	MER-70	MER-70	sublineage	Lambda	NA	
 MER70C	MER70C	erv_3	MER-70	MER-70	sublineage	Lambda	NA	
