@@ -1,38 +1,80 @@
 // glue/build/locus/loadFilteredErvLocusCandidates.js
 //
-// Load filtered ERV/LTR candidate loci from:
+// Streaming loader for the complete filtered HERV RBRT/Missillac-style table.
+//
+// Input:
 //   tabular/locus/HERVs-RBRT-filtered.tsv
 //
-// This loads directly into custom table erv_locus_candidate.
-// It does not require sequences and does not create links.
+// Behaviour:
+//   - uses the TSV "id" column as the erv_locus_candidate custom-row identifier
+//   - imports only fields explicitly defined on erv_locus_candidate
+//   - skips empty / NA-like values rather than passing null to glue.command()
+//   - creates no sequences and does not populate the sequence link
+//
+// Assumptions:
+//   - every input row should be imported
+//   - id is populated and unique
+//   - erv_locus_candidate is empty before this script is run
 
 var INPUT_PATH = "tabular/locus/HERVs-RBRT-filtered.tsv";
+var TABLE_NAME = "erv_locus_candidate";
 
 var BufferedReader = Java.type("java.io.BufferedReader");
 var FileReader = Java.type("java.io.FileReader");
+
+// These are the fields actually defined on erv_locus_candidate.
+// The TSV column "id" is deliberately excluded because it identifies
+// the custom table row rather than representing a table field.
+var FIELD_NAMES = [
+	"chrom",
+	"strand",
+	"start_position",
+	"end_position",
+	"length",
+
+	"names",
+	"genes",
+	"genes_order",
+	"genes_simplified",
+
+	"case_status",
+	"names_decision",
+	"status",
+	"clade_out",
+	"group_out",
+	"subgroup_out",
+	"phylogeny_name",
+	"makes_mosaic",
+
+	"curatedns",
+	"digs_ids",
+	"repbase_ids",
+	"retrotector_ids"
+];
 
 function norm(value) {
 	if(value === null || value === undefined) {
 		return null;
 	}
+
 	var s = ("" + value).trim();
+
 	if(s === "") {
 		return null;
 	}
-	var low = s.toLowerCase();
-	if(low === "n/a" || low === "na" || low === "null" || low === "none" || s === "-") {
-		return null;
-	}
-	return s;
-}
 
-function normInt(value) {
-	value = norm(value);
-	if(value === null) {
+	var low = s.toLowerCase();
+
+	if(
+		low === "n/a" ||
+		low === "na" ||
+		low === "null" ||
+		low === "none"
+	) {
 		return null;
 	}
-	var n = parseInt(value, 10);
-	return isNaN(n) ? null : n;
+
+	return s;
 }
 
 function splitTsvLine(line) {
@@ -41,9 +83,11 @@ function splitTsvLine(line) {
 
 function makeRow(headers, values) {
 	var row = {};
+
 	for(var i = 0; i < headers.length; i++) {
-		row[headers[i]] = (i < values.length ? values[i] : null);
+		row[headers[i]] = i < values.length ? values[i] : null;
 	}
+
 	return row;
 }
 
@@ -51,113 +95,147 @@ function customRowPath(tableName, rowId) {
 	return "custom-table-row/" + tableName + "/" + rowId;
 }
 
-function ensureRow(tableName, rowId) {
-	try {
-		glue.command(["create", "custom-table-row", tableName, rowId]);
-		return true;
-	} catch(e) {
-		return false;
+function contains(array, value) {
+	for(var i = 0; i < array.length; i++) {
+		if(array[i] === value) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function validateHeaders(headers) {
+	if(!contains(headers, "id")) {
+		throw "Required TSV column is missing: id";
+	}
+
+	for(var i = 0; i < FIELD_NAMES.length; i++) {
+		var fieldName = FIELD_NAMES[i];
+
+		if(!contains(headers, fieldName)) {
+			throw "Required TSV column is missing: " + fieldName;
+		}
 	}
 }
 
-function setFieldIfPresent(fieldName, value) {
+function setField(fieldName, value) {
 	value = norm(value);
-	if(value !== null) {
-		glue.command(["set", "field", fieldName, value]);
+
+	if(value === null) {
+		return;
 	}
+
+	glue.command([
+		"set",
+		"field",
+		fieldName,
+		value
+	]);
 }
 
-function setIntFieldIfPresent(fieldName, value) {
-	value = normInt(value);
-	if(value !== null) {
-		glue.command(["set", "field", fieldName, "" + value]);
-	}
-}
-
-function loadRow(row) {
-
+function loadRow(row, lineNumber) {
 	var rowId = norm(row["id"]);
+
 	if(rowId === null) {
-		return "skipped";
+		throw "Missing id at input line " + lineNumber;
 	}
 
-	var wasCreated = ensureRow("erv_locus_candidate", rowId);
+	try {
+		glue.inMode(
+			customRowPath(TABLE_NAME, rowId),
+			function() {
+				for(var i = 0; i < FIELD_NAMES.length; i++) {
+					var fieldName = FIELD_NAMES[i];
 
-	glue.inMode(customRowPath("erv_locus_candidate", rowId), function() {
-
-		setFieldIfPresent("case_status", row["case_status"]);
-		setFieldIfPresent("chrom", row["chrom"]);
-		setFieldIfPresent("clade_out", row["clade_out"]);
-		setFieldIfPresent("curatedns", row["curatedns"]);
-		setFieldIfPresent("digs_ids", row["digs_ids"]);
-		setIntFieldIfPresent("end_position", row["end_position"]);
-
-		setFieldIfPresent("genes", row["genes"]);
-		setFieldIfPresent("genes_order", row["genes_order"]);
-		setFieldIfPresent("genes_simplified", row["genes_simplified"]);
-		setFieldIfPresent("group_out", row["group_out"]);
-		setIntFieldIfPresent("length", row["length"]);
-		setFieldIfPresent("makes_mosaic", row["makes_mosaic"]);
-
-		setFieldIfPresent("names", row["names"]);
-		setFieldIfPresent("names_decision", row["names_decision"]);
-		setFieldIfPresent("phylogeny_name", row["phylogeny_name"]);
-		setFieldIfPresent("repbase_ids", row["repbase_ids"]);
-		setFieldIfPresent("retrotector_ids", row["retrotector_ids"]);
-		setIntFieldIfPresent("start_position", row["start_position"]);
-
-		setFieldIfPresent("status", row["status"]);
-		setFieldIfPresent("strand", row["strand"]);
-		setFieldIfPresent("subgroup_out", row["subgroup_out"]);
-	});
-
-	return wasCreated ? "created" : "updated";
-}
-
-var reader = new BufferedReader(new FileReader(INPUT_PATH));
-
-var headerLine = reader.readLine();
-if(headerLine === null) {
-	throw "Input file is empty: " + INPUT_PATH;
-}
-
-var headers = splitTsvLine(headerLine);
-
-var line;
-var lineNumber = 1;
-var created = 0;
-var updated = 0;
-var skipped = 0;
-
-while((line = reader.readLine()) !== null) {
-	lineNumber++;
-
-	var values = splitTsvLine(line);
-	var row = makeRow(headers, values);
-
-	var result = loadRow(row);
-
-	if(result === "created") {
-		created++;
-	} else if(result === "updated") {
-		updated++;
-	} else {
-		skipped++;
-	}
-
-	if(lineNumber % 10000 === 0) {
-		glue.logInfo(
-			"Processed " + lineNumber +
-			" lines; created=" + created +
-			", updated=" + updated +
-			", skipped=" + skipped
+					setField(
+						fieldName,
+						row[fieldName]
+					);
+				}
+			}
 		);
+
+	} catch(error) {
+		throw "Failed to populate existing row '" +
+			rowId +
+			"' at input line " +
+			lineNumber +
+			": " +
+			error;
 	}
 }
 
-reader.close();
+// --------------------------------------------------
+// Stream input file
+// --------------------------------------------------
 
-glue.logInfo("Filtered ERV locus candidate import complete");
-glue.logInfo("Created rows: " + created);
-glue.logInfo("Updated rows: " + updated);
-glue.logInfo("Skipped rows: " + skipped);
+var reader = new BufferedReader(
+	new FileReader(INPUT_PATH)
+);
+
+try {
+	var headerLine = reader.readLine();
+
+	if(headerLine === null) {
+		throw "Input file is empty: " + INPUT_PATH;
+	}
+
+	var headers = splitTsvLine(headerLine);
+
+	validateHeaders(headers);
+
+	var line;
+	var lineNumber = 1;
+	var loaded = 0;
+
+	while((line = reader.readLine()) !== null) {
+		lineNumber++;
+
+		if(("" + line).trim() === "") {
+			continue;
+		}
+
+		var values = splitTsvLine(line);
+
+		if(values.length > headers.length) {
+			throw "Input line " +
+				lineNumber +
+				" contains " +
+				values.length +
+				" columns, but the header contains " +
+				headers.length;
+		}
+
+		var row = makeRow(
+			headers,
+			values
+		);
+
+		loadRow(
+			row,
+			lineNumber
+		);
+
+		loaded++;
+
+		if(loaded % 10000 === 0) {
+			glue.logInfo(
+				"Loaded " +
+				loaded +
+				" erv_locus_candidate rows"
+			);
+		}
+	}
+
+	glue.logInfo(
+		"ERV locus candidate import complete"
+	);
+
+	glue.logInfo(
+		"Rows loaded: " + loaded
+	);
+
+} finally {
+	reader.close();
+}
