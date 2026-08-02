@@ -14,18 +14,29 @@
 //   1. Confirms that the corresponding erv_lineage row exists.
 //   2. Confirms that the reference sequence exists.
 //   3. Identifies the appropriate parent constrained alignment.
-//   4. Ensures that the new reference is a member of that parent alignment.
-//   5. Creates a constrained child alignment using the reference.
+//   4. Creates a missing subgenus alignment where required.
+//   5. Ensures that the new reference is a member of its parent alignment.
+//   6. Creates a constrained lineage alignment using the reference.
 //
 // Alignment naming:
 //
-//   Child alignment:
-//     AL_<sanitised standardised lineage name>
+//   Lineage alignment:
+//     AL_LINEAGE_<sanitised standardised lineage name>
 //
-//   Parent alignment, in order of preference:
+//   Subgenus alignment:
+//     AL_SUBGENUS_<sanitised subgenus>
+//
+//   Parent alignment for a lineage, in order of preference:
 //     AL_SUBGENUS_<sanitised subgenus>
 //     AL_GENUS_<sanitised genus>
 //     AL_CLADE_<sanitised clade>
+//
+//   Parent alignment for a newly created subgenus:
+//     AL_GENUS_<sanitised genus>
+//     AL_CLADE_<sanitised clade>
+//
+// A missing subgenus alignment is created using the first accepted lineage
+// reference encountered for that subgenus.
 //
 // Reference naming:
 //
@@ -37,11 +48,14 @@
 //
 // command. The cache is updated whenever a new alignment is created.
 //
-// Parent-alignment membership is cached on demand. Each parent alignment is
-// queried at most once during the run.
-// Parent alignment:
-//   - subgenus, genus or clade alignment where classified
-//   - no parent where the classification is explicitly Unclassified
+// Parent-alignment membership is cached on demand. Each required
+// reference/alignment membership is queried at most once during the run.
+//
+// Root placement:
+//   - Explicitly Unclassified classifications are placed at the root.
+//   - A subgenus with no usable genus or clade is also placed at the root.
+//
+// Missing genus or clade alignments are not created automatically.
 //
 // Set DRY_RUN to true to report intended changes without modifying the
 // project.
@@ -132,6 +146,7 @@ function shouldInclude(row) {
 	return status === "accepted";
 }
 
+
 /*
  * Entity-existence functions
  */
@@ -204,6 +219,18 @@ function alignmentNameForRow(row) {
 	return "AL_LINEAGE_" + cleanAlignmentId;
 }
 
+function subgenusAlignmentName(subgenus) {
+
+	var cleanSubgenus = sanitize(subgenus);
+
+	if(cleanSubgenus === "") {
+		throw "Could not derive subgenus alignment name from: " +
+			subgenus;
+	}
+
+	return "AL_SUBGENUS_" + cleanSubgenus;
+}
+
 function isUnclassified(value) {
 
 	var normalisedValue = norm(value);
@@ -212,6 +239,10 @@ function isUnclassified(value) {
 		normalisedValue.toLowerCase() === "unclassified";
 }
 
+
+/*
+ * Determine the direct parent for a lineage alignment.
+ */
 
 function parentAlignmentForRow(row) {
 
@@ -233,7 +264,7 @@ function parentAlignmentForRow(row) {
 		return {
 			rootLevel: false,
 			parentAlignmentName:
-				"AL_SUBGENUS_" + sanitize(subgenus)
+				subgenusAlignmentName(subgenus)
 		};
 	}
 
@@ -283,6 +314,67 @@ function parentAlignmentForRow(row) {
 		parentAlignmentName: null
 	};
 }
+
+
+/*
+ * Determine where a newly created subgenus alignment should sit.
+ *
+ * Parent alignment, in order of preference:
+ *
+ *     AL_GENUS_<genus>
+ *     AL_CLADE_<clade>
+ *
+ * If genus or clade is explicitly Unclassified, the subgenus alignment is
+ * created at the root.
+ *
+ * If no usable genus or clade is supplied, the subgenus alignment is also
+ * created at the root.
+ */
+
+function parentAlignmentForSubgenus(row) {
+
+	var genus = norm(row["genus"]);
+
+	if(isUnclassified(genus)) {
+		return {
+			rootLevel: true,
+			parentAlignmentName: null
+		};
+	}
+
+	if(genus != null) {
+		return {
+			rootLevel: false,
+			parentAlignmentName:
+				"AL_GENUS_" + sanitize(genus)
+		};
+	}
+
+
+	var clade = norm(row["clade"]);
+
+	if(isUnclassified(clade)) {
+		return {
+			rootLevel: true,
+			parentAlignmentName: null
+		};
+	}
+
+	if(clade != null) {
+		return {
+			rootLevel: false,
+			parentAlignmentName:
+				"AL_CLADE_" + sanitize(clade)
+		};
+	}
+
+
+	return {
+		rootLevel: true,
+		parentAlignmentName: null
+	};
+}
+
 
 /*
  * Alignment cache
@@ -354,62 +446,18 @@ function addAlignmentToCache(
 /*
  * Parent-alignment membership cache
  *
- * Memberships are loaded only when a parent alignment is first encountered.
- *
  * The cache is keyed first by alignment name and then by reference name:
  *
  * memberMap["AL_SUBGENUS_Kappa"]["REF_HERVKHML1"] = true;
- *
- * A member created using:
- *
- *     add member -r REF_HERVKHML1
- *
- * is the sequence underlying that reference sequence. The where-clause below
- * therefore finds alignment members through the sequence-reference
- * relationship.
  */
-
-function listReferenceMembers(alignmentName) {
-
-	var referenceMemberMap = {};
-
-	glue.inMode("alignment/" + alignmentName, function() {
-
-		var memberRows = glue.tableToObjects(
-			glue.command([
-				"list",
-				"member"
-			])
-		);
-
-		_.each(memberRows, function(memberRow) {
-
-			/*
-			 * Depending on the GLUE version and configured list fields, the
-			 * reference name may be exposed directly in one of these forms.
-			 */
-
-			var referenceName =
-				norm(memberRow["sequence.referenceSequences.name"]) ||
-				norm(memberRow["referenceSequence.name"]) ||
-				norm(memberRow["reference.name"]);
-
-			if(referenceName != null) {
-				referenceMemberMap[referenceName] = true;
-			}
-		});
-	});
-
-	return referenceMemberMap;
-}
 
 
 /*
  * Determine directly whether a reference's underlying sequence is already
  * present in an alignment.
  *
- * This targeted query is used because the normal "list member" output does
- * not necessarily include reference-sequence names as columns.
+ * This targeted query is used because normal "list member" output does not
+ * necessarily include reference-sequence names as columns.
  */
 
 function referenceIsAlignmentMember(
@@ -437,11 +485,10 @@ function referenceIsAlignmentMember(
 
 
 /*
- * Load and cache membership information for one parent alignment.
+ * Initialise membership information for one alignment.
  *
- * The membership cache is intentionally populated with only the references
- * needed during this build. This avoids requiring every "list member" row to
- * expose a reference-name column.
+ * The cache is intentionally populated only with references needed during
+ * this build.
  */
 
 function ensureMembershipCacheForAlignment(
@@ -537,6 +584,285 @@ function ensureReferenceIsAlignmentMember(
 
 
 /*
+ * Ensure that the subgenus alignment required by a lineage row exists.
+ *
+ * A missing subgenus alignment is created using the current lineage
+ * reference as its constrained reference.
+ *
+ * After creation, all members of the higher parent alignment assigned to
+ * this subgenus are demoted into the new subgenus alignment. This is required
+ * because creating a constrained child alignment does not itself make its
+ * reference sequence a direct member of that child alignment.
+ *
+ * Returns an object containing:
+ *
+ *     status:
+ *         "existing"
+ *         "created"
+ *         "dry-run"
+ *         "missing-higher-parent"
+ *         "not-applicable"
+ *
+ *     alignmentName:
+ *         name of the subgenus alignment, where applicable
+ *
+ *     higherParentAlignmentName:
+ *         genus or clade parent, where applicable
+ *
+ *     parentMembershipResult:
+ *         "existing"
+ *         "added"
+ *         "dry-run"
+ *         null
+ *
+ *     demotionResult:
+ *         "performed"
+ *         "dry-run"
+ *         null
+ */
+
+function ensureSubgenusAlignment(
+	row,
+	alignmentMap,
+	memberMap,
+	referenceName
+) {
+
+	var subgenus = norm(row["subgenus"]);
+
+	if(
+		subgenus == null ||
+		isUnclassified(subgenus)
+	) {
+		return {
+			status: "not-applicable",
+			alignmentName: null,
+			higherParentAlignmentName: null,
+			parentMembershipResult: null,
+			demotionResult: null
+		};
+	}
+
+
+	var alignmentName =
+		subgenusAlignmentName(subgenus);
+
+
+	if(
+		alignmentExists(
+			alignmentMap,
+			alignmentName
+		)
+	) {
+		return {
+			status: "existing",
+			alignmentName: alignmentName,
+			higherParentAlignmentName:
+				alignmentMap[alignmentName].parentName,
+			parentMembershipResult: null,
+			demotionResult: null
+		};
+	}
+
+
+	var parentResolution =
+		parentAlignmentForSubgenus(row);
+
+	var rootLevel =
+		parentResolution.rootLevel;
+
+	var higherParentAlignmentName =
+		parentResolution.parentAlignmentName;
+
+
+	/*
+	 * A subgenus alignment can only be populated by demotion when it has a
+	 * higher parent. Missing genus or clade alignments are not created here.
+	 */
+
+	if(
+		rootLevel ||
+		higherParentAlignmentName == null ||
+		!alignmentExists(
+			alignmentMap,
+			higherParentAlignmentName
+		)
+	) {
+		return {
+			status: "missing-higher-parent",
+			alignmentName: alignmentName,
+			higherParentAlignmentName:
+				higherParentAlignmentName,
+			parentMembershipResult: null,
+			demotionResult: null
+		};
+	}
+
+
+	/*
+	 * Ensure that the reference used for the new subgenus alignment is
+	 * currently a member of the higher parent alignment.
+	 */
+
+	var parentMembershipResult =
+		ensureReferenceIsAlignmentMember(
+			memberMap,
+			higherParentAlignmentName,
+			referenceName
+		);
+
+
+	/*
+	 * Create the constrained subgenus alignment beneath the higher parent.
+	 */
+
+	var createAlignmentCommand = [
+		"create",
+		"alignment",
+		alignmentName,
+		"-r",
+		referenceName,
+		"-p",
+		higherParentAlignmentName
+	];
+
+	runCmd(createAlignmentCommand);
+
+
+	/*
+	 * Update the alignment cache in normal and dry-run modes.
+	 */
+
+	addAlignmentToCache(
+		alignmentMap,
+		alignmentName,
+		higherParentAlignmentName,
+		referenceName
+	);
+
+
+	/*
+	 * Demote all members assigned to this subgenus from the higher parent
+	 * alignment into the new subgenus alignment.
+	 */
+
+	var demoteWhereClause =
+		"sequence.erv_lineage.rv_subgenus.id = '" +
+		escapeQuotes(subgenus) +
+		"'";
+
+
+	log(
+		"Demoting members assigned to subgenus " +
+		subgenus +
+		" from " +
+		higherParentAlignmentName +
+		" into " +
+		alignmentName
+	);
+
+
+	if(DRY_RUN) {
+
+		log(
+			"[DRY RUN] alignment/" +
+			higherParentAlignmentName +
+			": demote member " +
+			alignmentName +
+			" -w \"" +
+			demoteWhereClause +
+			"\""
+		);
+
+		/*
+		 * Record the current reference as a member of the subgenus alignment
+		 * so subsequent dry-run processing can continue.
+		 */
+
+		var dryRunSubgenusMemberMap =
+			ensureMembershipCacheForAlignment(
+				memberMap,
+				alignmentName
+			);
+
+		dryRunSubgenusMemberMap[referenceName] = true;
+
+
+		log(
+			"[DRY RUN] Would create subgenus alignment " +
+			alignmentName +
+			" under " +
+			higherParentAlignmentName +
+			" with reference " +
+			referenceName
+		);
+
+		return {
+			status: "dry-run",
+			alignmentName: alignmentName,
+			higherParentAlignmentName:
+				higherParentAlignmentName,
+			parentMembershipResult:
+				parentMembershipResult,
+			demotionResult: "dry-run"
+		};
+	}
+
+
+	glue.inMode(
+		"alignment/" + higherParentAlignmentName,
+		function() {
+			glue.command([
+				"demote",
+				"member",
+				alignmentName,
+				"-w",
+				demoteWhereClause
+			]);
+		}
+	);
+
+
+	/*
+	 * Reset the relevant membership caches because demotion changes direct
+	 * membership in both the higher parent and the new child alignment.
+	 */
+
+	memberMap[higherParentAlignmentName] = {};
+	memberMap[alignmentName] = {};
+
+
+	log(
+		"Created subgenus alignment " +
+		alignmentName +
+		" under " +
+		higherParentAlignmentName +
+		" with reference " +
+		referenceName
+	);
+
+	log(
+		"Demoted subgenus " +
+		subgenus +
+		" members into " +
+		alignmentName
+	);
+
+
+	return {
+		status: "created",
+		alignmentName: alignmentName,
+		higherParentAlignmentName:
+			higherParentAlignmentName,
+		parentMembershipResult:
+			parentMembershipResult,
+		demotionResult: "performed"
+	};
+}
+
+
+
+/*
  * Main build
  */
 
@@ -569,6 +895,15 @@ var skippedCount = 0;
 var missingLineageCount = 0;
 var missingReferenceCount = 0;
 var missingParentAlignmentCount = 0;
+var missingHigherParentAlignmentCount = 0;
+
+var existingSubgenusAlignmentCount = 0;
+var createdSubgenusAlignmentCount = 0;
+var dryRunSubgenusAlignmentCount = 0;
+
+var existingSubgenusParentMembershipCount = 0;
+var addedSubgenusParentMembershipCount = 0;
+var dryRunSubgenusParentMembershipCount = 0;
 
 var existingParentMembershipCount = 0;
 var addedParentMembershipCount = 0;
@@ -657,7 +992,7 @@ _.each(rows, function(row) {
 
 
 	/*
-	 * Resolve child and parent alignment names.
+	 * Resolve lineage and parent alignment names.
 	 */
 
 	var alignmentName =
@@ -674,7 +1009,88 @@ _.each(rows, function(row) {
 
 
 	/*
-	 * Only non-root alignments require a parent alignment.
+	 * If the lineage belongs to a subgenus and that subgenus alignment does
+	 * not yet exist, create it now.
+	 *
+	 * The first accepted lineage encountered for the subgenus supplies the
+	 * constrained reference for the new subgenus alignment.
+	 */
+
+	if(
+		!rootLevel &&
+		parentAlignmentName != null &&
+		parentAlignmentName.indexOf("AL_SUBGENUS_") === 0
+	) {
+
+		var subgenusResult =
+			ensureSubgenusAlignment(
+				row,
+				alignmentMap,
+				memberMap,
+				referenceName
+			);
+
+
+		if(subgenusResult.status === "existing") {
+
+			existingSubgenusAlignmentCount++;
+
+		}
+		else if(subgenusResult.status === "created") {
+
+			createdSubgenusAlignmentCount++;
+
+		}
+		else if(subgenusResult.status === "dry-run") {
+
+			dryRunSubgenusAlignmentCount++;
+
+		}
+		else if(
+			subgenusResult.status ===
+			"missing-higher-parent"
+		) {
+
+			missingHigherParentAlignmentCount++;
+
+			log(
+				"Skipping " + sequenceId +
+				" because the higher parent required for " +
+				subgenusResult.alignmentName +
+				" is missing: " +
+				subgenusResult.higherParentAlignmentName
+			);
+
+			return;
+		}
+
+
+		if(
+			subgenusResult.parentMembershipResult ===
+			"existing"
+		) {
+			existingSubgenusParentMembershipCount++;
+		}
+		else if(
+			subgenusResult.parentMembershipResult ===
+			"added"
+		) {
+			addedSubgenusParentMembershipCount++;
+		}
+		else if(
+			subgenusResult.parentMembershipResult ===
+			"dry-run"
+		) {
+			dryRunSubgenusParentMembershipCount++;
+		}
+	}
+
+
+	/*
+	 * After attempting to create a missing subgenus alignment, confirm that
+	 * the required parent now exists.
+	 *
+	 * Missing genus or clade alignments are not created by this script.
 	 */
 
 	if(
@@ -699,12 +1115,13 @@ _.each(rows, function(row) {
 		return;
 	}
 
+
 	/*
-	 * If the child alignment already exists, no further action is needed.
+	 * If the lineage alignment already exists, no further action is needed.
 	 *
-	 * In particular, its reference must already be a member of its parent,
-	 * because GLUE would not have allowed the constrained alignment to be
-	 * created otherwise.
+	 * Its reference must already be a member of its parent because GLUE
+	 * would not have allowed the constrained alignment to be created
+	 * otherwise.
 	 */
 
 	if(
@@ -726,12 +1143,8 @@ _.each(rows, function(row) {
 
 
 	/*
-	 * Ensure the reference is a member of the proposed parent alignment.
-	 *
-	 * This is the step required to avoid:
-	 *
-	 * Reference REF_x of alignment AL_x is not a member of proposed
-	 * parent alignment AL_y
+	 * Ensure the lineage reference is a member of the proposed parent
+	 * alignment.
 	 */
 
 	if(!rootLevel) {
@@ -745,16 +1158,18 @@ _.each(rows, function(row) {
 
 		if(membershipResult === "existing") {
 			existingParentMembershipCount++;
-		} else if(membershipResult === "added") {
+		}
+		else if(membershipResult === "added") {
 			addedParentMembershipCount++;
-		} else if(membershipResult === "dry-run") {
+		}
+		else if(membershipResult === "dry-run") {
 			dryRunParentMembershipCount++;
 		}
 	}
 
 
 	/*
-	 * Create the constrained child alignment.
+	 * Create the constrained lineage alignment.
 	 */
 
 	var createAlignmentCommand = [
@@ -774,23 +1189,6 @@ _.each(rows, function(row) {
 	}
 
 
-	if(DRY_RUN) {
-
-		runCmd(createAlignmentCommand);
-
-		dryRunAlignmentCount++;
-
-		addAlignmentToCache(
-			alignmentMap,
-			alignmentName,
-			parentAlignmentName,
-			referenceName
-		);
-
-		return;
-	}
-
-
 	runCmd(createAlignmentCommand);
 
 	addAlignmentToCache(
@@ -799,6 +1197,15 @@ _.each(rows, function(row) {
 		parentAlignmentName,
 		referenceName
 	);
+
+
+	if(DRY_RUN) {
+
+		dryRunAlignmentCount++;
+
+		return;
+	}
+
 
 	createdAlignmentCount++;
 
@@ -863,35 +1270,74 @@ log(
 );
 
 log(
-	"Existing parent memberships: " +
+	"Missing higher parent alignments: " +
+	missingHigherParentAlignmentCount
+);
+
+log(
+	"Existing subgenus alignments encountered: " +
+	existingSubgenusAlignmentCount
+);
+
+log(
+	"Subgenus alignments created: " +
+	createdSubgenusAlignmentCount
+);
+
+if(DRY_RUN) {
+	log(
+		"Subgenus alignments to create: " +
+		dryRunSubgenusAlignmentCount
+	);
+}
+
+log(
+	"Existing subgenus-parent memberships: " +
+	existingSubgenusParentMembershipCount
+);
+
+log(
+	"Subgenus-parent memberships added: " +
+	addedSubgenusParentMembershipCount
+);
+
+if(DRY_RUN) {
+	log(
+		"Subgenus-parent memberships to add: " +
+		dryRunSubgenusParentMembershipCount
+	);
+}
+
+log(
+	"Existing lineage-parent memberships: " +
 	existingParentMembershipCount
 );
 
 log(
-	"Parent memberships added: " +
+	"Lineage-parent memberships added: " +
 	addedParentMembershipCount
 );
 
 if(DRY_RUN) {
 	log(
-		"Parent memberships to add: " +
+		"Lineage-parent memberships to add: " +
 		dryRunParentMembershipCount
 	);
 }
 
 log(
-	"Existing alignments: " +
+	"Existing lineage alignments: " +
 	existingAlignmentCount
 );
 
 log(
-	"Created alignments: " +
+	"Lineage alignments created: " +
 	createdAlignmentCount
 );
 
 if(DRY_RUN) {
 	log(
-		"Alignments to create: " +
+		"Lineage alignments to create: " +
 		dryRunAlignmentCount
 	);
 }

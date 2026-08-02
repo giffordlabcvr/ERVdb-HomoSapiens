@@ -18,9 +18,166 @@
 //   MER57B1,MER57B1 -> MER57B1
 //   ERV-L,ERVL      -> ERV-L
 //
+// Compatible LTR subtype classifications may be collapsed to a shared
+// parent LTR family:
+//
+//   LTR7,LTR7A      -> LTR7
+//   LTR16C,LTR16E2  -> LTR16
+//
 // Genuinely conflicting classifications are reported as exceptions.
 //
 // This script does not modify the project.
+
+
+// -------------------------------------------------------------------------
+// Explicit LTR subtype-to-family mappings
+// -------------------------------------------------------------------------
+
+var ltrFamilyBySubtype = {
+
+	// LTR5 family
+	"LTR1":  "LTR1",
+	"LTR1A": "LTR1",
+	"LTR1B": "LTR1",
+	"LTR1C": "LTR1",
+
+	// LTR5 family
+	"LTR5": "LTR5",
+	"LTR5-Hs": "LTR5",
+	"LTR5_Hs": "LTR5",
+	"LTR5A": "LTR5",
+	"LTR5B": "LTR5",
+
+	// LTR7 family
+	"LTR7":  "LTR7",
+	"LTR7A": "LTR7",
+	"LTR7B": "LTR7",
+	"LTR7C": "LTR7",
+	"LTR7Y": "LTR7",
+
+	// LTR8 family
+	"LTR8":  "LTR8",
+	"LTR8A": "LTR8",
+	"LTR8B": "LTR8",
+
+	// LTR12 family
+	"LTR12":  "LTR12",
+	"LTR12_": "LTR12",
+	"LTR12B": "LTR12",
+	"LTR12C": "LTR12",
+	"LTR12D": "LTR12",
+	"LTR12E": "LTR12",
+
+	// LTR13 family
+	"LTR13": "LTR13",
+	"LTR13A": "LTR13",
+	"LTR13_": "LTR13",
+
+	// MER66 family
+	"MER66A": "MER66",
+	"MER66B": "MER66",
+	"MER66C": "MER66",
+
+	// MER66 family
+	"MER66A": "MER66",
+	"MER66B": "MER66",
+	"MER66C": "MER66",
+
+	// MER83 family
+	"MER83B": "MER83",
+	"MER83C": "MER83",
+
+	// MER70 family
+	"MER70A": "MER70",
+	"MER70B": "MER70",
+
+	// MER83 family
+	"MER83B": "MER83",
+	"MER83C": "MER83",
+
+	// MLT2A family
+	"MLT2A1": "MLT2A",
+	"MLT2A2": "MLT2A",
+
+	// LTR16 family
+	"LTR16A":        "LTR16",
+	"LTR16A1":       "LTR16",
+	"LTR16A2":       "LTR16",
+	"LTR16B":        "LTR16",
+	"LTR16B1":       "LTR16",
+	"LTR16B2":       "LTR16",
+	"LTR16C":        "LTR16",
+	"LTR16D":        "LTR16",
+	"LTR16D1":       "LTR16",
+	"LTR16D2":       "LTR16",
+	"LTR16E1":       "LTR16",
+	"LTR16E2":       "LTR16",
+	"ERV3-16A3_LTR": "LTR16"
+};
+
+var ervLineageTranslationByKey = {
+
+	"ervle":       "ERV-L",
+	"hervea":      "HERV-E",
+	"hervip":      "HERV-I",
+
+	"hervk(hml1)":  "HERV-K-HML1",
+	"hervk(hml2)":  "HERV-K-HML2",
+	"hervk(hml3)":  "HERV-K-HML3",
+	"hervk(hml4)":  "HERV-K-HML4",
+	"hervk(hml5)":  "HERV-K-HML5",
+	"hervk(hml6)":  "HERV-K-HML6",
+	"hervk(hml7)":  "HERV-K-HML7",
+	"hervk(hml8)":  "HERV-K-HML8",
+	"hervk(hml9)":  "HERV-K-HML9",
+	"hervk(hml10)": "HERV-K-HML10",
+
+	"hervlb1": "HERV-Lb",
+	"hervlb2": "HERV-Lb",
+
+	"hervrb1": "HERV-Rb",
+	"hervrb2": "HERV-Rb",
+
+	"huersp3b": "HERV-P",
+	"rrhervi":  "HERV-15"
+};
+
+var ltrTranslationByKey = {
+
+	// Naming and punctuation differences
+	"erv316a3_ltr": "ERV316A3LTR",
+	"mer4d0":       "MER4D",
+
+	// Available representative alignments
+	"ltr5_hs": "LTR5",
+	"ltr7":    "LTR7A",
+	"mer34":   "MER34A1",
+	"mer66":   "MER66A",
+	"mer70":   "MER70A",
+	"mlt2a":   "MLT2A1",
+	"mlt2b1":  "MLT2B3",
+	"mlt2c1":  "MLT2C2",
+	"mer61e":  "MER61",
+	"mer61d":  "MER61",
+	"mlt2b5":  "MLT2B4",
+	"mer61f":  "MER61A",
+
+	// Underscore variants
+	"ltr12_":     "LTR12",
+	"mer4a1_":    "MER4A1",
+	"pabl_a":     "PABLA",
+	"pabl_b":     "PABLB",
+	"prima4_ltr": "PRIMA4LTR",
+
+	// HERV1 LTR variants use the master alignment
+	"herv1_ltra": "HERV1LTR",
+	"herv1_ltrb": "HERV1LTR",
+	"herv1_ltrc": "HERV1LTR",
+	"herv1_ltrd": "HERV1LTR",
+	"herv1_ltre": "HERV1LTR",
+
+};
+
 
 
 // -------------------------------------------------------------------------
@@ -55,13 +212,17 @@ function norm(value) {
 //   MER57B1,MER57B1 -> MER57B1
 //   ERV-L,ERVL      -> ERV-L
 //
-// If more than one distinct normalised name remains, the result is
-// considered conflicting.
+// For LTR records, multiple distinct names may also be resolved when all
+// names map explicitly to the same parent LTR family.
+//
+// If more than one distinct normalised name remains and no shared LTR
+// family can be identified, the result is considered conflicting.
 // -------------------------------------------------------------------------
 
-function resolveClassification(value) {
+function resolveClassification(value, status) {
 
 	if(value === null || value === undefined) {
+
 		return {
 			status: "missing",
 			classification: null,
@@ -72,6 +233,7 @@ function resolveClassification(value) {
 	var originalValue = ("" + value).trim();
 
 	if(originalValue === "") {
+
 		return {
 			status: "missing",
 			classification: null,
@@ -110,6 +272,49 @@ function resolveClassification(value) {
 
 	if(keys.length > 1) {
 
+		if(status === "LTR") {
+
+			var family = null;
+			var compatible = true;
+
+			for(var i = 0; i < keys.length; i++) {
+
+				var subtype =
+					nameByKey[keys[i]];
+
+				var mappedFamily =
+					ltrFamilyBySubtype[subtype];
+
+				if(mappedFamily === undefined) {
+
+					compatible = false;
+					break;
+				}
+
+				if(family === null) {
+
+					family = mappedFamily;
+				}
+				else if(family !== mappedFamily) {
+
+					compatible = false;
+					break;
+				}
+			}
+
+			if(compatible) {
+
+				return {
+					status: "resolved",
+					classification: family,
+					normalisedKey: norm(family),
+					originalValue: originalValue,
+					resolutionType:
+						"ltr_family_collapse"
+				};
+			}
+		}
+
 		return {
 			status: "conflicting",
 			classification: null,
@@ -122,7 +327,8 @@ function resolveClassification(value) {
 		status: "resolved",
 		classification: nameByKey[keys[0]],
 		normalisedKey: keys[0],
-		originalValue: originalValue
+		originalValue: originalValue,
+		resolutionType: "direct"
 	};
 }
 
@@ -302,6 +508,7 @@ glue.logInfo(
 // -------------------------------------------------------------------------
 
 var assignments = [];
+var familyCollapsedAssignments = [];
 var unmatched = [];
 var conflictingClassifications = [];
 var missingClassifications = [];
@@ -350,8 +557,16 @@ for(var i = 0; i < candidateRows.length; i++) {
 		continue;
 	}
 
+	var classificationResult =
+		resolveClassification(
+			rawClassification,
+			locusStatus
+		);
+
+
 	var classificationResult = resolveClassification(
-		rawClassification
+		rawClassification,
+		locusStatus
 	);
 
 	if(classificationResult.status === "missing") {
@@ -370,7 +585,8 @@ for(var i = 0; i < candidateRows.length; i++) {
 		conflictingClassifications.push({
 			id: locusID,
 			status: locusStatus,
-			classification: classificationResult.originalValue
+			classification:
+				classificationResult.originalValue
 		});
 
 		continue;
@@ -382,11 +598,88 @@ for(var i = 0; i < candidateRows.length; i++) {
 	var classificationKey =
 		classificationResult.normalisedKey;
 
+
+	// Translate historical ERV names before alignment lookup
+
+	if(locusStatus === "ERV") {
+
+		var translated =
+			ervLineageTranslationByKey[
+				classificationKey
+			];
+
+		if(translated !== undefined) {
+
+			classificationName =
+				translated;
+
+			classificationKey =
+				norm(translated);
+		}
+	}
+
+
+	// Translate LTR aliases before alignment lookup
+
+	if(locusStatus === "LTR") {
+
+		var translatedLtrName =
+			ltrTranslationByKey[
+				classificationKey
+			];
+
+		if(translatedLtrName !== undefined) {
+
+			classificationName =
+				translatedLtrName;
+
+			classificationKey =
+				norm(translatedLtrName);
+		}
+	}
+
+
 	var alignmentName =
 		alignmentLookup[classificationKey];
 
+
+
+
+
+
+
+
+
+
+
+
+	// Translate historical ERV classifications to current lineage names
+	// before attempting the alignment lookup.
+
+	if(locusStatus === "ERV") {
+
+		var translatedLineageName =
+			ervLineageTranslationByKey[
+				classificationKey
+			];
+
+		if(translatedLineageName !== undefined) {
+
+			classificationName =
+				translatedLineageName;
+
+			classificationKey =
+				norm(translatedLineageName);
+		}
+	}
+
+
+	var alignmentName =
+		alignmentLookup[classificationKey];
+
+
 	if(alignmentName === null ||
-		alignmentName === undefined) {
+			alignmentName === undefined) {
 
 		unmatched.push({
 			id: locusID,
@@ -394,13 +687,15 @@ for(var i = 0; i < candidateRows.length; i++) {
 			classification: classificationName,
 			originalClassification:
 				classificationResult.originalValue,
-			key: classificationKey
+			key: classificationKey,
+			resolutionType:
+				classificationResult.resolutionType
 		});
 
 		continue;
 	}
 
-	assignments.push({
+	var assignment = {
 		id: locusID,
 		status: locusStatus,
 		classification: classificationName,
@@ -409,8 +704,22 @@ for(var i = 0; i < candidateRows.length; i++) {
 		alignmentName: alignmentName,
 		length: row.length,
 		chrom: row.chrom,
-		start_position: row.start_position
-	});
+		start_position: row.start_position,
+		resolutionType:
+			classificationResult.resolutionType
+	};
+
+	assignments.push(
+		assignment
+	);
+
+	if(classificationResult.resolutionType ===
+			"ltr_family_collapse") {
+
+		familyCollapsedAssignments.push(
+			assignment
+		);
+	}
 }
 
 
@@ -421,6 +730,11 @@ for(var i = 0; i < candidateRows.length; i++) {
 glue.logInfo(
 	"Resolved assignments: " +
 	assignments.length
+);
+
+glue.logInfo(
+	"LTR family-collapsed assignments: " +
+	familyCollapsedAssignments.length
 );
 
 glue.logInfo(
@@ -463,6 +777,29 @@ for(var i = 0; i < assignments.length; i++) {
 
 
 // -------------------------------------------------------------------------
+// Report LTR assignments resolved through family collapse
+// -------------------------------------------------------------------------
+
+for(var i = 0;
+		i < familyCollapsedAssignments.length;
+		i++) {
+
+	var collapsedAssignment =
+		familyCollapsedAssignments[i];
+
+	glue.logInfo(
+		"ASSIGN_LTR_FAMILY_COLLAPSE\t" +
+		collapsedAssignment.id + "\t" +
+		collapsedAssignment.status + "\t" +
+		collapsedAssignment.originalClassification +
+		"\t" +
+		collapsedAssignment.classification + "\t" +
+		collapsedAssignment.alignmentName
+	);
+}
+
+
+// -------------------------------------------------------------------------
 // Report conflicting classifications
 // -------------------------------------------------------------------------
 
@@ -490,7 +827,8 @@ for(var i = 0;
 		i < missingClassifications.length;
 		i++) {
 
-	var missingRow = missingClassifications[i];
+	var missingRow =
+		missingClassifications[i];
 
 	glue.logInfo(
 		"MISSING_CLASSIFICATION\t" +
@@ -508,7 +846,8 @@ for(var i = 0;
 		i < unsupportedStatuses.length;
 		i++) {
 
-	var unsupportedRow = unsupportedStatuses[i];
+	var unsupportedRow =
+		unsupportedStatuses[i];
 
 	glue.logInfo(
 		"UNSUPPORTED_STATUS\t" +
@@ -526,7 +865,8 @@ var unmatchedSummaryByKey = {};
 
 for(var i = 0; i < unmatched.length; i++) {
 
-	var unmatchedRow = unmatched[i];
+	var unmatchedRow =
+		unmatched[i];
 
 	var summaryKey =
 		unmatchedRow.status + "\t" +
@@ -541,9 +881,11 @@ for(var i = 0; i < unmatched.length; i++) {
 			status: unmatchedRow.status,
 			classification:
 				unmatchedRow.classification,
-			normalisedKey: unmatchedRow.key,
+			normalisedKey:
+				unmatchedRow.key,
 			count: 0,
-			exampleLocus: unmatchedRow.id
+			exampleLocus:
+				unmatchedRow.id
 		};
 
 		unmatchedSummaryByKey[summaryKey] =
@@ -554,15 +896,18 @@ for(var i = 0; i < unmatched.length; i++) {
 }
 
 var unmatchedSummary = [];
-var unmatchedSummaryKeys = Object.keys(
-	unmatchedSummaryByKey
-);
+
+var unmatchedSummaryKeys =
+	Object.keys(
+		unmatchedSummaryByKey
+	);
 
 for(var i = 0;
 		i < unmatchedSummaryKeys.length;
 		i++) {
 
-	var summaryKey = unmatchedSummaryKeys[i];
+	var summaryKey =
+		unmatchedSummaryKeys[i];
 
 	unmatchedSummary.push(
 		unmatchedSummaryByKey[summaryKey]
@@ -617,7 +962,9 @@ glue.logInfo(
 	"STATUS\tCLASSIFICATION\tNORMALISED_KEY\tLOCUS_COUNT\tEXAMPLE_LOCUS"
 );
 
-for(var i = 0; i < unmatchedSummary.length; i++) {
+for(var i = 0;
+		i < unmatchedSummary.length;
+		i++) {
 
 	var unmatchedSummaryRow =
 		unmatchedSummary[i];
@@ -631,3 +978,106 @@ for(var i = 0; i < unmatchedSummary.length; i++) {
 	);
 }
 
+
+// -------------------------------------------------------------------------
+// Count rows by locus status
+// -------------------------------------------------------------------------
+
+function countRowsByStatus(
+	rows,
+	status
+) {
+
+	var count = 0;
+
+	for(var i = 0; i < rows.length; i++) {
+
+		if(rows[i].status === status) {
+			count++;
+		}
+	}
+
+	return count;
+}
+
+
+// -------------------------------------------------------------------------
+// Print one compact outcome-summary row
+// -------------------------------------------------------------------------
+
+function printOutcomeSummaryRow(
+	outcome,
+	rows
+) {
+
+	var ervCount =
+		countRowsByStatus(
+			rows,
+			"ERV"
+		);
+
+	var ltrCount =
+		countRowsByStatus(
+			rows,
+			"LTR"
+		);
+
+	var otherCount =
+		rows.length -
+		ervCount -
+		ltrCount;
+
+	glue.logInfo(
+		outcome + "\t" +
+		ervCount + "\t" +
+		ltrCount + "\t" +
+		otherCount + "\t" +
+		rows.length
+	);
+}
+
+
+// -------------------------------------------------------------------------
+// Print compact outcome summary
+//
+// ASSIGN_LTR_FAMILY_COLLAPSE is a subset of ASSIGN.
+// It must not be added to ASSIGN when calculating totals.
+// -------------------------------------------------------------------------
+
+glue.logInfo(
+	"OUTCOME SUMMARY"
+);
+
+glue.logInfo(
+	"OUTCOME\tERV\tLTR\tOTHER\tTOTAL"
+);
+
+printOutcomeSummaryRow(
+	"ASSIGN",
+	assignments
+);
+
+printOutcomeSummaryRow(
+	"ASSIGN_LTR_FAMILY_COLLAPSE",
+	familyCollapsedAssignments
+);
+
+printOutcomeSummaryRow(
+	"UNMATCHED_CLASSIFICATION",
+	unmatched
+);
+
+printOutcomeSummaryRow(
+	"CONFLICTING_CLASSIFICATION",
+	conflictingClassifications
+);
+
+printOutcomeSummaryRow(
+	"MISSING_CLASSIFICATION",
+	missingClassifications
+);
+
+printOutcomeSummaryRow(
+	"UNSUPPORTED_STATUS",
+	unsupportedStatuses
+);
