@@ -38,36 +38,38 @@
   
   # Clade I
 
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervtPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervePolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervrPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervRbPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHerviPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervhPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervFaPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervFbPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervFcPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervWPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHerv9PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/ervSelectorHervLbPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervtPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervePolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervrPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervRbPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHerviPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervhPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervFaPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervFbPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervFcPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervWPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHerv9PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/ervSelectorHervLbPolNucs.xml
 
   # Clade II
   
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml5PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml6PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml5PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml6PolNucs.xml
 
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml1PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml2PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml3PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml4PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml7PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml8PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml9PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/ervSelectorHervkhml10PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml1PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml2PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml3PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml4PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml7PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml8PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml9PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/ervSelectorHervkhml10PolNucs.xml
 
 
   # Clade III
 
-	  create module -f modules/analyse/msa_masking/clade_III/nucs/ervSelectorHervLPolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_III/nucs/ervSelectorHervU3PolNucs.xml
-	  create module -f modules/analyse/msa_masking/clade_III/nucs/ervSelectorHervSPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_III/nucs/pol/ervSelectorHervLPolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_III/nucs/pol/ervSelectorHervU3PolNucs.xml
+	  create module -f modules/analyse/msa_masking/clade_III/nucs/pol/ervSelectorHervSPolNucs.xml
+	  
+

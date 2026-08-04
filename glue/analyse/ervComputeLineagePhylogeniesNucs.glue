@@ -7,110 +7,118 @@
   # Clade I
 
     #~# Gammaretroviruses
-    #generate nucleotide phylogeny AL_LINEAGE_HERVT -s ervSelectorHervTPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervTPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVT -s ervSelectorHervTPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervTPolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVE -s ervSelectorHervEPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervEPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVE -s ervSelectorHervEPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervEPolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVR -s ervSelectorHervRPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervRPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVR -s ervSelectorHervRPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervRPolNucs.tree NEWICK_BOOTSTRAPS
 
     #~# Rhoretroviruses
-    #generate nucleotide phylogeny AL_LINEAGE_HERVRb1 -s ervSelectorHervRbPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervRb1PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVRb -s ervSelectorHervRbPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervRb1PolNucs.tree NEWICK_BOOTSTRAPS
 
     #~# Iotaretroviruses
-    #generate nucleotide phylogeny AL_LINEAGE_HERVI -s ervSelectorHervIPolNucs \
+    generate nucleotide phylogeny AL_LINEAGE_HERVI -s ervSelectorHervIPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervIPolNucs.tree NEWICK_BOOTSTRAPS
+
+    #generate nucleotide phylogeny AL_LINEAGE_HERVADP -s ervSelectorHervAdpPolNucs \
     #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervIPolNucs.tree NEWICK_BOOTSTRAPS
+    #-o trees/lineage/hervAdpPolNucs.tree NEWICK_BOOTSTRAPS
 
     #~# Zetaretroviruses (H/F)  
-    #generate nucleotide phylogeny AL_LINEAGE_HERVH -s ervSelectorHervHPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervHPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVH -s ervSelectorHervHPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervHPolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVFa -s ervSelectorHervFaPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervFaPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVFa -s ervSelectorHervFaPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervFaPolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVFb -s ervSelectorHervFbPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervFbPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVFb -s ervSelectorHervFbPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervFbPolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVFc -s ervSelectorHervFcGagNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'gag' and fLocNotes.ref_nt_coverage_pct >= 65" \
-    #-o trees/lineage/hervFcGagNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVFc -s ervSelectorHervFcGagNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'gag' and fLocNotes.ref_nt_coverage_pct >= 65" \
+    -o trees/lineage/hervFcGagNucs.tree NEWICK_BOOTSTRAPS
 
     #~# Zetaretroviruses  (W/9/30)  
-    #generate nucleotide phylogeny AL_LINEAGE_HERVW -s ervSelectorHervWPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervWPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVW -s ervSelectorHervWPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervWPolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERV9 -s ervSelectorHerv9PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/herv9PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERV9 -s ervSelectorHerv9PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/herv9PolNucs.tree NEWICK_BOOTSTRAPS
+
+    generate nucleotide phylogeny AL_LINEAGE_HERVP-s ervSelectorHervPPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervPPolNucs.tree NEWICK_BOOTSTRAPS
 
   # Clade II
 
 	#~# Betaretroviruses
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML1 -s ervSelectorHervKhml1PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml1PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML1 -s ervSelectorHervKhml1PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml1PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML2 -s ervSelectorHervKhml2PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml2PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML2 -s ervSelectorHervKhml2PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml2PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML3 -s ervSelectorHervKhml3PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml3PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML3 -s ervSelectorHervKhml3PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml3PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML4 -s ervSelectorHervKhml4PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml4PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML4 -s ervSelectorHervKhml4PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml4PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML7 -s ervSelectorHervKhml7PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml7PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML7 -s ervSelectorHervKhml7PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml7PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML8 -s ervSelectorHervKhml8PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml8PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML8 -s ervSelectorHervKhml8PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml8PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML9 -s ervSelectorHervKhml9PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml9PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML9 -s ervSelectorHervKhml9PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml9PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML10 -s ervSelectorHervKhml10PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml10PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML10 -s ervSelectorHervKhml10PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml10PolNucs.tree NEWICK_BOOTSTRAPS
 
 
 	#~# Archaeobetaretroviruses
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML5 -s ervSelectorHervKhml5PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml5PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML5 -s ervSelectorHervKhml5PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml5PolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVKHML6 -s ervSelectorHervKhml6PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervKhml6PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVKHML6 -s ervSelectorHervKhml6PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervKhml6PolNucs.tree NEWICK_BOOTSTRAPS
 
 
   # Clade III
   
  	#~# Sigmaretroviruses
-    #generate nucleotide phylogeny AL_LINEAGE_HERVS -s ervSelectorHervSPolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervSPolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVS -s ervSelectorHervSPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervSPolNucs.tree NEWICK_BOOTSTRAPS
 
-    #generate nucleotide phylogeny AL_LINEAGE_HERVU3 -s ervSelectorHervU3PolNucs \
-    #-w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
-    #-o trees/lineage/hervU3PolNucs.tree NEWICK_BOOTSTRAPS
+    generate nucleotide phylogeny AL_LINEAGE_HERVU3 -s ervSelectorHervU3PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervU3PolNucs.tree NEWICK_BOOTSTRAPS
 
  	#~# Lambdaretroviruses
     generate nucleotide phylogeny AL_LINEAGE_HERVL -s ervSelectorHervLPolNucs \

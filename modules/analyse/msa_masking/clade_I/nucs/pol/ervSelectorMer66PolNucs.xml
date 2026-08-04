@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alignmentColumnsSelector>
+
+    <relRefName>REF_MER66</relRefName>
+ 
+    <!-- Partition 1 -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>4315</startNt>
+        <endNt>7275</endNt>
+    </nucleotideRegionSelector>
+  
+</alignmentColumnsSelector>
+
+ 

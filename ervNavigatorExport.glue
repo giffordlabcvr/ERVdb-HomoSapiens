@@ -9,7 +9,7 @@ project ervdb
   run script glue/export/exportHervLineageAlignmentSegments.js
 
   # Export alignments 
-  run file glue/export/exportAlignments.glue
+  #run file glue/export/exportAlignments.glue
   
   validate
   
