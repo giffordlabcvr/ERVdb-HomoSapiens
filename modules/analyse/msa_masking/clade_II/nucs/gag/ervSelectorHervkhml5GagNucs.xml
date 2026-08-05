@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alignmentColumnsSelector>
+
+    <relRefName>REF_HERVKHML5</relRefName>
+ 
+    <!-- Partition 1 -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>641</startNt>
+        <endNt>2026</endNt>
+    </nucleotideRegionSelector>
+  
+</alignmentColumnsSelector>
+
+  

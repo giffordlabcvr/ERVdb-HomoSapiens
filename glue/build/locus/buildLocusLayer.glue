@@ -12,7 +12,7 @@
   #run script glue/build/locus/hervLinkLociToErvLineages.js
 
   # Construct lineage MSAs 
-  #run file glue/build/locus/constructLineageMsas.glue
+  #run file glue/build/locus/msa/constructLineageMsas.glue
 
   # Assign Missillac IDs
   #run file glue/build/locus/assignMissillacIds.glue
