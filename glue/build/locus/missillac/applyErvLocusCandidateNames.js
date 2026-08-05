@@ -1,4 +1,4 @@
-// glue/build/locus/applyErvLocusCandidateNames.js
+// glue/build/locus/missillac/applyErvLocusCandidateNames.js
 //
 // Dry-run Missillac naming pass for filtered ERV/LTR candidate loci.
 //
