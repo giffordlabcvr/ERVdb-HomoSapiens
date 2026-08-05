@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alignmentColumnsSelector>
+
+    <relRefName>REF_HERVKHML8</relRefName>
+ 
+    <!-- Partition 1 Pol -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>1742</startNt>
+        <endNt>4447</endNt>
+    </nucleotideRegionSelector>
+  
+</alignmentColumnsSelector>
+
