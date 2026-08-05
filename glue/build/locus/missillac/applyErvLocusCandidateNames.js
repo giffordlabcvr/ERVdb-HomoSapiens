@@ -1,44 +1,133 @@
 // glue/build/locus/missillac/applyErvLocusCandidateNames.js
 //
-// Missillac naming pass for filtered ERV/LTR candidate loci.
+// Assigns Missillac IDs to ERV locus candidates.
 //
 // Reads:
 //   erv_locus_candidate
-//   erv_lineage
-//   erv_lineage_alias
+//   erv_locus_candidate -> erv_lineage
 //   erv_locus_legacy_xref
 //
 // Writes:
 //   erv_locus_candidate_name
 //
-// Logic:
-//   - if case_status = Mosaic:
-//       standard_id = Mosaic
-//       resolution_status = mosaic
+// Naming rules:
 //
-//   - if case_status = Resolved at clade level:
-//       standard_id = normalised names_decision, e.g. Clade-I
-//       resolution_status = resolved_category
+// 1. Fully resolved candidates
 //
-//   - otherwise resolve names_decision to erv_lineage by:
-//       1. erv_lineage.id
-//       2. erv_lineage.standard_id
-//       3. erv_lineage_alias.alias_name
+//    The persisted erv_lineage link is authoritative.
 //
-//   - for legacy xrefs where:
-//       legacy_source = compiled_human_erv_loci_hg19
-//       mapping_status = mapped
-//       source_numeric_id is a positive integer
+//    Naming stem:
+//      erv_locus_candidate.erv_lineage.standard_id
 //
-//     preserve source_numeric_id as the Missillac locus number.
+//    Number:
+//      a. Preserve the DBM/Gifford source_numeric_id where uniquely
+//         available.
+//      b. Otherwise assign the lowest unused positive integer within
+//         the lineage, in genomic order.
 //
-//   - assign remaining numbers sequentially within each standard_id,
-//     in genomic order, while skipping preserved numbers.
+// 2. Candidates resolved above lineage level
 //
-// No links are created.
+//    This includes:
+//      Resolved at subgenus level
+//      Resolved at genus level
+//      Resolved at clade level
+//
+//    Naming stem:
+//      derived from names_decision using CATEGORY_STANDARD_IDS.
+//
+//    Number:
+//      numeric component of the internal candidate ID.
+//
+//    Example:
+//      RBRT454868, Lambda
+//      -> ERV-3.Lambda-454868
+//
+// 3. Mosaic candidates
+//
+//    Naming stem:
+//      Mosaic
+//
+//    Number:
+//      numeric component of the internal candidate ID.
+//
+// 4. LTR candidates
+//
+//    If status = LTR, append:
+//
+//      (LTR)
+//
+//    Example:
+//      ERV-1.Zeta.MER57-6407(LTR)
+//
+// No links are created or modified.
+
+var CANDIDATE_TABLE =
+	"erv_locus_candidate";
+
+var NAME_TABLE =
+	"erv_locus_candidate_name";
+
+var LEGACY_XREF_TABLE =
+	"erv_locus_legacy_xref";
 
 var NUMBERING_LEGACY_SOURCE =
 	"compiled_human_erv_loci_hg19";
+
+var FULLY_RESOLVED_STATUS =
+	"Fully resolved";
+
+
+// -------------------------------------------------------------------------
+// Above-lineage category names
+// -------------------------------------------------------------------------
+//
+// Add further exact mappings here as required.
+//
+// The values are Missillac naming stems, not erv_lineage identifiers.
+//
+// Where names_decision already begins with "ERV-", the value is accepted
+// directly and does not need an entry here.
+
+var CATEGORY_STANDARD_IDS = {
+
+	// Deep clades
+	"Clade I":
+		"ERV-1",
+
+	"Clade II":
+		"ERV-2",
+
+	"Clade III":
+		"ERV-3",
+
+	// Common genus-level concepts
+	"Gamma":
+		"ERV-1.Gamma",
+
+	"Gammaretrovirus":
+		"ERV-1.Gamma",
+
+	"Zeta":
+		"ERV-1.Zeta",
+
+	"Eta":
+		"ERV-1.Eta",
+
+	"Theta":
+		"ERV-1.Theta",
+
+	"Kappa":
+		"ERV-2.Kappa",
+
+	"Betaretrovirus":
+		"ERV-2.Kappa",
+
+	"Lambda":
+		"ERV-3.Lambda",
+
+	"Lambdaretrovirus":
+		"ERV-3.Lambda"
+};
 
 
 // -------------------------------------------------------------------------
@@ -54,25 +143,28 @@ function norm(value) {
 		return null;
 	}
 
-	var s = ("" + value).trim();
+	var result =
+		("" + value).trim();
 
-	if(s === "") {
+	if(result === "") {
 		return null;
 	}
 
-	var low = s.toLowerCase();
+	var lower =
+		result.toLowerCase();
 
 	if(
-		low === "n/a" ||
-		low === "na" ||
-		low === "null" ||
-		low === "none" ||
-		s === "-"
+		lower === "n/a" ||
+		lower === "na" ||
+		lower === "null" ||
+		lower === "none" ||
+		lower === "unknown" ||
+		result === "-"
 	) {
 		return null;
 	}
 
-	return s;
+	return result;
 }
 
 
@@ -84,21 +176,28 @@ function normInt(value) {
 		return null;
 	}
 
-	var n = parseInt(value, 10);
+	var number =
+		parseInt(value, 10);
 
-	return isNaN(n) ? null : n;
+	return isNaN(number)
+		? null
+		: number;
 }
 
 
 function positiveInt(value) {
 
-	var n = normInt(value);
+	var number =
+		normInt(value);
 
-	if(n === null || n < 1) {
+	if(
+		number === null ||
+		number < 1
+	) {
 		return null;
 	}
 
-	return n;
+	return number;
 }
 
 
@@ -106,6 +205,7 @@ function customRowPath(
 	tableName,
 	rowId
 ) {
+
 	return (
 		"custom-table-row/" +
 		tableName +
@@ -184,7 +284,8 @@ function chrRank(chrom) {
 		return 1000;
 	}
 
-	chrom = chrom.replace(/^chr/i, "");
+	chrom =
+		chrom.replace(/^chr/i, "");
 
 	if(chrom === "X") {
 		return 23;
@@ -201,44 +302,23 @@ function chrRank(chrom) {
 		return 25;
 	}
 
-	var n = parseInt(chrom, 10);
+	var number =
+		parseInt(chrom, 10);
 
-	return isNaN(n) ? 1000 : n;
-}
-
-
-function normaliseCategoryName(value) {
-
-	value = norm(value);
-
-	if(value === null) {
-		return null;
-	}
-
-	if(value === "Clade I") {
-		return "Clade-I";
-	}
-
-	if(value === "Clade II") {
-		return "Clade-II";
-	}
-
-	if(value === "Clade III") {
-		return "Clade-III";
-	}
-
-	return value.replace(/\s+/g, "-");
+	return isNaN(number)
+		? 1000
+		: number;
 }
 
 
 function genomicSort(a, b) {
 
-	var cr =
+	var chromosomeComparison =
 		chrRank(a.chrom) -
 		chrRank(b.chrom);
 
-	if(cr !== 0) {
-		return cr;
+	if(chromosomeComparison !== 0) {
+		return chromosomeComparison;
 	}
 
 	var aStart =
@@ -251,11 +331,8 @@ function genomicSort(a, b) {
 			? b.start_position
 			: 0;
 
-	var sp =
-		aStart - bStart;
-
-	if(sp !== 0) {
-		return sp;
+	if(aStart !== bStart) {
+		return aStart - bStart;
 	}
 
 	var aEnd =
@@ -268,11 +345,8 @@ function genomicSort(a, b) {
 			? b.end_position
 			: 0;
 
-	var ep =
-		aEnd - bEnd;
-
-	if(ep !== 0) {
-		return ep;
+	if(aEnd !== bEnd) {
+		return aEnd - bEnd;
 	}
 
 	if(a.candidate_id < b.candidate_id) {
@@ -287,259 +361,136 @@ function genomicSort(a, b) {
 }
 
 
-// -------------------------------------------------------------------------
-// Build lineage-resolution maps
-// -------------------------------------------------------------------------
+/*
+ * Extract the trailing numeric component of the internal candidate ID.
+ *
+ * Examples:
+ *
+ *   RBRT454868 -> 454868
+ *   RBRT6407   -> 6407
+ */
+function candidateNumericId(candidateId) {
 
-var lineageById = {};
-var lineageByStandardId = {};
+	candidateId =
+		norm(candidateId);
 
-var lineageRows = glue.tableToObjects(
-	glue.command([
-		"list",
-		"custom-table-row",
-		"erv_lineage",
-		"id",
-		"standard_id"
-	])
-);
-
-_.each(lineageRows, function(row) {
-
-	var id =
-		norm(row["id"]);
-
-	var standardId =
-		norm(row["standard_id"]);
-
-	if(id !== null) {
-
-		lineageById[id] = {
-			resolved_lineage_id:
-				id,
-
-			standard_id:
-				standardId !== null
-					? standardId
-					: id
-		};
+	if(candidateId === null) {
+		return null;
 	}
 
-	if(
-		standardId !== null &&
-		id !== null
-	) {
-		lineageByStandardId[standardId] = {
-			resolved_lineage_id:
-				id,
+	var match =
+		candidateId.match(/(\d+)$/);
 
-			standard_id:
-				standardId
-		};
+	if(!match) {
+		return null;
 	}
-});
+
+	return positiveInt(match[1]);
+}
 
 
-var lineageByAlias = {};
-
-var lineageAliasRows = glue.tableToObjects(
-	glue.command([
-		"list",
-		"custom-table-row",
-		"erv_lineage_alias",
-		"id",
-		"alias_name",
-		"erv_lineage.id",
-		"erv_lineage.standard_id"
-	])
-);
-
-_.each(lineageAliasRows, function(row) {
-
-	var aliasName =
-		norm(row["alias_name"]);
-
-	var lineageId =
-		norm(row["erv_lineage.id"]);
-
-	var standardId =
-		norm(row["erv_lineage.standard_id"]);
-
-	if(
-		aliasName !== null &&
-		lineageId !== null
-	) {
-		lineageByAlias[aliasName] = {
-			resolved_lineage_id:
-				lineageId,
-
-			standard_id:
-				standardId !== null
-					? standardId
-					: lineageId
-		};
-	}
-});
-
-
-function resolveLineage(
-	rawName,
-	caseStatus
+/*
+ * Construct the final identifier.
+ *
+ * The LTR suffix is added only to missillac_id. It does not alter the
+ * stored standard_id or locus_number.
+ */
+function makeMissillacId(
+	standardId,
+	locusNumber,
+	locusStatus
 ) {
 
-	rawName =
-		norm(rawName);
+	standardId =
+		norm(standardId);
 
-	caseStatus =
-		norm(caseStatus);
-
-	if(caseStatus === "Mosaic") {
-
-		return {
-			source:
-				"case_status.mosaic",
-
-			raw_name:
-				rawName,
-
-			resolved_lineage_id:
-				null,
-
-			standard_id:
-				"Mosaic",
-
-			resolution_status:
-				"mosaic",
-
-			notes:
-				"Mosaic locus; numbered in shared Mosaic category"
-		};
-	}
+	locusNumber =
+		positiveInt(locusNumber);
 
 	if(
-		caseStatus ===
-		"Resolved at clade level"
+		standardId === null ||
+		locusNumber === null
 	) {
-
-		var categoryId =
-			normaliseCategoryName(
-				rawName
-			);
-
-		if(categoryId !== null) {
-
-			return {
-				source:
-					"case_status.clade_level",
-
-				raw_name:
-					rawName,
-
-				resolved_lineage_id:
-					null,
-
-				standard_id:
-					categoryId,
-
-				resolution_status:
-					"resolved_category",
-
-				notes:
-					"Resolved at clade level; numbered within clade-level category"
-			};
-		}
+		return null;
 	}
+
+	var missillacId =
+		standardId +
+		"-" +
+		locusNumber;
+
+	if(norm(locusStatus) === "LTR") {
+		missillacId += "(LTR)";
+	}
+
+	return missillacId;
+}
+
+
+/*
+ * Resolve an above-lineage category stem.
+ *
+ * Exact configured category names are preferred.
+ *
+ * An existing ERV-* stem is accepted directly, allowing explicitly
+ * curated category stems to pass through without another lookup.
+ */
+function resolveCategoryStandardId(
+	rawName
+) {
+
+	rawName = norm(rawName);
 
 	if(rawName === null) {
 		return null;
 	}
 
-	if(lineageById[rawName]) {
-
-		return {
-			source:
-				"erv_lineage.id",
-
-			raw_name:
-				rawName,
-
-			resolved_lineage_id:
-				lineageById[rawName]
-					.resolved_lineage_id,
-
-			standard_id:
-				lineageById[rawName]
-					.standard_id,
-
-			resolution_status:
-				"resolved",
-
-			notes:
-				"Resolved via erv_lineage.id"
-		};
+	if(CATEGORY_STANDARD_IDS[rawName]) {
+		return CATEGORY_STANDARD_IDS[rawName];
 	}
 
-	if(lineageByStandardId[rawName]) {
-
-		return {
-			source:
-				"erv_lineage.standard_id",
-
-			raw_name:
-				rawName,
-
-			resolved_lineage_id:
-				lineageByStandardId[rawName]
-					.resolved_lineage_id,
-
-			standard_id:
-				lineageByStandardId[rawName]
-					.standard_id,
-
-			resolution_status:
-				"resolved",
-
-			notes:
-				"Resolved via erv_lineage.standard_id"
-		};
-	}
-
-	if(lineageByAlias[rawName]) {
-
-		return {
-			source:
-				"erv_lineage_alias.alias_name",
-
-			raw_name:
-				rawName,
-
-			resolved_lineage_id:
-				lineageByAlias[rawName]
-					.resolved_lineage_id,
-
-			standard_id:
-				lineageByAlias[rawName]
-					.standard_id,
-
-			resolution_status:
-				"resolved",
-
-			notes:
-				"Resolved via erv_lineage_alias.alias_name"
-		};
+	if(/^ERV-[123](\.|$)/.test(rawName)) {
+		return rawName.replace(/\s+/g, "-");
 	}
 
 	return null;
 }
 
 
+/*
+ * Identify case-status values representing resolution above lineage
+ * level.
+ */
+function isAboveLineageResolution(
+	caseStatus
+) {
+
+	caseStatus =
+		norm(caseStatus);
+
+	return (
+		caseStatus ===
+			"Resolved at subgenus level" ||
+
+		caseStatus ===
+			"Resolved at genus level" ||
+
+		caseStatus ===
+			"Resolved at clade level"
+	);
+}
+
+
 // -------------------------------------------------------------------------
-// Load authoritative preserved-number claims
+// Legacy DBM/Gifford numbering claims
 // -------------------------------------------------------------------------
 //
-// Map structure:
+// Only unambiguously mapped xrefs from the curated DBM/Gifford source
+// contribute preserved numbers.
 //
-// legacyNumberClaimsByCandidate[candidateId] = [
+// Structure:
+//
+// legacyClaimsByCandidate[candidateId] = [
 //     {
 //         xref_id: "...",
 //         legacy_name: "...",
@@ -547,17 +498,14 @@ function resolveLineage(
 //         source_numeric_id: 9
 //     }
 // ];
-//
-// Only unambiguously mapped DBM/Gifford xrefs contribute automatic
-// number claims.
 
-var legacyNumberClaimsByCandidate = {};
+var legacyClaimsByCandidate = {};
 
-var legacyNumberRows = glue.tableToObjects(
+var legacyRows = glue.tableToObjects(
 	glue.command([
 		"list",
 		"custom-table-row",
-		"erv_locus_legacy_xref",
+		LEGACY_XREF_TABLE,
 		"-w",
 		"legacy_source = '" +
 			NUMBERING_LEGACY_SOURCE +
@@ -572,7 +520,8 @@ var legacyNumberRows = glue.tableToObjects(
 	])
 );
 
-_.each(legacyNumberRows, function(row) {
+
+_.each(legacyRows, function(row) {
 
 	var candidateId =
 		norm(
@@ -591,17 +540,11 @@ _.each(legacyNumberRows, function(row) {
 		return;
 	}
 
-	if(
-		!legacyNumberClaimsByCandidate[
-			candidateId
-		]
-	) {
-		legacyNumberClaimsByCandidate[
-			candidateId
-		] = [];
+	if(!legacyClaimsByCandidate[candidateId]) {
+		legacyClaimsByCandidate[candidateId] = [];
 	}
 
-	legacyNumberClaimsByCandidate[
+	legacyClaimsByCandidate[
 		candidateId
 	].push({
 		xref_id:
@@ -620,31 +563,25 @@ _.each(legacyNumberRows, function(row) {
 	});
 });
 
+
 glue.logInfo(
 	"Loaded authoritative legacy-number xrefs: " +
-	legacyNumberRows.length
+	legacyRows.length
 );
 
 
-// -------------------------------------------------------------------------
-// Resolve one candidate's legacy-number claim
-// -------------------------------------------------------------------------
-//
-// A candidate may theoretically have more than one relevant xref.
-//
-// Accepted:
-//   - one claim;
-//   - multiple claims that all specify the same number.
-//
-// Rejected:
-//   - multiple distinct numbers attached to one candidate.
-
-function resolveCandidateLegacyNumber(
+/*
+ * Resolve the preserved number for one candidate.
+ *
+ * Multiple xrefs are acceptable when they all specify the same number.
+ * Multiple distinct numbers are treated as a conflict.
+ */
+function resolveLegacyNumber(
 	candidateId
 ) {
 
 	var claims =
-		legacyNumberClaimsByCandidate[
+		legacyClaimsByCandidate[
 			candidateId
 		];
 
@@ -708,157 +645,19 @@ function resolveCandidateLegacyNumber(
 
 
 // -------------------------------------------------------------------------
-// Load and resolve candidate rows
+// Candidate-name row writing
 // -------------------------------------------------------------------------
 
-var candidateRows = glue.tableToObjects(
-	glue.command([
-		"list",
-		"custom-table-row",
-		"erv_locus_candidate",
-		"id",
-		"names_decision",
-		"case_status",
-		"chrom",
-		"start_position",
-		"end_position"
-	])
-);
-
-var resolvedByStandardId = {};
-var unresolved = [];
-
-_.each(candidateRows, function(row) {
-
-	var candidateId =
-		norm(row["id"]);
-
-	var rawName =
-		norm(row["names_decision"]);
-
-	var caseStatus =
-		norm(row["case_status"]);
-
-	if(candidateId === null) {
-		return;
-	}
-
-	var resolved =
-		resolveLineage(
-			rawName,
-			caseStatus
-		);
-
-	if(resolved === null) {
-
-		unresolved.push({
-			candidate_id:
-				candidateId,
-
-			raw_name:
-				rawName,
-
-			case_status:
-				caseStatus,
-
-			reason:
-				"Could not resolve names_decision to lineage/category"
-		});
-
-		return;
-	}
-
-	var standardId =
-		resolved.standard_id;
-
-	if(
-		!resolvedByStandardId[
-			standardId
-		]
-	) {
-		resolvedByStandardId[
-			standardId
-		] = [];
-	}
-
-	var legacyNumberResolution =
-		resolveCandidateLegacyNumber(
-			candidateId
-		);
-
-	resolvedByStandardId[
-		standardId
-	].push({
-		candidate_id:
-			candidateId,
-
-		raw_name:
-			rawName,
-
-		naming_source:
-			resolved.source,
-
-		resolved_lineage_id:
-			resolved.resolved_lineage_id,
-
-		standard_id:
-			standardId,
-
-		resolution_status:
-			resolved.resolution_status,
-
-		notes:
-			resolved.notes,
-
-		chrom:
-			norm(row["chrom"]),
-
-		start_position:
-			normInt(
-				row["start_position"]
-			),
-
-		end_position:
-			normInt(
-				row["end_position"]
-			),
-
-		legacy_number_status:
-			legacyNumberResolution.status,
-
-		legacy_number:
-			legacyNumberResolution.number,
-
-		legacy_number_claims:
-			legacyNumberResolution.claims
-	});
-});
-
-glue.logInfo(
-	"Loaded candidate rows: " +
-	candidateRows.length
-);
-
-glue.logInfo(
-	"Unresolved lineage/category candidates: " +
-	unresolved.length
-);
-
-
-// -------------------------------------------------------------------------
-// Write lineage/category-unresolved rows
-// -------------------------------------------------------------------------
-
-_.each(unresolved, function(item) {
+function writeCandidateName(item) {
 
 	ensureRow(
-		"erv_locus_candidate_name",
+		NAME_TABLE,
 		item.candidate_id
 	);
 
 	glue.inMode(
 		customRowPath(
-			"erv_locus_candidate_name",
+			NAME_TABLE,
 			item.candidate_id
 		),
 
@@ -871,7 +670,7 @@ _.each(unresolved, function(item) {
 
 			setFieldIfPresent(
 				"naming_source",
-				"names_decision"
+				item.naming_source
 			);
 
 			setFieldIfPresent(
@@ -880,49 +679,454 @@ _.each(unresolved, function(item) {
 			);
 
 			setFieldIfPresent(
+				"resolved_lineage_id",
+				item.resolved_lineage_id
+			);
+
+			setFieldIfPresent(
+				"standard_id",
+				item.standard_id
+			);
+
+			setIntFieldIfPresent(
+				"locus_number",
+				item.locus_number
+			);
+
+			setFieldIfPresent(
+				"missillac_id",
+				item.missillac_id
+			);
+
+			setFieldIfPresent(
 				"resolution_status",
-				"unresolved"
+				item.resolution_status
 			);
 
 			setFieldIfPresent(
 				"notes",
-				item.reason
+				item.notes
 			);
 		}
 	);
-});
+}
 
 
 // -------------------------------------------------------------------------
-// Number and write resolved rows
+// Load candidates
+// -------------------------------------------------------------------------
+
+var candidateRows = glue.tableToObjects(
+	glue.command([
+		"list",
+		"custom-table-row",
+		CANDIDATE_TABLE,
+		"id",
+		"names_decision",
+		"case_status",
+		"status",
+		"chrom",
+		"start_position",
+		"end_position",
+		"erv_lineage.id",
+		"erv_lineage.standard_id"
+	])
+);
+
+
+var fullyResolvedByStandardId = [];
+var fullyResolvedGroups = {};
+
+var directNumberItems = [];
+var unresolvedItems = [];
+
+
+_.each(candidateRows, function(row) {
+
+	var candidateId =
+		norm(row["id"]);
+
+	var rawName =
+		norm(row["names_decision"]);
+
+	var caseStatus =
+		norm(row["case_status"]);
+
+	var locusStatus =
+		norm(row["status"]);
+
+	var linkedLineageId =
+		norm(row["erv_lineage.id"]);
+
+	var linkedStandardId =
+		norm(
+			row["erv_lineage.standard_id"]
+		);
+
+	if(candidateId === null) {
+		return;
+	}
+
+	/*
+	 * Fully resolved candidates must use the persisted lineage link.
+	 */
+	if(caseStatus === FULLY_RESOLVED_STATUS) {
+
+		if(
+			linkedLineageId === null ||
+			linkedStandardId === null
+		) {
+			unresolvedItems.push({
+				candidate_id:
+					candidateId,
+
+				raw_name:
+					rawName,
+
+				naming_source:
+					"erv_locus_candidate.erv_lineage",
+
+				resolved_lineage_id:
+					linkedLineageId,
+
+				standard_id:
+					linkedStandardId,
+
+				locus_number:
+					null,
+
+				missillac_id:
+					null,
+
+				resolution_status:
+					"unresolved",
+
+				notes:
+					"Fully resolved candidate has no valid persisted erv_lineage link"
+			});
+
+			return;
+		}
+
+		var legacyResolution =
+			resolveLegacyNumber(
+				candidateId
+			);
+
+		var item = {
+			candidate_id:
+				candidateId,
+
+			raw_name:
+				rawName,
+
+			naming_source:
+				"erv_locus_candidate.erv_lineage",
+
+			resolved_lineage_id:
+				linkedLineageId,
+
+			standard_id:
+				linkedStandardId,
+
+			resolution_status:
+				"resolved",
+
+			notes:
+				"Resolved through persisted erv_lineage link",
+
+			locus_status:
+				locusStatus,
+
+			chrom:
+				norm(row["chrom"]),
+
+			start_position:
+				normInt(
+					row["start_position"]
+				),
+
+			end_position:
+				normInt(
+					row["end_position"]
+				),
+
+			legacy_number_status:
+				legacyResolution.status,
+
+			legacy_number:
+				legacyResolution.number,
+
+			legacy_number_claims:
+				legacyResolution.claims
+		};
+
+		if(!fullyResolvedGroups[linkedStandardId]) {
+			fullyResolvedGroups[linkedStandardId] = [];
+		}
+
+		fullyResolvedGroups[
+			linkedStandardId
+		].push(item);
+
+		return;
+	}
+
+	/*
+	 * Candidates resolved above lineage level use the category stem and
+	 * numeric part of the internal candidate ID.
+	 */
+	if(isAboveLineageResolution(caseStatus)) {
+
+		var categoryStandardId =
+			resolveCategoryStandardId(
+				rawName
+			);
+
+		var categoryNumber =
+			candidateNumericId(
+				candidateId
+			);
+
+		if(
+			categoryStandardId === null ||
+			categoryNumber === null
+		) {
+			unresolvedItems.push({
+				candidate_id:
+					candidateId,
+
+				raw_name:
+					rawName,
+
+				naming_source:
+					"case_status.category",
+
+				resolved_lineage_id:
+					null,
+
+				standard_id:
+					categoryStandardId,
+
+				locus_number:
+					categoryNumber,
+
+				missillac_id:
+					null,
+
+				resolution_status:
+					"unresolved_category",
+
+				notes:
+					categoryStandardId === null
+						? (
+							"No Missillac category stem is configured for names_decision '" +
+							rawName +
+							"'"
+						)
+						: (
+							"Could not extract numeric component from candidate ID"
+						)
+			});
+
+			return;
+		}
+
+		directNumberItems.push({
+			candidate_id:
+				candidateId,
+
+			raw_name:
+				rawName,
+
+			naming_source:
+				"case_status.category",
+
+			resolved_lineage_id:
+				null,
+
+			standard_id:
+				categoryStandardId,
+
+			locus_number:
+				categoryNumber,
+
+			missillac_id:
+				makeMissillacId(
+					categoryStandardId,
+					categoryNumber,
+					locusStatus
+				),
+
+			resolution_status:
+				"resolved_category",
+
+			notes:
+				caseStatus +
+				"; number derived from internal candidate ID"
+		});
+
+		return;
+	}
+
+	/*
+	 * Mosaics also use the numeric part of the internal candidate ID.
+	 */
+	if(caseStatus === "Mosaic") {
+
+		var mosaicNumber =
+			candidateNumericId(
+				candidateId
+			);
+
+		if(mosaicNumber === null) {
+
+			unresolvedItems.push({
+				candidate_id:
+					candidateId,
+
+				raw_name:
+					rawName,
+
+				naming_source:
+					"case_status.mosaic",
+
+				resolved_lineage_id:
+					null,
+
+				standard_id:
+					"Mosaic",
+
+				locus_number:
+					null,
+
+				missillac_id:
+					null,
+
+				resolution_status:
+					"unresolved",
+
+				notes:
+					"Could not extract numeric component from candidate ID"
+			});
+
+			return;
+		}
+
+		directNumberItems.push({
+			candidate_id:
+				candidateId,
+
+			raw_name:
+				rawName,
+
+			naming_source:
+				"case_status.mosaic",
+
+			resolved_lineage_id:
+				null,
+
+			standard_id:
+				"Mosaic",
+
+			locus_number:
+				mosaicNumber,
+
+			missillac_id:
+				makeMissillacId(
+					"Mosaic",
+					mosaicNumber,
+					locusStatus
+				),
+
+			resolution_status:
+				"mosaic",
+
+			notes:
+				"Mosaic locus; number derived from internal candidate ID"
+		});
+
+		return;
+	}
+
+	unresolvedItems.push({
+		candidate_id:
+			candidateId,
+
+		raw_name:
+			rawName,
+
+		naming_source:
+			"case_status",
+
+		resolved_lineage_id:
+			linkedLineageId,
+
+		standard_id:
+			null,
+
+		locus_number:
+			null,
+
+		missillac_id:
+			null,
+
+		resolution_status:
+			"unresolved",
+
+		notes:
+			"Unsupported or missing case_status: " +
+			(caseStatus !== null ? caseStatus : "null")
+	});
+});
+
+
+glue.logInfo(
+	"Loaded candidate rows: " +
+	candidateRows.length
+);
+
+
+// -------------------------------------------------------------------------
+// Assign fully resolved lineage numbers
 // -------------------------------------------------------------------------
 
 var namedCount = 0;
 var preservedNumberCount = 0;
 var newlyAllocatedCount = 0;
+var directCandidateIdCount = 0;
 var candidateLegacyConflictCount = 0;
-var standardIdNumberConflictCount = 0;
+var lineageNumberConflictCount = 0;
+
+
+/*
+ * Write above-lineage and mosaic items first.
+ */
+_.each(directNumberItems, function(item) {
+
+	writeCandidateName(item);
+
+	namedCount++;
+	directCandidateIdCount++;
+});
+
 
 _.each(
-	Object.keys(
-		resolvedByStandardId
-	).sort(),
+	Object.keys(fullyResolvedGroups).sort(),
 
 	function(standardId) {
 
 		var items =
-			resolvedByStandardId[
+			fullyResolvedGroups[
 				standardId
 			];
 
 		items.sort(genomicSort);
 
 		/*
-		 * First collect preserved-number claims within this standard_id.
-		 *
-		 * numberClaims[number] = [item, item, ...]
+		 * Gather all legacy number claims in this lineage.
 		 */
-		var numberClaims = {};
+		var claimsByNumber = {};
 
 		_.each(items, function(item) {
 
@@ -940,36 +1144,38 @@ _.each(
 			var numberKey =
 				"" + item.legacy_number;
 
-			if(!numberClaims[numberKey]) {
-				numberClaims[numberKey] = [];
+			if(!claimsByNumber[numberKey]) {
+				claimsByNumber[numberKey] = [];
 			}
 
-			numberClaims[numberKey].push(
-				item
-			);
+			claimsByNumber[
+				numberKey
+			].push(item);
 		});
 
-		/*
-		 * Determine which preserved numbers are safe to reserve.
-		 */
 		var usedNumbers = {};
-		var preservedNumberByCandidate = {};
-		var numberConflictCandidates = {};
+		var preservedByCandidate = {};
+		var duplicateClaimCandidates = {};
 
+		/*
+		 * Reserve unambiguous legacy numbers.
+		 */
 		_.each(
-			Object.keys(numberClaims),
+			Object.keys(claimsByNumber),
 
 			function(numberKey) {
 
 				var claimItems =
-					numberClaims[numberKey];
+					claimsByNumber[
+						numberKey
+					];
 
 				if(claimItems.length === 1) {
 
 					var claimItem =
 						claimItems[0];
 
-					preservedNumberByCandidate[
+					preservedByCandidate[
 						claimItem.candidate_id
 					] =
 						parseInt(
@@ -980,43 +1186,38 @@ _.each(
 					usedNumbers[numberKey] =
 						true;
 
-				} else {
+					return;
+				}
 
-					standardIdNumberConflictCount++;
+				lineageNumberConflictCount++;
 
-					_.each(
+				_.each(
+					claimItems,
+					function(conflictItem) {
+
+						duplicateClaimCandidates[
+							conflictItem.candidate_id
+						] = true;
+					}
+				);
+
+				glue.logInfo(
+					"Legacy number conflict in " +
+					standardId +
+					": number " +
+					numberKey +
+					" claimed by " +
+					_.map(
 						claimItems,
 						function(conflictItem) {
-
-							numberConflictCandidates[
-								conflictItem.candidate_id
-							] = true;
+							return conflictItem.candidate_id;
 						}
-					);
-
-					glue.logInfo(
-						"Legacy number conflict in " +
-						standardId +
-						": number " +
-						numberKey +
-						" claimed by " +
-						_.map(
-							claimItems,
-							function(conflictItem) {
-								return conflictItem.candidate_id;
-							}
-						).join(", ")
-					);
-				}
+					).join(", ")
+				);
 			}
 		);
 
-		/*
-		 * Assign numbers to candidates without valid preserved numbers.
-		 *
-		 * Use the smallest available positive integer, preserving genomic
-		 * order among newly numbered candidates.
-		 */
+
 		var nextAvailableNumber = 1;
 
 		function allocateNextNumber() {
@@ -1041,100 +1242,76 @@ _.each(
 			return allocated;
 		}
 
+
 		_.each(items, function(item) {
 
-			var legacyConflictReason = null;
+			var conflictReason = null;
 
 			if(
 				item.legacy_number_status ===
-				"candidate_conflict"
+					"candidate_conflict"
 			) {
-				legacyConflictReason =
+				conflictReason =
 					"Multiple distinct DBM/Gifford mnemonic numbers are linked to this candidate";
 			}
 
 			if(
-				numberConflictCandidates[
+				duplicateClaimCandidates[
 					item.candidate_id
 				]
 			) {
-				legacyConflictReason =
-					"DBM/Gifford mnemonic number is also claimed by another candidate in standard_id " +
+				conflictReason =
+					"DBM/Gifford mnemonic number is also claimed by another candidate in lineage " +
 					standardId;
 			}
 
-			/*
-			 * Do not silently replace a conflicting historical number with
-			 * a newly allocated number.
-			 */
-			if(legacyConflictReason !== null) {
+			if(conflictReason !== null) {
 
-				ensureRow(
-					"erv_locus_candidate_name",
-					item.candidate_id
-				);
+				writeCandidateName({
+					candidate_id:
+						item.candidate_id,
 
-				glue.inMode(
-					customRowPath(
-						"erv_locus_candidate_name",
-						item.candidate_id
-					),
+					raw_name:
+						item.raw_name,
 
-					function() {
+					naming_source:
+						NUMBERING_LEGACY_SOURCE,
 
-						setFieldIfPresent(
-							"candidate_id",
-							item.candidate_id
-						);
+					resolved_lineage_id:
+						item.resolved_lineage_id,
 
-						setFieldIfPresent(
-							"naming_source",
-							NUMBERING_LEGACY_SOURCE
-						);
+					standard_id:
+						item.standard_id,
 
-						setFieldIfPresent(
-							"raw_name",
-							item.raw_name
-						);
+					locus_number:
+						null,
 
-						setFieldIfPresent(
-							"resolved_lineage_id",
-							item.resolved_lineage_id
-						);
+					missillac_id:
+						null,
 
-						setFieldIfPresent(
-							"standard_id",
-							item.standard_id
-						);
+					resolution_status:
+						"legacy_number_conflict",
 
-						setFieldIfPresent(
-							"resolution_status",
-							"legacy_number_conflict"
-						);
-
-						setFieldIfPresent(
-							"notes",
-							legacyConflictReason
-						);
-					}
-				);
+					notes:
+						conflictReason
+				});
 
 				candidateLegacyConflictCount++;
 
 				return;
 			}
 
-			var locusNumber = null;
-			var namingSource = item.naming_source;
-			var notes = item.notes;
+			var locusNumber;
+			var namingSource;
+			var notes;
 
 			if(
-				preservedNumberByCandidate[
+				preservedByCandidate[
 					item.candidate_id
 				] !== undefined
 			) {
 				locusNumber =
-					preservedNumberByCandidate[
+					preservedByCandidate[
 						item.candidate_id
 					];
 
@@ -1142,8 +1319,8 @@ _.each(
 					NUMBERING_LEGACY_SOURCE;
 
 				notes =
-					item.notes +
-					"; preserved DBM/Gifford mnemonic number " +
+					"Resolved through persisted erv_lineage link; " +
+					"preserved DBM/Gifford mnemonic number " +
 					locusNumber;
 
 				preservedNumberCount++;
@@ -1153,77 +1330,48 @@ _.each(
 				locusNumber =
 					allocateNextNumber();
 
+				namingSource =
+					"erv_locus_candidate.erv_lineage";
+
 				notes =
-					item.notes +
-					"; newly allocated Missillac locus number";
+					"Resolved through persisted erv_lineage link; " +
+					"newly allocated Missillac locus number";
 
 				newlyAllocatedCount++;
 			}
 
-			var missillacId =
-				standardId +
-				"-" +
-				locusNumber;
+			writeCandidateName({
+				candidate_id:
+					item.candidate_id,
 
-			ensureRow(
-				"erv_locus_candidate_name",
-				item.candidate_id
-			);
+				raw_name:
+					item.raw_name,
 
-			glue.inMode(
-				customRowPath(
-					"erv_locus_candidate_name",
-					item.candidate_id
-				),
+				naming_source:
+					namingSource,
 
-				function() {
+				resolved_lineage_id:
+					item.resolved_lineage_id,
 
-					setFieldIfPresent(
-						"candidate_id",
-						item.candidate_id
-					);
+				standard_id:
+					item.standard_id,
 
-					setFieldIfPresent(
-						"naming_source",
-						namingSource
-					);
+				locus_number:
+					locusNumber,
 
-					setFieldIfPresent(
-						"raw_name",
-						item.raw_name
-					);
+				missillac_id:
+					makeMissillacId(
+						item.standard_id,
+						locusNumber,
+						item.locus_status
+					),
 
-					setFieldIfPresent(
-						"resolved_lineage_id",
-						item.resolved_lineage_id
-					);
+				resolution_status:
+					item.resolution_status,
 
-					setFieldIfPresent(
-						"standard_id",
-						item.standard_id
-					);
-
-					setIntFieldIfPresent(
-						"locus_number",
-						locusNumber
-					);
-
-					setFieldIfPresent(
-						"missillac_id",
-						missillacId
-					);
-
-					setFieldIfPresent(
-						"resolution_status",
-						item.resolution_status
-					);
-
-					setFieldIfPresent(
-						"notes",
-						notes
-					);
-				}
-			);
+				notes:
+					notes
+			});
 
 			namedCount++;
 
@@ -1240,6 +1388,20 @@ _.each(
 );
 
 
+// -------------------------------------------------------------------------
+// Write unresolved and conflict rows
+// -------------------------------------------------------------------------
+
+_.each(unresolvedItems, function(item) {
+
+	writeCandidateName(item);
+});
+
+
+// -------------------------------------------------------------------------
+// Summary
+// -------------------------------------------------------------------------
+
 glue.logInfo(
 	"Candidate Missillac naming pass complete"
 );
@@ -1255,8 +1417,13 @@ glue.logInfo(
 );
 
 glue.logInfo(
-	"Newly allocated numbers: " +
+	"Newly allocated lineage numbers: " +
 	newlyAllocatedCount
+);
+
+glue.logInfo(
+	"IDs using candidate numeric component: " +
+	directCandidateIdCount
 );
 
 glue.logInfo(
@@ -1265,12 +1432,11 @@ glue.logInfo(
 );
 
 glue.logInfo(
-	"Duplicated legacy numbers within standard_id groups: " +
-	standardIdNumberConflictCount
+	"Duplicated legacy numbers within lineage groups: " +
+	lineageNumberConflictCount
 );
 
 glue.logInfo(
-	"Unresolved lineage/category candidates written: " +
-	unresolved.length
+	"Unresolved candidates written: " +
+	unresolvedItems.length
 );
-
