@@ -6,10 +6,9 @@
     <!-- Partition 1 -->
     <nucleotideRegionSelector>
         <featureName>whole_genome</featureName>
-        <startNt>634</startNt>
-        <endNt>2070</endNt>
+        <startNt>5394</startNt>
+        <endNt>6614</endNt>
     </nucleotideRegionSelector>
   
 </alignmentColumnsSelector>
 
- 
