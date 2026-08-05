@@ -3,70 +3,98 @@
 // Imports historical or published ERV locus records, maps them onto
 // erv_locus_candidate, and records:
 //
-//   1. Source-record provenance in erv_locus_legacy_xref
-//   2. Searchable alternative names in erv_locus_alias
+//   1. Source provenance in erv_locus_legacy_xref
+//   2. Searchable names in erv_locus_alias
 //
 // Current assumptions:
-//   - imported records concern Homo sapiens;
-//   - imported coordinates use the same assembly as erv_locus_candidate;
-//   - hostSpecies and genomeBuild are retained as provenance on xref rows;
-//   - orthology calibrations are not created by this module.
+//   - all imported records concern Homo sapiens;
+//   - source coordinates use the same assembly as erv_locus_candidate;
+//   - hostSpecies and genomeBuild are retained as xref provenance;
+//   - orthology calibrations are not created here.
 //
-// The createOrthologyCalibrations function argument is retained so that
-// legacyLocusImporter.xml and existing invoke-function calls remain valid.
+// createOrthologyCalibrations remains in the public function signature
+// for compatibility with the existing XML module and build script.
 
-var LOCUS_CANDIDATE_TABLE = "erv_locus_candidate";
-var LOCUS_CANDIDATE_LINK = "erv_locus_candidate";
+var LOCUS_TABLE = "erv_locus_candidate";
+var LOCUS_LINK = "erv_locus_candidate";
 
 var XREF_TABLE = "erv_locus_legacy_xref";
 
 var ALIAS_TABLE = "erv_locus_alias";
-var ALIAS_LOCUS_LINK = "erv_locus_candidate";
+var ALIAS_LINK = "erv_locus_candidate";
+
+var DBM_GIFFORD_SOURCE = "compiled_human_erv_loci_hg19";
 
 var MAPPING_METHOD = "coordinate_overlap";
 
 
-/*
- * -------------------------------------------------------------------------
- * General utility functions
- * -------------------------------------------------------------------------
- */
+// -------------------------------------------------------------------------
+// General helpers
+// -------------------------------------------------------------------------
 
-function esc(str) {
+function clean(value) {
 
-	if(str == null) {
-		return "";
-	}
-
-	return ("" + str).replace(/'/g, "''");
-}
-
-
-function clean(str) {
-
-	if(str == null) {
+	if(value === null || value === undefined) {
 		return null;
 	}
 
-	var cleaned = ("" + str).replace(/^\s+|\s+$/g, "");
+	var result = ("" + value).replace(/^\s+|\s+$/g, "");
+
+	if(result === "") {
+		return null;
+	}
+
+	var lower = result.toLowerCase();
 
 	if(
-		cleaned === "" ||
-		cleaned.toLowerCase() === "null"
+		lower === "null" ||
+		lower === "none" ||
+		lower === "n/a" ||
+		lower === "na"
 	) {
 		return null;
 	}
 
-	return cleaned;
+	return result;
 }
 
 
-function safeId(str) {
+function esc(value) {
 
-	return ("" + str)
-		.replace(/[^A-Za-z0-9_.-]/g, "_")
-		.replace(/_+/g, "_")
-		.replace(/^_+|_+$/g, "");
+	if(value === null || value === undefined) {
+		return "";
+	}
+
+	return ("" + value).replace(/'/g, "''");
+}
+
+
+function getField(row, names) {
+
+	for(var i = 0; i < names.length; i++) {
+
+		var value = clean(row[names[i]]);
+
+		if(value !== null) {
+			return value;
+		}
+	}
+
+	return null;
+}
+
+
+function parseInteger(value) {
+
+	value = clean(value);
+
+	if(value === null) {
+		return null;
+	}
+
+	var number = parseInt(value, 10);
+
+	return isNaN(number) ? null : number;
 }
 
 
@@ -84,36 +112,14 @@ function rowList(result) {
 }
 
 
-function getField(row, names) {
+function customRowPath(tableName, rowId) {
 
-	for(var i = 0; i < names.length; i++) {
-
-		var value = clean(row[names[i]]);
-
-		if(value != null) {
-			return value;
-		}
-	}
-
-	return null;
-}
-
-
-function parseCoordinate(value) {
-
-	value = clean(value);
-
-	if(value == null) {
-		return null;
-	}
-
-	var coordinate = parseInt(value, 10);
-
-	if(isNaN(coordinate)) {
-		return null;
-	}
-
-	return coordinate;
+	return (
+		"custom-table-row/" +
+		tableName +
+		"/" +
+		rowId
+	);
 }
 
 
@@ -121,18 +127,18 @@ function normaliseOrientation(value) {
 
 	value = clean(value);
 
-	if(value == null) {
+	if(value === null) {
 		return null;
 	}
 
-	var lowerValue = value.toLowerCase();
+	var lower = value.toLowerCase();
 
 	if(
 		value === "+" ||
 		value === "(+)" ||
-		lowerValue === "positive" ||
-		lowerValue === "plus" ||
-		lowerValue === "forward"
+		lower === "positive" ||
+		lower === "plus" ||
+		lower === "forward"
 	) {
 		return "+";
 	}
@@ -140,9 +146,9 @@ function normaliseOrientation(value) {
 	if(
 		value === "-" ||
 		value === "(-)" ||
-		lowerValue === "negative" ||
-		lowerValue === "minus" ||
-		lowerValue === "reverse"
+		lower === "negative" ||
+		lower === "minus" ||
+		lower === "reverse"
 	) {
 		return "-";
 	}
@@ -157,51 +163,40 @@ function intervalLength(start, end) {
 }
 
 
-function overlapBp(
+function overlapLength(
 	aStart,
 	aEnd,
 	bStart,
 	bEnd
 ) {
 
-	var overlapStart = Math.max(
-		aStart,
-		bStart
-	);
+	var start = Math.max(aStart, bStart);
+	var end = Math.min(aEnd, bEnd);
 
-	var overlapEnd = Math.min(
-		aEnd,
-		bEnd
-	);
-
-	if(overlapEnd < overlapStart) {
+	if(end < start) {
 		return 0;
 	}
 
-	return overlapEnd - overlapStart + 1;
+	return end - start + 1;
 }
 
 
 /*
- * Return a stable unsigned integer hash as a string.
- *
- * This is used only to construct deterministic custom-table row IDs.
+ * Stable unsigned string hash used only for deterministic row IDs.
  */
-function hashString(str) {
+function hashString(value) {
 
-	if(str == null) {
-		str = "";
-	}
-
-	str = "" + str;
+	value = value === null || value === undefined
+		? ""
+		: "" + value;
 
 	var hash = 0;
 
-	for(var i = 0; i < str.length; i++) {
+	for(var i = 0; i < value.length; i++) {
 
 		hash =
 			((hash << 5) - hash) +
-			str.charCodeAt(i);
+			value.charCodeAt(i);
 
 		hash = hash | 0;
 	}
@@ -209,12 +204,6 @@ function hashString(str) {
 	return "" + (hash >>> 0);
 }
 
-
-/*
- * -------------------------------------------------------------------------
- * Custom-table helpers
- * -------------------------------------------------------------------------
- */
 
 function customTableRowExists(
 	tableName,
@@ -226,7 +215,8 @@ function customTableRowExists(
 		"custom-table-row",
 		tableName,
 		"-w",
-		"id = '" + esc(rowId) + "'"
+		"id = '" + esc(rowId) + "'",
+		"id"
 	]));
 
 	return rows.length > 0;
@@ -254,14 +244,14 @@ function createCustomTableRowIfNeeded(
 }
 
 
-function setFieldIfNotNull(
+function setFieldIfPresent(
 	fieldName,
 	value
 ) {
 
 	value = clean(value);
 
-	if(value != null) {
+	if(value !== null) {
 
 		glue.command([
 			"set",
@@ -273,30 +263,11 @@ function setFieldIfNotNull(
 }
 
 
-/*
- * -------------------------------------------------------------------------
- * Source-row normalisation
- * -------------------------------------------------------------------------
- */
+// -------------------------------------------------------------------------
+// Source-row normalisation
+// -------------------------------------------------------------------------
 
 function normaliseLegacyRow(row) {
-
-	/*
-	 * Retained for provenance and possible future use.
-	 *
-	 * These values are not used to restrict candidate matching because
-	 * erv_locus_candidate currently has no host_species or genome_build
-	 * fields.
-	 */
-	var inputOrganism = getField(row, [
-		"organism",
-		"host_species"
-	]);
-
-	var inputAssembly = getField(row, [
-		"assembly",
-		"genome_build"
-	]);
 
 	var approvedName = getField(row, [
 		"approved_name"
@@ -306,10 +277,16 @@ function normaliseLegacyRow(row) {
 		"approved_symbol"
 	]);
 
+	var hgncId = getField(row, [
+		"hgnc_id",
+		"HGNC ID",
+		"hgnc"
+	]);
+
 	var sourceAliases = getField(row, [
 		"alias_symbol",
-		"aliases",
 		"source_aliases",
+		"aliases",
 		"Alias"
 	]);
 
@@ -322,11 +299,9 @@ function normaliseLegacyRow(row) {
 	]);
 
 	/*
-	 * The DBM/Gifford source file uses the historical spelling
-	 * "mnenomic-number".
-	 *
-	 * This value is retained as source_numeric_id so that the subsequent
-	 * naming stage can preserve the curated historical locus number.
+	 * The DBM/Gifford file uses the spelling "mnenomic-number".
+	 * The value is retained as source_numeric_id for subsequent
+	 * Missillac number preservation.
 	 */
 	var sourceNumericId = getField(row, [
 		"source_numeric_id",
@@ -343,14 +318,14 @@ function normaliseLegacyRow(row) {
 		"Chr"
 	]);
 
-	var start = parseCoordinate(getField(row, [
+	var start = parseInteger(getField(row, [
 		"start",
 		"start_position",
 		"extract_start",
 		"Start"
 	]));
 
-	var end = parseCoordinate(getField(row, [
+	var end = parseInteger(getField(row, [
 		"end",
 		"end_position",
 		"extract_end",
@@ -365,24 +340,23 @@ function normaliseLegacyRow(row) {
 		])
 	);
 
-	var sourceNote = getField(row, [
-		"extra",
-		"source_note"
+	var sourceOrthology = getField(row, [
+		"source_orthology",
+		"orthology",
+		"oldest_common_ancestor",
+		"OCA"
 	]);
 
 	var sourceBand = getField(row, [
 		"source_band",
 		"band",
-		"Locus",
 		"Chr. band",
 		"chromosome_location"
 	]);
 
-	var sourceOrthology = getField(row, [
-		"orthology",
-		"source_orthology",
-		"oldest_common_ancestor",
-		"OCA"
+	var sourceNote = getField(row, [
+		"source_note",
+		"extra"
 	]);
 
 	var legacyName = getField(row, [
@@ -391,23 +365,19 @@ function normaliseLegacyRow(row) {
 		"Locus"
 	]);
 
-	/*
-	 * Generate a primary source-record name where the input does not
-	 * provide one explicitly.
-	 */
-	if(legacyName == null) {
+	if(legacyName === null) {
 
-		if(approvedSymbol != null) {
+		if(approvedSymbol !== null) {
 
 			legacyName = approvedSymbol;
 
-		} else if(approvedName != null) {
+		} else if(approvedName !== null) {
 
 			legacyName = approvedName;
 
 		} else if(
-			legacyClassification != null &&
-			sourceNumericId != null
+			legacyClassification !== null &&
+			sourceNumericId !== null
 		) {
 
 			legacyName =
@@ -419,55 +389,34 @@ function normaliseLegacyRow(row) {
 
 			var nameParts = [];
 
-			if(legacyClassification != null) {
-				nameParts.push(
-					legacyClassification
-				);
+			if(legacyClassification !== null) {
+				nameParts.push(legacyClassification);
 			}
 
-			if(sourceNumericId != null) {
-				nameParts.push(
-					sourceNumericId
-				);
+			if(sourceNumericId !== null) {
+				nameParts.push(sourceNumericId);
 			}
 
-			if(scaffold != null) {
-				nameParts.push(
-					scaffold
-				);
+			if(scaffold !== null) {
+				nameParts.push(scaffold);
 			}
 
-			if(start != null) {
-				nameParts.push(
-					"" + start
-				);
+			if(start !== null) {
+				nameParts.push("" + start);
 			}
 
-			if(end != null) {
-				nameParts.push(
-					"" + end
-				);
+			if(end !== null) {
+				nameParts.push("" + end);
 			}
 
-			legacyName =
-				nameParts.join("_");
+			legacyName = nameParts.join("_");
 		}
 	}
 
 	/*
-	 * Preserve the previous importer behaviour in which an "extra"
-	 * qualifier contributes to the generated legacy name.
+	 * sourceNote is deliberately not appended to legacyName.
+	 * It is stored independently in source_note.
 	 */
-	if(
-		legacyName != null &&
-		sourceNote != null
-	) {
-		legacyName =
-			legacyName +
-			"_" +
-			sourceNote;
-	}
-
 	return {
 		legacyName:
 			legacyName,
@@ -478,11 +427,11 @@ function normaliseLegacyRow(row) {
 		approvedSymbol:
 			approvedSymbol,
 
-		inputOrganism:
-			inputOrganism,
+		hgncId:
+			hgncId,
 
-		inputAssembly:
-			inputAssembly,
+		sourceAliases:
+			sourceAliases,
 
 		legacyClassification:
 			legacyClassification,
@@ -490,8 +439,8 @@ function normaliseLegacyRow(row) {
 		sourceNumericId:
 			sourceNumericId,
 
-		sourceAliases:
-			sourceAliases,
+		sourceOrthology:
+			sourceOrthology,
 
 		sourceBand:
 			sourceBand,
@@ -509,43 +458,34 @@ function normaliseLegacyRow(row) {
 			end,
 
 		orientation:
-			orientation,
-
-		sourceOrthology:
-			sourceOrthology
+			orientation
 	};
 }
 
 
-/*
- * -------------------------------------------------------------------------
- * Source-row validation
- * -------------------------------------------------------------------------
- */
+function validateLegacyRow(row) {
 
-function validateLegacyRow(normRow) {
-
-	if(normRow.legacyName == null) {
+	if(row.legacyName === null) {
 		return "Unable to determine a legacy name";
 	}
 
-	if(normRow.scaffold == null) {
+	if(row.scaffold === null) {
 		return "Missing chromosome or scaffold";
 	}
 
-	if(normRow.start == null) {
+	if(row.start === null) {
 		return "Missing or invalid start coordinate";
 	}
 
-	if(normRow.end == null) {
+	if(row.end === null) {
 		return "Missing or invalid end coordinate";
 	}
 
-	if(normRow.start < 1) {
+	if(row.start < 1) {
 		return "Start coordinate is less than 1";
 	}
 
-	if(normRow.end < normRow.start) {
+	if(row.end < row.start) {
 		return "End coordinate precedes start coordinate";
 	}
 
@@ -553,95 +493,69 @@ function validateLegacyRow(normRow) {
 }
 
 
-/*
- * -------------------------------------------------------------------------
- * Legacy-xref identifier generation
- * -------------------------------------------------------------------------
- */
+// -------------------------------------------------------------------------
+// Deterministic row IDs
+// -------------------------------------------------------------------------
 
 function makeXrefId(
 	legacySource,
-	normRow,
+	row,
 	rowIndex
 ) {
 
-	var sourceHash =
-		hashString(legacySource);
+	var key =
+		legacySource +
+		"|" +
+		(row.legacyName || "") +
+		"|" +
+		(row.scaffold || "") +
+		"|" +
+		(row.start !== null ? row.start : "") +
+		"|" +
+		(row.end !== null ? row.end : "") +
+		"|" +
+		(rowIndex + 1);
 
-	var rowPart =
-		"" + (rowIndex + 1);
-
-	var coordinatePart = "";
-
-	if(
-		normRow.scaffold != null &&
-		normRow.start != null
-	) {
-		coordinatePart =
-			"_" +
-			safeId(normRow.scaffold) +
-			"_" +
-			normRow.start;
-	}
-
-	var xrefId =
-		"lx_" +
-		sourceHash +
-		"_" +
-		rowPart +
-		coordinatePart;
-
-	/*
-	 * Keep the row ID safely below the usual GLUE custom-table row-ID
-	 * length limit.
-	 */
-	if(xrefId.length > 45) {
-
-		xrefId =
-			"lx_" +
-			sourceHash +
-			"_" +
-			rowPart;
-	}
-
-	return xrefId;
+	return "lx_" + hashString(key);
 }
 
 
-/*
- * -------------------------------------------------------------------------
- * Candidate-locus matching
- * -------------------------------------------------------------------------
- */
-
-function getOverlappingLocusCandidates(
-	normRow
+function makeAliasId(
+	candidateId,
+	aliasSource,
+	aliasName
 ) {
 
-	/*
-	 * erv_locus_candidate uses:
-	 *
-	 *   chrom
-	 *   strand
-	 *   start_position
-	 *   end_position
-	 *
-	 * The xref table deliberately uses the source-oriented terms
-	 * scaffold and orientation.
-	 */
+	var key =
+		candidateId +
+		"|" +
+		aliasSource +
+		"|" +
+		aliasName.toLowerCase();
+
+	return "la_" + hashString(key);
+}
+
+
+// -------------------------------------------------------------------------
+// Candidate matching
+// -------------------------------------------------------------------------
+
+function getOverlappingCandidates(row) {
+
 	var whereClause =
 		"chrom = '" +
-		esc(normRow.scaffold) +
+		esc(row.scaffold) +
 		"' and " +
-		normRow.start +
+		row.start +
 		" <= end_position and " +
-		normRow.end +
+		row.end +
 		" >= start_position";
 
 	var result = glue.command([
 		"list",
 		"custom-table-row",
-		LOCUS_CANDIDATE_TABLE,
+		LOCUS_TABLE,
 		"--whereClause",
 		whereClause,
 		"id",
@@ -650,51 +564,42 @@ function getOverlappingLocusCandidates(
 		"strand"
 	]);
 
-	var rows =
-		rowList(result);
-
+	var resultRows = rowList(result);
 	var candidates = [];
 
-	for(var i = 0; i < rows.length; i++) {
+	for(var i = 0; i < resultRows.length; i++) {
 
-		var values =
-			rows[i].value;
+		var values = resultRows[i].value;
 
-		var candidateId =
-			values[0];
-
-		var candidateStart =
-			parseInt(values[1], 10);
-
-		var candidateEnd =
-			parseInt(values[2], 10);
-
+		var candidateId = clean(values[0]);
+		var candidateStart = parseInteger(values[1]);
+		var candidateEnd = parseInteger(values[2]);
 		var candidateOrientation =
 			normaliseOrientation(values[3]);
 
 		if(
-			isNaN(candidateStart) ||
-			isNaN(candidateEnd)
+			candidateId === null ||
+			candidateStart === null ||
+			candidateEnd === null
 		) {
 			continue;
 		}
 
-		var overlap =
-			overlapBp(
-				normRow.start,
-				normRow.end,
-				candidateStart,
-				candidateEnd
-			);
+		var overlap = overlapLength(
+			row.start,
+			row.end,
+			candidateStart,
+			candidateEnd
+		);
 
-		if(overlap <= 0) {
+		if(overlap < 1) {
 			continue;
 		}
 
 		var sourceLength =
 			intervalLength(
-				normRow.start,
-				normRow.end
+				row.start,
+				row.end
 			);
 
 		var candidateLength =
@@ -709,12 +614,6 @@ function getOverlappingLocusCandidates(
 		var candidateOverlapFraction =
 			overlap / candidateLength;
 
-		/*
-		 * Reciprocal overlap is the smaller of:
-		 *
-		 *   proportion of the source record covered;
-		 *   proportion of the candidate covered.
-		 */
 		var reciprocalOverlap =
 			Math.min(
 				sourceOverlapFraction,
@@ -724,11 +623,11 @@ function getOverlappingLocusCandidates(
 		var orientationMatches = null;
 
 		if(
-			normRow.orientation != null &&
-			candidateOrientation != null
+			row.orientation !== null &&
+			candidateOrientation !== null
 		) {
 			orientationMatches =
-				normRow.orientation ===
+				row.orientation ===
 				candidateOrientation;
 		}
 
@@ -766,19 +665,13 @@ function getOverlappingLocusCandidates(
 }
 
 
-function compareCandidateMatches(
-	a,
-	b
-) {
+function compareCandidateMatches(a, b) {
 
 	/*
-	 * Primary criterion:
-	 * strongest reciprocal overlap.
+	 * Prefer the strongest reciprocal overlap.
 	 */
-	if(
-		a.reciprocalOverlap !==
-		b.reciprocalOverlap
-	) {
+	if(a.reciprocalOverlap !== b.reciprocalOverlap) {
+
 		return (
 			b.reciprocalOverlap -
 			a.reciprocalOverlap
@@ -786,21 +679,16 @@ function compareCandidateMatches(
 	}
 
 	/*
-	 * Secondary criterion:
-	 * greatest absolute overlap.
+	 * Then prefer the greatest absolute overlap.
 	 */
 	if(a.overlapBp !== b.overlapBp) {
 		return b.overlapBp - a.overlapBp;
 	}
 
 	/*
-	 * If overlap measures are tied, prefer orientation agreement where
-	 * both source and candidate orientations are available.
+	 * Then prefer strand/orientation agreement.
 	 */
-	if(
-		a.orientationMatches !==
-		b.orientationMatches
-	) {
+	if(a.orientationMatches !== b.orientationMatches) {
 
 		if(a.orientationMatches === true) {
 			return -1;
@@ -812,8 +700,7 @@ function compareCandidateMatches(
 	}
 
 	/*
-	 * Next prefer the candidate covering the greatest proportion of the
-	 * source interval.
+	 * Then prefer greater coverage of the source interval.
 	 */
 	if(
 		a.sourceOverlapFraction !==
@@ -826,7 +713,7 @@ function compareCandidateMatches(
 	}
 
 	/*
-	 * Final deterministic tie-break.
+	 * Deterministic final tie-break.
 	 */
 	if(a.candidateId < b.candidateId) {
 		return -1;
@@ -840,14 +727,10 @@ function compareCandidateMatches(
 }
 
 
-function findBestLocusCandidateMatch(
-	normRow
-) {
+function findBestCandidateMatch(row) {
 
 	var candidates =
-		getOverlappingLocusCandidates(
-			normRow
-		);
+		getOverlappingCandidates(row);
 
 	if(candidates.length === 0) {
 
@@ -881,12 +764,9 @@ function findBestLocusCandidateMatch(
 		};
 	}
 
-	candidates.sort(
-		compareCandidateMatches
-	);
+	candidates.sort(compareCandidateMatches);
 
-	var bestCandidate =
-		candidates[0];
+	var best = candidates[0];
 
 	return {
 		status:
@@ -898,38 +778,36 @@ function findBestLocusCandidateMatch(
 			MAPPING_METHOD,
 
 		candidateId:
-			bestCandidate.candidateId,
+			best.candidateId,
 
 		matchCount:
 			candidates.length,
 
 		overlapBp:
-			bestCandidate.overlapBp,
+			best.overlapBp,
 
 		sourceOverlapFraction:
-			bestCandidate.sourceOverlapFraction,
+			best.sourceOverlapFraction,
 
 		candidateOverlapFraction:
-			bestCandidate.candidateOverlapFraction,
+			best.candidateOverlapFraction,
 
 		reciprocalOverlap:
-			bestCandidate.reciprocalOverlap,
+			best.reciprocalOverlap,
 
 		orientationMatches:
-			bestCandidate.orientationMatches
+			best.orientationMatches
 	};
 }
 
 
-/*
- * -------------------------------------------------------------------------
- * Legacy-xref creation
- * -------------------------------------------------------------------------
- */
+// -------------------------------------------------------------------------
+// Legacy xrefs
+// -------------------------------------------------------------------------
 
 function createOrUpdateXref(
 	xrefId,
-	normRow,
+	row,
 	legacySource,
 	pubmedId,
 	hostSpecies,
@@ -943,10 +821,10 @@ function createOrUpdateXref(
 	);
 
 	glue.inMode(
-		"custom-table-row/" +
-		XREF_TABLE +
-		"/" +
-		xrefId,
+		customRowPath(
+			XREF_TABLE,
+			xrefId
+		),
 
 		function() {
 
@@ -961,24 +839,20 @@ function createOrUpdateXref(
 				"set",
 				"field",
 				"legacy_name",
-				normRow.legacyName
+				row.legacyName
 			]);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"pubmed_id",
 				pubmedId
 			);
 
-			/*
-			 * These are currently assumed rather than used to restrict
-			 * candidate matching. They remain useful xref provenance.
-			 */
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"host_species",
 				hostSpecies
 			);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"genome_build",
 				genomeBuild
 			);
@@ -987,56 +861,56 @@ function createOrUpdateXref(
 				"set",
 				"field",
 				"scaffold",
-				normRow.scaffold
+				row.scaffold
 			]);
 
 			glue.command([
 				"set",
 				"field",
 				"start_position",
-				"" + normRow.start
+				"" + row.start
 			]);
 
 			glue.command([
 				"set",
 				"field",
 				"end_position",
-				"" + normRow.end
+				"" + row.end
 			]);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"orientation",
-				normRow.orientation
+				row.orientation
 			);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"legacy_classification",
-				normRow.legacyClassification
+				row.legacyClassification
 			);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"source_numeric_id",
-				normRow.sourceNumericId
+				row.sourceNumericId
 			);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"source_aliases",
-				normRow.sourceAliases
+				row.sourceAliases
 			);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"source_orthology",
-				normRow.sourceOrthology
+				row.sourceOrthology
 			);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"source_band",
-				normRow.sourceBand
+				row.sourceBand
 			);
 
-			setFieldIfNotNull(
+			setFieldIfPresent(
 				"source_note",
-				normRow.sourceNote
+				row.sourceNote
 			);
 
 			glue.command([
@@ -1053,92 +927,73 @@ function createOrUpdateXref(
 				match.method
 			]);
 
-			if(match.candidateId != null) {
+			if(match.candidateId !== null) {
 
 				glue.command([
 					"set",
 					"link-target",
-					LOCUS_CANDIDATE_LINK,
-					"custom-table-row/" +
-					LOCUS_CANDIDATE_TABLE +
-					"/" +
-					match.candidateId
+					LOCUS_LINK,
+					customRowPath(
+						LOCUS_TABLE,
+						match.candidateId
+					)
 				]);
 			}
 		}
 	);
-
-	return xrefId;
 }
 
 
-/*
- * -------------------------------------------------------------------------
- * Alias handling
- * -------------------------------------------------------------------------
- */
+// -------------------------------------------------------------------------
+// Alias handling
+// -------------------------------------------------------------------------
 
-function normaliseAlias(aliasName) {
+function normaliseAlias(value) {
 
-	aliasName =
-		clean(aliasName);
+	value = clean(value);
 
-	if(aliasName == null) {
+	if(value === null) {
 		return null;
 	}
 
-	var lowerAlias =
-		aliasName.toLowerCase();
+	var lower = value.toLowerCase();
 
 	if(
-		aliasName === "-" ||
-		lowerAlias === "na" ||
-		lowerAlias === "n/a" ||
-		lowerAlias === "none" ||
-		lowerAlias === "unknown"
+		value === "-" ||
+		lower === "unknown" ||
+		lower === "not known" ||
+		lower === "not available"
 	) {
 		return null;
 	}
 
-	/*
-	 * alias_name is VARCHAR 150.
-	 *
-	 * Do not silently truncate identifiers or names, because that could
-	 * produce misleading aliases.
-	 */
-	if(aliasName.length > 150) {
+	if(value.length > 150) {
 
 		glue.log(
 			"WARNING",
 			"Skipping alias longer than 150 characters: " +
-			aliasName
+			value
 		);
 
 		return null;
 	}
 
-	return aliasName;
+	return value;
 }
 
 
-function splitSourceAliases(
-	aliasString
+function splitDelimitedAliases(
+	value,
+	delimiterRegex
 ) {
 
-	aliasString =
-		clean(aliasString);
+	value = clean(value);
 
-	if(aliasString == null) {
+	if(value === null) {
 		return [];
 	}
 
-	/*
-	 * The imported sources may separate aliases using commas,
-	 * semicolons, or pipes.
-	 */
-	var parts =
-		aliasString.split(/[;,|]/);
-
+	var parts = value.split(delimiterRegex);
 	var aliases = [];
 
 	for(var i = 0; i < parts.length; i++) {
@@ -1146,7 +1001,7 @@ function splitSourceAliases(
 		var aliasName =
 			normaliseAlias(parts[i]);
 
-		if(aliasName != null) {
+		if(aliasName !== null) {
 			aliases.push(aliasName);
 		}
 	}
@@ -1155,47 +1010,69 @@ function splitSourceAliases(
 }
 
 
-function makeAliasId(
-	candidateId,
-	aliasSource,
-	aliasName
+function aliasesForSource(
+	row,
+	legacySource
 ) {
 
-	var candidateHash =
-		hashString(candidateId);
+	var aliases = [];
 
-	var sourceHash =
-		hashString(aliasSource);
+	if(legacySource === DBM_GIFFORD_SOURCE) {
 
-	var aliasHash =
-		hashString(aliasName.toLowerCase());
+		/*
+		 * Curated DBM/Gifford policy:
+		 *
+		 *   approved_symbol
+		 *   each comma-separated alias_symbol
+		 *   hgnc_id
+		 *
+		 * approved_name is deliberately excluded.
+		 */
+		aliases.push(row.approvedSymbol);
 
-	var aliasId =
-		"la_" +
-		candidateHash +
-		"_" +
-		sourceHash +
-		"_" +
-		aliasHash;
-
-	/*
-	 * This construction is normally well below the row-ID limit, but
-	 * retain a defensive fallback.
-	 */
-	if(aliasId.length > 45) {
-
-		aliasId =
-			"la_" +
-			hashString(
-				candidateId +
-				"|" +
-				aliasSource +
-				"|" +
-				aliasName.toLowerCase()
+		var dbmAliases =
+			splitDelimitedAliases(
+				row.sourceAliases,
+				/,/
 			);
+
+		for(var i = 0; i < dbmAliases.length; i++) {
+			aliases.push(dbmAliases[i]);
+		}
+
+		aliases.push(row.hgncId);
+
+	} else {
+
+		/*
+		 * For other published catalogues, retain the principal source
+		 * identifier and any explicitly listed aliases.
+		 */
+		aliases.push(row.legacyName);
+
+		if(
+			row.approvedSymbol !== null &&
+			row.approvedSymbol !== row.legacyName
+		) {
+			aliases.push(row.approvedSymbol);
+		}
+
+		var sourceAliases =
+			splitDelimitedAliases(
+				row.sourceAliases,
+				/[;,|]/
+			);
+
+		for(
+			var j = 0;
+			j < sourceAliases.length;
+			j++
+		) {
+			aliases.push(sourceAliases[j]);
+		}
 	}
 
-	return aliasId;
+	return aliases;
 }
 
 
@@ -1208,7 +1085,7 @@ function createLocusAlias(
 	aliasName =
 		normaliseAlias(aliasName);
 
-	if(aliasName == null) {
+	if(aliasName === null) {
 		return false;
 	}
 
@@ -1219,9 +1096,6 @@ function createLocusAlias(
 			aliasName
 		);
 
-	/*
-	 * A deterministic row ID makes repeated creation idempotent.
-	 */
 	if(
 		customTableRowExists(
 			ALIAS_TABLE,
@@ -1239,10 +1113,10 @@ function createLocusAlias(
 	]);
 
 	glue.inMode(
-		"custom-table-row/" +
-		ALIAS_TABLE +
-		"/" +
-		aliasId,
+		customRowPath(
+			ALIAS_TABLE,
+			aliasId
+		),
 
 		function() {
 
@@ -1263,11 +1137,11 @@ function createLocusAlias(
 			glue.command([
 				"set",
 				"link-target",
-				ALIAS_LOCUS_LINK,
-				"custom-table-row/" +
-				LOCUS_CANDIDATE_TABLE +
-				"/" +
-				candidateId
+				ALIAS_LINK,
+				customRowPath(
+					LOCUS_TABLE,
+					candidateId
+				)
 			]);
 		}
 	);
@@ -1276,92 +1150,48 @@ function createLocusAlias(
 }
 
 
-function createAliasesForMatchedRow(
-	normRow,
+function createAliasesForMatch(
+	row,
 	legacySource,
 	match
 ) {
 
 	/*
-	 * Do not create aliases for unmatched records.
+	 * Only unambiguous mappings donate aliases automatically.
 	 */
-	if(match.candidateId == null) {
-		return 0;
-	}
-
-	/*
-	 * Initially create aliases only for unambiguous coordinate mappings.
-	 *
-	 * mapped_multiple_overlaps xrefs remain available for review, but do
-	 * not automatically donate names to the selected candidate.
-	 */
-	if(match.status !== "mapped") {
-		return 0;
-	}
-
-	var aliases = [];
-
-	/*
-	 * The primary source-record name.
-	 */
-	aliases.push(
-		normRow.legacyName
-	);
-
-	/*
-	 * For dbm-gifford-legacy-list-hg19.tsv this allows the locus to be
-	 * found by both HGNC-style symbol and approved descriptive name.
-	 */
-	aliases.push(
-		normRow.approvedSymbol
-	);
-
-	aliases.push(
-		normRow.approvedName
-	);
-
-	/*
-	 * Add individually parsed source aliases.
-	 */
-	var parsedSourceAliases =
-		splitSourceAliases(
-			normRow.sourceAliases
-		);
-
-	for(
-		var i = 0;
-		i < parsedSourceAliases.length;
-		i++
+	if(
+		match.candidateId === null ||
+		match.status !== "mapped"
 	) {
-		aliases.push(
-			parsedSourceAliases[i]
-		);
+		return 0;
 	}
 
-	var seenAliases = {};
-	var createdCount = 0;
+	var aliases =
+		aliasesForSource(
+			row,
+			legacySource
+		);
 
-	for(var j = 0; j < aliases.length; j++) {
+	var seen = {};
+	var created = 0;
+
+	for(var i = 0; i < aliases.length; i++) {
 
 		var aliasName =
-			normaliseAlias(aliases[j]);
+			normaliseAlias(aliases[i]);
 
-		if(aliasName == null) {
+		if(aliasName === null) {
 			continue;
 		}
 
-		/*
-		 * Suppress duplicates within this source row while preserving
-		 * the original spelling and capitalisation of the first value.
-		 */
-		var aliasKey =
+		var key =
 			aliasName.toLowerCase();
 
-		if(seenAliases[aliasKey]) {
+		if(seen[key]) {
 			continue;
 		}
 
-		seenAliases[aliasKey] = true;
+		seen[key] = true;
 
 		if(
 			createLocusAlias(
@@ -1370,19 +1200,17 @@ function createAliasesForMatchedRow(
 				legacySource
 			)
 		) {
-			createdCount++;
+			created++;
 		}
 	}
 
-	return createdCount;
+	return created;
 }
 
 
-/*
- * -------------------------------------------------------------------------
- * Public module functions
- * -------------------------------------------------------------------------
- */
+// -------------------------------------------------------------------------
+// Public functions exposed through legacyLocusImporter.xml
+// -------------------------------------------------------------------------
 
 function loadLegacyLocusFile(
 	inputPath,
@@ -1393,20 +1221,16 @@ function loadLegacyLocusFile(
 	createOrthologyCalibrations
 ) {
 
-	/*
-	 * createOrthologyCalibrations is deliberately ignored.
-	 *
-	 * It remains in the function signature for compatibility with the
-	 * existing ecmaFunctionInvoker XML and build script.
-	 */
 	if(
-		createOrthologyCalibrations != null &&
-		("" + createOrthologyCalibrations).toLowerCase() === "true"
+		createOrthologyCalibrations !== null &&
+		createOrthologyCalibrations !== undefined &&
+		("" + createOrthologyCalibrations)
+			.toLowerCase() === "true"
 	) {
 		glue.log(
 			"WARNING",
-			"createOrthologyCalibrations was true, but " +
-			"legacyLocusImporter.js now imports xrefs and aliases only"
+			"createOrthologyCalibrations was true, but this " +
+			"module now imports legacy xrefs and aliases only"
 		);
 	}
 
@@ -1417,13 +1241,12 @@ function loadLegacyLocusFile(
 
 		function() {
 
-			inputRows =
-				glue.tableToObjects(
-					glue.command([
-						"load-tabular",
-						inputPath
-					])
-				);
+			inputRows = glue.tableToObjects(
+				glue.command([
+					"load-tabular",
+					inputPath
+				])
+			);
 		}
 	);
 
@@ -1431,20 +1254,22 @@ function loadLegacyLocusFile(
 
 	for(var i = 0; i < inputRows.length; i++) {
 
-		var normRow =
+		var row =
 			normaliseLegacyRow(
 				inputRows[i]
 			);
 
 		var validationError =
-			validateLegacyRow(normRow);
+			validateLegacyRow(row);
 
-		if(validationError != null) {
+		if(validationError !== null) {
 
 			glue.log(
 				"WARNING",
 				"Skipping legacy row " +
 				(i + 1) +
+				" in " +
+				legacySource +
 				": " +
 				validationError
 			);
@@ -1452,27 +1277,19 @@ function loadLegacyLocusFile(
 			continue;
 		}
 
-		/*
-		 * We currently assume all records belong to the human/build
-		 * context supplied by the module invocation.
-		 *
-		 * Input-row organism and assembly values are not validated.
-		 */
 		var match =
-			findBestLocusCandidateMatch(
-				normRow
-			);
+			findBestCandidateMatch(row);
 
 		var xrefId =
 			makeXrefId(
 				legacySource,
-				normRow,
+				row,
 				i
 			);
 
 		createOrUpdateXref(
 			xrefId,
-			normRow,
+			row,
 			legacySource,
 			pubmedId,
 			hostSpecies,
@@ -1481,8 +1298,8 @@ function loadLegacyLocusFile(
 		);
 
 		var aliasesCreated =
-			createAliasesForMatchedRow(
-				normRow,
+			createAliasesForMatch(
+				row,
 				legacySource,
 				match
 			);
@@ -1492,25 +1309,22 @@ function loadLegacyLocusFile(
 				legacySource,
 
 			legacy_name:
-				normRow.legacyName,
+				row.legacyName,
 
 			legacy_classification:
-				normRow.legacyClassification,
+				row.legacyClassification,
 
 			source_numeric_id:
-				normRow.sourceNumericId,
+				row.sourceNumericId,
 
 			scaffold:
-				normRow.scaffold,
+				row.scaffold,
 
-			start:
-				normRow.start,
+			start_position:
+				row.start,
 
-			end:
-				normRow.end,
-
-			source_orthology:
-				normRow.sourceOrthology,
+			end_position:
+				row.end,
 
 			mapping_status:
 				match.status,
@@ -1551,16 +1365,10 @@ function loadLegacyLocusFile(
 }
 
 
-function clearLegacySource(
-	legacySource
-) {
+function clearLegacySource(legacySource) {
 
 	/*
-	 * Delete aliases before deleting xrefs.
-	 *
-	 * The two tables are independently linked to the candidate table, but
-	 * deleting both source-derived layers prevents stale aliases remaining
-	 * when mappings or source records change.
+	 * Remove source-derived aliases first.
 	 */
 	var aliasRows = rowList(glue.command([
 		"list",
@@ -1575,17 +1383,17 @@ function clearLegacySource(
 
 	for(var i = 0; i < aliasRows.length; i++) {
 
-		var aliasRowId =
-			aliasRows[i].value[0];
-
 		glue.command([
 			"delete",
 			"custom-table-row",
 			ALIAS_TABLE,
-			aliasRowId
+			aliasRows[i].value[0]
 		]);
 	}
 
+	/*
+	 * Then remove source-derived xrefs.
+	 */
 	var xrefRows = rowList(glue.command([
 		"list",
 		"custom-table-row",
@@ -1599,14 +1407,11 @@ function clearLegacySource(
 
 	for(var j = 0; j < xrefRows.length; j++) {
 
-		var xrefRowId =
-			xrefRows[j].value[0];
-
 		glue.command([
 			"delete",
 			"custom-table-row",
 			XREF_TABLE,
-			xrefRowId
+			xrefRows[j].value[0]
 		]);
 	}
 

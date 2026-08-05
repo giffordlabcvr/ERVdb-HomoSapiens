@@ -3,21 +3,33 @@
   run file glue/build/locus/hervImportLocusSources.glue
 
   # Set sequence lengths and kinds
-  run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js 
+  run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js
 
-  # Link to locus data table
+  # Link sequences to locus candidate records
   run script glue/build/locus/hervLinkLocusSeqsToLocusCandidateTable.js
 
-  # Link loci to curated ERV provirus lineage concepts
-  #run script glue/build/locus/hervLinkLociToErvLineages.js
+  # Persist locus-candidate to curated ERV-lineage relationships.
+  run script glue/build/locus/linkLocusCandidatesToErvLineages.js
 
-  # Construct lineage MSAs 
-  #run file glue/build/locus/msa/constructLineageMsas.glue
+  # Add resolved loci to lineage-level alignments
+  run script glue/build/locus/msa/addResolvedLociToAlignments.js
+
+  # Compute ERV lineage-level alignments
+  run script glue/build/locus/msa/computeHervLineageAlignments.js
+
+  # Compute LTR alignments
+  run script glue/build/locus/msa/computeHervLineageLtrAlignments.js
+
+  # Record feature presence in lineage-level alignments
+  run file glue/build/locus/msa/recordFeaturePresence.glue
+
+  # Import legacy mappings and aliases
+  run file glue/build/locus/missillac/importLegacyMappings.glue
 
   # Assign Missillac IDs
-  #run file glue/build/locus/assignMissillacIds.glue
+  run script glue/build/locus/missillac/applyErvLocusCandidateNames.js
 
-  # Map legacy ERV overlaps
-  #run file  glue/build/locus/mapLegacyErvs.glue
-  
+  # Build, reroot, and prepare lineage-level nucleotide phylogenies
+  run file glue/analyse/reconstructLineageLevelPhylogenies.glue
+
   validate

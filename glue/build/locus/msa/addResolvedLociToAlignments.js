@@ -1,4 +1,4 @@
-// glue/build/locus/listResolvedLocusAlignmentAssignments.js
+// glue/build/locus/addResolvedLociToAlignments.js
 //
 // Dry-run script to identify alignment assignments for fully resolved
 // ERV locus candidates.
