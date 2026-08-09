@@ -1,0 +1,25 @@
+ 
+  #~# Build lineage level phylogenies
+  
+  
+  module ervRaxmlPhylogenyGeneratorNucs
+
+
+  # Clade III
+  
+ 	#~# Sigmaretroviruses
+    generate nucleotide phylogeny AL_LINEAGE_HERVS -s ervSelectorHervSPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervSPolNucs.tree NEWICK_BOOTSTRAPS
+
+    generate nucleotide phylogeny AL_LINEAGE_HERVU3 -s ervSelectorHervU3PolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervU3PolNucs.tree NEWICK_BOOTSTRAPS
+
+ 	#~# Lambdaretroviruses
+    generate nucleotide phylogeny AL_LINEAGE_HERVL -s ervSelectorHervLPolNucs \
+    -w "fLocNotes.featureLoc.feature.name = 'pol' and fLocNotes.ref_nt_coverage_pct >= 55" \
+    -o trees/lineage/hervLPolNucs.tree NEWICK_BOOTSTRAPS
+
+    exit
+    

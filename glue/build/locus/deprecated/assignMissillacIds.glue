@@ -1,3 +1,0 @@
-
-  run script glue/hervLegacyLocusAssign.js
-  run script glue/hervAssignIdsToNonLegacyLoci.js
