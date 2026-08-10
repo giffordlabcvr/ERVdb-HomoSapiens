@@ -1,4 +1,4 @@
-// glue/analyse/buildHervLineagePhylogeniesNucs.js
+// glue/analyse/reconstructLineageLevelPhylogenies.js
 //
 // Build nucleotide phylogenies for human ERV lineage alignments.
 //
@@ -9,10 +9,15 @@
 //
 //   - pol nucleotide phylogenies only.
 //
-// HERV lineage alignments are discovered directly from the GLUE project,
-// rather than being specified in a configuration block.
+// HERV lineage alignments are discovered directly from the GLUE project.
+// Selector modules are assumed to have been created separately by:
 //
-// Naming conventions:
+//   run file glue/analyse/createPhylogenyModules.glue
+//
+// Selector modules are highly curated and are therefore NOT created,
+// deleted or modified by this script.
+//
+// Naming convention:
 //
 //   Alignment:
 //       AL_LINEAGE_HERVFRD
@@ -23,25 +28,21 @@
 //   Selector module:
 //       msaSelector_HERVFRD_pol_nucs
 //
-//   Selector XML:
-//       modules/analyse/msa_masking/nucs/
-//           msaSelector_HERVFRD_pol_nucs.xml
-//
 //   Output tree:
 //       trees/lineage/HERVFRD_pol_nucs.tree
 //
 // Workflow:
 //
 //   1. Discover AL_LINEAGE_HERV* alignments.
-//   2. Derive the selector and output tree names.
-//   3. Skip the lineage if the output tree already exists.
-//   4. Require at least four total alignment members.
-//   5. Recreate the selector module from its XML definition.
+//   2. Derive the expected selector module name.
+//   3. Skip the lineage if no curated selector module is defined.
+//   4. Skip the lineage if the output tree already exists.
+//   5. Require at least four total alignment members.
 //   6. Require at least four members passing the pol coverage filter.
 //   7. Generate a bootstrap-labelled nucleotide tree with RAxML.
 //
-// Because existing trees are skipped, the script can safely be rerun after
-// partial or interrupted phylogeny-building runs.
+// Existing trees are skipped, allowing interrupted or partial phylogeny
+// reconstruction runs to be resumed without repeating expensive analyses.
 //
 // Assumes execution from within the ervdb project mode.
 
@@ -67,15 +68,14 @@ var MIN_TREE_MEMBERS =
 var PHYLOGENY_GENERATOR_MODULE =
 	"ervRaxmlPhylogenyGeneratorNucs";
 
-var SELECTOR_DIR =
-	"modules/analyse/msa_masking/nucs";
-
 var TREE_DIR =
 	"trees/lineage";
 
 
-// Java filesystem access.
-//
+// -----------------------------------------------------------------------------
+// Java filesystem access
+// -----------------------------------------------------------------------------
+
 var File =
 	Java.type("java.io.File");
 
@@ -130,14 +130,12 @@ function runCmd(cmdWords) {
 // -----------------------------------------------------------------------------
 // Discover HERV lineage alignments
 //
-// Equivalent console command:
+// Equivalent GLUE command:
 //
-//   list alignment name refSequence.name
-//       -w "name like 'AL_LINEAGE_HERV%'"
-//       -s name
+//   list alignment -w "name like 'AL_LINEAGE_HERV%'"
 //
-// Restricting this to AL_LINEAGE_HERV% prevents other non-human lineage
-// alignments such as AL_LINEAGE_CeratotheriumRb from entering this workflow.
+// Restricting the query to AL_LINEAGE_HERV% excludes lineage alignments
+// belonging to non-human ERVs.
 // -----------------------------------------------------------------------------
 
 function getHervLineageAlignments() {
@@ -145,18 +143,16 @@ function getHervLineageAlignments() {
 	return queryObjects([
 		"list",
 		"alignment",
-		"name",
-		"refSequence.name",
 		"-w",
-		"name like 'AL_LINEAGE_HERV%'",
-		"-s",
-		"name"
+		"name like 'AL_LINEAGE_HERV%'"
 	]);
 }
 
 
 // -----------------------------------------------------------------------------
 // Derive canonical HERV name
+//
+// Example:
 //
 //   AL_LINEAGE_HERVFRD
 //
@@ -174,7 +170,9 @@ function getHervName(alignmentName) {
 
 		throw new Error(
 			"Cannot derive HERV name from alignment: " +
-			alignmentName
+			alignmentName +
+			". Expected alignment name beginning with " +
+			prefix
 		);
 	}
 
@@ -185,7 +183,15 @@ function getHervName(alignmentName) {
 
 
 // -----------------------------------------------------------------------------
-// Derived names and paths
+// Derive selector module name
+//
+// Example:
+//
+//   AL_LINEAGE_HERVFRD
+//
+// becomes:
+//
+//   msaSelector_HERVFRD_pol_nucs
 // -----------------------------------------------------------------------------
 
 function getSelectorModuleName(
@@ -202,20 +208,17 @@ function getSelectorModuleName(
 }
 
 
-function getSelectorFile(
-	alignmentName
-) {
-
-	return (
-		SELECTOR_DIR +
-		"/" +
-		getSelectorModuleName(
-			alignmentName
-		) +
-		".xml"
-	);
-}
-
+// -----------------------------------------------------------------------------
+// Derive output tree path
+//
+// Example:
+//
+//   AL_LINEAGE_HERVFRD
+//
+// becomes:
+//
+//   trees/lineage/HERVFRD_pol_nucs.tree
+// -----------------------------------------------------------------------------
 
 function getTreeFile(
 	alignmentName
@@ -250,6 +253,9 @@ function fileExists(filePath) {
 
 // -----------------------------------------------------------------------------
 // GLUE object checks
+//
+// list module does not accept explicit column names.
+// Its default result already includes module name and type.
 // -----------------------------------------------------------------------------
 
 function moduleExists(moduleName) {
@@ -270,6 +276,10 @@ function moduleExists(moduleName) {
 
 // -----------------------------------------------------------------------------
 // Count all members of an alignment
+//
+// Equivalent GLUE command:
+//
+//   alignment <alignmentName> list member
 // -----------------------------------------------------------------------------
 
 function countAlignmentMembers(
@@ -296,7 +306,10 @@ function countAlignmentMembers(
 
 
 // -----------------------------------------------------------------------------
-// Build feature-coverage where-clause
+// Construct the feature-coverage where-clause
+//
+// This is the same filter applied both when counting eligible members and
+// when generating the phylogeny.
 // -----------------------------------------------------------------------------
 
 function buildCoverageWhereClause() {
@@ -312,7 +325,7 @@ function buildCoverageWhereClause() {
 
 
 // -----------------------------------------------------------------------------
-// Count members passing the coverage filter
+// Count alignment members passing the feature-coverage filter
 // -----------------------------------------------------------------------------
 
 function countEligibleMembers(
@@ -342,53 +355,7 @@ function countEligibleMembers(
 
 
 // -----------------------------------------------------------------------------
-// Recreate selector module
-// -----------------------------------------------------------------------------
-
-function recreateSelectorModule(
-	alignmentName
-) {
-
-	var selectorModule =
-		getSelectorModuleName(
-			alignmentName
-		);
-
-	var selectorFile =
-		getSelectorFile(
-			alignmentName
-		);
-
-
-	if(moduleExists(selectorModule)) {
-
-		runCmd([
-			"delete",
-			"module",
-			selectorModule
-		]);
-	}
-
-
-	runCmd([
-		"create",
-		"module",
-		"-f",
-		selectorFile
-	]);
-
-
-	log(
-		"Recreated selector module " +
-		selectorModule +
-		" from " +
-		selectorFile
-	);
-}
-
-
-// -----------------------------------------------------------------------------
-// Process one HERV lineage alignment
+// Generate one lineage phylogeny
 // -----------------------------------------------------------------------------
 
 function generateLineagePhylogeny(
@@ -408,11 +375,6 @@ function generateLineagePhylogeny(
 			alignmentName
 		);
 
-	var selectorFile =
-		getSelectorFile(
-			alignmentName
-		);
-
 	var outputFile =
 		getTreeFile(
 			alignmentName
@@ -429,7 +391,39 @@ function generateLineagePhylogeny(
 
 
 	// ---------------------------------------------------------------------
-	// Skip completed analyses immediately.
+	// Curated selector module
+	//
+	// Selector modules are instantiated separately by
+	// createPhylogenyModules.glue.
+	//
+	// Absence of a selector therefore means that this lineage has not yet
+	// been curated/enabled for this phylogenetic analysis.
+	// ---------------------------------------------------------------------
+
+	if(!moduleExists(
+			selectorModule
+		)) {
+
+		log(
+			"Skipping " +
+			alignmentName +
+			": selector module not defined -> " +
+			selectorModule
+		);
+
+		return {
+			status: "skipped",
+			reason:
+				"SELECTOR_NOT_DEFINED"
+		};
+	}
+
+
+	// ---------------------------------------------------------------------
+	// Existing tree
+	//
+	// Phylogeny reconstruction may be expensive. If the expected output
+	// tree already exists, regard this lineage as completed.
 	// ---------------------------------------------------------------------
 
 	if(
@@ -446,13 +440,14 @@ function generateLineagePhylogeny(
 
 		return {
 			status: "skipped",
-			reason: "TREE_ALREADY_EXISTS"
+			reason:
+				"TREE_ALREADY_EXISTS"
 		};
 	}
 
 
 	// ---------------------------------------------------------------------
-	// Require sufficient total alignment membership.
+	// Total alignment membership
 	// ---------------------------------------------------------------------
 
 	var totalMemberCount =
@@ -483,56 +478,7 @@ function generateLineagePhylogeny(
 
 
 	// ---------------------------------------------------------------------
-	// The selector is curated manually and represented by its XML file.
-	//
-	// Do not attempt to infer the selected region here. The script simply
-	// consumes the corresponding curated selector definition.
-	// ---------------------------------------------------------------------
-
-	if(!fileExists(selectorFile)) {
-
-		log(
-			"Skipping " +
-			alignmentName +
-			": selector XML does not exist -> " +
-			selectorFile
-		);
-
-		return {
-			status: "skipped",
-			reason:
-				"SELECTOR_FILE_NOT_FOUND"
-		};
-	}
-
-
-	recreateSelectorModule(
-		alignmentName
-	);
-
-
-	if(
-		!DRY_RUN &&
-		!moduleExists(selectorModule)
-	) {
-
-		log(
-			"Skipping " +
-			alignmentName +
-			": selector module unavailable after recreation -> " +
-			selectorModule
-		);
-
-		return {
-			status: "skipped",
-			reason:
-				"SELECTOR_MODULE_NOT_FOUND"
-		};
-	}
-
-
-	// ---------------------------------------------------------------------
-	// Apply the pol coverage filter.
+	// Feature coverage
 	// ---------------------------------------------------------------------
 
 	var whereClause =
@@ -574,7 +520,7 @@ function generateLineagePhylogeny(
 
 
 	// ---------------------------------------------------------------------
-	// Generate nucleotide phylogeny.
+	// Generate phylogeny
 	// ---------------------------------------------------------------------
 
 	log(
@@ -582,11 +528,13 @@ function generateLineagePhylogeny(
 		FEATURE_NAME +
 		" nucleotide phylogeny for " +
 		alignmentName +
+		" using " +
+		selectorModule +
 		": " +
 		eligibleMemberCount +
 		" of " +
 		totalMemberCount +
-		" member(s) eligible"
+		" member(s) pass the coverage filter"
 	);
 
 
@@ -644,7 +592,9 @@ if(!moduleExists(
 
 
 log(
-	"Discovering HERV lineage alignments"
+	"Building HERV lineage " +
+	FEATURE_NAME +
+	" nucleotide phylogenies"
 );
 
 
@@ -653,7 +603,7 @@ var lineageAlignments =
 
 
 log(
-	"Found " +
+	"Discovered " +
 	lineageAlignments.length +
 	" HERV lineage alignment(s)"
 );
@@ -662,7 +612,13 @@ log(
 if(SKIP_EXISTING_TREES) {
 
 	log(
-		"Existing trees will be skipped"
+		"Existing output trees will be skipped"
+	);
+}
+else {
+
+	log(
+		"Existing output trees will be rebuilt"
 	);
 }
 
@@ -673,19 +629,17 @@ if(SKIP_EXISTING_TREES) {
 
 var generatedCount = 0;
 
+var selectorNotDefinedCount = 0;
+
 var existingTreeCount = 0;
 
 var insufficientMembersCount = 0;
 
 var insufficientEligibleMembersCount = 0;
 
-var selectorFileNotFoundCount = 0;
-
-var selectorModuleNotFoundCount = 0;
-
 
 // -----------------------------------------------------------------------------
-// Process discovered lineages
+// Process discovered HERV lineage alignments
 // -----------------------------------------------------------------------------
 
 _.each(
@@ -707,6 +661,11 @@ _.each(
 
 
 		if(result.reason ===
+				"SELECTOR_NOT_DEFINED") {
+
+			selectorNotDefinedCount++;
+		}
+		else if(result.reason ===
 				"TREE_ALREADY_EXISTS") {
 
 			existingTreeCount++;
@@ -720,16 +679,6 @@ _.each(
 				"INSUFFICIENT_ELIGIBLE_MEMBERS") {
 
 			insufficientEligibleMembersCount++;
-		}
-		else if(result.reason ===
-				"SELECTOR_FILE_NOT_FOUND") {
-
-			selectorFileNotFoundCount++;
-		}
-		else if(result.reason ===
-				"SELECTOR_MODULE_NOT_FOUND") {
-
-			selectorModuleNotFoundCount++;
 		}
 	}
 );
@@ -754,6 +703,11 @@ log(
 );
 
 log(
+	"Lineages without a curated selector module: " +
+	selectorNotDefinedCount
+);
+
+log(
 	"Existing phylogenies skipped: " +
 	existingTreeCount
 );
@@ -761,25 +715,19 @@ log(
 log(
 	"Alignments skipped with fewer than " +
 	MIN_TREE_MEMBERS +
-	" members: " +
+	" total members: " +
 	insufficientMembersCount
 );
 
 log(
 	"Alignments skipped with fewer than " +
 	MIN_TREE_MEMBERS +
-	" members passing the coverage filter: " +
+	" members passing the " +
+	FEATURE_NAME +
+	" coverage >= " +
+	MIN_COVERAGE_PCT +
+	"% filter: " +
 	insufficientEligibleMembersCount
-);
-
-log(
-	"Alignments without a selector XML: " +
-	selectorFileNotFoundCount
-);
-
-log(
-	"Selector modules unavailable after recreation: " +
-	selectorModuleNotFoundCount
 );
 
 log(

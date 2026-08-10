@@ -35,23 +35,23 @@
       #~#~# Clade II
 
       #~# Betaretrovirus: archaeo
-	  delete module msaSelectorHerv_khml5_Pol_Nucs
-	  delete module msaSelectorHerv_khml6_Pol_Nucs
+	  delete module msaSelector_HERVKHML5_pol_nucs
+	  delete module msaSelector_HERVKHML6_pol_nucs
 	  
       #~# Betaretrovirus: K
-	  delete module msaSelectorHerv_khml1_Pol_Nucs
-	  delete module msaSelectorHerv_khml2_Pol_Nucs
-	  delete module msaSelectorHerv_khml3_Pol_Nucs
-	  delete module msaSelectorHerv_khml4_Pol_Nucs
-	  delete module msaSelectorHerv_khml7_Pol_Nucs
-	  delete module msaSelectorHerv_khml8_Pol_Nucs
-	  delete module msaSelectorHerv_khml9_Pol_Nucs
-	  delete module msaSelectorHerv_khml10_Pol_Nucs
+	  delete module msaSelector_HERVKHML1_pol_nucs
+	  delete module msaSelector_HERVKHML2_pol_nucs
+	  delete module msaSelector_HERVKHML3_pol_nucs
+	  delete module msaSelector_HERVKHML4_pol_nucs
+	  delete module msaSelector_HERVKHML7_pol_nucs
+	  delete module msaSelector_HERVKHML8_pol_nucs
+	  delete module msaSelector_HERVKHML9_pol_nucs
+	  delete module msaSelector_HERVKHML10_pol_nucs
 
       #~#~# Clade III
-	  delete module msaSelectorHerv_L_Pol_Nucs
-	  delete module msaSelectorHerv_U3_Pol_Nucs
-	  delete module msaSelectorHerv_S_Pol_Nucs
+	  delete module msaSelector_HERVS_pol_nucs
+	  delete module msaSelector_HERVL_pol_nucs
+	  delete module msaSelector_HERVU3_pol_nucs
 
 
   #~# Create nucleotide phylogeny build modules
@@ -59,64 +59,64 @@
   # Clade I
 
       #~# Gammaretrovirus
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVT_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVE_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVR_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERV1_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERV15_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVT_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVE_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVR_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERV1_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERV15_pol_nucs.xml
 
       #~# Rho
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVRb_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVRb_pol_nucs.xml
 
       #~# Iota
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVI_pol_nucs.xml
-	  #create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVADP_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVI_pol_nucs.xml
+	  #create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVADP_pol_nucs.xml
 
       #~# Zeta: HF
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVH_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVFa_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVFb_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVFc1_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVFc2_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVXa_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVH_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVFa_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVFb_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVFc1_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVFc2_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVXa_pol_nucs.xml
 
       #~# Zeta: W9P
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVW_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERV9_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERV30_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVP_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVW_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERV9_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERV30_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVP_pol_nucs.xml
 
       #~# Zeta: FRD
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVFRD_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERV4_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERV46_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_PRIMA41_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVFRD_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERV4_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERV46_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_PRIMA41_pol_nucs.xml
 
       #~# Theta
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERVLb_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_HERV24_pol_nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_I/nucs/pol/msaSelector_MER66_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVLb_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERV24_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_MER66_pol_nucs.xml
 	  
 
   # Clade II
   
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml5_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml6_Pol_Nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML5_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML6_pol_nucs.xml
 
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml1_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml2_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml3_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml4_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml7_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml8_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml9_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_II/nucs/pol/msaSelectorHerv_khml10_Pol_Nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML1_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML2_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML3_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML4_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML7_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML8_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML9_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVKHML10_pol_nucs.xml
 
 
   # Clade III
 
-	  create module -f modules/analyse/msa_masking/clade_III/nucs/pol/msaSelectorHerv_L_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_III/nucs/pol/msaSelectorHerv_U3_Pol_Nucs.xml
-	  create module -f modules/analyse/msa_masking/clade_III/nucs/pol/msaSelectorHerv_S_Pol_Nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVL_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVU3_pol_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/pol/msaSelector_HERVS_pol_nucs.xml
 	  
 
