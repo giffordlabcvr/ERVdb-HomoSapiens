@@ -1,0 +1,15 @@
+<ecmaFunctionInvoker>
+
+    <scriptFileName>populateErvLocusResolved.js</scriptFileName>
+
+    <function>
+        <name>populateErvLocusResolved</name>
+
+        <parameter>
+            <name>batchSize</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+</ecmaFunctionInvoker>
