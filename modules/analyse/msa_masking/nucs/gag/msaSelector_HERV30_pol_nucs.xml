@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alignmentColumnsSelector>
+
+    <relRefName>REF_HERV30</relRefName>
+ 
+    <!-- Partition 1 -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>1952</startNt>
+        <endNt>3664</endNt>
+    </nucleotideRegionSelector>
+  
+</alignmentColumnsSelector>
+
+  

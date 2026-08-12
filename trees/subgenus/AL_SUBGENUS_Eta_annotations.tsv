@@ -1,6 +1,0 @@
-taxon	sequenceID	erv_lineage	species	name	full_name	clade	genus	combined-erv-xrv-species	combined-erv-xrv-name	combined-erv-xrv-genus	combined-erv-xrv-subgenus
-alignment/AL_SUBGENUS_Eta/member/xrv-refseqs-ncbi/AF356697	AF356697	-	Gammaretrovirus porConc	PERVE	porcine endogenous retrovirus E	-	-	Gammaretrovirus porConc|-	PERVE|-	Gammaretrovirus|-	Eta|-
-alignment/AL_SUBGENUS_Eta/member/erv-refseqs-gamma/HARLEQUIN	HARLEQUIN	Gammaretrovirus etacatarrhini	-	-	-	I	Gammaretrovirus	-|Gammaretrovirus etacatarrhini	-|HERV-1	-|Gammaretrovirus	-|Eta
-alignment/AL_SUBGENUS_Eta/member/erv-refseqs-gamma/HERV-1	HERV-1	Gammaretrovirus etacatarrhini	-	-	-	I	Gammaretrovirus	-|Gammaretrovirus etacatarrhini	-|HERV-1	-|Gammaretrovirus	-|Eta
-alignment/AL_SUBGENUS_Eta/member/erv-refseqs-gamma/HERV-E	HERV-E	Gammaretrovirus etacatarrhini	-	-	-	I	Gammaretrovirus	-|Gammaretrovirus etacatarrhini	-|HERV-1	-|Gammaretrovirus	-|Eta
-alignment/AL_SUBGENUS_Eta/member/erv-refseqs-gamma/HERV-R	HERV-R	Gammaretrovirus etacatarrhini	-	-	-	I	Gammaretrovirus	-|Gammaretrovirus etacatarrhini	-|HERV-1	-|Gammaretrovirus	-|Eta
