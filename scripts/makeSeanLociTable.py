@@ -125,7 +125,7 @@ with open(input_file, newline="", encoding="utf-8") as infile, \
             "Chromosome": clean(row["chrom"]),
             "Start": clean(row["start_position"]),
             "End": clean(row["end_position"]),
-            "Strand": clean(row["strand"]),
+            "Strand": row["strand"].strip() if row["strand"] else "",
             "Length": clean(row["length"]),
             "Category": clean(row["status"]),
             "Taxonomic_Resolution": clean(row["names_decision"]),
