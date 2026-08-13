@@ -14,7 +14,7 @@
 //
 //   fLocNotes.featureLoc.feature.name = 'whole_genome'
 //   and
-//   fLocNotes.ref_nt_coverage_pct >= 55
+//   fLocNotes.ref_nt_coverage_pct >= 70
 //
 // Naming convention:
 //
@@ -57,7 +57,7 @@ var FEATURE_NAME =
 	"whole_genome";
 
 var MIN_COVERAGE_PCT =
-	55;
+	70;
 
 var MIN_TREE_MEMBERS =
 	4;
