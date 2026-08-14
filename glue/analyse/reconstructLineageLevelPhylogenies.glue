@@ -6,5 +6,5 @@
   run script glue/analyse/reconstructLineageLevelPhylogenies.js
 
   # Re-root phylogenies and export FigTree annotations
-  run file glue/analyse/prepareLineagePhylogeniesNucs.glue
+  run file glue/analyse/prepareLineagePhylogeniesNucs.js
 
