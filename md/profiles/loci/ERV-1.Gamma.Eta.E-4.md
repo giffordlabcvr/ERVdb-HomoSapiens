@@ -1,3 +1,9 @@
-# ERV-1.Gamma.Eta.E-4
+# ERV-1.Gamma.Eta.E-4 (ERVE-4 / CT-RCC HERV-E)
+
+The human locus **ERV-1.Gamma.Eta.E-4**, commonly known as **ERVE-4** or **CT-RCC HERV-E**, is a relatively intact HERV-E provirus on chromosome 6q that has attracted particular interest because of its selective expression and immunogenicity in **clear-cell renal cell carcinoma (ccRCC)**. Although the provirus contains disabling mutations and cannot produce an infectious virus, transcription from the locus can generate retrovirus-derived RNAs and proteins in tumour cells.
+
+Expression of ERVE-4 in ccRCC is closely linked to a defining molecular feature of this cancer: loss of the tumour suppressor **VHL**. VHL inactivation stabilizes hypoxia-inducible transcription factors, and **HIF-2α** can bind a hypoxia-response element in the ERVE-4 5′ LTR and promote transcription. This activity is also influenced by DNA methylation: the LTR is hypomethylated in ERVE-4-expressing ccRCC cells but generally methylated and transcriptionally repressed in normal tissues and other tumour types. Thus, activation of an ancient retroviral promoter has become coupled to a central oncogenic pathway in kidney cancer.
+
+ERVE-4 is also a source of tumour-associated antigens. The **CT-RCC-1** peptide encoded by transcripts from the locus is presented by HLA-A*11 and was originally identified as the target of cytotoxic T cells associated with regression of metastatic kidney cancer following allogeneic stem-cell transplantation. Subsequent work has developed T-cell receptors directed against CT-RCC-1 and demonstrated that engineered T cells can selectively kill ERVE-4-expressing ccRCC cells, establishing this locus as a potential target for cancer immunotherapy. More recent studies indicate that ERVE-4 forms part of a broader group of HIF-responsive ERVs whose products can be translated, presented by HLA molecules and recognized by T cells in kidney cancer.
 
 * * * * *
