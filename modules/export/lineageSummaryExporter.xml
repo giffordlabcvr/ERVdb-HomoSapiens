@@ -1,0 +1,20 @@
+<ecmaFunctionInvoker>
+
+    <scriptFileName>lineageSummaryExporter.js</scriptFileName>
+
+    <function>
+        <name>previewLineageSummary</name>
+        <tableFromObjectsResultType/>
+    </function>
+
+    <function>
+        <name>exportLineageSummary</name>
+
+        <parameter>
+            <name>fileName</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+</ecmaFunctionInvoker>
