@@ -6,3 +6,4 @@ Suppressyn is expressed in placental tissues and encodes a truncated retroviral 
 
 Suppressyn represents a distinct outcome of retroviral gene domestication. Whereas the independently acquired syncytin proteins retained the membrane fusion activity of retroviral envelope proteins to support placental development, Suppressyn appears to have evolved primarily as a receptor interference factor that protects host cells from infection by related exogenous retroviruses.
 
+* * * * *
