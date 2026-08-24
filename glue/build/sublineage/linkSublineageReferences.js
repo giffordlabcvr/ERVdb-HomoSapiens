@@ -2,11 +2,12 @@
  * Populate lineage-side custom tables from ERV/LTR sublineage reference sources.
  *
  * Behaviour:
- * - For sources matching ^erv-refseqs-.*-sub$:
+ * - For source 'erv-sub':
  *     create/find erv_lineage rows and link sequences to them
  *     set entity_level = 'sublineage'
- * - For sources matching ^ltr_refseqs_erv[123]_sublineage$:
+ * - For source 'ltr-sub':
  *     create/find ltr_lineage rows and link sequences to them
+ *     set entity_level = 'sublineage'
  *
  * Assumes:
  * - sequence -> erv_lineage link exists
@@ -51,11 +52,11 @@ function setFieldIfExists(tableName, rowId, fieldName, value) {
 }
 
 function isErvSublineageSource(sourceName) {
-	return /^erv-refseqs-.*-sub$/.test(sourceName);
+	return sourceName === "erv-sub";
 }
 
 function isLtrSublineageSource(sourceName) {
-	return /^ltr_refseqs_erv[123]_sublineage$/.test(sourceName);
+	return sourceName === "ltr-sub";
 }
 
 function listSublineageReferenceSources() {

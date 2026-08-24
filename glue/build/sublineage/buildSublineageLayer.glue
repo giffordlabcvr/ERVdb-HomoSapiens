@@ -21,10 +21,10 @@
   run file glue/build/sublineage/importSublineageSideData.glue
   
   # Declare reference sequences for ERV sublineages
-  run script glue/build/sublineage/declareSublineageReferences.js
+  run script glue/build/sublineage/ervDeclareSublineageReferences.js
 
   # Import sublineage reference feature locations
-  run file glue/build/sublineage/importFeatureLocationsHervSublineages.glue
+  run file glue/build/sublineage/ervImportFeatureLocationsSublineages.glue
 
   # Extend constrained alignment tree
   run script glue/build/sublineage/extendAlignmentTreeAcceptedSublineages.js  

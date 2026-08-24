@@ -2,34 +2,32 @@
  * Update `length` and `sequence_kind` for reference sequences.
  *
  * Rules:
- * - sources matching ^erv-refseqs-...-sub$ get sequence_kind = 'erv_sub_ref'
- * - sources matching ^erv-refseqs-...$ get sequence_kind = 'erv_ref'
- * - sources matching ^ltr_refseqs_erv[123]_sublineage$ get
- *     sequence_kind = 'ltr_erv<N>_sub_ref'
- * - sources matching ^ltr-refseqs-([A-Za-z0-9._-]+)$ get
- *     sequence_kind = 'ltr_' + suffix + '_ref'
+ * - source 'erv' gets sequence_kind = 'erv_ref'
+ * - source 'ltr' gets sequence_kind = 'ltr_ref'
+ * - source 'erv-sub' gets sequence_kind = 'erv_sub_ref'
+ * - source 'ltr-sub' gets sequence_kind = 'ltr_sub_ref'
+ *
+ * Any other sources are ignored.
  */
 
 var sourceObjs = glue.tableToObjects(glue.command(["list", "source"]));
 
 function getSequenceKindForSource(sourceName) {
 
-	var ltrSubMatch = sourceName.match(/^ltr_refseqs_erv([123])_sublineage$/);
-	if(ltrSubMatch) {
-		return "ltr_erv" + ltrSubMatch[1] + "_sub_ref";
+	if(sourceName === "erv") {
+		return "erv_ref";
 	}
 
-	if(/^erv-refseqs-[A-Za-z0-9._-]+-sub$/.test(sourceName)) {
+	if(sourceName === "ltr") {
+		return "ltr_ref";
+	}
+
+	if(sourceName === "erv-sub") {
 		return "erv_sub_ref";
 	}
 
-	var ltrMatch = sourceName.match(/^ltr-refseqs-([A-Za-z0-9._-]+)$/);
-	if(ltrMatch) {
-		return "ltr_" + ltrMatch[1].replace(/-/g, "_") + "_ref";
-	}
-
-	if(/^erv-refseqs-[A-Za-z0-9._-]+$/.test(sourceName)) {
-		return "erv_ref";
+	if(sourceName === "ltr-sub") {
+		return "ltr_sub_ref";
 	}
 
 	return null;

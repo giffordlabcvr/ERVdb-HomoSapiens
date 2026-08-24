@@ -164,7 +164,7 @@ declareReferences({
 		"sequenceID",
 		"source.name",
 		"erv_lineage.id",
-		"-w", "source.name like 'erv-refseqs-%-sub'",
+		"-w", "source.name = 'erv-sub'",
 		"-s", "erv_lineage.id,sequenceID"
 	]
 });
@@ -178,7 +178,7 @@ declareReferences({
 		"sequenceID",
 		"source.name",
 		"ltr_lineage.id",
-		"-w", "source.name like 'ltr_refseqs_erv%_sublineage'",
+		"-w", "source.name = 'ltr-sub'",
 		"-s", "ltr_lineage.id,sequenceID"
 	]
 });

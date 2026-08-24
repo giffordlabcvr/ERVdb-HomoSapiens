@@ -20,11 +20,7 @@
 
 var INPUT_FILE = "tabular/reference/herv_sublineage_ltr_data_all.tsv";
 
-var LTR_SOURCES = [
-	"ltr_refseqs_erv1_sublineage",
-	"ltr_refseqs_erv2_sublineage",
-	"ltr_refseqs_erv3_sublineage"
-];
+var LTR_SOURCE = "ltr-sub";
 
 var DRY_RUN = false;
 
@@ -144,15 +140,7 @@ function findLtrSequenceRef(sequenceId) {
 		return null;
 	}
 
-	var i;
-	for(i = 0; i < LTR_SOURCES.length; i++) {
-		var sourceName = LTR_SOURCES[i];
-		var seqRef = findSequenceInSource(sourceName, seq);
-		if(seqRef != null) {
-			return seqRef;
-		}
-	}
-	return null;
+	return findSequenceInSource(LTR_SOURCE, seq);
 }
 
 function setSequenceCustomLinkIfPresent(sequenceRef, linkName, targetTable, targetId) {
@@ -177,7 +165,7 @@ glue.inMode("module/tabularUtility", function() {
 });
 
 log("Loaded " + rows.length + " rows from " + INPUT_FILE);
-log("LTR sequence search sources: " + LTR_SOURCES.join(", "));
+log("LTR sequence search source: " + LTR_SOURCE);
 
 var assocRowCount = 0;
 var ltrLineageCount = 0;

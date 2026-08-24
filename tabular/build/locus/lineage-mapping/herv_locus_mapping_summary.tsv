@@ -1,9 +1,0 @@
-metric_group	metric	count	percentage
-run	total_input_loci	60716	100.00
-run	dry_run	0	
-mapping_outcome	missing_classification	60716	100.00
-mapping_method	(missing)	60716	100.00
-association_action	(missing)	60716	100.00
-assignment_status	(missing)	60716	100.00
-locus_category	(missing)	60716	100.00
-is_mosaic	(missing)	60716	100.00
