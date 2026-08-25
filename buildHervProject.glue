@@ -1,4 +1,9 @@
-  
+
+# Define project-specific DB schema extensions
+schema-project ervdb
+  run file schema/ervdbProvenanceTables.glue
+  exit
+
 # Build ERVdb-HomoSapiens extension to ERVdb project  
 project ervdb
 
@@ -9,4 +14,3 @@ project ervdb
   #run file glue/build/locus/buildLocusLayer.glue
   
   exit
-

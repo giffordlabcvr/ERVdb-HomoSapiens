@@ -1,0 +1,25 @@
+# Export lineage data
+
+console set cmd-output-file-format tab
+console set next-cmd-output-file web-app/erv_lineage_data.tsv
+
+list sequence sequenceID erv_lineage.standard_id \
+              sequence_kind length \
+              erv_lineage.reference_type \
+              erv_lineage.curation_tier \
+              erv_lineage.reference_method \
+              erv_lineage.num_seqs \
+              erv_lineage.accession \
+              erv_lineage.pubmed_id \
+              erv_lineage.in_rt_phylogeny \
+              erv_lineage.in_tm_phylogeny \
+              erv_lineage.consensus_orfs \
+              erv_lineage.rv_species.id \
+              erv_lineage.rv_species.full_name \
+              erv_lineage.rv_species.name \
+              erv_lineage.rv_species.rv_clade.id \
+              erv_lineage.rv_species.rv_genus.id \
+              erv_lineage.description \
+              erv_lineage.notes \
+              -w "sequence_kind = 'erv_ref'"
+              

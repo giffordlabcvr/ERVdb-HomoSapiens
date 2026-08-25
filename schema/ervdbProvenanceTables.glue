@@ -1,0 +1,96 @@
+# ============================================================================
+# ERV locus provenance tables
+#
+# Source-specific records supporting final ERV locus definitions.
+#
+# DIGS and RetroTector records are represented explicitly because the
+# corresponding source datasets are relatively small and contain useful
+# structural / annotation information.
+#
+# Repbase provenance is represented only as a lightweight association with
+# the final ERV locus; the complete Repbase-derived locus catalogue is not
+# loaded into GLUE.
+# ============================================================================
+
+
+# ----------------------------------------------------------------------------
+# DIGS loci
+# ----------------------------------------------------------------------------
+
+create custom-table digs_locus
+
+table digs_locus
+
+  # Genomic coordinates of the consolidated DIGS locus
+  create field chrom          VARCHAR 50
+  create field strand         VARCHAR 10
+  create field start_position INTEGER
+  create field end_position   INTEGER
+
+  # Consolidated DIGS annotation
+  create field names          VARCHAR 1000
+  create field genes          VARCHAR 1000
+
+  # IDs of the underlying DIGS hits contributing to this consolidated locus
+  create field digs_ids       VARCHAR 2000
+
+exit
+
+# A final ERV locus may be supported by one or more DIGS loci.
+create link digs_locus erv_locus --multiplicity MANY_TO_ONE
+
+
+# ----------------------------------------------------------------------------
+# RetroTector loci
+# ----------------------------------------------------------------------------
+
+create custom-table retrotector_locus
+
+table retrotector_locus
+
+  # Genomic coordinates of the RetroTector locus
+  create field chrom          VARCHAR 50
+  create field strand         VARCHAR 10
+  create field start_position INTEGER
+  create field end_position   INTEGER
+
+  # RetroTector structural annotation
+  #
+  # Example:
+  #   5LTR-PBS-CA-NC-DU-Prot-RT-IN-SU-TM-3LTR
+  create field gene_structure VARCHAR 1000
+
+  # RetroTector ERV classification / name
+  create field name           VARCHAR 200
+
+  # Original RetroTector consensus-gene identifier
+  create field conso_gene_rt  VARCHAR 100
+
+exit
+
+# A final ERV locus may be supported by one or more RetroTector loci.
+create link retrotector_locus erv_locus --multiplicity MANY_TO_ONE
+
+
+# ----------------------------------------------------------------------------
+# Repbase provenance
+# ----------------------------------------------------------------------------
+
+create custom-table erv_locus_repbase_assoc
+
+table erv_locus_repbase_assoc
+
+  # Identifier of the corresponding element / row in the Repbase-derived
+  # source dataset used by the HERV integration pipeline.
+  create field repbase_id   VARCHAR 100
+
+  # Original Repbase element name, where available.
+  #
+  # This is useful for provenance and for mapping the final ERV locus back
+  # to the Repbase-derived BED representation without loading the complete
+  # Repbase dataset into GLUE.
+  create field repbase_name VARCHAR 200
+
+exit
+
+create link erv_locus_repbase_assoc erv_locus --multiplicity MANY_TO_ONE
