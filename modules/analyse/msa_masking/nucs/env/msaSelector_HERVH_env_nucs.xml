@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alignmentColumnsSelector>
+
+    <relRefName>REF_HERVH</relRefName>
+ 
+    <!-- Partition 1 -->
+    <nucleotideRegionSelector>
+        <featureName>whole_genome</featureName>
+        <startNt>6668</startNt>
+        <endNt>8425</endNt>
+    </nucleotideRegionSelector>
+  
+</alignmentColumnsSelector>
+

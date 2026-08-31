@@ -1,0 +1,49 @@
+<ecmaFunctionInvoker>
+
+    <scriptFileName>ervTreeBuilder.js</scriptFileName>
+
+    <function>
+        <name>reconstructWithSelector</name>
+
+        <parameter>
+            <name>alignmentName</name>
+        </parameter>
+
+        <parameter>
+            <name>selectorModuleName</name>
+        </parameter>
+
+        <parameter>
+            <name>outputFile</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+    <function>
+        <name>reconstructWithCoverage</name>
+
+        <parameter>
+            <name>alignmentName</name>
+        </parameter>
+
+        <parameter>
+            <name>selectorModuleName</name>
+        </parameter>
+
+        <parameter>
+            <name>featureName</name>
+        </parameter>
+
+        <parameter>
+            <name>minCoveragePct</name>
+        </parameter>
+
+        <parameter>
+            <name>outputFile</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+</ecmaFunctionInvoker>

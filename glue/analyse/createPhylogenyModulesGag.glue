@@ -1,0 +1,122 @@
+
+  #~# Clean-up
+
+  
+  # Genus-level masking modules
+
+      #~#~# Clade I
+
+      #~# Gammaretrovirus
+	  delete module msaSelector_HERVT_gag_nucs
+	  delete module msaSelector_HERVE_gag_nucs
+	  delete module msaSelector_HERVR_gag_nucs
+
+      #~# Rho
+	  delete module msaSelector_HERVRb_gag_nucs
+
+      #~# Zeta: HF
+	  delete module msaSelector_HERVH_gag_nucs
+	  delete module msaSelector_HERVFa_gag_nucs
+	  delete module msaSelector_HERVFb_gag_nucs
+	  delete module msaSelector_HERVFc_gag_nucs
+
+      #~# Theta
+	  delete module msaSelector_HERVLb_gag_nucs
+
+      #~# Iota
+	  delete module msaSelector_HERVI_gag_nucs
+	  delete module msaSelector_HERVADP_gag_nucs
+
+      #~# Zeta: W9P
+	  delete module msaSelector_HERVW_gag_nucs
+	  delete module msaSelector_HERV9_gag_nucs
+	  delete module msaSelector_HERVP_gag_nucs
+
+      #~#~# Clade II
+
+      #~# Betaretrovirus: archaeo
+	  delete module msaSelector_HERVKHML5_gag_nucs
+	  delete module msaSelector_HERVKHML6_gag_nucs
+	  
+      #~# Betaretrovirus: K
+	  delete module msaSelector_HERVKHML1_gag_nucs
+	  delete module msaSelector_HERVKHML2_gag_nucs
+	  delete module msaSelector_HERVKHML3_gag_nucs
+	  delete module msaSelector_HERVKHML4_gag_nucs
+	  delete module msaSelector_HERVKHML7_gag_nucs
+	  delete module msaSelector_HERVKHML8_gag_nucs
+	  delete module msaSelector_HERVKHML9_gag_nucs
+	  delete module msaSelector_HERVKHML10_gag_nucs
+
+      #~#~# Clade III
+	  delete module msaSelector_HERVS_gag_nucs
+	  delete module msaSelector_HERVL_gag_nucs
+	  delete module msaSelector_HERVU3_gag_nucs
+
+
+  #~# Create nucleotide phylogeny build modules
+  
+  # Clade I
+
+      #~# Gammaretrovirus
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVT_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVE_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVR_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERV1_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERV15_gag_nucs.xml
+
+      #~# Rho
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVRb_gag_nucs.xml
+
+      #~# Iota
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVI_gag_nucs.xml
+	  #create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVADP_gag_nucs.xml
+
+      #~# Zeta: HF
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVH_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVFa_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVFb_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVFc1_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVFc2_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVXa_gag_nucs.xml
+
+      #~# Zeta: W9P
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVW_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERV9_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERV30_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVP_gag_nucs.xml
+
+      #~# Zeta: FRD
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVFRD_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERV4_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERV46_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_PRIMA41_gag_nucs.xml
+
+      #~# Theta
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVLb_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERV24_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_MER66_gag_nucs.xml
+	  
+
+  # Clade II
+  
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML5_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML6_gag_nucs.xml
+
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML1_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML2_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML3_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML4_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML7_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML8_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML9_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVKHML10_gag_nucs.xml
+
+
+  # Clade III
+
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVL_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVU3_gag_nucs.xml
+	  create module -f modules/analyse/msa_masking//nucs/gag/msaSelector_HERVS_gag_nucs.xml
+	  
+

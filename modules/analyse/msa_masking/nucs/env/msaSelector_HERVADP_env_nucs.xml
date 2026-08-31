@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <alignmentColumnsSelector>
 
-    <relRefName>REF_HERVL</relRefName>
+    <relRefName>REF_HERVADP</relRefName>
  
     <!-- Partition 1 -->
     <nucleotideRegionSelector>
         <featureName>whole_genome</featureName>
-        <startNt>489s</startNt>
-        <endNt>2234</endNt>
+        <startNt>6175</startNt>
+        <endNt>8184</endNt>
     </nucleotideRegionSelector>
   
 </alignmentColumnsSelector>
