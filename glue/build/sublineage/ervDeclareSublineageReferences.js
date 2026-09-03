@@ -1,16 +1,43 @@
 // glue/build/sublineage/ervDeclareSublineageReferences.js
 //
-// Declare reference sequences for ERV and LTR sublineage references.
+// Declare references for:
 //
-// Naming convention:
-//   ERV sublineage refs: REF_<erv_lineage.id sanitized>
-//   LTR sublineage refs: LTR_REF_<ltr_lineage.id sanitized>
+//   1. ERV sublineage reference sequences in source erv-sub
+//   2. LTR lineages associated with ERV sublineages in source ltr-sub
+//
+// Naming conventions:
+//
+//   ERV references:
+//     REF_<sequenceID sanitized>
+//
+//   Sublineage-associated LTR references:
+//     LTR_REF_<sequenceID sanitized>
+//
+// Examples:
+//
+//   erv-sub/HERV-39
+//     -> REF_HERV39
+//
+//   ltr-sub/LTR19B
+//     -> LTR_REF_LTR19B
+//
+// Important distinction:
+//
+//   sequenceID identifies the representative sequence and determines the
+//   reference name.
+//
+//   erv_lineage.id identifies the canonical ERV sublineage entity.
+//
+//   ltr_lineage.id identifies the associated LTR-lineage entity.
+//
+// Only sequences that have been linked to an erv_lineage or ltr_lineage row
+// are eligible to become references.
 //
 // Assumptions:
-// - sequence.erv_lineage is set for ERV sublineage reference sequences
-// - sequence.ltr_lineage is set for LTR sublineage reference sequences
-// - sublineage ERV rows are stored in erv_lineage with entity_level = 'sublineage'
-// - one representative sequence per lineage/LTR lineage is expected
+//
+//   - sequence.erv_lineage is set for ERV sublineage reference sequences
+//   - sequence.ltr_lineage is set for sublineage-associated LTR sequences
+//   - one representative sequence per ERV or LTR lineage is expected
 
 var DRY_RUN = false;
 
@@ -19,166 +46,425 @@ var DRY_RUN = false;
 // -----------------------------------------------------------------------------
 
 function norm(value) {
+
 	if(value === null || value === undefined) {
 		return null;
 	}
-	var s = ("" + value).trim();
-	if(s === "") {
+
+	var stringValue =
+		("" + value).trim();
+
+	if(stringValue === "") {
 		return null;
 	}
-	var low = s.toLowerCase();
-	if(low === "n/a" || low === "na" || low === "null" || low === "none") {
+
+	var lowerValue =
+		stringValue.toLowerCase();
+
+	if(
+		lowerValue === "n/a" ||
+		lowerValue === "na" ||
+		lowerValue === "n/k" ||
+		lowerValue === "nk" ||
+		lowerValue === "unknown" ||
+		lowerValue === "null" ||
+		lowerValue === "none"
+	) {
 		return null;
 	}
-	return s;
+
+	return stringValue;
 }
 
-function log(msg) {
-	glue.log("INFO", msg);
+function log(message) {
+	glue.logInfo(message);
 }
 
-function sanitizeRefSuffix(name) {
-	return ("" + name).replace(/[^A-Za-z0-9]/g, "");
+function sanitizeRefSuffix(value) {
+
+	value =
+		norm(value);
+
+	if(value === null) {
+		return "";
+	}
+
+	return value.replace(
+		/[^A-Za-z0-9]/g,
+		""
+	);
 }
 
 function escapeQuotes(value) {
-	return ("" + value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+
+	return (
+		"" + value
+	)
+		.replace(
+			/\\/g,
+			"\\\\"
+		)
+		.replace(
+			/'/g,
+			"\\'"
+		);
 }
 
-function queryObjects(cmdWords) {
-	return glue.tableToObjects(glue.command(cmdWords));
+function queryObjects(commandWords) {
+
+	return glue.tableToObjects(
+		glue.command(commandWords)
+	);
 }
 
-function runCmd(cmdWords) {
+function runCommand(commandWords) {
+
 	if(DRY_RUN) {
-		log("[DRY RUN] " + cmdWords.join(" "));
+		log(
+			"[DRY RUN] " +
+			commandWords.join(" ")
+		);
+
 		return null;
 	}
-	return glue.command(cmdWords);
+
+	return glue.command(commandWords);
 }
 
-function referenceExists(refName) {
-	var rows = queryObjects([
-		"list", "reference",
-		"-w", "name = '" + escapeQuotes(refName) + "'"
-	]);
+function referenceExists(referenceName) {
+
+	var rows =
+		queryObjects([
+			"list",
+			"reference",
+			"-w",
+			"name = '" +
+				escapeQuotes(referenceName) +
+				"'"
+		]);
+
 	return rows.length > 0;
 }
 
-function refNameForLineageId(prefix, lineageId) {
-	var clean = sanitizeRefSuffix(lineageId);
-	if(clean === "") {
-		throw "Could not derive reference name from lineage id: " + lineageId;
+function referenceNameForSequence(
+	prefix,
+	sequenceID
+) {
+
+	var cleanSequenceID =
+		sanitizeRefSuffix(sequenceID);
+
+	if(cleanSequenceID === "") {
+		throw (
+			"Could not derive reference name from sequence ID: " +
+			sequenceID
+		);
 	}
-	return prefix + clean;
+
+	return (
+		prefix +
+		cleanSequenceID
+	);
 }
 
 // -----------------------------------------------------------------------------
-// Generic declaration logic
+// Group linked sequences by lineage
 // -----------------------------------------------------------------------------
 
-function buildLineageToSequenceMap(rows, lineageField) {
-	var lineageToRows = {};
+function buildLineageToSequenceMap(
+	rows,
+	lineageField
+) {
 
-	_.each(rows, function(row) {
-		var sequenceID = norm(row.sequenceID);
-		var sourceName = norm(row["source.name"]);
-		var lineageId = norm(row[lineageField]);
+	var lineageToSequences = {};
+	var incompleteRows = [];
+	var unlinkedSequences = [];
 
-		if(sequenceID === null || sourceName === null || lineageId === null) {
-			return;
+	_.each(
+		rows,
+		function(row) {
+
+			var sequenceID =
+				norm(
+					row["sequenceID"]
+				);
+
+			var sourceName =
+				norm(
+					row["source.name"]
+				);
+
+			var lineageId =
+				norm(
+					row[lineageField]
+				);
+
+			if(
+				sequenceID === null ||
+				sourceName === null
+			) {
+				incompleteRows.push(row);
+				return;
+			}
+
+			if(lineageId === null) {
+				unlinkedSequences.push({
+					sourceName: sourceName,
+					sequenceID: sequenceID
+				});
+
+				return;
+			}
+
+			if(!lineageToSequences[lineageId]) {
+				lineageToSequences[lineageId] = [];
+			}
+
+			lineageToSequences[lineageId].push({
+				lineageId: lineageId,
+				sequenceID: sequenceID,
+				sourceName: sourceName
+			});
 		}
+	);
 
-		if(!lineageToRows[lineageId]) {
-			lineageToRows[lineageId] = [];
-		}
-
-		lineageToRows[lineageId].push({
-			lineageId: lineageId,
-			sequenceID: sequenceID,
-			sourceName: sourceName
-		});
-	});
-
-	return lineageToRows;
+	return {
+		lineageToSequences: lineageToSequences,
+		incompleteRows: incompleteRows,
+		unlinkedSequences: unlinkedSequences
+	};
 }
 
-function chooseRepresentative(rowList) {
-	if(rowList.length === 1) {
-		return rowList[0];
-	}
-
-	var exact = _.filter(rowList, function(row) {
-		return row.sequenceID === row.lineageId;
-	});
-	if(exact.length === 1) {
-		return exact[0];
-	}
-
-	var sorted = rowList.slice().sort(function(a, b) {
-		var aKey = a.sourceName + "/" + a.sequenceID;
-		var bKey = b.sourceName + "/" + b.sequenceID;
-		return aKey.localeCompare(bKey);
-	});
-	return sorted[0];
-}
+// -----------------------------------------------------------------------------
+// Generic reference-declaration logic
+// -----------------------------------------------------------------------------
 
 function declareReferences(config) {
-	var rows = queryObjects(config.query);
-	log("Loaded " + rows.length + " " + config.label + " sequence rows");
 
-	var lineageToRows = buildLineageToSequenceMap(rows, config.lineageField);
-	var lineageIds = _.keys(lineageToRows).sort();
+	var rows =
+		queryObjects(
+			config.query
+		);
 
-	_.each(lineageIds, function(lineageId) {
-		var candidates = lineageToRows[lineageId];
+	log(
+		"Loaded " +
+		rows.length +
+		" " +
+		config.label +
+		" sequence rows"
+	);
 
-		if(candidates.length > 1) {
-			throw "Multiple " + config.label + " reference sequences found for lineage '" + lineageId + "'";
+	var mappingResult =
+		buildLineageToSequenceMap(
+			rows,
+			config.lineageField
+		);
+
+	var lineageToSequences =
+		mappingResult.lineageToSequences;
+
+	var lineageIds =
+		_.keys(
+			lineageToSequences
+		).sort();
+
+	var referencesCreated = 0;
+	var referencesExisting = 0;
+
+	_.each(
+		lineageIds,
+		function(lineageId) {
+
+			var candidates =
+				lineageToSequences[lineageId];
+
+			if(candidates.length > 1) {
+
+				var candidateNames =
+					_.map(
+						candidates,
+						function(candidate) {
+							return (
+								candidate.sourceName +
+								"/" +
+								candidate.sequenceID
+							);
+						}
+					).join(", ");
+
+				throw (
+					"Multiple " +
+					config.label +
+					" reference sequences found for lineage '" +
+					lineageId +
+					"': " +
+					candidateNames
+				);
+			}
+
+			var chosen =
+				candidates[0];
+
+			/*
+			 * Reference names are deliberately derived from sequenceID,
+			 * not lineageId.
+			 *
+			 * This preserves stable reference names while allowing
+			 * erv_lineage.id to use canonical ERVdb identifiers.
+			 */
+
+			var referenceName =
+				referenceNameForSequence(
+					config.refPrefix,
+					chosen.sequenceID
+				);
+
+			if(referenceExists(referenceName)) {
+
+				referencesExisting++;
+
+				log(
+					"Reference already exists: " +
+					referenceName +
+					" -> " +
+					chosen.sourceName +
+					"/" +
+					chosen.sequenceID +
+					" [" +
+					lineageId +
+					"]"
+				);
+
+				return;
+			}
+
+			runCommand([
+				"create",
+				"reference",
+				referenceName,
+				chosen.sourceName,
+				chosen.sequenceID
+			]);
+
+			referencesCreated++;
+
+			log(
+				"Created " +
+					referenceName +
+					" from " +
+					chosen.sourceName +
+					"/" +
+					chosen.sequenceID +
+					" [" +
+					lineageId +
+					"]"
+			);
 		}
+	);
 
-		var chosen = chooseRepresentative(candidates);
-		var refName = refNameForLineageId(config.refPrefix, lineageId);
+	log(
+		"----- " +
+		config.label +
+		" SUMMARY -----"
+	);
 
-		if(referenceExists(refName)) {
-			log("Reference already exists: " + refName + " -> " +
-				chosen.sourceName + "/" + chosen.sequenceID);
-			return;
+	log(
+		"Source sequence rows: " +
+		rows.length
+	);
+
+	log(
+		"Linked lineage entities: " +
+		lineageIds.length
+	);
+
+	log(
+		"References created: " +
+		referencesCreated
+	);
+
+	log(
+		"References already present: " +
+		referencesExisting
+	);
+
+	log(
+		"Unlinked source sequences skipped: " +
+		mappingResult.unlinkedSequences.length
+	);
+
+	_.each(
+		mappingResult.unlinkedSequences,
+		function(sequence) {
+			log(
+				"  " +
+				sequence.sourceName +
+				"/" +
+				sequence.sequenceID
+			);
 		}
+	);
 
-		runCmd(["create", "reference", refName, chosen.sourceName, chosen.sequenceID]);
-		log("Created " + refName + " from " + chosen.sourceName + "/" + chosen.sequenceID);
-	});
+	log(
+		"Incomplete sequence rows skipped: " +
+		mappingResult.incompleteRows.length
+	);
 }
 
 // -----------------------------------------------------------------------------
-// Main
+// Declare ERV sublineage references
 // -----------------------------------------------------------------------------
 
 declareReferences({
-	label: "ERV sublineage",
-	refPrefix: "REF_",
-	lineageField: "erv_lineage.id",
+	label:
+		"ERV sublineage",
+
+	refPrefix:
+		"REF_",
+
+	lineageField:
+		"erv_lineage.id",
+
 	query: [
-		"list", "sequence",
+		"list",
+		"sequence",
 		"sequenceID",
 		"source.name",
 		"erv_lineage.id",
-		"-w", "source.name = 'erv-sub'",
-		"-s", "erv_lineage.id,sequenceID"
+		"-w",
+		"source.name = 'erv-sub'",
+		"-s",
+		"erv_lineage.id,sequenceID"
 	]
 });
 
+// -----------------------------------------------------------------------------
+// Declare references for sublineage-associated LTR lineages
+// -----------------------------------------------------------------------------
+
 declareReferences({
-	label: "LTR sublineage",
-	refPrefix: "LTR_REF_",
-	lineageField: "ltr_lineage.id",
+	label:
+		"sublineage-associated LTR lineage",
+
+	refPrefix:
+		"LTR_REF_",
+
+	lineageField:
+		"ltr_lineage.id",
+
 	query: [
-		"list", "sequence",
+		"list",
+		"sequence",
 		"sequenceID",
 		"source.name",
 		"ltr_lineage.id",
-		"-w", "source.name = 'ltr-sub'",
-		"-s", "ltr_lineage.id,sequenceID"
+		"-w",
+		"source.name = 'ltr-sub'",
+		"-s",
+		"ltr_lineage.id,sequenceID"
 	]
 });
+
+log(
+	"Sublineage-layer reference declaration complete"
+);

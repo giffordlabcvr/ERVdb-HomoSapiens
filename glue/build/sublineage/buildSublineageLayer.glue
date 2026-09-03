@@ -1,33 +1,32 @@
 
-  # Import ERV sublineage reference sequences
+  # Import ERV and LTR sublineage reference sequences
   run file glue/build/sublineage/importSublineageRefSources.glue
-
-  # Link reference sequences to lineage/ltr custom tables as appropriate
-  run script glue/build/sublineage/linkSublineageReferences.js
-
-  # Set reference sequence lengths and kinds
-  run script glue/build/sublineage/setErvSequenceLengthsAndKinds.js 
-
-  # Extend the rv_taxonomy table and link erv sublineage sequence entries to it
-  run script glue/build/sublineage/loadErvSublineageTaxonomy.js
   
-  # Populate the lineage aliases table for the sublineages
+  # Set reference-sequence lengths and kinds
+  run script glue/build/sublineage/setSublineageRefSequenceLengthsAndKinds.js
+  
+  # Create ERV sublineage rows, populate their metadata and taxonomy,
+  # and link representative sequences from source erv-sub
+  run script glue/build/sublineage/loadErvSublineages.js
+
+  # Populate aliases for the ERV sublineages
   run script glue/build/sublineage/loadErvSublineageAliases.js
-
-  # Map ERV sublineage and LTR relationships
-  run script glue/build/sublineage/loadErvSublineageLtrRelationships.js
-
-  # Import ERV sublineage-specific data
-  run file glue/build/sublineage/importSublineageSideData.glue
   
-  # Declare reference sequences for ERV sublineages
+  # Load LTR lineages associated with ERV sublineages,
+  # link their representative sequences from source ltr-sub,
+  # and create ERV-sublineage-to-LTR associations
+  run script glue/build/sublineage/loadSublineageAssociatedLtrLineages.js
+  
+  # Declare reference sequences for ERV and LTR sublineages
   run script glue/build/sublineage/ervDeclareSublineageReferences.js
-
+  
   # Import sublineage reference feature locations
   run file glue/build/sublineage/ervImportFeatureLocationsSublineages.glue
-
-  # Extend constrained alignment tree
-  run script glue/build/sublineage/extendAlignmentTreeAcceptedSublineages.js  
-
+  
+  # Extend the constrained alignment tree
+  run script glue/build/sublineage/extendAlignmentTreeAcceptedSublineages.js
+  
+  # Summarise the completed sublineage layer
+  run script glue/build/sublineage/summariseErvSublineageLayer.js
+  
   validate
-

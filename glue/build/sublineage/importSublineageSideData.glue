@@ -1,6 +1,0 @@
-
-  # Load data for the complete ERV genome sequences
-  module ervSideDataImporter 
-    populate -f tabular/reference/herv_sublineage_data.tsv
-    exit
-

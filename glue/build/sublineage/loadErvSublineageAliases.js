@@ -1,160 +1,462 @@
-// glue/build/erv/loadErvSublineageAliases.js
-//
-// Load ERV sublineage aliases from TSV into erv_lineage_alias.
-//
-// Input columns:
-//   erv_lineage.id
-//   category
-//   alias_name
-//   alias_source
-//
-// Assumes:
-// - sublineage rows already exist in erv_lineage
-// - erv_lineage_alias custom table exists
-// - link erv_lineage_alias -> erv_lineage exists
+/**
+ * loadErvSublineageAliases.js
+ *
+ * Load aliases for the curated ERV sublineages from:
+ *
+ *   tabular/sublineage/herv_sublineage_alias.tsv
+ *
+ * Expected columns:
+ *
+ *   erv_lineage.id
+ *   alias_name
+ *   alias_source
+ *
+ * Additional descriptive columns are permitted and ignored.
+ *
+ * The erv_lineage.id column must contain the authoritative canonical
+ * ERVdb identifier, not the representative sequence ID or familiar name.
+ *
+ * Example:
+ *
+ *   erv_lineage.id      = ERV-1.Rho.Rb.39
+ *   erv_lineage.name    = HERV-39
+ *   alias_name          = HERV39
+ *   alias_source        = repbase
+ */
 
-var INPUT_FILE = "tabular/reference/herv_sublineage_alias.tsv";
-var DRY_RUN = false;
+var INPUT_PATH =
+	"tabular/sublineage/herv_sublineage_alias.tsv";
 
-function log(msg) {
-	glue.logInfo(msg);
+// ============================================================================
+// Helpers
+// ============================================================================
+
+function log(message) {
+	glue.logInfo(message);
 }
 
 function norm(value) {
-	if(value == null) {
-		return null;
-	}
-	var s = ("" + value).trim();
-	if(s === "") {
-		return null;
-	}
-	return s;
-}
 
-function safeId(value) {
-	if(value == null) {
+	if(value === null || value === undefined) {
 		return null;
 	}
-	return value.trim()
-		.replace(/[()]/g, "")
-		.replace(/[^A-Za-z0-9._-]+/g, "_");
-}
 
-function aliasSourceCode(aliasSource) {
-	if(aliasSource === "other") {
-		return "OT";
+	var stringValue =
+		("" + value).trim();
+
+	if(stringValue === "") {
+		return null;
 	}
-	if(aliasSource === "retrotector") {
-		return "RT";
+
+	var lowerValue =
+		stringValue.toLowerCase();
+
+	if(
+		lowerValue === "n/a" ||
+		lowerValue === "na" ||
+		lowerValue === "n/k" ||
+		lowerValue === "nk" ||
+		lowerValue === "unknown" ||
+		lowerValue === "null" ||
+		lowerValue === "none"
+	) {
+		return null;
 	}
-	if(aliasSource === "repbase") {
-		return "RB";
-	}
-	return "XX";
+
+	return stringValue;
 }
 
 function escapeQuotes(value) {
 	return value.replace(/'/g, "\\'");
 }
 
-function customRowExists(tableName, rowId) {
-	var result = glue.command([
-		"list", "custom-table-row", tableName,
-		"-w", "id = '" + escapeQuotes(rowId) + "'"
-	]);
-	return result.listResult &&
-		result.listResult.row &&
-		result.listResult.row.length > 0;
-}
+function sanitiseId(value) {
 
-function createCustomRowIfMissing(tableName, rowId) {
-	if(!customRowExists(tableName, rowId)) {
-		if(!DRY_RUN) {
-			glue.command(["create", "custom-table-row", tableName, rowId]);
-		}
-		log("Created " + tableName + "/" + rowId);
-	}
-}
+	value =
+		norm(value);
 
-function setCustomFieldIfPresent(tableName, rowId, fieldName, value) {
-	if(value == null) {
-		return;
+	if(value === null) {
+		return null;
 	}
-	if(!DRY_RUN) {
-		glue.inMode("custom-table-row/" + tableName + "/" + rowId, function() {
-			glue.command(["set", "field", fieldName, value]);
-		});
-	}
-}
 
-function setCustomLinkIfPresent(tableName, rowId, linkName, targetTable, targetId) {
-	if(targetId == null) {
-		return;
-	}
-	if(!DRY_RUN) {
-		glue.inMode("custom-table-row/" + tableName + "/" + rowId, function() {
-			glue.command([
-				"set", "link-target", linkName,
-				"custom-table-row/" + targetTable + "/" + targetId
-			]);
-		});
-	}
-}
-
-function aliasRowId(lineageId, aliasSource, aliasName) {
-	return safeId(lineageId + "__" + aliasSourceCode(aliasSource) + "__" + aliasName);
-}
-
-var rows;
-glue.inMode("module/tabularUtility", function() {
-	rows = glue.tableToObjects(
-		glue.command(["load-tabular", INPUT_FILE])
+	return value.replace(
+		/[^A-Za-z0-9._-]/g,
+		"_"
 	);
-});
+}
 
-log("Loaded " + rows.length + " rows from " + INPUT_FILE);
+function customRowPath(
+	tableName,
+	rowId
+) {
+	return (
+		"custom-table-row/" +
+		tableName +
+		"/" +
+		rowId
+	);
+}
 
-var aliasCount = 0;
-var skippedMissingLineageCount = 0;
-var skippedWrongCategoryCount = 0;
+function customRowExists(
+	tableName,
+	rowId
+) {
 
-_.each(rows, function(row) {
+	rowId =
+		norm(rowId);
 
-	var lineageId = norm(row["erv_lineage.id"]);
-	var category = norm(row["category"]);
-	var aliasName = norm(row["alias_name"]);
-	var aliasSource = norm(row["alias_source"]);
+	if(rowId === null) {
+		return false;
+	}
 
-	if(lineageId == null || aliasName == null || aliasSource == null) {
-		log("Skipping incomplete row: " + JSON.stringify(row));
+	var result =
+		glue.command([
+			"list",
+			"custom-table-row",
+			tableName,
+			"-w",
+			"id = '" +
+				escapeQuotes(rowId) +
+				"'"
+		]);
+
+	var rows =
+		glue.tableToObjects(result);
+
+	return rows.length > 0;
+}
+
+function ensureCustomRow(
+	tableName,
+	rowId
+) {
+
+	rowId =
+		norm(rowId);
+
+	if(rowId === null) {
+		return false;
+	}
+
+	if(
+		!customRowExists(
+			tableName,
+			rowId
+		)
+	) {
+		glue.command([
+			"create",
+			"custom-table-row",
+			tableName,
+			rowId
+		]);
+
+		log(
+			"Created " +
+			tableName +
+			"/" +
+			rowId
+		);
+
+		return true;
+	}
+
+	return false;
+}
+
+function loadTsv(path) {
+
+	var rows;
+
+	glue.inMode(
+		"module/tabularUtility",
+		function() {
+			rows =
+				glue.tableToObjects(
+					glue.command([
+						"load-tabular",
+						path
+					])
+				);
+		}
+	);
+
+	return rows;
+}
+
+function setStringFieldIfPresent(
+	fieldName,
+	value
+) {
+
+	value =
+		norm(value);
+
+	if(value === null) {
 		return;
 	}
 
-	if(category !== null && category !== "sublineage") {
-		skippedWrongCategoryCount++;
-		log("Skipping alias '" + aliasName + "' because category is '" + category + "'");
+	glue.command([
+		"set",
+		"field",
+		fieldName,
+		value
+	]);
+}
+
+function setLinkIfPresent(
+	linkName,
+	tableName,
+	rowId
+) {
+
+	rowId =
+		norm(rowId);
+
+	if(rowId === null) {
 		return;
 	}
 
-	if(!customRowExists("erv_lineage", lineageId)) {
-		skippedMissingLineageCount++;
-		log("Skipping alias '" + aliasName + "' because erv_lineage row '" + lineageId + "' is missing");
-		return;
+	glue.command([
+		"set",
+		"link-target",
+		linkName,
+		customRowPath(
+			tableName,
+			rowId
+		)
+	]);
+}
+
+function sourceCode(aliasSource) {
+
+	aliasSource =
+		norm(aliasSource);
+
+	if(aliasSource === null) {
+		return "NA";
 	}
 
-	var rowId = aliasRowId(lineageId, aliasSource, aliasName);
+	var lowerSource =
+		aliasSource.toLowerCase();
 
-	createCustomRowIfMissing("erv_lineage_alias", rowId);
-	setCustomFieldIfPresent("erv_lineage_alias", rowId, "alias_name", aliasName);
-	setCustomFieldIfPresent("erv_lineage_alias", rowId, "alias_source", aliasSource);
-	setCustomLinkIfPresent("erv_lineage_alias", rowId, "erv_lineage", "erv_lineage", lineageId);
+	if(lowerSource === "repbase") {
+		return "RB";
+	}
 
-	aliasCount++;
-	log("Linked alias '" + aliasName + "' (" + aliasSource + ") -> " + lineageId);
-});
+	if(lowerSource === "retrotector") {
+		return "RT";
+	}
+
+	if(lowerSource === "other") {
+		return "OT";
+	}
+
+	return sanitiseId(
+		aliasSource.toUpperCase()
+	);
+}
+
+function makeAliasRowId(
+	lineageId,
+	aliasSource,
+	aliasName
+) {
+	return (
+		sanitiseId(lineageId) +
+		"__" +
+		sourceCode(aliasSource) +
+		"__" +
+		sanitiseId(aliasName)
+	);
+}
+
+// ============================================================================
+// Load input
+// ============================================================================
+
+var rows =
+	loadTsv(INPUT_PATH);
+
+log(
+	"Loaded " +
+	rows.length +
+	" rows from " +
+	INPUT_PATH
+);
+
+// ============================================================================
+// Process aliases
+// ============================================================================
+
+var aliasRowsCreated = 0;
+var aliasRowsUpdated = 0;
+var missingLineageRows = 0;
+var incompleteRows = 0;
+
+_.each(
+	rows,
+	function(row) {
+
+		var lineageId =
+			norm(
+				row["erv_lineage.id"]
+			);
+
+		var aliasName =
+			norm(
+				row["alias_name"]
+			);
+
+		var aliasSource =
+			norm(
+				row["alias_source"]
+			);
+
+		// --------------------------------------------------------------------
+		// Check required fields
+		// --------------------------------------------------------------------
+
+		if(
+			lineageId === null ||
+			aliasName === null ||
+			aliasSource === null
+		) {
+			incompleteRows++;
+
+			log(
+				"Skipping incomplete alias row: " +
+				JSON.stringify(row)
+			);
+
+			return;
+		}
+
+		// --------------------------------------------------------------------
+		// Confirm that the canonical ERV sublineage exists
+		// --------------------------------------------------------------------
+
+		if(
+			!customRowExists(
+				"erv_lineage",
+				lineageId
+			)
+		) {
+			missingLineageRows++;
+
+			log(
+				"Skipping alias '" +
+				aliasName +
+				"' because canonical erv_lineage row '" +
+				lineageId +
+				"' is missing"
+			);
+
+			return;
+		}
+
+		// --------------------------------------------------------------------
+		// Create or find the alias row
+		// --------------------------------------------------------------------
+
+		var aliasRowId =
+			makeAliasRowId(
+				lineageId,
+				aliasSource,
+				aliasName
+			);
+
+		var wasCreated =
+			ensureCustomRow(
+				"erv_lineage_alias",
+				aliasRowId
+			);
+
+		if(wasCreated) {
+			aliasRowsCreated++;
+		} else {
+			aliasRowsUpdated++;
+		}
+
+		// --------------------------------------------------------------------
+		// Populate the alias and link it to the canonical ERV sublineage
+		// --------------------------------------------------------------------
+
+		glue.inMode(
+			customRowPath(
+				"erv_lineage_alias",
+				aliasRowId
+			),
+			function() {
+
+				setStringFieldIfPresent(
+					"alias_name",
+					aliasName
+				);
+
+				setStringFieldIfPresent(
+					"alias_source",
+					aliasSource
+				);
+
+				setLinkIfPresent(
+					"erv_lineage",
+					"erv_lineage",
+					lineageId
+				);
+			}
+		);
+
+		log(
+			"Linked alias '" +
+				aliasName +
+				"' (" +
+				aliasSource +
+				") -> " +
+				lineageId
+		);
+	}
+);
+
+// ============================================================================
+// Summary
+// ============================================================================
 
 log("----- SUMMARY -----");
-log("Alias rows created/updated: " + aliasCount);
-log("Skipped due to missing erv_lineage row: " + skippedMissingLineageCount);
-log("Skipped due to non-sublineage category: " + skippedWrongCategoryCount);
 
+log(
+	"Input alias rows: " +
+	rows.length
+);
+
+log(
+	"Alias rows created: " +
+	aliasRowsCreated
+);
+
+log(
+	"Existing alias rows updated: " +
+	aliasRowsUpdated
+);
+
+log(
+	"Alias rows created/updated: " +
+	(
+		aliasRowsCreated +
+		aliasRowsUpdated
+	)
+);
+
+log(
+	"Skipped due to missing canonical erv_lineage row: " +
+	missingLineageRows
+);
+
+log(
+	"Skipped incomplete rows: " +
+	incompleteRows
+);
+
+log(
+	"ERV sublineage alias loading complete"
+);

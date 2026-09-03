@@ -7,7 +7,7 @@
 //   - status = accepted
 //
 // Input:
-//   tabular/reference/herv_sublineage_data.tsv
+//   tabular/sublineage/herv_sublineage_data.tsv
 //
 // For each included row, the script:
 //
@@ -60,7 +60,7 @@
 // Set DRY_RUN to true to report intended changes without modifying the
 // project.
 
-var INPUT_FILE = "tabular/reference/herv_sublineage_data.tsv";
+var INPUT_FILE = "tabular/sublineage/herv_sublineage_data.tsv";
 var DRY_RUN = false;
 
 
