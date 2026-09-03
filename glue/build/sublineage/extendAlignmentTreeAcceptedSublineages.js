@@ -197,27 +197,31 @@ function referenceNameForSequenceId(sequenceId) {
 	return "REF_" + cleanSequenceId;
 }
 
-function alignmentNameForRow(row) {
 
-	var standardisedLineageName =
-		norm(row["Standardised lineage name"]);
+function sublineageAlignmentName(lineageId) {
 
-	var sequenceId =
-		norm(row["sequenceID"]);
+	lineageId = norm(lineageId);
 
-	var alignmentId =
-		standardisedLineageName || sequenceId;
-
-	var cleanAlignmentId =
-		sanitize(alignmentId);
-
-	if(cleanAlignmentId === "") {
-		throw "Could not derive alignment name for row: " +
-			JSON.stringify(row);
+	if(lineageId === null) {
+		throw "Cannot derive sublineage alignment name from missing lineage_id";
 	}
 
-	return "AL_LINEAGE_" + cleanAlignmentId;
+	var suffix = lineageId
+		.replace(/^ERVR-([A-Za-z0-9]+)(?=\.|$)/i, "$1R")
+		.replace(/^ERV-/i, "")
+		.replace(/[^A-Za-z0-9]+/g, "_")
+		.replace(/^_+/, "")
+		.replace(/_+$/, "");
+	
+	if(suffix === "") {
+		throw "Could not derive sublineage alignment name from lineage_id: " +
+			lineageId;
+	}
+
+	return "AL_SUBLINEAGE_" + suffix;
 }
+
+
 
 function subgenusAlignmentName(subgenus) {
 
@@ -920,16 +924,31 @@ var dryRunAlignmentCount = 0;
 
 _.each(rows, function(row) {
 
+	var lineageId =
+		norm(row["lineage_id"]);
+
 	var sequenceId =
 		norm(row["sequenceID"]);
+
+	if(lineageId == null) {
+
+		skippedCount++;
+
+		log(
+			"Skipping row with missing lineage_id: " +
+			JSON.stringify(row)
+		);
+
+		return;
+	}
 
 	if(sequenceId == null) {
 
 		skippedCount++;
 
 		log(
-			"Skipping row with missing sequenceID: " +
-			JSON.stringify(row)
+			"Skipping erv_lineage/" + lineageId +
+			" because sequenceID is missing"
 		);
 
 		return;
@@ -941,6 +960,7 @@ _.each(rows, function(row) {
 
 		log(
 			"Skipping " + sequenceId +
+			" [" + lineageId + "]" +
 			" because entity_type=" +
 			norm(row["entity_type"]) +
 			", status=" +
@@ -954,21 +974,24 @@ _.each(rows, function(row) {
 
 
 	/*
-	 * Confirm that the lineage record exists.
+	 * Confirm that the canonical lineage record exists.
+	 *
+	 * lineage_id identifies the erv_lineage row.
+	 * sequenceID identifies its representative sequence.
 	 */
 
-	if(!customRowExists("erv_lineage", sequenceId)) {
+	if(!customRowExists("erv_lineage", lineageId)) {
 
 		missingLineageCount++;
 
 		log(
 			"Skipping " + sequenceId +
-			" because erv_lineage row is missing"
+			" because canonical erv_lineage row is missing: " +
+			lineageId
 		);
 
 		return;
 	}
-
 
 	/*
 	 * Confirm that the reference sequence exists.
@@ -995,9 +1018,10 @@ _.each(rows, function(row) {
 	 * Resolve lineage and parent alignment names.
 	 */
 
-	var alignmentName =
-		alignmentNameForRow(row);
 
+	var alignmentName =
+		sublineageAlignmentName(lineageId);
+	
 	var parentResolution =
 		parentAlignmentForRow(row);
 

@@ -1,0 +1,38 @@
+reference REF_MER101
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8214
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 421
+    exit
+
+  add feature-location LEA
+  feature-location LEA
+    add segment 422 650
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 651 2504
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 2505 5996
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 5998 7962
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 7963 8214
+    exit
+    
+  exit
