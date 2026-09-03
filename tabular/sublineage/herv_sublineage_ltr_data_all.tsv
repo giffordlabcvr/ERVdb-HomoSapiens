@@ -1,4 +1,5 @@
 LTR_name	original_name	clade	linked_lineage_id	linked_lineage_name	linked_element_status	phylogeny_group	phylogeny_subgroup	flag
+HARLEQUIN_LTR	HARLEQUIN_LTR	I	ERV-1.Eta.E.HQ	HARLEQUIN	sublineage	Eta	NA	
 MER67C	MER67C	I	ERV-1.Rho.Rb.39	HERV-39	sublineage	Rho	NA	
 LTR58	LTR58	I	ERV-1.Rho.Rb.31	HERV-31	sublineage	Rho	NA	
 LTR38A1	LTR38A1	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	

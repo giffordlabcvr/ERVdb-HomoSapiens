@@ -28,6 +28,10 @@ var ERV_SOURCE =
 var LTR_SOURCE =
 	"ltr-sub";
 
+var SUBLINEAGE_ASSOCIATION_EVIDENCE =
+	"curated_sublineage_ltr_table";
+
+
 // ============================================================================
 // General helpers
 // ============================================================================
@@ -168,12 +172,53 @@ function expectedLtrReferenceName(sequenceID) {
 	);
 }
 
-function expectedLineageAlignmentName(sequenceID) {
+/*
+ * Convert canonical ERV sublineage IDs into alignment names.
+ *
+ * Examples:
+ *
+ *   ERV-1.Rho.Rb.39
+ *       -> AL_SUBLINEAGE_1_Rho_Rb_39
+ *
+ *   ERVR-1.Theta.101
+ *       -> AL_SUBLINEAGE_1R_Theta_101
+ */
 
-	return (
-		"AL_LINEAGE_" +
-		sanitiseIdentifier(sequenceID)
-	);
+function expectedSublineageAlignmentName(lineageId) {
+
+	lineageId = norm(lineageId);
+
+	if(lineageId === null) {
+		return null;
+	}
+
+	var suffix = lineageId
+		.replace(
+			/^ERVR-([A-Za-z0-9]+)(?=\.|$)/i,
+			"$1R"
+		)
+		.replace(
+			/^ERV-/i,
+			""
+		)
+		.replace(
+			/[^A-Za-z0-9]+/g,
+			"_"
+		)
+		.replace(
+			/^_+/,
+			""
+		)
+		.replace(
+			/_+$/,
+			""
+		);
+
+	if(suffix === "") {
+		return null;
+	}
+
+	return "AL_SUBLINEAGE_" + suffix;
 }
 
 function displayValue(value) {
@@ -218,6 +263,7 @@ function printCounts(counts) {
 	);
 }
 
+
 // ============================================================================
 // Load the curated TSV
 // ============================================================================
@@ -250,24 +296,33 @@ _.each(
 		if(lineageId === null) {
 			curatedRowsWithoutLineageId.push(row);
 		} else {
+
 			if(expectedByLineageId[lineageId]) {
-				duplicateCuratedLineageIds.push(lineageId);
+				duplicateCuratedLineageIds.push(
+					lineageId
+				);
 			}
 
-			expectedByLineageId[lineageId] = row;
+			expectedByLineageId[lineageId] =
+				row;
 		}
 
 		if(sequenceID === null) {
 			curatedRowsWithoutSequenceId.push(row);
 		} else {
+
 			if(expectedBySequenceId[sequenceID]) {
-				duplicateCuratedSequenceIds.push(sequenceID);
+				duplicateCuratedSequenceIds.push(
+					sequenceID
+				);
 			}
 
-			expectedBySequenceId[sequenceID] = row;
+			expectedBySequenceId[sequenceID] =
+				row;
 		}
 	}
 );
+
 
 // ============================================================================
 // Load erv_lineage rows classified as sublineages
@@ -310,7 +365,8 @@ _.each(
 
 		if(
 			entityLevel === null ||
-			entityLevel.toLowerCase() !== "sublineage"
+			entityLevel.toLowerCase() !==
+				"sublineage"
 		) {
 			return;
 		}
@@ -331,12 +387,18 @@ _.each(
 			entityType: norm(row["entity_type"]),
 			entityLevel: entityLevel,
 			status: norm(row["status"]),
-			parentLineage: norm(row["parent_lineage"]),
-			curationTier: norm(row["curation_tier"]),
-			clade: norm(row["rv_clade.id"]),
-			subfamily: norm(row["rv_subfamily.id"]),
-			genus: norm(row["rv_genus.id"]),
-			subgenus: norm(row["rv_subgenus.id"]),
+			parentLineage:
+				norm(row["parent_lineage"]),
+			curationTier:
+				norm(row["curation_tier"]),
+			clade:
+				norm(row["rv_clade.id"]),
+			subfamily:
+				norm(row["rv_subfamily.id"]),
+			genus:
+				norm(row["rv_genus.id"]),
+			subgenus:
+				norm(row["rv_subgenus.id"]),
 			aliasCount: 0,
 			ltrIds: {},
 			sequences: []
@@ -366,6 +428,7 @@ _.each(
 		);
 	}
 );
+
 
 // ============================================================================
 // Compare curated IDs with database IDs
@@ -397,6 +460,7 @@ _.each(
 		}
 	}
 );
+
 
 // ============================================================================
 // Load representative ERV sequences
@@ -448,14 +512,20 @@ _.each(
 		}
 
 		if(!sublineages[linkedLineageId]) {
+
 			ervSequencesWithUnexpectedLineage.push({
 				sequenceID: sequenceID,
-				linkedLineageId: linkedLineageId
+				linkedLineageId:
+					linkedLineageId
 			});
+
 		} else {
+
 			sublineages[
 				linkedLineageId
-			].sequences.push(sequenceID);
+			].sequences.push(
+				sequenceID
+			);
 		}
 
 		var expectedRow =
@@ -463,13 +533,17 @@ _.each(
 
 		if(
 			expectedRow &&
-			norm(expectedRow["lineage_id"]) !== linkedLineageId
+			norm(
+				expectedRow["lineage_id"]
+			) !== linkedLineageId
 		) {
 			ervCanonicalLinkMismatches.push({
 				sequenceID: sequenceID,
 				expectedLineageId:
 					norm(
-						expectedRow["lineage_id"]
+						expectedRow[
+							"lineage_id"
+						]
 					),
 				actualLineageId:
 					linkedLineageId
@@ -502,6 +576,7 @@ _.each(
 		}
 	}
 );
+
 
 // ============================================================================
 // Load aliases
@@ -549,15 +624,18 @@ _.each(
 			lineageId !== null &&
 			sublineages[lineageId]
 		) {
-			sublineages[lineageId].aliasCount++;
+			sublineages[
+				lineageId
+			].aliasCount++;
+
 			sublineageAliasCount++;
 			return;
 		}
 
 		/*
-		 * Base-layer aliases are not orphans merely because they do not
-		 * target a sublineage. Only rows with no erv_lineage target are
-		 * considered orphaned.
+		 * Base-layer aliases are not orphans merely because
+		 * they do not target a sublineage. Only rows without
+		 * any erv_lineage target are treated as orphaned.
 		 */
 
 		if(lineageId === null) {
@@ -569,6 +647,7 @@ _.each(
 		}
 	}
 );
+
 
 // ============================================================================
 // Load LTR-lineage rows
@@ -615,6 +694,7 @@ _.each(
 	}
 );
 
+
 // ============================================================================
 // Load ERV-LTR associations
 // ============================================================================
@@ -626,13 +706,14 @@ var associationRows =
 		"erv_lineage_ltr_assoc",
 		"id",
 		"erv_lineage.id",
-		"erv_lineage.entity_level",
 		"ltr_lineage.id",
 		"association_type",
 		"evidence"
 	]);
 
 var sublineageAssociationCount = 0;
+var sublineageAssociatedLtrIds = {};
+
 var incompleteAssociationRows = [];
 var associationsWithUnknownSublineage = [];
 var associationsWithUnknownLtrLineage = [];
@@ -651,23 +732,28 @@ _.each(
 				row["erv_lineage.id"]
 			);
 
-		var ervEntityLevel =
-			norm(
-				row["erv_lineage.entity_level"]
-			);
-
 		var ltrLineageId =
 			norm(
 				row["ltr_lineage.id"]
 			);
 
+		var evidence =
+			norm(
+				row["evidence"]
+			);
+
 		/*
-		 * Ignore complete associations belonging to the base layer.
+		 * Restrict the report to associations created by the
+		 * sublineage-associated LTR loader.
+		 *
+		 * entity_level is not sufficient for determining
+		 * association provenance because an ERV lineage may
+		 * occur in both the base and sublineage datasets.
 		 */
 
 		if(
-			ervEntityLevel !== null &&
-			ervEntityLevel.toLowerCase() !== "sublineage"
+			evidence !==
+			SUBLINEAGE_ASSOCIATION_EVIDENCE
 		) {
 			return;
 		}
@@ -678,8 +764,10 @@ _.each(
 		) {
 			incompleteAssociationRows.push({
 				id: associationId,
-				ervLineageId: ervLineageId,
-				ltrLineageId: ltrLineageId
+				ervLineageId:
+					ervLineageId,
+				ltrLineageId:
+					ltrLineageId
 			});
 
 			return;
@@ -688,8 +776,10 @@ _.each(
 		if(!sublineages[ervLineageId]) {
 			associationsWithUnknownSublineage.push({
 				id: associationId,
-				ervLineageId: ervLineageId,
-				ltrLineageId: ltrLineageId
+				ervLineageId:
+					ervLineageId,
+				ltrLineageId:
+					ltrLineageId
 			});
 
 			return;
@@ -698,14 +788,20 @@ _.each(
 		if(!ltrLineages[ltrLineageId]) {
 			associationsWithUnknownLtrLineage.push({
 				id: associationId,
-				ervLineageId: ervLineageId,
-				ltrLineageId: ltrLineageId
+				ervLineageId:
+					ervLineageId,
+				ltrLineageId:
+					ltrLineageId
 			});
 
 			return;
 		}
 
 		sublineageAssociationCount++;
+
+		sublineageAssociatedLtrIds[
+			ltrLineageId
+		] = true;
 
 		sublineages[
 			ervLineageId
@@ -720,6 +816,7 @@ _.each(
 		] = true;
 	}
 );
+
 
 // ============================================================================
 // Load sequences in source ltr-sub
@@ -742,7 +839,6 @@ var ltrSequenceRows =
 
 var ltrSequencesWithoutLineage = [];
 var ltrSequencesWithoutSublineageAssociation = [];
-var sublineageAssociatedLtrIds = {};
 
 _.each(
 	ltrSequenceRows,
@@ -773,7 +869,9 @@ _.each(
 		if(ltrLineages[ltrLineageId]) {
 			ltrLineages[
 				ltrLineageId
-			].sequences.push(sequenceID);
+			].sequences.push(
+				sequenceID
+			);
 		}
 
 		var associatedSublineages =
@@ -785,16 +883,15 @@ _.each(
 
 		if(
 			associatedSublineages === null ||
-			setSize(associatedSublineages) === 0
+			setSize(
+				associatedSublineages
+			) === 0
 		) {
 			ltrSequencesWithoutSublineageAssociation.push({
 				sequenceID: sequenceID,
-				ltrLineageId: ltrLineageId
+				ltrLineageId:
+					ltrLineageId
 			});
-		} else {
-			sublineageAssociatedLtrIds[
-				ltrLineageId
-			] = true;
 		}
 	}
 );
@@ -807,7 +904,9 @@ _.each(
 
 		if(
 			setSize(
-				sublineages[lineageId].ltrIds
+				sublineages[
+					lineageId
+				].ltrIds
 			) === 0
 		) {
 			sublineagesWithoutLtrs.push(
@@ -829,7 +928,8 @@ _.each(
 
 		if(
 			setSize(
-				ltrLineage.associatedSublineageIds
+				ltrLineage
+					.associatedSublineageIds
 			) === 0
 		) {
 			return;
@@ -843,12 +943,15 @@ _.each(
 
 		if(ltrLineage.sequences.length > 1) {
 			associatedLtrsWithMultipleSequences.push({
-				ltrLineageId: ltrLineageId,
-				sequenceIDs: ltrLineage.sequences
+				ltrLineageId:
+					ltrLineageId,
+				sequenceIDs:
+					ltrLineage.sequences
 			});
 		}
 	}
 );
+
 
 // ============================================================================
 // Load declared references
@@ -947,11 +1050,16 @@ _.each(
 				sequenceID
 			);
 
-		if(referenceName !== expectedReferenceName) {
+		if(
+			referenceName !==
+			expectedReferenceName
+		) {
 			unexpectedReferenceNames.push({
 				sequence: sequenceKey,
-				expected: expectedReferenceName,
-				actual: referenceName
+				expected:
+					expectedReferenceName,
+				actual:
+					referenceName
 			});
 		}
 	}
@@ -991,7 +1099,8 @@ _.each(
 		if(!referenceName) {
 			linkedLtrSequencesWithoutReferences.push({
 				sequenceID: sequenceID,
-				ltrLineageId: ltrLineageId
+				ltrLineageId:
+					ltrLineageId
 			});
 
 			return;
@@ -1002,15 +1111,21 @@ _.each(
 				sequenceID
 			);
 
-		if(referenceName !== expectedReferenceName) {
+		if(
+			referenceName !==
+			expectedReferenceName
+		) {
 			unexpectedReferenceNames.push({
 				sequence: sequenceKey,
-				expected: expectedReferenceName,
-				actual: referenceName
+				expected:
+					expectedReferenceName,
+				actual:
+					referenceName
 			});
 		}
 	}
 );
+
 
 // ============================================================================
 // Load alignments
@@ -1056,6 +1171,7 @@ _.each(
 
 var acceptedSublineages = [];
 var excludedSublineages = [];
+
 var acceptedSublineagesWithoutAlignments = [];
 var acceptedSublineagesWithoutOneSequence = [];
 var alignmentReferenceMismatches = [];
@@ -1070,16 +1186,24 @@ _.each(
 		var status =
 			sublineage.status === null ?
 				"" :
-				sublineage.status.toLowerCase();
+				sublineage.status
+					.toLowerCase();
 
 		if(status !== "accepted") {
-			excludedSublineages.push(lineageId);
+			excludedSublineages.push(
+				lineageId
+			);
+
 			return;
 		}
 
-		acceptedSublineages.push(lineageId);
+		acceptedSublineages.push(
+			lineageId
+		);
 
-		if(sublineage.sequences.length !== 1) {
+		if(
+			sublineage.sequences.length !== 1
+		) {
 			acceptedSublineagesWithoutOneSequence.push(
 				lineageId
 			);
@@ -1091,8 +1215,8 @@ _.each(
 			sublineage.sequences[0];
 
 		var expectedAlignmentName =
-			expectedLineageAlignmentName(
-				sequenceID
+			expectedSublineageAlignmentName(
+				lineageId
 			);
 
 		var alignment =
@@ -1133,6 +1257,7 @@ _.each(
 	}
 );
 
+
 // ============================================================================
 // Parent-lineage checks
 // ============================================================================
@@ -1154,7 +1279,9 @@ _.each(
 			);
 
 		if(lineageId !== null) {
-			allErvLineageIds[lineageId] = true;
+			allErvLineageIds[
+				lineageId
+			] = true;
 		}
 	}
 );
@@ -1185,21 +1312,27 @@ _.each(
 		if(allErvLineageIds[parentLineage]) {
 			parentValuesMatchingErvRows.push({
 				lineageId: lineageId,
-				parentLineage: parentLineage
+				parentLineage:
+					parentLineage
 			});
 		} else {
+
 			/*
-			 * This is not necessarily an error. Some parent_lineage values
-			 * may denote higher taxonomic groupings rather than erv_lineage
+			 * This is not necessarily an error. Some
+			 * parent_lineage values may denote higher
+			 * taxonomic groupings rather than erv_lineage
 			 * rows.
 			 */
+
 			parentValuesNotMatchingErvRows.push({
 				lineageId: lineageId,
-				parentLineage: parentLineage
+				parentLineage:
+					parentLineage
 			});
 		}
 	}
 );
+
 
 // ============================================================================
 // Print report
@@ -1247,6 +1380,7 @@ log(
 	excludedSublineages.length
 );
 
+
 // ============================================================================
 // Curated inventory
 // ============================================================================
@@ -1264,6 +1398,7 @@ printCounts(entityTypeCounts);
 subheading("Curation tier");
 
 printCounts(curationTierCounts);
+
 
 // ============================================================================
 // Canonical identity
@@ -1348,6 +1483,7 @@ log(
 	curatedRowsWithoutSequenceId.length
 );
 
+
 // ============================================================================
 // ERV sequence coverage
 // ============================================================================
@@ -1419,6 +1555,7 @@ _.each(
 	}
 );
 
+
 // ============================================================================
 // Alias coverage
 // ============================================================================
@@ -1457,6 +1594,7 @@ _.each(
 );
 
 log("");
+
 log(
 	"Total aliases attached to sublineages: " +
 	sublineageAliasCount
@@ -1474,13 +1612,18 @@ _.each(
 			"  " +
 			alias.id +
 			": " +
-			displayValue(alias.aliasName) +
+			displayValue(
+				alias.aliasName
+			) +
 			" [" +
-			displayValue(alias.aliasSource) +
+			displayValue(
+				alias.aliasSource
+			) +
 			"]"
 		);
 	}
 );
+
 
 // ============================================================================
 // Parent-lineage assignments
@@ -1493,6 +1636,7 @@ subheading("Sublineage counts by parent_lineage");
 printCounts(parentLineageCounts);
 
 log("");
+
 log(
 	"Sublineages without parent_lineage: " +
 	sublineagesWithoutParentValues.length
@@ -1544,6 +1688,7 @@ _.each(
 	}
 );
 
+
 // ============================================================================
 // LTR association coverage
 // ============================================================================
@@ -1593,7 +1738,9 @@ _.each(
 	}
 );
 
-subheading("LTR associations per ERV sublineage");
+subheading(
+	"LTR associations per ERV sublineage"
+);
 
 _.each(
 	sortedKeys(sublineages),
@@ -1614,6 +1761,7 @@ _.each(
 );
 
 log("");
+
 log(
 	"Distinct LTR lineages associated with ERV sublineages: " +
 	setSize(sublineageAssociatedLtrIds)
@@ -1631,9 +1779,13 @@ _.each(
 			"  " +
 			item.id +
 			": ERV=" +
-			displayValue(item.ervLineageId) +
+			displayValue(
+				item.ervLineageId
+			) +
 			", LTR=" +
-			displayValue(item.ltrLineageId)
+			displayValue(
+				item.ltrLineageId
+			)
 		);
 	}
 );
@@ -1676,11 +1828,14 @@ _.each(
 	}
 );
 
+
 // ============================================================================
 // LTR sequence coverage
 // ============================================================================
 
-heading("Sublineage-associated LTR sequence coverage");
+heading(
+	"Sublineage-associated LTR sequence coverage"
+);
 
 log(
 	"Sequences in source '" +
@@ -1749,6 +1904,7 @@ _.each(
 	}
 );
 
+
 // ============================================================================
 // Reference coverage
 // ============================================================================
@@ -1808,11 +1964,14 @@ _.each(
 	}
 );
 
+
 // ============================================================================
 // Alignment-tree coverage
 // ============================================================================
 
-heading("Accepted sublineage alignment coverage");
+heading(
+	"Accepted sublineage alignment coverage"
+);
 
 log(
 	"Accepted ERV sublineages: " +
@@ -1832,7 +1991,7 @@ _.each(
 );
 
 log(
-	"Accepted sublineages without an expected lineage alignment: " +
+	"Accepted sublineages without an expected sublineage alignment: " +
 	acceptedSublineagesWithoutAlignments.length
 );
 
@@ -1851,7 +2010,7 @@ _.each(
 );
 
 log(
-	"Lineage alignments using an unexpected reference: " +
+	"Sublineage alignments using an unexpected reference: " +
 	alignmentReferenceMismatches.length
 );
 
@@ -1870,6 +2029,7 @@ _.each(
 		);
 	}
 );
+
 
 // ============================================================================
 // Final integrity summary
