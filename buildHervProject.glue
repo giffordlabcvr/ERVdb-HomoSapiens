@@ -1,7 +1,13 @@
 
 # Define project-specific DB schema extensions
 schema-project ervdb
+
+  # Permanent locus provenance tables
   run file schema/ervdbProvenanceTables.glue
+
+  # Temporary/staging candidate table
+  run file schema/ervdbStagingTables.glue
+
   exit
 
 # Build ERVdb-HomoSapiens extension to ERVdb project  

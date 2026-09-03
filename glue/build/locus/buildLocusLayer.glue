@@ -1,35 +1,51 @@
 
-  # Import classified HERV loci
+  # Load the source candidate dataset
+  run script glue/build/locus/candidates/loadErvLocusCandidates.js
+
+  # Import the selected and classified HERV locus sequences
   run file glue/build/locus/hervImportLocusSources.glue
 
-  # Set sequence lengths and kinds
-  run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js
+  # Set locus sequence lengths and kinds
+  run script glue/build/locus/setErvLocusSequenceLengthsAndKinds.js
 
-  # Link sequences to locus candidate records
-  run script glue/build/locus/hervLinkLocusSeqsToLocusCandidateTable.js
+  # Create permanent erv_locus rows from selected candidates,
+  # populate their metadata, and link the imported sequences
+  run script glue/build/locus/loadErvLoci.js
 
-  # Persist locus-candidate to curated ERV-lineage relationships.
-  run script glue/build/locus/linkLocusCandidatesToErvLineages.js
+die
 
-  # Add resolved loci to lineage-level alignments
+  # Create curated locus-to-ERV-lineage associations
+  run script glue/build/locus/loadErvLocusLineageAssociations.js
+
+  # Create curated locus-to-LTR-lineage associations, where available
+  run script glue/build/locus/loadErvLocusLtrAssociations.js
+
+  # Load source-specific provenance records and connect them to
+  # the resolved ERV loci
+  run script glue/build/locus/loadErvLocusProvenance.js
+
+  # Add resolved locus sequences to their lineage/sublineage alignments
   run script glue/build/locus/msa/addResolvedLociToAlignments.js
 
-  # Compute ERV lineage-level alignments
+  # Compute ERV lineage and sublineage alignments
   run script glue/build/locus/msa/computeHervLineageAlignments.js
 
-  # Compute LTR alignments
+  # Compute LTR-lineage alignments
   run script glue/build/locus/msa/computeHervLineageLtrAlignments.js
 
-  # Record feature presence in lineage-level alignments
+  # Record feature presence in the resulting alignments
   run file glue/build/locus/msa/recordFeaturePresence.glue
 
-  # Import legacy mappings and aliases
+  # Import legacy mappings used for Missillac nomenclature
   run file glue/build/locus/missillac/importLegacyMappings.glue
 
-  # Assign Missillac IDs
-  run script glue/build/locus/missillac/applyErvLocusCandidateNames.js
+  # Populate erv_locus.missillac_id and erv_locus.orthology_group
+  run script glue/build/locus/missillac/applyErvLocusNames.js
 
-  # Build, reroot, and prepare lineage-level nucleotide phylogenies
+  # Build, reroot and prepare lineage-level nucleotide phylogenies
   run file glue/analyse/reconstructLineageLevelPhylogenies.glue
+
+  # Summarise and check the completed locus layer
+  run script glue/build/locus/summariseErvLocusLayer.js
 
   validate

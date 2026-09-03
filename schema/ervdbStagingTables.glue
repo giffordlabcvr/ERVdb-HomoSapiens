@@ -1,0 +1,57 @@
+# --------------------------------------------------
+# Staging table for 500K dataset
+# --------------------------------------------------
+
+create custom-table erv_locus_candidate
+
+table erv_locus_candidate
+
+  # --------------------------------------------------
+  # Genomic coordinates
+  # --------------------------------------------------
+
+  create field chrom              VARCHAR 50
+  create field strand             VARCHAR 10
+  create field start_position     INTEGER
+  create field end_position       INTEGER
+  create field length             INTEGER
+
+  # --------------------------------------------------
+  # Source annotation content
+  # --------------------------------------------------
+
+  create field names              VARCHAR 4000
+  create field genes              VARCHAR 4000
+
+  create field genes_order        VARCHAR 1000
+  create field genes_simplified   VARCHAR 1000
+
+  # --------------------------------------------------
+  # Classification
+  # --------------------------------------------------
+
+  create field case_status        VARCHAR 200
+
+  create field names_decision     VARCHAR 200
+  create field status             VARCHAR 50
+
+  create field clade_out          VARCHAR 500
+  create field group_out          VARCHAR 1000
+  create field subgroup_out       VARCHAR 1000
+
+  create field phylogeny_name     VARCHAR 1000
+
+  create field makes_mosaic       VARCHAR 50
+
+  # --------------------------------------------------
+  # Database support
+  # --------------------------------------------------
+
+  create field curatedns          VARCHAR 10
+
+  create field digs_ids           VARCHAR 1000
+  create field repbase_ids        VARCHAR 2000
+  create field retrotector_ids    VARCHAR 1000
+
+exit
+

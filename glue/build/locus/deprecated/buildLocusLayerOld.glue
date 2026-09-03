@@ -1,0 +1,35 @@
+
+  # Import classified HERV loci
+  run file glue/build/locus/hervImportLocusSources.glue
+
+  # Set sequence lengths and kinds
+  run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js
+
+  # Link sequences to locus candidate records
+  run script glue/build/locus/hervLinkLocusSeqsToLocusCandidateTable.js
+
+  # Persist locus-candidate to curated ERV-lineage relationships.
+  run script glue/build/locus/linkLocusCandidatesToErvLineages.js
+
+  # Add resolved loci to lineage-level alignments
+  run script glue/build/locus/msa/addResolvedLociToAlignments.js
+
+  # Compute ERV lineage-level alignments
+  run script glue/build/locus/msa/computeHervLineageAlignments.js
+
+  # Compute LTR alignments
+  run script glue/build/locus/msa/computeHervLineageLtrAlignments.js
+
+  # Record feature presence in lineage-level alignments
+  run file glue/build/locus/msa/recordFeaturePresence.glue
+
+  # Import legacy mappings and aliases
+  run file glue/build/locus/missillac/importLegacyMappings.glue
+
+  # Assign Missillac IDs
+  run script glue/build/locus/missillac/applyErvLocusCandidateNames.js
+
+  # Build, reroot, and prepare lineage-level nucleotide phylogenies
+  run file glue/analyse/reconstructLineageLevelPhylogenies.glue
+
+  validate
