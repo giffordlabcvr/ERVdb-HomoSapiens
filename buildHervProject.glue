@@ -8,6 +8,9 @@ schema-project ervdb
   # Temporary/staging candidate table
   run file schema/ervdbStagingTables.glue
 
+  # Legacy locus cross-referencing tables
+  run file schema/ervdbLocusLegacyXrefTables.glue
+
   exit
 
 # Build ERVdb-HomoSapiens extension to ERVdb project  

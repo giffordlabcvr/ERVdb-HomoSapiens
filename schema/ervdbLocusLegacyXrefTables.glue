@@ -1,0 +1,52 @@
+# --------------------------------------------------
+# ERV locus legacy/source cross-references
+# --------------------------------------------------
+# Provenance/mapping layer:
+# records that a row/name/coordinate interval from a source catalogue
+# maps to an ERVdb locus candidate.
+
+create custom-table erv_locus_legacy_xref
+
+table erv_locus_legacy_xref
+
+	create field legacy_source         VARCHAR 50
+	create field legacy_name           VARCHAR 150
+	create field pubmed_id             INTEGER
+
+	create field host_species          VARCHAR 50
+	create field genome_build          VARCHAR 50
+	create field scaffold              VARCHAR 100
+	create field start_position        INTEGER
+	create field end_position          INTEGER
+	create field orientation           VARCHAR 10
+	
+	create field legacy_classification VARCHAR 100
+	create field source_numeric_id     VARCHAR 50
+	create field source_aliases        VARCHAR 500
+	create field source_orthology      VARCHAR 100
+	create field source_band           VARCHAR 50
+	create field source_note           VARCHAR 200
+
+	create field mapping_status        VARCHAR 50
+	create field mapping_method        VARCHAR 50
+
+exit
+
+create link erv_locus_legacy_xref erv_locus --multiplicity MANY_TO_ONE
+
+
+# --------------------------------------------------
+# ERV locus aliases
+# --------------------------------------------------
+# Search/display synonym layer:
+# records alternative names by which a matched ERVdb locus is known.
+
+create custom-table erv_locus_alias
+
+table erv_locus_alias
+  create field alias_name   VARCHAR 150
+  create field alias_source VARCHAR 50
+exit
+
+create link erv_locus_alias erv_locus --multiplicity MANY_TO_ONE
+

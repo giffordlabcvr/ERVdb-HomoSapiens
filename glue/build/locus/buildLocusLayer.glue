@@ -6,13 +6,11 @@
   run file glue/build/locus/hervImportLocusSources.glue
 
   # Set locus sequence lengths and kinds
-  run script glue/build/locus/setErvLocusSequenceLengthsAndKinds.js
+  run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js
 
   # Create permanent erv_locus rows from selected candidates,
   # populate their metadata, and link the imported sequences
   run script glue/build/locus/loadErvLoci.js
-
-die
 
   # Create curated locus-to-ERV-lineage associations
   run script glue/build/locus/loadErvLocusLineageAssociations.js
