@@ -800,7 +800,6 @@ printAudit(
 	"Source rows with invalid coordinates",
 	invalidCoordinateCount,
 	invalidCoordinateExamples
-ballot
 );
 
 printAudit(
