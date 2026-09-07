@@ -17,8 +17,44 @@
 //       = imported sequence.sequenceID
 //       = erv_locus.id
 //
-// Missillac identifiers are not used as primary keys. They are populated
-// later in erv_locus.missillac_id.
+// Source-to-permanent-field mappings:
+//
+//   chrom
+//       -> scaffold
+//
+//   strand
+//       -> orientation
+//
+//   status
+//       -> locus_type
+//          ERV -> erv
+//          LTR -> solo_ltr
+//
+//   genes_simplified
+//       -> structural_profile
+//
+//   case_status
+//       -> taxonomic_resolution
+//          Fully resolved              -> lineage
+//          Resolved at subgenus level  -> subgenus
+//          Resolved at genus level     -> genus
+//          Resolved at clade level     -> clade
+//          Any mosaic case             -> mosaic
+//          Other unresolved cases      -> unresolved
+//
+//   makes_mosaic
+//       -> mosaic_component
+//          LTR -> ltr
+//          int -> internal
+//
+//   curatedns
+//       -> is_high_support
+//
+// curation_tier is deliberately not populated here. curatedNS is a Boolean
+// high-support flag, not a tier assignment.
+//
+// Missillac identifiers are not used as primary keys. orthology_group and
+// missillac_id are populated later.
 //
 // This script does not create ERV-lineage or LTR-lineage associations.
 
@@ -37,14 +73,11 @@ var DETAIL_LIMIT =
 
 /*
  * Sources containing selected ERV locus sequences.
- *
- * These retain the source names used by the existing locus-layer import.
  */
 
 var LOCUS_SOURCES = [
 
-	// Filtered combined set
-	"filtered_2026_07",
+	"filtered_2026_07"
 
 ];
 
@@ -129,8 +162,7 @@ function normBoolean(value) {
 		lowerValue === "true" ||
 		lowerValue === "yes" ||
 		lowerValue === "y" ||
-		lowerValue === "1" ||
-		lowerValue === "mosaic"
+		lowerValue === "1"
 	) {
 		return true;
 	}
@@ -139,10 +171,7 @@ function normBoolean(value) {
 		lowerValue === "false" ||
 		lowerValue === "no" ||
 		lowerValue === "n" ||
-		lowerValue === "0" ||
-		lowerValue === "non-mosaic" ||
-		lowerValue === "non_mosaic" ||
-		lowerValue === "not mosaic"
+		lowerValue === "0"
 	) {
 		return false;
 	}
@@ -246,6 +275,48 @@ function setBooleanFieldIfPresent(
 }
 
 
+function incrementCount(counts, key) {
+
+	key = norm(key);
+
+	if(key === null) {
+		key = "[null]";
+	}
+
+	if(counts[key] === undefined) {
+		counts[key] = 0;
+	}
+
+	counts[key]++;
+}
+
+
+function printCounts(title, counts) {
+
+	log(title + ":");
+
+	var keys =
+		sortedKeys(counts);
+
+	if(keys.length === 0) {
+		log("  none");
+		return;
+	}
+
+	_.each(
+		keys,
+		function(key) {
+			log(
+				"  " +
+				key +
+				": " +
+				counts[key]
+			);
+		}
+	);
+}
+
+
 function printLimitedValues(
 	title,
 	values
@@ -288,6 +359,134 @@ function printLimitedValues(
 
 
 // ============================================================================
+// Permanent-field value mappings
+// ============================================================================
+
+function resolveLocusType(status) {
+
+	status =
+		norm(status);
+
+	if(status === null) {
+		return null;
+	}
+
+	var lowerStatus =
+		status.toLowerCase();
+
+	if(lowerStatus === "erv") {
+		return "erv";
+	}
+
+	if(lowerStatus === "ltr") {
+		return "solo_ltr";
+	}
+
+	return null;
+}
+
+
+function resolveTaxonomicResolution(caseStatus) {
+
+	caseStatus =
+		norm(caseStatus);
+
+	if(caseStatus === null) {
+		return null;
+	}
+
+	var lowerStatus =
+		caseStatus.toLowerCase();
+
+	if(lowerStatus === "fully resolved") {
+		return "lineage";
+	}
+
+	if(
+		lowerStatus ===
+		"resolved at subgenus level"
+	) {
+		return "subgenus";
+	}
+
+	if(
+		lowerStatus ===
+		"resolved at genus level"
+	) {
+		return "genus";
+	}
+
+	if(
+		lowerStatus ===
+		"resolved at clade level"
+	) {
+		return "clade";
+	}
+
+	/*
+	 * This includes values such as:
+	 *
+	 *   Mosaic
+	 *   Partially unresolved - Mosaic
+	 */
+	if(lowerStatus.indexOf("mosaic") >= 0) {
+		return "mosaic";
+	}
+
+	if(lowerStatus.indexOf("unresolved") >= 0) {
+		return "unresolved";
+	}
+
+	return null;
+}
+
+
+function resolveMosaicComponent(
+	caseStatus,
+	makesMosaic
+) {
+
+	caseStatus =
+		norm(caseStatus);
+
+	makesMosaic =
+		norm(makesMosaic);
+
+	/*
+	 * mosaic_component is meaningful only for a mosaic
+	 * classification.
+	 */
+
+	if(
+		caseStatus === null ||
+		caseStatus.toLowerCase().indexOf("mosaic") < 0
+	) {
+		return null;
+	}
+
+	if(makesMosaic === null) {
+		return null;
+	}
+
+	var lowerValue =
+		makesMosaic.toLowerCase();
+
+	if(lowerValue === "ltr") {
+		return "ltr";
+	}
+
+	if(
+		lowerValue === "int" ||
+		lowerValue === "internal"
+	) {
+		return "internal";
+	}
+
+	return null;
+}
+
+
+// ============================================================================
 // Load selected candidate rows
 // ============================================================================
 
@@ -306,12 +505,21 @@ var candidateRows =
 		"start_position",
 		"end_position",
 		"status",
-		"makes_mosaic"
+		"genes_simplified",
+		"case_status",
+		"makes_mosaic",
+		"curatedns"
 	]);
 
 var candidatesById = {};
 
 var candidateRowsWithoutIds = 0;
+
+var unrecognisedLocusStatuses = {};
+var unrecognisedCaseStatuses = {};
+var unrecognisedMosaicValues = {};
+var unrecognisedHighSupportValues = {};
+
 
 _.each(
 	candidateRows,
@@ -327,39 +535,137 @@ _.each(
 			return;
 		}
 
+		var status =
+			norm(
+				row["status"]
+			);
+
+		var caseStatus =
+			norm(
+				row["case_status"]
+			);
+
+		var makesMosaic =
+			norm(
+				row["makes_mosaic"]
+			);
+
+		var curatedNs =
+			norm(
+				row["curatedns"]
+			);
+
+		var locusType =
+			resolveLocusType(
+				status
+			);
+
+		var taxonomicResolution =
+			resolveTaxonomicResolution(
+				caseStatus
+			);
+
+		var mosaicComponent =
+			resolveMosaicComponent(
+				caseStatus,
+				makesMosaic
+			);
+
+		var isHighSupport =
+			normBoolean(
+				curatedNs
+			);
+
+
+		if(
+			status !== null &&
+			locusType === null
+		) {
+			unrecognisedLocusStatuses[
+				status
+			] = true;
+		}
+
+
+		if(
+			caseStatus !== null &&
+			taxonomicResolution === null
+		) {
+			unrecognisedCaseStatuses[
+				caseStatus
+			] = true;
+		}
+
+
+		if(
+			caseStatus !== null &&
+			caseStatus
+				.toLowerCase()
+				.indexOf("mosaic") >= 0 &&
+			makesMosaic !== null &&
+			mosaicComponent === null
+		) {
+			unrecognisedMosaicValues[
+				makesMosaic
+			] = true;
+		}
+
+
+		if(
+			curatedNs !== null &&
+			isHighSupport === null
+		) {
+			unrecognisedHighSupportValues[
+				curatedNs
+			] = true;
+		}
+
+
 		candidatesById[candidateId] = {
-			id: candidateId,
+
+			id:
+				candidateId,
+
 			chrom:
 				norm(
 					row["chrom"]
 				),
+
 			strand:
 				norm(
 					row["strand"]
 				),
+
 			startPosition:
 				normInt(
 					row["start_position"]
 				),
+
 			endPosition:
 				normInt(
 					row["end_position"]
 				),
-			status:
+
+			locusType:
+				locusType,
+
+			structuralProfile:
 				norm(
-					row["status"]
+					row["genes_simplified"]
 				),
-			makesMosaicRaw:
-				norm(
-					row["makes_mosaic"]
-				),
-			makesMosaic:
-				normBoolean(
-					row["makes_mosaic"]
-				)
+
+			taxonomicResolution:
+				taxonomicResolution,
+
+			mosaicComponent:
+				mosaicComponent,
+
+			isHighSupport:
+				isHighSupport
 		};
 	}
 );
+
 
 log(
 	"Loaded " +
@@ -526,9 +832,9 @@ _.each(
 
 			duplicateImportedSequenceIds.push(
 				sequenceID +
-				" [" +
-				sourceNames.join(", ") +
-				"]"
+					" [" +
+					sourceNames.join(", ") +
+					"]"
 			);
 		}
 
@@ -568,7 +874,14 @@ var linkedSequenceCount = 0;
 var skippedDuplicateSequenceCount = 0;
 var skippedMissingCandidateCount = 0;
 
-var unrecognisedMosaicValues = {};
+var locusTypeCounts = {};
+var structuralProfileCounts = {};
+var taxonomicResolutionCounts = {};
+var mosaicComponentCounts = {};
+
+var highSupportCount = 0;
+var nonHighSupportCount = 0;
+var unknownHighSupportCount = 0;
 
 
 _.each(
@@ -645,20 +958,6 @@ _.each(
 
 
 		/*
-		 * Record an unexpected non-null makes_mosaic value.
-		 */
-
-		if(
-			candidate.makesMosaicRaw !== null &&
-			candidate.makesMosaic === null
-		) {
-			unrecognisedMosaicValues[
-				candidate.makesMosaicRaw
-			] = true;
-		}
-
-
-		/*
 		 * Populate permanent locus metadata.
 		 */
 
@@ -700,17 +999,68 @@ _.each(
 						candidate.strand
 					);
 
-					setBooleanFieldIfPresent(
-						"is_mosaic",
-						candidate.makesMosaic
+					setFieldIfPresent(
+						"locus_type",
+						candidate.locusType
+					);
+
+					setFieldIfPresent(
+						"structural_profile",
+						candidate.structuralProfile
 					);
 
 					setFieldIfPresent(
 						"taxonomic_resolution",
-						candidate.status
+						candidate.taxonomicResolution
 					);
+
+					setFieldIfPresent(
+						"mosaic_component",
+						candidate.mosaicComponent
+					);
+
+					setBooleanFieldIfPresent(
+						"is_high_support",
+						candidate.isHighSupport
+					);
+
+					/*
+					 * curation_tier is deliberately not
+					 * populated here.
+					 */
 				}
 			);
+		}
+
+
+		incrementCount(
+			locusTypeCounts,
+			candidate.locusType
+		);
+
+		incrementCount(
+			structuralProfileCounts,
+			candidate.structuralProfile
+		);
+
+		incrementCount(
+			taxonomicResolutionCounts,
+			candidate.taxonomicResolution
+		);
+
+		incrementCount(
+			mosaicComponentCounts,
+			candidate.mosaicComponent
+		);
+
+		if(candidate.isHighSupport === true) {
+			highSupportCount++;
+		} else if(
+			candidate.isHighSupport === false
+		) {
+			nonHighSupportCount++;
+		} else {
+			unknownHighSupportCount++;
 		}
 
 
@@ -821,6 +1171,43 @@ log(
 );
 
 
+printCounts(
+	"Locus types",
+	locusTypeCounts
+);
+
+printCounts(
+	"Structural profiles",
+	structuralProfileCounts
+);
+
+printCounts(
+	"Taxonomic resolutions",
+	taxonomicResolutionCounts
+);
+
+printCounts(
+	"Mosaic components",
+	mosaicComponentCounts
+);
+
+
+log(
+	"High-support loci: " +
+	highSupportCount
+);
+
+log(
+	"Non-high-support loci: " +
+	nonHighSupportCount
+);
+
+log(
+	"Loci with unknown high-support status: " +
+	unknownHighSupportCount
+);
+
+
 printLimitedValues(
 	"Imported sequence IDs occurring in multiple sources",
 	duplicateImportedSequenceIds
@@ -836,15 +1223,32 @@ printLimitedValues(
 	candidateIdsWithoutSequences
 );
 
-
-var mosaicValues =
+printLimitedValues(
+	"Unrecognised source status values",
 	sortedKeys(
-		unrecognisedMosaicValues
-	);
+		unrecognisedLocusStatuses
+	)
+);
 
 printLimitedValues(
-	"Unrecognised non-null makes_mosaic values",
-	mosaicValues
+	"Unrecognised source case_status values",
+	sortedKeys(
+		unrecognisedCaseStatuses
+	)
+);
+
+printLimitedValues(
+	"Unrecognised mosaic-component values",
+	sortedKeys(
+		unrecognisedMosaicValues
+	)
+);
+
+printLimitedValues(
+	"Unrecognised curatedNS values",
+	sortedKeys(
+		unrecognisedHighSupportValues
+	)
 );
 
 

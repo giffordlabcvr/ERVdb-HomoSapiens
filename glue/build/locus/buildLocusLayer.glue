@@ -1,13 +1,13 @@
 
-  # Load the source candidate dataset
-  run script glue/build/locus/candidates/loadErvLocusCandidates.js
-
   # Import the selected and classified HERV locus sequences
   run file glue/build/locus/hervImportLocusSources.glue
 
+  # Load the source candidate dataset
+  run script glue/build/locus/candidates/loadErvLocusCandidates.js
+
   # Set locus sequence lengths and kinds
   run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js
-
+  
   # Create permanent erv_locus rows from selected candidates,
   # populate their metadata, and link the imported sequences
   run script glue/build/locus/loadErvLoci.js
@@ -17,10 +17,10 @@
 
   # Create curated locus-to-LTR-lineage associations, where available
   run script glue/build/locus/loadErvLocusLtrAssociations.js
-
+  
   # Load source-specific provenance records and connect them to
   # the resolved ERV loci
-  run script glue/build/locus/loadErvLocusProvenance.js
+  run file glue/build/locus/loadErvLocusProvenance.glue
 
   # Add resolved locus sequences to their lineage/sublineage alignments
   run script glue/build/locus/msa/addResolvedLociToAlignments.js

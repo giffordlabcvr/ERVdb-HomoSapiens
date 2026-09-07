@@ -22,23 +22,36 @@ create custom-table digs_locus
 table digs_locus
 
   # Genomic coordinates of the consolidated DIGS locus
-  create field chrom          VARCHAR 50
-  create field strand         VARCHAR 10
-  create field start_position INTEGER
-  create field end_position   INTEGER
+  create field chrom               VARCHAR 50
+  create field strand              VARCHAR 10
+  create field start_position      INTEGER
+  create field end_position        INTEGER
 
   # Consolidated DIGS annotation
-  create field names          VARCHAR 1000
-  create field genes          VARCHAR 1000
+  create field names               VARCHAR 1000
+  create field genes               VARCHAR 1000
 
   # IDs of the underlying DIGS hits contributing to this consolidated locus
-  create field digs_ids       VARCHAR 2000
+  create field digs_ids            VARCHAR 2000
+
+  # DIGS-specific name resolution
+  #
+  # resolved_name corresponds to the `summarised` field in
+  # digs-name-decision.tsv.
+  create field resolved_name       VARCHAR 200
+
+  # Numeric support for the DIGS-specific name decision.
+  # Corresponds to `score` in digs-name-decision.tsv.
+  create field resolution_score    DOUBLE
+
+  # Assessment of agreement between LTR and internal-region classifications.
+  # Corresponds to `ltr_check` in digs-name-decision.tsv.
+  create field ltr_check           VARCHAR 200
 
 exit
 
 # A final ERV locus may be supported by one or more DIGS loci.
 create link digs_locus erv_locus --multiplicity MANY_TO_ONE
-
 
 # ----------------------------------------------------------------------------
 # RetroTector loci
