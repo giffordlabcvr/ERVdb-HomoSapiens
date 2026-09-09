@@ -1,185 +1,73 @@
-// glue/build/locus/addResolvedLociToAlignments.js
+// glue/build/locus/msa/addResolvedLociToAlignments.js
 //
-// Dry-run script to identify alignment assignments for fully resolved
-// ERV locus candidates.
+// Add permanent ERV locus sequences to their resolved ERV lineage,
+// ERV sublineage, or LTR alignments.
 //
-// Inclusion criteria:
-//   length >= 100
-//   case_status = 'Fully resolved'
+// ERV alignment names are derived directly from the standard
+// erv_lineage.id:
 //
-// Matching rules:
-//   status = ERV -> names_decision -> AL_LINEAGE_*
-//   status = LTR -> names          -> AL_LTR_*
+//   ERV-1.Eta.1       -> AL_LINEAGE_1_Eta_1
+//   ERV-1.Zeta.19     -> AL_SUBLINEAGE_1_Zeta_19
+//   ERVR-1.Theta.101  -> AL_SUBLINEAGE_1R_Theta_101
 //
-// Matching is case-insensitive and ignores hyphens.
+// LTR alignments are matched by normalising the suffix of existing
+// AL_LTR_* alignment names and comparing it with ltr_lineage.id.
 //
-// Repeated identical classifications are collapsed:
+// This script deliberately uses permanent locus associations rather than
+// the original staging classifications:
 //
-//   MER57B1,MER57B1 -> MER57B1
-//   ERV-L,ERVL      -> ERV-L
+//   sequence -> erv_locus
+//   erv_locus <- erv_locus_lineage_assoc -> erv_lineage
+//   erv_locus <- erv_locus_ltr_assoc     -> ltr_lineage
 //
-// Compatible LTR subtype classifications may be collapsed to a shared
-// parent LTR family:
+// A locus is assigned only when:
 //
-//   LTR7,LTR7A      -> LTR7
-//   LTR16C,LTR16E2  -> LTR16
+//   1. exactly one sequence is linked to the erv_locus row;
+//   2. exactly one distinct target lineage is identified;
+//   3. the expected alignment exists.
 //
-// Genuinely conflicting classifications are reported as exceptions.
-//
-// This script does not modify the project.
-
-
-// -------------------------------------------------------------------------
-// Explicit LTR subtype-to-family mappings
-// -------------------------------------------------------------------------
-
-var ltrFamilyBySubtype = {
-
-	// LTR5 family
-	"LTR1":  "LTR1",
-	"LTR1A": "LTR1",
-	"LTR1B": "LTR1",
-	"LTR1C": "LTR1",
-
-	// LTR5 family
-	"LTR5": "LTR5",
-	"LTR5-Hs": "LTR5",
-	"LTR5_Hs": "LTR5",
-	"LTR5A": "LTR5",
-	"LTR5B": "LTR5",
-
-	// LTR7 family
-	"LTR7":  "LTR7",
-	"LTR7A": "LTR7",
-	"LTR7B": "LTR7",
-	"LTR7C": "LTR7",
-	"LTR7Y": "LTR7",
-
-	// LTR8 family
-	"LTR8":  "LTR8",
-	"LTR8A": "LTR8",
-	"LTR8B": "LTR8",
-
-	// LTR12 family
-	"LTR12":  "LTR12",
-	"LTR12_": "LTR12",
-	"LTR12B": "LTR12",
-	"LTR12C": "LTR12",
-	"LTR12D": "LTR12",
-	"LTR12E": "LTR12",
-
-	// LTR13 family
-	"LTR13": "LTR13",
-	"LTR13A": "LTR13",
-	"LTR13_": "LTR13",
-
-	// MER66 family
-	"MER66A": "MER66",
-	"MER66B": "MER66",
-	"MER66C": "MER66",
-
-	// MER66 family
-	"MER66A": "MER66",
-	"MER66B": "MER66",
-	"MER66C": "MER66",
-
-	// MER83 family
-	"MER83B": "MER83",
-	"MER83C": "MER83",
-
-	// MER70 family
-	"MER70A": "MER70",
-	"MER70B": "MER70",
-
-	// MER83 family
-	"MER83B": "MER83",
-	"MER83C": "MER83",
-
-	// MLT2A family
-	"MLT2A1": "MLT2A",
-	"MLT2A2": "MLT2A",
-
-	// LTR16 family
-	"LTR16A":        "LTR16",
-	"LTR16A1":       "LTR16",
-	"LTR16A2":       "LTR16",
-	"LTR16B":        "LTR16",
-	"LTR16B1":       "LTR16",
-	"LTR16B2":       "LTR16",
-	"LTR16C":        "LTR16",
-	"LTR16D":        "LTR16",
-	"LTR16D1":       "LTR16",
-	"LTR16D2":       "LTR16",
-	"LTR16E1":       "LTR16",
-	"LTR16E2":       "LTR16",
-	"ERV3-16A3_LTR": "LTR16"
-};
-
-var ervLineageTranslationByKey = {
-
-	"ervle":       "ERV-L",
-	"hervea":      "HERV-E",
-	"hervip":      "HERV-I",
-
-	"hervk(hml1)":  "HERV-K-HML1",
-	"hervk(hml2)":  "HERV-K-HML2",
-	"hervk(hml3)":  "HERV-K-HML3",
-	"hervk(hml4)":  "HERV-K-HML4",
-	"hervk(hml5)":  "HERV-K-HML5",
-	"hervk(hml6)":  "HERV-K-HML6",
-	"hervk(hml7)":  "HERV-K-HML7",
-	"hervk(hml8)":  "HERV-K-HML8",
-	"hervk(hml9)":  "HERV-K-HML9",
-	"hervk(hml10)": "HERV-K-HML10",
-
-	"hervlb1": "HERV-Lb",
-	"hervlb2": "HERV-Lb",
-
-	"hervrb1": "HERV-Rb",
-	"hervrb2": "HERV-Rb",
-
-	"huersp3b": "HERV-P",
-	"rrhervi":  "HERV-15"
-};
-
-var ltrTranslationByKey = {
-
-	// Naming and punctuation differences
-	"erv316a3_ltr": "ERV316A3LTR",
-	"mer4d0":       "MER4D",
-
-	// Available representative alignments
-	"ltr5_hs": "LTR5",
-	"ltr7":    "LTR7A",
-	"mer34":   "MER34A1",
-	"mer66":   "MER66A",
-	"mer70":   "MER70A",
-	"mlt2a":   "MLT2A1",
-	"mlt2b1":  "MLT2B3",
-	"mlt2c1":  "MLT2C2",
-	"mer61e":  "MER61",
-	"mer61d":  "MER61",
-	"mlt2b5":  "MLT2B4",
-	"mer61f":  "MER61A",
-
-	// Underscore variants
-	"ltr12_":     "LTR12",
-	"mer4a1_":    "MER4A1",
-	"pabl_a":     "PABLA",
-	"pabl_b":     "PABLB",
-	"prima4_ltr": "PRIMA4LTR",
-
-	// HERV1 LTR variants use the master alignment
-	"herv1_ltra": "HERV1LTR",
-	"herv1_ltrb": "HERV1LTR",
-	"herv1_ltrc": "HERV1LTR",
-	"herv1_ltrd": "HERV1LTR",
-	"herv1_ltre": "HERV1LTR",
-
-};
+// Loci with conflicting lineage associations are reported and skipped.
 
 var DRY_RUN = false;
-var BATCH_SIZE = 500;
+var BATCH_SIZE = 250;
+
+
+// -------------------------------------------------------------------------
+// General utilities
+// -------------------------------------------------------------------------
+
+function log(message) {
+	glue.logInfo(message);
+}
+
+
+function norm(value) {
+
+	if(value === null || value === undefined) {
+		return null;
+	}
+
+	var result = ("" + value).trim();
+
+	if(result === "") {
+		return null;
+	}
+
+	var lower = result.toLowerCase();
+
+	if(lower === "n/a" ||
+		lower === "na" ||
+		lower === "n/k" ||
+		lower === "nk" ||
+		lower === "unknown" ||
+		lower === "null" ||
+		lower === "none") {
+
+		return null;
+	}
+
+	return result;
+}
 
 
 function escapeQuotes(value) {
@@ -190,693 +78,742 @@ function escapeQuotes(value) {
 }
 
 
-function runCmd(cmdWords) {
+function runCommand(commandWords) {
 
 	if(DRY_RUN) {
 
-		glue.logInfo(
+		log(
 			"[DRY RUN] " +
-			cmdWords.join(" ")
+			commandWords.join(" ")
 		);
 
 		return null;
 	}
 
-	return glue.command(
-		cmdWords
-	);
+	return glue.command(commandWords);
 }
 
 
-function buildAssignmentsByAlignment(
-	assignments
-) {
+function addUniqueValue(map, key, value) {
 
-	var assignmentsByAlignment = {};
+	if(map[key] === undefined) {
+		map[key] = [];
+	}
 
-	for(var i = 0;
-			i < assignments.length;
-			i++) {
+	for(var i = 0; i < map[key].length; i++) {
 
-		var assignment =
-			assignments[i];
-
-		var alignmentName =
-			assignment.alignmentName;
-
-		if(assignmentsByAlignment[
-				alignmentName
-			] === undefined) {
-
-			assignmentsByAlignment[
-				alignmentName
-			] = [];
+		if(map[key][i] === value) {
+			return;
 		}
-
-		assignmentsByAlignment[
-			alignmentName
-		].push(
-			assignment
-		);
 	}
 
-	return assignmentsByAlignment;
+	map[key].push(value);
 }
 
 
-function buildIdWhereClause(
-	assignments,
-	startIndex,
-	endIndex
-) {
+function sortedKeys(map) {
 
-	var quotedIds = [];
+	var keys = Object.keys(map);
+	keys.sort();
 
-	for(var i = startIndex;
-			i < endIndex;
-			i++) {
-
-		quotedIds.push(
-			"'" +
-			escapeQuotes(
-				assignments[i].id
-			) +
-			"'"
-		);
-	}
-
-	return (
-		"erv_locus_candidate.id in (" +
-		quotedIds.join(",") +
-		")"
-	);
+	return keys;
 }
-
-
-function addAssignmentsToAlignment(
-	alignmentName,
-	alignmentAssignments
-) {
-
-	glue.logInfo(
-		"Adding " +
-		alignmentAssignments.length +
-		" candidate loci to " +
-		alignmentName
-	);
-
-	for(var startIndex = 0;
-			startIndex <
-				alignmentAssignments.length;
-			startIndex += BATCH_SIZE) {
-
-		var endIndex = Math.min(
-			startIndex + BATCH_SIZE,
-			alignmentAssignments.length
-		);
-
-		var whereClause =
-			buildIdWhereClause(
-				alignmentAssignments,
-				startIndex,
-				endIndex
-			);
-
-		glue.inMode(
-			"/alignment/" +
-				alignmentName,
-			function() {
-
-				runCmd([
-					"add",
-					"member",
-					"--whereClause",
-					whereClause
-				]);
-			}
-		);
-
-		glue.logInfo(
-			"Added batch " +
-			(startIndex + 1) +
-			"-" +
-			endIndex +
-			" to " +
-			alignmentName
-		);
-	}
-}
-
-
 
 
 // -------------------------------------------------------------------------
-// Normalise a lineage or LTR name for matching
+// ERV alignment naming
 // -------------------------------------------------------------------------
 
-function norm(value) {
+function standardErvAlignmentSuffix(lineageId) {
 
-	if(value === null || value === undefined) {
+	lineageId = norm(lineageId);
+
+	if(lineageId === null) {
 		return null;
 	}
 
-	var s = ("" + value).trim();
+	var suffix = lineageId
 
-	if(s === "") {
+		// ERVR-1.Theta.101 -> 1R.Theta.101
+		.replace(
+			/^ERVR-([A-Za-z0-9]+)(?=\.|$)/i,
+			"$1R"
+		)
+
+		// ERV-1.Eta.1 -> 1.Eta.1
+		.replace(
+			/^ERV-/i,
+			""
+		)
+
+		// Replace dots, hyphens and other separators with underscores.
+		.replace(
+			/[^A-Za-z0-9]+/g,
+			"_"
+		)
+
+		.replace(
+			/^_+/,
+			""
+		)
+
+		.replace(
+			/_+$/,
+			""
+		);
+
+	if(suffix === "") {
 		return null;
 	}
 
-	return s
-		.replace(/-/g, "")
+	return suffix;
+}
+
+
+function expectedErvAlignmentName(
+	lineageId,
+	entityLevel
+) {
+
+	var suffix =
+		standardErvAlignmentSuffix(
+			lineageId
+		);
+
+	if(suffix === null) {
+		return null;
+	}
+
+	entityLevel = norm(entityLevel);
+
+	if(entityLevel === null) {
+		return null;
+	}
+
+	var lowerLevel =
+		entityLevel.toLowerCase();
+
+	if(lowerLevel === "lineage") {
+
+		return (
+			"AL_LINEAGE_" +
+			suffix
+		);
+	}
+
+	if(lowerLevel === "sublineage") {
+
+		return (
+			"AL_SUBLINEAGE_" +
+			suffix
+		);
+	}
+
+	return null;
+}
+
+
+// -------------------------------------------------------------------------
+// LTR alignment-name matching
+//
+// Existing LTR alignment names are retained. We normalise both the
+// ltr_lineage.id and the suffix of AL_LTR_* so that punctuation differences
+// do not prevent a match.
+// -------------------------------------------------------------------------
+
+function normalisedLtrKey(value) {
+
+	value = norm(value);
+
+	if(value === null) {
+		return null;
+	}
+
+	return value
+		.replace(/[^A-Za-z0-9]/g, "")
 		.toLowerCase();
 }
 
 
 // -------------------------------------------------------------------------
-// Resolve a curated classification field
-//
-// Repeated equivalent names are collapsed.
-//
-// Examples:
-//
-//   MER57B1,MER57B1 -> MER57B1
-//   ERV-L,ERVL      -> ERV-L
-//
-// For LTR records, multiple distinct names may also be resolved when all
-// names map explicitly to the same parent LTR family.
-//
-// If more than one distinct normalised name remains and no shared LTR
-// family can be identified, the result is considered conflicting.
+// Load existing alignments
 // -------------------------------------------------------------------------
 
-function resolveClassification(value, status) {
+log("Loading existing alignments");
 
-	if(value === null || value === undefined) {
+var alignmentRows =
+	glue.tableToObjects(
+		glue.command([
+			"list",
+			"alignment",
+			"name"
+		])
+	);
 
-		return {
-			status: "missing",
-			classification: null,
-			originalValue: value
-		};
-	}
-
-	var originalValue = ("" + value).trim();
-
-	if(originalValue === "") {
-
-		return {
-			status: "missing",
-			classification: null,
-			originalValue: originalValue
-		};
-	}
-
-	var parts = originalValue.split(",");
-	var nameByKey = {};
-	var keys = [];
-
-	for(var i = 0; i < parts.length; i++) {
-
-		var name = parts[i].trim();
-		var key = norm(name);
-
-		if(key === null) {
-			continue;
-		}
-
-		if(nameByKey[key] === undefined) {
-
-			nameByKey[key] = name;
-			keys.push(key);
-		}
-	}
-
-	if(keys.length === 0) {
-
-		return {
-			status: "missing",
-			classification: null,
-			originalValue: originalValue
-		};
-	}
-
-	if(keys.length > 1) {
-
-		if(status === "LTR") {
-
-			var family = null;
-			var compatible = true;
-
-			for(var i = 0; i < keys.length; i++) {
-
-				var subtype =
-					nameByKey[keys[i]];
-
-				var mappedFamily =
-					ltrFamilyBySubtype[subtype];
-
-				if(mappedFamily === undefined) {
-
-					compatible = false;
-					break;
-				}
-
-				if(family === null) {
-
-					family = mappedFamily;
-				}
-				else if(family !== mappedFamily) {
-
-					compatible = false;
-					break;
-				}
-			}
-
-			if(compatible) {
-
-				return {
-					status: "resolved",
-					classification: family,
-					normalisedKey: norm(family),
-					originalValue: originalValue,
-					resolutionType:
-						"ltr_family_collapse"
-				};
-			}
-		}
-
-		return {
-			status: "conflicting",
-			classification: null,
-			originalValue: originalValue,
-			keys: keys
-		};
-	}
-
-	return {
-		status: "resolved",
-		classification: nameByKey[keys[0]],
-		normalisedKey: keys[0],
-		originalValue: originalValue,
-		resolutionType: "direct"
-	};
-}
-
-
-// -------------------------------------------------------------------------
-// Add an alignment to a lookup table
-// -------------------------------------------------------------------------
-
-function addAlignmentToLookup(
-	lookup,
-	key,
-	alignmentName,
-	alignmentType
-) {
-
-	if(key === null) {
-		return;
-	}
-
-	if(lookup[key] !== undefined &&
-			lookup[key] !== alignmentName) {
-
-		throw new Error(
-			"Normalised " +
-			alignmentType +
-			" alignment-name collision for key '" +
-			key +
-			"': " +
-			lookup[key] +
-			" and " +
-			alignmentName
-		);
-	}
-
-	lookup[key] = alignmentName;
-}
-
-
-// -------------------------------------------------------------------------
-// Load lineage and LTR alignments
-// -------------------------------------------------------------------------
-
-var alignmentRows = glue.tableToObjects(
-	glue.command([
-		"list",
-		"alignment",
-		"name",
-		"-w",
-		"name like 'AL_LINEAGE%' or name like 'AL_LTR%'"
-	])
-);
-
-glue.logInfo(
-	"Alignment rows retrieved: " +
-	alignmentRows.length
-);
-
-var lineageAlignmentByKey = {};
+var alignmentExists = {};
 var ltrAlignmentByKey = {};
-
-var lineageAlignmentCount = 0;
-var ltrAlignmentCount = 0;
-var unexpectedAlignmentCount = 0;
+var duplicateLtrAlignmentKeys = {};
 
 for(var i = 0; i < alignmentRows.length; i++) {
 
-	var alignmentRow = alignmentRows[i];
-	var alignmentName = alignmentRow.name;
+	var alignmentName =
+		norm(alignmentRows[i].name);
 
-	if(alignmentName === null ||
-			alignmentName === undefined ||
-			("" + alignmentName).trim() === "") {
+	if(alignmentName === null) {
+		continue;
+	}
 
-		glue.logInfo(
-			"WARNING: Alignment row has no name"
+	alignmentExists[alignmentName] = true;
+
+	if(alignmentName.indexOf("AL_LTR_") === 0) {
+
+		var ltrSuffix =
+			alignmentName.substring(
+				"AL_LTR_".length
+			);
+
+		var ltrKey =
+			normalisedLtrKey(
+				ltrSuffix
+			);
+
+		if(ltrKey === null) {
+			continue;
+		}
+
+		if(ltrAlignmentByKey[ltrKey] !== undefined &&
+			ltrAlignmentByKey[ltrKey] !== alignmentName) {
+
+			duplicateLtrAlignmentKeys[ltrKey] = true;
+		}
+		else {
+			ltrAlignmentByKey[ltrKey] = alignmentName;
+		}
+	}
+}
+
+log(
+	"Existing alignments loaded: " +
+	alignmentRows.length
+);
+
+log(
+	"Ambiguous normalised LTR alignment keys: " +
+	Object.keys(duplicateLtrAlignmentKeys).length
+);
+
+
+// -------------------------------------------------------------------------
+// Load permanent ERV loci
+// -------------------------------------------------------------------------
+
+log("Loading permanent erv_locus rows");
+
+var locusRows =
+	glue.tableToObjects(
+		glue.command([
+			"list",
+			"custom-table-row",
+			"erv_locus",
+			"id",
+			"locus_type",
+			"taxonomic_resolution",
+			"structural_profile"
+		])
+	);
+
+var locusById = {};
+
+for(var i = 0; i < locusRows.length; i++) {
+
+	var locusId =
+		norm(locusRows[i].id);
+
+	if(locusId !== null) {
+		locusById[locusId] = locusRows[i];
+	}
+}
+
+log(
+	"Permanent ERV loci loaded: " +
+	locusRows.length
+);
+
+
+// -------------------------------------------------------------------------
+// Load locus sequences
+// -------------------------------------------------------------------------
+
+log("Loading sequences linked to permanent ERV loci");
+
+var sequenceRows =
+	glue.tableToObjects(
+		glue.command([
+			"list",
+			"sequence",
+			"source.name",
+			"sequenceID",
+			"erv_locus.id",
+			"-w",
+			"erv_locus.id != null"
+		])
+	);
+
+var sequencesByLocus = {};
+
+for(var i = 0; i < sequenceRows.length; i++) {
+
+	var sequenceRow =
+		sequenceRows[i];
+
+	var sequenceLocusId =
+		norm(
+			sequenceRow["erv_locus.id"]
 		);
+
+	var sourceName =
+		norm(
+			sequenceRow["source.name"]
+		);
+
+	var sequenceId =
+		norm(
+			sequenceRow.sequenceID
+		);
+
+	if(sequenceLocusId === null ||
+		sourceName === null ||
+		sequenceId === null) {
 
 		continue;
 	}
 
-	alignmentName = "" + alignmentName;
-
-	if(alignmentName.indexOf("AL_LINEAGE_") === 0) {
-
-		var lineageName = alignmentName.substring(
-			"AL_LINEAGE_".length
-		);
-
-		var lineageKey = norm(lineageName);
-
-		addAlignmentToLookup(
-			lineageAlignmentByKey,
-			lineageKey,
-			alignmentName,
-			"lineage"
-		);
-
-		lineageAlignmentCount++;
+	if(sequencesByLocus[sequenceLocusId] === undefined) {
+		sequencesByLocus[sequenceLocusId] = [];
 	}
-	else if(alignmentName.indexOf("AL_LTR_") === 0) {
 
-		var ltrName = alignmentName.substring(
-			"AL_LTR_".length
-		);
-
-		var ltrKey = norm(ltrName);
-
-		addAlignmentToLookup(
-			ltrAlignmentByKey,
-			ltrKey,
-			alignmentName,
-			"LTR"
-		);
-
-		ltrAlignmentCount++;
-	}
-	else {
-
-		unexpectedAlignmentCount++;
-
-		glue.logInfo(
-			"WARNING: Unexpected alignment name: " +
-			alignmentName
-		);
-	}
+	sequencesByLocus[sequenceLocusId].push({
+		sourceName: sourceName,
+		sequenceId: sequenceId
+	});
 }
 
-glue.logInfo(
-	"Lineage alignments indexed: " +
-	lineageAlignmentCount
-);
-
-glue.logInfo(
-	"LTR alignments indexed: " +
-	ltrAlignmentCount
-);
-
-glue.logInfo(
-	"Unexpected alignment names: " +
-	unexpectedAlignmentCount
+log(
+	"Linked locus sequences loaded: " +
+	sequenceRows.length
 );
 
 
 // -------------------------------------------------------------------------
-// Load fully resolved locus candidates
+// Load locus-to-ERV-lineage associations
 // -------------------------------------------------------------------------
 
-var candidateRows = glue.tableToObjects(
-	glue.command([
-		"list",
-		"custom-table-row",
-		"erv_locus_candidate",
-		"id",
-		"status",
-		"length",
-		"case_status",
-		"chrom",
-		"start_position",
-		"names_decision",
-		"phylogeny_name",
-		"names",
-		"-w",
-		"length >= 100 and case_status = 'Fully resolved'",
-		"-s",
-		"status,names_decision,id"
-	])
-);
+log("Loading ERV locus-to-lineage associations");
 
-glue.logInfo(
-	"Candidate rows retrieved: " +
-	candidateRows.length
+var ervAssociationRows =
+	glue.tableToObjects(
+		glue.command([
+			"list",
+			"custom-table-row",
+			"erv_locus_lineage_assoc",
+			"id",
+			"erv_locus.id",
+			"erv_lineage.id",
+			"erv_lineage.entity_level",
+			"association_role",
+			"evidence",
+			"confidence"
+		])
+	);
+
+var ervTargetsByLocus = {};
+var ervTargetDetailsByKey = {};
+
+for(var i = 0; i < ervAssociationRows.length; i++) {
+
+	var associationRow =
+		ervAssociationRows[i];
+
+	var associatedLocusId =
+		norm(
+			associationRow["erv_locus.id"]
+		);
+
+	var ervLineageId =
+		norm(
+			associationRow["erv_lineage.id"]
+		);
+
+	var entityLevel =
+		norm(
+			associationRow[
+				"erv_lineage.entity_level"
+			]
+		);
+
+	if(associatedLocusId === null ||
+		ervLineageId === null ||
+		entityLevel === null) {
+
+		continue;
+	}
+
+	var lowerEntityLevel =
+		entityLevel.toLowerCase();
+
+	if(lowerEntityLevel !== "lineage" &&
+		lowerEntityLevel !== "sublineage") {
+
+		continue;
+	}
+
+	var targetKey =
+		lowerEntityLevel +
+		"\t" +
+		ervLineageId;
+
+	addUniqueValue(
+		ervTargetsByLocus,
+		associatedLocusId,
+		targetKey
+	);
+
+	ervTargetDetailsByKey[targetKey] = {
+		lineageId: ervLineageId,
+		entityLevel: lowerEntityLevel
+	};
+}
+
+log(
+	"ERV locus-lineage association rows loaded: " +
+	ervAssociationRows.length
 );
 
 
 // -------------------------------------------------------------------------
-// Resolve each locus candidate to an alignment
+// Load locus-to-LTR associations
+// -------------------------------------------------------------------------
+
+log("Loading ERV locus-to-LTR associations");
+
+var ltrAssociationRows =
+	glue.tableToObjects(
+		glue.command([
+			"list",
+			"custom-table-row",
+			"erv_locus_ltr_assoc",
+			"id",
+			"erv_locus.id",
+			"ltr_lineage.id",
+			"association_role",
+			"evidence",
+			"confidence"
+		])
+	);
+
+var ltrTargetsByLocus = {};
+
+for(var i = 0; i < ltrAssociationRows.length; i++) {
+
+	var ltrAssociationRow =
+		ltrAssociationRows[i];
+
+	var ltrLocusId =
+		norm(
+			ltrAssociationRow["erv_locus.id"]
+		);
+
+	var ltrLineageId =
+		norm(
+			ltrAssociationRow["ltr_lineage.id"]
+		);
+
+	if(ltrLocusId === null ||
+		ltrLineageId === null) {
+
+		continue;
+	}
+
+	addUniqueValue(
+		ltrTargetsByLocus,
+		ltrLocusId,
+		ltrLineageId
+	);
+}
+
+log(
+	"ERV locus-LTR association rows loaded: " +
+	ltrAssociationRows.length
+);
+
+
+// -------------------------------------------------------------------------
+// Resolve locus assignments
 // -------------------------------------------------------------------------
 
 var assignments = [];
-var familyCollapsedAssignments = [];
-var unmatched = [];
-var conflictingClassifications = [];
-var missingClassifications = [];
-var unsupportedStatuses = [];
 
-for(var i = 0; i < candidateRows.length; i++) {
+var lociWithoutSequence = [];
+var lociWithMultipleSequences = [];
+var lociWithoutTarget = [];
+var lociWithMultipleTargets = [];
+var lociWithMissingAlignment = [];
+var lociWithUnsupportedType = [];
 
-	var row = candidateRows[i];
+var locusIds =
+	sortedKeys(
+		locusById
+	);
 
-	var locusID = row.id;
-	var locusStatus = row.status;
+for(var i = 0; i < locusIds.length; i++) {
 
-	if(locusID === null ||
-			locusID === undefined ||
-			("" + locusID).trim() === "") {
+	var locusId =
+		locusIds[i];
 
-		glue.logInfo(
-			"WARNING: Candidate row has no id"
+	var locusRow =
+		locusById[locusId];
+
+	var locusType =
+		norm(
+			locusRow.locus_type
+		);
+
+	var locusSequences =
+		sequencesByLocus[locusId];
+
+	if(locusSequences === undefined ||
+		locusSequences.length === 0) {
+
+		lociWithoutSequence.push(
+			locusId
 		);
 
 		continue;
 	}
 
-	locusID = "" + locusID;
+	if(locusSequences.length !== 1) {
 
-	var rawClassification;
-	var alignmentLookup;
+		lociWithMultipleSequences.push({
+			locusId: locusId,
+			count: locusSequences.length
+		});
 
-	if(locusStatus === "ERV") {
-
-		rawClassification = row.names_decision;
-		alignmentLookup = lineageAlignmentByKey;
+		continue;
 	}
-	else if(locusStatus === "LTR") {
 
-		rawClassification = row.names;
-		alignmentLookup = ltrAlignmentByKey;
+	var sequenceRef =
+		locusSequences[0];
+
+	var alignmentName = null;
+	var targetDescription = null;
+
+	if(locusType !== null &&
+		locusType.toLowerCase() === "erv") {
+
+		var ervTargets =
+			ervTargetsByLocus[locusId];
+
+		if(ervTargets === undefined ||
+			ervTargets.length === 0) {
+
+			lociWithoutTarget.push({
+				locusId: locusId,
+				locusType: locusType
+			});
+
+			continue;
+		}
+
+		if(ervTargets.length !== 1) {
+
+			lociWithMultipleTargets.push({
+				locusId: locusId,
+				locusType: locusType,
+				targets: ervTargets.join(",")
+			});
+
+			continue;
+		}
+
+		var ervTarget =
+			ervTargetDetailsByKey[
+				ervTargets[0]
+			];
+
+		alignmentName =
+			expectedErvAlignmentName(
+				ervTarget.lineageId,
+				ervTarget.entityLevel
+			);
+
+		targetDescription =
+			ervTarget.entityLevel +
+			":" +
+			ervTarget.lineageId;
+	}
+	else if(locusType !== null &&
+		locusType.toLowerCase() === "solo_ltr") {
+
+		var ltrTargets =
+			ltrTargetsByLocus[locusId];
+
+		if(ltrTargets === undefined ||
+			ltrTargets.length === 0) {
+
+			lociWithoutTarget.push({
+				locusId: locusId,
+				locusType: locusType
+			});
+
+			continue;
+		}
+
+		if(ltrTargets.length !== 1) {
+
+			lociWithMultipleTargets.push({
+				locusId: locusId,
+				locusType: locusType,
+				targets: ltrTargets.join(",")
+			});
+
+			continue;
+		}
+
+		var ltrLineageId =
+			ltrTargets[0];
+
+		var ltrKey =
+			normalisedLtrKey(
+				ltrLineageId
+			);
+
+		if(duplicateLtrAlignmentKeys[ltrKey] === true) {
+
+			lociWithMultipleTargets.push({
+				locusId: locusId,
+				locusType: locusType,
+				targets:
+					"ambiguous AL_LTR key " +
+					ltrKey
+			});
+
+			continue;
+		}
+
+		alignmentName =
+			ltrAlignmentByKey[ltrKey];
+
+		targetDescription =
+			"ltr_lineage:" +
+			ltrLineageId;
 	}
 	else {
 
-		unsupportedStatuses.push({
-			id: locusID,
-			status: locusStatus
+		lociWithUnsupportedType.push({
+			locusId: locusId,
+			locusType: locusType
 		});
 
 		continue;
 	}
-
-	var classificationResult =
-		resolveClassification(
-			rawClassification,
-			locusStatus
-		);
-
-
-	var classificationResult = resolveClassification(
-		rawClassification,
-		locusStatus
-	);
-
-	if(classificationResult.status === "missing") {
-
-		missingClassifications.push({
-			id: locusID,
-			status: locusStatus,
-			value: rawClassification
-		});
-
-		continue;
-	}
-
-	if(classificationResult.status === "conflicting") {
-
-		conflictingClassifications.push({
-			id: locusID,
-			status: locusStatus,
-			classification:
-				classificationResult.originalValue
-		});
-
-		continue;
-	}
-
-	var classificationName =
-		classificationResult.classification;
-
-	var classificationKey =
-		classificationResult.normalisedKey;
-
-
-	// Translate historical ERV names before alignment lookup
-
-	if(locusStatus === "ERV") {
-
-		var translated =
-			ervLineageTranslationByKey[
-				classificationKey
-			];
-
-		if(translated !== undefined) {
-
-			classificationName =
-				translated;
-
-			classificationKey =
-				norm(translated);
-		}
-	}
-
-
-	// Translate LTR aliases before alignment lookup
-
-	if(locusStatus === "LTR") {
-
-		var translatedLtrName =
-			ltrTranslationByKey[
-				classificationKey
-			];
-
-		if(translatedLtrName !== undefined) {
-
-			classificationName =
-				translatedLtrName;
-
-			classificationKey =
-				norm(translatedLtrName);
-		}
-	}
-
-
-	var alignmentName =
-		alignmentLookup[classificationKey];
-
-
-
-
-
-	// Translate historical ERV classifications to current lineage names
-	// before attempting the alignment lookup.
-
-	if(locusStatus === "ERV") {
-
-		var translatedLineageName =
-			ervLineageTranslationByKey[
-				classificationKey
-			];
-
-		if(translatedLineageName !== undefined) {
-
-			classificationName =
-				translatedLineageName;
-
-			classificationKey =
-				norm(translatedLineageName);
-		}
-	}
-
-
-	var alignmentName =
-		alignmentLookup[classificationKey];
-
 
 	if(alignmentName === null ||
-			alignmentName === undefined) {
+		alignmentName === undefined ||
+		alignmentExists[alignmentName] !== true) {
 
-		unmatched.push({
-			id: locusID,
-			status: locusStatus,
-			classification: classificationName,
-			originalClassification:
-				classificationResult.originalValue,
-			key: classificationKey,
-			resolutionType:
-				classificationResult.resolutionType
+		lociWithMissingAlignment.push({
+			locusId: locusId,
+			target: targetDescription,
+			expectedAlignment: alignmentName
 		});
 
 		continue;
 	}
 
-	var assignment = {
-		id: locusID,
-		status: locusStatus,
-		classification: classificationName,
-		originalClassification:
-			classificationResult.originalValue,
+	assignments.push({
+		locusId: locusId,
+		sourceName: sequenceRef.sourceName,
+		sequenceId: sequenceRef.sequenceId,
 		alignmentName: alignmentName,
-		length: row.length,
-		chrom: row.chrom,
-		start_position: row.start_position,
-		resolutionType:
-			classificationResult.resolutionType
-	};
-
-	assignments.push(
-		assignment
-	);
-
-	if(classificationResult.resolutionType ===
-			"ltr_family_collapse") {
-
-		familyCollapsedAssignments.push(
-			assignment
-		);
-	}
+		target: targetDescription
+	});
 }
 
 
-var assignmentsByAlignment =
-	buildAssignmentsByAlignment(
-		assignments
+// -------------------------------------------------------------------------
+// Group assignments by target alignment
+// -------------------------------------------------------------------------
+
+var assignmentsByAlignment = {};
+
+for(var i = 0; i < assignments.length; i++) {
+
+	var assignment =
+		assignments[i];
+
+	if(assignmentsByAlignment[
+		assignment.alignmentName
+	] === undefined) {
+
+		assignmentsByAlignment[
+			assignment.alignmentName
+		] = [];
+	}
+
+	assignmentsByAlignment[
+		assignment.alignmentName
+	].push(
+		assignment
 	);
+}
+
+
+// -------------------------------------------------------------------------
+// Build sequence where clause
+// -------------------------------------------------------------------------
+
+function buildSequenceWhereClause(
+	alignmentAssignments,
+	startIndex,
+	endIndex
+) {
+
+	var conditions = [];
+
+	for(var i = startIndex; i < endIndex; i++) {
+
+		var assignment =
+			alignmentAssignments[i];
+
+		conditions.push(
+			"(" +
+			"source.name = '" +
+			escapeQuotes(
+				assignment.sourceName
+			) +
+			"' and sequenceID = '" +
+			escapeQuotes(
+				assignment.sequenceId
+			) +
+			"'" +
+			")"
+		);
+	}
+
+	return conditions.join(" or ");
+}
+
+
+// -------------------------------------------------------------------------
+// Add sequence assignments
+// -------------------------------------------------------------------------
 
 var targetAlignmentNames =
-	Object.keys(
+	sortedKeys(
 		assignmentsByAlignment
 	);
 
-targetAlignmentNames.sort();
+var addedAssignmentCount = 0;
 
 for(var i = 0;
 		i < targetAlignmentNames.length;
@@ -885,371 +822,222 @@ for(var i = 0;
 	var targetAlignmentName =
 		targetAlignmentNames[i];
 
-	addAssignmentsToAlignment(
-		targetAlignmentName,
+	var alignmentAssignments =
 		assignmentsByAlignment[
 			targetAlignmentName
-		]
+		];
+
+	log(
+		"Adding " +
+		alignmentAssignments.length +
+		" locus sequences to " +
+		targetAlignmentName
 	);
+
+	for(var startIndex = 0;
+		startIndex < alignmentAssignments.length;
+		startIndex += BATCH_SIZE) {
+
+		var endIndex =
+			Math.min(
+				startIndex + BATCH_SIZE,
+				alignmentAssignments.length
+			);
+
+		var whereClause =
+			buildSequenceWhereClause(
+				alignmentAssignments,
+				startIndex,
+				endIndex
+			);
+
+		glue.inMode(
+			"/alignment/" +
+			targetAlignmentName,
+			function() {
+
+				runCommand([
+					"add",
+					"member",
+					"--whereClause",
+					whereClause
+				]);
+			}
+		);
+
+		addedAssignmentCount +=
+			endIndex - startIndex;
+
+		log(
+			"Added batch " +
+			(startIndex + 1) +
+			"-" +
+			endIndex +
+			" to " +
+			targetAlignmentName
+		);
+	}
 }
 
 
-
 // -------------------------------------------------------------------------
-// Report summary
+// Summary
 // -------------------------------------------------------------------------
 
-glue.logInfo(
+log("============================================================");
+log("Resolved locus alignment assignment summary");
+log("============================================================");
+
+log(
+	"Permanent ERV loci examined: " +
+	locusIds.length
+);
+
+log(
 	"Resolved assignments: " +
 	assignments.length
 );
 
-glue.logInfo(
-	"LTR family-collapsed assignments: " +
-	familyCollapsedAssignments.length
+log(
+	"Assignments submitted: " +
+	addedAssignmentCount
 );
 
-glue.logInfo(
-	"Unmatched classifications: " +
-	unmatched.length
+log(
+	"Target alignments used: " +
+	targetAlignmentNames.length
 );
 
-glue.logInfo(
-	"Conflicting fully resolved classifications: " +
-	conflictingClassifications.length
+log(
+	"Loci without a linked sequence: " +
+	lociWithoutSequence.length
 );
 
-glue.logInfo(
-	"Missing classifications: " +
-	missingClassifications.length
+log(
+	"Loci with multiple linked sequences: " +
+	lociWithMultipleSequences.length
 );
 
-glue.logInfo(
-	"Unsupported statuses: " +
-	unsupportedStatuses.length
+log(
+	"Loci without a lineage/LTR target: " +
+	lociWithoutTarget.length
+);
+
+log(
+	"Loci with multiple targets: " +
+	lociWithMultipleTargets.length
+);
+
+log(
+	"Loci whose expected alignment is missing: " +
+	lociWithMissingAlignment.length
+);
+
+log(
+	"Loci with an unsupported locus_type: " +
+	lociWithUnsupportedType.length
 );
 
 
 // -------------------------------------------------------------------------
-// Report resolved assignments
+// Detailed review output
 // -------------------------------------------------------------------------
+
+for(var i = 0; i < lociWithMultipleSequences.length; i++) {
+
+	var multipleSequenceRow =
+		lociWithMultipleSequences[i];
+
+	log(
+		"MULTIPLE_SEQUENCES\t" +
+		multipleSequenceRow.locusId +
+		"\t" +
+		multipleSequenceRow.count
+	);
+}
+
+
+for(var i = 0; i < lociWithoutTarget.length; i++) {
+
+	var missingTargetRow =
+		lociWithoutTarget[i];
+
+	log(
+		"NO_TARGET\t" +
+		missingTargetRow.locusId +
+		"\t" +
+		missingTargetRow.locusType
+	);
+}
+
+
+for(var i = 0; i < lociWithMultipleTargets.length; i++) {
+
+	var multipleTargetRow =
+		lociWithMultipleTargets[i];
+
+	log(
+		"MULTIPLE_TARGETS\t" +
+		multipleTargetRow.locusId +
+		"\t" +
+		multipleTargetRow.locusType +
+		"\t" +
+		multipleTargetRow.targets
+	);
+}
+
+
+for(var i = 0; i < lociWithMissingAlignment.length; i++) {
+
+	var missingAlignmentRow =
+		lociWithMissingAlignment[i];
+
+	log(
+		"MISSING_ALIGNMENT\t" +
+		missingAlignmentRow.locusId +
+		"\t" +
+		missingAlignmentRow.target +
+		"\t" +
+		missingAlignmentRow.expectedAlignment
+	);
+}
+
+
+for(var i = 0; i < lociWithUnsupportedType.length; i++) {
+
+	var unsupportedTypeRow =
+		lociWithUnsupportedType[i];
+
+	log(
+		"UNSUPPORTED_LOCUS_TYPE\t" +
+		unsupportedTypeRow.locusId +
+		"\t" +
+		unsupportedTypeRow.locusType
+	);
+}
+
 
 for(var i = 0; i < assignments.length; i++) {
 
-	var assignment = assignments[i];
+	var resolvedAssignment =
+		assignments[i];
 
-	glue.logInfo(
+	log(
 		"ASSIGN\t" +
-		assignment.id + "\t" +
-		assignment.status + "\t" +
-		assignment.classification + "\t" +
-		assignment.alignmentName
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Report LTR assignments resolved through family collapse
-// -------------------------------------------------------------------------
-
-for(var i = 0;
-		i < familyCollapsedAssignments.length;
-		i++) {
-
-	var collapsedAssignment =
-		familyCollapsedAssignments[i];
-
-	glue.logInfo(
-		"ASSIGN_LTR_FAMILY_COLLAPSE\t" +
-		collapsedAssignment.id + "\t" +
-		collapsedAssignment.status + "\t" +
-		collapsedAssignment.originalClassification +
+		resolvedAssignment.locusId +
 		"\t" +
-		collapsedAssignment.classification + "\t" +
-		collapsedAssignment.alignmentName
+		resolvedAssignment.sourceName +
+		"/" +
+		resolvedAssignment.sequenceId +
+		"\t" +
+		resolvedAssignment.target +
+		"\t" +
+		resolvedAssignment.alignmentName
 	);
 }
 
-
-// -------------------------------------------------------------------------
-// Report conflicting classifications
-// -------------------------------------------------------------------------
-
-for(var i = 0;
-		i < conflictingClassifications.length;
-		i++) {
-
-	var conflictingRow =
-		conflictingClassifications[i];
-
-	glue.logInfo(
-		"CONFLICTING_CLASSIFICATION\t" +
-		conflictingRow.id + "\t" +
-		conflictingRow.status + "\t" +
-		conflictingRow.classification
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Report missing classifications
-// -------------------------------------------------------------------------
-
-for(var i = 0;
-		i < missingClassifications.length;
-		i++) {
-
-	var missingRow =
-		missingClassifications[i];
-
-	glue.logInfo(
-		"MISSING_CLASSIFICATION\t" +
-		missingRow.id + "\t" +
-		missingRow.status
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Report unsupported status values
-// -------------------------------------------------------------------------
-
-for(var i = 0;
-		i < unsupportedStatuses.length;
-		i++) {
-
-	var unsupportedRow =
-		unsupportedStatuses[i];
-
-	glue.logInfo(
-		"UNSUPPORTED_STATUS\t" +
-		unsupportedRow.id + "\t" +
-		unsupportedRow.status
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Build unmatched-classification summary
-// -------------------------------------------------------------------------
-
-var unmatchedSummaryByKey = {};
-
-for(var i = 0; i < unmatched.length; i++) {
-
-	var unmatchedRow =
-		unmatched[i];
-
-	var summaryKey =
-		unmatchedRow.status + "\t" +
-		unmatchedRow.key;
-
-	var summaryRow =
-		unmatchedSummaryByKey[summaryKey];
-
-	if(summaryRow === undefined) {
-
-		summaryRow = {
-			status: unmatchedRow.status,
-			classification:
-				unmatchedRow.classification,
-			normalisedKey:
-				unmatchedRow.key,
-			count: 0,
-			exampleLocus:
-				unmatchedRow.id
-		};
-
-		unmatchedSummaryByKey[summaryKey] =
-			summaryRow;
-	}
-
-	summaryRow.count++;
-}
-
-var unmatchedSummary = [];
-
-var unmatchedSummaryKeys =
-	Object.keys(
-		unmatchedSummaryByKey
-	);
-
-for(var i = 0;
-		i < unmatchedSummaryKeys.length;
-		i++) {
-
-	var summaryKey =
-		unmatchedSummaryKeys[i];
-
-	unmatchedSummary.push(
-		unmatchedSummaryByKey[summaryKey]
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Sort unmatched summary
-//
-// Sort order:
-//   1. status
-//   2. descending locus count
-//   3. classification
-// -------------------------------------------------------------------------
-
-unmatchedSummary.sort(function(a, b) {
-
-	if(a.status < b.status) {
-		return -1;
-	}
-
-	if(a.status > b.status) {
-		return 1;
-	}
-
-	if(a.count !== b.count) {
-		return b.count - a.count;
-	}
-
-	if(a.classification < b.classification) {
-		return -1;
-	}
-
-	if(a.classification > b.classification) {
-		return 1;
-	}
-
-	return 0;
-});
-
-
-// -------------------------------------------------------------------------
-// Print unmatched-classification summary table
-// -------------------------------------------------------------------------
-
-glue.logInfo(
-	"UNMATCHED CLASSIFICATION SUMMARY"
-);
-
-glue.logInfo(
-	"STATUS\tCLASSIFICATION\tNORMALISED_KEY\tLOCUS_COUNT\tEXAMPLE_LOCUS"
-);
-
-for(var i = 0;
-		i < unmatchedSummary.length;
-		i++) {
-
-	var unmatchedSummaryRow =
-		unmatchedSummary[i];
-
-	glue.logInfo(
-		unmatchedSummaryRow.status + "\t" +
-		unmatchedSummaryRow.classification + "\t" +
-		unmatchedSummaryRow.normalisedKey + "\t" +
-		unmatchedSummaryRow.count + "\t" +
-		unmatchedSummaryRow.exampleLocus
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Count rows by locus status
-// -------------------------------------------------------------------------
-
-function countRowsByStatus(
-	rows,
-	status
-) {
-
-	var count = 0;
-
-	for(var i = 0; i < rows.length; i++) {
-
-		if(rows[i].status === status) {
-			count++;
-		}
-	}
-
-	return count;
-}
-
-
-// -------------------------------------------------------------------------
-// Print one compact outcome-summary row
-// -------------------------------------------------------------------------
-
-function printOutcomeSummaryRow(
-	outcome,
-	rows
-) {
-
-	var ervCount =
-		countRowsByStatus(
-			rows,
-			"ERV"
-		);
-
-	var ltrCount =
-		countRowsByStatus(
-			rows,
-			"LTR"
-		);
-
-	var otherCount =
-		rows.length -
-		ervCount -
-		ltrCount;
-
-	glue.logInfo(
-		outcome + "\t" +
-		ervCount + "\t" +
-		ltrCount + "\t" +
-		otherCount + "\t" +
-		rows.length
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Print compact outcome summary
-//
-// ASSIGN_LTR_FAMILY_COLLAPSE is a subset of ASSIGN.
-// It must not be added to ASSIGN when calculating totals.
-// -------------------------------------------------------------------------
-
-glue.logInfo(
-	"OUTCOME SUMMARY"
-);
-
-glue.logInfo(
-	"OUTCOME\tERV\tLTR\tOTHER\tTOTAL"
-);
-
-printOutcomeSummaryRow(
-	"ASSIGN",
-	assignments
-);
-
-printOutcomeSummaryRow(
-	"ASSIGN_LTR_FAMILY_COLLAPSE",
-	familyCollapsedAssignments
-);
-
-printOutcomeSummaryRow(
-	"UNMATCHED_CLASSIFICATION",
-	unmatched
-);
-
-printOutcomeSummaryRow(
-	"CONFLICTING_CLASSIFICATION",
-	conflictingClassifications
-);
-
-printOutcomeSummaryRow(
-	"MISSING_CLASSIFICATION",
-	missingClassifications
-);
-
-printOutcomeSummaryRow(
-	"UNSUPPORTED_STATUS",
-	unsupportedStatuses
+log(
+	DRY_RUN
+		? "Dry run finished; no alignment members were added"
+		: "Finished adding resolved locus sequences to alignments"
 );

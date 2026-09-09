@@ -1,391 +1,197 @@
-// glue/computeErvLocusAlignments.js
+// glue/build/locus/msa/computeHervLineageLtrAlignments.js
 //
-// Compute all ERV lineage and LTR alignments.
+// Compute LTR-lineage alignments after locus sequences have been added.
 //
-// Rules:
+// Target alignments:
 //
-// ERV lineage alignments:
-//   - alignment name begins AL_LINEAGE_
-//   - if erv_lineage.consensus_orfs = YES, use rvCompoundAligner
-//   - otherwise use rvCompoundAlignerNoOrfs
-//   - explicit lineage overrides may force a different aligner
+//   AL_LTR_*
 //
-// LTR alignments:
-//   - alignment name begins AL_LTR_
-//   - always use ltrMafftAligner
+// Every target alignment containing more than one member is computed using:
 //
-// General:
-//   - only compute alignments containing more than one member
+//   ltrMafftAligner
 //
-// Assumptions:
-//   - lineage alignments are named:
-//       AL_LINEAGE_<lineage ID with non-alphanumerics removed>
-//   - LTR alignments are named:
-//       AL_LTR_<LTR identifier with non-alphanumerics removed>
-//   - alignment members have already been added
+// ERV lineage and sublineage alignments are handled separately by:
 //
-// This script computes every eligible alignment whose name begins
-// AL_LINEAGE_ or AL_LTR_.
+//   computeHervLineageAlignments.js
+//
+// This script deliberately allows alignment computation errors to propagate,
+// so a failed alignment stops the build rather than being silently skipped.
 
 var DRY_RUN = false;
 
-
-// -----------------------------------------------------------------------------
-// Explicit module overrides
-// -----------------------------------------------------------------------------
-
-var alignerOverrideByLineageId = {
-	"HERV-L": "rvCompoundAlignerNoEnv",
-	"HERV-4": "rvCompoundAlignerNoEnv"
-};
+var ALIGNER_MODULE =
+	"ltrMafftAligner";
 
 
-// -----------------------------------------------------------------------------
-// Helpers
-// -----------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// General utilities
+// -------------------------------------------------------------------------
 
-function log(msg) {
-	glue.log("INFO", msg);
+function log(message) {
+	glue.logInfo(message);
 }
 
 
 function norm(value) {
 
-	if(value === null || value === undefined) {
-		return null;
-	}
-
-	var s = ("" + value).trim();
-
-	if(s === "" ||
-			s === "-" ||
-			s.toLowerCase() === "n/a") {
+	if(value === null ||
+		value === undefined) {
 
 		return null;
 	}
 
-	return s;
+	var result =
+		("" + value).trim();
+
+	if(result === "") {
+		return null;
+	}
+
+	var lower =
+		result.toLowerCase();
+
+	if(lower === "n/a" ||
+		lower === "na" ||
+		lower === "n/k" ||
+		lower === "nk" ||
+		lower === "unknown" ||
+		lower === "null" ||
+		lower === "none" ||
+		result === "-") {
+
+		return null;
+	}
+
+	return result;
 }
 
 
-function sanitizeRefSuffix(name) {
-
-	return ("" + name).replace(
-		/[^A-Za-z0-9]/g,
-		""
-	);
-}
-
-
-function escapeQuotes(value) {
-
-	return ("" + value)
-		.replace(/\\/g, "\\\\")
-		.replace(/'/g, "\\'");
-}
-
-
-function queryObjects(cmdWords) {
+function queryObjects(commandWords) {
 
 	return glue.tableToObjects(
-		glue.command(cmdWords)
+		glue.command(
+			commandWords
+		)
 	);
 }
 
 
-function runCmd(cmdWords) {
+function runCommand(commandWords) {
 
 	if(DRY_RUN) {
 
 		log(
 			"[DRY RUN] " +
-			cmdWords.join(" ")
+			commandWords.join(" ")
 		);
 
 		return null;
 	}
 
-	return glue.command(cmdWords);
-}
-
-
-// -----------------------------------------------------------------------------
-// Count alignment members
-// -----------------------------------------------------------------------------
-
-function countAlignmentMembers(alignmentName) {
-
-	var rows;
-
-	glue.inMode(
-		"/alignment/" + alignmentName,
-		function() {
-
-			rows = queryObjects([
-				"list",
-				"member"
-			]);
-		}
+	return glue.command(
+		commandWords
 	);
-
-	return rows.length;
 }
 
 
-// -----------------------------------------------------------------------------
-// Load lineage information
-//
-// Build a lookup keyed by the sanitised lineage ID.
-//
-// Example:
-//
-//   HERV-K-HML2 -> HERVKHML2
-//
-// This matches the suffix used in:
-//
-//   AL_LINEAGE_HERVKHML2
-// -----------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// Count members of one alignment
+// -------------------------------------------------------------------------
 
-function loadLineageInfoByAlignmentSuffix() {
-
-	var rows = queryObjects([
-		"list",
-		"custom-table-row",
-		"erv_lineage",
-		"id",
-		"consensus_orfs",
-		"-s",
-		"id"
-	]);
-
-	var lineageInfoBySuffix = {};
-
-	_.each(rows, function(row) {
-
-		var lineageId =
-			norm(row.id);
-
-		if(lineageId === null) {
-			return;
-		}
-
-		var alignmentSuffix =
-			sanitizeRefSuffix(lineageId);
-
-		if(lineageInfoBySuffix[
-				alignmentSuffix
-			] !== undefined) {
-
-			throw new Error(
-				"Sanitised lineage ID collision for '" +
-				alignmentSuffix +
-				"': " +
-				lineageInfoBySuffix[
-					alignmentSuffix
-				].id +
-				" and " +
-				lineageId
-			);
-		}
-
-		lineageInfoBySuffix[
-			alignmentSuffix
-		] = {
-			id: lineageId,
-			consensus_orfs:
-				norm(row.consensus_orfs)
-		};
-	});
-
-	return lineageInfoBySuffix;
-}
-
-
-// -----------------------------------------------------------------------------
-// Load target alignments
-// -----------------------------------------------------------------------------
-
-function loadTargetAlignments() {
-
-	return queryObjects([
-		"list",
-		"alignment",
-		"name",
-		"-w",
-		"name like 'AL_LINEAGE_%' or name like 'AL_LTR_%'",
-		"-s",
-		"name"
-	]);
-}
-
-
-// -----------------------------------------------------------------------------
-// Aligner selection for ERV lineage alignments
-// -----------------------------------------------------------------------------
-
-function chooseLineageAlignerModule(
-	lineageRow
-) {
-
-	var lineageId =
-		lineageRow.id;
-
-	if(alignerOverrideByLineageId
-			.hasOwnProperty(lineageId)) {
-
-		return alignerOverrideByLineageId[
-			lineageId
-		];
-	}
-
-	if(lineageRow.consensus_orfs ===
-			"YES") {
-
-		return "rvCompoundAligner";
-	}
-
-	return "rvCompoundAlignerNoOrfs";
-}
-
-
-// -----------------------------------------------------------------------------
-// Compute one ERV lineage alignment
-// -----------------------------------------------------------------------------
-
-function computeLineageAlignment(
-	alignmentName,
-	lineageInfoBySuffix
-) {
-
-	var alignmentSuffix =
-		alignmentName.substring(
-			"AL_LINEAGE_".length
-		);
-
-	var lineageRow =
-		lineageInfoBySuffix[
-			alignmentSuffix
-		];
-
-	if(lineageRow === undefined) {
-
-		log(
-			"Skipping lineage alignment " +
-			alignmentName +
-			": no matching erv_lineage row for suffix '" +
-			alignmentSuffix +
-			"'"
-		);
-
-		return {
-			status: "skipped",
-			type: "LINEAGE",
-			alignmentName: alignmentName,
-			reason: "NO_LINEAGE_ROW"
-		};
-	}
-
-	var moduleName =
-		chooseLineageAlignerModule(
-			lineageRow
-		);
-
-	runCmd([
-		"compute",
-		"alignment",
-		alignmentName,
-		moduleName
-	]);
-
-	log(
-		"Computed " +
-		alignmentName +
-		" using " +
-		moduleName +
-		" for lineage " +
-		lineageRow.id
-	);
-
-	return {
-		status: "computed",
-		type: "LINEAGE",
-		alignmentName: alignmentName,
-		moduleName: moduleName,
-		lineageId: lineageRow.id
-	};
-}
-
-
-// -----------------------------------------------------------------------------
-// Compute one LTR alignment
-// -----------------------------------------------------------------------------
-
-function computeLtrAlignment(
+function countAlignmentMembers(
 	alignmentName
 ) {
 
-	var moduleName =
-		"ltrMafftAligner";
+	var memberRows = [];
 
-	runCmd([
-		"compute",
-		"alignment",
+	glue.inMode(
+		"/alignment/" +
 		alignmentName,
-		moduleName
-	]);
+		function() {
 
-	log(
-		"Computed " +
-		alignmentName +
-		" using " +
-		moduleName
+			memberRows =
+				queryObjects([
+					"list",
+					"member"
+				]);
+		}
 	);
 
-	return {
-		status: "computed",
-		type: "LTR",
-		alignmentName: alignmentName,
-		moduleName: moduleName
-	};
+	return memberRows.length;
 }
 
 
-// -----------------------------------------------------------------------------
-// Main
-// -----------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// Load LTR alignments
+// -------------------------------------------------------------------------
 
-var lineageInfoBySuffix =
-	loadLineageInfoByAlignmentSuffix();
+log(
+	"Loading LTR-lineage alignments"
+);
 
 var alignmentRows =
-	loadTargetAlignments();
+	queryObjects([
+		"list",
+		"alignment",
+		"name",
+		"parent.name",
+		"refSequence.name",
+		"-w",
+		"name like 'AL_LTR_%'",
+		"-s",
+		"name"
+	]);
 
 log(
 	"Loaded " +
 	alignmentRows.length +
-	" AL_LINEAGE_* and AL_LTR_* alignments"
+	" AL_LTR_* alignments"
 );
 
-var lineageComputedCount = 0;
-var ltrComputedCount = 0;
-var skippedLineageCount = 0;
-var skippedInsufficientMembersCount = 0;
-var unexpectedAlignmentCount = 0;
 
-_.each(alignmentRows, function(row) {
+// -------------------------------------------------------------------------
+// Compute eligible LTR alignments
+// -------------------------------------------------------------------------
+
+var computed = [];
+var skippedInsufficientMembers = [];
+var skippedMissingNameCount = 0;
+
+for(var i = 0;
+	i < alignmentRows.length;
+	i++) {
+
+	var alignmentRow =
+		alignmentRows[i];
 
 	var alignmentName =
-		norm(row.name);
+		norm(
+			alignmentRow.name
+		);
+
+	var parentAlignmentName =
+		norm(
+			alignmentRow[
+				"parent.name"
+			]
+		);
+
+	var referenceName =
+		norm(
+			alignmentRow[
+				"refSequence.name"
+			]
+		);
 
 	if(alignmentName === null) {
 
-		unexpectedAlignmentCount++;
+		skippedMissingNameCount++;
 
 		log(
 			"Skipping alignment row with no name"
 		);
 
-		return;
+		continue;
 	}
 
 	var memberCount =
@@ -395,7 +201,16 @@ _.each(alignmentRows, function(row) {
 
 	if(memberCount <= 1) {
 
-		skippedInsufficientMembersCount++;
+		skippedInsufficientMembers.push({
+			alignmentName:
+				alignmentName,
+			parentAlignmentName:
+				parentAlignmentName,
+			referenceName:
+				referenceName,
+			memberCount:
+				memberCount
+		});
 
 		log(
 			"Skipping " +
@@ -405,88 +220,144 @@ _.each(alignmentRows, function(row) {
 			" alignment member(s)"
 		);
 
-		return;
+		continue;
 	}
-
-	if(alignmentName.indexOf(
-			"AL_LINEAGE_"
-		) === 0) {
-
-		var lineageResult =
-			computeLineageAlignment(
-				alignmentName,
-				lineageInfoBySuffix
-			);
-
-		if(lineageResult.status ===
-				"computed") {
-
-			lineageComputedCount++;
-		}
-		else {
-
-			skippedLineageCount++;
-		}
-
-		return;
-	}
-
-	if(alignmentName.indexOf(
-			"AL_LTR_"
-		) === 0) {
-
-		computeLtrAlignment(
-			alignmentName
-		);
-
-		ltrComputedCount++;
-
-		return;
-	}
-
-	unexpectedAlignmentCount++;
 
 	log(
-		"Skipping unexpected alignment name: " +
-		alignmentName
+		"Computing " +
+		alignmentName +
+		" using " +
+		ALIGNER_MODULE +
+		"; reference=" +
+		(
+			referenceName !== null
+				? referenceName
+				: "(none)"
+		) +
+		"; members=" +
+		memberCount
 	);
-});
+
+	runCommand([
+		"compute",
+		"alignment",
+		alignmentName,
+		ALIGNER_MODULE
+	]);
+
+	computed.push({
+		alignmentName:
+			alignmentName,
+		parentAlignmentName:
+			parentAlignmentName,
+		referenceName:
+			referenceName,
+		memberCount:
+			memberCount
+	});
+
+	log(
+		"Computed " +
+		alignmentName +
+		" using " +
+		ALIGNER_MODULE
+	);
+}
 
 
-// -----------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 // Summary
-// -----------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 
 log(
-	"ALIGNMENT COMPUTATION SUMMARY"
+	"============================================================"
 );
 
 log(
-	"ERV lineage alignments computed: " +
-	lineageComputedCount
+	"LTR-lineage alignment computation summary"
+);
+
+log(
+	"============================================================"
+);
+
+log(
+	"LTR alignments examined: " +
+	alignmentRows.length
 );
 
 log(
 	"LTR alignments computed: " +
-	ltrComputedCount
+	computed.length
 );
 
 log(
-	"ERV lineage alignments skipped because no lineage row was found: " +
-	skippedLineageCount
+	"LTR alignments skipped with <= 1 member: " +
+	skippedInsufficientMembers.length
 );
 
 log(
-	"Alignments skipped with <= 1 member: " +
-	skippedInsufficientMembersCount
+	"Alignment rows skipped because the name was missing: " +
+	skippedMissingNameCount
 );
+
+
+// -------------------------------------------------------------------------
+// Detailed computed-alignment report
+// -------------------------------------------------------------------------
+
+for(var i = 0;
+	i < computed.length;
+	i++) {
+
+	var computedRow =
+		computed[i];
+
+	log(
+		"COMPUTED\t" +
+		computedRow.alignmentName +
+		"\t" +
+		(
+			computedRow.referenceName !== null
+				? computedRow.referenceName
+				: "(none)"
+		) +
+		"\t" +
+		computedRow.memberCount +
+		"\t" +
+		ALIGNER_MODULE
+	);
+}
+
+
+// -------------------------------------------------------------------------
+// Detailed skipped-alignment report
+// -------------------------------------------------------------------------
+
+for(var i = 0;
+	i < skippedInsufficientMembers.length;
+	i++) {
+
+	var skippedRow =
+		skippedInsufficientMembers[i];
+
+	log(
+		"SKIPPED_INSUFFICIENT_MEMBERS\t" +
+		skippedRow.alignmentName +
+		"\t" +
+		(
+			skippedRow.referenceName !== null
+				? skippedRow.referenceName
+				: "(none)"
+		) +
+		"\t" +
+		skippedRow.memberCount
+	);
+}
+
 
 log(
-	"Unexpected alignment rows: " +
-	unexpectedAlignmentCount
+	DRY_RUN
+		? "Dry run finished; no LTR alignments were computed"
+		: "Finished computing LTR-lineage alignments"
 );
-
-log(
-	"Finished computing ERV lineage and LTR alignments."
-);
-

@@ -1,31 +1,36 @@
-// legacyLocusImporter.js
+// modules/build/legacyLocusImporter.js
 //
-// Imports historical or published ERV locus records, maps them onto
-// erv_locus_candidate, and records:
+// Import historical or published ERV locus records, map them onto permanent
+// erv_locus rows, and record:
 //
 //   1. Source provenance in erv_locus_legacy_xref
 //   2. Searchable names in erv_locus_alias
 //
+// Matching is based on coordinate overlap and is restricted to the supplied
+// host species and genome build.
+//
 // Current assumptions:
-//   - all imported records concern Homo sapiens;
-//   - source coordinates use the same assembly as erv_locus_candidate;
-//   - hostSpecies and genomeBuild are retained as xref provenance;
+//
+//   - source coordinates use the same assembly as the target erv_locus rows;
+//   - hostSpecies and genomeBuild identify the appropriate locus layer;
 //   - orthology calibrations are not created here.
 //
-// createOrthologyCalibrations remains in the public function signature
-// for compatibility with the existing XML module and build script.
+// createOrthologyCalibrations remains in the public function signature for
+// compatibility with the existing XML module and build script.
 
-var LOCUS_TABLE = "erv_locus_candidate";
-var LOCUS_LINK = "erv_locus_candidate";
+var LOCUS_TABLE = "erv_locus";
+var LOCUS_LINK = "erv_locus";
 
 var XREF_TABLE = "erv_locus_legacy_xref";
 
 var ALIAS_TABLE = "erv_locus_alias";
-var ALIAS_LINK = "erv_locus_candidate";
+var ALIAS_LINK = "erv_locus";
 
-var DBM_GIFFORD_SOURCE = "compiled_human_erv_loci_hg19";
+var DBM_GIFFORD_SOURCE =
+	"compiled_human_erv_loci_hg19";
 
-var MAPPING_METHOD = "coordinate_overlap";
+var MAPPING_METHOD =
+	"coordinate_overlap";
 
 
 // -------------------------------------------------------------------------
@@ -34,24 +39,33 @@ var MAPPING_METHOD = "coordinate_overlap";
 
 function clean(value) {
 
-	if(value === null || value === undefined) {
+	if(value === null ||
+		value === undefined) {
+
 		return null;
 	}
 
-	var result = ("" + value).replace(/^\s+|\s+$/g, "");
+	var result =
+		("" + value).replace(
+			/^\s+|\s+$/g,
+			""
+		);
 
 	if(result === "") {
 		return null;
 	}
 
-	var lower = result.toLowerCase();
+	var lower =
+		result.toLowerCase();
 
-	if(
-		lower === "null" ||
+	if(lower === "null" ||
 		lower === "none" ||
 		lower === "n/a" ||
-		lower === "na"
-	) {
+		lower === "na" ||
+		lower === "n/k" ||
+		lower === "nk" ||
+		lower === "unknown") {
+
 		return null;
 	}
 
@@ -61,19 +75,31 @@ function clean(value) {
 
 function esc(value) {
 
-	if(value === null || value === undefined) {
+	if(value === null ||
+		value === undefined) {
+
 		return "";
 	}
 
-	return ("" + value).replace(/'/g, "''");
+	return ("" + value)
+		.replace(/\\/g, "\\\\")
+		.replace(/'/g, "\\'");
 }
 
 
-function getField(row, names) {
+function getField(
+	row,
+	names
+) {
 
-	for(var i = 0; i < names.length; i++) {
+	for(var i = 0;
+		i < names.length;
+		i++) {
 
-		var value = clean(row[names[i]]);
+		var value =
+			clean(
+				row[names[i]]
+			);
 
 		if(value !== null) {
 			return value;
@@ -86,25 +112,31 @@ function getField(row, names) {
 
 function parseInteger(value) {
 
-	value = clean(value);
+	value =
+		clean(value);
 
 	if(value === null) {
 		return null;
 	}
 
-	var number = parseInt(value, 10);
+	var number =
+		parseInt(
+			value,
+			10
+		);
 
-	return isNaN(number) ? null : number;
+	return isNaN(number)
+		? null
+		: number;
 }
 
 
 function rowList(result) {
 
-	if(
-		result &&
+	if(result &&
 		result.listResult &&
-		result.listResult.row
-	) {
+		result.listResult.row) {
+
 		return result.listResult.row;
 	}
 
@@ -112,7 +144,10 @@ function rowList(result) {
 }
 
 
-function customRowPath(tableName, rowId) {
+function customRowPath(
+	tableName,
+	rowId
+) {
 
 	return (
 		"custom-table-row/" +
@@ -125,31 +160,31 @@ function customRowPath(tableName, rowId) {
 
 function normaliseOrientation(value) {
 
-	value = clean(value);
+	value =
+		clean(value);
 
 	if(value === null) {
 		return null;
 	}
 
-	var lower = value.toLowerCase();
+	var lower =
+		value.toLowerCase();
 
-	if(
-		value === "+" ||
+	if(value === "+" ||
 		value === "(+)" ||
 		lower === "positive" ||
 		lower === "plus" ||
-		lower === "forward"
-	) {
+		lower === "forward") {
+
 		return "+";
 	}
 
-	if(
-		value === "-" ||
+	if(value === "-" ||
 		value === "(-)" ||
 		lower === "negative" ||
 		lower === "minus" ||
-		lower === "reverse"
-	) {
+		lower === "reverse") {
+
 		return "-";
 	}
 
@@ -157,7 +192,10 @@ function normaliseOrientation(value) {
 }
 
 
-function intervalLength(start, end) {
+function intervalLength(
+	start,
+	end
+) {
 
 	return end - start + 1;
 }
@@ -170,35 +208,53 @@ function overlapLength(
 	bEnd
 ) {
 
-	var start = Math.max(aStart, bStart);
-	var end = Math.min(aEnd, bEnd);
+	var overlapStart =
+		Math.max(
+			aStart,
+			bStart
+		);
 
-	if(end < start) {
+	var overlapEnd =
+		Math.min(
+			aEnd,
+			bEnd
+		);
+
+	if(overlapEnd < overlapStart) {
 		return 0;
 	}
 
-	return end - start + 1;
+	return (
+		overlapEnd -
+		overlapStart +
+		1
+	);
 }
 
 
 /*
- * Stable unsigned string hash used only for deterministic row IDs.
+ * Stable unsigned string hash used only for deterministic custom-row IDs.
  */
 function hashString(value) {
 
-	value = value === null || value === undefined
-		? ""
-		: "" + value;
+	value =
+		value === null ||
+		value === undefined
+			? ""
+			: "" + value;
 
 	var hash = 0;
 
-	for(var i = 0; i < value.length; i++) {
+	for(var i = 0;
+		i < value.length;
+		i++) {
 
 		hash =
 			((hash << 5) - hash) +
 			value.charCodeAt(i);
 
-		hash = hash | 0;
+		hash =
+			hash | 0;
 	}
 
 	return "" + (hash >>> 0);
@@ -210,14 +266,19 @@ function customTableRowExists(
 	rowId
 ) {
 
-	var rows = rowList(glue.command([
-		"list",
-		"custom-table-row",
-		tableName,
-		"-w",
-		"id = '" + esc(rowId) + "'",
-		"id"
-	]));
+	var rows =
+		rowList(
+			glue.command([
+				"list",
+				"custom-table-row",
+				tableName,
+				"-w",
+				"id = '" +
+					esc(rowId) +
+					"'",
+				"id"
+			])
+		);
 
 	return rows.length > 0;
 }
@@ -228,19 +289,22 @@ function createCustomTableRowIfNeeded(
 	rowId
 ) {
 
-	if(
-		!customTableRowExists(
-			tableName,
-			rowId
-		)
-	) {
+	if(!customTableRowExists(
+		tableName,
+		rowId
+	)) {
+
 		glue.command([
 			"create",
 			"custom-table-row",
 			tableName,
 			rowId
 		]);
+
+		return true;
 	}
+
+	return false;
 }
 
 
@@ -249,7 +313,8 @@ function setFieldIfPresent(
 	value
 ) {
 
-	value = clean(value);
+	value =
+		clean(value);
 
 	if(value !== null) {
 
@@ -269,154 +334,179 @@ function setFieldIfPresent(
 
 function normaliseLegacyRow(row) {
 
-	var approvedName = getField(row, [
-		"approved_name"
-	]);
+	var approvedName =
+		getField(row, [
+			"approved_name"
+		]);
 
-	var approvedSymbol = getField(row, [
-		"approved_symbol"
-	]);
+	var approvedSymbol =
+		getField(row, [
+			"approved_symbol"
+		]);
 
-	var hgncId = getField(row, [
-		"hgnc_id",
-		"HGNC ID",
-		"hgnc"
-	]);
+	var hgncId =
+		getField(row, [
+			"hgnc_id",
+			"HGNC ID",
+			"hgnc"
+		]);
 
-	var sourceAliases = getField(row, [
-		"alias_symbol",
-		"source_aliases",
-		"aliases",
-		"Alias"
-	]);
+	var sourceAliases =
+		getField(row, [
+			"alias_symbol",
+			"source_aliases",
+			"aliases",
+			"Alias"
+		]);
 
-	var legacyClassification = getField(row, [
-		"legacy_classification",
-		"legacyClassification",
-		"erv-taxonomic-component",
-		"classification",
-		"Dfam designation"
-	]);
+	var legacyClassification =
+		getField(row, [
+			"legacy_classification",
+			"legacyClassification",
+			"erv-taxonomic-component",
+			"classification",
+			"Dfam designation"
+		]);
 
 	/*
 	 * The DBM/Gifford file uses the spelling "mnenomic-number".
 	 * The value is retained as source_numeric_id for subsequent
-	 * Missillac number preservation.
+	 * Missillac-number preservation.
 	 */
-	var sourceNumericId = getField(row, [
-		"source_numeric_id",
-		"mnenomic-number",
-		"mnemonic-number",
-		"numeric_id"
-	]);
-
-	var scaffold = getField(row, [
-		"scaffold",
-		"chrom",
-		"chromosome",
-		"chr",
-		"Chr"
-	]);
-
-	var start = parseInteger(getField(row, [
-		"start",
-		"start_position",
-		"extract_start",
-		"Start"
-	]));
-
-	var end = parseInteger(getField(row, [
-		"end",
-		"end_position",
-		"extract_end",
-		"End"
-	]));
-
-	var orientation = normaliseOrientation(
+	var sourceNumericId =
 		getField(row, [
-			"strand",
-			"orientation",
-			"Orientation"
-		])
-	);
+			"source_numeric_id",
+			"mnenomic-number",
+			"mnemonic-number",
+			"numeric_id"
+		]);
 
-	var sourceOrthology = getField(row, [
-		"source_orthology",
-		"orthology",
-		"oldest_common_ancestor",
-		"OCA"
-	]);
+	var scaffold =
+		getField(row, [
+			"scaffold",
+			"chrom",
+			"chromosome",
+			"chr",
+			"Chr"
+		]);
 
-	var sourceBand = getField(row, [
-		"source_band",
-		"band",
-		"Chr. band",
-		"chromosome_location"
-	]);
+	var start =
+		parseInteger(
+			getField(row, [
+				"start",
+				"start_position",
+				"extract_start",
+				"Start"
+			])
+		);
 
-	var sourceNote = getField(row, [
-		"source_note",
-		"extra"
-	]);
+	var end =
+		parseInteger(
+			getField(row, [
+				"end",
+				"end_position",
+				"extract_end",
+				"End"
+			])
+		);
 
-	var legacyName = getField(row, [
-		"legacy_name",
-		"legacyName",
-		"Locus"
-	]);
+	var orientation =
+		normaliseOrientation(
+			getField(row, [
+				"strand",
+				"orientation",
+				"Orientation"
+			])
+		);
+
+	var sourceOrthology =
+		getField(row, [
+			"source_orthology",
+			"orthology",
+			"oldest_common_ancestor",
+			"OCA"
+		]);
+
+	var sourceBand =
+		getField(row, [
+			"source_band",
+			"band",
+			"Chr. band",
+			"chromosome_location"
+		]);
+
+	var sourceNote =
+		getField(row, [
+			"source_note",
+			"extra"
+		]);
+
+	var legacyName =
+		getField(row, [
+			"legacy_name",
+			"legacyName",
+			"Locus"
+		]);
 
 	if(legacyName === null) {
 
 		if(approvedSymbol !== null) {
 
-			legacyName = approvedSymbol;
+			legacyName =
+				approvedSymbol;
+		}
+		else if(approvedName !== null) {
 
-		} else if(approvedName !== null) {
-
-			legacyName = approvedName;
-
-		} else if(
-			legacyClassification !== null &&
-			sourceNumericId !== null
-		) {
+			legacyName =
+				approvedName;
+		}
+		else if(legacyClassification !== null &&
+			sourceNumericId !== null) {
 
 			legacyName =
 				legacyClassification +
 				"_" +
 				sourceNumericId;
-
-		} else {
+		}
+		else {
 
 			var nameParts = [];
 
 			if(legacyClassification !== null) {
-				nameParts.push(legacyClassification);
+				nameParts.push(
+					legacyClassification
+				);
 			}
 
 			if(sourceNumericId !== null) {
-				nameParts.push(sourceNumericId);
+				nameParts.push(
+					sourceNumericId
+				);
 			}
 
 			if(scaffold !== null) {
-				nameParts.push(scaffold);
+				nameParts.push(
+					scaffold
+				);
 			}
 
 			if(start !== null) {
-				nameParts.push("" + start);
+				nameParts.push(
+					"" + start
+				);
 			}
 
 			if(end !== null) {
-				nameParts.push("" + end);
+				nameParts.push(
+					"" + end
+				);
 			}
 
-			legacyName = nameParts.join("_");
+			legacyName =
+				nameParts.join("_");
 		}
 	}
 
-	/*
-	 * sourceNote is deliberately not appended to legacyName.
-	 * It is stored independently in source_note.
-	 */
 	return {
 		legacyName:
 			legacyName,
@@ -469,6 +559,10 @@ function validateLegacyRow(row) {
 		return "Unable to determine a legacy name";
 	}
 
+	if(row.legacyName.length > 150) {
+		return "Legacy name exceeds 150 characters";
+	}
+
 	if(row.scaffold === null) {
 		return "Missing chromosome or scaffold";
 	}
@@ -510,87 +604,152 @@ function makeXrefId(
 		"|" +
 		(row.scaffold || "") +
 		"|" +
-		(row.start !== null ? row.start : "") +
+		(
+			row.start !== null
+				? row.start
+				: ""
+		) +
 		"|" +
-		(row.end !== null ? row.end : "") +
+		(
+			row.end !== null
+				? row.end
+				: ""
+		) +
 		"|" +
 		(rowIndex + 1);
 
-	return "lx_" + hashString(key);
+	return (
+		"lx_" +
+		hashString(key)
+	);
 }
 
 
 function makeAliasId(
-	candidateId,
+	locusId,
 	aliasSource,
 	aliasName
 ) {
 
 	var key =
-		candidateId +
+		locusId +
 		"|" +
 		aliasSource +
 		"|" +
 		aliasName.toLowerCase();
 
-	return "la_" + hashString(key);
+	return (
+		"la_" +
+		hashString(key)
+	);
 }
 
 
 // -------------------------------------------------------------------------
-// Candidate matching
+// Permanent-locus matching
 // -------------------------------------------------------------------------
 
-function getOverlappingCandidates(row) {
+function getOverlappingLoci(
+	row,
+	hostSpecies,
+	genomeBuild
+) {
 
-	var whereClause =
-		"chrom = '" +
+	var conditions = [];
+
+	conditions.push(
+		"scaffold = '" +
 		esc(row.scaffold) +
-		"' and " +
+		"'"
+	);
+
+	conditions.push(
 		row.start +
-		" <= end_position and " +
+		" <= end_position"
+	);
+
+	conditions.push(
 		row.end +
-		" >= start_position";
+		" >= start_position"
+	);
 
-	var result = glue.command([
-		"list",
-		"custom-table-row",
-		LOCUS_TABLE,
-		"--whereClause",
-		whereClause,
-		"id",
-		"start_position",
-		"end_position",
-		"strand"
-	]);
+	hostSpecies =
+		clean(hostSpecies);
 
-	var resultRows = rowList(result);
-	var candidates = [];
+	if(hostSpecies !== null) {
 
-	for(var i = 0; i < resultRows.length; i++) {
+		conditions.push(
+			"host_species = '" +
+			esc(hostSpecies) +
+			"'"
+		);
+	}
 
-		var values = resultRows[i].value;
+	genomeBuild =
+		clean(genomeBuild);
 
-		var candidateId = clean(values[0]);
-		var candidateStart = parseInteger(values[1]);
-		var candidateEnd = parseInteger(values[2]);
-		var candidateOrientation =
-			normaliseOrientation(values[3]);
+	if(genomeBuild !== null) {
 
-		if(
-			candidateId === null ||
-			candidateStart === null ||
-			candidateEnd === null
-		) {
+		conditions.push(
+			"genome_build = '" +
+			esc(genomeBuild) +
+			"'"
+		);
+	}
+
+	var result =
+		glue.command([
+			"list",
+			"custom-table-row",
+			LOCUS_TABLE,
+			"--whereClause",
+			conditions.join(" and "),
+			"id",
+			"start_position",
+			"end_position",
+			"orientation"
+		]);
+
+	var resultRows =
+		rowList(result);
+
+	var loci = [];
+
+	for(var i = 0;
+		i < resultRows.length;
+		i++) {
+
+		var values =
+			resultRows[i].value;
+
+		var locusId =
+			clean(values[0]);
+
+		var locusStart =
+			parseInteger(values[1]);
+
+		var locusEnd =
+			parseInteger(values[2]);
+
+		var locusOrientation =
+			normaliseOrientation(
+				values[3]
+			);
+
+		if(locusId === null ||
+			locusStart === null ||
+			locusEnd === null) {
+
 			continue;
 		}
 
-		var overlap = overlapLength(
-			row.start,
-			row.end,
-			candidateStart,
-			candidateEnd
-		);
+		var overlap =
+			overlapLength(
+				row.start,
+				row.end,
+				locusStart,
+				locusEnd
+			);
 
 		if(overlap < 1) {
 			continue;
@@ -602,47 +761,48 @@ function getOverlappingCandidates(row) {
 				row.end
 			);
 
-		var candidateLength =
+		var locusLength =
 			intervalLength(
-				candidateStart,
-				candidateEnd
+				locusStart,
+				locusEnd
 			);
 
 		var sourceOverlapFraction =
-			overlap / sourceLength;
+			overlap /
+			sourceLength;
 
-		var candidateOverlapFraction =
-			overlap / candidateLength;
+		var locusOverlapFraction =
+			overlap /
+			locusLength;
 
 		var reciprocalOverlap =
 			Math.min(
 				sourceOverlapFraction,
-				candidateOverlapFraction
+				locusOverlapFraction
 			);
 
 		var orientationMatches = null;
 
-		if(
-			row.orientation !== null &&
-			candidateOrientation !== null
-		) {
+		if(row.orientation !== null &&
+			locusOrientation !== null) {
+
 			orientationMatches =
 				row.orientation ===
-				candidateOrientation;
+				locusOrientation;
 		}
 
-		candidates.push({
-			candidateId:
-				candidateId,
+		loci.push({
+			locusId:
+				locusId,
 
 			start:
-				candidateStart,
+				locusStart,
 
 			end:
-				candidateEnd,
+				locusEnd,
 
 			orientation:
-				candidateOrientation,
+				locusOrientation,
 
 			orientationMatches:
 				orientationMatches,
@@ -653,24 +813,28 @@ function getOverlappingCandidates(row) {
 			sourceOverlapFraction:
 				sourceOverlapFraction,
 
-			candidateOverlapFraction:
-				candidateOverlapFraction,
+			locusOverlapFraction:
+				locusOverlapFraction,
 
 			reciprocalOverlap:
 				reciprocalOverlap
 		});
 	}
 
-	return candidates;
+	return loci;
 }
 
 
-function compareCandidateMatches(a, b) {
+function compareLocusMatches(
+	a,
+	b
+) {
 
 	/*
 	 * Prefer the strongest reciprocal overlap.
 	 */
-	if(a.reciprocalOverlap !== b.reciprocalOverlap) {
+	if(a.reciprocalOverlap !==
+		b.reciprocalOverlap) {
 
 		return (
 			b.reciprocalOverlap -
@@ -681,14 +845,20 @@ function compareCandidateMatches(a, b) {
 	/*
 	 * Then prefer the greatest absolute overlap.
 	 */
-	if(a.overlapBp !== b.overlapBp) {
-		return b.overlapBp - a.overlapBp;
+	if(a.overlapBp !==
+		b.overlapBp) {
+
+		return (
+			b.overlapBp -
+			a.overlapBp
+		);
 	}
 
 	/*
 	 * Then prefer strand/orientation agreement.
 	 */
-	if(a.orientationMatches !== b.orientationMatches) {
+	if(a.orientationMatches !==
+		b.orientationMatches) {
 
 		if(a.orientationMatches === true) {
 			return -1;
@@ -702,10 +872,9 @@ function compareCandidateMatches(a, b) {
 	/*
 	 * Then prefer greater coverage of the source interval.
 	 */
-	if(
-		a.sourceOverlapFraction !==
-		b.sourceOverlapFraction
-	) {
+	if(a.sourceOverlapFraction !==
+		b.sourceOverlapFraction) {
+
 		return (
 			b.sourceOverlapFraction -
 			a.sourceOverlapFraction
@@ -715,11 +884,11 @@ function compareCandidateMatches(a, b) {
 	/*
 	 * Deterministic final tie-break.
 	 */
-	if(a.candidateId < b.candidateId) {
+	if(a.locusId < b.locusId) {
 		return -1;
 	}
 
-	if(a.candidateId > b.candidateId) {
+	if(a.locusId > b.locusId) {
 		return 1;
 	}
 
@@ -727,12 +896,20 @@ function compareCandidateMatches(a, b) {
 }
 
 
-function findBestCandidateMatch(row) {
+function findBestLocusMatch(
+	row,
+	hostSpecies,
+	genomeBuild
+) {
 
-	var candidates =
-		getOverlappingCandidates(row);
+	var loci =
+		getOverlappingLoci(
+			row,
+			hostSpecies,
+			genomeBuild
+		);
 
-	if(candidates.length === 0) {
+	if(loci.length === 0) {
 
 		return {
 			status:
@@ -741,7 +918,7 @@ function findBestCandidateMatch(row) {
 			method:
 				MAPPING_METHOD,
 
-			candidateId:
+			locusId:
 				null,
 
 			matchCount:
@@ -753,7 +930,7 @@ function findBestCandidateMatch(row) {
 			sourceOverlapFraction:
 				null,
 
-			candidateOverlapFraction:
+			locusOverlapFraction:
 				null,
 
 			reciprocalOverlap:
@@ -764,24 +941,27 @@ function findBestCandidateMatch(row) {
 		};
 	}
 
-	candidates.sort(compareCandidateMatches);
+	loci.sort(
+		compareLocusMatches
+	);
 
-	var best = candidates[0];
+	var best =
+		loci[0];
 
 	return {
 		status:
-			candidates.length === 1
+			loci.length === 1
 				? "mapped"
 				: "mapped_multiple_overlaps",
 
 		method:
 			MAPPING_METHOD,
 
-		candidateId:
-			best.candidateId,
+		locusId:
+			best.locusId,
 
 		matchCount:
-			candidates.length,
+			loci.length,
 
 		overlapBp:
 			best.overlapBp,
@@ -789,8 +969,8 @@ function findBestCandidateMatch(row) {
 		sourceOverlapFraction:
 			best.sourceOverlapFraction,
 
-		candidateOverlapFraction:
-			best.candidateOverlapFraction,
+		locusOverlapFraction:
+			best.locusOverlapFraction,
 
 		reciprocalOverlap:
 			best.reciprocalOverlap,
@@ -927,7 +1107,7 @@ function createOrUpdateXref(
 				match.method
 			]);
 
-			if(match.candidateId !== null) {
+			if(match.locusId !== null) {
 
 				glue.command([
 					"set",
@@ -935,7 +1115,7 @@ function createOrUpdateXref(
 					LOCUS_LINK,
 					customRowPath(
 						LOCUS_TABLE,
-						match.candidateId
+						match.locusId
 					)
 				]);
 			}
@@ -950,20 +1130,21 @@ function createOrUpdateXref(
 
 function normaliseAlias(value) {
 
-	value = clean(value);
+	value =
+		clean(value);
 
 	if(value === null) {
 		return null;
 	}
 
-	var lower = value.toLowerCase();
+	var lower =
+		value.toLowerCase();
 
-	if(
-		value === "-" ||
+	if(value === "-" ||
 		lower === "unknown" ||
 		lower === "not known" ||
-		lower === "not available"
-	) {
+		lower === "not available") {
+
 		return null;
 	}
 
@@ -987,22 +1168,33 @@ function splitDelimitedAliases(
 	delimiterRegex
 ) {
 
-	value = clean(value);
+	value =
+		clean(value);
 
 	if(value === null) {
 		return [];
 	}
 
-	var parts = value.split(delimiterRegex);
+	var parts =
+		value.split(
+			delimiterRegex
+		);
+
 	var aliases = [];
 
-	for(var i = 0; i < parts.length; i++) {
+	for(var i = 0;
+		i < parts.length;
+		i++) {
 
 		var aliasName =
-			normaliseAlias(parts[i]);
+			normaliseAlias(
+				parts[i]
+			);
 
 		if(aliasName !== null) {
-			aliases.push(aliasName);
+			aliases.push(
+				aliasName
+			);
 		}
 	}
 
@@ -1017,7 +1209,8 @@ function aliasesForSource(
 
 	var aliases = [];
 
-	if(legacySource === DBM_GIFFORD_SOURCE) {
+	if(legacySource ===
+		DBM_GIFFORD_SOURCE) {
 
 		/*
 		 * Curated DBM/Gifford policy:
@@ -1028,7 +1221,9 @@ function aliasesForSource(
 		 *
 		 * approved_name is deliberately excluded.
 		 */
-		aliases.push(row.approvedSymbol);
+		aliases.push(
+			row.approvedSymbol
+		);
 
 		var dbmAliases =
 			splitDelimitedAliases(
@@ -1036,25 +1231,36 @@ function aliasesForSource(
 				/,/
 			);
 
-		for(var i = 0; i < dbmAliases.length; i++) {
-			aliases.push(dbmAliases[i]);
+		for(var i = 0;
+			i < dbmAliases.length;
+			i++) {
+
+			aliases.push(
+				dbmAliases[i]
+			);
 		}
 
-		aliases.push(row.hgncId);
-
-	} else {
+		aliases.push(
+			row.hgncId
+		);
+	}
+	else {
 
 		/*
 		 * For other published catalogues, retain the principal source
-		 * identifier and any explicitly listed aliases.
+		 * identifier and explicitly listed aliases.
 		 */
-		aliases.push(row.legacyName);
+		aliases.push(
+			row.legacyName
+		);
 
-		if(
-			row.approvedSymbol !== null &&
-			row.approvedSymbol !== row.legacyName
-		) {
-			aliases.push(row.approvedSymbol);
+		if(row.approvedSymbol !== null &&
+			row.approvedSymbol !==
+				row.legacyName) {
+
+			aliases.push(
+				row.approvedSymbol
+			);
 		}
 
 		var sourceAliases =
@@ -1063,12 +1269,13 @@ function aliasesForSource(
 				/[;,|]/
 			);
 
-		for(
-			var j = 0;
+		for(var j = 0;
 			j < sourceAliases.length;
-			j++
-		) {
-			aliases.push(sourceAliases[j]);
+			j++) {
+
+			aliases.push(
+				sourceAliases[j]
+			);
 		}
 	}
 
@@ -1077,13 +1284,15 @@ function aliasesForSource(
 
 
 function createLocusAlias(
-	candidateId,
+	locusId,
 	aliasName,
 	aliasSource
 ) {
 
 	aliasName =
-		normaliseAlias(aliasName);
+		normaliseAlias(
+			aliasName
+		);
 
 	if(aliasName === null) {
 		return false;
@@ -1091,17 +1300,16 @@ function createLocusAlias(
 
 	var aliasId =
 		makeAliasId(
-			candidateId,
+			locusId,
 			aliasSource,
 			aliasName
 		);
 
-	if(
-		customTableRowExists(
-			ALIAS_TABLE,
-			aliasId
-		)
-	) {
+	if(customTableRowExists(
+		ALIAS_TABLE,
+		aliasId
+	)) {
+
 		return false;
 	}
 
@@ -1140,7 +1348,7 @@ function createLocusAlias(
 				ALIAS_LINK,
 				customRowPath(
 					LOCUS_TABLE,
-					candidateId
+					locusId
 				)
 			]);
 		}
@@ -1157,12 +1365,12 @@ function createAliasesForMatch(
 ) {
 
 	/*
-	 * Only unambiguous mappings donate aliases automatically.
+	 * Only unambiguous single-overlap mappings donate aliases
+	 * automatically.
 	 */
-	if(
-		match.candidateId === null ||
-		match.status !== "mapped"
-	) {
+	if(match.locusId === null ||
+		match.status !== "mapped") {
+
 		return 0;
 	}
 
@@ -1175,10 +1383,14 @@ function createAliasesForMatch(
 	var seen = {};
 	var created = 0;
 
-	for(var i = 0; i < aliases.length; i++) {
+	for(var i = 0;
+		i < aliases.length;
+		i++) {
 
 		var aliasName =
-			normaliseAlias(aliases[i]);
+			normaliseAlias(
+				aliases[i]
+			);
 
 		if(aliasName === null) {
 			continue;
@@ -1187,19 +1399,18 @@ function createAliasesForMatch(
 		var key =
 			aliasName.toLowerCase();
 
-		if(seen[key]) {
+		if(seen[key] === true) {
 			continue;
 		}
 
 		seen[key] = true;
 
-		if(
-			createLocusAlias(
-				match.candidateId,
-				aliasName,
-				legacySource
-			)
-		) {
+		if(createLocusAlias(
+			match.locusId,
+			aliasName,
+			legacySource
+		)) {
+
 			created++;
 		}
 	}
@@ -1209,7 +1420,7 @@ function createAliasesForMatch(
 
 
 // -------------------------------------------------------------------------
-// Public functions exposed through legacyLocusImporter.xml
+// Public function: load one legacy-locus file
 // -------------------------------------------------------------------------
 
 function loadLegacyLocusFile(
@@ -1221,16 +1432,54 @@ function loadLegacyLocusFile(
 	createOrthologyCalibrations
 ) {
 
-	if(
-		createOrthologyCalibrations !== null &&
+	inputPath =
+		clean(inputPath);
+
+	legacySource =
+		clean(legacySource);
+
+	pubmedId =
+		clean(pubmedId);
+
+	hostSpecies =
+		clean(hostSpecies);
+
+	genomeBuild =
+		clean(genomeBuild);
+
+	if(inputPath === null) {
+		throw new Error(
+			"inputPath is required"
+		);
+	}
+
+	if(legacySource === null) {
+		throw new Error(
+			"legacySource is required"
+		);
+	}
+
+	if(hostSpecies === null) {
+		throw new Error(
+			"hostSpecies is required"
+		);
+	}
+
+	if(genomeBuild === null) {
+		throw new Error(
+			"genomeBuild is required"
+		);
+	}
+
+	if(createOrthologyCalibrations !== null &&
 		createOrthologyCalibrations !== undefined &&
 		("" + createOrthologyCalibrations)
-			.toLowerCase() === "true"
-	) {
+			.toLowerCase() === "true") {
+
 		glue.log(
 			"WARNING",
 			"createOrthologyCalibrations was true, but this " +
-			"module now imports legacy xrefs and aliases only"
+			"module imports legacy xrefs and aliases only"
 		);
 	}
 
@@ -1238,21 +1487,30 @@ function loadLegacyLocusFile(
 
 	glue.inMode(
 		"module/tabularUtility",
-
 		function() {
 
-			inputRows = glue.tableToObjects(
-				glue.command([
-					"load-tabular",
-					inputPath
-				])
-			);
+			inputRows =
+				glue.tableToObjects(
+					glue.command([
+						"load-tabular",
+						inputPath
+					])
+				);
 		}
 	);
 
 	var outputRows = [];
 
-	for(var i = 0; i < inputRows.length; i++) {
+	var validRowCount = 0;
+	var invalidRowCount = 0;
+	var mappedCount = 0;
+	var mappedMultipleCount = 0;
+	var unmatchedCount = 0;
+	var aliasesCreatedCount = 0;
+
+	for(var i = 0;
+		i < inputRows.length;
+		i++) {
 
 		var row =
 			normaliseLegacyRow(
@@ -1260,9 +1518,13 @@ function loadLegacyLocusFile(
 			);
 
 		var validationError =
-			validateLegacyRow(row);
+			validateLegacyRow(
+				row
+			);
 
 		if(validationError !== null) {
+
+			invalidRowCount++;
 
 			glue.log(
 				"WARNING",
@@ -1277,8 +1539,26 @@ function loadLegacyLocusFile(
 			continue;
 		}
 
+		validRowCount++;
+
 		var match =
-			findBestCandidateMatch(row);
+			findBestLocusMatch(
+				row,
+				hostSpecies,
+				genomeBuild
+			);
+
+		if(match.status === "mapped") {
+			mappedCount++;
+		}
+		else if(match.status ===
+			"mapped_multiple_overlaps") {
+
+			mappedMultipleCount++;
+		}
+		else {
+			unmatchedCount++;
+		}
 
 		var xrefId =
 			makeXrefId(
@@ -1303,6 +1583,9 @@ function loadLegacyLocusFile(
 				legacySource,
 				match
 			);
+
+		aliasesCreatedCount +=
+			aliasesCreated;
 
 		outputRows.push({
 			legacy_source:
@@ -1332,8 +1615,8 @@ function loadLegacyLocusFile(
 			mapping_method:
 				match.method,
 
-			matched_locus_candidate:
-				match.candidateId,
+			matched_locus:
+				match.locusId,
 
 			match_count:
 				match.matchCount,
@@ -1344,8 +1627,8 @@ function loadLegacyLocusFile(
 			source_overlap_fraction:
 				match.sourceOverlapFraction,
 
-			candidate_overlap_fraction:
-				match.candidateOverlapFraction,
+			locus_overlap_fraction:
+				match.locusOverlapFraction,
 
 			reciprocal_overlap:
 				match.reciprocalOverlap,
@@ -1361,27 +1644,70 @@ function loadLegacyLocusFile(
 		});
 	}
 
+	glue.log(
+		"INFO",
+		"Legacy source " +
+			legacySource +
+			": input rows=" +
+			inputRows.length +
+			", valid rows=" +
+			validRowCount +
+			", invalid rows=" +
+			invalidRowCount +
+			", mapped=" +
+			mappedCount +
+			", mapped with multiple overlaps=" +
+			mappedMultipleCount +
+			", unmatched=" +
+			unmatchedCount +
+			", aliases created=" +
+			aliasesCreatedCount
+	);
+
 	return outputRows;
 }
 
 
-function clearLegacySource(legacySource) {
+// -------------------------------------------------------------------------
+// Public function: remove records derived from one legacy source
+// -------------------------------------------------------------------------
+
+function clearLegacySource(
+	legacySource
+) {
+
+	legacySource =
+		clean(
+			legacySource
+		);
+
+	if(legacySource === null) {
+		throw new Error(
+			"legacySource is required"
+		);
+	}
 
 	/*
-	 * Remove source-derived aliases first.
+	 * Delete aliases first so source-derived names are removed before
+	 * their provenance records.
 	 */
-	var aliasRows = rowList(glue.command([
-		"list",
-		"custom-table-row",
-		ALIAS_TABLE,
-		"-w",
-		"alias_source = '" +
-		esc(legacySource) +
-		"'",
-		"id"
-	]));
+	var aliasRows =
+		rowList(
+			glue.command([
+				"list",
+				"custom-table-row",
+				ALIAS_TABLE,
+				"-w",
+				"alias_source = '" +
+					esc(legacySource) +
+					"'",
+				"id"
+			])
+		);
 
-	for(var i = 0; i < aliasRows.length; i++) {
+	for(var i = 0;
+		i < aliasRows.length;
+		i++) {
 
 		glue.command([
 			"delete",
@@ -1392,20 +1718,25 @@ function clearLegacySource(legacySource) {
 	}
 
 	/*
-	 * Then remove source-derived xrefs.
+	 * Delete legacy cross-reference rows from this source.
 	 */
-	var xrefRows = rowList(glue.command([
-		"list",
-		"custom-table-row",
-		XREF_TABLE,
-		"-w",
-		"legacy_source = '" +
-		esc(legacySource) +
-		"'",
-		"id"
-	]));
+	var xrefRows =
+		rowList(
+			glue.command([
+				"list",
+				"custom-table-row",
+				XREF_TABLE,
+				"-w",
+				"legacy_source = '" +
+					esc(legacySource) +
+					"'",
+				"id"
+			])
+		);
 
-	for(var j = 0; j < xrefRows.length; j++) {
+	for(var j = 0;
+		j < xrefRows.length;
+		j++) {
 
 		glue.command([
 			"delete",

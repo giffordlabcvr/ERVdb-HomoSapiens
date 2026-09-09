@@ -37,7 +37,8 @@
   # Import legacy mappings used for Missillac nomenclature
   run file glue/build/locus/missillac/importLegacyMappings.glue
 
-  # Populate erv_locus.missillac_id and erv_locus.orthology_group
+  # Assign Missillac identifiers and orthology-group numbers to
+  # lineage-resolved ERV loci
   run script glue/build/locus/missillac/applyErvLocusNames.js
 
   # Build, reroot and prepare lineage-level nucleotide phylogenies
@@ -47,3 +48,4 @@
   run script glue/build/locus/summariseErvLocusLayer.js
 
   validate
+  

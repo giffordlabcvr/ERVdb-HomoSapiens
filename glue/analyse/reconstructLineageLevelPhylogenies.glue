@@ -7,4 +7,3 @@
 
   # Re-root phylogenies and export FigTree annotations
   run file glue/analyse/prepareLineagePhylogeniesNucs.js
-
