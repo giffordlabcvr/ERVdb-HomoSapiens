@@ -16,7 +16,6 @@ HARLEQUIN	ERV-1.Eta.E.HQ	HARLEQUIN	HARLEQUIN		ERVR-1.Eta.E	phylogeny_group	subli
 HUERS-P1	ERV-1.Zeta.W9P.P.1	HUERS-P1	HUERS-P1		ERV-1.Zeta.W9P.P	phylogeny_group	sublineage	accepted	uncertain	reference	11027	I	Orthoretrovirinae	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	no RT	no	3	TRUE
 HUERS-P2	ERV-1.Zeta.W9P.P.2	HUERS-P2	HUERS-P2		ERV-1.Zeta.W9P.P	phylogeny_group	sublineage	accepted	no	reference	8987	I	Orthoretrovirinae	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	YES	no	3	TRUE
 HuRRS-P	ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	HuRRS-P		ERV-1.Zeta.W9P.P	phylogeny_group	sublineage	accepted	no	reference	8099	I	Orthoretrovirinae	Zetaretrovirus	W9P	Reference	reference				YES	no	4	TRUE
-ERV-L	ERV-3.Lambda.L	ERV-L	endogenous retrovirus L		ERV-3.Lambda	phylogeny_group	sublineage	accepted	no	reference	5667	III	Orthoretrovirinae	Lambdaretrovirus	L	Consensus	REPBASE				YES	no	5	TRUE
 ERV-Lb4	ERV-3.Lambda.Lb4	ERV-Lb4	endogenous retrovirus Lb4		ERV-3.Lambda	phylogeny_group	sublineage	accepted	no	reference	5714	III	Orthoretrovirinae	Lambdaretrovirus	L	Consensus	REPBASE				YES	no	1	TRUE
 ERV-L47	ERV-3.Lambda.47	ERV-L47	endogenous retrovirus L47		ERV-3.Lambda	phylogeny_group	sublineage	accepted	uncertain	reference	5246	III	Orthoretrovirinae	Sigmaretrovirus		Consensus	REPBASE				YES	no	1	TRUE
 LOR-1	ERVR-1.Theta.LOR1	LOR-1	LOR-1		ERV-1.Theta	repeat_group	sublineage	accepted	yes	reference	8120	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE

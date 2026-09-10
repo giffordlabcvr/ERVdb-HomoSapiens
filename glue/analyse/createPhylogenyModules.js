@@ -62,25 +62,172 @@ function queryObjects(commandWords) {
 	);
 }
 
+function standardLineageStem(lineageId) {
+	if(lineageId.indexOf("ERVR-") === 0) {
+		var stem =
+			lineageId.substring("ERVR-".length);
+
+		var firstDot =
+			stem.indexOf(".");
+
+		if(firstDot >= 0) {
+			stem =
+				stem.substring(0, firstDot) +
+				"R" +
+				stem.substring(firstDot);
+		} else {
+			stem = stem + "R";
+		}
+
+		return stem.replace(/\./g, "_");
+	}
+
+	if(lineageId.indexOf("ERV-") === 0) {
+		return lineageId
+			.substring("ERV-".length)
+			.replace(/\./g, "_");
+	}
+
+	throw new Error(
+		"Unsupported ERV lineage ID: " +
+		lineageId
+	);
+}
+
+function loadHumanErvIndex() {
+	var rows = queryObjects([
+		"list",
+		"custom-table-row",
+		"erv_lineage",
+		"id",
+		"name",
+		"entity_level",
+		"-w",
+		"human_erv = 'TRUE'"
+	]);
+
+	var index = {};
+
+	_.each(rows, function(row) {
+		var stem =
+			standardLineageStem(row.id);
+
+		if(index[stem]) {
+			throw new Error(
+				"Multiple human ERV rows produce alignment stem '" +
+				stem +
+				"': " +
+				index[stem].id +
+				" and " +
+				row.id
+			);
+		}
+
+		index[stem] = {
+			id: row.id,
+			name: row.name,
+			entityLevel: row.entity_level
+		};
+	});
+
+	return {
+		rows: rows,
+		byStem: index
+	};
+}
 
 // -----------------------------------------------------------------------------
 // Alignment discovery
 // -----------------------------------------------------------------------------
 
-function loadTargetAlignments() {
+function loadTargetAlignments(humanErvIndex) {
 	var rows = queryObjects([
 		"list",
 		"alignment",
 		"name",
+		"parent.name",
 		"refSequence.name",
 		"-w",
 		"name like 'AL_LINEAGE_%' or " +
 			"name like 'AL_SUBLINEAGE_%'"
 	]);
 
-	rows.sort(function(rowA, rowB) {
-		var nameA = "" + rowA.name;
-		var nameB = "" + rowB.name;
+	var selectedRows = [];
+
+	_.each(rows, function(row) {
+		var alignmentInfo =
+			parseAlignmentName(
+				row.name
+			);
+
+		// Match the standard-ID-derived alignment stem against the index
+		// of erv_lineage rows for which human_erv = TRUE.
+
+		var humanErv =
+			humanErvIndex.byStem[
+				alignmentInfo.standardStem
+			];
+
+		// This alignment does not represent a recognised human ERV.
+		// It remains part of the general ERVdb alignment tree but is not
+		// included in the Homo sapiens phylogeny workflow.
+
+		if(!humanErv) {
+			return;
+		}
+
+		// The alignment prefix and erv_lineage.entity_level should agree:
+		//
+		//   entity_level = lineage
+		//       -> AL_LINEAGE_...
+		//
+		//   entity_level = sublineage
+		//       -> AL_SUBLINEAGE_...
+
+		if(
+			humanErv.entityLevel !== null &&
+			humanErv.entityLevel !== undefined &&
+			("" + humanErv.entityLevel).trim() !== "" &&
+			humanErv.entityLevel !== alignmentInfo.entityLevel
+		) {
+			throw new Error(
+				"Entity-level mismatch for " +
+				humanErv.id +
+				" [" +
+				humanErv.name +
+				"]: erv_lineage.entity_level is '" +
+				humanErv.entityLevel +
+				"', but alignment " +
+				row.name +
+				" implies '" +
+				alignmentInfo.entityLevel +
+				"'"
+			);
+		}
+
+		// Attach the corresponding ERV lineage metadata to the alignment
+		// result object for later logging and reporting.
+
+		row.ervLineageId =
+			humanErv.id;
+
+		row.ervLineageName =
+			humanErv.name;
+
+		row.ervEntityLevel =
+			humanErv.entityLevel;
+
+		selectedRows.push(
+			row
+		);
+	});
+
+	selectedRows.sort(function(rowA, rowB) {
+		var nameA =
+			"" + rowA.name;
+
+		var nameB =
+			"" + rowB.name;
 
 		if(nameA < nameB) {
 			return -1;
@@ -93,9 +240,81 @@ function loadTargetAlignments() {
 		return 0;
 	});
 
-	return rows;
+	return selectedRows;
+}
+function standardLineageStem(lineageId) {
+	if(lineageId.indexOf("ERVR-") === 0) {
+		var stem =
+			lineageId.substring("ERVR-".length);
+
+		var firstDot =
+			stem.indexOf(".");
+
+		if(firstDot >= 0) {
+			stem =
+				stem.substring(0, firstDot) +
+				"R" +
+				stem.substring(firstDot);
+		} else {
+			stem = stem + "R";
+		}
+
+		return stem.replace(/\./g, "_");
+	}
+
+	if(lineageId.indexOf("ERV-") === 0) {
+		return lineageId
+			.substring("ERV-".length)
+			.replace(/\./g, "_");
+	}
+
+	throw new Error(
+		"Unsupported ERV lineage ID: " +
+		lineageId
+	);
 }
 
+function loadHumanErvIndex() {
+	var rows = queryObjects([
+		"list",
+		"custom-table-row",
+		"erv_lineage",
+		"id",
+		"name",
+		"entity_level",
+		"-w",
+		"human_erv = 'TRUE'"
+	]);
+
+	var index = {};
+
+	_.each(rows, function(row) {
+		var stem =
+			standardLineageStem(row.id);
+
+		if(index[stem]) {
+			throw new Error(
+				"Multiple human ERV rows produce alignment stem '" +
+				stem +
+				"': " +
+				index[stem].id +
+				" and " +
+				row.id
+			);
+		}
+
+		index[stem] = {
+			id: row.id,
+			name: row.name,
+			entityLevel: row.entity_level
+		};
+	});
+
+	return {
+		rows: rows,
+		byStem: index
+	};
+}
 
 // -----------------------------------------------------------------------------
 // Alignment-name parsing
@@ -293,8 +512,33 @@ log(
 	"Loading ERV lineage and sublineage alignments"
 );
 
+log(
+	"Loading human ERV lineage definitions"
+);
+
+var humanErvIndex =
+	loadHumanErvIndex();
+
+log(
+	"Loaded " +
+	humanErvIndex.rows.length +
+	" ERV rows with human_erv = TRUE"
+);
+
+log(
+	"Loading corresponding lineage and sublineage alignments"
+);
+
 var alignmentRows =
-	loadTargetAlignments();
+	loadTargetAlignments(
+		humanErvIndex
+	);
+
+log(
+	"Selected " +
+	alignmentRows.length +
+	" human ERV lineage/sublineage alignment(s)"
+);
 
 log(
 	"Loaded " +
