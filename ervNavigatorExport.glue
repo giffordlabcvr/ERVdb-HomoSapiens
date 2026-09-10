@@ -1,33 +1,20 @@
 # Export data for ERV web application
 
 project ervdb
-
-  # To do for all phylogenies under 'trees/':
-  # 	- Strip path to sequence object.
-  # 	- Label internal nodes
-  #     - Create uniform annotations for ERVs and XRVs
-  # 	- Move to export folder `web-app`
-  
-  # Export features, feature locations, and FASTA 
-  run script glue/export/ervdbExportReferenceFeatures.js
-
-  # Export lineage data 
-  run file glue/export/exportCuratedErvLineageData.glue
-  
-  # Export age calibration data 
-  run script glue/export/exportErvAgeCalibrationsForNavigator.js
   
   # Locus-level export
-  
+
+  # Export locus table
+
   # Export all locus sequences as a single FASTA-formatted file
   module fastaExporter export -w "sequence_kind = 'proviral_locus'" -f web-app/proviral_locus_seqs.fas
 
   # Export aligned segments for lineage level alignments
-  # run script glue/export/exportHervLineageAlignmentSegments.js
+  run script glue/export/exportHervLineageAlignmentSegments.js
 
   # Export alignments 
-  #run file glue/export/exportAlignments.glue
-  
+  run file glue/export/exportAlignments.glue
+    
   validate
   
   exit

@@ -1,12 +1,12 @@
 
   # Import the selected and classified HERV locus sequences
-  run file glue/build/locus/hervImportLocusSources.glue
+  run file glue/build/locus/importLocusSource.glue
 
   # Load the source candidate dataset
   run script glue/build/locus/candidates/loadErvLocusCandidates.js
 
   # Set locus sequence lengths and kinds
-  run script glue/build/locus/hervSetLocusSeqLengthsAndKinds.js
+  run script glue/build/locus/setLocusSeqLengthsAndKinds.js
   
   # Create permanent erv_locus rows from selected candidates,
   # populate their metadata, and link the imported sequences
@@ -40,9 +40,6 @@
   # Assign Missillac identifiers and orthology-group numbers to
   # lineage-resolved ERV loci
   run script glue/build/locus/missillac/applyErvLocusNames.js
-
-  # Build, reroot and prepare lineage-level nucleotide phylogenies
-  run file glue/analyse/reconstructLineageLevelPhylogenies.glue
 
   # Summarise and check the completed locus layer
   run script glue/build/locus/summariseErvLocusLayer.js

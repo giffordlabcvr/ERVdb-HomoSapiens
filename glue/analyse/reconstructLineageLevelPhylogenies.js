@@ -1,735 +1,696 @@
 // glue/analyse/reconstructLineageLevelPhylogenies.js
 //
-// Build nucleotide phylogenies for human ERV lineage alignments.
+// Reconstruct nucleotide phylogenies for ERV lineage and sublineage
+// alignments.
 //
-// Current scope:
+// This script is an orchestration layer. The reusable reconstruction logic
+// is provided by the base-layer ECMA function-invoker module:
 //
-//   - HERV lineage alignments only:
-//         AL_LINEAGE_HERV*
+//   ervTreeBuilder
 //
-//   - pol nucleotide phylogenies only.
+// Alignment naming:
 //
-// HERV lineage alignments are discovered directly from the GLUE project.
-// Selector modules are assumed to have been created separately by:
+//   AL_LINEAGE_1_Eta_1
+//       -> selector msaSelector_1_Eta_1_pol_nucs
+//       -> tree trees/lineage/1_Eta_1_pol_nucs.tree
 //
-//   run file glue/analyse/createPhylogenyModules.glue
+//   AL_SUBLINEAGE_1R_Theta_101
+//       -> selector msaSelector_1R_Theta_101_pol_nucs
+//       -> tree trees/sublineage/1R_Theta_101_pol_nucs.tree
 //
-// Selector modules are highly curated and are therefore NOT created,
-// deleted or modified by this script.
+// Selector modules are created separately:
 //
-// Naming convention:
+//   run script glue/analyse/createPhylogenyModules.js
 //
-//   Alignment:
-//       AL_LINEAGE_HERVFRD
+// The ervTreeBuilder module:
+//   - checks alignment membership;
+//   - filters members by feature coverage;
+//   - requires a sufficient number of eligible members;
+//   - skips an existing output tree;
+//   - runs the nucleotide phylogeny generator.
 //
-//   HERV name:
-//       HERVFRD
-//
-//   Selector module:
-//       msaSelector_HERVFRD_pol_nucs
-//
-//   Output tree:
-//       trees/lineage/HERVFRD_pol_nucs.tree
-//
-// Workflow:
-//
-//   1. Discover AL_LINEAGE_HERV* alignments.
-//   2. Derive the expected selector module name.
-//   3. Skip the lineage if no curated selector module is defined.
-//   4. Skip the lineage if the output tree already exists.
-//   5. Require at least four total alignment members.
-//   6. Require at least four members passing the pol coverage filter.
-//   7. Generate a bootstrap-labelled nucleotide tree with RAxML.
-//
-// Existing trees are skipped, allowing interrupted or partial phylogeny
-// reconstruction runs to be resumed without repeating expensive analyses.
+// This script:
+//   - discovers lineage and sublineage alignments;
+//   - derives standard-ID selector names;
+//   - skips unavailable selectors;
+//   - delegates each reconstruction to ervTreeBuilder;
+//   - reports a summary.
 //
 // Assumes execution from within the ervdb project mode.
 
 
-var DRY_RUN = false;
-
-var SKIP_EXISTING_TREES = true;
-
-
 // -----------------------------------------------------------------------------
-// Analysis settings
+// Configuration
 // -----------------------------------------------------------------------------
 
-var FEATURE_NAME =
-	"pol";
+var TREE_BUILDER_MODULE =
+	"ervTreeBuilder";
 
-var MIN_COVERAGE_PCT =
-	55;
+var TREE_ROOT =
+	"trees";
 
-var MIN_TREE_MEMBERS =
-	4;
-
-var PHYLOGENY_GENERATOR_MODULE =
-	"ervRaxmlPhylogenyGeneratorNucs";
-
-var TREE_DIR =
-	"trees/lineage";
+var DRY_RUN =
+	false;
 
 
-// -----------------------------------------------------------------------------
-// Java filesystem access
-// -----------------------------------------------------------------------------
+// Minimum reference-feature coverage required for an alignment member to
+// be included in the corresponding tree.
+//
+// These values can be adjusted independently later if required.
 
-var File =
-	Java.type("java.io.File");
+var FEATURE_SETTINGS = [
+	{
+		featureName: "gag",
+		minCoveragePct: 55
+	},
+	{
+		featureName: "pol",
+		minCoveragePct: 55
+	},
+	{
+		featureName: "env",
+		minCoveragePct: 55
+	}
+];
 
 
 // -----------------------------------------------------------------------------
 // Generic helpers
 // -----------------------------------------------------------------------------
 
-function log(msg) {
-
-	glue.log(
-		"INFO",
-		msg
-	);
+function log(message) {
+	glue.logInfo(message);
 }
 
-
 function escapeQuotes(value) {
-
 	return ("" + value)
 		.replace(/\\/g, "\\\\")
 		.replace(/'/g, "\\'");
 }
 
-
-function queryObjects(cmdWords) {
-
+function queryObjects(commandWords) {
 	return glue.tableToObjects(
-		glue.command(cmdWords)
-	);
-}
-
-
-function runCmd(cmdWords) {
-
-	if(DRY_RUN) {
-
-		log(
-			"[DRY RUN] " +
-			cmdWords.join(" ")
-		);
-
-		return null;
-	}
-
-	return glue.command(
-		cmdWords
-	);
-}
-
-
-// -----------------------------------------------------------------------------
-// Discover HERV lineage alignments
-//
-// Equivalent GLUE command:
-//
-//   list alignment -w "name like 'AL_LINEAGE_HERV%'"
-//
-// Restricting the query to AL_LINEAGE_HERV% excludes lineage alignments
-// belonging to non-human ERVs.
-// -----------------------------------------------------------------------------
-
-function getHervLineageAlignments() {
-
-	return queryObjects([
-		"list",
-		"alignment",
-		"-w",
-		"name like 'AL_LINEAGE_HERV%'"
-	]);
-}
-
-
-// -----------------------------------------------------------------------------
-// Derive canonical HERV name
-//
-// Example:
-//
-//   AL_LINEAGE_HERVFRD
-//
-// becomes:
-//
-//   HERVFRD
-// -----------------------------------------------------------------------------
-
-function getHervName(alignmentName) {
-
-	var prefix =
-		"AL_LINEAGE_";
-
-	if(alignmentName.indexOf(prefix) !== 0) {
-
-		throw new Error(
-			"Cannot derive HERV name from alignment: " +
-			alignmentName +
-			". Expected alignment name beginning with " +
-			prefix
-		);
-	}
-
-	return alignmentName.substring(
-		prefix.length
-	);
-}
-
-
-// -----------------------------------------------------------------------------
-// Derive selector module name
-//
-// Example:
-//
-//   AL_LINEAGE_HERVFRD
-//
-// becomes:
-//
-//   msaSelector_HERVFRD_pol_nucs
-// -----------------------------------------------------------------------------
-
-function getSelectorModuleName(
-	alignmentName
-) {
-
-	return (
-		"msaSelector_" +
-		getHervName(alignmentName) +
-		"_" +
-		FEATURE_NAME +
-		"_nucs"
-	);
-}
-
-
-// -----------------------------------------------------------------------------
-// Derive output tree path
-//
-// Example:
-//
-//   AL_LINEAGE_HERVFRD
-//
-// becomes:
-//
-//   trees/lineage/HERVFRD_pol_nucs.tree
-// -----------------------------------------------------------------------------
-
-function getTreeFile(
-	alignmentName
-) {
-
-	return (
-		TREE_DIR +
-		"/" +
-		getHervName(alignmentName) +
-		"_" +
-		FEATURE_NAME +
-		"_nucs.tree"
-	);
-}
-
-
-// -----------------------------------------------------------------------------
-// Filesystem helpers
-// -----------------------------------------------------------------------------
-
-function fileExists(filePath) {
-
-	var file =
-		new File(filePath);
-
-	return (
-		file.exists() &&
-		file.isFile()
+		glue.command(commandWords)
 	);
 }
 
 
 // -----------------------------------------------------------------------------
 // GLUE object checks
-//
-// list module does not accept explicit column names.
-// Its default result already includes module name and type.
 // -----------------------------------------------------------------------------
 
 function moduleExists(moduleName) {
-
-	var rows =
-		queryObjects([
-			"list",
-			"module",
-			"-w",
-			"name = '" +
-				escapeQuotes(moduleName) +
-				"'"
-		]);
+	var rows = queryObjects([
+		"list",
+		"module",
+		"-w",
+		"name = '" +
+			escapeQuotes(moduleName) +
+			"'"
+	]);
 
 	return rows.length > 0;
 }
 
 
 // -----------------------------------------------------------------------------
-// Count all members of an alignment
-//
-// Equivalent GLUE command:
-//
-//   alignment <alignmentName> list member
+// Alignment discovery
 // -----------------------------------------------------------------------------
 
-function countAlignmentMembers(
-	alignmentName
-) {
+function loadTargetAlignments() {
+	var rows = queryObjects([
+		"list",
+		"alignment",
+		"name",
+		"refSequence.name",
+		"-w",
+		"name like 'AL_LINEAGE_%' or " +
+			"name like 'AL_SUBLINEAGE_%'"
+	]);
 
-	var rows = [];
+	rows.sort(function(rowA, rowB) {
+		var nameA = "" + rowA.name;
+		var nameB = "" + rowB.name;
 
-	glue.inMode(
-		"/alignment/" +
-			alignmentName,
-		function() {
-
-			rows =
-				queryObjects([
-					"list",
-					"member"
-				]);
+		if(nameA < nameB) {
+			return -1;
 		}
-	);
 
-	return rows.length;
+		if(nameA > nameB) {
+			return 1;
+		}
+
+		return 0;
+	});
+
+	return rows;
 }
 
 
 // -----------------------------------------------------------------------------
-// Construct the feature-coverage where-clause
-//
-// This is the same filter applied both when counting eligible members and
-// when generating the phylogeny.
+// Alignment-name parsing
 // -----------------------------------------------------------------------------
 
-function buildCoverageWhereClause() {
+function parseAlignmentName(alignmentName) {
+	var lineagePrefix =
+		"AL_LINEAGE_";
 
+	var sublineagePrefix =
+		"AL_SUBLINEAGE_";
+
+	if(alignmentName.indexOf(lineagePrefix) === 0) {
+		return {
+			entityLevel: "lineage",
+			standardStem: alignmentName.substring(
+				lineagePrefix.length
+			),
+			treeDirectory: "lineage"
+		};
+	}
+
+	if(alignmentName.indexOf(sublineagePrefix) === 0) {
+		return {
+			entityLevel: "sublineage",
+			standardStem: alignmentName.substring(
+				sublineagePrefix.length
+			),
+			treeDirectory: "sublineage"
+		};
+	}
+
+	throw new Error(
+		"Unsupported alignment name: " +
+		alignmentName
+	);
+}
+
+
+// -----------------------------------------------------------------------------
+// Derived names
+// -----------------------------------------------------------------------------
+
+function makeSelectorModuleName(
+	standardStem,
+	featureName
+) {
 	return (
-		"fLocNotes.featureLoc.feature.name = '" +
-		escapeQuotes(FEATURE_NAME) +
-		"' and " +
-		"fLocNotes.ref_nt_coverage_pct >= " +
-		MIN_COVERAGE_PCT
+		"msaSelector_" +
+		standardStem +
+		"_" +
+		featureName +
+		"_nucs"
+	);
+}
+
+function makeOutputFile(
+	alignmentInfo,
+	featureName
+) {
+	return (
+		TREE_ROOT +
+		"/" +
+		alignmentInfo.treeDirectory +
+		"/" +
+		alignmentInfo.standardStem +
+		"_" +
+		featureName +
+		"_nucs.tree"
 	);
 }
 
 
 // -----------------------------------------------------------------------------
-// Count alignment members passing the feature-coverage filter
+// Tree-builder invocation
 // -----------------------------------------------------------------------------
 
-function countEligibleMembers(
+function reconstructWithCoverage(
 	alignmentName,
-	whereClause
+	selectorModuleName,
+	featureName,
+	minCoveragePct,
+	outputFile
 ) {
+	var commandWords = [
+		"module",
+		TREE_BUILDER_MODULE,
+		"reconstructWithCoverage",
+		alignmentName,
+		selectorModuleName,
+		featureName,
+		"" + minCoveragePct,
+		outputFile
+	];
 
-	var rows = [];
+	if(DRY_RUN) {
+		log(
+			"[DRY RUN] " +
+			commandWords.join(" ")
+		);
 
-	glue.inMode(
-		"/alignment/" +
-			alignmentName,
-		function() {
+		return [{
+			alignmentName: alignmentName,
+			selectorModuleName: selectorModuleName,
+			featureName: featureName,
+			minCoveragePct: minCoveragePct,
+			outputFile: outputFile,
+			status: "dry_run",
+			reason: null
+		}];
+	}
 
-			rows =
-				queryObjects([
-					"list",
-					"member",
-					"-w",
-					whereClause
-				]);
-		}
-	);
+	var result =
+		glue.command(commandWords);
 
-	return rows.length;
+	return glue.tableToObjects(result);
 }
 
 
 // -----------------------------------------------------------------------------
-// Generate one lineage phylogeny
+// Summary helpers
 // -----------------------------------------------------------------------------
 
-function generateLineagePhylogeny(
-	alignmentRow
-) {
+function incrementCount(counts, key) {
+	if(
+		key === null ||
+		key === undefined ||
+		("" + key).trim() === ""
+	) {
+		key = "unknown";
+	}
 
+	key = "" + key;
+
+	if(counts[key] === undefined) {
+		counts[key] = 0;
+	}
+
+	counts[key]++;
+}
+
+function sortedKeys(object) {
+	var keys = [];
+
+	for(var key in object) {
+		if(object.hasOwnProperty(key)) {
+			keys.push(key);
+		}
+	}
+
+	keys.sort();
+
+	return keys;
+}
+
+
+// -----------------------------------------------------------------------------
+// Validate required base-layer infrastructure
+// -----------------------------------------------------------------------------
+
+if(!moduleExists(TREE_BUILDER_MODULE)) {
+	throw new Error(
+		"Required base-layer module '" +
+		TREE_BUILDER_MODULE +
+		"' does not exist. " +
+		"The ervTreeBuilder module must be declared by the ERVdb " +
+		"base-layer build before this analysis is run."
+	);
+}
+
+log(
+	"Using base-layer tree builder module: " +
+	TREE_BUILDER_MODULE
+);
+
+
+// -----------------------------------------------------------------------------
+// Load alignments
+// -----------------------------------------------------------------------------
+
+log(
+	"Loading ERV lineage and sublineage alignments"
+);
+
+var alignmentRows =
+	loadTargetAlignments();
+
+log(
+	"Loaded " +
+	alignmentRows.length +
+	" ERV lineage/sublineage alignment(s)"
+);
+
+
+// -----------------------------------------------------------------------------
+// Process alignments
+// -----------------------------------------------------------------------------
+
+var lineageAlignmentCount = 0;
+var sublineageAlignmentCount = 0;
+
+var reconstructionRequestedCount = 0;
+var selectorMissingCount = 0;
+var invocationErrorCount = 0;
+
+var statusCounts = {};
+var reasonCounts = {};
+
+var featureRequestedCounts = {
+	gag: 0,
+	pol: 0,
+	env: 0
+};
+
+var featureMissingSelectorCounts = {
+	gag: 0,
+	pol: 0,
+	env: 0
+};
+
+var missingSelectors = [];
+var invocationErrors = [];
+
+
+_.each(alignmentRows, function(alignmentRow) {
 	var alignmentName =
 		alignmentRow.name;
 
-	var hervName =
-		getHervName(
-			alignmentName
-		);
+	var referenceName =
+		alignmentRow["refSequence.name"];
 
-	var selectorModule =
-		getSelectorModuleName(
-			alignmentName
-		);
+	var alignmentInfo =
+		parseAlignmentName(alignmentName);
 
-	var outputFile =
-		getTreeFile(
-			alignmentName
-		);
-
+	if(alignmentInfo.entityLevel === "lineage") {
+		lineageAlignmentCount++;
+	} else {
+		sublineageAlignmentCount++;
+	}
 
 	log(
 		"Processing " +
+		alignmentInfo.entityLevel +
+		" alignment " +
 		alignmentName +
-		" (" +
-		hervName +
-		")"
+		(
+			referenceName !== null &&
+			referenceName !== undefined
+				? " constrained by " + referenceName
+				: ""
+		)
 	);
 
+	_.each(FEATURE_SETTINGS, function(featureSetting) {
+		var featureName =
+			featureSetting.featureName;
 
-	// ---------------------------------------------------------------------
-	// Curated selector module
-	//
-	// Selector modules are instantiated separately by
-	// createPhylogenyModules.glue.
-	//
-	// Absence of a selector therefore means that this lineage has not yet
-	// been curated/enabled for this phylogenetic analysis.
-	// ---------------------------------------------------------------------
+		var minCoveragePct =
+			featureSetting.minCoveragePct;
 
-	if(!moduleExists(
-			selectorModule
-		)) {
-
-		log(
-			"Skipping " +
-			alignmentName +
-			": selector module not defined -> " +
-			selectorModule
-		);
-
-		return {
-			status: "skipped",
-			reason:
-				"SELECTOR_NOT_DEFINED"
-		};
-	}
-
-
-	// ---------------------------------------------------------------------
-	// Existing tree
-	//
-	// Phylogeny reconstruction may be expensive. If the expected output
-	// tree already exists, regard this lineage as completed.
-	// ---------------------------------------------------------------------
-
-	if(
-		SKIP_EXISTING_TREES &&
-		fileExists(outputFile)
-	) {
-
-		log(
-			"Skipping " +
-			alignmentName +
-			": tree already exists -> " +
-			outputFile
-		);
-
-		return {
-			status: "skipped",
-			reason:
-				"TREE_ALREADY_EXISTS"
-		};
-	}
-
-
-	// ---------------------------------------------------------------------
-	// Total alignment membership
-	// ---------------------------------------------------------------------
-
-	var totalMemberCount =
-		countAlignmentMembers(
-			alignmentName
-		);
-
-
-	if(totalMemberCount <
-			MIN_TREE_MEMBERS) {
-
-		log(
-			"Skipping " +
-			alignmentName +
-			": only " +
-			totalMemberCount +
-			" total alignment member(s); " +
-			MIN_TREE_MEMBERS +
-			" are required"
-		);
-
-		return {
-			status: "skipped",
-			reason:
-				"INSUFFICIENT_MEMBERS"
-		};
-	}
-
-
-	// ---------------------------------------------------------------------
-	// Feature coverage
-	// ---------------------------------------------------------------------
-
-	var whereClause =
-		buildCoverageWhereClause();
-
-
-	var eligibleMemberCount =
-		countEligibleMembers(
-			alignmentName,
-			whereClause
-		);
-
-
-	if(eligibleMemberCount <
-			MIN_TREE_MEMBERS) {
-
-		log(
-			"Skipping " +
-			alignmentName +
-			": " +
-			totalMemberCount +
-			" total member(s), but only " +
-			eligibleMemberCount +
-			" pass the " +
-			FEATURE_NAME +
-			" coverage >= " +
-			MIN_COVERAGE_PCT +
-			"% filter; " +
-			MIN_TREE_MEMBERS +
-			" eligible members are required"
-		);
-
-		return {
-			status: "skipped",
-			reason:
-				"INSUFFICIENT_ELIGIBLE_MEMBERS"
-		};
-	}
-
-
-	// ---------------------------------------------------------------------
-	// Generate phylogeny
-	// ---------------------------------------------------------------------
-
-	log(
-		"Generating " +
-		FEATURE_NAME +
-		" nucleotide phylogeny for " +
-		alignmentName +
-		" using " +
-		selectorModule +
-		": " +
-		eligibleMemberCount +
-		" of " +
-		totalMemberCount +
-		" member(s) pass the coverage filter"
-	);
-
-
-	glue.inMode(
-		"/module/" +
-			PHYLOGENY_GENERATOR_MODULE,
-		function() {
-
-			runCmd([
-				"generate",
-				"nucleotide",
-				"phylogeny",
-				alignmentName,
-				"-s",
-				selectorModule,
-				"-w",
-				whereClause,
-				"-o",
-				outputFile,
-				"NEWICK_BOOTSTRAPS"
-			]);
-		}
-	);
-
-
-	log(
-		"Generated " +
-		outputFile
-	);
-
-
-	return {
-		status: "generated",
-		totalMemberCount:
-			totalMemberCount,
-		eligibleMemberCount:
-			eligibleMemberCount
-	};
-}
-
-
-// -----------------------------------------------------------------------------
-// Main
-// -----------------------------------------------------------------------------
-
-if(!moduleExists(
-		PHYLOGENY_GENERATOR_MODULE
-	)) {
-
-	throw new Error(
-		"Required phylogeny generator module does not exist: " +
-		PHYLOGENY_GENERATOR_MODULE
-	);
-}
-
-
-log(
-	"Building HERV lineage " +
-	FEATURE_NAME +
-	" nucleotide phylogenies"
-);
-
-
-var lineageAlignments =
-	getHervLineageAlignments();
-
-
-log(
-	"Discovered " +
-	lineageAlignments.length +
-	" HERV lineage alignment(s)"
-);
-
-
-if(SKIP_EXISTING_TREES) {
-
-	log(
-		"Existing output trees will be skipped"
-	);
-}
-else {
-
-	log(
-		"Existing output trees will be rebuilt"
-	);
-}
-
-
-// -----------------------------------------------------------------------------
-// Summary counters
-// -----------------------------------------------------------------------------
-
-var generatedCount = 0;
-
-var selectorNotDefinedCount = 0;
-
-var existingTreeCount = 0;
-
-var insufficientMembersCount = 0;
-
-var insufficientEligibleMembersCount = 0;
-
-
-// -----------------------------------------------------------------------------
-// Process discovered HERV lineage alignments
-// -----------------------------------------------------------------------------
-
-_.each(
-	lineageAlignments,
-	function(alignmentRow) {
-
-		var result =
-			generateLineagePhylogeny(
-				alignmentRow
+		var selectorModuleName =
+			makeSelectorModuleName(
+				alignmentInfo.standardStem,
+				featureName
 			);
 
+		var outputFile =
+			makeOutputFile(
+				alignmentInfo,
+				featureName
+			);
 
-		if(result.status ===
-				"generated") {
+		// Selector availability represents whether an appropriate curated
+		// feature region has been defined for this lineage/sublineage.
 
-			generatedCount++;
+		if(!moduleExists(selectorModuleName)) {
+			selectorMissingCount++;
+			featureMissingSelectorCounts[featureName]++;
+
+			missingSelectors.push({
+				alignmentName: alignmentName,
+				referenceName: referenceName,
+				featureName: featureName,
+				selectorModuleName: selectorModuleName
+			});
+
+			log(
+				"Skipping " +
+				alignmentName +
+				" " +
+				featureName +
+				" tree: selector module does not exist: " +
+				selectorModuleName
+			);
+
 			return;
 		}
 
+		log(
+			"Requesting " +
+			featureName +
+			" tree for " +
+			alignmentName +
+			" using " +
+			selectorModuleName +
+			", minimum coverage " +
+			minCoveragePct +
+			"% -> " +
+			outputFile
+		);
 
-		if(result.reason ===
-				"SELECTOR_NOT_DEFINED") {
+		reconstructionRequestedCount++;
+		featureRequestedCounts[featureName]++;
 
-			selectorNotDefinedCount++;
+		try {
+			var resultRows =
+				reconstructWithCoverage(
+					alignmentName,
+					selectorModuleName,
+					featureName,
+					minCoveragePct,
+					outputFile
+				);
+
+			if(
+				resultRows === null ||
+				resultRows === undefined ||
+				resultRows.length === 0
+			) {
+				incrementCount(
+					statusCounts,
+					"no_result"
+				);
+
+				return;
+			}
+
+			_.each(resultRows, function(resultRow) {
+				incrementCount(
+					statusCounts,
+					resultRow.status
+				);
+
+				if(
+					resultRow.reason !== null &&
+					resultRow.reason !== undefined &&
+					("" + resultRow.reason).trim() !== ""
+				) {
+					incrementCount(
+						reasonCounts,
+						resultRow.reason
+					);
+				}
+			});
+
+		} catch(error) {
+			invocationErrorCount++;
+
+			invocationErrors.push({
+				alignmentName: alignmentName,
+				referenceName: referenceName,
+				featureName: featureName,
+				selectorModuleName: selectorModuleName,
+				outputFile: outputFile,
+				error: "" + error
+			});
+
+			log(
+				"ERROR reconstructing " +
+				alignmentName +
+				" " +
+				featureName +
+				": " +
+				error
+			);
 		}
-		else if(result.reason ===
-				"TREE_ALREADY_EXISTS") {
-
-			existingTreeCount++;
-		}
-		else if(result.reason ===
-				"INSUFFICIENT_MEMBERS") {
-
-			insufficientMembersCount++;
-		}
-		else if(result.reason ===
-				"INSUFFICIENT_ELIGIBLE_MEMBERS") {
-
-			insufficientEligibleMembersCount++;
-		}
-	}
-);
+	});
+});
 
 
 // -----------------------------------------------------------------------------
 // Summary
 // -----------------------------------------------------------------------------
 
+log("============================================================");
+log("ERV lineage/sublineage phylogeny reconstruction summary");
+log("============================================================");
+
 log(
-	"LINEAGE PHYLOGENY SUMMARY"
+	"Target alignments: " +
+	alignmentRows.length
 );
 
 log(
-	"HERV lineage alignments discovered: " +
-	lineageAlignments.length
+	"Lineage alignments: " +
+	lineageAlignmentCount
 );
 
 log(
-	"Phylogenies generated: " +
-	generatedCount
+	"Sublineage alignments: " +
+	sublineageAlignmentCount
 );
 
 log(
-	"Lineages without a curated selector module: " +
-	selectorNotDefinedCount
+	"Reconstruction requests: " +
+	reconstructionRequestedCount
 );
 
 log(
-	"Existing phylogenies skipped: " +
-	existingTreeCount
+	"Missing selector combinations: " +
+	selectorMissingCount
 );
 
 log(
-	"Alignments skipped with fewer than " +
-	MIN_TREE_MEMBERS +
-	" total members: " +
-	insufficientMembersCount
+	"Invocation errors: " +
+	invocationErrorCount
 );
 
-log(
-	"Alignments skipped with fewer than " +
-	MIN_TREE_MEMBERS +
-	" members passing the " +
-	FEATURE_NAME +
-	" coverage >= " +
-	MIN_COVERAGE_PCT +
-	"% filter: " +
-	insufficientEligibleMembersCount
-);
+log("------------------------------------------------------------");
+log("Requests by feature");
+log("------------------------------------------------------------");
 
-log(
-	"Finished building HERV lineage nucleotide phylogenies."
-);
+_.each(FEATURE_SETTINGS, function(featureSetting) {
+	var featureName =
+		featureSetting.featureName;
+
+	log(
+		featureName +
+		": " +
+		featureRequestedCounts[featureName] +
+		" requested; " +
+		featureMissingSelectorCounts[featureName] +
+		" missing selector(s)"
+	);
+});
+
+log("------------------------------------------------------------");
+log("Tree-builder result statuses");
+log("------------------------------------------------------------");
+
+var statusKeys =
+	sortedKeys(statusCounts);
+
+if(statusKeys.length === 0) {
+	log("No result statuses returned");
+} else {
+	_.each(statusKeys, function(status) {
+		log(
+			"  " +
+			status +
+			": " +
+			statusCounts[status]
+		);
+	});
+}
+
+log("------------------------------------------------------------");
+log("Tree-builder skip/error reasons");
+log("------------------------------------------------------------");
+
+var reasonKeys =
+	sortedKeys(reasonCounts);
+
+if(reasonKeys.length === 0) {
+	log("No skip reasons returned");
+} else {
+	_.each(reasonKeys, function(reason) {
+		log(
+			"  " +
+			reason +
+			": " +
+			reasonCounts[reason]
+		);
+	});
+}
+
+
+// -----------------------------------------------------------------------------
+// Detailed missing-selector report
+// -----------------------------------------------------------------------------
+
+if(missingSelectors.length > 0) {
+	log("------------------------------------------------------------");
+	log("Missing selector modules");
+	log("------------------------------------------------------------");
+
+	_.each(missingSelectors, function(item) {
+		log(
+			"  " +
+			item.alignmentName +
+			" [" +
+			item.featureName +
+			"]: " +
+			item.selectorModuleName +
+			(
+				item.referenceName !== null &&
+				item.referenceName !== undefined
+					? " (reference " +
+						item.referenceName +
+						")"
+					: ""
+			)
+		);
+	});
+}
+
+
+// -----------------------------------------------------------------------------
+// Detailed invocation-error report
+// -----------------------------------------------------------------------------
+
+if(invocationErrors.length > 0) {
+	log("------------------------------------------------------------");
+	log("Tree-builder invocation errors");
+	log("------------------------------------------------------------");
+
+	_.each(invocationErrors, function(item) {
+		log(
+			"  " +
+			item.alignmentName +
+			" [" +
+			item.featureName +
+			"]: " +
+			item.error
+		);
+	});
+}
+
+log("============================================================");
+
+if(DRY_RUN) {
+	log(
+		"Dry run complete; no phylogenies were reconstructed"
+	);
+} else {
+	log(
+		"Finished ERV lineage/sublineage phylogeny reconstruction"
+	);
+}
+
+if(invocationErrorCount > 0) {
+	throw new Error(
+		"Phylogeny reconstruction completed with " +
+		invocationErrorCount +
+		" tree-builder invocation error(s); " +
+		"see the preceding log messages"
+	);
+}

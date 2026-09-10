@@ -1,9 +1,0 @@
-
-  # Create modules for phylogeny build
-  run file glue/analyse/createPhylogenyModules.glue
-
-  # Compute phylogenies
-  run script glue/analyse/reconstructLineageLevelPhylogenies.js
-
-  # Re-root phylogenies and export FigTree annotations
-  run file glue/analyse/prepareLineagePhylogeniesNucs.js

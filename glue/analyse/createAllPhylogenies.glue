@@ -1,0 +1,18 @@
+# ============================================================================
+# Reconstruct all ERVdb-HomoSapiens phylogenies
+#
+# This analysis is run after the ERVdb project has been fully built.
+# It generates external tree outputs and does not populate the database.
+# ============================================================================
+
+  # Recreate gag, pol and env MSA column selector modules
+  run script glue/analyse/createPhylogenyModules.js
+
+  # Reconstruct ERV lineage and sublineage nucleotide phylogenies
+  run script glue/analyse/reconstructLineageLevelPhylogenies.js
+
+  # Reroot ERV lineage and sublineage nucleotide phylogenies
+  run script glue/analyse/rerootLineagePhylogeniesNucs.js
+
+  # Reconstruct and prepare LTR-lineage nucleotide phylogenies
+  #run file glue/analyse/reconstructLtrPhylogenies.glue
