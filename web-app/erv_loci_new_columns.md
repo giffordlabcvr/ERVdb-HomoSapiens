@@ -67,8 +67,5 @@ This export excludes loci marked as mosaic. Mosaic loci can have distinct
 lineage assignments for different parts of the locus and require a separate
 association-level representation.
 
-The file describes taxonomic assignments and genomic locations. It does not\
-include nucleotide sequences, feature annotations, LTR-lineage associations,\
-phylogenetic alignments, or the underlying evidence used to establish each\
-classification.
+The file describes taxonomic assignments and genomic locations. It does not include nucleotide sequences, feature annotations, LTR-lineage associations, phylogenetic alignments, or the underlying evidence used to establish each classification.
 
