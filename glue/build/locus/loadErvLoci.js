@@ -42,10 +42,9 @@
 //          Any mosaic case             -> mosaic
 //          Other unresolved cases      -> unresolved
 //
-//   makes_mosaic
-//       -> mosaic_component
-//          LTR -> ltr
-//          int -> internal
+//   case_status
+//       -> is_mosaic
+//          TRUE when case_status contains "mosaic"
 //
 //   curatedns
 //       -> is_high_support
@@ -441,51 +440,6 @@ function resolveTaxonomicResolution(caseStatus) {
 }
 
 
-function resolveMosaicComponent(
-	caseStatus,
-	makesMosaic
-) {
-
-	caseStatus =
-		norm(caseStatus);
-
-	makesMosaic =
-		norm(makesMosaic);
-
-	/*
-	 * mosaic_component is meaningful only for a mosaic
-	 * classification.
-	 */
-
-	if(
-		caseStatus === null ||
-		caseStatus.toLowerCase().indexOf("mosaic") < 0
-	) {
-		return null;
-	}
-
-	if(makesMosaic === null) {
-		return null;
-	}
-
-	var lowerValue =
-		makesMosaic.toLowerCase();
-
-	if(lowerValue === "ltr") {
-		return "ltr";
-	}
-
-	if(
-		lowerValue === "int" ||
-		lowerValue === "internal"
-	) {
-		return "internal";
-	}
-
-	return null;
-}
-
-
 // ============================================================================
 // Load selected candidate rows
 // ============================================================================
@@ -507,7 +461,6 @@ var candidateRows =
 		"status",
 		"genes_simplified",
 		"case_status",
-		"makes_mosaic",
 		"curatedns"
 	]);
 
@@ -517,7 +470,6 @@ var candidateRowsWithoutIds = 0;
 
 var unrecognisedLocusStatuses = {};
 var unrecognisedCaseStatuses = {};
-var unrecognisedMosaicValues = {};
 var unrecognisedHighSupportValues = {};
 
 
@@ -545,11 +497,6 @@ _.each(
 				row["case_status"]
 			);
 
-		var makesMosaic =
-			norm(
-				row["makes_mosaic"]
-			);
-
 		var curatedNs =
 			norm(
 				row["curatedns"]
@@ -565,11 +512,9 @@ _.each(
 				caseStatus
 			);
 
-		var mosaicComponent =
-			resolveMosaicComponent(
-				caseStatus,
-				makesMosaic
-			);
+	   var isMosaic =
+		   caseStatus !== null &&
+		   caseStatus.toLowerCase().indexOf("mosaic") >= 0;
 
 		var isHighSupport =
 			normBoolean(
@@ -593,20 +538,6 @@ _.each(
 		) {
 			unrecognisedCaseStatuses[
 				caseStatus
-			] = true;
-		}
-
-
-		if(
-			caseStatus !== null &&
-			caseStatus
-				.toLowerCase()
-				.indexOf("mosaic") >= 0 &&
-			makesMosaic !== null &&
-			mosaicComponent === null
-		) {
-			unrecognisedMosaicValues[
-				makesMosaic
 			] = true;
 		}
 
@@ -657,9 +588,9 @@ _.each(
 			taxonomicResolution:
 				taxonomicResolution,
 
-			mosaicComponent:
-				mosaicComponent,
-
+			isMosaic:
+				isMosaic,
+	
 			isHighSupport:
 				isHighSupport
 		};
@@ -877,7 +808,8 @@ var skippedMissingCandidateCount = 0;
 var locusTypeCounts = {};
 var structuralProfileCounts = {};
 var taxonomicResolutionCounts = {};
-var mosaicComponentCounts = {};
+
+var mosaicLocusCount = 0;
 
 var highSupportCount = 0;
 var nonHighSupportCount = 0;
@@ -1014,9 +946,9 @@ _.each(
 						candidate.taxonomicResolution
 					);
 
-					setFieldIfPresent(
-						"mosaic_component",
-						candidate.mosaicComponent
+					setBooleanFieldIfPresent(
+						"is_mosaic",
+						candidate.isMosaic
 					);
 
 					setBooleanFieldIfPresent(
@@ -1048,10 +980,9 @@ _.each(
 			candidate.taxonomicResolution
 		);
 
-		incrementCount(
-			mosaicComponentCounts,
-			candidate.mosaicComponent
-		);
+		if(candidate.isMosaic) {
+			mosaicLocusCount++;
+		}
 
 		if(candidate.isHighSupport === true) {
 			highSupportCount++;
@@ -1186,11 +1117,10 @@ printCounts(
 	taxonomicResolutionCounts
 );
 
-printCounts(
-	"Mosaic components",
-	mosaicComponentCounts
+log(
+	"Mosaic loci: " +
+	mosaicLocusCount
 );
-
 
 log(
 	"High-support loci: " +
@@ -1234,13 +1164,6 @@ printLimitedValues(
 	"Unrecognised source case_status values",
 	sortedKeys(
 		unrecognisedCaseStatuses
-	)
-);
-
-printLimitedValues(
-	"Unrecognised mosaic-component values",
-	sortedKeys(
-		unrecognisedMosaicValues
 	)
 );
 

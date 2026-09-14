@@ -1,7 +1,9 @@
 
-  # Import the selected and classified HERV locus sequences
-  run file glue/build/locus/importLocusSource.glue
-
+  # Import the selected and classified HERV locus sequences.
+  # The source dataset is too large to include in this GitHub repository.
+  # Replace the path below with the location of the dataset on your computer.
+  import source /Users/rob/Sources/erv/filtered_2026_07
+    
   # Load the source candidate dataset
   run script glue/build/locus/candidates/loadErvLocusCandidates.js
 
@@ -20,11 +22,11 @@
   
   # Load source-specific provenance records and connect them to
   # the resolved ERV loci
-  run file glue/build/locus/loadErvLocusProvenance.glue
+  #run file glue/build/locus/loadErvLocusProvenance.glue
 
   # Add resolved locus sequences to their lineage/sublineage alignments
   run script glue/build/locus/msa/addResolvedLociToAlignments.js
-
+  
   # Compute ERV lineage and sublineage alignments
   run script glue/build/locus/msa/computeHervLineageAlignments.js
 
