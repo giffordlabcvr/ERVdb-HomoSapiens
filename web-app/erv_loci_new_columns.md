@@ -41,30 +41,30 @@ Columns
 Interpretation of taxonomic fields
 ----------------------------------
 
-The value in `erv_locus.taxonomic_resolution` indicates the precision of the\
-classification, while the lineage and higher-taxonomic columns record the\
+The value in `erv_locus.taxonomic_resolution` indicates the precision of the
+classification, while the lineage and higher-taxonomic columns record the
 available placement.
 
 For example:
 
 -   `lineage` indicates assignment to a specific ERV lineage.
--   `subgenus` indicates that the locus could not be assigned confidently below\
+-   `subgenus` indicates that the locus could not be assigned confidently below
     the subgenus level.
 -   `genus` indicates resolution at genus level only.
 -   `clade` indicates resolution at the broader ERV clade level.
--   `unresolved` indicates that no supported placement was obtained at the\
+-   `unresolved` indicates that no supported placement was obtained at the
     represented taxonomic levels.
 
-A populated `erv_lineage.id` identifies the lineage record through which the\
-classification is represented. It should not necessarily be interpreted as a\
-fully resolved lineage-level assignment unless\
+A populated `erv_lineage.id` identifies the lineage record through which the
+classification is represented. It should not necessarily be interpreted as a
+fully resolved lineage-level assignment unless
 `erv_locus.taxonomic_resolution` is `lineage`.
 
 Scope and limitations
 ---------------------
 
-This export excludes loci marked as mosaic. Mosaic loci can have distinct\
-lineage assignments for different parts of the locus and require a separate\
+This export excludes loci marked as mosaic. Mosaic loci can have distinct
+lineage assignments for different parts of the locus and require a separate
 association-level representation.
 
 The file describes taxonomic assignments and genomic locations. It does not\
