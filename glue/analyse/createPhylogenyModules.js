@@ -46,6 +46,13 @@ var DRY_RUN =
 // Generic helpers
 // -----------------------------------------------------------------------------
 
+var File =
+	Java.type("java.io.File");
+
+function fileExists(filePath) {
+	return new File(filePath).isFile();
+}
+
 function log(message) {
 	glue.logInfo(message);
 }
@@ -447,6 +454,21 @@ function createModuleFromXml(
 	moduleName,
 	xmlPath
 ) {
+	if(!fileExists(xmlPath)) {
+		log(
+			"Skipping " +
+			moduleName +
+			": selector XML does not exist: " +
+			xmlPath
+		);
+
+		return {
+			created: false,
+			dryRun: false,
+			missingXml: true
+		};
+	}
+
 	if(DRY_RUN) {
 		log(
 			"[DRY RUN] Would create module " +
@@ -462,47 +484,26 @@ function createModuleFromXml(
 		};
 	}
 
-	try {
-		glue.command([
-			"create",
-			"module",
-			"-f",
-			xmlPath
-		]);
+	glue.command([
+		"create",
+		"module",
+		"-f",
+		xmlPath
+	]);
 
-		log(
-			"Created module " +
-			moduleName +
-			" from " +
-			xmlPath
-		);
+	log(
+		"Created module " +
+		moduleName +
+		" from " +
+		xmlPath
+	);
 
-		return {
-			created: true,
-			dryRun: false,
-			missingXml: false
-		};
-
-	} catch(error) {
-		if(isMissingFileError(error)) {
-			log(
-				"Skipping " +
-				moduleName +
-				": selector XML does not exist: " +
-				xmlPath
-			);
-
-			return {
-				created: false,
-				dryRun: false,
-				missingXml: true
-			};
-		}
-
-		throw error;
-	}
+	return {
+		created: true,
+		dryRun: false,
+		missingXml: false
+	};
 }
-
 
 // -----------------------------------------------------------------------------
 // Load target alignments
