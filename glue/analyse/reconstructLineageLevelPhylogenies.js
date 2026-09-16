@@ -379,8 +379,7 @@ function reconstructWithCoverage(
 	outputFile
 ) {
 	var commandWords = [
-		"module",
-		TREE_BUILDER_MODULE,
+		"invoke-function",
 		"reconstructWithCoverage",
 		alignmentName,
 		selectorModuleName,
@@ -391,7 +390,9 @@ function reconstructWithCoverage(
 
 	if(DRY_RUN) {
 		log(
-			"[DRY RUN] " +
+			"[DRY RUN] module " +
+			TREE_BUILDER_MODULE +
+			" " +
 			commandWords.join(" ")
 		);
 
@@ -406,12 +407,18 @@ function reconstructWithCoverage(
 		}];
 	}
 
-	var result =
-		glue.command(commandWords);
+	var result = null;
+
+	glue.inMode(
+		"/module/" + TREE_BUILDER_MODULE,
+		function() {
+			result =
+				glue.command(commandWords);
+		}
+	);
 
 	return glue.tableToObjects(result);
 }
-
 
 // -----------------------------------------------------------------------------
 // Summary helpers
