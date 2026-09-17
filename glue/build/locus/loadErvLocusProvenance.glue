@@ -3,10 +3,12 @@
   # permanent ERV loci
   run script glue/build/locus/provenance/loadDigsLocusProvenance.js
 
-  # Load Repbase provenance associations and connect them to
-  # permanent ERV loci
-  run script glue/build/locus/provenance/loadRepbaseLocusProvenance.js
-
   # Load RetroTector provenance records and connect them to
   # permanent ERV loci
   run script glue/build/locus/provenance/loadRetrotectorLocusProvenance.js
+
+  # Load Repbase provenance associations and connect them to
+  # permanent ERV loci
+  #run script glue/build/locus/provenance/loadRepbaseLocusProvenance.js
+  
+  

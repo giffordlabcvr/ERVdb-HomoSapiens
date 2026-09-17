@@ -1,0 +1,12 @@
+
+  # Add resolved locus sequences to their lineage/sublineage alignments
+  run script glue/build/locus/msa/addResolvedLociToAlignments.js
+  
+  # Compute ERV lineage and sublineage alignments
+  run script glue/build/locus/msa/computeHervLineageAlignments.js
+
+  # Compute LTR-lineage alignments
+  run script glue/build/locus/msa/computeHervLineageLtrAlignments.js
+
+  # Record feature presence in the resulting alignments
+  run file glue/build/locus/msa/recordFeaturePresence.glue
