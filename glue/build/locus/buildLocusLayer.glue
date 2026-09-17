@@ -20,11 +20,10 @@
   # Create curated locus-to-LTR-lineage associations, where available
   run script glue/build/locus/loadErvLocusLtrAssociations.js
   
-  # Load source-specific provenance records and connect them to
-  # the resolved ERV loci
+  # Load source-specific provenance records and connect them to ERV loci
   run file glue/build/locus/loadErvLocusProvenance.glue
 
-  # Create alignments
+  # Create alignments 
   run file glue/build/locus/hervAlignmentSteps.glue
 
   # Import legacy mappings used for Missillac nomenclature
