@@ -1,0 +1,5 @@
+
+  # Exporters
+
+  create module -t fastaExporter
+  create module -f modules/build/rv/fastaAlignmentExporterLineage.xml
