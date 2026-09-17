@@ -2,7 +2,7 @@
   # Import the selected and classified HERV locus sequences.
   # The source dataset is too large to include in this GitHub repository.
   # Replace the path below with the location of the dataset on your computer.
-  import source /Users/rob/Sources/erv/filtered_2026_07
+  import source sources/filtered_2026_07
     
   # Load the source candidate dataset
   run script glue/build/locus/candidates/loadErvLocusCandidates.js
