@@ -1,30 +1,40 @@
-// glue/analyse/prepareLineagePhylogeniesNucs.js
+// glue/analyse/rerootLineagePhylogeniesNucs.js
 //
-// Prepare reconstructed HERV lineage nucleotide phylogenies for inspection.
+// Prepare reconstructed human ERV lineage and sublineage nucleotide
+// phylogenies for inspection.
 //
-// For each AL_LINEAGE_HERV* alignment:
+// Uses the same standard-ID naming scheme and alignment universe as
+// reconstructLineageLevelPhylogenies.js.
 //
-//   1. Derive the corresponding unrooted pol tree path.
-//   2. Check whether that tree exists.
-//   3. If it exists:
+//   1. Identify lineage and sublineage alignments corresponding to
+//      erv_lineage rows for which human_erv = TRUE.
+//   2. Derive the corresponding unrooted pol tree path.
+//   3. Check whether that tree exists.
+//   4. If it exists:
 //        - midpoint-reroot it using ervPhyloUtility;
 //        - export FigTree annotations for the source alignment using
 //          ervFigTreeAnnotationExporterLocus.
-//   4. If it does not exist, skip the lineage.
+//   5. If it does not exist, skip the alignment.
 //
 // Naming convention:
 //
 //   Alignment:
-//       AL_LINEAGE_HERVFRD
+//       AL_LINEAGE_1_Zeta_FRD_1
 //
 //   Input tree:
-//       trees/lineage/HERVFRD_pol_nucs.tree
+//       trees/lineage/1_Zeta_FRD_1_pol_nucs.tree
 //
 //   Midpoint-rerooted tree:
-//       trees/lineage/HERVFRD_pol_nucs_midpoint_rerooted.tree
+//       trees/lineage/1_Zeta_FRD_1_pol_nucs_midpoint_rerooted.tree
 //
 //   FigTree annotations:
-//       trees/lineage/AL_LINEAGE_HERVFRD.annotations.tsv
+//       trees/lineage/AL_LINEAGE_1_Zeta_FRD_1.annotations.tsv
+//
+//   Sublineage alignment:
+//       AL_SUBLINEAGE_1_Eta_E_HQ
+//
+//   Input tree:
+//       trees/sublineage/1_Eta_E_HQ_pol_nucs.tree
 //
 // This script assumes that the following modules already exist:
 //
@@ -51,8 +61,8 @@ var SKIP_EXISTING_ANNOTATIONS = false;
 var FEATURE_NAME =
 	"pol";
 
-var TREE_DIR =
-	"trees/lineage";
+var TREE_ROOT =
+	"trees";
 
 var PHYLO_UTILITY_MODULE =
 	"ervPhyloUtility";
@@ -153,54 +163,257 @@ function moduleExists(moduleName) {
 
 
 // -----------------------------------------------------------------------------
-// Discover HERV lineage alignments
-//
-// Same alignment universe used by reconstructLineageLevelPhylogenies.js:
-//
-//   list alignment -w "name like 'AL_LINEAGE_HERV%'"
+// Standard-ID and alignment helpers
 // -----------------------------------------------------------------------------
 
-function getHervLineageAlignments() {
+function standardLineageStem(lineageId) {
 
-	return queryObjects([
-		"list",
-		"alignment",
-		"-w",
-		"name like 'AL_LINEAGE_HERV%'"
-	]);
-}
+	if(lineageId.indexOf("ERVR-") === 0) {
 
+		var stem =
+			lineageId.substring(
+				"ERVR-".length
+			);
 
-// -----------------------------------------------------------------------------
-// Derive HERV name
-//
-//   AL_LINEAGE_HERVFRD
-//
-// becomes:
-//
-//   HERVFRD
-// -----------------------------------------------------------------------------
+		var firstDot =
+			stem.indexOf(".");
 
-function getHervName(
-	alignmentName
-) {
+		if(firstDot >= 0) {
 
-	var prefix =
-		"AL_LINEAGE_";
+			stem =
+				stem.substring(
+					0,
+					firstDot
+				) +
+				"R" +
+				stem.substring(
+					firstDot
+				);
+		}
+		else {
 
-	if(alignmentName.indexOf(prefix) !== 0) {
+			stem =
+				stem +
+				"R";
+		}
 
-		throw new Error(
-			"Cannot derive HERV name from alignment: " +
-			alignmentName +
-			". Expected alignment name beginning with " +
-			prefix
+		return stem.replace(
+			/\./g,
+			"_"
 		);
 	}
 
-	return alignmentName.substring(
-		prefix.length
+	if(lineageId.indexOf("ERV-") === 0) {
+
+		return lineageId
+			.substring(
+				"ERV-".length
+			)
+			.replace(
+				/\./g,
+				"_"
+			);
+	}
+
+	throw new Error(
+		"Unsupported ERV lineage ID: " +
+		lineageId
 	);
+}
+
+
+function loadHumanErvIndex() {
+
+	var rows =
+		queryObjects([
+			"list",
+			"custom-table-row",
+			"erv_lineage",
+			"id",
+			"name",
+			"entity_level",
+			"-w",
+			"human_erv = 'TRUE'"
+		]);
+
+	var index = {};
+
+	_.each(
+		rows,
+		function(row) {
+
+			var stem =
+				standardLineageStem(
+					row.id
+				);
+
+			if(index[stem]) {
+
+				throw new Error(
+					"Multiple human ERV rows produce alignment stem '" +
+					stem +
+					"': " +
+					index[stem].id +
+					" and " +
+					row.id
+				);
+			}
+
+			index[stem] = {
+				id: row.id,
+				name: row.name,
+				entityLevel:
+					row.entity_level
+			};
+		}
+	);
+
+	return {
+		rows: rows,
+		byStem: index
+	};
+}
+
+
+function parseAlignmentName(
+	alignmentName
+) {
+
+	var lineagePrefix =
+		"AL_LINEAGE_";
+
+	var sublineagePrefix =
+		"AL_SUBLINEAGE_";
+
+	if(
+		alignmentName.indexOf(
+			lineagePrefix
+		) === 0
+	) {
+
+		return {
+			entityLevel: "lineage",
+			standardStem:
+				alignmentName.substring(
+					lineagePrefix.length
+				),
+			treeDirectory: "lineage"
+		};
+	}
+
+	if(
+		alignmentName.indexOf(
+			sublineagePrefix
+		) === 0
+	) {
+
+		return {
+			entityLevel: "sublineage",
+			standardStem:
+				alignmentName.substring(
+					sublineagePrefix.length
+				),
+			treeDirectory: "sublineage"
+		};
+	}
+
+	throw new Error(
+		"Unsupported alignment name: " +
+		alignmentName
+	);
+}
+
+
+function loadTargetAlignments(
+	humanErvIndex
+) {
+
+	var rows =
+		queryObjects([
+			"list",
+			"alignment",
+			"name",
+			"refSequence.name",
+			"-w",
+			"name like 'AL_LINEAGE_%' or " +
+				"name like 'AL_SUBLINEAGE_%'"
+		]);
+
+	var selectedRows = [];
+
+	_.each(
+		rows,
+		function(row) {
+
+			var alignmentInfo =
+				parseAlignmentName(
+					row.name
+				);
+
+			var humanErv =
+				humanErvIndex.byStem[
+					alignmentInfo.standardStem
+				];
+
+			if(!humanErv) {
+
+				return;
+			}
+
+			if(
+				humanErv.entityLevel !== null &&
+				humanErv.entityLevel !== undefined &&
+				("" + humanErv.entityLevel).trim() !== "" &&
+				humanErv.entityLevel !==
+					alignmentInfo.entityLevel
+			) {
+
+				throw new Error(
+					"Entity-level mismatch for " +
+					humanErv.id +
+					": erv_lineage.entity_level is '" +
+					humanErv.entityLevel +
+					"', but alignment " +
+					row.name +
+					" implies '" +
+					alignmentInfo.entityLevel +
+					"'"
+				);
+			}
+
+			row.alignmentInfo =
+				alignmentInfo;
+
+			row.ervLineageId =
+				humanErv.id;
+
+			row.ervLineageName =
+				humanErv.name;
+
+			selectedRows.push(
+				row
+			);
+		}
+	);
+
+	selectedRows.sort(
+		function(rowA, rowB) {
+
+			if(rowA.name < rowB.name) {
+
+				return -1;
+			}
+
+			if(rowA.name > rowB.name) {
+
+				return 1;
+			}
+
+			return 0;
+		}
+	);
+
+	return selectedRows;
 }
 
 
@@ -209,21 +422,23 @@ function getHervName(
 //
 // Must match reconstructLineageLevelPhylogenies.js.
 //
-//   AL_LINEAGE_HERVFRD
+//   AL_LINEAGE_1_Zeta_FRD_1
 //
 // becomes:
 //
-//   trees/lineage/HERVFRD_pol_nucs.tree
+//   trees/lineage/1_Zeta_FRD_1_pol_nucs.tree
 // -----------------------------------------------------------------------------
 
 function getSourceTreeFile(
-	alignmentName
+	alignmentInfo
 ) {
 
 	return (
-		TREE_DIR +
+		TREE_ROOT +
 		"/" +
-		getHervName(alignmentName) +
+		alignmentInfo.treeDirectory +
+		"/" +
+		alignmentInfo.standardStem +
 		"_" +
 		FEATURE_NAME +
 		"_nucs.tree"
@@ -236,13 +451,15 @@ function getSourceTreeFile(
 // -----------------------------------------------------------------------------
 
 function getRerootedTreeFile(
-	alignmentName
+	alignmentInfo
 ) {
 
 	return (
-		TREE_DIR +
+		TREE_ROOT +
 		"/" +
-		getHervName(alignmentName) +
+		alignmentInfo.treeDirectory +
+		"/" +
+		alignmentInfo.standardStem +
 		"_" +
 		FEATURE_NAME +
 		"_nucs_midpoint_rerooted.tree"
@@ -258,11 +475,14 @@ function getRerootedTreeFile(
 // -----------------------------------------------------------------------------
 
 function getAnnotationFile(
-	alignmentName
+	alignmentName,
+	alignmentInfo
 ) {
 
 	return (
-		TREE_DIR +
+		TREE_ROOT +
+		"/" +
+		alignmentInfo.treeDirectory +
 		"/" +
 		alignmentName +
 		".annotations.tsv"
@@ -349,8 +569,8 @@ function rerootPhylogeny(
 //
 //   module ervFigTreeAnnotationExporterLocus
 //
-//     export figtree-annotation AL_LINEAGE_HERVFRD \
-//       -f trees/lineage/AL_LINEAGE_HERVFRD.annotations.tsv
+//     export figtree-annotation AL_LINEAGE_1_Zeta_FRD_1 \
+//       -f trees/lineage/AL_LINEAGE_1_Zeta_FRD_1.annotations.tsv
 // -----------------------------------------------------------------------------
 
 function exportFigTreeAnnotations(
@@ -409,7 +629,7 @@ function exportFigTreeAnnotations(
 
 
 // -----------------------------------------------------------------------------
-// Prepare one lineage phylogeny
+// Prepare one lineage or sublineage phylogeny
 // -----------------------------------------------------------------------------
 
 function prepareLineagePhylogeny(
@@ -419,19 +639,23 @@ function prepareLineagePhylogeny(
 	var alignmentName =
 		alignmentRow.name;
 
+	var alignmentInfo =
+		alignmentRow.alignmentInfo;
+
 	var sourceTreeFile =
 		getSourceTreeFile(
-			alignmentName
+			alignmentInfo
 		);
 
 	var rerootedTreeFile =
 		getRerootedTreeFile(
-			alignmentName
+			alignmentInfo
 		);
 
 	var annotationFile =
 		getAnnotationFile(
-			alignmentName
+			alignmentName,
+			alignmentInfo
 		);
 
 
@@ -446,9 +670,11 @@ function prepareLineagePhylogeny(
 	// phylogeny during the reconstruction stage.
 	// ---------------------------------------------------------------------
 
-	if(!fileExists(
+	if(
+		!fileExists(
 			sourceTreeFile
-		)) {
+		)
+	) {
 
 		log(
 			"Skipping " +
@@ -504,9 +730,11 @@ function prepareLineagePhylogeny(
 // Main
 // -----------------------------------------------------------------------------
 
-if(!moduleExists(
+if(
+	!moduleExists(
 		PHYLO_UTILITY_MODULE
-	)) {
+	)
+) {
 
 	throw new Error(
 		"Required phylogeny utility module does not exist: " +
@@ -515,9 +743,11 @@ if(!moduleExists(
 }
 
 
-if(!moduleExists(
+if(
+	!moduleExists(
 		FIGTREE_EXPORTER_MODULE
-	)) {
+	)
+) {
 
 	throw new Error(
 		"Required FigTree annotation exporter module does not exist: " +
@@ -527,18 +757,31 @@ if(!moduleExists(
 
 
 log(
-	"Preparing HERV lineage nucleotide phylogenies"
+	"Preparing human ERV lineage and sublineage nucleotide phylogenies"
 );
 
 
-var lineageAlignments =
-	getHervLineageAlignments();
+var humanErvIndex =
+	loadHumanErvIndex();
+
+
+log(
+	"Loaded " +
+	humanErvIndex.rows.length +
+	" ERV rows with human_erv = TRUE"
+);
+
+
+var targetAlignments =
+	loadTargetAlignments(
+		humanErvIndex
+	);
 
 
 log(
 	"Discovered " +
-	lineageAlignments.length +
-	" HERV lineage alignment(s)"
+	targetAlignments.length +
+	" human ERV lineage/sublineage alignment(s)"
 );
 
 
@@ -564,7 +807,7 @@ var annotationsExistingCount = 0;
 // -----------------------------------------------------------------------------
 
 _.each(
-	lineageAlignments,
+	targetAlignments,
 	function(alignmentRow) {
 
 		var result =
@@ -632,12 +875,12 @@ _.each(
 // -----------------------------------------------------------------------------
 
 log(
-	"LINEAGE PHYLOGENY PREPARATION SUMMARY"
+	"LINEAGE/SUBLINEAGE PHYLOGENY PREPARATION SUMMARY"
 );
 
 log(
-	"HERV lineage alignments discovered: " +
-	lineageAlignments.length
+	"Human ERV lineage/sublineage alignments discovered: " +
+	targetAlignments.length
 );
 
 log(
@@ -671,5 +914,6 @@ log(
 );
 
 log(
-	"Finished preparing HERV lineage nucleotide phylogenies."
+	"Finished preparing human ERV lineage/sublineage nucleotide phylogenies."
 );
+

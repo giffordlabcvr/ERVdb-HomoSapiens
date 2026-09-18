@@ -7,7 +7,7 @@
 
 	<figTreeAnnotation>
 		<annotationName>classification</annotationName>
-		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.classification')}</valueFreemarkerTemplate>
+		<valueFreemarkerTemplate>${renderNestedProperty('sequence.erv_locus.structural_profile')}</valueFreemarkerTemplate>
 	</figTreeAnnotation>
 	
 	<figTreeAnnotation>
