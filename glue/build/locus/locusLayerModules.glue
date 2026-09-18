@@ -1,5 +1,9 @@
+  delete module fastaExporter
+  delete module fastaAlignmentExporterLineage
+  delete module ervFigTreeAnnotationExporterLocus
 
   # Exporters
 
   create module -t fastaExporter
-  create module -f modules/build/rv/fastaAlignmentExporterLineage.xml
+  create module -f modules/analyse/fastaAlignmentExporterLineage.xml
+  create module -f modules/analyse/ervFigTreeAnnotationExporterLocus.xml

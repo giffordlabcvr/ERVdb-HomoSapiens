@@ -3,6 +3,9 @@
   # The source dataset is too large to include in this GitHub repository.
   # Replace the path below with the location of the dataset on your computer.
   import source sources/filtered_2026_07
+
+  # Instantiate modules
+  run file glue/build/locus/locusLayerModules.glue
     
   # Load the source candidate dataset
   run script glue/build/locus/candidates/loadErvLocusCandidates.js
