@@ -8,5 +8,9 @@
   # Compute LTR-lineage alignments
   run script glue/build/locus/msa/computeHervLineageLtrAlignments.js
 
-  # Record feature presence in the resulting alignments
+  # Record feature presence in the lineage alignments
   run file glue/build/locus/msa/recordFeaturePresence.glue
+
+  # Record feature presence in the LTR alignments
+  run script glue/build/locus/msa/recordLtrFeaturePresence.js
+
