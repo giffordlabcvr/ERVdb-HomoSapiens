@@ -8,24 +8,28 @@
 //
 //   1. Identify lineage and sublineage alignments corresponding to
 //      erv_lineage rows for which human_erv = TRUE.
-//   2. Derive the corresponding unrooted pol tree path.
-//   3. Check whether that tree exists.
-//   4. If it exists:
+//   2. Derive the corresponding unrooted gag, pol and env tree paths.
+//   3. Check which of those trees exist.
+//   4. If a tree exists:
 //        - midpoint-reroot it using ervPhyloUtility;
-//        - export FigTree annotations for the source alignment using
+//        - export FigTree annotations once for the source alignment using
 //          ervFigTreeAnnotationExporterLocus.
-//   5. If it does not exist, skip the alignment.
+//   5. If a tree does not exist, skip that alignment-feature combination.
 //
 // Naming convention:
 //
 //   Alignment:
 //       AL_LINEAGE_1_Zeta_FRD_1
 //
-//   Input tree:
+//   Input trees:
+//       trees/lineage/1_Zeta_FRD_1_gag_nucs.tree
 //       trees/lineage/1_Zeta_FRD_1_pol_nucs.tree
+//       trees/lineage/1_Zeta_FRD_1_env_nucs.tree
 //
-//   Midpoint-rerooted tree:
+//   Midpoint-rerooted trees:
+//       trees/lineage/1_Zeta_FRD_1_gag_nucs_midpoint_rerooted.tree
 //       trees/lineage/1_Zeta_FRD_1_pol_nucs_midpoint_rerooted.tree
+//       trees/lineage/1_Zeta_FRD_1_env_nucs_midpoint_rerooted.tree
 //
 //   FigTree annotations:
 //       trees/lineage/AL_LINEAGE_1_Zeta_FRD_1.annotations.tsv
@@ -33,8 +37,10 @@
 //   Sublineage alignment:
 //       AL_SUBLINEAGE_1_Eta_E_HQ
 //
-//   Input tree:
+//   Input trees:
+//       trees/sublineage/1_Eta_E_HQ_gag_nucs.tree
 //       trees/sublineage/1_Eta_E_HQ_pol_nucs.tree
+//       trees/sublineage/1_Eta_E_HQ_env_nucs.tree
 //
 // This script assumes that the following modules already exist:
 //
@@ -58,8 +64,11 @@ var SKIP_EXISTING_ANNOTATIONS = false;
 // Analysis settings
 // -----------------------------------------------------------------------------
 
-var FEATURE_NAME =
-	"pol";
+var FEATURE_NAMES = [
+	"gag",
+	"pol",
+	"env"
+];
 
 var TREE_ROOT =
 	"trees";
@@ -419,18 +428,11 @@ function loadTargetAlignments(
 
 // -----------------------------------------------------------------------------
 // Derive source tree path
-//
-// Must match reconstructLineageLevelPhylogenies.js.
-//
-//   AL_LINEAGE_1_Zeta_FRD_1
-//
-// becomes:
-//
-//   trees/lineage/1_Zeta_FRD_1_pol_nucs.tree
 // -----------------------------------------------------------------------------
 
 function getSourceTreeFile(
-	alignmentInfo
+	alignmentInfo,
+	featureName
 ) {
 
 	return (
@@ -440,7 +442,7 @@ function getSourceTreeFile(
 		"/" +
 		alignmentInfo.standardStem +
 		"_" +
-		FEATURE_NAME +
+		featureName +
 		"_nucs.tree"
 	);
 }
@@ -451,7 +453,8 @@ function getSourceTreeFile(
 // -----------------------------------------------------------------------------
 
 function getRerootedTreeFile(
-	alignmentInfo
+	alignmentInfo,
+	featureName
 ) {
 
 	return (
@@ -461,7 +464,7 @@ function getRerootedTreeFile(
 		"/" +
 		alignmentInfo.standardStem +
 		"_" +
-		FEATURE_NAME +
+		featureName +
 		"_nucs_midpoint_rerooted.tree"
 	);
 }
@@ -471,7 +474,7 @@ function getRerootedTreeFile(
 // Derive FigTree annotation path
 //
 // Retaining the alignment name here makes the relationship between the
-// annotation file and its GLUE alignment completely explicit.
+// annotation file and its GLUE alignment explicit.
 // -----------------------------------------------------------------------------
 
 function getAnnotationFile(
@@ -565,12 +568,8 @@ function rerootPhylogeny(
 // -----------------------------------------------------------------------------
 // Export FigTree annotations
 //
-// Equivalent GLUE syntax:
-//
-//   module ervFigTreeAnnotationExporterLocus
-//
-//     export figtree-annotation AL_LINEAGE_1_Zeta_FRD_1 \
-//       -f trees/lineage/AL_LINEAGE_1_Zeta_FRD_1.annotations.tsv
+// FigTree annotations describe the alignment members rather than an individual
+// feature tree, so they are exported only once per alignment.
 // -----------------------------------------------------------------------------
 
 function exportFigTreeAnnotations(
@@ -629,11 +628,12 @@ function exportFigTreeAnnotations(
 
 
 // -----------------------------------------------------------------------------
-// Prepare one lineage or sublineage phylogeny
+// Prepare one lineage or sublineage feature phylogeny
 // -----------------------------------------------------------------------------
 
-function prepareLineagePhylogeny(
-	alignmentRow
+function prepareFeaturePhylogeny(
+	alignmentRow,
+	featureName
 ) {
 
 	var alignmentName =
@@ -644,31 +644,28 @@ function prepareLineagePhylogeny(
 
 	var sourceTreeFile =
 		getSourceTreeFile(
-			alignmentInfo
+			alignmentInfo,
+			featureName
 		);
 
 	var rerootedTreeFile =
 		getRerootedTreeFile(
-			alignmentInfo
-		);
-
-	var annotationFile =
-		getAnnotationFile(
-			alignmentName,
-			alignmentInfo
+			alignmentInfo,
+			featureName
 		);
 
 
 	log(
 		"Processing " +
-		alignmentName
+		alignmentName +
+		" [" +
+		featureName +
+		"]"
 	);
 
 
-	// ---------------------------------------------------------------------
-	// The source tree defines whether this alignment actually produced a
-	// phylogeny during the reconstruction stage.
-	// ---------------------------------------------------------------------
+	// The source tree defines whether this alignment-feature combination
+	// produced a phylogeny during the reconstruction stage.
 
 	if(
 		!fileExists(
@@ -679,6 +676,9 @@ function prepareLineagePhylogeny(
 		log(
 			"Skipping " +
 			alignmentName +
+			" [" +
+			featureName +
+			"]" +
 			": source tree not found -> " +
 			sourceTreeFile
 		);
@@ -690,10 +690,6 @@ function prepareLineagePhylogeny(
 	}
 
 
-	// ---------------------------------------------------------------------
-	// Midpoint reroot
-	// ---------------------------------------------------------------------
-
 	var rerootResult =
 		rerootPhylogeny(
 			alignmentName,
@@ -702,26 +698,10 @@ function prepareLineagePhylogeny(
 		);
 
 
-	// ---------------------------------------------------------------------
-	// FigTree annotations
-	//
-	// Annotation export is tied to the same alignment that generated the
-	// source tree.
-	// ---------------------------------------------------------------------
-
-	var annotationResult =
-		exportFigTreeAnnotations(
-			alignmentName,
-			annotationFile
-		);
-
-
 	return {
 		status: "prepared",
 		rerootResult:
-			rerootResult,
-		annotationResult:
-			annotationResult
+			rerootResult
 	};
 }
 
@@ -810,61 +790,84 @@ _.each(
 	targetAlignments,
 	function(alignmentRow) {
 
-		var result =
-			prepareLineagePhylogeny(
-				alignmentRow
-			);
+		var alignmentHasSourceTree =
+			false;
+
+		_.each(
+			FEATURE_NAMES,
+			function(featureName) {
+
+				var result =
+					prepareFeaturePhylogeny(
+						alignmentRow,
+						featureName
+					);
+
+				if(
+					result.status ===
+					"skipped"
+				) {
+
+					sourceTreeMissingCount++;
+
+					return;
+				}
+
+				alignmentHasSourceTree =
+					true;
+
+				sourceTreeFoundCount++;
 
 
-		if(
-			result.status ===
-			"skipped"
-		) {
+				if(
+					result.rerootResult ===
+					"generated"
+				) {
+
+					rerootedGeneratedCount++;
+				}
+				else if(
+					result.rerootResult ===
+					"already_exists"
+				) {
+
+					rerootedExistingCount++;
+				}
+			}
+		);
+
+
+		// FigTree annotations describe alignment members rather than a
+		// particular feature tree, so export them only once per alignment.
+
+		if(alignmentHasSourceTree) {
+
+			var annotationFile =
+				getAnnotationFile(
+					alignmentRow.name,
+					alignmentRow.alignmentInfo
+				);
+
+			var annotationResult =
+				exportFigTreeAnnotations(
+					alignmentRow.name,
+					annotationFile
+				);
 
 			if(
-				result.reason ===
-				"TREE_NOT_FOUND"
+				annotationResult ===
+				"generated"
 			) {
 
-				sourceTreeMissingCount++;
+				annotationsGeneratedCount++;
 			}
+			else if(
+				annotationResult ===
+				"already_exists"
+			) {
 
-			return;
-		}
-
-
-		sourceTreeFoundCount++;
-
-
-		if(
-			result.rerootResult ===
-			"generated"
-		) {
-
-			rerootedGeneratedCount++;
-		}
-		else if(
-			result.rerootResult ===
-			"already_exists"
-		) {
-
-			rerootedExistingCount++;
-		}
-
-
-		if(
-			result.annotationResult ===
-			"generated"
-		) {
-
-			annotationsGeneratedCount++;
-		}
-		else if(
-			result.annotationResult ===
-			"already_exists"
-		) {
-
-			annotationsExistingCount++;
+				annotationsExistingCount++;
+			}
 		}
 	}
 );
@@ -884,12 +887,12 @@ log(
 );
 
 log(
-	"Alignments with source trees: " +
+	"Alignment-feature combinations with source trees: " +
 	sourceTreeFoundCount
 );
 
 log(
-	"Alignments without source trees: " +
+	"Alignment-feature combinations without source trees: " +
 	sourceTreeMissingCount
 );
 
