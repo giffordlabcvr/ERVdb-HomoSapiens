@@ -1,0 +1,19 @@
+<ecmaFunctionInvoker>
+
+    <scriptFileName>estimateLtrAges.js</scriptFileName>
+
+    <function>
+        <name>estimateConsensusAges</name>
+
+        <parameter>
+            <name>alignmentName</name>
+        </parameter>
+
+        <parameter>
+            <name>referenceName</name>
+        </parameter>
+
+        <tableFromObjectsResultType/>
+    </function>
+
+</ecmaFunctionInvoker>
