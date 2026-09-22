@@ -27,10 +27,11 @@
 // Workflow:
 //
 //   1. Discover AL_LTR_* alignments.
-//   2. Skip the alignment if its output tree already exists.
-//   3. Count members passing the whole_genome coverage threshold.
-//   4. Require at least four qualifying members.
-//   5. Generate a bootstrap-labelled nucleotide tree using the complete
+//   2. Count their members and sort them from smallest to largest.
+//   3. Skip the alignment if its output tree already exists.
+//   4. Count members passing the whole_genome coverage threshold.
+//   5. Require at least four qualifying members.
+//   6. Generate a bootstrap-labelled nucleotide tree using the complete
 //      alignment.
 //
 // Existing trees are skipped so interrupted or partial reconstruction runs
@@ -247,22 +248,76 @@ function countAlignmentMembers(
 	alignmentName
 ) {
 
-	var rows = [];
+	var countResult = null;
 
 	glue.inMode(
 		"/alignment/" +
 			alignmentName,
 		function() {
 
-			rows =
-				queryObjects([
-					"list",
+			countResult =
+				glue.command([
+					"count",
 					"member"
 				]);
 		}
 	);
 
-	return rows.length;
+	return Number(
+		countResult.countResult.count
+	);
+}
+
+
+// -----------------------------------------------------------------------------
+// Count and order alignments by size
+//
+// Member counts are stored on the alignment rows so they can be reused during
+// processing rather than queried for a second time.
+// -----------------------------------------------------------------------------
+
+function sortAlignmentsBySize(
+	alignmentRows
+) {
+
+	_.each(
+		alignmentRows,
+		function(alignmentRow) {
+
+			alignmentRow.memberCount =
+				countAlignmentMembers(
+					alignmentRow.name
+				);
+		}
+	);
+
+	alignmentRows.sort(
+		function(rowA, rowB) {
+
+			var countDifference =
+				rowA.memberCount -
+				rowB.memberCount;
+
+			if(countDifference !== 0) {
+
+				return countDifference;
+			}
+
+			if(rowA.name < rowB.name) {
+
+				return -1;
+			}
+
+			if(rowA.name > rowB.name) {
+
+				return 1;
+			}
+
+			return 0;
+		}
+	);
+
+	return alignmentRows;
 }
 
 
@@ -372,9 +427,7 @@ function generateLtrPhylogeny(
 	// ---------------------------------------------------------------------
 
 	var totalMemberCount =
-		countAlignmentMembers(
-			alignmentName
-		);
+		alignmentRow.memberCount;
 
 
 	if(totalMemberCount <
@@ -548,6 +601,29 @@ log(
 );
 
 
+log(
+	"Counting alignment members and ordering alignments from smallest to largest"
+);
+
+
+ltrAlignments =
+	sortAlignmentsBySize(
+		ltrAlignments
+	);
+
+
+if(ltrAlignments.length > 0) {
+
+	log(
+		"Alignment size range: " +
+		ltrAlignments[0].memberCount +
+		" to " +
+		ltrAlignments[ltrAlignments.length - 1].memberCount +
+		" member(s)"
+	);
+}
+
+
 if(SKIP_EXISTING_TREES) {
 
 	log(
@@ -671,3 +747,4 @@ log(
 log(
 	"Finished building LTR nucleotide phylogenies."
 );
+
