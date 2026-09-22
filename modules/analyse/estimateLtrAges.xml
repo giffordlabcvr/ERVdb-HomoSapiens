@@ -17,10 +17,6 @@
             <name>minColumnOccupancyPct</name>
         </parameter>
 
-        <parameter>
-            <name>minConsensusSupportPct</name>
-        </parameter>
-
         <tableFromObjectsResultType/>
     </function>
 
@@ -39,8 +35,26 @@
             <name>minColumnOccupancyPct</name>
         </parameter>
 
+        <tableFromObjectsResultType/>
+    </function>
+
+    <function>
+        <name>storeConsensusAges</name>
+
         <parameter>
-            <name>minConsensusSupportPct</name>
+            <name>alignmentName</name>
+        </parameter>
+
+        <parameter>
+            <name>referenceName</name>
+        </parameter>
+
+        <parameter>
+            <name>ltrLineageId</name>
+        </parameter>
+
+        <parameter>
+            <name>minColumnOccupancyPct</name>
         </parameter>
 
         <tableFromObjectsResultType/>
