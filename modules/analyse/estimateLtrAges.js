@@ -1945,3 +1945,91 @@ function normaliseRequired(
 
     return result;
 }
+
+function medianAbsoluteDeviation(
+    values,
+    centre
+) {
+
+    if(
+        values === null ||
+        values.length === 0 ||
+        centre === null
+    ) {
+        return null;
+    }
+
+
+    var deviations =
+        [];
+
+
+    _.each(
+        values,
+        function(value) {
+
+            deviations.push(
+                Math.abs(
+                    value - centre
+                )
+            );
+        }
+    );
+
+
+    sortNumeric(
+        deviations
+    );
+
+
+    return median(
+        deviations
+    );
+}
+
+
+function robustZScore(
+    value,
+    medianValue,
+    madValue
+) {
+
+    if(
+        value === null ||
+        medianValue === null ||
+        madValue === null ||
+        madValue === 0
+    ) {
+        return null;
+    }
+
+
+    return (
+        0.6745 *
+        (value - medianValue) /
+        madValue
+    );
+}
+
+
+function outlierStatusFromRobustZ(
+    robustZ
+) {
+
+    if(robustZ === null) {
+        return "none";
+    }
+
+
+    if(robustZ >= 3.5) {
+        return "high_outlier";
+    }
+
+
+    if(robustZ <= -3.5) {
+        return "low_outlier";
+    }
+
+
+    return "none";
+}
