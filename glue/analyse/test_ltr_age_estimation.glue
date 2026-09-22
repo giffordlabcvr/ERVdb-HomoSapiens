@@ -1,0 +1,38 @@
+console set cmd-output-file-format tab
+
+    
+# LTR10E (HERV-I)
+
+console set next-cmd-output-file LTR10E_90_50.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR10E LTR_REF_LTR10E 90 50
+
+console set next-cmd-output-file LTR10E_90_70.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR10E LTR_REF_LTR10E 90 70
+
+console set next-cmd-output-file LTR10E_90_80.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR10E LTR_REF_LTR10E 90 80
+
+console set next-cmd-output-file LTR10E_90_90.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR10E LTR_REF_LTR10E 90 90
+    
+# LTR6A (HERV-T)
+
+console set next-cmd-output-file LTR6A_90_50.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR6A LTR_REF_LTR6A 90 50
+
+console set next-cmd-output-file LTR6A_90_70.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR6A LTR_REF_LTR6A 90 70
+
+console set next-cmd-output-file LTR6A_90_80.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR6A LTR_REF_LTR6A 90 80
+
+console set next-cmd-output-file LTR6A_90_90.tsv
+module estimateLtrAges invoke-function estimateConsensusAges \
+    AL_LTR_LTR6A LTR_REF_LTR6A 90 90

@@ -1,38 +1,16 @@
 /**
  * estimateLtrAges.js
  *
- * Estimate the ages of LTR loci from nucleotide divergence from an
- * alignment-derived consensus sequence.
+ * Estimate LTR locus ages from divergence from an alignment-derived
+ * consensus sequence.
  *
- * The LTR alignment must be constrained by the supplied LTR reference.
+ * Dating columns are selected automatically using:
  *
- * GLUE is used to:
+ *   1. minimum column occupancy;
+ *   2. minimum support for the GLUE consensus nucleotide.
  *
- *   1. Generate a nucleotide consensus in the coordinate space of the
- *      supplied LTR reference.
- *
- *   2. Export qualifying alignment members in exactly the same reference
- *      coordinate space, excluding insertions relative to the reference.
- *
- * This script then compares each exported sequence directly with the
- * consensus.
- *
- * Only positions containing canonical nucleotides (A/C/G/T) in BOTH the
- * consensus and the alignment member are compared.
- *
- * Gaps and ambiguous nucleotides are excluded from the calculation.
- *
- * Raw nucleotide divergence:
- *
- *      p_distance = substitutions / sites_compared
- *
- * Age:
- *
- *      age_mya = p_distance / substitution_rate / 1,000,000
- *
- * This is a consensus-divergence age estimate. There is therefore no
- * factor of two, unlike dating based on divergence between paired
- * proviral LTRs.
+ * Both thresholds are supplied as function parameters so their effects
+ * can be investigated without modifying the module.
  */
 
 
@@ -51,10 +29,7 @@ var FEATURE_NAME =
 
 
 /*
- * Initial locus-selection threshold.
- *
- * This is deliberately independent of the later calculation of
- * sites_compared / comparison_coverage_pct.
+ * Minimum reference coverage for a locus to enter the analysis.
  */
 
 var MIN_REF_NT_COVERAGE_PCT =
@@ -62,27 +37,190 @@ var MIN_REF_NT_COVERAGE_PCT =
 
 
 /*
- * Neutral substitution rate.
- *
- * IMPORTANT:
- * This value should be reviewed before age estimates are treated as
- * definitive ERVdb calibrations.
- *
- * Units:
- * substitutions / site / year
+ * Minimum proportion of dating-mask sites represented by canonical
+ * nucleotides in a locus before an age is assigned.
  */
 
-var SUBSTITUTION_RATE =
+var MIN_DATING_COVERAGE_PCT =
+    70.0;
+
+
+/*
+ * Provisional neutral substitution rates.
+ *
+ * LOW rate  -> older age bound
+ * HIGH rate -> younger age bound
+ */
+
+var SUBSTITUTION_RATE_CENTRAL =
     2.2e-9;
+
+var SUBSTITUTION_RATE_LOW =
+    1.8e-9;
+
+var SUBSTITUTION_RATE_HIGH =
+    2.6e-9;
 
 
 // ============================================================================
-// Public function
+// Public functions
 // ============================================================================
 
 function estimateConsensusAges(
     alignmentName,
-    referenceName
+    referenceName,
+    minColumnOccupancyPct,
+    minConsensusSupportPct
+) {
+
+    var analysis =
+        analyseAlignment(
+            alignmentName,
+            referenceName,
+            minColumnOccupancyPct,
+            minConsensusSupportPct
+        );
+
+    return analysis.rows;
+}
+
+
+function summariseConsensusAges(
+    alignmentName,
+    referenceName,
+    minColumnOccupancyPct,
+    minConsensusSupportPct
+) {
+
+    var analysis =
+        analyseAlignment(
+            alignmentName,
+            referenceName,
+            minColumnOccupancyPct,
+            minConsensusSupportPct
+        );
+
+
+    var ages =
+        [];
+
+    var rawDistances =
+        [];
+
+    var datingDistances =
+        [];
+
+
+    _.each(
+        analysis.rows,
+        function(row) {
+
+            if(row.raw_p_distance !== null) {
+                rawDistances.push(
+                    row.raw_p_distance
+                );
+            }
+
+            if(row.dating_p_distance !== null) {
+                datingDistances.push(
+                    row.dating_p_distance
+                );
+            }
+
+            if(row.age_mya !== null) {
+                ages.push(
+                    row.age_mya
+                );
+            }
+        }
+    );
+
+
+    sortNumeric(ages);
+    sortNumeric(rawDistances);
+    sortNumeric(datingDistances);
+
+
+    return [{
+
+        alignment_name:
+            alignmentName,
+
+        reference_name:
+            referenceName,
+
+        min_column_occupancy_pct:
+            analysis.minColumnOccupancyPct,
+
+        min_consensus_support_pct:
+            analysis.minConsensusSupportPct,
+
+
+        // Alignment / mask
+
+        alignment_taxa:
+            analysis.alignmentTaxa,
+
+        consensus_length:
+            analysis.consensusLength,
+
+        callable_consensus_sites:
+            analysis.callableConsensusSites,
+
+        dating_mask_sites:
+            analysis.datingMaskSites,
+
+        dating_mask_pct:
+            percentage(
+                analysis.datingMaskSites,
+                analysis.callableConsensusSites
+            ),
+
+
+        // Number of loci actually receiving an age
+
+        dated_taxa:
+            ages.length,
+
+
+        // Divergence summaries
+
+        median_raw_p_distance:
+            median(rawDistances),
+
+        median_dating_p_distance:
+            median(datingDistances),
+
+
+        // Age distribution
+
+        min_age_mya:
+            percentile(ages, 0.00),
+
+        q1_age_mya:
+            percentile(ages, 0.25),
+
+        median_age_mya:
+            percentile(ages, 0.50),
+
+        q3_age_mya:
+            percentile(ages, 0.75),
+
+        max_age_mya:
+            percentile(ages, 1.00)
+    }];
+}
+
+
+// ============================================================================
+// Core analysis
+// ============================================================================
+
+function analyseAlignment(
+    alignmentName,
+    referenceName,
+    minColumnOccupancyPct,
+    minConsensusSupportPct
 ) {
 
     alignmentName =
@@ -98,19 +236,33 @@ function estimateConsensusAges(
         );
 
 
+    minColumnOccupancyPct =
+        normalisePercentage(
+            minColumnOccupancyPct,
+            "minColumnOccupancyPct"
+        );
+
+
+    minConsensusSupportPct =
+        normalisePercentage(
+            minConsensusSupportPct,
+            "minConsensusSupportPct"
+        );
+
+
     var whereClause =
         buildMemberWhereClause();
 
 
     // ------------------------------------------------------------------------
-    // Generate consensus
+    // Generate GLUE consensus
     // ------------------------------------------------------------------------
 
     var consensusResult;
 
+
     glue.inMode(
-        "module/" +
-        CONSENSUS_GENERATOR_MODULE,
+        "module/" + CONSENSUS_GENERATOR_MODULE,
         function() {
 
             consensusResult =
@@ -157,24 +309,23 @@ function estimateConsensusAges(
     if(consensusSequence.length === 0) {
 
         throw (
-            "Consensus sequence is empty for alignment " +
+            "Consensus sequence is empty for " +
             alignmentName
         );
     }
 
 
     // ------------------------------------------------------------------------
-    // Export qualifying alignment members in the SAME reference coordinate
-    // space.
+    // Export qualifying members in the same reference-coordinate space.
     //
-    // Note that --includeInsertions / -i is deliberately NOT supplied.
+    // --includeInsertions is deliberately NOT used.
     // ------------------------------------------------------------------------
 
     var alignmentResult;
 
+
     glue.inMode(
-        "module/" +
-        FASTA_ALIGNMENT_EXPORTER_MODULE,
+        "module/" + FASTA_ALIGNMENT_EXPORTER_MODULE,
         function() {
 
             alignmentResult =
@@ -202,37 +353,17 @@ function estimateConsensusAges(
     if(memberRecords.length === 0) {
 
         throw (
-            "No qualifying alignment members were exported from " +
+            "No qualifying alignment members exported from " +
             alignmentName
         );
     }
 
 
     // ------------------------------------------------------------------------
-    // Determine callable consensus positions
+    // Normalise sequences and check coordinate compatibility
     // ------------------------------------------------------------------------
 
-    var callableConsensusSites =
-        countCanonicalNucleotides(
-            consensusSequence
-        );
-
-
-    if(callableConsensusSites === 0) {
-
-        throw (
-            "Consensus for " +
-            alignmentName +
-            " contains no callable A/C/G/T positions"
-        );
-    }
-
-
-    // ------------------------------------------------------------------------
-    // Compare each member with the consensus
-    // ------------------------------------------------------------------------
-
-    var resultRows =
+    var members =
         [];
 
 
@@ -240,21 +371,14 @@ function estimateConsensusAges(
         memberRecords,
         function(memberRecord) {
 
-            var memberSequence =
+            var sequence =
                 normaliseSequence(
                     memberRecord.sequence
                 );
 
 
-            /*
-             * This is an important sanity check.
-             *
-             * Both sequences should have been generated in precisely the
-             * same related-reference / feature coordinate space.
-             */
-
             if(
-                memberSequence.length !==
+                sequence.length !==
                 consensusSequence.length
             ) {
 
@@ -264,56 +388,165 @@ function estimateConsensusAges(
                     ": consensus length = " +
                     consensusSequence.length +
                     ", member length = " +
-                    memberSequence.length
+                    sequence.length
                 );
             }
 
 
-            var comparison =
+            members.push({
+                id: memberRecord.id,
+                sequence: sequence
+            });
+        }
+    );
+
+
+    // ------------------------------------------------------------------------
+    // Column statistics and dating mask
+    // ------------------------------------------------------------------------
+
+    var columnStats =
+        calculateColumnStats(
+            consensusSequence,
+            members
+        );
+
+
+    var datingMask =
+        buildDatingMask(
+            consensusSequence,
+            columnStats,
+            minColumnOccupancyPct,
+            minConsensusSupportPct
+        );
+
+
+    var callableConsensusSites =
+        countCanonicalNucleotides(
+            consensusSequence
+        );
+
+
+    var datingMaskSites =
+        countTrue(
+            datingMask
+        );
+
+
+    if(datingMaskSites === 0) {
+
+        throw (
+            "Dating mask contains zero usable columns for " +
+            alignmentName +
+            " using occupancy >= " +
+            minColumnOccupancyPct +
+            "% and consensus support >= " +
+            minConsensusSupportPct +
+            "%"
+        );
+    }
+
+
+    // ------------------------------------------------------------------------
+    // Locus comparisons
+    // ------------------------------------------------------------------------
+
+    var rows =
+        [];
+
+
+    _.each(
+        members,
+        function(member) {
+
+            var rawComparison =
                 compareSequences(
                     consensusSequence,
-                    memberSequence
+                    member.sequence,
+                    null
                 );
 
 
-            var comparisonCoveragePct =
-                (
-                    100.0 *
-                    comparison.sitesCompared /
+            var datingComparison =
+                compareSequences(
+                    consensusSequence,
+                    member.sequence,
+                    datingMask
+                );
+
+
+            var rawCoveragePct =
+                percentage(
+                    rawComparison.sitesCompared,
                     callableConsensusSites
                 );
 
 
-            var pDistance = null;
-            var ageMya = null;
+            var datingCoveragePct =
+                percentage(
+                    datingComparison.sitesCompared,
+                    datingMaskSites
+                );
 
 
-            if(comparison.sitesCompared > 0) {
+            var rawPDistance =
+                distanceFromComparison(
+                    rawComparison
+                );
 
-                pDistance =
-                    (
-                        comparison.sitesDifferent /
-                        comparison.sitesCompared
+
+            var datingPDistance =
+                distanceFromComparison(
+                    datingComparison
+                );
+
+
+            var ageMya =
+                null;
+
+            var ageYoungerBoundMya =
+                null;
+
+            var ageOlderBoundMya =
+                null;
+
+
+            if(
+                datingPDistance !== null &&
+                datingCoveragePct >=
+                    MIN_DATING_COVERAGE_PCT
+            ) {
+
+                ageMya =
+                    ageFromDistance(
+                        datingPDistance,
+                        SUBSTITUTION_RATE_CENTRAL
                     );
 
 
-                ageMya =
-                    (
-                        pDistance /
-                        SUBSTITUTION_RATE /
-                        1000000.0
+                ageYoungerBoundMya =
+                    ageFromDistance(
+                        datingPDistance,
+                        SUBSTITUTION_RATE_HIGH
+                    );
+
+
+                ageOlderBoundMya =
+                    ageFromDistance(
+                        datingPDistance,
+                        SUBSTITUTION_RATE_LOW
                     );
             }
 
 
-            var memberIdentity =
+            var identity =
                 parseAlignmentMemberId(
-                    memberRecord.id,
+                    member.id,
                     alignmentName
                 );
 
 
-            resultRows.push({
+            rows.push({
 
                 alignment_name:
                     alignmentName,
@@ -322,46 +555,246 @@ function estimateConsensusAges(
                     referenceName,
 
                 source_name:
-                    memberIdentity.sourceName,
+                    identity.sourceName,
 
                 sequence_id:
-                    memberIdentity.sequenceID,
+                    identity.sequenceID,
 
-                fasta_id:
-                    memberRecord.id,
+
+                // Mask definition
+
+                min_column_occupancy_pct:
+                    minColumnOccupancyPct,
+
+                min_consensus_support_pct:
+                    minConsensusSupportPct,
 
                 consensus_length:
                     consensusSequence.length,
 
+                alignment_taxa:
+                    members.length,
+
                 callable_consensus_sites:
                     callableConsensusSites,
 
-                sites_compared:
-                    comparison.sitesCompared,
+                dating_mask_sites:
+                    datingMaskSites,
 
-                sites_matching:
-                    comparison.sitesMatching,
 
-                sites_different:
-                    comparison.sitesDifferent,
+                // Raw comparison
 
-                comparison_coverage_pct:
-                    comparisonCoveragePct,
+                raw_sites_compared:
+                    rawComparison.sitesCompared,
 
-                p_distance:
-                    pDistance,
+                raw_sites_different:
+                    rawComparison.sitesDifferent,
+
+                raw_comparison_coverage_pct:
+                    rawCoveragePct,
+
+                raw_p_distance:
+                    rawPDistance,
+
+
+                // Masked comparison
+
+                dating_sites_compared:
+                    datingComparison.sitesCompared,
+
+                dating_sites_different:
+                    datingComparison.sitesDifferent,
+
+                dating_coverage_pct:
+                    datingCoveragePct,
+
+                dating_p_distance:
+                    datingPDistance,
+
+
+                // Clock
 
                 substitution_rate:
-                    SUBSTITUTION_RATE,
+                    SUBSTITUTION_RATE_CENTRAL,
+
+                substitution_rate_low:
+                    SUBSTITUTION_RATE_LOW,
+
+                substitution_rate_high:
+                    SUBSTITUTION_RATE_HIGH,
+
+
+                // Age
 
                 age_mya:
-                    ageMya
+                    ageMya,
+
+                age_younger_bound_mya:
+                    ageYoungerBoundMya,
+
+                age_older_bound_mya:
+                    ageOlderBoundMya
             });
         }
     );
 
 
-    return resultRows;
+    return {
+
+        alignmentName:
+            alignmentName,
+
+        referenceName:
+            referenceName,
+
+        minColumnOccupancyPct:
+            minColumnOccupancyPct,
+
+        minConsensusSupportPct:
+            minConsensusSupportPct,
+
+        alignmentTaxa:
+            members.length,
+
+        consensusLength:
+            consensusSequence.length,
+
+        callableConsensusSites:
+            callableConsensusSites,
+
+        datingMaskSites:
+            datingMaskSites,
+
+        rows:
+            rows
+    };
+}
+
+
+// ============================================================================
+// Column statistics
+// ============================================================================
+
+function calculateColumnStats(
+    consensusSequence,
+    members
+) {
+
+    var stats =
+        [];
+
+
+    for(
+        var pos = 0;
+        pos < consensusSequence.length;
+        pos++
+    ) {
+
+        var consensusNt =
+            consensusSequence.charAt(pos);
+
+
+        var callableCount =
+            0;
+
+        var consensusCount =
+            0;
+
+
+        _.each(
+            members,
+            function(member) {
+
+                var nt =
+                    member.sequence.charAt(pos);
+
+
+                if(!isCanonicalNt(nt)) {
+                    return;
+                }
+
+
+                callableCount++;
+
+
+                if(
+                    isCanonicalNt(consensusNt) &&
+                    nt === consensusNt
+                ) {
+                    consensusCount++;
+                }
+            }
+        );
+
+
+        stats.push({
+
+            callableCount:
+                callableCount,
+
+            consensusCount:
+                consensusCount,
+
+            occupancyPct:
+                percentage(
+                    callableCount,
+                    members.length
+                ),
+
+            consensusSupportPct:
+                percentage(
+                    consensusCount,
+                    callableCount
+                )
+        });
+    }
+
+
+    return stats;
+}
+
+
+// ============================================================================
+// Dating mask
+// ============================================================================
+
+function buildDatingMask(
+    consensusSequence,
+    columnStats,
+    minColumnOccupancyPct,
+    minConsensusSupportPct
+) {
+
+    var mask =
+        [];
+
+
+    for(
+        var pos = 0;
+        pos < consensusSequence.length;
+        pos++
+    ) {
+
+        var stats =
+            columnStats[pos];
+
+
+        mask.push(
+
+            isCanonicalNt(
+                consensusSequence.charAt(pos)
+            ) &&
+
+            stats.occupancyPct >=
+                minColumnOccupancyPct &&
+
+            stats.consensusSupportPct >=
+                minConsensusSupportPct
+        );
+    }
+
+
+    return mask;
 }
 
 
@@ -371,7 +804,8 @@ function estimateConsensusAges(
 
 function compareSequences(
     consensusSequence,
-    memberSequence
+    memberSequence,
+    mask
 ) {
 
     var sitesCompared =
@@ -385,28 +819,25 @@ function compareSequences(
 
 
     for(
-        var i = 0;
-        i < consensusSequence.length;
-        i++
+        var pos = 0;
+        pos < consensusSequence.length;
+        pos++
     ) {
 
+        if(
+            mask !== null &&
+            !mask[pos]
+        ) {
+            continue;
+        }
+
+
         var consensusNt =
-            consensusSequence.charAt(i);
+            consensusSequence.charAt(pos);
 
         var memberNt =
-            memberSequence.charAt(i);
+            memberSequence.charAt(pos);
 
-
-        /*
-         * Compare only canonical nucleotides.
-         *
-         * This automatically excludes:
-         *
-         *   -
-         *   N
-         *   IUPAC ambiguity codes
-         *   any other non-canonical character
-         */
 
         if(
             !isCanonicalNt(consensusNt) ||
@@ -420,11 +851,8 @@ function compareSequences(
 
 
         if(consensusNt === memberNt) {
-
             sitesMatching++;
-
         } else {
-
             sitesDifferent++;
         }
     }
@@ -444,6 +872,126 @@ function compareSequences(
 }
 
 
+function distanceFromComparison(
+    comparison
+) {
+
+    if(comparison.sitesCompared === 0) {
+        return null;
+    }
+
+
+    return (
+        comparison.sitesDifferent /
+        comparison.sitesCompared
+    );
+}
+
+
+// ============================================================================
+// Age calculation
+// ============================================================================
+
+function ageFromDistance(
+    distance,
+    substitutionRate
+) {
+
+    return (
+        distance /
+        substitutionRate /
+        1000000.0
+    );
+}
+
+
+// ============================================================================
+// Distribution helpers
+// ============================================================================
+
+function sortNumeric(values) {
+
+    values.sort(
+        function(a, b) {
+            return a - b;
+        }
+    );
+}
+
+
+function median(values) {
+
+    return percentile(
+        values,
+        0.5
+    );
+}
+
+
+/*
+ * Linear interpolation between adjacent ranked observations.
+ *
+ * For exploratory summaries this gives us conventional continuous
+ * quartiles without adding another dependency.
+ */
+
+function percentile(
+    sortedValues,
+    proportion
+) {
+
+    if(
+        sortedValues.length === 0
+    ) {
+        return null;
+    }
+
+
+    if(
+        sortedValues.length === 1
+    ) {
+        return sortedValues[0];
+    }
+
+
+    var index =
+        proportion *
+        (sortedValues.length - 1);
+
+
+    var lowerIndex =
+        Math.floor(index);
+
+    var upperIndex =
+        Math.ceil(index);
+
+
+    if(
+        lowerIndex === upperIndex
+    ) {
+        return sortedValues[lowerIndex];
+    }
+
+
+    var fraction =
+        index - lowerIndex;
+
+
+    return (
+        sortedValues[lowerIndex] +
+        fraction *
+        (
+            sortedValues[upperIndex] -
+            sortedValues[lowerIndex]
+        )
+    );
+}
+
+
+// ============================================================================
+// Nucleotide helpers
+// ============================================================================
+
 function isCanonicalNt(nt) {
 
     return (
@@ -455,21 +1003,23 @@ function isCanonicalNt(nt) {
 }
 
 
-function countCanonicalNucleotides(sequence) {
+function countCanonicalNucleotides(
+    sequence
+) {
 
     var count =
         0;
 
 
     for(
-        var i = 0;
-        i < sequence.length;
-        i++
+        var pos = 0;
+        pos < sequence.length;
+        pos++
     ) {
 
         if(
             isCanonicalNt(
-                sequence.charAt(i)
+                sequence.charAt(pos)
             )
         ) {
             count++;
@@ -481,11 +1031,83 @@ function countCanonicalNucleotides(sequence) {
 }
 
 
+function countTrue(values) {
+
+    var count =
+        0;
+
+
+    _.each(
+        values,
+        function(value) {
+
+            if(value) {
+                count++;
+            }
+        }
+    );
+
+
+    return count;
+}
+
+
+// ============================================================================
+// Numeric helpers
+// ============================================================================
+
+function percentage(
+    numerator,
+    denominator
+) {
+
+    if(denominator === 0) {
+        return 0.0;
+    }
+
+
+    return (
+        100.0 *
+        numerator /
+        denominator
+    );
+}
+
+
+function normalisePercentage(
+    value,
+    parameterName
+) {
+
+    var number =
+        Number(value);
+
+
+    if(
+        isNaN(number) ||
+        number < 0.0 ||
+        number > 100.0
+    ) {
+
+        throw (
+            "Parameter '" +
+            parameterName +
+            "' must be a number between 0 and 100"
+        );
+    }
+
+
+    return number;
+}
+
+
 // ============================================================================
 // GLUE result parsing
 // ============================================================================
 
-function nucleotideFastaRecords(result) {
+function nucleotideFastaRecords(
+    result
+) {
 
     if(
         result === null ||
@@ -504,19 +1126,12 @@ function nucleotideFastaRecords(result) {
         result.nucleotideFasta.sequences;
 
 
-    /*
-     * Nashorn / GLUE result objects can occasionally expose a single
-     * result differently from a normal JS array. Normalise here.
-     */
-
     if(sequences === null) {
         return [];
     }
 
 
-    if(
-        sequences.length === undefined
-    ) {
+    if(sequences.length === undefined) {
         return [sequences];
     }
 
@@ -533,20 +1148,6 @@ function parseAlignmentMemberId(
     fastaId,
     alignmentName
 ) {
-
-    /*
-     * fastaAlignmentExporter currently emits:
-     *
-     *   <alignment>.<source>.<sequenceID>
-     *
-     * e.g.
-     *
-     *   AL_LTR_LTR12C.filtered_2026_07.RBRT10000
-     *
-     * Strip the known alignment prefix and then split the remainder.
-     *
-     * This assumes source names do not contain ".".
-     */
 
     var prefix =
         alignmentName +
@@ -618,7 +1219,9 @@ function buildMemberWhereClause() {
 // General helpers
 // ============================================================================
 
-function normaliseSequence(value) {
+function normaliseSequence(
+    value
+) {
 
     if(
         value === null ||
@@ -627,11 +1230,6 @@ function normaliseSequence(value) {
         return "";
     }
 
-
-    /*
-     * FASTA command results should not contain whitespace, but removing it
-     * here makes the comparison robust to representation differences.
-     */
 
     return (
         ("" + value)
