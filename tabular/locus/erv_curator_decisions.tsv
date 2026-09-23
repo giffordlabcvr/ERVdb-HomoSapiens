@@ -1,4 +1,4 @@
-i8	case_status	names_decision	curator_decision	reasoning	length	phylogeny_name	names
+sequenceID	case_status	names_decision	curator_decision	reasoning	length	phylogeny_name	names
 RBRT247685	Resolved at subgenus level	Lambda	ERV3-16A3		1283	ERV3-16A3,ERV-Lb4,HERV-L	LTR16A,ERVL-B4-int,HERV-L
 RBRT2098	Resolved at clade level	Clade III	ERV3-16A3		1633	ERV3-16A3,ERV3-16A3,ERV-L47	LTR16B2,ERV3-16A3_I-int,LTR47B
 RBRT391681	Resolved at subgenus level	Lambda	ERV3-16A3		6168	ERV3-16A3,ERV3-16A3,ERV3-16A3,ERV3-16A3,ERV3-16A3,ERV3-16A3,ERV3-16A3,ERV3-16A3,ERV3-16A3,ERV3-16A3,HERV-L	LTR16A,ERV3-16A3_I-int,ERV3-16A3_I-int,ERV3-16A3_I-int,ERV3-16A3_I-int,ERV3-16A3_I-int,ERV3-16A3_I-int,ERV3-16A3_I-int,ERV3-16A3_I-int,LTR16A,HERV-L
