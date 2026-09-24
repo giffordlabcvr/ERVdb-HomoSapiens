@@ -1,42 +1,53 @@
-sequenceID	lineage_id	name	full_name	species	parent_lineage	entity_type	entity_level	status	highly_degraded	sequence_kind	length	clade	subfamily	genus	subgenus	reference_type	reference_method	num_seqs	accession	pubmed_id	in_rt_phylogeny	in_tm_phylogeny	curation_tier	human_erv
-HERV-39	ERV-1.Rho.Rb.39	HERV-39	human endogenous retrovirus 39		ERV-1.Rho.Rb	annotation_group	sublineage	accepted	uncertain	reference	9084	I	Orthoretrovirinae	Rhoretrovirus		Consensus	REPBASE				no pol	no	1	TRUE
-MER-52A	ERV-1.Zeta.HF.52A	MER-52A	medium reiteration frequency repeat 52A		ERV-1.Zeta.HF	annotation_group	sublineage	accepted	no	reference	4981	I	Orthoretrovirinae	Zetaretrovirus	HF	Consensus	REPBASE				YES	no	1	TRUE
-HERV-19	ERV-1.Zeta.19	HERV-19	human endogenous retrovirus 19		ERV-1.Zeta	annotation_group	sublineage	accepted	yes	reference	5586	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-HERV-35	ERV-1.Zeta.35	HERV-35	human endogenous retrovirus 35		ERV-1.Zeta	annotation_group	sublineage	accepted	yes	reference	6918	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-HERV-16	ERV-3.Lambda.16	HERV-16	human endogenous retrovirus 16		ERV-3.Lambda.L	annotation_group	sublineage	accepted	yes	reference	4996	III	Orthoretrovirinae	Lambdaretrovirus	16	Consensus	REPBASE				YES	no	1	TRUE
-HERV-52	ERV-3.Lambda.52	HERV-52	human endogenous retrovirus 52		ERV-3.Lambda.L	annotation_group	sublineage	accepted	uncertain	reference	3556	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-HERV-57	ERV-3.Lambda.57	HERV-57	human endogenous retrovirus 57		ERV-3.Lambda.L	annotation_group	sublineage	accepted	uncertain	reference	5343	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				partial	no	1	TRUE
-HERV-L40	ERV-3.Lambda.40	HERV-L40	human endogenous retrovirus L40		ERV-3.Lambda.L	annotation_group	sublineage	accepted	uncertain	reference	5530	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				partial	no	1	TRUE
-HERV-L53	ERV-3.Lambda.53	HERV-L53	human endogenous retrovirus L53		ERV-3.Lambda.L	annotation_group	sublineage	accepted	uncertain	reference	3329	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				partial	no	1	TRUE
-HERV-L74	ERV-3.Lambda.74	HERV-L74	human endogenous retrovirus L74		ERV-3.Lambda.L	annotation_group	sublineage	accepted	uncertain	reference	5685	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				no RT	no	2	TRUE
-HERV-Pb	ERV-1.Iota.I.Pb	HERV-Pb	human endogenous retrovirus Pb		ERV-1.Iota.I	annotation_group	sublineage	excluded	yes	reference		I	Orthoretrovirinae	Iotaretrovirus		Reference	reference				no RT	no	4	TRUE
-HERV-31	ERV-1.Rho.Rb.31	HERV-31	human endogenous retrovirus 31		ERV-1.Rho.Rb	annotation_group	sublineage	excluded	yes	reference	4936	I	Orthoretrovirinae	Rhoretrovirus		Consensus	REPBASE				no pol	no	1	TRUE
-HERV-L68	ERV-3.Lambda.68	HERV-L68	human endogenous retrovirus L68		ERV-3.Lambda.L	annotation_group	sublineage	excluded	uncertain	reference	3037	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-HARLEQUIN	ERV-1.Eta.E.HQ	HARLEQUIN	HARLEQUIN		ERVR-1.Eta.E	phylogeny_group	sublineage	accepted	no	reference	6896	I	Orthoretrovirinae	Gammaretrovirus	Eta	Consensus	REPBASE				YES	no	7	TRUE
-HUERS-P1	ERV-1.Zeta.W9P.P.1	HUERS-P1	HUERS-P1		ERV-1.Zeta.W9P.P	phylogeny_group	sublineage	accepted	uncertain	reference	11027	I	Orthoretrovirinae	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	no RT	no	3	TRUE
-HUERS-P2	ERV-1.Zeta.W9P.P.2	HUERS-P2	HUERS-P2		ERV-1.Zeta.W9P.P	phylogeny_group	sublineage	accepted	no	reference	8987	I	Orthoretrovirinae	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	YES	no	3	TRUE
-HuRRS-P	ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	HuRRS-P		ERV-1.Zeta.W9P.P	phylogeny_group	sublineage	accepted	no	reference	8099	I	Orthoretrovirinae	Zetaretrovirus	W9P	Reference	reference				YES	no	4	TRUE
-ERV-Lb4	ERV-3.Lambda.Lb4	ERV-Lb4	endogenous retrovirus Lb4		ERV-3.Lambda	phylogeny_group	sublineage	accepted	no	reference	5714	III	Orthoretrovirinae	Lambdaretrovirus	L	Consensus	REPBASE				YES	no	1	TRUE
-ERV-L47	ERV-3.Lambda.47	ERV-L47	endogenous retrovirus L47		ERV-3.Lambda	phylogeny_group	sublineage	accepted	uncertain	reference	5246	III	Orthoretrovirinae	Sigmaretrovirus		Consensus	REPBASE				YES	no	1	TRUE
-LOR-1	ERVR-1.Theta.LOR1	LOR-1	LOR-1		ERV-1.Theta	repeat_group	sublineage	accepted	yes	reference	8120	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-LTR-43	ERVR-1.Theta.43	LTR-43	LTR-43		ERV-1.Theta	repeat_group	sublineage	accepted	yes	reference	4798	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-101	ERVR-1.Theta.101	MER-101	medium reiteration frequency repeat 101		ERV-1.Theta	repeat_group	sublineage	accepted	yes	reference	6639	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-61	ERVR-1.Theta.MER61	MER-61	medium reiteration frequency repeat 61		ERV-1.Theta	repeat_group	sublineage	accepted	yes	reference	5217	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-89	ERVR-1.Theta.MER89	MER-89	medium reiteration frequency repeat 89		ERV-1.Theta	repeat_group	sublineage	accepted	yes	reference	7048	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-HERV-G25	ERVR-1.Zeta.W9P.P.G25	HERV-G25	human endogenous retrovirus G25		ERV-1.Zeta.W9P.P	repeat_group	sublineage	accepted	uncertain	reference	6996	I	Orthoretrovirinae	Zetaretrovirus	W9P	Consensus	REPBASE				YES	no	1	TRUE
-MER-41	ERVR-1.Zeta.MER41	MER-41	medium reiteration frequency repeat 41		ERV-1.Zeta	repeat_group	sublineage	accepted	yes	reference	3944	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-57	ERVR-1.Zeta.MER57	MER-57	medium reiteration frequency repeat 57		ERV-1.Zeta	repeat_group	sublineage	accepted	yes	reference	7133	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-83A	ERVR-1.Zeta.MER83A	MER-83A	medium reiteration frequency repeat 83A		ERV-1.Zeta	repeat_group	sublineage	accepted	yes	reference	4285	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-83B	ERVR-1.Zeta.MER83B	MER-83B	medium reiteration frequency repeat 83B		ERV-1.Zeta	repeat_group	sublineage	accepted	yes	reference	4880	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-84	ERVR-1.Zeta.MER84	MER-84	medium reiteration frequency repeat 84		ERV-1.Zeta	repeat_group	sublineage	accepted	yes	reference	2880	I	Orthoretrovirinae	Zetaretrovirus		Consensus	REPBASE				YES	YES	1	TRUE
-ERV3-16A3	ERVR-3.Lambda.16A3	ERV3-16A3	ERV3-16A3		ERV-3.Lambda.L	repeat_group	sublineage	accepted	yes	reference	6070	III	Orthoretrovirinae	Lambdaretrovirus	16	Consensus	REPBASE				YES	no	1	TRUE
-MER-70	ERVR-3.Lambda.70	MER-70	medium reiteration frequency repeat 70		ERV-3.Lambda.L	repeat_group	sublineage	accepted	uncertain	reference	5023	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				YES	no	1	TRUE
-MER-76	ERVR-3.Lambda.76	MER-76	medium reiteration frequency repeat 76		ERV-3.Lambda.L	repeat_group	sublineage	accepted	uncertain	reference	6189	III	Orthoretrovirinae	Lambdaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-HERV-38	ERVR-1.Theta.38	HERV-38	human endogenous retrovirus 38		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	1786	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-LTR-37	ERVR-1.Theta.37	LTR-37	LTR-37		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	4060	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-21	ERVR-1.Theta.MER21	MER-21	medium reiteration frequency repeat 21		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	933	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-31	ERVR-1.Theta.MER31	MER-31	medium reiteration frequency repeat 31		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	4936	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-34B	ERVR-1.Theta.MER34b	MER-34B	medium reiteration frequency repeat 34B		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	5356	I	Orthoretrovirinae	Thetaretrovirus		Consensus	REPBASE				no RT	no	1	TRUE
-MER-4	ERVR-1.Unclassified.MER4	MER-4	medium reiteration frequency repeat 4		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	6387	I	Orthoretrovirinae	Unclassified		Consensus	REPBASE				no RT	no	1	TRUE
-MER-4B	ERVR-1.Unclassified.MER4b	MER-4B	medium reiteration frequency repeat 4B		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	6758	I	Orthoretrovirinae	Unclassified		Consensus	REPBASE				no RT	no	1	TRUE
-MER-65	ERVR-1.Unclassified.MER65	MER-65	medium reiteration frequency repeat 65		ERV-1.Theta	repeat_group	sublineage	excluded	yes	reference	4871	I	Orthoretrovirinae	Unclassified		Consensus	REPBASE				no RT	YES	1	TRUE
+sequenceID	lineage_id	name	full_name	parent_lineage	entity_type	status	length	clade	genus	subgenus	reference_type	reference_method	num_seqs	accession	pubmed_id	in_tm_phylogeny	curation_tier	human_erv
+HERV-39	ERV-1.Rho.Rb.39	HERV-39	human endogenous retrovirus 39	ERV-1.Rho.Rb	erv_derived_repeat	accepted	9084	I	Rhoretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-52A	ERV-1.Zeta.HF.52A	MER-52A	medium reiteration frequency repeat 52A	ERV-1.Zeta.HF	erv_derived_repeat	accepted	4981	I	Zetaretrovirus	HF	Consensus	REPBASE				no	1	TRUE
+HERV-19	ERV-1.Zeta.19	HERV-19	human endogenous retrovirus 19	ERV-1.Zeta	erv_derived_repeat	accepted	5586	I	Zetaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-35	ERV-1.Zeta.35	HERV-35	human endogenous retrovirus 35	ERV-1.Zeta	erv_derived_repeat	accepted	6918	I	Zetaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-16	ERV-3.Lambda.16	HERV-16	human endogenous retrovirus 16	ERV-3.Lambda.L	erv_derived_repeat	accepted	4996	III	Lambdaretrovirus	16	Consensus	REPBASE				no	1	TRUE
+HERV-52	ERV-3.Lambda.52	HERV-52	human endogenous retrovirus 52	ERV-3.Lambda.L	erv_derived_repeat	accepted	3556	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-57	ERV-3.Lambda.57	HERV-57	human endogenous retrovirus 57	ERV-3.Lambda.L	erv_derived_repeat	accepted	5343	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-L40	ERV-3.Lambda.40	HERV-L40	human endogenous retrovirus L40	ERV-3.Lambda.L	degraded_erv_group	accepted	5530	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-L53	ERV-3.Lambda.53	HERV-L53	human endogenous retrovirus L53	ERV-3.Lambda.L	erv_derived_repeat	accepted	3329	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-L74	ERV-3.Lambda.74	HERV-L74	human endogenous retrovirus L74	ERV-3.Lambda.L	erv_derived_repeat	accepted	5685	III	Lambdaretrovirus		Consensus	REPBASE				no	2	TRUE
+HERV-Pb	ERV-1.Iota.I.Pb	HERV-Pb	human endogenous retrovirus Pb	ERV-1.Iota.I	uncertain	excluded		I	Iotaretrovirus		Reference	reference				no	4	TRUE
+HERV-31	ERV-1.Rho.Rb.31	HERV-31	human endogenous retrovirus 31	ERV-1.Rho.Rb	erv_derived_repeat	excluded	4936	I	Rhoretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-L68	ERV-3.Lambda.68	HERV-L68	human endogenous retrovirus L68	ERV-3.Lambda.L	erv_derived_repeat	excluded	3037	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
+HARLEQUIN	ERV-1.Eta.E.HQ	HARLEQUIN	HARLEQUIN	ERV-1.Eta.E	sublineage	accepted	6896	I	Gammaretrovirus	Eta	Consensus	REPBASE				no	7	TRUE
+HUERS-P1	ERV-1.Zeta.W9P.P.1	HUERS-P1	HUERS-P1	ERV-1.Zeta.W9P.P	sublineage	accepted	11027	I	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	no	3	TRUE
+HUERS-P2	ERV-1.Zeta.W9P.P.2	HUERS-P2	HUERS-P2	ERV-1.Zeta.W9P.P	sublineage	accepted	8987	I	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	no	3	TRUE
+HuRRS-P	ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	HuRRS-P	ERV-1.Zeta.W9P.P	sublineage	accepted	8099	I	Zetaretrovirus	W9P	Reference	reference				no	4	TRUE
+ERV-Lb4	ERV-3.Lambda.Lb4	ERV-Lb4	endogenous retrovirus Lb4	ERV-3.Lambda	sublineage	accepted	5714	III	Lambdaretrovirus	L	Consensus	REPBASE				no	1	TRUE
+ERV-L47	ERV-3.Lambda.47	ERV-L47	endogenous retrovirus L47	ERV-3.Lambda	sublineage	accepted	5246	III	Sigmaretrovirus		Consensus	REPBASE				no	1	TRUE
+LOR-1	ERVR-1.Theta.LOR1	LOR-1	LOR-1	ERV-1.Theta	uncertain	accepted	8120	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+LTR-43	ERVR-1.Theta.43	LTR-43	LTR-43	ERV-1.Theta	repeat_group	accepted	4798	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-101	ERVR-1.Theta.101	MER-101	medium reiteration frequency repeat 101	ERV-1.Theta	repeat_group	accepted	6639	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-61	ERVR-1.Theta.MER61	MER-61	medium reiteration frequency repeat 61	ERV-1.Theta	repeat_group	accepted	5217	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-89	ERVR-1.Theta.MER89	MER-89	medium reiteration frequency repeat 89	ERV-1.Theta	repeat_group	accepted	7048	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-G25	ERVR-1.Zeta.W9P.P.G25	HERV-G25	human endogenous retrovirus G25	ERV-1.Zeta.W9P.P	degraded_erv_group	accepted	6996	I	Zetaretrovirus	W9P	Consensus	REPBASE				no	1	TRUE
+MER-41	ERVR-1.Zeta.MER41	MER-41	medium reiteration frequency repeat 41	ERV-1.Zeta	repeat_group	accepted	3944	I	Zetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-57	ERVR-1.Zeta.MER57	MER-57	medium reiteration frequency repeat 57	ERV-1.Zeta	repeat_group	accepted	7133	I	Zetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-83A	ERVR-1.Zeta.MER83A	MER-83A	medium reiteration frequency repeat 83A	ERV-1.Zeta	repeat_group	accepted	4285	I	Zetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-83B	ERVR-1.Zeta.MER83B	MER-83B	medium reiteration frequency repeat 83B	ERV-1.Zeta	repeat_group	accepted	4880	I	Zetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-84	ERVR-1.Zeta.MER84	MER-84	medium reiteration frequency repeat 84	ERV-1.Zeta	repeat_group	accepted	2880	I	Zetaretrovirus		Consensus	REPBASE				YES	1	TRUE
+ERV3-16A3	ERVR-3.Lambda.16A3	ERV3-16A3	ERV3-16A3	ERV-3.Lambda.L	degraded_erv_group	accepted	6070	III	Lambdaretrovirus	16	Consensus	REPBASE				no	1	TRUE
+MER-70	ERVR-3.Lambda.70	MER-70	medium reiteration frequency repeat 70	ERV-3.Lambda.L	repeat_group	accepted	5023	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-76	ERVR-3.Lambda.76	MER-76	medium reiteration frequency repeat 76	ERV-3.Lambda.L	repeat_group	accepted	6189	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
+HERV-38	ERVR-1.Theta.38	HERV-38	human endogenous retrovirus 38	ERV-1.Theta	repeat_group	excluded	1786	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+LTR-37	ERVR-1.Theta.37	LTR-37	LTR-37	ERV-1.Theta	repeat_group	excluded	4060	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-21	ERVR-1.Theta.MER21	MER-21	medium reiteration frequency repeat 21	ERV-1.Theta	repeat_group	excluded	933	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-31	ERVR-1.Theta.MER31	MER-31	medium reiteration frequency repeat 31	ERV-1.Theta	repeat_group	excluded	4936	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-34B	ERVR-1.Theta.MER34b	MER-34B	medium reiteration frequency repeat 34B	ERV-1.Theta	repeat_group	excluded	5356	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
+MER-4	ERVR-1.Unclassified.MER4	MER-4	medium reiteration frequency repeat 4	ERV-1.Theta	repeat_group	excluded	6387	I	Unclassified		Consensus	REPBASE				no	1	TRUE
+MER-4B	ERVR-1.Unclassified.MER4b	MER-4B	medium reiteration frequency repeat 4B	ERV-1.Theta	repeat_group	excluded	6758	I	Unclassified		Consensus	REPBASE				no	1	TRUE
+MER-65	ERVR-1.Unclassified.MER65	MER-65	medium reiteration frequency repeat 65	ERV-1.Theta	repeat_group	excluded	4871	I	Unclassified		Consensus	REPBASE				YES	1	TRUE
+HERV-K-HML6-1a	ERV-2.Beta.K6.1a	HERV-K-HML6	endogenous archeobetaretrovirus K Catarrhini type 6	ERV-2.Beta.K6	sublineage	excluded	8214	II	Betaretrovirus	Archaeobeta	Consensus	majority_consensus	20		31167914	YES	1	TRUE
+HERV-K-HML6-1b	ERV-2.Beta.K6.1b	HERV-K-HML6	endogenous archeobetaretrovirus K Catarrhini type 6	ERV-2.Beta.K6	sublineage	excluded	8214	II	Betaretrovirus	Archaeobeta	Consensus	majority_consensus	20		31167914	YES	1	TRUE
+HERV-T1	ERV-1.Gamma.T1	HERV-T1	human endogenous retrovirus T1	ERV-1.Gamma.T	sublineage	excluded		I	Gammaretrovirus	HERVT1	AncRecon	majority_consensus			28397686	YES	1	TRUE
+HERV-T2	ERV-1.Gamma.T2	HERV-T2	human endogenous retrovirus T2	ERV-1.Gamma.T	sublineage	excluded		I	Gammaretrovirus	HERVT2	AncRecon	majority_consensus			28397686	YES	1	TRUE
+HERV-T3	ERV-1.Gamma.T3	HERV-T3	human endogenous retrovirus T3	ERV-1.Gamma.T	sublineage	excluded		I	Gammaretrovirus	HERVT3	AncRecon	majority_consensus			28397686	YES	1	TRUE
+HERV-V	ERV-1.Theta.V	HERV-V	human endogenous retrovirus V	ERV-1.Theta.V	uncertain	excluded	2482	I	Thetaretrovirus		Reference	reference				YES	1	TRUE
+ERV-Le	ERV-3.Lambda.Le	ERV-Le	endogenous retrovirus Le	ERV-3.Lambda.L	sublineage	excluded	5667	III	Lambdaretrovirus		Reference	REPBASE				no	2	TRUE
+PRIMA-X	ERV-1.Zeta.primax	PRIMA-X	PRIMA-X	Theta.Lb	uncertain	excluded	4102	I	Thetaretrovirus		Consensus	REPBASE				no	3	TRUE
+HERV-1	ERV-1.Gamma.R.1	HERV-1	human endogenous retrovirus 1	ERV-1.Gamma.E	uncertain	excluded	9611	I	Gammaretrovirus	Eta	Consensus	REPBASE				no	2	TRUE
+HERV-24b	ERV-1.Theta.24.b	HERV-24b	human endogenous retrovirus 24b	Theta.Lb	sublineage	excluded	7613	I	Thetaretrovirus		Consensus	REPBASE				no	3	TRUE
+ERV-L	ERV-3.Lambda.L	ERV-L	endogenous retrovirus L	ERV-3.Lambda	sublineage	excluded	5667	III	Lambdaretrovirus	L	Consensus	REPBASE				no	5	TRUE
