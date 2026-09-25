@@ -1,20 +1,8 @@
 sequenceID	lineage_id	name	full_name	parent_lineage	entity_type	status	clade	genus	subgenus	reference_type	reference_method	num_seqs	accession	pubmed_id	in_tm_phylogeny	curation_tier	human_erv
 HUERS-P1	ERV-1.Zeta.W9P.P.1	HUERS-P1	HUERS-P1	ERV-1.Zeta.W9P.P	sublineage	accepted	I	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	no	3	TRUE
 HUERS-P2	ERV-1.Zeta.W9P.P.2	HUERS-P2	HUERS-P2	ERV-1.Zeta.W9P.P	sublineage	accepted	I	Zetaretrovirus	W9P	Consensus	REPBASE			2825129	no	3	TRUE
-HERV-1	ERV-1.Gamma.R.1	HERV-1	human endogenous retrovirus 1	ERV-1.Gamma.E	uncertain	excluded	I	Gammaretrovirus	Eta	Consensus	REPBASE				no	2	TRUE
-HERV-T1	ERV-1.Gamma.T1	HERV-T1	human endogenous retrovirus T1	ERV-1.Gamma.T	sublineage	excluded	I	Gammaretrovirus	HERVT1	AncRecon	majority_consensus			28397686	YES	1	TRUE
-HERV-T2	ERV-1.Gamma.T2	HERV-T2	human endogenous retrovirus T2	ERV-1.Gamma.T	sublineage	excluded	I	Gammaretrovirus	HERVT2	AncRecon	majority_consensus			28397686	YES	1	TRUE
-HERV-T3	ERV-1.Gamma.T3	HERV-T3	human endogenous retrovirus T3	ERV-1.Gamma.T	sublineage	excluded	I	Gammaretrovirus	HERVT3	AncRecon	majority_consensus			28397686	YES	1	TRUE
-HERV-Pb	ERV-1.Iota.I.Pb	HERV-Pb	human endogenous retrovirus Pb	ERV-1.Iota.I	uncertain	excluded	I	Iotaretrovirus		Reference	reference				no	4	TRUE
-HERV-24b	ERV-1.Theta.24.b	HERV-24b	human endogenous retrovirus 24b	Theta.Lb	sublineage	excluded	I	Thetaretrovirus		Consensus	REPBASE				no	3	TRUE
-HERV-V	ERV-1.Theta.V	HERV-V	human endogenous retrovirus V	ERV-1.Theta.V	uncertain	excluded	I	Thetaretrovirus		Reference	reference				YES	1	TRUE
-PRIMA-X	ERV-1.Zeta.primax	PRIMA-X	PRIMA-X	Theta.Lb	uncertain	excluded	I	Thetaretrovirus		Consensus	REPBASE				no	3	TRUE
-LOR-1	ERVR-1.Theta.LOR1	LOR-1	LOR-1	ERV-1.Theta	uncertain	excluded	I	Thetaretrovirus		Consensus	REPBASE				no	1	TRUE
 HuRRS-P	ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	HuRRS-P	ERV-1.Zeta.W9P.P	sublineage	excluded	I	Zetaretrovirus	W9P	Reference	reference				no	4	TRUE
-HERV-K-HML6-1a	ERV-2.Beta.K6.1a	HERV-K-HML6	endogenous retrovirus K HML6 type 1a	ERV-2.Beta.K6	sublineage	excluded	II	Betaretrovirus	Archaeobeta	Consensus	majority_consensus	20		31167914	YES	1	TRUE
-HERV-K-HML6-1b	ERV-2.Beta.K6.1b	HERV-K-HML6	endogenous retrovirus K HML6 type 1b	ERV-2.Beta.K6	sublineage	excluded	II	Betaretrovirus	Archaeobeta	Consensus	majority_consensus	20		31167914	YES	1	TRUE
-ERV-L	ERV-3.Lambda.L	ERV-L	endogenous retrovirus L	ERV-3.Lambda	sublineage	excluded	III	Lambdaretrovirus	L	Consensus	REPBASE				no	5	TRUE
+HERV-Pb	ERV-1.Iota.I.Pb	HERV-Pb	human endogenous retrovirus Pb	ERV-1.Iota.I	uncertain	excluded	I	Iotaretrovirus		Reference	reference				no	4	TRUE
 ERV-Lb4	ERV-3.Lambda.Lb4	ERV-Lb4	endogenous retrovirus Lb4	ERV-3.Lambda	sublineage	excluded	III	Lambdaretrovirus	L	Consensus	REPBASE				no	1	TRUE
-HERV-L68	ERV-3.Lambda.68	HERV-L68	human endogenous retrovirus L68	ERV-3.Lambda.L	erv_derived_repeat	excluded	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
-ERV-Le	ERV-3.Lambda.Le	ERV-Le	endogenous retrovirus Le	ERV-3.Lambda.L	sublineage	excluded	III	Lambdaretrovirus		Reference	REPBASE				no	2	TRUE
+HERV-L68	ERV-3.Lambda.68	HERV-L68	human endogenous retrovirus L68	ERV-3.Lambda.L	sublineage	excluded	III	Lambdaretrovirus		Consensus	REPBASE				no	1	TRUE
 ERV-L47	ERV-3.Lambda.47	ERV-L47	endogenous retrovirus L47	ERV-3.Lambda	sublineage	excluded	III	Sigmaretrovirus		Consensus	REPBASE				no	1	TRUE

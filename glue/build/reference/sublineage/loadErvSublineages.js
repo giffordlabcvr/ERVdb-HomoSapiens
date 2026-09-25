@@ -3,7 +3,7 @@
  *
  * Load the curated ERV sublineage catalogue from:
  *
- *   tabular/sublineage/herv_sublineage_data.tsv
+ *   tabular/reference/sublineage/herv_sublineage_data.tsv
  *
  * For each row:
  *
@@ -30,7 +30,7 @@
  */
 
 var INPUT_PATH =
-	"tabular/sublineage/herv_sublineage_data.tsv";
+	"tabular/reference/sublineage/herv_sublineage_data.tsv";
 
 var ERV_SOURCE =
 	"erv-sub";
