@@ -1,15 +1,18 @@
-   ============================================================
-  # Extended ERV reference layer
-  # ============================================================
-  
+============================================================
+# Extended ERV reference layer
+# ============================================================
+
   # Import reference sequences for entities below/outside
   # the canonical ERV lineage layer
   run file glue/build/sublineage/importExtendedRefSources.glue
   
   # Set reference-sequence lengths and kinds
   run script glue/build/sublineage/setExtendedRefSequenceLengthsAndKinds.js
- 
-  
+   
+# ============================================================
+# Genuine ERV sublineages
+# ============================================================
+
   # Create ERV sublineage rows, populate their metadata and taxonomy,
   # and link representative sequences from source erv-sub
   run script glue/build/sublineage/loadErvSublineages.js
@@ -21,6 +24,19 @@
   # link their representative sequences from source ltr-sub,
   # and create ERV-sublineage-to-LTR associations
   run script glue/build/sublineage/loadSublineageAssociatedLtrLineages.js
+
+
+# ============================================================
+# Other ERV-derived entities
+# ============================================================
+
+
+
+
+
+
+
+
   
   # Declare reference sequences for ERV and LTR sublineages
   run script glue/build/sublineage/ervDeclareSublineageReferences.js
