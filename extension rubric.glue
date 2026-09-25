@@ -1,0 +1,43 @@
+# ============================================================
+# Extended ERV reference layer
+# ============================================================
+
+# Import reference sequences for entities below/outside
+# the canonical ERV lineage layer
+importExtendedRefSources
+
+# Set sequence lengths and reference kinds
+setExtendedRefSequenceLengthsAndKinds
+
+
+# ============================================================
+# Genuine ERV sublineages
+# ============================================================
+
+loadErvSublineages
+loadErvSublineageAliases
+loadSublineageAssociatedLtrLineages
+
+
+# ============================================================
+# Other ERV-derived entities
+# ============================================================
+
+loadErvDerivedEntities
+loadErvDerivedEntityAliases
+loadErvDerivedEntityAssociations
+
+
+# ============================================================
+# Shared reference infrastructure
+# ============================================================
+
+declareExtendedReferences
+importExtendedFeatureLocations
+
+# Extend alignments where biologically/analytically appropriate
+extendAlignmentTree...
+
+# Summaries / validation
+summarise...
+validate
