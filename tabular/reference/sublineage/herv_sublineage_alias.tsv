@@ -1,6 +1,4 @@
 erv_lineage.id	erv_lineage.name	category	alias_name	alias_source
-ERV-3.Lambda.47	ERV-L47	sublineage	ERVL47	repbase
 ERV-3.Lambda.Lb4	ERV-Lb4	sublineage	ERVL-B4	repbase
-ERV-3.Lambda.74	HERV-L74	sublineage	HERVL74	repbase
 ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	huersp1	retrotector
 ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	huersp2	retrotector

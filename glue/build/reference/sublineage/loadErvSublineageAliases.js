@@ -3,7 +3,7 @@
  *
  * Load aliases for the curated ERV sublineages from:
  *
- *   tabular/sublineage/herv_sublineage_alias.tsv
+ *   tabular/reference/sublineage/herv_sublineage_alias.tsv
  *
  * Expected columns:
  *
@@ -25,7 +25,7 @@
  */
 
 var INPUT_PATH =
-	"tabular/sublineage/herv_sublineage_alias.tsv";
+	"tabular/reference/sublineage/herv_sublineage_alias.tsv";
 
 // ============================================================================
 // Helpers

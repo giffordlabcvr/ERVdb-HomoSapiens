@@ -1,585 +1,497 @@
-// glue/build/sublineage/loadSublineageAssociatedLtrLineages.js
-//
-// Create LTR lineage rows associated with ERV sublineages,
-// link their representative sequences from source "ltr-sub",
-// and create ERV-lineage-to-LTR-lineage association rows.
-//
-// Input:
-//   tabular/sublineage/herv_sublineage_ltr_data_all.tsv
-//
-// Required columns:
-//   LTR_name
-//   linked_lineage_id
-//
-// Optional columns:
-//   original_name
-//   linked_element_name
-//   linked_element_status
-//   assoc_category
-//   flag
-//
-// Identifier semantics:
-//
-//   LTR_name
-//       Canonical ltr_lineage.id and expected sequenceID in source ltr-sub.
-//
-//   linked_lineage_id
-//       Canonical erv_lineage.id. This must identify an ERV sublineage
-//       row already created by loadErvSublineages.js.
-//
-//   linked_element_name
-//       Original or source-specific name for the linked ERV element.
-//       This is metadata only and is never used as a database key.
-//
-// This script deliberately describes these records as LTR lineages
-// associated with ERV sublineages. It does not imply that they are
-// sublineages of base-layer LTR families.
+/**
+ * glue/build/reference/sublineage/loadSublineageAssociatedLtrLineages.js
+ *
+ * Load LTR lineages associated with ERV sublineage-layer records from:
+ *
+ *   tabular/reference/sublineage/herv_sublineage_ltr_data_all.tsv
+ *
+ * LTR_name identifies the ltr_lineage row. The reference row is identified
+ * by the actual sequenceID found in source ltr-sub. Usually this is
+ * LTR_name, but original_name is also searched as a fallback.
+ *
+ * linked_lineage_id identifies an existing erv_lineage row. An LTR lineage
+ * may have no ERV association.
+ */
 
-var INPUT_FILE =
-	"tabular/sublineage/herv_sublineage_ltr_data_all.tsv";
-
+var INPUT_FILE = "tabular/reference/sublineage/herv_sublineage_ltr_data_all.tsv";
 var LTR_SOURCE = "ltr-sub";
-
+var LTR_CATEGORY = "erv";
 var DRY_RUN = false;
 
 
-// -----------------------------------------------------------------------------
-// General utilities
-// -----------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
 
 function log(message) {
-	glue.logInfo(message);
+    glue.logInfo(message);
 }
 
 function norm(value) {
+    if(value === null || value === undefined) {
+        return null;
+    }
 
-	if(value === null || value === undefined) {
-		return null;
-	}
+    var result = ("" + value).trim();
 
-	var stringValue = ("" + value).trim();
+    if(result === "") {
+        return null;
+    }
 
-	if(stringValue === "") {
-		return null;
-	}
+    var lower = result.toLowerCase();
 
-	var lowerValue = stringValue.toLowerCase();
+    if(
+        lower === "n/a" ||
+        lower === "na" ||
+        lower === "n/k" ||
+        lower === "nk" ||
+        lower === "unknown" ||
+        lower === "null" ||
+        lower === "none"
+    ) {
+        return null;
+    }
 
-	if(
-		lowerValue === "n/a" ||
-		lowerValue === "na" ||
-		lowerValue === "n/k" ||
-		lowerValue === "nk" ||
-		lowerValue === "unknown" ||
-		lowerValue === "null" ||
-		lowerValue === "none"
-	) {
-		return null;
-	}
-
-	return stringValue;
+    return result;
 }
 
 function escapeQuotes(value) {
-
-	return ("" + value)
-		.replace(/\\/g, "\\\\")
-		.replace(/'/g, "\\'");
+    return ("" + value)
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
 }
 
 function customRowPath(tableName, rowId) {
-
-	return (
-		"custom-table-row/" +
-		tableName + "/" +
-		rowId
-	);
+    return "custom-table-row/" + tableName + "/" + rowId;
 }
-
-
-// -----------------------------------------------------------------------------
-// Custom-table helpers
-// -----------------------------------------------------------------------------
 
 function customRowExists(tableName, rowId) {
+    rowId = norm(rowId);
 
-	rowId = norm(rowId);
+    if(rowId === null) {
+        return false;
+    }
 
-	if(rowId === null) {
-		return false;
-	}
+    var result = glue.command([
+        "list",
+        "custom-table-row",
+        tableName,
+        "-w",
+        "id = '" + escapeQuotes(rowId) + "'"
+    ]);
 
-	var result = glue.command([
-		"list",
-		"custom-table-row",
-		tableName,
-		"-w",
-		"id = '" + escapeQuotes(rowId) + "'"
-	]);
-
-	return (
-		result.listResult &&
-		result.listResult.row &&
-		result.listResult.row.length > 0
-	);
+    return glue.tableToObjects(result).length > 0;
 }
 
-function createCustomRowIfMissing(tableName, rowId) {
+function ensureCustomRow(tableName, rowId) {
+    rowId = norm(rowId);
 
-	rowId = norm(rowId);
+    if(rowId === null || customRowExists(tableName, rowId)) {
+        return false;
+    }
 
-	if(rowId === null) {
-		return false;
-	}
+    if(DRY_RUN) {
+        log("[DRY RUN] Would create " + tableName + "/" + rowId);
+        return true;
+    }
 
-	if(customRowExists(tableName, rowId)) {
-		return false;
-	}
+    glue.command([
+        "create",
+        "custom-table-row",
+        tableName,
+        rowId
+    ]);
 
-	if(DRY_RUN) {
-		log(
-			"[DRY RUN] Would create " +
-			tableName + "/" + rowId
-		);
-		return true;
-	}
-
-	glue.command([
-		"create",
-		"custom-table-row",
-		tableName,
-		rowId
-	]);
-
-	log(
-		"Created " +
-		tableName + "/" + rowId
-	);
-
-	return true;
+    log("Created " + tableName + "/" + rowId);
+    return true;
 }
 
 function setFieldIfPresent(fieldName, value) {
+    value = norm(value);
 
-	value = norm(value);
-
-	if(value !== null) {
-		glue.command([
-			"set",
-			"field",
-			fieldName,
-			value
-		]);
-	}
+    if(value !== null) {
+        glue.command([
+            "set",
+            "field",
+            fieldName,
+            value
+        ]);
+    }
 }
 
-function setLinkIfPresent(linkName, targetPath) {
-
-	if(targetPath !== null) {
-		glue.command([
-			"set",
-			"link-target",
-			linkName,
-			targetPath
-		]);
-	}
+function setLink(linkName, tableName, rowId) {
+    glue.command([
+        "set",
+        "link-target",
+        linkName,
+        customRowPath(tableName, rowId)
+    ]);
 }
 
+function findSequenceInSource(sourceName, sequenceID) {
+    sequenceID = norm(sequenceID);
 
-// -----------------------------------------------------------------------------
-// Sequence helpers
-// -----------------------------------------------------------------------------
+    if(sequenceID === null) {
+        return null;
+    }
 
-function findSequenceInSource(sourceName, sequenceId) {
+    var rows = glue.tableToObjects(
+        glue.command([
+            "list",
+            "sequence",
+            "source.name",
+            "sequenceID",
+            "-w",
+            "source.name = '" +
+                escapeQuotes(sourceName) +
+                "' and sequenceID = '" +
+                escapeQuotes(sequenceID) +
+                "'"
+        ])
+    );
 
-	sourceName = norm(sourceName);
-	sequenceId = norm(sequenceId);
+    if(rows.length === 0) {
+        return null;
+    }
 
-	if(
-		sourceName === null ||
-		sequenceId === null
-	) {
-		return null;
-	}
-
-	var result = glue.command([
-		"list",
-		"sequence",
-		"source.name",
-		"sequenceID",
-		"-w",
-		"source.name = '" +
-			escapeQuotes(sourceName) +
-			"' and sequenceID = '" +
-			escapeQuotes(sequenceId) +
-			"'"
-	]);
-
-	if(
-		result.listResult &&
-		result.listResult.row &&
-		result.listResult.row.length > 0
-	) {
-		var values =
-			result.listResult.row[0].value;
-
-		return {
-			sourceName: values[0],
-			sequenceID: values[1]
-		};
-	}
-
-	return null;
+    return {
+        sourceName: sourceName,
+        sequenceID: sequenceID
+    };
 }
 
-function findLtrSequence(
-	ltrLineageId,
-	originalName
-) {
+function findLtrSequence(ltrLineageId, originalName) {
+    var found = findSequenceInSource(
+        LTR_SOURCE,
+        ltrLineageId
+    );
 
-	var sequenceRef =
-		findSequenceInSource(
-			LTR_SOURCE,
-			ltrLineageId
-		);
+    if(
+        found === null &&
+        originalName !== null &&
+        originalName !== ltrLineageId
+    ) {
+        found = findSequenceInSource(
+            LTR_SOURCE,
+            originalName
+        );
+    }
 
-	if(
-		sequenceRef === null &&
-		originalName !== null &&
-		originalName !== ltrLineageId
-	) {
-		sequenceRef =
-			findSequenceInSource(
-				LTR_SOURCE,
-				originalName
-			);
-	}
-
-	return sequenceRef;
+    return found;
 }
 
-
-// -----------------------------------------------------------------------------
-// Association helpers
-// -----------------------------------------------------------------------------
-
-function makeAssocId(
-	ervLineageId,
-	ltrLineageId
-) {
-
-	return (
-		ervLineageId +
-		"__" +
-		ltrLineageId
-	);
+function associationId(ervLineageId, ltrLineageId) {
+    return ervLineageId + "__" + ltrLineageId;
 }
 
-function isSublineageRelationship(
-	linkedElementStatus
-) {
+function associationComment(row, ltrLineageId, ervLineageId) {
+    var comment =
+        "LTR lineage " + ltrLineageId +
+        " associated with ERV lineage " + ervLineageId;
 
-	linkedElementStatus =
-		norm(linkedElementStatus);
+    var linkedElementName =
+        norm(row["linked_element_name"]);
+    var linkedElementStatus =
+        norm(row["linked_element_status"]);
+    var assocCategory =
+        norm(row["assoc_category"]);
+    var flag =
+        norm(row["flag"]);
 
-	/*
-	 * A blank value is accepted because the input file itself is
-	 * specifically for sublineage-associated LTR lineages.
-	 */
+    if(linkedElementName !== null) {
+        comment +=
+            "; original linked element: " +
+            linkedElementName;
+    }
 
-	if(linkedElementStatus === null) {
-		return true;
-	}
+    if(linkedElementStatus !== null) {
+        comment +=
+            "; source element status: " +
+            linkedElementStatus;
+    }
 
-	return (
-		linkedElementStatus.toLowerCase() ===
-		"sublineage"
-	);
+    if(assocCategory !== null) {
+        comment +=
+            "; source category: " +
+            assocCategory;
+    }
+
+    if(flag !== null) {
+        comment +=
+            "; source flag: " +
+            flag;
+    }
+
+    return comment;
 }
 
 
-// -----------------------------------------------------------------------------
-// Load input rows
-// -----------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Load and inspect input
+// ---------------------------------------------------------------------------
 
 var rows;
 
-glue.inMode(
-	"module/tabularUtility",
-	function() {
-		rows = glue.tableToObjects(
-			glue.command([
-				"load-tabular",
-				INPUT_FILE
-			])
-		);
-	}
-);
+glue.inMode("module/tabularUtility", function() {
+    rows = glue.tableToObjects(
+        glue.command([
+            "load-tabular",
+            INPUT_FILE
+        ])
+    );
+});
 
 log(
-	"Loaded " +
-	rows.length +
-	" rows from " +
-	INPUT_FILE
+    "Loaded " + rows.length +
+    " rows from " + INPUT_FILE
 );
-
-log(
-	"LTR sequence search source: " +
-	LTR_SOURCE
-);
+log("LTR sequence search source: " + LTR_SOURCE);
 
 
-// -----------------------------------------------------------------------------
-// Summary counters
-// -----------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Preflight: resolve identifiers and detect conflicting assignments
+// ---------------------------------------------------------------------------
 
-var rowsProcessed = 0;
-var skippedNonSublineageRows = 0;
-var skippedIncompleteRows = 0;
-
-var ltrRowsCreated = 0;
-var ltrRowsExisting = 0;
-
-var ltrSequencesLinked = 0;
-var ltrSequencesMissing = 0;
-
-var associationsCreated = 0;
-var associationsExisting = 0;
-var associationsUpdated = 0;
-
-var missingErvLineages = 0;
-var unlinkedLtrRows = 0;
-
-var distinctLtrLineages = {};
-var distinctErvLineages = {};
-
-
-// -----------------------------------------------------------------------------
-// Process rows
-// -----------------------------------------------------------------------------
+var prepared = [];
+var referenceToLineage = {};
+var seenAssociations = {};
 
 _.each(rows, function(row) {
+    var ltrLineageId =
+        norm(row["LTR_name"]);
+    var ervLineageId =
+        norm(row["linked_lineage_id"]);
+    var originalName =
+        norm(row["original_name"]);
 
-	var ltrLineageId =
-		norm(row["LTR_name"]);
+    if(ltrLineageId === null) {
+        throw new Error(
+            "Missing LTR_name in row: " +
+            JSON.stringify(row)
+        );
+    }
 
-	var originalName =
-		norm(row["original_name"]);
+    var sequenceRef =
+        findLtrSequence(ltrLineageId, originalName);
 
-	var linkedLineageId =
-		norm(row["linked_lineage_id"]);
+    if(sequenceRef !== null) {
+        var referenceId = sequenceRef.sequenceID;
+        var previousLineage =
+            referenceToLineage[referenceId];
 
-	var linkedElementName =
-		norm(row["linked_element_name"]);
+        if(
+            previousLineage !== undefined &&
+            previousLineage !== ltrLineageId
+        ) {
+            throw new Error(
+                "LTR sequence " + LTR_SOURCE + "/" +
+                referenceId +
+                " is assigned to both '" +
+                previousLineage + "' and '" +
+                ltrLineageId + "'"
+            );
+        }
 
-	var linkedElementStatus =
-		norm(row["linked_element_status"]);
+        referenceToLineage[referenceId] =
+            ltrLineageId;
+    }
 
-	var sourceAssociationCategory =
-		norm(row["assoc_category"]);
+    if(ervLineageId !== null) {
+        if(
+            !customRowExists(
+                "erv_lineage",
+                ervLineageId
+            )
+        ) {
+            throw new Error(
+                "ERV lineage '" + ervLineageId +
+                "' not found for LTR lineage '" +
+                ltrLineageId + "'"
+            );
+        }
 
-	var sourceFlag =
-		norm(row["flag"]);
+        var assocId =
+            associationId(
+                ervLineageId,
+                ltrLineageId
+            );
 
+        if(seenAssociations[assocId]) {
+            throw new Error(
+                "Duplicate ERV-LTR association '" +
+                assocId + "' in input"
+            );
+        }
 
-	/*
-	 * Reject rows explicitly assigned to another relationship level.
-	 */
+        seenAssociations[assocId] = true;
+    }
 
-	if(
-		!isSublineageRelationship(
-			linkedElementStatus
-		)
-	) {
-		skippedNonSublineageRows++;
+    prepared.push({
+        row: row,
+        ltrLineageId: ltrLineageId,
+        ervLineageId: ervLineageId,
+        sequenceRef: sequenceRef
+    });
+});
 
-		log(
-			"Skipping non-sublineage relationship: " +
-			"LTR=" + ltrLineageId +
-			", linked element=" +
-			linkedElementName +
-			", status=" +
-			linkedElementStatus
-		);
-
-		return;
-	}
-
-
-	if(ltrLineageId === null) {
-		skippedIncompleteRows++;
-
-		log(
-			"Skipping row with missing LTR_name: " +
-			JSON.stringify(row)
-		);
-
-		return;
-	}
-
-	rowsProcessed++;
-	distinctLtrLineages[ltrLineageId] = true;
-
-
-	/*
-	 * Create or find the LTR lineage.
-	 */
-
-	var ltrRowCreated =
-		createCustomRowIfMissing(
-			"ltr_lineage",
-			ltrLineageId
-		);
-
-	if(ltrRowCreated) {
-		ltrRowsCreated++;
-	} else {
-		ltrRowsExisting++;
-	}
-
-
-	/*
-	 * Populate LTR metadata.
-	 *
-	 * linked_element records the original source-specific ERV name,
-	 * not the canonical linked_lineage_id.
-	 */
-
-	if(!DRY_RUN) {
-		glue.inMode(
-			customRowPath(
-				"ltr_lineage",
-				ltrLineageId
-			),
-			function() {
-				setFieldIfPresent(
-					"original_name",
-					originalName
-				);
-
-				setFieldIfPresent(
-					"linked_element",
-					linkedElementName
-				);
-			}
-		);
-	}
+log("Preflight successful");
 
 
-	/*
-	 * Link the representative sequence from source ltr-sub.
-	 */
+// ---------------------------------------------------------------------------
+// Pass 1: create lineage, reference and association rows
+// ---------------------------------------------------------------------------
 
-	var sequenceRef =
-		findLtrSequence(
-			ltrLineageId,
-			originalName
-		);
+var ltrRowsCreated = 0;
+var referenceRowsCreated = 0;
+var associationsCreated = 0;
 
-	if(sequenceRef !== null) {
+_.each(prepared, function(item) {
+    if(
+        ensureCustomRow(
+            "ltr_lineage",
+            item.ltrLineageId
+        )
+    ) {
+        ltrRowsCreated++;
+    }
 
-		if(!DRY_RUN) {
-			glue.inMode(
-				"sequence/" +
-					sequenceRef.sourceName + "/" +
-					sequenceRef.sequenceID,
-				function() {
-					setLinkIfPresent(
-						"ltr_lineage",
-						customRowPath(
-							"ltr_lineage",
-							ltrLineageId
-						)
-					);
-				}
-			);
-		}
+    if(item.sequenceRef !== null) {
+        if(
+            ensureCustomRow(
+                "ltr_lineage_reference",
+                item.sequenceRef.sequenceID
+            )
+        ) {
+            referenceRowsCreated++;
+        }
+    }
 
-		ltrSequencesLinked++;
+    if(item.ervLineageId !== null) {
+        if(
+            ensureCustomRow(
+                "erv_lineage_ltr_assoc",
+                associationId(
+                    item.ervLineageId,
+                    item.ltrLineageId
+                )
+            )
+        ) {
+            associationsCreated++;
+        }
+    }
+});
 
-		log(
-			"Linked LTR sequence " +
-			sequenceRef.sourceName + "/" +
-			sequenceRef.sequenceID +
-			" -> ltr_lineage/" +
-			ltrLineageId
-		);
-
-	} else {
-
-		ltrSequencesMissing++;
-
-		log(
-			"No representative LTR sequence found for " +
-			"ltr_lineage/" + ltrLineageId
-		);
-	}
-
-
-	/*
-	 * An LTR lineage may legitimately lack a current ERV assignment.
-	 * In that case the LTR row and sequence link are retained, but no
-	 * association row is created.
-	 */
-
-	if(linkedLineageId === null) {
-		unlinkedLtrRows++;
-
-		log(
-			"No linked_lineage_id for LTR lineage " +
-			ltrLineageId
-		);
-
-		return;
-	}
-
-	distinctErvLineages[linkedLineageId] = true;
+log(
+    "Created/verified LTR lineage, reference and " +
+    "association rows"
+);
 
 
-	/*
-	 * The canonical ERV sublineage row must already exist.
-	 */
+// ---------------------------------------------------------------------------
+// Pass 2: populate records and links
+// ---------------------------------------------------------------------------
 
-	if(
-		!customRowExists(
-			"erv_lineage",
-			linkedLineageId
-		)
-	) {
-		missingErvLineages++;
+var populatedLtrLineages = {};
+var linkedReferences = {};
+var missingSequences = 0;
+var associationsUpdated = 0;
+var unlinkedLtrRows = 0;
 
-		log(
-			"No erv_lineage row found for canonical ID " +
-			linkedLineageId +
-			" while processing LTR lineage " +
-			ltrLineageId
-		);
+_.each(prepared, function(item) {
+    var row = item.row;
+    var ltrLineageId = item.ltrLineageId;
+    var ervLineageId = item.ervLineageId;
+    var sequenceRef = item.sequenceRef;
 
-		return;
-	}
+    if(!populatedLtrLineages[ltrLineageId]) {
+        if(!DRY_RUN) {
+            glue.inMode(
+                customRowPath(
+                    "ltr_lineage",
+                    ltrLineageId
+                ),
+                function() {
+                    setFieldIfPresent(
+                        "original_name",
+                        row["original_name"]
+                    );
+                    setFieldIfPresent(
+                        "ltr_category",
+                        LTR_CATEGORY
+                    );
+                }
+            );
+        }
 
+        populatedLtrLineages[ltrLineageId] = true;
+    }
 
-	/*
-	 * Create the ERV-LTR association.
-	 */
+    if(sequenceRef === null) {
+        missingSequences++;
 
-	var assocId =
-		makeAssocId(
-			linkedLineageId,
-			ltrLineageId
-		);
+        log(
+            "No LTR sequence found for " +
+            "ltr_lineage/" + ltrLineageId
+        );
+    } else {
+        var referenceId =
+            sequenceRef.sequenceID;
 
-	var assocCreated =
-		createCustomRowIfMissing(
-			"erv_lineage_ltr_assoc",
-			assocId
-		);
+        if(!linkedReferences[referenceId]) {
+            if(!DRY_RUN) {
+                glue.inMode(
+                    customRowPath(
+                        "ltr_lineage_reference",
+                        referenceId
+                    ),
+                    function() {
+                        setLink(
+                            "ltr_lineage",
+                            "ltr_lineage",
+                            ltrLineageId
+                        );
+                    }
+                );
 
-	if(assocCreated) {
-		associationsCreated++;
-	} else {
-		associationsExisting++;
-	}
+                glue.inMode(
+                    "sequence/" +
+                    sequenceRef.sourceName +
+                    "/" +
+                    referenceId,
+                    function() {
+                        setLink(
+                            "ltr_lineage_reference",
+                            "ltr_lineage_reference",
+                            referenceId
+                        );
+                    }
+                );
+            }
+
+            linkedReferences[referenceId] = true;
+
+            log(
+                "Linked LTR sequence " +
+                sequenceRef.sourceName + "/" +
+                referenceId +
+                " -> ltr_lineage_reference/" +
+                referenceId +
+                " -> ltr_lineage/" +
+                ltrLineageId
+            );
+        }
+    }
+
+    if(ervLineageId === null) {
+        unlinkedLtrRows++;
+        return;
+    }
+
+    var assocId =
+        associationId(
+            ervLineageId,
+            ltrLineageId
+        );
 
 
 	if(!DRY_RUN) {
@@ -589,156 +501,45 @@ _.each(rows, function(row) {
 				assocId
 			),
 			function() {
-
-				setFieldIfPresent(
-					"association_type",
-					"associated_ltr"
-				);
-
-				setFieldIfPresent(
-					"evidence",
-					"curated_sublineage_ltr_table"
-				);
-
-				var comment =
-					"LTR lineage " +
-					ltrLineageId +
-					" associated with ERV sublineage " +
-					linkedLineageId;
-
-				if(linkedElementName !== null) {
-					comment +=
-						" (original linked element: " +
-						linkedElementName +
-						")";
-				}
-
-				if(sourceAssociationCategory !== null) {
-					comment +=
-						"; source category: " +
-						sourceAssociationCategory;
-				}
-
-				if(sourceFlag !== null) {
-					comment +=
-						"; source flag: " +
-						sourceFlag;
-				}
-
-				setFieldIfPresent(
-					"comment",
-					comment
-				);
-
-				setLinkIfPresent(
+				setLink(
 					"erv_lineage",
-					customRowPath(
-						"erv_lineage",
-						linkedLineageId
-					)
+					"erv_lineage",
+					ervLineageId
 				);
-
-				setLinkIfPresent(
+				setLink(
 					"ltr_lineage",
-					customRowPath(
-						"ltr_lineage",
-						ltrLineageId
-					)
+					"ltr_lineage",
+					ltrLineageId
 				);
 			}
 		);
 	}
 
-	associationsUpdated++;
-
-	log(
-		"Created/updated ERV-sublineage-to-LTR association " +
-		assocId
-	);
+    associationsUpdated++;
 });
 
 
-// -----------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 // Summary
-// -----------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
-log("----- SUMMARY -----");
-
+log("----- LTR SUBLINEAGE-LAYER SUMMARY -----");
+log("Input rows: " + rows.length);
 log(
-	"Input rows: " +
-	rows.length
+    "Distinct LTR lineages: " +
+    Object.keys(populatedLtrLineages).length
 );
-
+log("LTR lineage rows created: " + ltrRowsCreated);
+log("LTR reference rows created: " + referenceRowsCreated);
 log(
-	"Sublineage-associated rows processed: " +
-	rowsProcessed
+    "LTR references linked: " +
+    Object.keys(linkedReferences).length
 );
-
+log("Rows without an LTR sequence: " + missingSequences);
+log("Association rows created: " + associationsCreated);
+log("Associations populated: " + associationsUpdated);
 log(
-	"Distinct LTR lineages encountered: " +
-	Object.keys(distinctLtrLineages).length
+    "Rows without an ERV association: " +
+    unlinkedLtrRows
 );
-
-log(
-	"Distinct ERV sublineages encountered: " +
-	Object.keys(distinctErvLineages).length
-);
-
-log(
-	"LTR lineage rows created: " +
-	ltrRowsCreated
-);
-
-log(
-	"LTR lineage rows already present: " +
-	ltrRowsExisting
-);
-
-log(
-	"Representative LTR sequences linked: " +
-	ltrSequencesLinked
-);
-
-log(
-	"Representative LTR sequences missing: " +
-	ltrSequencesMissing
-);
-
-log(
-	"Association rows created: " +
-	associationsCreated
-);
-
-log(
-	"Association rows already present: " +
-	associationsExisting
-);
-
-log(
-	"Association rows created/updated: " +
-	associationsUpdated
-);
-
-log(
-	"Rows without linked_lineage_id: " +
-	unlinkedLtrRows
-);
-
-log(
-	"Canonical ERV sublineage rows missing: " +
-	missingErvLineages
-);
-
-log(
-	"Non-sublineage relationships skipped: " +
-	skippedNonSublineageRows
-);
-
-log(
-	"Incomplete rows skipped: " +
-	skippedIncompleteRows
-);
-
-log(
-	"Finished loading LTR lineages associated with ERV sublineages"
-);
+log("Finished loading sublineage-associated LTR lineages");

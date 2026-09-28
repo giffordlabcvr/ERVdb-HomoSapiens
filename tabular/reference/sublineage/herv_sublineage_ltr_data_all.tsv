@@ -1,4 +1,5 @@
 LTR_name	original_name	clade	linked_lineage_id	linked_lineage_name	linked_element_status	phylogeny_group	phylogeny_subgroup	flag
+HARLEQUIN_LTR	HARLEQUIN_LTR	I	ERV-1.Eta.E.HQ	HARLEQUIN	sublineage	Eta	NA	
 LTR19B	LTR19B	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
 LTR19C	LTR19C	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
 LTR73	LTR73	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
@@ -22,5 +23,3 @@ LTR28	LTR28	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA
 LTR28B	LTR28B	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
 LTR28C	LTR28C	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
 MLT2B4	MLT2B4	III	ERV-3.Lambda.Lb4	ERV-Lb4	sublineage	Lambda	NA	
-MER74C	MER74C	III	ERV-3.Lambda.74	HERVL74	sublineage	Lambda	NA	
-LTR47B2	LTR47B2	III	ERV-3.Lambda.47	ERV-L47	sublineage	Lambda	NA	
