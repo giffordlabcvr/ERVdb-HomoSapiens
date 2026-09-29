@@ -1,25 +1,14 @@
 
-
   # ERV-derived repeats
 
-  # Create ERV sublineage rows, populate their metadata and taxonomy,
+  # Create ERVR rows, populate their metadata and taxonomy,
   # and link representative sequences from source erv-sub
-  run script glue/build/reference/sublineage/loadErvSublineages.js
+  run script glue/build/reference/ervr/loadErvDerivedRepeats.js
 
   # Populate aliases for the ERV sublineages
-  run script glue/build/reference/sublineage/loadErvSublineageAliases.js
+  run script glue/build/reference/ervr/loadErvrAliases.js
   
-  # Load LTR lineages associated with ERV sublineages,
+  # Load LTR lineages associated with ERV-derived repeats,
   # link their representative sequences from source ltr-sub,
   # and create ERV-sublineage-to-LTR associations
-  run script glue/build/reference/sublineage/loadSublineageAssociatedLtrLineages.js
-  
-  # Import sublineage reference feature locations
-  run file glue/build/reference/sublineage/ervImportFeatureLocationsSublineages.glue
-  
-  # Declare reference sequences for ERV sublineages
-  run script glue/build/sublineage/ervDeclareSublineageReferences.js
-  
-  # Extend the constrained alignment tree
-  run script glue/build/reference/sublineage/extendAlignmentTreeAcceptedSublineages.js
-
+  run script glue/build/reference/ervr/loadErvrAssociatedLtrLineages.js

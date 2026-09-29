@@ -2,23 +2,17 @@ reference REF_HERVV
 
   add feature-location whole_genome
   feature-location whole_genome
-    add segment 1 6523
+    add segment 1 3922
     exit
 
   add feature-location 5LTR
   feature-location 5LTR
-    add segment 1 644
-    exit
-
-  add feature-location env
-  feature-location env
-    add segment 6583 7506
+    add segment 1 720
     exit
 
   add feature-location 3LTR
   feature-location 3LTR
-    add segment 6166 6523
+    add segment 3203 3922
     exit
 
   exit
-

@@ -1,0 +1,8 @@
+reference REF_HERVKHML61b
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 3350
+    exit
+
+  exit

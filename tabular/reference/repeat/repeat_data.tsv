@@ -1,0 +1,17 @@
+sequenceID	lineage_id	legacy_name	legacy_full_name	entity_type	classification_basis	status	parent_lineage	major_clade	minor_clade	genus	subgenus	human_erv	length	reference_role	reference_status	derivation_method	reference_method	num_seqs	represented_form	reference_completeness	fragment_extent	architecture_level	coding_level	validation_level	accession	pubmed_id	description	notes
+MER-61	MER-61	MER-61	medium reiteration frequency repeat 61	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	5217	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+HERV-31	HERV-31	HERV-31	human endogenous retrovirus 31	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	4936	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+HERV-38	HERV-38	HERV-38	human endogenous retrovirus 38	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	1786	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+LTR-37	LTR-37	LTR-37	LTR-37	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	4060	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-21	MER-21	MER-21	medium reiteration frequency repeat 21	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	933	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-31	MER-31	MER-31	medium reiteration frequency repeat 31	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	4936	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-34B	MER-34B	MER-34B	medium reiteration frequency repeat 34B	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	5356	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-4B	MER-4B	MER-4B	medium reiteration frequency repeat 4B	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	6758	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-65	MER-65	MER-65	medium reiteration frequency repeat 65	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	4871	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-4	MER-4	MER-4	medium reiteration frequency repeat 4	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	6387	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-4B	MER-4B	MER-4B	medium reiteration frequency repeat 4B	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	6758	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+HERV-35	HERV-35	HERV-35	human endogenous retrovirus 35	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	6918	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-41	MER-41	MER-41	medium reiteration frequency repeat 41	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	3944	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+MER-57	MER-57	MER-57	medium reiteration frequency repeat 57	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	7133	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+HERV-39	HERV-39	HERV-39	human endogenous retrovirus 39	repeat_group	repeat_family	excluded	n/a	I		NK		TRUE	9084	canonical	active	consensus	REPBASE		proviral_genome			0	0	0				
+HERV-L68	HERV-L68	HERV-L68	human endogenous retrovirus L68	repeat_group	repeat_family	excluded	n/a	III		NK		TRUE		canonical	active	consensus	REPBASE		proviral_genome			0	0	0				

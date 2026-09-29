@@ -416,26 +416,21 @@ function declareReferences(config) {
 // -----------------------------------------------------------------------------
 
 declareReferences({
-	label:
-		"ERV sublineage",
-
-	refPrefix:
-		"REF_",
-
-	lineageField:
-		"erv_lineage.id",
-
-	query: [
-		"list",
-		"sequence",
-		"sequenceID",
-		"source.name",
-		"erv_lineage.id",
-		"-w",
-		"source.name = 'erv-sub'",
-		"-s",
-		"erv_lineage.id,sequenceID"
-	]
+    label: "ERV sublineage",
+    refPrefix: "REF_",
+    lineageField: "erv_lineage_reference.erv_lineage.id",
+    query: [
+        "list", "sequence",
+        "sequenceID",
+        "source.name",
+        "erv_lineage_reference.erv_lineage.id",
+        "-w",
+        "source.name = 'erv-sub' and " +
+            "erv_lineage_reference.reference_role = 'canonical' and " +
+            "erv_lineage_reference.reference_status = 'active'",
+        "-s",
+        "erv_lineage_reference.erv_lineage.id,sequenceID"
+    ]
 });
 
 // -----------------------------------------------------------------------------
@@ -443,27 +438,23 @@ declareReferences({
 // -----------------------------------------------------------------------------
 
 declareReferences({
-	label:
-		"sublineage-associated LTR lineage",
-
-	refPrefix:
-		"LTR_REF_",
-
-	lineageField:
-		"ltr_lineage.id",
-
-	query: [
-		"list",
-		"sequence",
-		"sequenceID",
-		"source.name",
-		"ltr_lineage.id",
-		"-w",
-		"source.name = 'ltr-sub'",
-		"-s",
-		"ltr_lineage.id,sequenceID"
-	]
+    label: "LTR sublineage",
+    refPrefix: "LTR_REF_",
+    lineageField: "ltr_lineage_reference.ltr_lineage.id",
+    query: [
+        "list", "sequence",
+        "sequenceID",
+        "source.name",
+        "ltr_lineage_reference.ltr_lineage.id",
+        "-w",
+        "source.name = 'ltr-sub' and " +
+            "ltr_lineage_reference.reference_role = 'canonical' and " +
+            "ltr_lineage_reference.reference_status = 'active'",
+        "-s",
+        "ltr_lineage_reference.ltr_lineage.id,sequenceID"
+    ]
 });
+
 
 log(
 	"Sublineage-layer reference declaration complete"

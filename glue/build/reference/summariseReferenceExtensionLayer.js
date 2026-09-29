@@ -20,7 +20,7 @@
  */
 
 var INPUT_PATH =
-	"tabular/sublineage/herv_sublineage_data.tsv";
+	"tabular/reference/sublineage/herv_sublineage_data.tsv";
 
 var ERV_SOURCE =
 	"erv-sub";
@@ -334,10 +334,10 @@ var ervLineageRows =
 		"custom-table-row",
 		"erv_lineage",
 		"id",
-		"name",
-		"full_name",
+		"legacy_name",
+		"legacy_full_name",
 		"entity_type",
-		"entity_level",
+		"entity_type",
 		"status",
 		"parent_lineage",
 		"curation_tier",
@@ -360,7 +360,7 @@ _.each(
 
 		var entityLevel =
 			norm(
-				row["entity_level"]
+				row["entity_type"]
 			);
 
 		if(
@@ -382,8 +382,8 @@ _.each(
 
 		var sublineage = {
 			id: lineageId,
-			name: norm(row["name"]),
-			fullName: norm(row["full_name"]),
+			legacy_name: norm(row["legacy_name"]),
+			fullName: norm(row["legacy_full_name"]),
 			entityType: norm(row["entity_type"]),
 			entityLevel: entityLevel,
 			status: norm(row["status"]),
@@ -471,10 +471,10 @@ var ervSequenceRows =
 		"list",
 		"sequence",
 		"sequenceID",
-		"source.name",
+		"source.legacy_name",
 		"erv_lineage.id",
 		"-w",
-		"source.name = '" +
+		"source.legacy_name = '" +
 			ERV_SOURCE +
 			"'",
 		"-s",
@@ -746,7 +746,7 @@ _.each(
 		 * Restrict the report to associations created by the
 		 * sublineage-associated LTR loader.
 		 *
-		 * entity_level is not sufficient for determining
+		 * entity_type is not sufficient for determining
 		 * association provenance because an ERV lineage may
 		 * occur in both the base and sublineage datasets.
 		 */
@@ -827,10 +827,10 @@ var ltrSequenceRows =
 		"list",
 		"sequence",
 		"sequenceID",
-		"source.name",
+		"source.legacy_name",
 		"ltr_lineage.id",
 		"-w",
-		"source.name = '" +
+		"source.legacy_name = '" +
 			LTR_SOURCE +
 			"'",
 		"-s",
@@ -961,8 +961,8 @@ var referenceRows =
 	queryObjects([
 		"list",
 		"reference",
-		"name",
-		"sequence.source.name",
+		"legacy_name",
+		"sequence.source.legacy_name",
 		"sequence.sequenceID"
 	]);
 
@@ -974,12 +974,12 @@ _.each(
 
 		var referenceName =
 			norm(
-				row["name"]
+				row["legacy_name"]
 			);
 
 		var sourceName =
 			norm(
-				row["sequence.source.name"]
+				row["sequence.source.legacy_name"]
 			);
 
 		var sequenceID =
@@ -1135,9 +1135,9 @@ var alignmentRows =
 	queryObjects([
 		"list",
 		"alignment",
-		"name",
-		"parent.name",
-		"refSequence.name"
+		"legacy_name",
+		"parent.legacy_name",
+		"refSequence.legacy_name"
 	]);
 
 var alignmentsByName = {};
@@ -1148,7 +1148,7 @@ _.each(
 
 		var alignmentName =
 			norm(
-				row["name"]
+				row["legacy_name"]
 			);
 
 		if(alignmentName === null) {
@@ -1156,14 +1156,14 @@ _.each(
 		}
 
 		alignmentsByName[alignmentName] = {
-			name: alignmentName,
+			legacy_name: alignmentName,
 			parentName:
 				norm(
-					row["parent.name"]
+					row["parent.legacy_name"]
 				),
 			referenceName:
 				norm(
-					row["refSequence.name"]
+					row["refSequence.legacy_name"]
 				)
 		};
 	}
@@ -1572,10 +1572,10 @@ _.each(
 		var label =
 			lineageId;
 
-		if(sublineage.name !== null) {
+		if(sublineage.legacy_name !== null) {
 			label +=
 				" [" +
-				sublineage.name +
+				sublineage.legacy_name +
 				"]";
 		}
 
@@ -1727,10 +1727,10 @@ _.each(
 		var label =
 			lineageId;
 
-		if(sublineage.name !== null) {
+		if(sublineage.legacy_name !== null) {
 			label +=
 				" [" +
-				sublineage.name +
+				sublineage.legacy_name +
 				"]";
 		}
 

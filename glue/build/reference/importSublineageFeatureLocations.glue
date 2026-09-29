@@ -12,7 +12,7 @@
   run file glue/build/reference/sublineage/feature_locations/rho/HERV-V.glue
 
   # Iotaretrovirus
-  run file glue/build/reference/sublineage/feature_locations/iota/HERV-Pb.glue
+  #run file glue/build/reference/sublineage/feature_locations/iota/HERV-Pb.glue
 
   # Zetaretrovirus
   run file glue/build/reference/sublineage/feature_locations/zeta/HERV-W-SG1.glue
@@ -21,7 +21,7 @@
   # Thetaretrovirus
   run file glue/build/reference/sublineage/feature_locations/theta/HERV-24b.glue
 
-  # Kappa (K)
+  # Beta (archeo)
   run file glue/build/reference/sublineage/feature_locations/betaretrovirus/HERV-K-HML6-1a.glue
   run file glue/build/reference/sublineage/feature_locations/betaretrovirus/HERV-K-HML6-1b.glue
 
