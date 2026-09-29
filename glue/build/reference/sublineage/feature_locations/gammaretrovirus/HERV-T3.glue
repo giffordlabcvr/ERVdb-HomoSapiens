@@ -26,7 +26,7 @@ reference REF_HERVT3
     exit
 
   add feature-location 3LTR
-  feature-location 5LTR
+  feature-location 3LTR
     add segment 9358 9883
     exit
 

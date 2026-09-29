@@ -1,4 +1,6 @@
 LTR_name	original_name	clade	linked_lineage_id	linked_lineage_name	linked_element_status	phylogeny_group	phylogeny_subgroup
+MER89	MER-89	I	ERVR-1.Theta.24.89	MER-89	sublineage	Theta	NA
+MER110	MER110	I	ERVR-1.Theta.24.110	MER-110	sublineage	Theta	NA
 MER101	MER101	I	ERVR-1.Theta.24.101	MER-101	sublineage	Theta	NA
 LOR1a_LTR	LOR1a	I	ERVR-1.Theta.24.LOR1	LOR1	sublineage	Theta	NA
 LOR1b_LTR	LOR1b	I	ERVR-1.Theta.24.LOR1	LOR1	sublineage	Theta	NA

@@ -17,7 +17,7 @@ reference REF_HERV24b
 
   add feature-location pro
   feature-location pro
-    add segment 2811 3319
+    add segment 2811 3320
     exit
 
   add feature-location pol
