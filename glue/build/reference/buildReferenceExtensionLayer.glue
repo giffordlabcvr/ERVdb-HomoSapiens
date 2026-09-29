@@ -1,6 +1,7 @@
+#=============================================================
+# Extended ERV reference layer
+# ============================================================
 
-  # Extended ERV reference layer
- 
   # Import reference sequences for entities below/outside
   # the canonical ERV lineage layer
   run file glue/build/reference/importExtendedRefSources.glue
@@ -8,19 +9,51 @@
   # Set reference-sequence lengths and kinds
   run script glue/build/reference/setExtendedRefSequenceLengthsAndKinds.js
    
-  # Genuine ERV sublineages
-  run file glue/build/reference/sublineage/buildSublineageLayer.glue
+# ============================================================
+# ERV sublineages
+# ============================================================
 
-  # Other ERV-derived entities
-  run file glue/build/reference/ervr/buildErvrLayer.glue
- 
-  # Declare reference sequences for ERV sublineages
-  run script glue/build/sublineage/ervDeclareSublineageReferences.js
+  # Create ERV sublineage rows, populate their metadata and taxonomy,
+  # and link representative sequences from source erv-sub
+  run script glue/build/reference/sublineage/loadErvSublineages.js
+
+  # Populate aliases for the ERV sublineages
+  run script glue/build/reference/sublineage/loadErvSublineageAliases.js
+  
+  # Load LTR lineages associated with ERV sublineages,
+  # link their representative sequences from source ltr-sub,
+  # and create ERV-sublineage-to-LTR associations
+  run script glue/build/reference/sublineage/loadSublineageAssociatedLtrLineages.js
+  
+  # Import sublineage reference feature locations
+  run file glue/build/reference/sublineage/ervImportFeatureLocationsSublineages.glue
   
   # Extend the constrained alignment tree
   run script glue/build/reference/sublineage/extendAlignmentTreeAcceptedSublineages.js
 
+
+# ============================================================
+# ERV-derived repeats
+# ============================================================
+
+  #loadErvDerivedEntities
+  #loadErvDerivedEntityAliases
+  #loadErvDerivedEntityAssociations
+
+  # Import ervr reference feature locations
+  #run file glue/build/sublineage/ervImportFeatureLocationsErvrs.glue
+  
+
+# ============================================================
+# Shared reference infrastructure
+# ============================================================
+
+  # Declare reference sequences for ERV and LTR sublineages
+  #run script glue/build/sublineage/ervDeclareSublineageReferences.js
+  
   # Summarise the completed sublineage layer
   #run script glue/build/sublineage/summariseErvSublineageLayer.js
   
   validate
+
+
