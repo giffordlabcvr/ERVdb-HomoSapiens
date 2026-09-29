@@ -1,0 +1,19 @@
+reference REF_HERVWSG1
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 10437
+    exit
+
+  #add feature-location 5LTR
+  #feature-location 5LTR
+  #  add segment 1 794
+  #  exit
+
+  #add feature-location 3LTR
+  #feature-location 3LTR
+  #  add segment 9648 10437
+  #  exit
+
+  exit
+

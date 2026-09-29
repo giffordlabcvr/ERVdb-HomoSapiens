@@ -1,38 +1,38 @@
-reference REF_HERVRb1
+reference REF_HUERSP3B
 
   add feature-location whole_genome
   feature-location whole_genome
-    add segment 1 8333
+    add segment 1 10437
     exit
 
   add feature-location 5LTR
   feature-location 5LTR
-    add segment 1 644
+    add segment 1 794
     exit
 
   add feature-location LEA
   feature-location LEA
-    add segment 645 721
+    add segment 795 1465
     exit
 
   add feature-location gag
   feature-location gag
-    add segment 722 2518
+    add segment 1466 3787
     exit
 
   add feature-location pol
   feature-location pol
-    add segment 2521 6396
+    add segment 3788 6858
     exit
 
   add feature-location env
   feature-location env
-    add segment 6583 7506
+    add segment 6860 9541
     exit
 
   add feature-location 3LTR
   feature-location 3LTR
-    add segment 7664 8333
+    add segment 9648 10437
     exit
 
   exit
