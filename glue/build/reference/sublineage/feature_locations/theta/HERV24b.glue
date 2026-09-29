@@ -1,0 +1,43 @@
+reference REF_HERV24b
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 8765
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 576
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 1470 2810
+    exit
+
+  add feature-location pro
+  feature-location pro
+    add segment 2811 3319
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 3321 6506
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 6538 7968
+    exit
+
+  add feature-location PPT
+  feature-location PPT
+    add segment 8177 8189
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 8190 8765
+    exit
+
+  exit

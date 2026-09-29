@@ -2,12 +2,33 @@ reference REF_HERVT3
 
   add feature-location whole_genome
   feature-location whole_genome
-    add segment 1 9826
+    add segment 1 9883
     exit
-
+    
   add feature-location 5LTR
   feature-location 5LTR
-    add segment 1 564
+    add segment 1 529
+    exit
+
+  add feature-location gag
+  feature-location gag
+    add segment 2325 3884
+    exit
+
+  add feature-location pol
+  feature-location pol
+    add segment 3885 7904
+    exit
+
+  add feature-location env
+  feature-location env
+    add segment 7292 9334
+    exit
+
+  add feature-location 3LTR
+  feature-location 5LTR
+    add segment 9358 9883
     exit
 
   exit
+

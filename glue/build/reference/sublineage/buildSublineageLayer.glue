@@ -14,11 +14,11 @@
   run script glue/build/reference/sublineage/loadSublineageAssociatedLtrLineages.js
   
   # Import sublineage reference feature locations
-  run file glue/build/reference/sublineage/ervImportFeatureLocationsSublineages.glue
+  run file glue/build/reference/sublineage/importSublineageFeatureLocations.glue
   
   # Declare reference sequences for ERV sublineages
   run script glue/build/sublineage/ervDeclareSublineageReferences.js
   
   # Extend the constrained alignment tree
-  run script glue/build/reference/sublineage/extendAlignmentTreeAcceptedSublineages.js
+  #run script glue/build/reference/sublineage/extendAlignmentTreeAcceptedSublineages.js
 
