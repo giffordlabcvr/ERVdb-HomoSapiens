@@ -32,6 +32,7 @@ var REPRESENTED_FORMS = [
 ];
 var REFERENCE_COMPLETENESS_VALUES =
     ["complete", "fragmentary", "unknown"];
+    
 var FRAGMENT_EXTENTS =
     ["five_prime", "three_prime", "internal", "envelope", "other", "unknown"];
 
