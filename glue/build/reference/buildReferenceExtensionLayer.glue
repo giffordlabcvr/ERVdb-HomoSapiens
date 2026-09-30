@@ -19,9 +19,10 @@
   # Set LTR lengths and add feature locations
   run script glue/build/reference/addLtrWholeGenomeFeatureLocations.js
   
-  # Import sublineage reference feature locations
-  run file glue/build/reference/importSublineageFeatureLocations.glue
-  
+  # Import reference feature locations
+  run file glue/build/reference/importFeatureLocationsSublineage.glue
+  #run file glue/build/reference/importFeatureLocationsErvr.glue
+
   # Extend the constrained alignment tree
   #run script glue/build/reference/sublineage/extendAlignmentTreeAcceptedSublineages.js
    
