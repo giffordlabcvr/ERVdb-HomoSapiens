@@ -12,13 +12,19 @@ ERV-1-Zeta.Canis.Fc	CfERV-Fc	Canis familiaris endogenous retrovirus Fc	lineage	e
 ERV-1-Zeta.Eq	EqERV-Zeta	equine endogenous zetaretrovirus	lineage	ervdb_phylogeny	accepted	Zeta	false	Equid member of the 'Zeta' group of endogenous clade I retroviruses.	-	I	-	Zetaretrovirus	FRD
 ERV-1.Eta.15	HERV-15	human endogenous retrovirus 15	lineage	ervdb_phylogeny	accepted	Eta	true	Ancient gammaretrovirus-like lineage discovered through expression-based cloning in human teratocarcinoma cells.	First recognised as the retinoic acid-inducible human endogenous retrovirus I (RRHERV-I).	I	Gamma-Eta	Etaretrovirus	-
 ERV-1.Eta.E	HERV-E	human endogenous retrovirus E	lineage	ervdb_phylogeny	accepted	Eta	true	Ancient gammaretrovirus-like lineage likely present in primate ancestors by the Eocene epoch or earlier	-	I	Gamma-Eta	Etaretrovirus	-
+ERV-1.Eta.E.HQ	HARLEQUIN	HARLEQUIN	uncertain	-	excluded	ERV-1.Eta.E	true	-	-	I	Gamma-Eta	Gammaretrovirus	Eta
 ERV-1.Eta.R	HERV-R	human endogenous retrovirus R	lineage	ervdb_phylogeny	accepted	Eta	true	Ancient gammaretrovirus-like lineage present in primate ancestors by the Oligocene epoch.	Includes ERV3-1, one of the earliest recognised envelope-derived human genes.	I	Gamma-Eta	Etaretrovirus	-
 ERV-1.Eta.Suidae	PERV-E	porcine endogenous retrovirus E	lineage	ervdb_phylogeny	accepted	Eta	false	Endogenous gammaretrovirus lineage found in domestic pigs and wild boar and closely related to the primate HERV-E lineage	First described from a complete proviral sequence; its higher copy number in some domestic and inbred pigs may reflect relatively recent genomic amplification.	I	Gamma-Eta	Etaretrovirus	-
 ERV-1.Gamma.T	HERV-T	human endogenous retrovirus T	lineage	ervdb_phylogeny	accepted	Gammaretrovirus	true	Ancient gammaretrovirus lineage present in primate ancestors by the Eocene epoch	Source of at least one co-opted env gene co-opted in human ancestors.	I	Gamma-Eta	Gammaretrovirus	REV
+ERV-1.Gamma.T2	HERV-T2	human endogenous retrovirus T2	sublineage	-	excluded	ERV-1.Gamma.T	true	-	-	I	Gamma-Eta	Gammaretrovirus	REV
+ERV-1.Gamma.T3	HERV-T3	human endogenous retrovirus T3	sublineage	-	excluded	ERV-1.Gamma.T	true	-	-	I	Gamma-Eta	Gammaretrovirus	REV
 ERV-1.Iota.ADP	HERV-ADP	human endogenous retrovirus ADP	lineage	ervdb_phylogeny	accepted	Iota	true	Clade I retrovirus lineage present in the Eocene but potentially much older.	Related endogenous retroviruses occur across diverse vertebrate groups, including non-mammalian lineages.	I	-	Iotaretrovirus	-
 ERV-1.Iota.I	HERV-I	human endogenous retrovirus I	lineage	ervdb_phylogeny	accepted	Iota	true	Clade I retrovirus lineage present in the Eocene but potentially much older.	Related endogenous retroviruses occur across diverse vertebrate groups, including non-mammalian lineages.	I	-	Iotaretrovirus	-
+ERV-1.Iota.I.Pb	HERV-Pb	human endogenous retrovirus Pb	uncertain	-	excluded	ERV-1.Iota.I	true	-	-	I	-	Iotaretrovirus	-
 ERV-1.Rho.Rb	HERV-Rb	human endogenous retrovirus R(b)	lineage	ervdb_phylogeny	accepted	Rho	true	Distinct clade I retrovirus lineage present in primate ancestors by the Eocene epoch.	Encodes ERVPABLB-1 (envR(b)), a conserved envelope-derived human gene expressed in placenta.	I	-	Rhoretrovirus	-
+ERV-1.Rho.V	HERV-V	human endogenous retrovirus V	uncertain	-	excluded	ERV-1.Rho	true	-	-	I	-	Rhoretrovirus	-
 ERV-1.Theta.24	HERV-24	human endogenous retrovirus 24	lineage	ervdb_phylogeny	accepted	Theta	true	Obscure clade I retrovirus lineage.	-	I	-	Thetaretrovirus	-
+ERV-1.Theta.24b	HERV-24b	human endogenous retrovirus 24b	sublineage	-	excluded	ERV-1.Theta.24	true	-	-	I	-	Thetaretrovirus	-
 ERV-1.Theta.34	MER-34	medium reiteration frequency repeat 34	lineage	ervdb_phylogeny	accepted	Theta	true	Obscure clade I retrovirus lineage.	-	I	-	Thetaretrovirus	-
 ERV-1.Theta.Lb	HERV-Lb	human endogenous retrovirus L(b)	lineage	ervdb_phylogeny	accepted	Theta	true	Clade I retrovirus lineage present in primate ancestors by the Eocene epoch.	-	I	-	Thetaretrovirus	-
 ERV-1.Zeta.FRD.1	HERV-FRD	human endogenous retrovirus FRD	lineage	ervdb_phylogeny	accepted	FRD	true	Clade I retrovirus lineage present in primate ancestors by the Eocene epoch.	Source of multiple human genes derived from viral proteins, including syncytin-2.	I	-	Zetaretrovirus	FRD
@@ -35,7 +41,12 @@ ERV-1.Zeta.HF.XA	HERV-XA	human endogenous retrovirus XA	lineage	ervdb_phylogeny	
 ERV-1.Zeta.W9P.30	HERV-30	human endogenous retrovirus 30	lineage	ervdb_phylogeny	accepted	W9P	true	Clade I retrovirus lineage present in primate ancestors by the Eocene epoch.	-	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.9	HERV-9	human endogenous retrovirus 9	lineage	ervdb_phylogeny	accepted	W9P	true	Clade I retrovirus lineage present in primate ancestors by the Eocene epoch.	Generated a large population of LTR sequences that contribute regulatory elements to the human genome.	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.P	HERV-P	human endogenous retrovirus P	lineage	ervdb_phylogeny	accepted	W9P	true	Clade I retrovirus lineage present in primate ancestors by the Eocene epoch.	-	I	-	Zetaretrovirus	W9P
+ERV-1.Zeta.W9P.P.1	HUERS-P1	HUERS-P1	sublineage	-	excluded	ERV-1.Zeta.W9P.P	true	-	-	I	-	Zetaretrovirus	W9P
+ERV-1.Zeta.W9P.P.2	HUERS-P2	HUERS-P2	sublineage	-	excluded	ERV-1.Zeta.W9P.P	true	-	-	I	-	Zetaretrovirus	W9P
+ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	HuRRS-P	uncertain	-	excluded	ERV-1.Zeta.W9P.P	true	-	-	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.W	HERV-W	human endogenous retrovirus W	lineage	ervdb_phylogeny	accepted	W9P	true	Clade I retrovirus lineage present in primate ancestors by the Eocene epoch.	Encodes Syncytin-1, a co-opted viral envelope protein essential for placental development.	I	-	Zetaretrovirus	W9P
+ERV-1.Zeta.W9P.W.SG1	HERV-W-SG1	human endogenous retrovirus W SG1	sublineage	-	excluded	ERV-1.Zeta.W9P.W	true	-	-	I	-	Zetaretrovirus	W9P
+ERV-1.Zeta.W9P.W.SG2	HERV-W-SG2	human endogenous retrovirus W SG2	sublineage	-	excluded	ERV-1.Zeta.W9P.W	true	-	-	I	-	Zetaretrovirus	W9P
 ERV-2-Alpha.Tg.F	TgERV-F	Taeniopygia guttata endogenous retrovirus F	lineage	ervdb_phylogeny	accepted	Alpharetrovirus	false	Recombinant avian retrovirus lineage combining alpharetrovirus-like and gammaretrovirus-like features.	Represents a rare example of a retrovirus that acquired an envelope gene from a distantly related mammalian retrovirus.	II	Alpha-Beta	Alpharetrovirus	-
 ERV-2-Beta.A.Mus	IAPE	intracisternal A-type particle	lineage	ervdb_phylogeny	accepted	Betaretrovirus	false	Highly active murine betaretrovirus-derived retrotransposons that replicate within endoplasmic-reticulum-associated intracellular particles.	Historically one of the most important endogenous retrovirus systems, helping reveal how infectious retroviruses can evolve into highly successful intracellular genomic parasites.	II	Alpha-Beta	Betaretrovirus	A
 ERV-2-Beta.Lago.H	RERV-H	Oryctolagus cuniculus clone A rabbit endogenous retrovirus H	lineage	ervdb_phylogeny	accepted	Betaretrovirus	false	Betaretrovirus-like endogenous retroviral sequence originally identified during searches for novel human retroviruses.	Originally reported as "Human Retrovirus 5" (HRV-5), a putative human retrovirus associated with autoimmune disease, before being shown to derive from rabbit-associated sequences.	II	Alpha-Beta	Betaretrovirus	Lago
@@ -53,6 +64,8 @@ ERV-2-Lenti.RELIK	RELIK	rabbit endogenous lentivirus type K	lineage	ervdb_phylog
 ERV-2-Lenti.SpELV	SpELV	springhare endogenous lentivirus	lineage	ervdb_phylogeny	accepted	Lentivirus	false	Endogenous lentivirus lineage identified in spring hares	Shows that lentiviruses infected ancestral rodents.	II	-	Lentivirus	Archaeo
 ERV-2.Beta.Archeo.5	HERV-K-HML5	endogenous retrovirus K  HML5	lineage	ervdb_phylogeny	accepted	Betaretrovirus	true	Ancient betaretrovirus-like lineage likely present in mammalian ancestors by the Eocene epoch or earlier.	-	II	Alpha-Beta	Betaretrovirus	Archaeo
 ERV-2.Beta.Archeo.6	HERV-K-HML6	endogenous retrovirus K  HML6	lineage	ervdb_phylogeny	accepted	Betaretrovirus	true	Ancient betaretrovirus-like lineage likely present in mammalian ancestors by the Eocene epoch or earlier.	-	II	Alpha-Beta	Betaretrovirus	Archaeo
+ERV-2.Beta.Archeo.6.1a	HERV-K-HML6	endogenous retrovirus K HML6 type 1a	sublineage	-	excluded	ERV-2.Beta.Archeo.6	true	-	-	II	Alpha-Beta	Betaretrovirus	Archaeo
+ERV-2.Beta.Archeo.6.1b	HERV-K-HML6	endogenous retrovirus K HML6 type 1b	sublineage	-	excluded	ERV-2.Beta.Archeo.6	true	-	-	II	Alpha-Beta	Betaretrovirus	Archaeo
 ERV-2.Beta.Archeo.9	HERV-hako	endogenous retrovirus Hako	lineage	ervdb_phylogeny	accepted	Betaretrovirus	true	-	-	II	Alpha-Beta	Betaretrovirus	Archaeo
 ERV-2.Beta.K.HML1	HERV-K-HML1	endogenous retrovirus K HML1	lineage	ervdb_phylogeny	accepted	Betaretrovirus	true	-	-	II	Alpha-Beta	Betaretrovirus	K
 ERV-2.Beta.K.HML10	HERV-K-HML10	endogenous retrovirus K HML10	lineage	ervdb_phylogeny	accepted	Betaretrovirus	true	-	-	II	Alpha-Beta	Betaretrovirus	K
@@ -66,6 +79,7 @@ ERV-3-Lambda.MuERV.L	MuERV-L	Mus musculus endogenous retroviral sequence MuERV-L
 ERV-3-Lambda.U3.Eq	EqERV-U3	equine endogenous lambdaretrovirus U3	lineage	ervdb_phylogeny	accepted	Lambda	false	Equid member of the U3 subgroup of the 'Lambda' clade (ERV-L llike retroviruses).	-	III	Sigma-Lambda	Lambdaretrovirus	-
 ERV-3-Sigma.Eq	EqERV-S	equine endogenous retrovirus S	lineage	ervdb_phylogeny	accepted	Sigma	false	Equid member of the ERV-S (Sigma)-related retrovirus group.	-	III	Sigma-Lambda	Sigmaretrovirus	-
 ERV-3.Lambda.L	HERV-L	human endogenous retrovirus L	lineage	ervdb_phylogeny	accepted	L	true	Clade III retrovirus lineage originating in the late Cretaceous epoch, lacks an envelope gene, very high copy number.	Among the oldest ERV lineages known in mammals.	III	Sigma-Lambda	Lambdaretrovirus	-
+ERV-3.Lambda.Lb4	ERV-Lb4	endogenous retrovirus Lb4	sublineage	-	excluded	ERV-3.Lambda	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	L
 ERV-3.Lambda.U3	HERV-U3	human endogenous retrovirus U3	lineage	ervdb_phylogeny	accepted	U3	true	Ancient clade III retrovirus lineage present in mammalian ancestors by the Late Cretaceous.	-	III	Sigma-Lambda	Lambdaretrovirus	-
 ERV-3.Sigma.S	HERV-S	human endogenous retrovirus S	lineage	ervdb_phylogeny	accepted	S	true	Ancient clade III retrovirus lineage, likely present in mammals by the late Cretaceous.	-	III	Sigma-Lambda	Sigmaretrovirus	-
 ERV-3.Spuma.Ame.b	Spuma-Ame.b	axolotl endogenous foamy virus	lineage	ervdb_phylogeny	accepted	Spumavirus	false	Endogenous foamy virus lineage identified in amphibians.	Provides evidence that foamy viruses have infected tetrapods outside amniotes.	III	-	Spumavirus	Amphibian
@@ -74,3 +88,24 @@ ERV-3.Spuma.Coelocanth	CoeEFV	coelocanth endogenous foamy virus	lineage	ervdb_ph
 ERV-3.Spuma.Pilosa	SloEFV	sloth endogenous foamy virus	lineage	ervdb_phylogeny	accepted	Spumavirus	false	Endogenous foamy virus lineage identified in sloths.	First endogenous spumavirus to be discovered.	III	-	Spumavirus	Mammal
 ERV-3.Spuma.Rbi	Spuma-Rbi	caecilian endogenous foamy virus	lineage	ervdb_phylogeny	accepted	Spumavirus	false	Endogenous foamy virus lineage identified in amphibians.	Extends the known host range of foamy viruses to amphibians.	III	-	Spumavirus	Amphibian
 ERV-3.Spuma.Spu	Spuma-Spu	tuatara endogenous foamy virus	lineage	ervdb_phylogeny	accepted	Spumavirus	false	Endogenous foamy virus lineage identified in tuatara.	Demonstrates that foamy viruses infected reptilian ancestors in deep evolutionary time.	III	-	Spumavirus	Sphenodon
+ERVR-1.Theta.24.101	MER-101	medium reiteration frequency repeat 101	erv_derived_repeat	-	accepted	ERV-1.Theta.24	true	-	-	I	-	Thetaretrovirus	-
+ERVR-1.Theta.24.110	MER-110	medium reiteration frequency repeat 110	erv_derived_repeat	-	accepted	ERV-1.Theta.24	-	-	-	-	-	-	-
+ERVR-1.Theta.24.89	MER-89	medium reiteration frequency repeat 89	erv_derived_repeat	-	accepted	ERV-1.Theta.24	true	-	-	I	-	Thetaretrovirus	-
+ERVR-1.Theta.24.LOR1	LOR-1	LOR-1	erv_derived_repeat	-	accepted	ERV-1.Theta.24	true	-	-	I	-	Thetaretrovirus	-
+ERVR-1.Zeta.43	LTR-43	LTR-43	erv_derived_repeat	-	accepted	ERV-1.Zeta	true	-	-	I	-	Zetaretrovirus	HF
+ERVR-1.Zeta.83A	MER-83A	medium reiteration frequency repeat 83A	erv_derived_repeat	-	accepted	ERV-1.Zeta	true	-	-	I	-	Zetaretrovirus	-
+ERVR-1.Zeta.83B	MER-83B	medium reiteration frequency repeat 83B	erv_derived_repeat	-	accepted	ERV-1.Zeta	true	-	-	I	-	Zetaretrovirus	-
+ERVR-1.Zeta.84	MER-84	medium reiteration frequency repeat 84	erv_derived_repeat	-	accepted	ERV-1.Zeta	true	-	-	I	-	Zetaretrovirus	-
+ERVR-1.Zeta.HF.19	HERV-19	human endogenous retrovirus 19	erv_derived_repeat	-	accepted	ERV-1.Zeta	true	-	-	I	-	Zetaretrovirus	-
+ERVR-1.Zeta.HF.52A	MER-52A	medium reiteration frequency repeat 52A	erv_derived_repeat	-	accepted	ERV-1.Zeta.HF	true	-	-	I	-	Zetaretrovirus	HF
+ERVR-1.Zeta.W9P.P.G25	HERV-G25	human endogenous retrovirus G25	erv_derived_repeat	-	accepted	ERV-1.Zeta.W9P.P	true	-	-	I	-	Zetaretrovirus	W9P
+ERVR-3.Lambda.16	HERV-16	human endogenous retrovirus 16	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Lambda.16A3	ERV3-16A3	ERV3-16A3	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Lambda.40	HERV-L40	human endogenous retrovirus L40	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Lambda.52	HERV-52	human endogenous retrovirus 52	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Lambda.53	HERV-L53	human endogenous retrovirus L53	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Lambda.70	MER-70	medium reiteration frequency repeat 70	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Lambda.74	HERV-L74	human endogenous retrovirus L74	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Lambda.76	MER-76	medium reiteration frequency repeat 76	erv_derived_repeat	-	accepted	ERV-3.Lambda.L	true	-	-	III	Sigma-Lambda	Lambdaretrovirus	-
+ERVR-3.Sigma.47	ERV-L47	endogenous retrovirus L47	erv_derived_repeat	-	accepted	ERV-3.Sigma	true	-	-	III	Sigma-Lambda	Sigmaretrovirus	-
+ERVR-3.Sigma.57	HERV-57	human endogenous retrovirus 57	erv_derived_repeat	-	accepted	ERV-3.Sigma.57	true	-	-	III	Sigma-Lambda	Sigmaretrovirus	-

@@ -46,6 +46,8 @@ ERV-1.Zeta.W9P.9	PTR5	repbase
 ERV-1.Zeta.W9P.P	HUERS-P3	other
 ERV-1.Zeta.W9P.P	HUERS-P3	repbase
 ERV-1.Zeta.W9P.P	HUERS-P3B	repbase
+ERV-1.Zeta.W9P.P.1	huersp1	retrotector
+ERV-1.Zeta.W9P.P.2	huersp2	retrotector
 ERV-1.Zeta.W9P.W	HERV17	repbase
 ERV-1.Zeta.W9P.W	MSRV	repbase
 ERV-2-Beta.A.Mus	IAP	other
@@ -66,6 +68,7 @@ ERV-2.Beta.K.HML4	HERVK13	repbase
 ERV-2.Beta.K.HML7	HERVK11D	repbase
 ERV-2.Beta.K.HML8	HERVK11	repbase
 ERV-2.Beta.K.HML9	HERVK14C	repbase
+ERV-3.Lambda.Lb4	ERVL-B4	repbase
 ERV-3.Lambda.U3	HERVL66	repbase
 ERV-3.Sigma.S	HERV18	repbase
 ERV-3.Spuma.Spu	SpuEFV	other

@@ -5,15 +5,24 @@ console set next-cmd-output-file web-app/xrv_side_data.tsv
 
 list sequence \
   sequenceID \
-  xrv_species.ictv_recognised \
-  xrv_species.ncbi_ref \
-  xrv_species.full_name \
-  xrv_species.name \
-  xrv_species.id \
-  xrv_species.rv_major_clade.id \
-  xrv_species.rv_minor_clade.id \
-  xrv_species.rv_genus.id \
-  xrv_species.rv_subgenus.id \
-  xrv_species.rv_subgenus.ictv_recognised \
+  length \
+  xrv_isolate.id \
+  xrv_isolate.isolate_name \
+  xrv_isolate.sampled_host \
+  xrv_isolate.isolation_source \
+  xrv_isolate.molecule_type \
+  xrv_isolate.geo_loc_name \
+  xrv_isolate.collection_date \
+  xrv_isolate.pubmed_id \
+  xrv_isolate.rv_species.id \
+  xrv_isolate.rv_species.name \
+  xrv_isolate.rv_species.full_name \
+  xrv_isolate.rv_species.taxon_status \
+  xrv_isolate.rv_species.rv_major_clade.id \
+  xrv_isolate.rv_species.rv_minor_clade.id \
+  xrv_isolate.rv_species.rv_genus.id \
+  xrv_isolate.rv_species.rv_genus.taxon_status \
+  xrv_isolate.rv_species.rv_subgenus.id \
+  xrv_isolate.rv_species.rv_subgenus.taxon_status \
   -w "sequence_kind = 'xrv_ref'" \
-  -s sequenceID
+  -s xrv_isolate.rv_species.id,sequenceID
