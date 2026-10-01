@@ -12,7 +12,13 @@ project ervdb
   module fastaExporter export -w \
     "sequence_kind = 'ltr_ref' or sequence_kind = 'ltr_sub_ref'" \
     -f web-app/ltr_reference_seqs.fna
+
+  # Export ERV lineage aliases
+  run script glue/export/exportErvLineageAliases.glue
   
+  # Export ERV LTR lineage associations
+  run script glue/export/exportErvLtrLineageAssociations.glue
+
   validate
   
   exit

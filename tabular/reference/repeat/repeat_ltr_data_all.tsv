@@ -1,41 +1,41 @@
-LTR_name	original_name	clade	linked_lineage_id	linked_lineage_name	linked_element_status	phylogeny_group	phylogeny_subgroup	flag
-MER67C	MER67C	I	ERV-1.Rho.Rb.39	HERV-39	sublineage	Rho	NA	
-LTR58	LTR58	I	ERV-1.Rho.Rb.31	HERV-31	sublineage	Rho	NA	
-LTR38A1	LTR38A1	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	
-LTR38	LTR38	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	
-LTR38B	LTR38B	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	
-LTR38C	LTR38C	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	
-LTR37A	LTR37A	I	ERVR-1.Theta.37	LTR-37	sublineage	Theta	NA	
-LTR37B	LTR37B	I	ERVR-1.Theta.37	LTR-37	sublineage	Theta	NA	
-MER21A	MER21A	I	ERVR-1.Theta.MER21	MER-21	sublineage	Theta	NA	
-MER21B	MER21B	I	ERVR-1.Theta.MER21	MER-21	sublineage	Theta	NA	
-MER21C	MER21C	I	ERVR-1.Theta.MER21	MER-21	sublineage	Theta	NA	
-MER67A	MER67A	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	
-MER67B	MER67B	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	
-MER67C	MER67C	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	
-MER67D	MER67D	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	
-MER34B	MER34B	I	ERVR-1.Theta.MER34b	MER-34B	sublineage	Theta	NA	
-MER4A	MER4A	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-MER4A1	MER4A1	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-MER4C	MER4C	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-MER4CL34	MER4CL34	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-MER4D	MER4D	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-MER4D1	MER4D1	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-MER4E	MER4E	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-MER4E1	MER4E1	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	
-LTR39	LTR39	I	ERVR-1.Unclassified.MER4b	MER-4B	sublineage	Theta	NA	
-MER4B	MER4B	I	ERVR-1.Unclassified.MER4b	MER-4B	sublineage	Theta	NA	
-MER61C	MER61C	I	ERVR-1.Theta.MER61	MER-61	sublineage	Theta	NA	
-MER65A	MER65A	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	
-MER65B	MER65B	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	
-MER65C	MER65C	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	
-MER65D	MER65D	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	
-MER89	MER89	I	ERVR-1.Theta.MER89	MER-89	sublineage	Theta	NA	
-LTR35	LTR35	I	ERV-1.Zeta.35	HERV-35	sublineage	Zeta	NA	
-LTR35B	LTR35B	I	ERV-1.Zeta.35	HERV-35	sublineage	Zeta	NA	
-MER68	MER68	III	ERV-3.Lambda.68	HERV-L68	sublineage	Lambda	NA	
-MER68B	MER68B	III	ERV-3.Lambda.68	HERV-L68	sublineage	Lambda	NA	
-MER68C	MER68C	III	ERV-3.Lambda.68	HERV-L68	sublineage	Lambda	NA	
-LTR53	LTR53	III	ERV-3.Lambda.53	LTR-53	sublineage	Lambda	NA	
-LTR53B	LTR53B	III	ERV-3.Lambda.53	LTR-53	sublineage	Lambda	NA	
-LTR57	LTR57	I	ERV-3.Lambda.57	HERV-57	sublineage	Lambda	NA	
+LTR_name	original_name	clade	linked_lineage_id	linked_lineage_name	linked_element_status	phylogeny_group	phylogeny_subgroup	reference_role	reference_status	derivation_method	derivation_source	num_input_sequences	dfam_accession	notes
+MER67C	MER67C	I	ERV-1.Rho.Rb.39	HERV-39	sublineage	Rho	NA	canonical	active	consensus	repbase			
+LTR58	LTR58	I	ERV-1.Rho.Rb.31	HERV-31	sublineage	Rho	NA	canonical	active	consensus	repbase			
+LTR38A1	LTR38A1	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	canonical	active	consensus	repbase			
+LTR38	LTR38	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	canonical	active	consensus	repbase			
+LTR38B	LTR38B	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	canonical	active	consensus	repbase			
+LTR38C	LTR38C	I	ERVR-1.Theta.38	HERV-38	sublineage	Theta	NA	canonical	active	consensus	repbase			
+LTR37A	LTR37A	I	ERVR-1.Theta.37	LTR-37	sublineage	Theta	NA	canonical	active	consensus	repbase			
+LTR37B	LTR37B	I	ERVR-1.Theta.37	LTR-37	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER21A	MER21A	I	ERVR-1.Theta.MER21	MER-21	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER21B	MER21B	I	ERVR-1.Theta.MER21	MER-21	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER21C	MER21C	I	ERVR-1.Theta.MER21	MER-21	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER67A	MER67A	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER67B	MER67B	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER67C	MER67C	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER67D	MER67D	I	ERVR-1.Theta.MER31	MER-31	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER34B	MER34B	I	ERVR-1.Theta.MER34b	MER-34B	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4A	MER4A	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4A1	MER4A1	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4C	MER4C	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4CL34	MER4CL34	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4D	MER4D	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4D1	MER4D1	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4E	MER4E	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4E1	MER4E1	I	ERVR-1.Unclassified.MER4	MER-4	sublineage	Theta	NA	canonical	active	consensus	repbase			
+LTR39	LTR39	I	ERVR-1.Unclassified.MER4b	MER-4B	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER4B	MER4B	I	ERVR-1.Unclassified.MER4b	MER-4B	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER61C	MER61C	I	ERVR-1.Theta.MER61	MER-61	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER65A	MER65A	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER65B	MER65B	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER65C	MER65C	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER65D	MER65D	I	ERVR-1.Unclassified.MER65	MER-65	sublineage	Theta	NA	canonical	active	consensus	repbase			
+MER89	MER89	I	ERVR-1.Theta.MER89	MER-89	sublineage	Theta	NA	canonical	active	consensus	repbase			
+LTR35	LTR35	I	ERV-1.Zeta.35	HERV-35	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR35B	LTR35B	I	ERV-1.Zeta.35	HERV-35	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+MER68	MER68	III	ERV-3.Lambda.68	HERV-L68	sublineage	Lambda	NA	canonical	active	consensus	repbase			
+MER68B	MER68B	III	ERV-3.Lambda.68	HERV-L68	sublineage	Lambda	NA	canonical	active	consensus	repbase			
+MER68C	MER68C	III	ERV-3.Lambda.68	HERV-L68	sublineage	Lambda	NA	canonical	active	consensus	repbase			
+LTR53	LTR53	III	ERV-3.Lambda.53	LTR-53	sublineage	Lambda	NA	canonical	active	consensus	repbase			
+LTR53B	LTR53B	III	ERV-3.Lambda.53	LTR-53	sublineage	Lambda	NA	canonical	active	consensus	repbase			
+LTR57	LTR57	I	ERV-3.Lambda.57	HERV-57	sublineage	Lambda	NA	canonical	active	consensus	repbase			
