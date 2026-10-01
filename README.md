@@ -39,7 +39,7 @@ This layered design enables direct comparison of ERV diversity across species an
 
 Scripts in the [FredHutch/hervdbex](https://github.com/FredHutch/hervdbex) repository pull data directly from the following files here:
 
-- [`ERVdb/md/profiles/*.md`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/tree/main/md/profiles)
+- [`ERVdb/md/profiles/*.md`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/tree/main/md/profile)
 - [`ERVdb/web-app/ervdb_features.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_features.tsv)
 - [`ERVdb/web-app/ervdb_feature_locations.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_feature_locations.tsv)
 - [`ERVdb/web-app/ervdb_coding_nt.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_noncoding_nt.fasta)
