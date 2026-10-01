@@ -1,7 +1,7 @@
 // glue/build/locus/missillac/applyErvLocusNames.js
 //
 // Assign Missillac identifiers and orthology-group numbers to permanent,
-// taxonomically resolved ERV loci.
+// lineage-resolved ERV loci.
 //
 // Reads:
 //
@@ -18,9 +18,15 @@
 // Eligibility:
 //
 //   - the locus must have exactly one distinct erv_lineage association;
-//   - the associated erv_lineage must have entity_level "lineage" or
-//     "sublineage";
 //   - locus_type must be "erv" or "solo_ltr".
+//
+// A locus with no ERV-lineage association is not assigned a Missillac ID.
+// A locus associated with more than one ERV lineage is treated as
+// mosaic/unresolved for naming purposes and is also left unnamed.
+//
+// The biological classification of the locus is established upstream.
+// This script does not reinterpret taxonomic_resolution or properties of
+// the associated erv_lineage.
 //
 // Numbering:
 //
@@ -29,6 +35,11 @@
 //   2. Allocate the lowest unused positive integer within each
 //      erv_lineage.id namespace.
 //   3. Allocate new numbers deterministically in genomic order.
+//
+// This is the bootstrap allocation rule used to establish the initial
+// persistent Missillac namespace. In subsequent builds, previously issued
+// numbers will also need to be reserved from the persistent Missillac
+// registry, including numbers belonging to retired loci.
 //
 // Identifier format:
 //
@@ -46,9 +57,6 @@
 //
 // The "(LTR)" suffix describes the structural form of the locus. It does
 // not change its orthology-group number.
-//
-// Loci resolved only at genus, subgenus, or clade level are not named.
-// Mosaic and taxonomically unresolved loci are also left unnamed.
 
 var DRY_RUN = false;
 
@@ -342,11 +350,11 @@ function genomicSort(
 		return aStart - bStart;
 	}
 
-   var aEnd =
-	   a.end_position !== null
-		   ? a.end_position
-		   : 0;
-		
+	var aEnd =
+		a.end_position !== null
+			? a.end_position
+			: 0;
+
 	var bEnd =
 		b.end_position !== null
 			? b.end_position
@@ -582,7 +590,6 @@ var associationRows =
 		"id",
 		"erv_locus.id",
 		"erv_lineage.id",
-		"erv_lineage.entity_level",
 		"association_role",
 		"evidence",
 		"confidence",
@@ -591,7 +598,6 @@ var associationRows =
 	]);
 
 var lineageTargetsByLocus = {};
-var lineageDetailsByTargetKey = {};
 
 for(var i = 0;
 	i < associationRows.length;
@@ -614,49 +620,25 @@ for(var i = 0;
 			]
 		);
 
-	var entityLevel =
-		norm(
-			associationRow[
-				"erv_lineage.entity_level"
-			]
-		);
-
 	if(associatedLocusId === null ||
-		lineageId === null ||
-		entityLevel === null) {
+		lineageId === null) {
 
 		continue;
 	}
 
-	var lowerEntityLevel =
-		entityLevel.toLowerCase();
-
-	if(lowerEntityLevel !== "lineage" &&
-		lowerEntityLevel !== "sublineage") {
-
-		continue;
-	}
-
-	var targetKey =
-		lowerEntityLevel +
-		"\t" +
-		lineageId;
-
+	/*
+	 * We deliberately use the existence of the ERV-lineage association
+	 * itself as the classification criterion here.
+	 *
+	 * The upstream locus-classification workflow determines which lineage
+	 * associations are biologically justified. Missillac naming does not
+	 * reinterpret the lineage entity or taxonomic_resolution.
+	 */
 	addUniqueValue(
 		lineageTargetsByLocus,
 		associatedLocusId,
-		targetKey
+		lineageId
 	);
-
-	lineageDetailsByTargetKey[
-		targetKey
-	] = {
-		lineage_id:
-			lineageId,
-
-		entity_level:
-			lowerEntityLevel
-	};
 }
 
 log(
@@ -703,14 +685,13 @@ for(var i = 0;
 	var legacyRow =
 		legacyRows[i];
 
-
 	var legacyLocusId =
 		norm(
 			legacyRow[
 				"erv_locus.id"
 			]
 		);
-	
+
 	var sourceNumericId =
 		positiveInt(
 			legacyRow.source_numeric_id
@@ -844,7 +825,6 @@ var eligibleByLineage = {};
 
 var ineligibleNoLineage = [];
 var ineligibleMultipleLineages = [];
-var ineligibleResolution = [];
 var ineligibleLocusType = [];
 var legacyClaimConflicts = [];
 
@@ -872,6 +852,10 @@ for(var i = 0;
 			locusId
 		];
 
+	/*
+	 * No ERV-lineage association means that the locus does not have a
+	 * resolved lineage identity suitable for a Missillac identifier.
+	 */
 	if(lineageTargets === undefined ||
 		lineageTargets.length === 0) {
 
@@ -886,11 +870,19 @@ for(var i = 0;
 		continue;
 	}
 
+	/*
+	 * More than one distinct ERV-lineage association indicates that no
+	 * single lineage identity describes the locus. These loci are treated
+	 * as mosaic/unresolved for Missillac naming purposes.
+	 */
 	if(lineageTargets.length !== 1) {
 
 		ineligibleMultipleLineages.push({
 			locus_id:
 				locusId,
+
+			taxonomic_resolution:
+				locus.taxonomic_resolution,
 
 			targets:
 				lineageTargets.join(",")
@@ -899,32 +891,8 @@ for(var i = 0;
 		continue;
 	}
 
-	var target =
-		lineageDetailsByTargetKey[
-			lineageTargets[0]
-		];
-
-	/*
-	 * The association must resolve to a lineage or sublineage.
-	 * This has already been enforced while loading the association map,
-	 * but the explicit check keeps the eligibility rule clear.
-	 */
-	if(target.entity_level !== "lineage" &&
-		target.entity_level !== "sublineage") {
-
-		ineligibleResolution.push({
-			locus_id:
-				locusId,
-
-			taxonomic_resolution:
-				locus.taxonomic_resolution,
-
-			entity_level:
-				target.entity_level
-		});
-
-		continue;
-	}
+	var lineageId =
+		lineageTargets[0];
 
 	var locusType =
 		locus.locus_type !== null
@@ -958,7 +926,7 @@ for(var i = 0;
 				locusId,
 
 			lineage_id:
-				target.lineage_id,
+				lineageId,
 
 			claims:
 				legacyResolution.claims
@@ -991,10 +959,7 @@ for(var i = 0;
 			locus.taxonomic_resolution,
 
 		lineage_id:
-			target.lineage_id,
-
-		entity_level:
-			target.entity_level,
+			lineageId,
 
 		existing_orthology_group:
 			locus.existing_orthology_group,
@@ -1013,16 +978,16 @@ for(var i = 0;
 	};
 
 	if(eligibleByLineage[
-		target.lineage_id
+		lineageId
 	] === undefined) {
 
 		eligibleByLineage[
-			target.lineage_id
+			lineageId
 		] = [];
 	}
 
 	eligibleByLineage[
-		target.lineage_id
+		lineageId
 	].push(item);
 }
 
@@ -1066,6 +1031,13 @@ for(var lineageIndex = 0;
 
 	/*
 	 * Gather authoritative legacy-number claims within this lineage.
+	 *
+	 * During the initial bootstrap these claims define the numbers that
+	 * must be preserved before new numbers are allocated.
+	 *
+	 * In subsequent builds, usedNumbers must additionally include every
+	 * number previously issued in the persistent Missillac registry,
+	 * including numbers belonging to retired loci.
 	 */
 	var claimantsByNumber = {};
 
@@ -1400,7 +1372,7 @@ log(
 );
 
 log(
-	"Eligible lineage/sublineage-resolved loci: " +
+	"Eligible single-lineage loci considered: " +
 	(
 		namedItems.length +
 		legacyClaimConflicts.length +
@@ -1434,18 +1406,13 @@ log(
 );
 
 log(
-	"Loci intentionally unnamed because no lineage/sublineage association exists: " +
+	"Loci intentionally unnamed because no ERV-lineage association exists: " +
 	ineligibleNoLineage.length
 );
 
 log(
-	"Loci intentionally unnamed because multiple lineage/sublineage associations exist: " +
+	"Loci intentionally unnamed because multiple ERV-lineage associations exist: " +
 	ineligibleMultipleLineages.length
-);
-
-log(
-	"Loci intentionally unnamed because taxonomic resolution is ineligible: " +
-	ineligibleResolution.length
 );
 
 log(
@@ -1480,8 +1447,6 @@ for(var i = 0;
 		namedItem.locus_id +
 		"\t" +
 		namedItem.lineage_id +
-		"\t" +
-		namedItem.entity_level +
 		"\t" +
 		namedItem.orthology_group +
 		"\t" +
@@ -1519,25 +1484,9 @@ for(var i = 0;
 		"UNNAMED_MULTIPLE_LINEAGES\t" +
 		multipleLineageItem.locus_id +
 		"\t" +
+		multipleLineageItem.taxonomic_resolution +
+		"\t" +
 		multipleLineageItem.targets
-	);
-}
-
-
-for(var i = 0;
-	i < ineligibleResolution.length;
-	i++) {
-
-	var resolutionItem =
-		ineligibleResolution[i];
-
-	log(
-		"UNNAMED_INELIGIBLE_RESOLUTION\t" +
-		resolutionItem.locus_id +
-		"\t" +
-		resolutionItem.taxonomic_resolution +
-		"\t" +
-		resolutionItem.entity_level
 	);
 }
 
