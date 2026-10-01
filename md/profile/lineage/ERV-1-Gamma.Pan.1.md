@@ -1,4 +1,4 @@
-# ERV-1.Gamma.Pan (PtERV1 / CERV-1)
+# ERV-1-Gamma.Pan.1 (PtERV1 / CERV-1)
 
 ERV-1.Gamma.Pan, commonly known as PtERV1 (PTERV1) or CERV-1, is an endogenous gammaretrovirus lineage first characterised from the chimpanzee (*Pan troglodytes*) genome. More than 100 copies occur in chimpanzees, including relatively complete proviruses approximately 5--9 kb in length. The lineage has also colonised the genomes of bonobos, gorillas and several Old World monkey species, but is conspicuously absent from humans and Asian apes (PMID: 15737067; PMID: 16805923).
 
