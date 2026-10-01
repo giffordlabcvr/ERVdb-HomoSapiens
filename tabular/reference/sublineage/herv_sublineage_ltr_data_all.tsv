@@ -1,25 +1,25 @@
-LTR_name	original_name	clade	linked_lineage_id	linked_lineage_name	linked_element_status	phylogeny_group	phylogeny_subgroup	flag
-HARLEQUIN_LTR	HARLEQUIN_LTR	I	ERV-1.Eta.E.HQ	HARLEQUIN	sublineage	Eta	NA	
-LTR19B	LTR19B	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
-LTR19C	LTR19C	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
-LTR73	LTR73	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
-LTR8	LTR8	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
-LTR8A	LTR8A	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
-LTR8B	LTR8B	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	
-LTR1	LTR1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1A2	LTR1A2	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1B	LTR1B	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1B0	LTR1B0	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1B1	LTR1B1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1C	LTR1C	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1C1	LTR1C1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1D	LTR1D	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1D1	LTR1D1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1E	LTR1E	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1F	LTR1F	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1F1	LTR1F1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR1F2	LTR1F2	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR28	LTR28	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR28B	LTR28B	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-LTR28C	LTR28C	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	
-MLT2B4	MLT2B4	III	ERV-3.Lambda.Lb4	ERV-Lb4	sublineage	Lambda	NA	
+LTR_name	original_name	clade	linked_lineage_id	linked_lineage_name	linked_element_status	phylogeny_group	phylogeny_subgroup	reference_role	reference_status	derivation_method	derivation_source	num_input_sequences	dfam_accession	notes
+HARLEQUIN_LTR	HARLEQUIN_LTR	I	ERV-1.Eta.E.HQ	HARLEQUIN	sublineage	Eta	NA	canonical	active	consensus	repbase			
+LTR19B	LTR19B	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR19C	LTR19C	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR73	LTR73	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR8	LTR8	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR8A	LTR8A	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR8B	LTR8B	I	ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1	LTR1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1A2	LTR1A2	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1B	LTR1B	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1B0	LTR1B0	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1B1	LTR1B1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1C	LTR1C	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1C1	LTR1C1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1D	LTR1D	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1D1	LTR1D1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1E	LTR1E	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1F	LTR1F	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1F1	LTR1F1	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR1F2	LTR1F2	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR28	LTR28	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR28B	LTR28B	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+LTR28C	LTR28C	I	ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	Zeta	NA	canonical	active	consensus	repbase			
+MLT2B4	MLT2B4	III	ERV-3.Lambda.Lb4	ERV-Lb4	sublineage	Lambda	NA	canonical	active	consensus	repbase			
