@@ -45,13 +45,13 @@ The export is organised around three principal entities: **ERV lineages**, **ERV
 
 The principal lineage table contains one row per ERV lineage or sublineage:
 
-- `tabular/erv/erv_lineage_data.tsv`
+- `web-app//erv_lineage_data.tsv`
 
 Associated lineage data are provided separately:
 
-- `tabular/erv/erv_lineage_alias.tsv`
-- `tabular/erv/erv-ltr_relationships.tsv`
-- `tabular/erv/erv_age_calibrations.tsv`
+- `web-app/erv_lineage_alias.tsv`
+- `web-app/erv-ltr_relationships.tsv`
+- `web-app/erv_age_calibrations.tsv`
 
 Profiles of clades, lineages, and loci as Markdown:
 
@@ -83,14 +83,14 @@ Reference reconstruction and curation notes may additionally be supplied as Mark
 
 The principal human locus table contains one row per ERV locus in the specified human genome assembly:
 
-- [`tabular/locus/hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
+- [`web-app//hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
 
 Information representing relationships between loci and other ERVdb entities is exported separately:
 
-- [`tabular/locus/hg19_locus_lineage_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_locus_lineage_assoc.tsv)
-- `tabular/locus/hg19_locus_ltr_assoc.tsv`
-- `tabular/locus/erv_locus_alias.tsv`
-- `tabular/locus/erv_locus_age_calibrations.tsv`
+- [`web-app//locus/hg19_locus_lineage_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_locus_lineage_assoc.tsv)
+- `web-app//hg19_locus_ltr_assoc.tsv`
+- `web-app//erv_locus_alias.tsv`
+- `web-app//erv_locus_age_calibrations.tsv`
 
 Feature coverage information used to display the structural composition of loci is provided separately for the three major retroviral clades:
 
