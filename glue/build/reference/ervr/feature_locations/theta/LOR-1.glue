@@ -1,0 +1,23 @@
+reference REF_LOR1
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 9114
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 497
+    exit
+
+  add feature-location LOR-1
+  feature-location LOR-1
+    add segment 498 8617
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 8618 9114
+    exit
+
+  exit

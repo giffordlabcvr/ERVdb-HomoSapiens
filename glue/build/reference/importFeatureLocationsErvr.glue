@@ -1,0 +1,34 @@
+  
+  # Explicitly defined reference sequence feature locations
+
+  # Zetaretrovirus
+  run file glue/build/reference/ervr/feature_locations/zeta/HERV-19.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/HERV-G25.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/LTR-43.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/MER-41.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/MER-52A.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/MER-83A.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/MER-83B.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/MER-84.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/LTR-43.glue
+  run file glue/build/reference/ervr/feature_locations/zeta/MER-41.glue 
+
+  # Thetaretrovirus
+  run file glue/build/reference/ervr/feature_locations/theta/LOR-1.glue
+  run file glue/build/reference/ervr/feature_locations/theta/MER-101.glue
+  #run file glue/build/reference/ervr/feature_locations/theta/MER-110.glue
+  run file glue/build/reference/ervr/feature_locations/theta/PRIMAX.glue
+
+  # Sigma
+  run file glue/build/reference/ervr/feature_locations/sigma/ERV-L47.glue
+  run file glue/build/reference/ervr/feature_locations/sigma/HERV-57.glue
+
+  # Lambda
+  run file glue/build/reference/ervr/feature_locations/lambda/ERV-Lb4.glue
+  run file glue/build/reference/ervr/feature_locations/lambda/HERV-52.glue
+  run file glue/build/reference/ervr/feature_locations/lambda/HERV-L40.glue
+  run file glue/build/reference/ervr/feature_locations/lambda/HERV-L53.glue
+  run file glue/build/reference/ervr/feature_locations/lambda/HERV-L74.glue
+  run file glue/build/reference/ervr/feature_locations/lambda/MER-70.glue
+  run file glue/build/reference/ervr/feature_locations/lambda/MER-76.glue
+

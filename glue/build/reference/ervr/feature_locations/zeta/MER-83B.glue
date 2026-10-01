@@ -1,0 +1,23 @@
+reference REF_MER83B
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 5636
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 378
+    exit
+
+  add feature-location internal_region
+  feature-location internal_region
+    add segment 379 5258
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 5259 5636
+    exit
+
+  exit

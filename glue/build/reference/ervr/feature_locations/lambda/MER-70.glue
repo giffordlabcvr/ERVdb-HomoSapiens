@@ -1,38 +1,23 @@
-reference REF_HERVKHML2
+reference REF_MER70
 
   add feature-location whole_genome
   feature-location whole_genome
-    add segment 1 8214
+    add segment 1 5966
     exit
 
   add feature-location 5LTR
   feature-location 5LTR
-    add segment 1 421
+    add segment 1 471
     exit
 
-  add feature-location LEA
-  feature-location LEA
-    add segment 422 650
-    exit
-
-  add feature-location gag
-  feature-location gag
-    add segment 651 2504
-    exit
-
-  add feature-location pol
-  feature-location pol
-    add segment 2505 5996
-    exit
-
-  add feature-location env
-  feature-location env
-    add segment 5998 7962
+  add feature-location internal_region`
+  feature-location internal_region`
+    add segment 472 5494
     exit
 
   add feature-location 3LTR
   feature-location 3LTR
-    add segment 7963 8214
+    add segment 5495 5966
     exit
-    
+
   exit

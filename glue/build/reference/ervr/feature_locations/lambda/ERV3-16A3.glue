@@ -1,0 +1,23 @@
+reference REF_ERV3-16A3
+
+  add feature-location whole_genome
+  feature-location whole_genome
+    add segment 1 6912
+    exit
+
+  add feature-location 5LTR
+  feature-location 5LTR
+    add segment 1 422
+    exit
+
+  add feature-location internal_region
+  feature-location internal_region
+    add segment 423 6490
+    exit
+
+  add feature-location 3LTR
+  feature-location 3LTR
+    add segment 6491 6912
+    exit
+
+  exit
