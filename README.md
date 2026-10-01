@@ -53,7 +53,7 @@ Associated lineage data are provided separately:
 - `tabular/erv/erv-ltr_relationships.tsv`
 - `tabular/erv/erv_age_calibrations.tsv`
 
-Short lineage descriptions intended for search results and other compact displays are included in the tabular export. Fuller lineage profiles are provided as Markdown:
+Profiles of clades, lineages, and loci as Markdown:
 
 - [`md/profile/*.md`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/tree/main/md/profile)
 
