@@ -39,11 +39,11 @@ This layered design enables direct comparison of ERV diversity across species an
 
 Scripts in the [FredHutch/hervdbex](https://github.com/FredHutch/hervdbex) repository pull data directly from the following files here:
 
-- `[ERVdb/md/profiles/*.md](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/tree/main/md/profiles)`
-- `ERVdb/web-app/ervdb_features.tsv`
-- `ERVdb/web-app/ervdb_feature_locations.tsv`
-- `ERVdb/web-app/ervdb_coding_nt.fasta`
-- `ERVdb/web-app/ervdb_coding_aa.fasta`
+- [`ERVdb/md/profiles/*.md`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/tree/main/md/profiles)
+- [`ERVdb/web-app/ervdb_features.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_features.tsv)
+- [`ERVdb/web-app/ervdb_feature_locations.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_feature_locations.tsv)
+- [`ERVdb/web-app/ervdb_coding_nt.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_noncoding_nt.fasta)
+- [`ERVdb/web-app/ervdb_coding_aa.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_aa.fasta)
 - `ERVdb/tabular/erv/erv_lineage_data.tsv`
 - `ERVdb/tabular/erv/erv-ltr_relationships.tsv`
 - `ERVdb/tabular/erv/erv_lineage_alias.tsv`
