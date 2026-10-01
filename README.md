@@ -88,9 +88,9 @@ The principal human locus table contains one row per ERV locus in the specified 
 Information representing relationships between loci and other ERVdb entities is exported separately:
 
 - [`web-app//locus/hg19_locus_lineage_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_locus_lineage_assoc.tsv)
-- `web-app//hg19_locus_ltr_assoc.tsv`
-- `web-app//erv_locus_alias.tsv`
-- `web-app//erv_locus_age_calibrations.tsv`
+- `web-app/hg19_locus_ltr_assoc.tsv`
+- `web-app/erv_locus_alias.tsv`
+- `web-app/erv_locus_age_calibrations.tsv`
 
 Feature coverage information used to display the structural composition of loci is provided separately for the three major retroviral clades:
 
@@ -102,7 +102,7 @@ Feature coverage information used to display the structural composition of loci 
 
 Additional data defining the wider retrovirus taxonomic framework used by ERVdb are exported separately:
 
-- `tabular/xrv/xrv_side_data.tsv`
+- `web-app/xrv_side_data.tsv`
 
 Files shown without links above form part of the intended ERV Navigator export interface but do not yet have a completed export process.
 
