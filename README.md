@@ -34,3 +34,29 @@ This layered design enables direct comparison of ERV diversity across species an
 
 * * * * *
 
+
+## Data for the HERVdb app
+
+Scripts in the [FredHutch/hervdbex](https://github.com/FredHutch/hervdbex) repository pull data directly from the following files here:
+
+- `ERVdb/md/profiles/*.md`
+- `ERVdb/web-app/ervdb_features.tsv`
+- `ERVdb/web-app/ervdb_feature_locations.tsv`
+- `ERVdb/web-app/ervdb_coding_nt.fasta`
+- `ERVdb/web-app/ervdb_coding_aa.fasta`
+- `ERVdb/tabular/erv/erv_lineage_data.tsv`
+- `ERVdb/tabular/erv/erv-ltr_relationships.tsv`
+- `ERVdb/tabular/erv/erv_lineage_alias.tsv`
+- `ERVdb/tabular/xrv/xrv_side_data.tsv`
+
+Locus-specific data for the human genome are obtained from the *Homo sapiens* **[extension layer](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/)**. Specifically:
+
+- [`ERVdb-HomoSapiens/tabular/locus/hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
+- [`ERVdb-HomoSapiens/tabular/locus/hg19_locus_lineage_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_locus_lineage_assoc.tsv)
+- `ERVdb-HomoSapiens/tabular/locus/locus-feature-coverage-clade-I.tsv`
+- `ERVdb-HomoSapiens/tabular/locus/locus-feature-coverage-clade-II.tsv`
+- `ERVdb-HomoSapiens/tabular/locus/locus-feature-coverage-clade-III.tsv`
+
+
+* * * * *
+
