@@ -7,6 +7,7 @@
  * - source 'erv-sub' gets sequence_kind = 'erv_sub_ref'
  * - source 'ltr-sub' gets sequence_kind = 'ltr_sub_ref'
  * - source 'ervr' gets sequence_kind = 'ervr_ref'
+ * - source 'repeat' gets sequence_kind = 'repeat_ref'
  *
  * Any other sources are ignored.
  */
@@ -33,6 +34,10 @@ function getSequenceKindForSource(sourceName) {
 
 	if(sourceName === "ervr") {
 		return "ervr_ref";
+	}
+
+	if(sourceName === "repeat") {
+		return "repeat_ref";
 	}
 
 	return null;
