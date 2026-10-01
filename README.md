@@ -61,7 +61,7 @@ Profiles of clades, lineages, and loci as Markdown:
 
 Metadata describing ERV lineage reference sequences are exported separately from the lineage entities themselves:
 
-- `web-app/erv_lineage_references.tsv`
+- [`web-app/erv_lineage_references.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_data.tsv)
 
 Annotations associated with reference sequences are exported as:
 
@@ -70,7 +70,7 @@ Annotations associated with reference sequences are exported as:
 
 Reference nucleotide sequences are provided in FASTA format:
 
-- `web-app/ervdb_reference_nt.fasta`
+- [`web-app/ervdb_reference_nt.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_references.tsv)
 
 Coding regions extracted from annotated references are provided as:
 
