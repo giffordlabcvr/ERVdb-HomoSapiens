@@ -1,7 +1,7 @@
 # Export ERV-LTR lineage relationships
 
 console set cmd-output-file-format tab
-console set next-cmd-output-file tabular/erv/erv-ltr_relationships.tsv
+console set next-cmd-output-file web-app/erv-ltr_relationships.tsv
 
 list custom-table-row erv_lineage_ltr_assoc \
   erv_lineage.id \

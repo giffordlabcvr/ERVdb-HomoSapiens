@@ -492,10 +492,10 @@ REF_HERVRb|env	REF_HERVRb	erv	HERV-Rb	env	1	6501	7523		1	1	1023	341	341	true	tru
 REF_HERVRb|5LTR	REF_HERVRb	erv	HERV-Rb	5LTR	1	1	660		1	1	660			false			true			false	true
 REF_HERVRb|3LTR	REF_HERVRb	erv	HERV-Rb	3LTR	1	7679	8338		1	1	660			false			true			false	true
 REF_HERVS|whole_genome	REF_HERVS	erv	HERV-S	whole_genome	1	1	6935		1	1				false						false	false
-REF_HERVS|TSS	REF_HERVS	erv	HERV-S	TSS	1	335	340		1	1	6			false			false			false	false
 REF_HERVS|pro-pol	REF_HERVS	erv	HERV-S	pro-pol	1	1934	5479		1	1	3546	1182	1182	true	true	true	false	false	false	true	false
 REF_HERVS|pro	REF_HERVS	erv	HERV-S	pro	1	1934	2446		1	1	513	171	171	true	false	false	false	false	false	true	false
 REF_HERVS|PPT	REF_HERVS	erv	HERV-S	PPT	1	6483	6492		1	1	10			false			false			false	false
+REF_HERVS|polyA	REF_HERVS	erv	HERV-S	polyA	1	335	340		1	1	6			false			false			false	false
 REF_HERVS|pol	REF_HERVS	erv	HERV-S	pol	1	2447	5479		1	1	3033	1011	1011	true	true	true	false	false	false	true	false
 REF_HERVS|PBS	REF_HERVS	erv	HERV-S	PBS	1	444	461		1	1	18			false			false			false	false
 REF_HERVS|gag	REF_HERVS	erv	HERV-S	gag	1	503	1933		1	1	1431	477	477	true	true	true	true	false	false	true	false
@@ -536,9 +536,9 @@ REF_HERVW|3U5	REF_HERVW	erv	HERV-W	3U5	1	9677	10123		1	1	447			false			false			f
 REF_HERVW|3U3	REF_HERVW	erv	HERV-W	3U3	1	9353	9607		1	1	255			false			false			false	true
 REF_HERVW|3R	REF_HERVW	erv	HERV-W	3R	1	9608	9676		1	1	69			false			false			false	true
 REF_HERVXA|whole_genome	REF_HERVXA	erv	HERV-XA	whole_genome	1	1	8821		1	1				false						false	false
-REF_HERVXA|TSS	REF_HERVXA	erv	HERV-XA	TSS	1	437	442		1	1	6			false			false			false	false
 REF_HERVXA|pro	REF_HERVXA	erv	HERV-XA	pro	1	2542	2871		1	1	330	110	110	true	false	false	false	false	false	true	false
 REF_HERVXA|PPT	REF_HERVXA	erv	HERV-XA	PPT	1	8306	8310		1	1	5			false			false			false	false
+REF_HERVXA|polyA	REF_HERVXA	erv	HERV-XA	polyA	1	437	442		1	1	6			false			false			false	false
 REF_HERVXA|pol	REF_HERVXA	erv	HERV-XA	pol	1	2542	6180		1	1	3639	1213	1213	true	true	true	false	false	false	true	false
 REF_HERVXA|PBS	REF_HERVXA	erv	HERV-XA	PBS	1	515	532		1	1	18			false			false			false	false
 REF_HERVXA|glygag	REF_HERVXA	erv	HERV-XA	glygag	1	805	2286		1	1	1482	494	494	true	true	true	false	false	false	true	false
