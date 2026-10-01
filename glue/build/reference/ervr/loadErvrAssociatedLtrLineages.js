@@ -1,5 +1,5 @@
 /**
- * glue/build/reference/ervr/loadSublineageAssociatedLtrLineages.js
+ * glue/build/reference/ervr/loadErvrAssociatedLtrLineages.js
  *
  * Load LTR lineages associated with ERV sublineage-layer records from:
  *

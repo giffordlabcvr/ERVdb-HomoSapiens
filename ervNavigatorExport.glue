@@ -14,10 +14,16 @@ project ervdb
     -f web-app/ltr_reference_seqs.fna
 
   # Export ERV lineage aliases
-  run script glue/export/exportErvLineageAliases.glue
+  run file glue/export/exportErvLineageAliases.glue
   
   # Export ERV LTR lineage associations
-  run script glue/export/exportErvLtrLineageAssociations.glue
+  run file glue/export/exportErvLtrLineageAssociations.glue
+
+  # Export ERV lineage data
+  run file glue/export/exportErvLineageData.glue
+  
+   # Export ERV lineage reference sequence data 
+  run file glue/exportErvLineageReferenceData.glue
 
   validate
   
