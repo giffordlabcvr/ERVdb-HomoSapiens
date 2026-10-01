@@ -65,7 +65,7 @@ Metadata describing ERV lineage reference sequences are exported separately from
 
 Annotations associated with reference sequences are exported as:
 
-- [`web-app/ervdb_features.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_features.tsv)
+- [`web-app/ervdb_features.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_features.tsv)
 - [`web-app/ervdb_feature_locations.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_feature_locations.tsv)
 
 Reference nucleotide sequences are provided in FASTA format:
