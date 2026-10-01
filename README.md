@@ -66,7 +66,7 @@ Metadata describing ERV lineage reference sequences are exported separately from
 Annotations associated with reference sequences are exported as:
 
 - [`web-app/ervdb_features.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_features.tsv)
-- [`web-app/ervdb_feature_locations.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_feature_locations.tsv)
+- [`web-app/ervdb_feature_locations.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_feature_locations.tsv)
 
 Reference nucleotide sequences are provided in FASTA format:
 
@@ -74,8 +74,8 @@ Reference nucleotide sequences are provided in FASTA format:
 
 Coding regions extracted from annotated references are provided as:
 
-- [`web-app/ervdb_coding_nt.fasta`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_nt.fasta)
-- [`web-app/ervdb_coding_aa.fasta`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_aa.fasta)
+- [`web-app/ervdb_coding_nt.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_nt.fasta)
+- [`web-app/ervdb_coding_aa.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_aa.fasta)
 
 Reference reconstruction and curation notes may additionally be supplied as Markdown files.
 
@@ -83,7 +83,7 @@ Reference reconstruction and curation notes may additionally be supplied as Mark
 
 The principal human locus table contains one row per ERV locus in the specified human genome assembly:
 
-- [`web-app/hg19_loci_ervdb.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
+- [`web-app/hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
 
 Information representing relationships between loci and other ERVdb entities is exported separately:
 
@@ -102,7 +102,7 @@ Feature coverage information used to display the structural composition of loci 
 
 Additional data defining the wider retrovirus taxonomic framework used by ERVdb are exported separately:
 
-- [`web-app/xrv_side_data.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/xrv_side_data.tsv)
+- [`web-app/xrv_side_data.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/xrv_side_data.tsv)
 
 Files shown without links above form part of the intended ERV Navigator export interface but do not yet have a completed export process.
 
