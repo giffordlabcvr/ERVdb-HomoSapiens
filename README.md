@@ -35,27 +35,76 @@ This layered design enables direct comparison of ERV diversity across species an
 * * * * *
 
 
-## Data for the HERVdb app
+ ## Data for ERV Navigator
 
-Scripts in the [FredHutch/hervdbex](https://github.com/FredHutch/hervdbex) repository pull data directly from the following files here:
+Scripts in the [FredHutch/hervdbex](https://github.com/FredHutch/hervdbex) repository obtain ERV Navigator data from the files listed below. These files constitute the exported ERVdb data interface used by the web application.
 
-- [`ERVdb/md/profiles/*.md`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/tree/main/md/profile)
-- [`ERVdb/web-app/ervdb_features.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_features.tsv)
-- [`ERVdb/web-app/ervdb_feature_locations.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_feature_locations.tsv)
-- [`ERVdb/web-app/ervdb_coding_nt.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_noncoding_nt.fasta)
-- [`ERVdb/web-app/ervdb_coding_aa.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_aa.fasta)
-- `ERVdb/tabular/erv/erv_lineage_data.tsv`
-- `ERVdb/tabular/erv/erv-ltr_relationships.tsv`
-- `ERVdb/tabular/erv/erv_lineage_alias.tsv`
-- `ERVdb/tabular/xrv/xrv_side_data.tsv`
+The export is organised around three principal entities: **ERV lineages**, **ERV lineage reference sequences**, and **ERV loci**. Information representing one-to-many or many-to-many relationships is provided in separate association tables rather than encoded as multiple values within individual fields.
 
-Locus-specific data for the human genome are obtained from the *Homo sapiens* **[extension layer](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/)**. Specifically:
+### ERV lineages
 
-- [`ERVdb-HomoSapiens/tabular/locus/hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
-- [`ERVdb-HomoSapiens/tabular/locus/hg19_locus_lineage_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_locus_lineage_assoc.tsv)
-- `ERVdb-HomoSapiens/tabular/locus/locus-feature-coverage-clade-I.tsv`
-- `ERVdb-HomoSapiens/tabular/locus/locus-feature-coverage-clade-II.tsv`
-- `ERVdb-HomoSapiens/tabular/locus/locus-feature-coverage-clade-III.tsv`
+The principal lineage table contains one row per ERV lineage or sublineage:
+
+- `tabular/erv/erv_lineage_data.tsv`
+
+Associated lineage data are provided separately:
+
+- `tabular/erv/erv_lineage_alias.tsv`
+- `tabular/erv/erv-ltr_relationships.tsv`
+- `tabular/erv/erv_age_calibrations.tsv`
+
+Short lineage descriptions intended for search results and other compact displays are included in the tabular export. Fuller lineage profiles are provided as Markdown:
+
+- [`md/profile/*.md`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/tree/main/md/profile)
+
+### ERV lineage reference sequences
+
+Metadata describing ERV lineage reference sequences are exported separately from the lineage entities themselves:
+
+- `web-app/erv_lineage_references.tsv`
+
+Annotations associated with reference sequences are exported as:
+
+- [`web-app/ervdb_features.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_features.tsv)
+- [`web-app/ervdb_feature_locations.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_feature_locations.tsv)
+
+Reference nucleotide sequences are provided in FASTA format:
+
+- `web-app/ervdb_reference_nt.fasta`
+
+Coding regions extracted from annotated references are provided as:
+
+- [`web-app/ervdb_coding_nt.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_nt.fasta)
+- [`web-app/ervdb_coding_aa.fasta`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/ervdb_coding_aa.fasta)
+
+Reference reconstruction and curation notes may additionally be supplied as Markdown files.
+
+### ERV loci
+
+The principal human locus table contains one row per ERV locus in the specified human genome assembly:
+
+- [`tabular/locus/hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
+
+Information representing relationships between loci and other ERVdb entities is exported separately:
+
+- [`tabular/locus/hg19_locus_lineage_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_locus_lineage_assoc.tsv)
+- `tabular/locus/hg19_locus_ltr_assoc.tsv`
+- `tabular/locus/erv_locus_alias.tsv`
+- `tabular/locus/erv_locus_age_calibrations.tsv`
+
+Feature coverage information used to display the structural composition of loci is provided separately for the three major retroviral clades:
+
+- `tabular/locus/locus-feature-coverage-clade-I.tsv`
+- `tabular/locus/locus-feature-coverage-clade-II.tsv`
+- `tabular/locus/locus-feature-coverage-clade-III.tsv`
+
+### Supporting retrovirus taxonomy data
+
+Additional data defining the wider retrovirus taxonomic framework used by ERVdb are exported separately:
+
+- `tabular/xrv/xrv_side_data.tsv`
+
+Files shown without links above form part of the intended ERV Navigator export interface but do not yet have a completed export process.
 
 
 * * * * *
