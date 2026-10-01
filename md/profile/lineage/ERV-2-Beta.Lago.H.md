@@ -1,4 +1,4 @@
-# ERV-2.Beta.Orcytolagus.H
+# ERV-2-Beta.Lago.H
 
 **ERV-2.Beta.Oryctolagus.H (RERV-H)** is an endogenous betaretrovirus lineage found in the European rabbit (*Oryctolagus cuniculus*). The lineage was first characterised after sequences initially reported as a novel human retrovirus, **Human Retrovirus 5 (HRV-5)**, were shown to originate from rabbit genomic DNA rather than from human infection (PMID: 12072509).
 
