@@ -3,7 +3,7 @@
 project ervdb
   
   # Export features, feature locations, and FASTA 
-  run script glue/export/ervdbExportReferenceFeatures.js
+  #run script glue/export/ervdbExportReferenceFeatures.js
   
   # Export age calibration data 
   run script glue/export/exportErvAgeCalibrationsForNavigator.js
@@ -23,7 +23,7 @@ project ervdb
   run file glue/export/exportErvLineageData.glue
   
    # Export ERV lineage reference sequence data 
-  run file glue/exportErvLineageReferenceData.glue
+  run file glue/export/exportErvLineageReferenceData.glue
 
   validate
   
