@@ -1,0 +1,10 @@
+# Export ERV lineage aliases
+
+console set cmd-output-file-format tab
+console set next-cmd-output-file tabular/erv/erv_lineage_alias.tsv
+
+list custom-table-row erv_lineage_alias \
+  erv_lineage.id \
+  alias_name \
+  alias_source \
+  -s erv_lineage.id,alias_name
