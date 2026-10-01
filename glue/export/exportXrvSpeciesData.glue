@@ -1,0 +1,19 @@
+# Export XRV reference sequence data
+
+console set cmd-output-file-format tab
+console set next-cmd-output-file web-app/xrv_side_data.tsv
+
+list sequence \
+  sequenceID \
+  xrv_species.ictv_recognised \
+  xrv_species.ncbi_ref \
+  xrv_species.full_name \
+  xrv_species.name \
+  xrv_species.id \
+  xrv_species.rv_major_clade.id \
+  xrv_species.rv_minor_clade.id \
+  xrv_species.rv_genus.id \
+  xrv_species.rv_subgenus.id \
+  xrv_species.rv_subgenus.ictv_recognised \
+  -w "sequence_kind = 'xrv_ref'" \
+  -s sequenceID
