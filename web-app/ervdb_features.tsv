@@ -1,0 +1,118 @@
+feature	parent_feature	description	feature_type	codes_amino_acids	own_codon_numbering
+whole_genome		Retrovirus proviral genome	noncoding	false	false
+5flank		5 prime genomic flanking sequence	noncoding	false	false
+3flank		3 prime genomic flanking sequence	noncoding	false	false
+p16	whole_genome	p16 protein	coding	true	true
+p12	whole_genome	p12	coding	true	true
+orf_fc	whole_genome	Zeta-Fc putative orf	coding	true	true
+orfx	whole_genome	ORF X	coding	true	true
+orf2	whole_genome	ORF 2	coding	true	true
+orf1	whole_genome	ORF 1	coding	true	true
+orc	whole_genome	ORF C gene	coding	true	true
+orb	whole_genome	ORF B gene	coding	true	true
+ora	whole_genome	ORF A gene	coding	true	true
+gag-env	whole_genome	gag-env fusion	coding	true	true
+NF1	whole_genome	Nuclear factor 1 motif	noncoding	false	false
+nef	whole_genome	nef gene	coding	true	true
+LVb	whole_genome	Leukaemia virus factor b site	noncoding	false	false
+lep	whole_genome	lep protein	coding	true	true
+LEA	whole_genome	Leader region	noncoding	false	false
+ISRE	whole_genome	Interferon-stimulated response element	noncoding	false	false
+IR	whole_genome	Inverted repeat	noncoding	false	false
+internal_region	whole_genome	internal region (bounded by LTRs)	noncoding	false	false
+hbz	whole_genome	basic leucine zipper factor	coding	true	true
+gag	whole_genome	Group-specific antigen polyprotein	coding	true	true
+GRE	whole_genome	Glucocorticoid response element	noncoding	false	false
+glygag	whole_genome	Glyco-gag	coding	true	true
+GAS	whole_genome	STAT1 binding site	noncoding	false	false
+gag-pro-pol	whole_genome	gag-pro-pol fusion	coding	true	true
+gag-pro	whole_genome	gag-pro fusion	coding	true	true
+gag-pol	whole_genome	gag-pol fusion	coding	true	true
+env	whole_genome	envelope	coding	true	true
+DU	whole_genome	dUTPase	coding	true	true
+DIS	whole_genome	Dimerisation initiation site	noncoding	false	false
+CTS	whole_genome	Central termination sequence	noncoding	false	false
+cPPT	whole_genome	Central polypurine tract	noncoding	false	false
+bo2	whole_genome	Bo2 protein	coding	true	true
+bo1	whole_genome	Bo1 protein	coding	true	true
+bet	whole_genome	bet	coding	true	true
+bel2	whole_genome	bel2	coding	true	true
+bel1	whole_genome	bel1 gene	coding	true	true
+asp	whole_genome	putative antisense	coding	true	true
+5UTR	whole_genome	5' Untranslated region	noncoding	false	false
+5LTR	whole_genome	5' long terminal repeat	noncoding	false	false
+3LTR	whole_genome	3' long terminal repeat	noncoding	false	false
+SD	whole_genome	Splice donor region	noncoding	false	false
+sag	whole_genome	Superantigen	coding	true	true
+s2	whole_genome	s2 gene	coding	true	true
+s1	whole_genome	s1 gene	coding	true	true
+rex	whole_genome	Regulator of expression protein	coding	true	true
+rev	whole_genome	rev gene	coding	true	true
+rec	whole_genome	Rec protein	coding	true	true
+PSI	whole_genome	Packaging signal	noncoding	false	false
+pro-pol	whole_genome	pro-pol fusion	coding	true	true
+pro	whole_genome	protease	coding	true	true
+pregag	whole_genome	Pre-gag	coding	true	true
+PPT	whole_genome	Polypurine tract	noncoding	false	false
+polyA	whole_genome	Polyadenylation signal	noncoding	false	false
+pol	whole_genome	polymerase	coding	true	true
+PBS	whole_genome	Primer-binding site	noncoding	false	false
+p30	whole_genome	p30	coding	true	true
+p21	whole_genome	p21 protein	coding	true	true
+p2	whole_genome	HIV-1 gag-derived p2 protein	coding	true	true
+zh_xorf1	whole_genome	Zeta-H putative orf 1	coding	true	true
+vpy	whole_genome	vpy gene	coding	true	true
+vpx	whole_genome	vpx gene	coding	true	true
+vpw	whole_genome	vpw gene	coding	true	true
+vpu	whole_genome	vpu gene	coding	true	true
+vpr	whole_genome	vpr gene	coding	true	true
+vif	whole_genome	viral infectivity factor gene	coding	true	true
+unknown	whole_genome	Unknown protein	coding	true	true
+UCR	whole_genome	Upstream conserved region	noncoding	false	false
+ttm	whole_genome	ttm	coding	true	true
+TSS	whole_genome	Transcription start site	noncoding	false	false
+tmx	whole_genome	tmx gene	coding	true	true
+tax	whole_genome	Trans-activator of transcription	coding	true	true
+tat	whole_genome	transactivator protein gene	coding	true	true
+tas	whole_genome	Trans-activator gene	coding	true	true
+src	whole_genome	src protein	coding	true	true
+SL4	whole_genome	stem loop 4	noncoding	false	false
+SL3	whole_genome	stem loop 3	noncoding	false	false
+ZK	gag	gag Zinc Knuckle	coding	true	true
+U5_5LTR	5LTR	U5 region of 5' LTR	noncoding	false	false
+U3_5LTR	5LTR	U3 region of 5' LTR	noncoding	false	false
+TM	env	transmembrane domain	coding	true	true
+TATA_box	5LTR	TATA box	noncoding	false	false
+TAR	5LTR	Trans-activation response element	noncoding	false	false
+SU	env	surface glycoprotein	coding	true	true
+SP	env	signal peptide	coding	true	true
+R_5LTR	5LTR	R region of 5' LTR	noncoding	false	false
+RT	pol	Reverse transcriptase	coding	true	true
+RRE	env	Rev response element	noncoding	false	false
+RNaseH	pol	RNaseH	coding	true	true
+PP12	gag	RNA-binding phosphoprotein p12	coding	true	true
+NC	gag	nucleocapsid	coding	true	true
+FS	gag-pol	Frameshift signal	noncoding	false	false
+MHR	gag	gag Major homology region	coding	true	true
+MA	gag	matrix	coding	true	true
+ISD	env	immunosuppressive domain	coding	true	true
+IN	pol	integrase	coding	true	true
+g_patch	pro	G-patch	coding	true	true
+CA	gag	capsid	coding	true	true
+5U5	5LTR	5' LTR unique 5' region	noncoding	false	false
+5U3	5LTR	5' LTR unique 3' region	noncoding	false	false
+5R	5LTR	5' LTR repeat region	noncoding	false	false
+3U5	3LTR	3' LTR unique 5' region	noncoding	false	false
+3U3	3LTR	3' LTR unique 3' region	noncoding	false	false
+3TSS	3LTR	3' transcription start site	noncoding	false	false
+3R	3LTR	3' LTR repeat region	noncoding	false	false
+FS-stemloop	FS	Frameshift stem loop	noncoding	false	false
+FS-slippery-seq	FS	Frameshift slippery sequence	noncoding	false	false
+Chromo	IN	Integrase-associated chromodomain	coding	true	true
+RT_d7	RT	Reverse transcriptase domain 7	coding	true	true
+RT_d6	RT	Reverse transcriptase domain 6	coding	true	true
+RT_d5	RT	Reverse transcriptase domain 5	coding	true	true
+RT_d4	RT	Reverse transcriptase domain 4	coding	true	true
+RT_d3	RT	Reverse transcriptase domain 3	coding	true	true
+RT_d2	RT	Reverse transcriptase domain 2	coding	true	true
+RT_d1	RT	Reverse transcriptase domain 1	coding	true	true

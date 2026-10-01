@@ -2,19 +2,17 @@
 
 project ervdb
   
-  # Locus-level export
-
-  # Export locus table
-
-  # Export all locus sequences as a single FASTA-formatted file
-  module fastaExporter export -w "sequence_kind = 'proviral_locus'" -f web-app/proviral_locus_seqs.fas
-
-  # Export aligned segments for lineage level alignments
-  run script glue/export/exportHervLineageAlignmentSegments.js
-
-  # Export alignments 
-  run file glue/export/exportAlignments.glue
-    
+  # Export features, feature locations, and FASTA 
+  run script glue/export/ervdbExportReferenceFeatures.js
+  
+  # Export age calibration data 
+  run script glue/export/exportErvAgeCalibrationsForNavigator.js
+  
+  # Export LTR reference sequences
+  module fastaExporter export -w \
+    "sequence_kind = 'ltr_ref' or sequence_kind = 'ltr_sub_ref'" \
+    -f web-app/ltr_reference_seqs.fna
+  
   validate
   
   exit
