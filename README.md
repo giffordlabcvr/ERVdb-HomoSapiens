@@ -1,4 +1,4 @@
-# HERVdb  
+# ERVdb-HomoSapiens  
 *A GLUE-based reference and locus resource for human endogenous retroviruses (HERVs)*  
 
 **HERVdb** extends the [ERVdb](https://github.com/giffordlabcvr/ervdb) reference scaffold to incorporate **all classified human endogenous retrovirus (HERV) loci**.
