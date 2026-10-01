@@ -102,7 +102,7 @@ Feature coverage information used to display the structural composition of loci 
 
 Additional data defining the wider retrovirus taxonomic framework used by ERVdb are exported separately:
 
-- `web-app/xrv_side_data.tsv`
+- [`web-app/xrv_side_data.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/xrv_side_data.tsv)
 
 Files shown without links above form part of the intended ERV Navigator export interface but do not yet have a completed export process.
 
