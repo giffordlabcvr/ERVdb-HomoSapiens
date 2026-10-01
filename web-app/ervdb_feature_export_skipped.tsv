@@ -36,13 +36,13 @@ REF_HERVR	erv	HERV-R	5U5	noncoding_feature_shorter_than_50nt
 REF_HERVR	erv	HERV-R	3U5	noncoding_feature_shorter_than_50nt
 REF_HERVRb	erv	HERV-Rb	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVRb	erv	HERV-Rb	PBS	noncoding_feature_shorter_than_50nt
-REF_HERVS	erv	HERV-S	TSS	noncoding_feature_shorter_than_50nt
 REF_HERVS	erv	HERV-S	PPT	noncoding_feature_shorter_than_50nt
+REF_HERVS	erv	HERV-S	polyA	noncoding_feature_shorter_than_50nt
 REF_HERVS	erv	HERV-S	PBS	noncoding_feature_shorter_than_50nt
 REF_HERVS	erv	HERV-S	TATA_box	noncoding_feature_shorter_than_50nt
 REF_HERVT	erv	HERV-T	PPT	noncoding_feature_shorter_than_50nt
-REF_HERVXA	erv	HERV-XA	TSS	noncoding_feature_shorter_than_50nt
 REF_HERVXA	erv	HERV-XA	PPT	noncoding_feature_shorter_than_50nt
+REF_HERVXA	erv	HERV-XA	polyA	noncoding_feature_shorter_than_50nt
 REF_HERVXA	erv	HERV-XA	PBS	noncoding_feature_shorter_than_50nt
 REF_HERVXA	erv	HERV-XA	TATA_box	noncoding_feature_shorter_than_50nt
 REF_MELVmpf	erv	MELVmpf	PBS	noncoding_feature_shorter_than_50nt

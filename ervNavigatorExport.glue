@@ -3,10 +3,10 @@
 project ervdb
   
   # Export features, feature locations, and FASTA 
-  run script glue/export/ervdbExportReferenceFeatures.js
+  #run script glue/export/ervdbExportReferenceFeatures.js
   
   # Export age calibration data 
-  run script glue/export/exportErvAgeCalibrationsForNavigator.js
+  #run script glue/export/exportErvAgeCalibrationsForNavigator.js
   
   # Export LTR reference sequences
   module fastaExporter export -w \
@@ -14,10 +14,10 @@ project ervdb
     -f web-app/ltr_reference_seqs.fna
 
   # Export ERV lineage aliases
-  run script glue/export/exportErvLineageAliases.glue
+  run file glue/export/exportErvLineageAliases.glue
   
   # Export ERV LTR lineage associations
-  run script glue/export/exportErvLtrLineageAssociations.glue
+  run file glue/export/exportErvLtrLineageAssociations.glue
 
   validate
   

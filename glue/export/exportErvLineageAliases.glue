@@ -1,7 +1,7 @@
 # Export ERV lineage aliases
 
 console set cmd-output-file-format tab
-console set next-cmd-output-file tabular/erv/erv_lineage_alias.tsv
+console set next-cmd-output-file web-app/erv_lineage_alias.tsv
 
 list custom-table-row erv_lineage_alias \
   erv_lineage.id \
