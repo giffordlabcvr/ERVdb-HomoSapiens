@@ -50,7 +50,7 @@ The principal lineage table contains one row per ERV lineage or sublineage:
 Associated lineage data are provided separately:
 
 - [`web-app/erv_lineage_names.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_names.tsv)
-- [`web-app/erv-ltr_relationships.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv-ltr_relationships.tsv)
+- [`web-app/erv-ltr_relationships.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv-ltr_relationships.tsv)
 - [`web-app/erv_age_calibrations.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_navigator_age_calibrations.tsv)
 
 Profiles of clades, lineages, and loci as Markdown:
