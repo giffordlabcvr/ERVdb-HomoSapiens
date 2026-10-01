@@ -13,6 +13,9 @@ project ervdb
     "sequence_kind = 'ltr_ref' or sequence_kind = 'ltr_sub_ref'" \
     -f web-app/ltr_reference_seqs.fna
 
+  # Export XRV reference sequence data
+  run file glue/exportXrvSpeciesData.glue
+
   # Export ERV lineage aliases
   run file glue/export/exportErvLineageAliases.glue
   
@@ -22,7 +25,7 @@ project ervdb
   # Export ERV lineage data
   run file glue/export/exportErvLineageData.glue
   
-   # Export ERV lineage reference sequence data 
+  # Export ERV lineage reference sequence data 
   run file glue/exportErvLineageReferenceData.glue
 
   validate
