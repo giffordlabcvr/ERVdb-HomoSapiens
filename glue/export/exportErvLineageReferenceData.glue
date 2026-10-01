@@ -1,0 +1,28 @@
+# Export ERV lineage reference sequence metadata
+
+console set cmd-output-file-format tab
+console set next-cmd-output-file web-app/erv_lineage_references.tsv
+
+list sequence \
+  sequenceID \
+  length \
+  erv_lineage_reference.erv_lineage.id \
+  erv_lineage_reference.reference_role \
+  erv_lineage_reference.reference_status \
+  erv_lineage_reference.derivation_method \
+  erv_lineage_reference.derivation_source \
+  erv_lineage_reference.is_composite \
+  erv_lineage_reference.num_input_sequences \
+  erv_lineage_reference.represented_form \
+  erv_lineage_reference.reference_completeness \
+  erv_lineage_reference.fragment_extent \
+  erv_lineage_reference.architecture_level \
+  erv_lineage_reference.coding_level \
+  erv_lineage_reference.validation_level \
+  erv_lineage_reference.accession \
+  erv_lineage_reference.pubmed_id \
+  erv_lineage_reference.reconstruction_notes \
+  erv_lineage_reference.curation_notes \
+  -w "erv_lineage_reference.id != null" \
+  -s erv_lineage_reference.erv_lineage.id,sequenceID
+

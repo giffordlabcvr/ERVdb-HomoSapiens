@@ -1,0 +1,21 @@
+# Export ERV lineage data
+
+console set cmd-output-file-format tab
+console set next-cmd-output-file web-app/erv_lineage_data.tsv
+
+list custom-table-row erv_lineage \
+  id \
+  legacy_name \
+  legacy_full_name \
+  entity_type \
+  classification_basis \
+  status \
+  parent_lineage \
+  human_erv \
+  description \
+  notes \
+  rv_major_clade.id \
+  rv_minor_clade.id \
+  rv_genus.id \
+  rv_subgenus.id \
+  -s id
