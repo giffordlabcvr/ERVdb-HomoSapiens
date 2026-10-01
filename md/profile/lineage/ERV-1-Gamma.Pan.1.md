@@ -1,3 +1,11 @@
-# ERV-1-Gamma.Pan.1
+# ERV-1.Gamma.Pan (PtERV1 / CERV-1)
+
+ERV-1.Gamma.Pan, commonly known as PtERV1 (PTERV1) or CERV-1, is an endogenous gammaretrovirus lineage first characterised from the chimpanzee (*Pan troglodytes*) genome. More than 100 copies occur in chimpanzees, including relatively complete proviruses approximately 5--9 kb in length. The lineage has also colonised the genomes of bonobos, gorillas and several Old World monkey species, but is conspicuously absent from humans and Asian apes (PMID: 15737067; PMID: 16805923).
+
+The unusual distribution of PtERV1 provides evidence for comparatively recent cross-species transmission of a gammaretrovirus among primates. Mapping of 287 PtERV1 insertions in African apes and Old World monkeys showed that approximately 96% occupied non-orthologous genomic positions between species. Thus, most copies cannot represent integrations inherited from a common primate ancestor. Instead, the evidence indicates that related exogenous viruses independently invaded the germlines of several primate lineages, with particularly extensive expansions occurring in chimpanzees and gorillas. The African great ape invasions have been estimated to have occurred approximately 3--4 million years ago (PMID: 15737067).
+
+PtERV1 is particularly notable for what did **not** happen: despite extensive infection of closely related primates, no PtERV1 integrations are known from the human genome. This contrast has made PtERV1 an important model for investigating ancient host--retrovirus interactions. Differences in intrinsic antiviral defence, including the activities of TRIM5α and APOBEC3 proteins, have been investigated as possible explanations for the differing susceptibility of primate lineages, although the precise factors responsible for the absence of PtERV1 from humans remain unresolved.
+
+Known PtERV1 proviruses are defective and no replication-competent virus has been recovered. Nevertheless, their relatively recent origin preserves an unusually detailed genomic record of an extinct gammaretroviral epidemic. PtERV1 therefore provides a striking example of how endogenous retroviruses can reveal episodes of viral transmission that affected some closely related host lineages while completely bypassing others.
 
 * * * * * 
