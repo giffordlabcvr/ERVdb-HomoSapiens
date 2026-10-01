@@ -1,0 +1,294 @@
+erv_lineage_id	name	name_type	source
+ERV-1.Eta.15	HUMRIRT	alias	other
+ERV-1.Eta.15	RHERVI	alias	other
+ERV-1.Eta.15	RRHERV-I	alias	other
+ERV-1.Eta.15	RTVL-I	alias	other
+ERV-1.Eta.15	human endogenous retrovirus 15	legacy_full_name	ervdb
+ERV-1.Eta.15	HERV-15	legacy_name	ervdb
+ERV-1.Eta.E	ERVA	alias	other
+ERV-1.Eta.E	HERVE_a	alias	repbase
+ERV-1.Eta.E	Hs-5	alias	other
+ERV-1.Eta.E	NP-2	alias	other
+ERV-1.Eta.E	human endogenous retrovirus E	legacy_full_name	ervdb
+ERV-1.Eta.E	HERV-E	legacy_name	ervdb
+ERV-1.Eta.E.HQ	HARLEQUIN	legacy_full_name	ervdb
+ERV-1.Eta.E.HQ	HARLEQUIN	legacy_name	ervdb
+ERV-1.Eta.R	ERV-3	alias	other
+ERV-1.Eta.R	herv_rb	alias	retrotector
+ERV-1.Eta.R	HERV3	alias	repbase
+ERV-1.Eta.R	human endogenous retrovirus R	legacy_full_name	ervdb
+ERV-1.Eta.R	HERV-R	legacy_name	ervdb
+ERV-1.Eta.Suidae	porcine endogenous retrovirus E	legacy_full_name	ervdb
+ERV-1.Eta.Suidae	PERV-E	legacy_name	ervdb
+ERV-1.Gamma.T	HERVS71	alias	repbase
+ERV-1.Gamma.T	human endogenous retrovirus T	legacy_full_name	ervdb
+ERV-1.Gamma.T	HERV-T	legacy_name	ervdb
+ERV-1.Gamma.T2	human endogenous retrovirus T2	legacy_full_name	ervdb
+ERV-1.Gamma.T2	HERV-T2	legacy_name	ervdb
+ERV-1.Gamma.T3	human endogenous retrovirus T3	legacy_full_name	ervdb
+ERV-1.Gamma.T3	HERV-T3	legacy_name	ervdb
+ERV-1.Iota.ADP	ADP-pol	alias	repbase
+ERV-1.Iota.ADP	HERVP71A	alias	repbase
+ERV-1.Iota.ADP	human endogenous retrovirus ADP	legacy_full_name	ervdb
+ERV-1.Iota.ADP	HERV-ADP	legacy_name	ervdb
+ERV-1.Iota.I	ERV-FTD	alias	other
+ERV-1.Iota.I	HERV-FTD	alias	other
+ERV-1.Iota.I	HERV-IP	alias	other
+ERV-1.Iota.I	HERVIP10F	alias	other
+ERV-1.Iota.I	HERVIP10FH	alias	repbase
+ERV-1.Iota.I	HERV-IP-T47D	alias	other
+ERV-1.Iota.I	human endogenous retrovirus I	legacy_full_name	ervdb
+ERV-1.Iota.I	HERV-I	legacy_name	ervdb
+ERV-1.Iota.I.Pb	human endogenous retrovirus Pb	legacy_full_name	ervdb
+ERV-1.Iota.I.Pb	HERV-Pb	legacy_name	ervdb
+ERV-1.Rho.Rb	hervr	alias	retrotector
+ERV-1.Rho.Rb	pabl	alias	retrotector
+ERV-1.Rho.Rb	PABL_A	alias	repbase
+ERV-1.Rho.Rb	PABL_B	alias	repbase
+ERV-1.Rho.Rb	human endogenous retrovirus R(b)	legacy_full_name	ervdb
+ERV-1.Rho.Rb	HERV-Rb	legacy_name	ervdb
+ERV-1.Rho.V	human endogenous retrovirus V	legacy_full_name	ervdb
+ERV-1.Rho.V	HERV-V	legacy_name	ervdb
+ERV-1.Theta.24	ERV24_Prim	alias	repbase
+ERV-1.Theta.24	hepsi2	alias	retrotector
+ERV-1.Theta.24	human endogenous retrovirus 24	legacy_full_name	ervdb
+ERV-1.Theta.24	HERV-24	legacy_name	ervdb
+ERV-1.Theta.24b	human endogenous retrovirus 24b	legacy_full_name	ervdb
+ERV-1.Theta.24b	HERV-24b	legacy_name	ervdb
+ERV-1.Theta.34	medium reiteration frequency repeat 34	legacy_full_name	ervdb
+ERV-1.Theta.34	MER-34	legacy_name	ervdb
+ERV-1.Theta.Lb	hepsi1	alias	retrotector
+ERV-1.Theta.Lb	hepsi3	alias	retrotector
+ERV-1.Theta.Lb	HERV(HS49C23)	alias	retrotector
+ERV-1.Theta.Lb	PRIMA4	alias	repbase
+ERV-1.Theta.Lb	human endogenous retrovirus L(b)	legacy_full_name	ervdb
+ERV-1.Theta.Lb	HERV-Lb	legacy_name	ervdb
+ERV-1.Zeta.FRD.1	human endogenous retrovirus FRD	legacy_full_name	ervdb
+ERV-1.Zeta.FRD.1	HERV-FRD	legacy_name	ervdb
+ERV-1.Zeta.FRD.4	MER51	alias	repbase
+ERV-1.Zeta.FRD.4	human endogenous retrovirus 4	legacy_full_name	ervdb
+ERV-1.Zeta.FRD.4	HERV-4	legacy_name	ervdb
+ERV-1.Zeta.FRD.41	human endogenous retrovirus PRIMA-41	legacy_full_name	ervdb
+ERV-1.Zeta.FRD.41	PRIMA-41	legacy_name	ervdb
+ERV-1.Zeta.FRD.66	HERV-A	alias	other
+ERV-1.Zeta.FRD.66	HERV-Kb	alias	other
+ERV-1.Zeta.FRD.66	HERV-Z69907	alias	other
+ERV-1.Zeta.FRD.66	medium reiteration frequency repeat 66	legacy_full_name	ervdb
+ERV-1.Zeta.FRD.66	MER-66	legacy_name	ervdb
+ERV-1.Zeta.HF.46	human endogenous retrovirus 46	legacy_full_name	ervdb
+ERV-1.Zeta.HF.46	HERV-46	legacy_name	ervdb
+ERV-1.Zeta.HF.Fa	HERVFH19	alias	repbase
+ERV-1.Zeta.HF.Fa	human endogenous retrovirus F(a)	legacy_full_name	ervdb
+ERV-1.Zeta.HF.Fa	HERV-Fa	legacy_name	ervdb
+ERV-1.Zeta.HF.Fb	HERVH48	alias	repbase
+ERV-1.Zeta.HF.Fb	human endogenous retrovirus F(b)	legacy_full_name	ervdb
+ERV-1.Zeta.HF.Fb	HERV-Fb	legacy_name	ervdb
+ERV-1.Zeta.HF.Fc.1	HERV-Fc	alias	repbase
+ERV-1.Zeta.HF.Fc.1	human endogenous retrovirus F(c) 1	legacy_full_name	ervdb
+ERV-1.Zeta.HF.Fc.1	HERV-Fc1	legacy_name	ervdb
+ERV-1.Zeta.HF.Fc.2	HERV-Fc	alias	repbase
+ERV-1.Zeta.HF.Fc.2	human endogenous retrovirus F(c) 2	legacy_full_name	ervdb
+ERV-1.Zeta.HF.Fc.2	HERV-Fc2	legacy_name	ervdb
+ERV-1.Zeta.HF.H	human endogenous retrovirus H	legacy_full_name	ervdb
+ERV-1.Zeta.HF.H	HERV-H	legacy_name	ervdb
+ERV-1.Zeta.HF.XA	HERV-F(XA-34)	alias	other
+ERV-1.Zeta.HF.XA	HERVFH21	alias	repbase
+ERV-1.Zeta.HF.XA	human endogenous retrovirus XA	legacy_full_name	ervdb
+ERV-1.Zeta.HF.XA	HERV-XA	legacy_name	ervdb
+ERV-1.Zeta.W9P.30	human endogenous retrovirus 30	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.30	HERV-30	legacy_name	ervdb
+ERV-1.Zeta.W9P.9	PTR5	alias	repbase
+ERV-1.Zeta.W9P.9	human endogenous retrovirus 9	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.9	HERV-9	legacy_name	ervdb
+ERV-1.Zeta.W9P.P	HUERS-P3	alias	other
+ERV-1.Zeta.W9P.P	HUERS-P3	alias	repbase
+ERV-1.Zeta.W9P.P	HUERS-P3B	alias	repbase
+ERV-1.Zeta.W9P.P	human endogenous retrovirus P	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.P	HERV-P	legacy_name	ervdb
+ERV-1.Zeta.W9P.P.1	huersp1	alias	retrotector
+ERV-1.Zeta.W9P.P.1	HUERS-P1	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.P.1	HUERS-P1	legacy_name	ervdb
+ERV-1.Zeta.W9P.P.2	huersp2	alias	retrotector
+ERV-1.Zeta.W9P.P.2	HUERS-P2	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.P.2	HUERS-P2	legacy_name	ervdb
+ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	legacy_name	ervdb
+ERV-1.Zeta.W9P.W	HERV17	alias	repbase
+ERV-1.Zeta.W9P.W	MSRV	alias	repbase
+ERV-1.Zeta.W9P.W	human endogenous retrovirus W	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.W	HERV-W	legacy_name	ervdb
+ERV-1.Zeta.W9P.W.SG1	human endogenous retrovirus W SG1	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.W.SG1	HERV-W-SG1	legacy_name	ervdb
+ERV-1.Zeta.W9P.W.SG2	human endogenous retrovirus W SG2	legacy_full_name	ervdb
+ERV-1.Zeta.W9P.W.SG2	HERV-W-SG2	legacy_name	ervdb
+ERV-1-Gamma.Canis	Canis familiaris endogenous gammaretrovirus	legacy_full_name	ervdb
+ERV-1-Gamma.Canis	CfERV	legacy_name	ervdb
+ERV-1-Gamma.GLN	murine retrovirus using tRNAGln	legacy_full_name	ervdb
+ERV-1-Gamma.GLN	GLN	legacy_name	ervdb
+ERV-1-Gamma.Orca	killer whale endogenous gammaretrovirus	legacy_full_name	ervdb
+ERV-1-Gamma.Orca	KwERV	legacy_name	ervdb
+ERV-1-Gamma.Pan.1	ptERV	alias	other
+ERV-1-Gamma.Pan.1	Pan troglodytes endogenous retrovirus 1	legacy_full_name	ervdb
+ERV-1-Gamma.Pan.1	CERV-1	legacy_name	ervdb
+ERV-1-Gamma.Pan.2	chimpanzee endogenous retrovirus 2	legacy_full_name	ervdb
+ERV-1-Gamma.Pan.2	CERV-2	legacy_name	ervdb
+ERV-1-Gamma.RD114	CCC virus	alias	other
+ERV-1-Gamma.RD114	Crandell virus	alias	other
+ERV-1-Gamma.RD114	RD114 retrovirus	legacy_full_name	ervdb
+ERV-1-Gamma.RD114	RD114	legacy_name	ervdb
+ERV-1-Gamma.Sus.C	porcine endogenous retrovirus C-C105	legacy_full_name	ervdb
+ERV-1-Gamma.Sus.C	PERV-C	legacy_name	ervdb
+ERV-1-Rho.Ceratotherium.Rb	rhino endogenous retrovirus Rb	legacy_full_name	ervdb
+ERV-1-Rho.Ceratotherium.Rb	Ceratotherium-Rb	legacy_name	ervdb
+ERV-1-Rho.Eq.Rb	equine endogenous retrovirus Rb	legacy_full_name	ervdb
+ERV-1-Rho.Eq.Rb	EqERV-Rb	legacy_name	ervdb
+ERV-1-Zeta.Canis.Fc	Canis familiaris endogenous retrovirus Fc	legacy_full_name	ervdb
+ERV-1-Zeta.Canis.Fc	CfERV-Fc	legacy_name	ervdb
+ERV-1-Zeta.Eq	equine endogenous zetaretrovirus	legacy_full_name	ervdb
+ERV-1-Zeta.Eq	EqERV-Zeta	legacy_name	ervdb
+ERV-2.Beta.Archeo.5	HERVK22	alias	repbase
+ERV-2.Beta.Archeo.5	hml5	alias	retrotector
+ERV-2.Beta.Archeo.5	endogenous retrovirus K  HML5	legacy_full_name	ervdb
+ERV-2.Beta.Archeo.5	HERV-K-HML5	legacy_name	ervdb
+ERV-2.Beta.Archeo.6	HERVK3	alias	repbase
+ERV-2.Beta.Archeo.6	hml6	alias	retrotector
+ERV-2.Beta.Archeo.6	endogenous retrovirus K  HML6	legacy_full_name	ervdb
+ERV-2.Beta.Archeo.6	HERV-K-HML6	legacy_name	ervdb
+ERV-2.Beta.Archeo.6.1a	endogenous retrovirus K HML6 type 1a	legacy_full_name	ervdb
+ERV-2.Beta.Archeo.6.1a	HERV-K-HML6	legacy_name	ervdb
+ERV-2.Beta.Archeo.6.1b	endogenous retrovirus K HML6 type 1b	legacy_full_name	ervdb
+ERV-2.Beta.Archeo.6.1b	HERV-K-HML6	legacy_name	ervdb
+ERV-2.Beta.Archeo.9	HERV-K(HML-9)	alias	other
+ERV-2.Beta.Archeo.9	endogenous retrovirus Hako	legacy_full_name	ervdb
+ERV-2.Beta.Archeo.9	HERV-hako	legacy_name	ervdb
+ERV-2.Beta.K.HML1	HERVK14	alias	repbase
+ERV-2.Beta.K.HML1	endogenous retrovirus K HML1	legacy_full_name	ervdb
+ERV-2.Beta.K.HML1	HERV-K-HML1	legacy_name	ervdb
+ERV-2.Beta.K.HML10	HERVKC4	alias	repbase
+ERV-2.Beta.K.HML10	endogenous retrovirus K HML10	legacy_full_name	ervdb
+ERV-2.Beta.K.HML10	HERV-K-HML10	legacy_name	ervdb
+ERV-2.Beta.K.HML2	HERVK	alias	repbase
+ERV-2.Beta.K.HML2	endogenous retrovirus K HML2	legacy_full_name	ervdb
+ERV-2.Beta.K.HML2	HERV-K-HML2	legacy_name	ervdb
+ERV-2.Beta.K.HML3	HERVK9	alias	repbase
+ERV-2.Beta.K.HML3	endogenous retrovirus K HML3	legacy_full_name	ervdb
+ERV-2.Beta.K.HML3	HERV-K-HML3	legacy_name	ervdb
+ERV-2.Beta.K.HML4	HERVK13	alias	repbase
+ERV-2.Beta.K.HML4	endogenous retrovirus K HML4	legacy_full_name	ervdb
+ERV-2.Beta.K.HML4	HERV-K-HML4	legacy_name	ervdb
+ERV-2.Beta.K.HML7	HERVK11D	alias	repbase
+ERV-2.Beta.K.HML7	endogenous retrovirus K HML7	legacy_full_name	ervdb
+ERV-2.Beta.K.HML7	HERV-K-HML7	legacy_name	ervdb
+ERV-2.Beta.K.HML8	HERVK11	alias	repbase
+ERV-2.Beta.K.HML8	endogenous retrovirus K HML8	legacy_full_name	ervdb
+ERV-2.Beta.K.HML8	HERV-K-HML8	legacy_name	ervdb
+ERV-2.Beta.K.HML9	HERVK14C	alias	repbase
+ERV-2.Beta.K.HML9	endogenous retrovirus K HML9	legacy_full_name	ervdb
+ERV-2.Beta.K.HML9	HERV-K-HML9	legacy_name	ervdb
+ERV-2-Alpha.Tg.F	Taeniopygia guttata endogenous retrovirus F	legacy_full_name	ervdb
+ERV-2-Alpha.Tg.F	TgERV-F	legacy_name	ervdb
+ERV-2-Beta.A.Mus	IAP	alias	other
+ERV-2-Beta.A.Mus	intracisternal A-type particle	legacy_full_name	ervdb
+ERV-2-Beta.A.Mus	IAPE	legacy_name	ervdb
+ERV-2-Beta.Lago.H	HRV-5	alias	other
+ERV-2-Beta.Lago.H	Oryctolagus cuniculus clone A rabbit endogenous retrovirus H	legacy_full_name	ervdb
+ERV-2-Beta.Lago.H	RERV-H	legacy_name	ervdb
+ERV-2-Beta.Mys.TR	Reithrodontomys fulvescens endogenous virus mysTR	legacy_full_name	ervdb
+ERV-2-Beta.Mys.TR	mysTR	legacy_name	ervdb
+ERV-2-Beta.Py	Python molurus endogenous retrovirus	legacy_full_name	ervdb
+ERV-2-Beta.Py	PyERV	legacy_name	ervdb
+ERV-2-Delta.MinNat	Miniopterus endogenous deltaretrovirus	legacy_full_name	ervdb
+ERV-2-Delta.MinNat	MinERVa	legacy_name	ervdb
+ERV-2-Delta.MolMol	Molossus endogenous deltaretrovirus	legacy_full_name	ervdb
+ERV-2-Delta.MolMol	Delta.9-MolMol	legacy_name	ervdb
+ERV-2-Delta.MurMur	Murina endogenous deltaretrovirus	legacy_full_name	ervdb
+ERV-2-Delta.MurMur	Delta.3-MurAur	legacy_name	ervdb
+ERV-2-Delta.PlaMin	river dolphin endogenous deltaretrovirus	legacy_full_name	ervdb
+ERV-2-Delta.PlaMin	Delta.6-PlaMin	legacy_name	ervdb
+ERV-2-Lenti.Dermoptera	GvaELV	alias	other
+ERV-2-Lenti.Dermoptera	dermopteran endogenous lentivirus	legacy_full_name	ervdb
+ERV-2-Lenti.Dermoptera	DELV	legacy_name	ervdb
+ERV-2-Lenti.Mustela	ELVmpf	alias	other
+ERV-2-Lenti.Mustela	mustelid endogenous lentivirus	legacy_full_name	ervdb
+ERV-2-Lenti.Mustela	MELVmpf	legacy_name	ervdb
+ERV-2-Lenti.PSIV1	PSIV1	alias	other
+ERV-2-Lenti.PSIV1	prosimian immunodeficieny virus (grey mouse lemur)	legacy_full_name	ervdb
+ERV-2-Lenti.PSIV1	pSIVgml	legacy_name	ervdb
+ERV-2-Lenti.PSIV2	prosimian immunodeficieny virus 2	legacy_full_name	ervdb
+ERV-2-Lenti.PSIV2	PSIV2	legacy_name	ervdb
+ERV-2-Lenti.RELIK	rabbit endogenous lentivirus type K	legacy_full_name	ervdb
+ERV-2-Lenti.RELIK	RELIK	legacy_name	ervdb
+ERV-2-Lenti.SpELV	springhare endogenous lentivirus	legacy_full_name	ervdb
+ERV-2-Lenti.SpELV	SpELV	legacy_name	ervdb
+ERV-3.Lambda.L	human endogenous retrovirus L	legacy_full_name	ervdb
+ERV-3.Lambda.L	HERV-L	legacy_name	ervdb
+ERV-3.Lambda.Lb4	ERVL-B4	alias	repbase
+ERV-3.Lambda.Lb4	endogenous retrovirus Lb4	legacy_full_name	ervdb
+ERV-3.Lambda.Lb4	ERV-Lb4	legacy_name	ervdb
+ERV-3.Lambda.U3	HERVL66	alias	repbase
+ERV-3.Lambda.U3	human endogenous retrovirus U3	legacy_full_name	ervdb
+ERV-3.Lambda.U3	HERV-U3	legacy_name	ervdb
+ERV-3.Sigma.S	HERV18	alias	repbase
+ERV-3.Sigma.S	human endogenous retrovirus S	legacy_full_name	ervdb
+ERV-3.Sigma.S	HERV-S	legacy_name	ervdb
+ERV-3.Spuma.Ame.b	axolotl endogenous foamy virus	legacy_full_name	ervdb
+ERV-3.Spuma.Ame.b	Spuma-Ame.b	legacy_name	ervdb
+ERV-3.Spuma.Chrysochloris	Chrysochloris endogenous foamy virus	legacy_full_name	ervdb
+ERV-3.Spuma.Chrysochloris	ChrEFV	legacy_name	ervdb
+ERV-3.Spuma.Coelocanth	coelocanth endogenous foamy virus	legacy_full_name	ervdb
+ERV-3.Spuma.Coelocanth	CoeEFV	legacy_name	ervdb
+ERV-3.Spuma.Pilosa	sloth endogenous foamy virus	legacy_full_name	ervdb
+ERV-3.Spuma.Pilosa	SloEFV	legacy_name	ervdb
+ERV-3.Spuma.Rbi	caecilian endogenous foamy virus	legacy_full_name	ervdb
+ERV-3.Spuma.Rbi	Spuma-Rbi	legacy_name	ervdb
+ERV-3.Spuma.Spu	SpuEFV	alias	other
+ERV-3.Spuma.Spu	tuatara endogenous foamy virus	legacy_full_name	ervdb
+ERV-3.Spuma.Spu	Spuma-Spu	legacy_name	ervdb
+ERV-3-Lambda.MuERV.L	Mus musculus endogenous retroviral sequence MuERV-L	legacy_full_name	ervdb
+ERV-3-Lambda.MuERV.L	MuERV-L	legacy_name	ervdb
+ERV-3-Lambda.U3.Eq	equine endogenous lambdaretrovirus U3	legacy_full_name	ervdb
+ERV-3-Lambda.U3.Eq	EqERV-U3	legacy_name	ervdb
+ERV-3-Sigma.Eq	equine endogenous retrovirus S	legacy_full_name	ervdb
+ERV-3-Sigma.Eq	EqERV-S	legacy_name	ervdb
+ERVR-1.Theta.24.101	medium reiteration frequency repeat 101	legacy_full_name	ervdb
+ERVR-1.Theta.24.101	MER-101	legacy_name	ervdb
+ERVR-1.Theta.24.110	medium reiteration frequency repeat 110	legacy_full_name	ervdb
+ERVR-1.Theta.24.110	MER-110	legacy_name	ervdb
+ERVR-1.Theta.24.89	medium reiteration frequency repeat 89	legacy_full_name	ervdb
+ERVR-1.Theta.24.89	MER-89	legacy_name	ervdb
+ERVR-1.Theta.24.LOR1	LOR-1	legacy_full_name	ervdb
+ERVR-1.Theta.24.LOR1	LOR-1	legacy_name	ervdb
+ERVR-1.Zeta.43	LTR-43	legacy_full_name	ervdb
+ERVR-1.Zeta.43	LTR-43	legacy_name	ervdb
+ERVR-1.Zeta.83A	medium reiteration frequency repeat 83A	legacy_full_name	ervdb
+ERVR-1.Zeta.83A	MER-83A	legacy_name	ervdb
+ERVR-1.Zeta.83B	medium reiteration frequency repeat 83B	legacy_full_name	ervdb
+ERVR-1.Zeta.83B	MER-83B	legacy_name	ervdb
+ERVR-1.Zeta.84	medium reiteration frequency repeat 84	legacy_full_name	ervdb
+ERVR-1.Zeta.84	MER-84	legacy_name	ervdb
+ERVR-1.Zeta.HF.19	human endogenous retrovirus 19	legacy_full_name	ervdb
+ERVR-1.Zeta.HF.19	HERV-19	legacy_name	ervdb
+ERVR-1.Zeta.HF.52A	medium reiteration frequency repeat 52A	legacy_full_name	ervdb
+ERVR-1.Zeta.HF.52A	MER-52A	legacy_name	ervdb
+ERVR-1.Zeta.W9P.P.G25	human endogenous retrovirus G25	legacy_full_name	ervdb
+ERVR-1.Zeta.W9P.P.G25	HERV-G25	legacy_name	ervdb
+ERVR-3.Lambda.16	human endogenous retrovirus 16	legacy_full_name	ervdb
+ERVR-3.Lambda.16	HERV-16	legacy_name	ervdb
+ERVR-3.Lambda.16A3	ERV3-16A3	legacy_full_name	ervdb
+ERVR-3.Lambda.16A3	ERV3-16A3	legacy_name	ervdb
+ERVR-3.Lambda.40	human endogenous retrovirus L40	legacy_full_name	ervdb
+ERVR-3.Lambda.40	HERV-L40	legacy_name	ervdb
+ERVR-3.Lambda.52	human endogenous retrovirus 52	legacy_full_name	ervdb
+ERVR-3.Lambda.52	HERV-52	legacy_name	ervdb
+ERVR-3.Lambda.53	human endogenous retrovirus L53	legacy_full_name	ervdb
+ERVR-3.Lambda.53	HERV-L53	legacy_name	ervdb
+ERVR-3.Lambda.70	medium reiteration frequency repeat 70	legacy_full_name	ervdb
+ERVR-3.Lambda.70	MER-70	legacy_name	ervdb
+ERVR-3.Lambda.74	human endogenous retrovirus L74	legacy_full_name	ervdb
+ERVR-3.Lambda.74	HERV-L74	legacy_name	ervdb
+ERVR-3.Lambda.76	medium reiteration frequency repeat 76	legacy_full_name	ervdb
+ERVR-3.Lambda.76	MER-76	legacy_name	ervdb
+ERVR-3.Sigma.47	endogenous retrovirus L47	legacy_full_name	ervdb
+ERVR-3.Sigma.47	ERV-L47	legacy_name	ervdb
+ERVR-3.Sigma.57	human endogenous retrovirus 57	legacy_full_name	ervdb
+ERVR-3.Sigma.57	HERV-57	legacy_name	ervdb
