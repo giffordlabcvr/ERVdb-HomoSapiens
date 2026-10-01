@@ -45,7 +45,7 @@ The export is organised around three principal entities: **ERV lineages**, **ERV
 
 The principal lineage table contains one row per ERV lineage or sublineage:
 
-- [`web-app/erv_lineage_data.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_data.tsv)
+- [`web-app/erv_lineage_data.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_data.tsv)
 
 Associated lineage data are provided separately:
 
