@@ -1,0 +1,799 @@
+record_id	reference	source_name	sequence_id	feature	segment_index	ref_start	ref_end	translation_modifier_name	splice_index	transcription_index	nt_length	aa_length	codon_count	has_translation	has_stop	has_internal_stop	has_ambiguity	missing_codon_nts	missing_amino_acid	exported_coding_fasta	exported_noncoding_fasta
+REF_CeratotheriumRb|whole_genome	REF_CeratotheriumRb	erv	Ceratotherium-Rb	whole_genome	1	1	8390		1	1				false						false	false
+REF_CeratotheriumRb|pol	REF_CeratotheriumRb	erv	Ceratotherium-Rb	pol	1	4135	7272		1	1	3138	1046	1046	true	true	true	false	false	false	true	false
+REF_CeratotheriumRb|gag	REF_CeratotheriumRb	erv	Ceratotherium-Rb	gag	1	2049	3605		1	1	1557	519	519	true	true	true	false	false	false	true	false
+REF_CeratotheriumRb|5LTR	REF_CeratotheriumRb	erv	Ceratotherium-Rb	5LTR	1	1	431		1	1	431			false			false			false	true
+REF_CeratotheriumRb|3LTR	REF_CeratotheriumRb	erv	Ceratotherium-Rb	3LTR	1	8198	8390		1	1	193			false			false			false	true
+REF_CERV1|whole_genome	REF_CERV1	erv	CERV-1	whole_genome	1	1	8278		1	1				false						false	false
+REF_CERV1|pol	REF_CERV1	erv	CERV-1	pol	1	3433	6189		1	1	2757	919	919	true	true	false	false	false	false	true	false
+REF_CERV1|gag	REF_CERV1	erv	CERV-1	gag	1	664	3432		1	1	2769	923	923	true	true	true	false	false	false	true	false
+REF_CERV1|env	REF_CERV1	erv	CERV-1	env	1	6180	7853		1	1	1674	558	558	true	true	true	false	false	false	true	false
+REF_CERV1|5LTR	REF_CERV1	erv	CERV-1	5LTR	1	1	380		1	1	380			false			false			false	true
+REF_CERV1|3LTR	REF_CERV1	erv	CERV-1	3LTR	1	7960	8278		1	1	319			false			false			false	true
+REF_CERV2|whole_genome	REF_CERV2	erv	CERV-2	whole_genome	1	1	8708		1	1				false						false	false
+REF_CERV2|pol	REF_CERV2	erv	CERV-2	pol	1	2700	6275		1	1	3576	1192	1192	true	true	true	false	false	false	true	false
+REF_CERV2|gag	REF_CERV2	erv	CERV-2	gag	1	833	2503		1	1	1671	557	557	true	true	true	false	false	false	true	false
+REF_CERV2|env	REF_CERV2	erv	CERV-2	env	1	6218	8107		1	1	1890	630	630	true	true	false	false	false	false	true	false
+REF_CERV2|5LTR	REF_CERV2	erv	CERV-2	5LTR	1	1	544		1	1	544			false			false			false	true
+REF_CERV2|3LTR	REF_CERV2	erv	CERV-2	3LTR	1	8136	8708		1	1	573			false			false			false	true
+REF_CfERV|whole_genome	REF_CfERV	erv	CfERV	whole_genome	1	1	6045		1	1				false						false	false
+REF_CfERV|pol	REF_CfERV	erv	CfERV	pol	1	2443	5445		1	1	3003	1001	1001	true	true	true	false	false	false	true	false
+REF_CfERV|gag	REF_CfERV	erv	CfERV	gag	1	868	2442		1	1	1575	525	525	true	true	false	false	false	false	true	false
+REF_CfERV|5LTR	REF_CfERV	erv	CfERV	5LTR	1	1	378		1	1	378			false			false			false	true
+REF_CfERV|3LTR	REF_CfERV	erv	CfERV	3LTR	1	5670	6045		1	1	376			false			false			false	true
+REF_CfERVFc|whole_genome	REF_CfERVFc	erv	CfERV-Fc	whole_genome	1	1	6711		1	1				false						false	false
+REF_CfERVFc|pol	REF_CfERVFc	erv	CfERV-Fc	pol	1	2411	6400		1	1	3990	1330	1330	true	true	true	false	false	false	true	false
+REF_CfERVFc|gag	REF_CfERVFc	erv	CfERV-Fc	gag	1	744	2411		1	1	1668	556	556	true	false	false	false	false	false	true	false
+REF_CfERVFc|5LTR	REF_CfERVFc	erv	CfERV-Fc	5LTR	1	1	412		1	1	412			false			false			false	true
+REF_CfERVFc|3LTR	REF_CfERVFc	erv	CfERV-Fc	3LTR	1	6301	6711		1	1	411			false			false			false	true
+REF_CoeEFV|whole_genome	REF_CoeEFV	erv	CoeEFV	whole_genome	1	1	10428		1	1				false						false	false
+REF_CoeEFV|pol	REF_CoeEFV	erv	CoeEFV	pol	1	2555	6187		1	1	3633	1211	1211	true	true	false	false	false	false	true	false
+REF_CoeEFV|orf2	REF_CoeEFV	erv	CoeEFV	orf2	1	9010	9240		1	1	231	77	77	true	true	false	false	false	false	true	false
+REF_CoeEFV|orf1	REF_CoeEFV	erv	CoeEFV	orf1	1	9161	9592		1	1	432	144	144	true	true	false	false	false	false	true	false
+REF_CoeEFV|gag	REF_CoeEFV	erv	CoeEFV	gag	1	1106	2518		1	1	1413	471	471	true	true	false	false	false	false	true	false
+REF_CoeEFV|env	REF_CoeEFV	erv	CoeEFV	env	1	6024	9047		1	1	3024	1008	1008	true	true	false	false	false	false	true	false
+REF_CoeEFV|5LTR	REF_CoeEFV	erv	CoeEFV	5LTR	1	1	883		1	1	883			false			false			false	true
+REF_CoeEFV|3LTR	REF_CoeEFV	erv	CoeEFV	3LTR	1	9629	10428		1	1	800			false			false			false	true
+REF_Delta3MurAur|whole_genome	REF_Delta3MurAur	erv	Delta.3-MurAur	whole_genome	1	1	6584		1	1				false						false	false
+REF_Delta3MurAur|pro	REF_Delta3MurAur	erv	Delta.3-MurAur	pro	1	1880	2449		1	1	570	190	190	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|pol	REF_Delta3MurAur	erv	Delta.3-MurAur	pol	1	2440	4572		1	1	2133	711	711	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|PBS	REF_Delta3MurAur	erv	Delta.3-MurAur	PBS	1	576	593		1	1	18			false			false			false	false
+REF_Delta3MurAur|gag-pro-pol	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro-pol	1	654	1874		1	1	3921	1307	1307	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag-pro-pol	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro-pol	2	1875	1879	deltaGagPolTranslationModifier	2	1	3921	1307	1307	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag-pro-pol	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro-pol	3	1880	2434		3	1	3921	1307	1307	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag-pro-pol	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro-pol	4	2435	2439	deltaGagPolTranslationModifier	4	1	3921	1307	1307	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag-pro-pol	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro-pol	5	2440	4572		5	1	3921	1307	1307	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag-pro	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro	1	654	1874		1	1	1797	599	599	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag-pro	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro	2	1875	1879	deltaGagPolTranslationModifier	2	1	1797	599	599	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag-pro	REF_Delta3MurAur	erv	Delta.3-MurAur	gag-pro	3	1880	2449		3	1	1797	599	599	true	true	true	false	false	false	true	false
+REF_Delta3MurAur|gag	REF_Delta3MurAur	erv	Delta.3-MurAur	gag	1	654	1946		1	1	1293	431	431	true	true	false	false	false	false	true	false
+REF_Delta3MurAur|5LTR	REF_Delta3MurAur	erv	Delta.3-MurAur	5LTR	1	1	569		1	1	569			false			false			false	true
+REF_Delta6PlaMin|whole_genome	REF_Delta6PlaMin	erv	Delta.6-PlaMin	whole_genome	1	1	8242		1	1				false						false	false
+REF_Delta6PlaMin|pro	REF_Delta6PlaMin	erv	Delta.6-PlaMin	pro	1	1870	2508		1	1	639	213	213	true	true	false	false	false	false	true	false
+REF_Delta6PlaMin|pol	REF_Delta6PlaMin	erv	Delta.6-PlaMin	pol	1	2361	6581		1	1	4221	1407	1407	true	true	false	false	false	false	true	false
+REF_Delta6PlaMin|PBS	REF_Delta6PlaMin	erv	Delta.6-PlaMin	PBS	1	570	587		1	1	18			false			false			false	false
+REF_Delta6PlaMin|hbz	REF_Delta6PlaMin	erv	Delta.6-PlaMin	hbz	1	6582	6992		1	1	411	137	137	true	true	false	false	false	false	true	false
+REF_Delta6PlaMin|gag	REF_Delta6PlaMin	erv	Delta.6-PlaMin	gag	1	717	1901		1	1	1185	395	395	true	true	false	false	false	false	true	false
+REF_Delta6PlaMin|env	REF_Delta6PlaMin	erv	Delta.6-PlaMin	env	1	7147	8055		1	1	909	303	303	true	true	false	false	false	false	true	false
+REF_Delta6PlaMin|5LTR	REF_Delta6PlaMin	erv	Delta.6-PlaMin	5LTR	1	1	567		1	1	567			false			false			false	true
+REF_Delta9MolMol|whole_genome	REF_Delta9MolMol	erv	Delta.9-MolMol	whole_genome	1	1	9173		1	1				false						false	false
+REF_Delta9MolMol|tax	REF_Delta9MolMol	erv	Delta.9-MolMol	tax	1	7697	8740		1	1	1044	348	348	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|rex	REF_Delta9MolMol	erv	Delta.9-MolMol	rex	1	7050	7679		1	1	630	210	210	true	false	false	false	false	false	true	false
+REF_Delta9MolMol|pro	REF_Delta9MolMol	erv	Delta.9-MolMol	pro	1	2344	2895		1	1	552	184	184	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|pol	REF_Delta9MolMol	erv	Delta.9-MolMol	pol	1	2874	5411		1	1	2538	846	846	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|PBS	REF_Delta9MolMol	erv	Delta.9-MolMol	PBS	1	1124	1141		1	1	18			false			false			false	false
+REF_Delta9MolMol|hbz	REF_Delta9MolMol	erv	Delta.9-MolMol	hbz	1	7480	7944		1	1	465	155	155	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro-pol	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro-pol	1	1205	2395		1	1	4209	1403	1403	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro-pol	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro-pol	2	2396	2400	deltaGagPolTranslationModifier	2	1	4209	1403	1403	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro-pol	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro-pol	3	2401	2868		3	1	4209	1403	1403	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro-pol	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro-pol	4	2869	2873	deltaGagPolTranslationModifier	4	1	4209	1403	1403	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro-pol	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro-pol	5	2874	5411		5	1	4209	1403	1403	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro	1	1205	2395		1	1	1692	564	564	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro	2	2396	2400	deltaGagPolTranslationModifier	2	1	1692	564	564	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag-pro	REF_Delta9MolMol	erv	Delta.9-MolMol	gag-pro	3	2401	2895		3	1	1692	564	564	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|gag	REF_Delta9MolMol	erv	Delta.9-MolMol	gag	1	1205	2407		1	1	1203	401	401	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|env	REF_Delta9MolMol	erv	Delta.9-MolMol	env	1	5412	7007		1	1	1596	532	532	true	true	true	false	false	false	true	false
+REF_Delta9MolMol|5LTR	REF_Delta9MolMol	erv	Delta.9-MolMol	5LTR	1	1	1121		1	1	1121			false			false			false	true
+REF_Delta9MolMol|3LTR	REF_Delta9MolMol	erv	Delta.9-MolMol	3LTR	1	8053	9173		1	1	1121			false			false			false	true
+REF_DELV|whole_genome	REF_DELV	erv	DELV	whole_genome	1	1	10002		1	1				false						false	false
+REF_DELV|vif	REF_DELV	erv	DELV	vif	1	5162	5980		1	1	819	273	273	true	true	false	false	false	false	true	false
+REF_DELV|tat	REF_DELV	erv	DELV	tat	1	5998	6309		1	1	312	104	104	true	true	false	false	false	false	true	false
+REF_DELV|pro-pol	REF_DELV	erv	DELV	pro-pol	1	1783	5172		1	1	3390	1130	1130	true	true	false	false	false	false	true	false
+REF_DELV|pro	REF_DELV	erv	DELV	pro	1	1783	2259		1	1	477	159	159	true	false	false	false	false	false	true	false
+REF_DELV|PPT	REF_DELV	erv	DELV	PPT	1	9547	9560		1	1	14			false			false			false	false
+REF_DELV|pol	REF_DELV	erv	DELV	pol	1	2260	5172		1	1	2913	971	971	true	true	false	false	false	false	true	false
+REF_DELV|PBS	REF_DELV	erv	DELV	PBS	1	442	459		1	1	18			false			false			false	false
+REF_DELV|gag-pol	REF_DELV	erv	DELV	gag-pol	1	557	1834		1	1	4617	1539	1539	true	true	false	false	false	false	true	false
+REF_DELV|gag-pol	REF_DELV	erv	DELV	gag-pol	2	1835	1839	lentiGagPolTranslationModifier	2	1	4617	1539	1539	true	true	false	false	false	false	true	false
+REF_DELV|gag-pol	REF_DELV	erv	DELV	gag-pol	3	1840	5172		3	1	4617	1539	1539	true	true	false	false	false	false	true	false
+REF_DELV|gag	REF_DELV	erv	DELV	gag	1	557	1966		1	1	1410	470	470	true	true	false	false	false	false	true	false
+REF_DELV|env	REF_DELV	erv	DELV	env	1	6425	9277		1	1	2853	951	951	true	true	false	false	false	false	true	false
+REF_DELV|DU	REF_DELV	erv	DELV	DU	1	3922	4320		1	1	399	133	133	true	false	false	false	false	false	true	false
+REF_DELV|5LTR	REF_DELV	erv	DELV	5LTR	1	1	437		1	1	437			false			false			false	true
+REF_DELV|3LTR	REF_DELV	erv	DELV	3LTR	1	9566	10002		1	1	437			false			false			false	true
+REF_DELV|TM	REF_DELV	erv	DELV	TM	1	8567	9277		1	1	711	237	237	true	true	false	false	false	false	true	false
+REF_DELV|TAR	REF_DELV	erv	DELV	TAR	1	322	437		1	1	116			false			false			false	true
+REF_DELV|SU	REF_DELV	erv	DELV	SU	1	6425	8566		1	1	2142	714	714	true	false	false	false	false	false	true	false
+REF_DELV|RT	REF_DELV	erv	DELV	RT	1	2260	3576		1	1	1317	439	439	true	false	false	false	false	false	true	false
+REF_DELV|RNaseH	REF_DELV	erv	DELV	RNaseH	1	3577	3921		1	1	345	115	115	true	false	false	false	false	false	true	false
+REF_DELV|NC	REF_DELV	erv	DELV	NC	1	1619	1834		1	1	216	72	72	true	false	false	false	false	false	true	false
+REF_DELV|MA	REF_DELV	erv	DELV	MA	1	557	1021		1	1	465	155	155	true	false	false	false	false	false	true	false
+REF_DELV|IN	REF_DELV	erv	DELV	IN	1	4321	5172		1	1	852	284	284	true	true	false	false	false	false	true	false
+REF_DELV|FS	REF_DELV	erv	DELV	FS	1	1831	1893		1	1	63			false			false			false	true
+REF_DELV|CA	REF_DELV	erv	DELV	CA	1	1022	1618		1	1	597	199	199	true	false	false	false	false	false	true	false
+REF_DELV|FS-stemloop	REF_DELV	erv	DELV	FS-stemloop	1	1867	1893		1	1	27			false			false			false	false
+REF_DELV|FS-slippery-seq	REF_DELV	erv	DELV	FS-slippery-seq	1	1831	1837		1	1	7			false			false			false	false
+REF_EqERVRb|whole_genome	REF_EqERVRb	erv	EqERV-Rb	whole_genome	1	1	8705		1	1				false						false	false
+REF_EqERVRb|pro	REF_EqERVRb	erv	EqERV-Rb	pro	1	2933	3502		1	1	570	190	190	true	false	false	true	false	false	true	false
+REF_EqERVRb|pol	REF_EqERVRb	erv	EqERV-Rb	pol	1	3500	6556		1	1	3057	1019	1019	true	true	false	false	false	false	true	false
+REF_EqERVRb|gag	REF_EqERVRb	erv	EqERV-Rb	gag	1	1445	2932		1	1	1488	496	496	true	true	false	false	false	false	true	false
+REF_EqERVRb|env	REF_EqERVRb	erv	EqERV-Rb	env	1	6653	8173		1	1	1521	507	507	true	true	false	false	false	false	true	false
+REF_EqERVRb|5LTR	REF_EqERVRb	erv	EqERV-Rb	5LTR	1	1	666		1	1	666			false			true			false	true
+REF_EqERVRb|3LTR	REF_EqERVRb	erv	EqERV-Rb	3LTR	1	8037	8705		1	1	669			false			true			false	true
+REF_EqERVS|whole_genome	REF_EqERVS	erv	EqERV-S	whole_genome	1	1	6620		1	1				false						false	false
+REF_EqERVS|pro	REF_EqERVS	erv	EqERV-S	pro	1	1791	2309		1	1	519	173	173	true	true	false	false	false	false	true	false
+REF_EqERVS|pol	REF_EqERVS	erv	EqERV-S	pol	1	2331	3230		1	1	900	300	300	true	true	true	false	false	false	true	false
+REF_EqERVS|env	REF_EqERVS	erv	EqERV-S	env	1	3568	6345		1	1	2778	926	926	true	true	true	false	false	false	true	false
+REF_EqERVS|5LTR	REF_EqERVS	erv	EqERV-S	5LTR	1	1	329		1	1	329			false			false			false	true
+REF_EqERVS|3LTR	REF_EqERVS	erv	EqERV-S	3LTR	1	6328	6620		1	1	293			false			false			false	true
+REF_EqERVU3|whole_genome	REF_EqERVU3	erv	EqERV-U3	whole_genome	1	1	8639		1	1				false						false	false
+REF_EqERVU3|pol	REF_EqERVU3	erv	EqERV-U3	pol	1	2569	5820		1	1	3252	1084	1084	true	true	true	false	false	false	true	false
+REF_EqERVU3|gag	REF_EqERVU3	erv	EqERV-U3	gag	1	633	2381		1	1	1749	583	583	true	true	true	false	false	false	true	false
+REF_EqERVU3|env	REF_EqERVU3	erv	EqERV-U3	env	1	6787	8232		1	1	1446	482	482	true	true	false	false	false	false	true	false
+REF_EqERVU3|5LTR	REF_EqERVU3	erv	EqERV-U3	5LTR	1	1	508		1	1	508			false			false			false	true
+REF_EqERVU3|3LTR	REF_EqERVU3	erv	EqERV-U3	3LTR	1	8215	8639		1	1	425			false			false			false	true
+REF_EqERVZeta|whole_genome	REF_EqERVZeta	erv	EqERV-Zeta	whole_genome	1	1	8753		1	1				false						false	false
+REF_EqERVZeta|pro	REF_EqERVZeta	erv	EqERV-Zeta	pro	1	3179	3499		1	1	321	107	107	true	false	false	false	false	false	true	false
+REF_EqERVZeta|pol	REF_EqERVZeta	erv	EqERV-Zeta	pol	1	3500	6766		1	1	3267	1089	1089	true	true	true	true	false	false	true	false
+REF_EqERVZeta|gag	REF_EqERVZeta	erv	EqERV-Zeta	gag	1	1634	3178		1	1	1545	515	515	true	true	false	true	false	false	true	false
+REF_EqERVZeta|env	REF_EqERVZeta	erv	EqERV-Zeta	env	1	6797	8200		1	1	1404	468	468	true	true	false	true	false	false	true	false
+REF_EqERVZeta|5LTR	REF_EqERVZeta	erv	EqERV-Zeta	5LTR	1	1	644		1	1	644			false			true			false	true
+REF_EqERVZeta|3LTR	REF_EqERVZeta	erv	EqERV-Zeta	3LTR	1	8304	8753		1	1	450			false			true			false	true
+REF_GLN|whole_genome	REF_GLN	erv	GLN	whole_genome	1	1	8415		1	1				false						false	false
+REF_GLN|pro	REF_GLN	erv	GLN	pro	1	2570	2938		1	1	369	123	123	true	false	false	false	false	false	true	false
+REF_GLN|pol	REF_GLN	erv	GLN	pol	1	2714	6112		1	1	3399	1133	1133	true	true	false	false	false	false	true	false
+REF_GLN|gag	REF_GLN	erv	GLN	gag	1	866	2569		1	1	1704	568	568	true	true	false	false	false	false	true	false
+REF_GLN|env	REF_GLN	erv	GLN	env	1	5979	7943		1	1	1965	655	655	true	true	false	false	false	false	true	false
+REF_GLN|5LTR	REF_GLN	erv	GLN	5LTR	1	1	431		1	1	431			false			false			false	true
+REF_GLN|3LTR	REF_GLN	erv	GLN	3LTR	1	7986	8415		1	1	430			false			false			false	true
+REF_GLN|ZK	REF_GLN	erv	GLN	ZK	1	2468	2521		1	1	54	18	18	true	false	false	false	false	false	true	false
+REF_GLN|TM	REF_GLN	erv	GLN	TM	1	7344	7943		1	1	600	200	200	true	true	false	false	false	false	true	false
+REF_GLN|SU	REF_GLN	erv	GLN	SU	1	6055	7344		1	1	1290	430	430	true	true	true	false	false	false	true	false
+REF_GLN|RT	REF_GLN	erv	GLN	RT	1	2939	4927		1	1	1989	663	663	true	false	false	false	false	false	true	false
+REF_GLN|RNaseH	REF_GLN	erv	GLN	RNaseH	1	4472	4909		1	1	438	146	146	true	false	false	false	false	false	true	false
+REF_GLN|NC	REF_GLN	erv	GLN	NC	1	2411	2524		1	1	114	38	38	true	false	false	false	false	false	true	false
+REF_GLN|MA	REF_GLN	erv	GLN	MA	1	956	1336		1	1	381	127	127	true	false	false	false	false	false	true	false
+REF_GLN|IN	REF_GLN	erv	GLN	IN	1	4976	6100		1	1	1125	375	375	true	false	false	false	false	false	true	false
+REF_GLN|CA	REF_GLN	erv	GLN	CA	1	1622	2410		1	1	789	263	263	true	false	false	false	false	false	true	false
+REF_HERV15|whole_genome	REF_HERV15	erv	HERV-15	whole_genome	1	1	9693		1	1				false						false	false
+REF_HERV15|pro	REF_HERV15	erv	HERV-15	pro	1	3101	3703		1	1	603	201	201	true	true	true	false	false	false	true	false
+REF_HERV15|PPT	REF_HERV15	erv	HERV-15	PPT	1	9189	9200		1	1	12			false			false			false	false
+REF_HERV15|pol	REF_HERV15	erv	HERV-15	pol	1	3704	6913		1	1	3210	1070	1070	true	true	true	true	false	false	true	false
+REF_HERV15|PBS	REF_HERV15	erv	HERV-15	PBS	1	501	518		1	1	18			false			false			false	false
+REF_HERV15|p12	REF_HERV15	erv	HERV-15	p12	1	1850	2134		1	1	285	95	95	true	true	true	false	false	false	true	false
+REF_HERV15|gag	REF_HERV15	erv	HERV-15	gag	1	1427	3100		1	1	1674	558	558	true	true	true	false	false	false	true	false
+REF_HERV15|env	REF_HERV15	erv	HERV-15	env	1	6918	9044		1	1	2127	709	709	true	true	true	false	false	false	true	false
+REF_HERV15|5LTR	REF_HERV15	erv	HERV-15	5LTR	1	1	493		1	1	493			false			true			false	true
+REF_HERV15|3LTR	REF_HERV15	erv	HERV-15	3LTR	1	9201	9693		1	1	493			false			false			false	true
+REF_HERV15|NC	REF_HERV15	erv	HERV-15	NC	1	2573	3100		1	1	528	176	176	true	true	true	false	false	false	true	false
+REF_HERV15|MA	REF_HERV15	erv	HERV-15	MA	1	1427	1849		1	1	423	141	141	true	false	false	false	false	false	true	false
+REF_HERV15|CA	REF_HERV15	erv	HERV-15	CA	1	2135	2572		1	1	438	146	146	true	false	false	false	false	false	true	false
+REF_HERV15|5U5	REF_HERV15	erv	HERV-15	5U5	1	454	493		1	1	40			false			false			false	false
+REF_HERV15|5U3	REF_HERV15	erv	HERV-15	5U3	1	1	415		1	1	415			false			false			false	true
+REF_HERV15|5R	REF_HERV15	erv	HERV-15	5R	1	416	454		1	1	39			false			true			false	false
+REF_HERV15|3U5	REF_HERV15	erv	HERV-15	3U5	1	9654	9693		1	1	40			false			false			false	false
+REF_HERV15|3U3	REF_HERV15	erv	HERV-15	3U3	1	9201	9615		1	1	415			false			false			false	true
+REF_HERV15|3R	REF_HERV15	erv	HERV-15	3R	1	9616	9653		1	1	38			false			false			false	false
+REF_HERV24|whole_genome	REF_HERV24	erv	HERV-24	whole_genome	1	1	8552		1	1				false						false	false
+REF_HERV24|pro-pol	REF_HERV24	erv	HERV-24	pro-pol	1	2711	6409		1	1	3699	1233	1233	true	true	false	true	false	false	true	false
+REF_HERV24|pro	REF_HERV24	erv	HERV-24	pro	1	2711	3223		1	1	513	171	171	true	false	false	false	false	false	true	false
+REF_HERV24|pol	REF_HERV24	erv	HERV-24	pol	1	3224	6409		1	1	3186	1062	1062	true	true	false	true	false	false	true	false
+REF_HERV24|gag-pro-pol	REF_HERV24	erv	HERV-24	gag-pro-pol	1	1382	6409		1	1	5028	1676	1676	true	true	true	true	false	false	true	false
+REF_HERV24|gag	REF_HERV24	erv	HERV-24	gag	1	1382	2710		1	1	1329	443	443	true	true	false	false	false	false	true	false
+REF_HERV24|env	REF_HERV24	erv	HERV-24	env	1	6441	7841		1	1	1401	467	467	true	true	false	true	false	false	true	false
+REF_HERV24|5LTR	REF_HERV24	erv	HERV-24	5LTR	1	1	490		1	1	490			false			true			false	true
+REF_HERV24|3LTR	REF_HERV24	erv	HERV-24	3LTR	1	8063	8552		1	1	490			false			true			false	true
+REF_HERV30|whole_genome	REF_HERV30	erv	HERV-30	whole_genome	1	1	9069		1	1				false						false	false
+REF_HERV30|pol	REF_HERV30	erv	HERV-30	pol	1	3666	6869		1	1	3204	1068	1068	true	true	true	false	false	false	true	false
+REF_HERV30|gag	REF_HERV30	erv	HERV-30	gag	1	1952	3664		1	1	1713	571	571	true	true	true	false	false	false	true	false
+REF_HERV30|env	REF_HERV30	erv	HERV-30	env	1	6870	8141		1	1	1272	424	424	true	true	true	false	false	false	true	false
+REF_HERV30|5LTR	REF_HERV30	erv	HERV-30	5LTR	1	1	397		1	1	397			false			false			false	true
+REF_HERV30|3LTR	REF_HERV30	erv	HERV-30	3LTR	1	8380	9069		1	1	690			false			false			false	true
+REF_HERV4|whole_genome	REF_HERV4	erv	HERV-4	whole_genome	1	1	7807		1	1				false						false	false
+REF_HERV4|PPT	REF_HERV4	erv	HERV-4	PPT	1	7164	7173		1	1	10			false			false			false	false
+REF_HERV4|pol	REF_HERV4	erv	HERV-4	pol	1	3156	6689		1	1	3534	1178	1178	true	true	false	true	false	false	true	false
+REF_HERV4|gag	REF_HERV4	erv	HERV-4	gag	1	1590	3143		1	1	1554	518	518	true	true	false	true	false	false	true	false
+REF_HERV4|5LTR	REF_HERV4	erv	HERV-4	5LTR	1	1	634		1	1	634			false			false			false	true
+REF_HERV4|3LTR	REF_HERV4	erv	HERV-4	3LTR	1	7174	7807		1	1	634			false			false			false	true
+REF_HERV46|whole_genome	REF_HERV46	erv	HERV-46	whole_genome	1	1	7864		1	1				false						false	false
+REF_HERV46|pro-pol	REF_HERV46	erv	HERV-46	pro-pol	1	2469	6389		1	1	3921	1307	1307	true	true	true	true	false	false	true	false
+REF_HERV46|pro	REF_HERV46	erv	HERV-46	pro	1	2469	2762		1	1	294	98	98	true	true	true	true	false	false	true	false
+REF_HERV46|PPT	REF_HERV46	erv	HERV-46	PPT	1	7392	7403		1	1	12			false			false			false	false
+REF_HERV46|pol	REF_HERV46	erv	HERV-46	pol	1	2763	6389		1	1	3627	1209	1209	true	true	true	true	false	false	true	false
+REF_HERV46|gag	REF_HERV46	erv	HERV-46	gag	1	501	2468		1	1	1968	656	656	true	true	true	true	false	false	true	false
+REF_HERV46|env	REF_HERV46	erv	HERV-46	env	1	6478	7431		1	1	954	318	318	true	true	true	true	false	false	true	false
+REF_HERV46|5LTR	REF_HERV46	erv	HERV-46	5LTR	1	1	461		1	1	461			false			true			false	true
+REF_HERV46|3LTR	REF_HERV46	erv	HERV-46	3LTR	1	7404	7864		1	1	461			false			true			false	true
+REF_HERV9|whole_genome	REF_HERV9	erv	HERV-9	whole_genome	1	1	8630		1	1				false						false	false
+REF_HERV9|pol	REF_HERV9	erv	HERV-9	pol	1	2570	6217		1	1	3648	1216	1216	true	true	true	false	false	false	true	false
+REF_HERV9|gag	REF_HERV9	erv	HERV-9	gag	1	1982	3442		1	1	1461	487	487	true	true	true	false	false	false	true	false
+REF_HERV9|env	REF_HERV9	erv	HERV-9	env	1	3443	7018		1	1	3576	1192	1192	true	true	true	false	false	false	true	false
+REF_HERV9|5LTR	REF_HERV9	erv	HERV-9	5LTR	1	1	565		1	1	565			false			true			false	true
+REF_HERV9|3LTR	REF_HERV9	erv	HERV-9	3LTR	1	7805	8630		1	1	826			false			true			false	true
+REF_HERVADP|whole_genome	REF_HERVADP	erv	HERV-ADP	whole_genome	1	1	8810		1	1				false						false	false
+REF_HERVADP|PPT	REF_HERVADP	erv	HERV-ADP	PPT	1	8184	8199		1	1	16			false			false			false	false
+REF_HERVADP|pol	REF_HERVADP	erv	HERV-ADP	pol	1	2628	6131		1	1	3504	1168	1168	true	true	false	false	false	false	true	false
+REF_HERVADP|PBS	REF_HERVADP	erv	HERV-ADP	PBS	1	615	632		1	1	18			false			false			false	false
+REF_HERVADP|gag	REF_HERVADP	erv	HERV-ADP	gag	1	1071	2624		1	1	1554	518	518	true	false	false	false	false	false	true	false
+REF_HERVADP|env	REF_HERVADP	erv	HERV-ADP	env	1	6175	8184		1	1	2010	670	670	true	true	false	false	false	false	true	false
+REF_HERVADP|5LTR	REF_HERVADP	erv	HERV-ADP	5LTR	1	1	610		1	1	610			false			false			false	true
+REF_HERVADP|3LTR	REF_HERVADP	erv	HERV-ADP	3LTR	1	8201	8810		1	1	610			false			false			false	true
+REF_HERVE|whole_genome	REF_HERVE	erv	HERV-E	whole_genome	1	1	8840		1	1				false						false	false
+REF_HERVE|pro	REF_HERVE	erv	HERV-E	pro	1	2656	3207		1	1	552	184	184	true	false	false	false	false	false	true	false
+REF_HERVE|PPT	REF_HERVE	erv	HERV-E	PPT	1	8333	8344		1	1	12			false			false			false	false
+REF_HERVE|pol	REF_HERVE	erv	HERV-E	pol	1	2656	6267		1	1	3612	1204	1204	true	true	true	false	false	false	true	false
+REF_HERVE|PBS	REF_HERVE	erv	HERV-E	PBS	1	500	518		1	1	19			false			false			false	false
+REF_HERVE|p12	REF_HERVE	erv	HERV-E	p12	1	1441	1698		1	1	258	86	86	true	false	false	false	false	false	true	false
+REF_HERVE|gag	REF_HERVE	erv	HERV-E	gag	1	1048	2655		1	1	1608	536	536	true	true	true	false	false	false	true	false
+REF_HERVE|env	REF_HERVE	erv	HERV-E	env	1	6269	8317		1	1	2049	683	683	true	true	false	false	false	false	true	false
+REF_HERVE|5LTR	REF_HERVE	erv	HERV-E	5LTR	1	1	495		1	1	495			false			false			false	true
+REF_HERVE|3LTR	REF_HERVE	erv	HERV-E	3LTR	1	8348	8840		1	1	493			false			false			false	true
+REF_HERVE|NC	REF_HERVE	erv	HERV-E	NC	1	2143	2655		1	1	513	171	171	true	true	false	false	false	false	true	false
+REF_HERVE|MA	REF_HERVE	erv	HERV-E	MA	1	1048	1440		1	1	393	131	131	true	true	true	false	false	false	true	false
+REF_HERVE|CA	REF_HERVE	erv	HERV-E	CA	1	1699	2142		1	1	444	148	148	true	false	false	false	false	false	true	false
+REF_HERVFa|whole_genome	REF_HERVFa	erv	HERV-Fa	whole_genome	1	1	8661		1	1				false						false	false
+REF_HERVFa|pol	REF_HERVFa	erv	HERV-Fa	pol	1	2378	6454		1	1	4077	1359	1359	true	true	true	true	false	false	true	false
+REF_HERVFa|gag	REF_HERVFa	erv	HERV-Fa	gag	1	1072	2736		1	1	1665	555	555	true	true	true	false	false	false	true	false
+REF_HERVFa|env	REF_HERVFa	erv	HERV-Fa	env	1	6473	8140		1	1	1668	556	556	true	true	false	false	false	false	true	false
+REF_HERVFa|5LTR	REF_HERVFa	erv	HERV-Fa	5LTR	1	1	470		1	1	470			false			false			false	true
+REF_HERVFa|3LTR	REF_HERVFa	erv	HERV-Fa	3LTR	1	8192	8661		1	1	470			false			false			false	true
+REF_HERVFa|NC	REF_HERVFa	erv	HERV-Fa	NC	1	2492	2734		1	1	243	81	81	true	false	false	false	false	false	true	false
+REF_HERVFa|MA	REF_HERVFa	erv	HERV-Fa	MA	1	1072	1737		1	1	666	222	222	true	false	false	false	false	false	true	false
+REF_HERVFa|CA	REF_HERVFa	erv	HERV-Fa	CA	1	1738	2490		1	1	753	251	251	true	true	true	false	false	false	true	false
+REF_HERVFb|whole_genome	REF_HERVFb	erv	HERV-Fb	whole_genome	1	1	7081		1	1				false						false	false
+REF_HERVFb|pol	REF_HERVFb	erv	HERV-Fb	pol	1	4544	5578		1	1	1035	345	345	true	true	true	false	false	false	true	false
+REF_HERVFb|gag	REF_HERVFb	erv	HERV-Fb	gag	1	720	2543		1	1	1824	608	608	true	true	false	false	false	false	true	false
+REF_HERVFb|env	REF_HERVFb	erv	HERV-Fb	env	1	5579	6592		1	1	1014	338	338	true	true	true	false	false	false	true	false
+REF_HERVFb|5LTR	REF_HERVFb	erv	HERV-Fb	5LTR	1	1	448		1	1	448			false			false			false	true
+REF_HERVFb|3LTR	REF_HERVFb	erv	HERV-Fb	3LTR	1	6697	7081		1	1	385			false			false			false	true
+REF_HERVFc1|whole_genome	REF_HERVFc1	erv	HERV-Fc1	whole_genome	1	1	5320		1	1				false						false	false
+REF_HERVFc1|pro	REF_HERVFc1	erv	HERV-Fc1	pro	1	1477	2067		1	1	591	197	197	true	true	true	false	false	false	true	false
+REF_HERVFc1|pol	REF_HERVFc1	erv	HERV-Fc1	pol	1	2068	3159		1	1	1092	364	364	true	true	true	false	false	false	true	false
+REF_HERVFc1|gag	REF_HERVFc1	erv	HERV-Fc1	gag	1	394	1455		1	1	1062	354	354	true	true	true	false	false	false	true	false
+REF_HERVFc1|env	REF_HERVFc1	erv	HERV-Fc1	env	1	3160	4914		1	1	1755	585	585	true	true	false	false	false	false	true	false
+REF_HERVFc1|5LTR	REF_HERVFc1	erv	HERV-Fc1	5LTR	1	1	346		1	1	346			false			false			false	true
+REF_HERVFc1|3LTR	REF_HERVFc1	erv	HERV-Fc1	3LTR	1	4975	5320		1	1	346			false			false			false	true
+REF_HERVFc2|whole_genome	REF_HERVFc2	erv	HERV-Fc2	whole_genome	1	1	7993		1	1				false						false	false
+REF_HERVFc2|PPT	REF_HERVFc2	erv	HERV-Fc2	PPT	1	7610	7619		1	1	10			false			false			false	false
+REF_HERVFc2|pol	REF_HERVFc2	erv	HERV-Fc2	pol	1	2148	5630		1	1	3483	1161	1161	true	true	true	false	false	false	true	false
+REF_HERVFc2|orf_fc	REF_HERVFc2	erv	HERV-Fc2	orf_fc	1	337	792		1	1	456	152	152	true	true	false	false	false	false	true	false
+REF_HERVFc2|gag	REF_HERVFc2	erv	HERV-Fc2	gag	1	738	2147		1	1	1410	470	470	true	true	false	false	false	false	true	false
+REF_HERVFc2|env	REF_HERVFc2	erv	HERV-Fc2	env	1	5828	7582		1	1	1755	585	585	true	true	false	false	false	false	true	false
+REF_HERVFc2|5LTR	REF_HERVFc2	erv	HERV-Fc2	5LTR	1	1	374		1	1	374			false			true			false	true
+REF_HERVFc2|3LTR	REF_HERVFc2	erv	HERV-Fc2	3LTR	1	7620	7993		1	1	374			false			true			false	true
+REF_HERVFc2|MA	REF_HERVFc2	erv	HERV-Fc2	MA	1	738	1328		1	1	591	197	197	true	false	false	false	false	false	true	false
+REF_HERVFc2|CA	REF_HERVFc2	erv	HERV-Fc2	CA	1	1329	2084		1	1	756	252	252	true	false	false	false	false	false	true	false
+REF_HERVFRD|whole_genome	REF_HERVFRD	erv	HERV-FRD	whole_genome	1	1	10614		1	1				false						false	false
+REF_HERVFRD|pro	REF_HERVFRD	erv	HERV-FRD	pro	1	4259	4711		1	1	453	151	151	true	true	true	false	false	false	true	false
+REF_HERVFRD|pol	REF_HERVFRD	erv	HERV-FRD	pol	1	4712	8011		1	1	3300	1100	1100	true	true	true	false	false	false	true	false
+REF_HERVFRD|gag	REF_HERVFRD	erv	HERV-FRD	gag	1	1322	4258		1	1	2937	979	979	true	true	true	true	false	false	true	false
+REF_HERVFRD|env	REF_HERVFRD	erv	HERV-FRD	env	1	8018	9748		1	1	1731	577	577	true	true	true	false	false	false	true	false
+REF_HERVFRD|5LTR	REF_HERVFRD	erv	HERV-FRD	5LTR	1	1	734		1	1	734			false			true			false	true
+REF_HERVFRD|3LTR	REF_HERVFRD	erv	HERV-FRD	3LTR	1	9881	10614		1	1	734			false			true			false	true
+REF_HERVH|whole_genome	REF_HERVH	erv	HERV-H	whole_genome	1	1	9021		1	1				false						false	false
+REF_HERVH|zh_xorf1	REF_HERVH	erv	HERV-H	zh_xorf1	1	309	1022		1	1	714	238	238	true	true	false	false	false	false	true	false
+REF_HERVH|pro-pol	REF_HERVH	erv	HERV-H	pro-pol	1	2908	6552		1	1	3645	1215	1215	true	true	true	false	false	false	true	false
+REF_HERVH|pro	REF_HERVH	erv	HERV-H	pro	1	2908	3240		1	1	333	111	111	true	false	false	false	false	false	true	false
+REF_HERVH|pregag	REF_HERVH	erv	HERV-H	pregag	1	904	1254		1	1	351	117	117	true	false	false	false	false	false	true	false
+REF_HERVH|PPT	REF_HERVH	erv	HERV-H	PPT	1	8572	8584		1	1	13			false			false			false	false
+REF_HERVH|pol	REF_HERVH	erv	HERV-H	pol	1	3241	6552		1	1	3312	1104	1104	true	true	true	false	false	false	true	false
+REF_HERVH|PBS	REF_HERVH	erv	HERV-H	PBS	1	456	473		1	1	18			false			false			false	false
+REF_HERVH|LEA	REF_HERVH	erv	HERV-H	LEA	1	345	903		1	1	559			false			false			false	true
+REF_HERVH|internal_region	REF_HERVH	erv	HERV-H	internal_region	1	345	8584		1	1				false						false	false
+REF_HERVH|glygag	REF_HERVH	erv	HERV-H	glygag	1	904	2853		1	1	1950	650	650	true	true	false	false	false	false	true	false
+REF_HERVH|gag	REF_HERVH	erv	HERV-H	gag	1	1255	2853		1	1	1599	533	533	true	true	false	false	false	false	true	false
+REF_HERVH|env	REF_HERVH	erv	HERV-H	env	1	6668	8422		1	1	1755	585	585	true	true	false	false	false	false	true	false
+REF_HERVH|5LTR	REF_HERVH	erv	HERV-H	5LTR	1	1	438		1	1	438			false			false			false	true
+REF_HERVH|3LTR	REF_HERVH	erv	HERV-H	3LTR	1	8585	9021		1	1	437			false			false			false	true
+REF_HERVH|NC	REF_HERVH	erv	HERV-H	NC	1	2617	2853		1	1	237	79	79	true	true	false	false	false	false	true	false
+REF_HERVH|MA	REF_HERVH	erv	HERV-H	MA	1	1255	1851		1	1	597	199	199	true	false	false	false	false	false	true	false
+REF_HERVH|CA	REF_HERVH	erv	HERV-H	CA	1	1852	2616		1	1	765	255	255	true	false	false	false	false	false	true	false
+REF_HERVH|5U5	REF_HERVH	erv	HERV-H	5U5	1	410	438		1	1	29			false			false			false	false
+REF_HERVH|5U3	REF_HERVH	erv	HERV-H	5U3	1	1	344		1	1	344			false			false			false	true
+REF_HERVH|5R	REF_HERVH	erv	HERV-H	5R	1	345	409		1	1	65			false			false			false	true
+REF_HERVH|3U5	REF_HERVH	erv	HERV-H	3U5	1	8993	9021		1	1	29			false			false			false	false
+REF_HERVH|3U3	REF_HERVH	erv	HERV-H	3U3	1	8585	8928		1	1	344			false			false			false	true
+REF_HERVH|3R	REF_HERVH	erv	HERV-H	3R	1	8929	8992		1	1	64			false			false			false	true
+REF_HERVhako|whole_genome	REF_HERVhako	erv	HERV-hako	whole_genome	1	1	8277		1	1				false						false	false
+REF_HERVhako|pro	REF_HERVhako	erv	HERV-hako	pro	1	2630	3016		1	1	387	129	129	true	true	true	false	false	false	true	false
+REF_HERVhako|pol	REF_HERVhako	erv	HERV-hako	pol	1	3017	5929		1	1	2913	971	971	true	true	true	false	false	false	true	false
+REF_HERVhako|gag	REF_HERVhako	erv	HERV-hako	gag	1	608	2164		1	1	1557	519	519	true	true	true	false	false	false	true	false
+REF_HERVhako|env	REF_HERVhako	erv	HERV-hako	env	1	5972	7873		1	1	1902	634	634	true	true	true	false	false	false	true	false
+REF_HERVhako|DU	REF_HERVhako	erv	HERV-hako	DU	1	2166	2627		1	1	462	154	154	true	true	true	false	false	false	true	false
+REF_HERVhako|5LTR	REF_HERVhako	erv	HERV-hako	5LTR	1	1	350		1	1	350			false			false			false	true
+REF_HERVhako|3LTR	REF_HERVhako	erv	HERV-hako	3LTR	1	7860	8277		1	1	418			false			false			false	true
+REF_HERVI|whole_genome	REF_HERVI	erv	HERV-I	whole_genome	1	1	9068		1	1				false						false	false
+REF_HERVI|pro-pol	REF_HERVI	erv	HERV-I	pro-pol	1	3156	6167		1	1	3012	1004	1004	true	true	true	false	false	false	true	false
+REF_HERVI|pro	REF_HERVI	erv	HERV-I	pro	1	3156	3746		1	1	591	197	197	true	false	false	false	false	false	true	false
+REF_HERVI|PPT	REF_HERVI	erv	HERV-I	PPT	1	8541	8546		1	1	6			false			false			false	false
+REF_HERVI|pol	REF_HERVI	erv	HERV-I	pol	1	3747	6167		1	1	2421	807	807	true	true	true	false	false	false	true	false
+REF_HERVI|gag	REF_HERVI	erv	HERV-I	gag	1	1186	3138		1	1	1953	651	651	true	true	true	false	false	false	true	false
+REF_HERVI|env	REF_HERVI	erv	HERV-I	env	1	6168	8546		1	1	2379	793	793	true	true	false	false	false	false	true	false
+REF_HERVI|5LTR	REF_HERVI	erv	HERV-I	5LTR	1	1	522		1	1	522			false			true			false	true
+REF_HERVI|3LTR	REF_HERVI	erv	HERV-I	3LTR	1	8547	9068		1	1	522			false			true			false	true
+REF_HERVI|NC	REF_HERVI	erv	HERV-I	NC	1	2653	3138		1	1	486	162	162	true	true	true	false	false	false	true	false
+REF_HERVI|MA	REF_HERVI	erv	HERV-I	MA	1	1186	2214		1	1	1029	343	343	true	false	false	false	false	false	true	false
+REF_HERVI|CA	REF_HERVI	erv	HERV-I	CA	1	2215	2652		1	1	438	146	146	true	true	true	false	false	false	true	false
+REF_HERVKHML1|whole_genome	REF_HERVKHML1	erv	HERV-K-HML1	whole_genome	1	1	7048		1	1				false						false	false
+REF_HERVKHML1|pro	REF_HERVKHML1	erv	HERV-K-HML1	pro	1	2001	2948		1	1	948	316	316	true	true	false	true	false	false	true	false
+REF_HERVKHML1|pol	REF_HERVKHML1	erv	HERV-K-HML1	pol	1	2879	5527		1	1	2649	883	883	true	true	false	false	false	false	true	false
+REF_HERVKHML1|p21	REF_HERVKHML1	erv	HERV-K-HML1	p21	1	793	1101		1	1	309	103	103	true	false	false	false	false	false	true	false
+REF_HERVKHML1|gag	REF_HERVKHML1	erv	HERV-K-HML1	gag	1	493	2142		1	1	1650	550	550	true	true	false	true	false	false	true	false
+REF_HERVKHML1|env	REF_HERVKHML1	erv	HERV-K-HML1	env	1	5488	6492		1	1	1005	335	335	true	true	true	false	false	false	true	false
+REF_HERVKHML1|5LTR	REF_HERVKHML1	erv	HERV-K-HML1	5LTR	1	1	344		1	1	344			false			false			false	true
+REF_HERVKHML1|3LTR	REF_HERVKHML1	erv	HERV-K-HML1	3LTR	1	6441	7048		1	1	608			false			false			false	true
+REF_HERVKHML1|NC	REF_HERVKHML1	erv	HERV-K-HML1	NC	1	1777	2142		1	1	366	122	122	true	true	false	true	false	false	true	false
+REF_HERVKHML1|MA	REF_HERVKHML1	erv	HERV-K-HML1	MA	1	493	792		1	1	300	100	100	true	false	false	false	false	false	true	false
+REF_HERVKHML1|CA	REF_HERVKHML1	erv	HERV-K-HML1	CA	1	1102	1776		1	1	675	225	225	true	false	false	false	false	false	true	false
+REF_HERVKHML10|whole_genome	REF_HERVKHML10	erv	HERV-K-HML10	whole_genome	1	1	6364		1	1				false						false	false
+REF_HERVKHML10|pol	REF_HERVKHML10	erv	HERV-K-HML10	pol	1	1332	4133		1	1	2802	934	934	true	true	true	true	false	false	true	false
+REF_HERVKHML10|gag	REF_HERVKHML10	erv	HERV-K-HML10	gag	1	759	1331		1	1	573	191	191	true	true	true	false	false	false	true	false
+REF_HERVKHML10|env	REF_HERVKHML10	erv	HERV-K-HML10	env	1	4134	5540		1	1	1407	469	469	true	true	true	false	false	false	true	false
+REF_HERVKHML10|5LTR	REF_HERVKHML10	erv	HERV-K-HML10	5LTR	1	1	548		1	1	548			false			false			false	true
+REF_HERVKHML10|3LTR	REF_HERVKHML10	erv	HERV-K-HML10	3LTR	1	5817	6364		1	1	548			false			false			false	true
+REF_HERVKHML2|whole_genome	REF_HERVKHML2	erv	HERV-K-HML2	whole_genome	1	1	9472		1	1				false						false	false
+REF_HERVKHML2|rec	REF_HERVKHML2	erv	HERV-K-HML2	rec	1	6451	6654		1	1	261	87	87	true	true	false	false	false	false	true	false
+REF_HERVKHML2|rec	REF_HERVKHML2	erv	HERV-K-HML2	rec	2	8411	8467		1	1	261	87	87	true	true	false	false	false	false	true	false
+REF_HERVKHML2|pro	REF_HERVKHML2	erv	HERV-K-HML2	pro	1	3451	3918		1	1	468	156	156	true	true	false	false	false	false	true	false
+REF_HERVKHML2|PPT	REF_HERVKHML2	erv	HERV-K-HML2	PPT	1	8488	8504		1	1	17			false			false			false	false
+REF_HERVKHML2|pol	REF_HERVKHML2	erv	HERV-K-HML2	pol	1	3915	6629		1	1	2715	905	905	true	false	false	false	false	false	true	false
+REF_HERVKHML2|PBS	REF_HERVKHML2	erv	HERV-K-HML2	PBS	1	971	988		1	1	18			false			false			false	false
+REF_HERVKHML2|p21	REF_HERVKHML2	erv	HERV-K-HML2	p21	1	1424	1960		1	1	537	179	179	true	false	false	false	false	false	true	false
+REF_HERVKHML2|LEA	REF_HERVKHML2	erv	HERV-K-HML2	LEA	1	792	1110		1	1	319			false			false			false	true
+REF_HERVKHML2|gag	REF_HERVKHML2	erv	HERV-K-HML2	gag	1	1112	3112		1	1	2001	667	667	true	true	false	false	false	false	true	false
+REF_HERVKHML2|env	REF_HERVKHML2	erv	HERV-K-HML2	env	1	6451	8550		1	1	2100	700	700	true	true	false	false	false	false	true	false
+REF_HERVKHML2|DU	REF_HERVKHML2	erv	HERV-K-HML2	DU	1	2914	3450		1	1	537	179	179	true	false	false	false	false	false	true	false
+REF_HERVKHML2|5LTR	REF_HERVKHML2	erv	HERV-K-HML2	5LTR	1	1	968		1	1	968			false			false			false	true
+REF_HERVKHML2|3LTR	REF_HERVKHML2	erv	HERV-K-HML2	3LTR	1	8505	9472		1	1	968			false			false			false	true
+REF_HERVKHML2|TM	REF_HERVKHML2	erv	HERV-K-HML2	TM	1	7822	8550		1	1	729	243	243	true	true	false	false	false	false	true	false
+REF_HERVKHML2|SU	REF_HERVKHML2	erv	HERV-K-HML2	SU	1	6748	7821		1	1	1074	358	358	true	false	false	false	false	false	true	false
+REF_HERVKHML2|SP	REF_HERVKHML2	erv	HERV-K-HML2	SP	1	6451	6747		1	1	297	99	99	true	false	false	false	false	false	true	false
+REF_HERVKHML2|RT	REF_HERVKHML2	erv	HERV-K-HML2	RT	1	3915	5255		1	1	1341	447	447	true	false	false	false	false	false	true	false
+REF_HERVKHML2|RNaseH	REF_HERVKHML2	erv	HERV-K-HML2	RNaseH	1	5256	5639		1	1	384	128	128	true	false	false	false	false	false	true	false
+REF_HERVKHML2|NC	REF_HERVKHML2	erv	HERV-K-HML2	NC	1	2681	3112		1	1	432	144	144	true	true	false	false	false	false	true	false
+REF_HERVKHML2|MA	REF_HERVKHML2	erv	HERV-K-HML2	MA	1	1112	1423		1	1	312	104	104	true	false	false	false	false	false	true	false
+REF_HERVKHML2|IN	REF_HERVKHML2	erv	HERV-K-HML2	IN	1	5625	6629		1	1	1005	335	335	true	false	false	false	false	false	true	false
+REF_HERVKHML2|CA	REF_HERVKHML2	erv	HERV-K-HML2	CA	1	1961	2680		1	1	720	240	240	true	false	false	false	false	false	true	false
+REF_HERVKHML2|5U5	REF_HERVKHML2	erv	HERV-K-HML2	5U5	1	877	968		1	1	92			false			false			false	true
+REF_HERVKHML2|5U3	REF_HERVKHML2	erv	HERV-K-HML2	5U3	1	1	791		1	1	791			false			false			false	true
+REF_HERVKHML2|5R	REF_HERVKHML2	erv	HERV-K-HML2	5R	1	792	876		1	1	85			false			false			false	true
+REF_HERVKHML2|3U5	REF_HERVKHML2	erv	HERV-K-HML2	3U5	1	9381	9472		1	1	92			false			false			false	true
+REF_HERVKHML2|3U3	REF_HERVKHML2	erv	HERV-K-HML2	3U3	1	8505	9295		1	1	791			false			false			false	true
+REF_HERVKHML2|3R	REF_HERVKHML2	erv	HERV-K-HML2	3R	1	9296	9380		1	1	85			false			false			false	true
+REF_HERVKHML3|whole_genome	REF_HERVKHML3	erv	HERV-K-HML3	whole_genome	1	1	7045		1	1				false						false	false
+REF_HERVKHML3|pro	REF_HERVKHML3	erv	HERV-K-HML3	pro	1	1932	2876		1	1	945	315	315	true	true	false	false	false	false	true	false
+REF_HERVKHML3|pol	REF_HERVKHML3	erv	HERV-K-HML3	pol	1	2768	5608		1	1	2841	947	947	true	true	false	false	false	false	true	false
+REF_HERVKHML3|gag	REF_HERVKHML3	erv	HERV-K-HML3	gag	1	634	2070		1	1	1437	479	479	true	true	false	false	false	false	true	false
+REF_HERVKHML3|env	REF_HERVKHML3	erv	HERV-K-HML3	env	1	5394	6614		1	1	1221	407	407	true	true	false	true	false	false	true	false
+REF_HERVKHML3|5LTR	REF_HERVKHML3	erv	HERV-K-HML3	5LTR	1	1	511		1	1	511			false			false			false	true
+REF_HERVKHML3|3LTR	REF_HERVKHML3	erv	HERV-K-HML3	3LTR	1	6535	7045		1	1	511			false			false			false	true
+REF_HERVKHML4|whole_genome	REF_HERVKHML4	erv	HERV-K-HML4	whole_genome	1	1	10243		1	1				false						false	false
+REF_HERVKHML4|pro	REF_HERVKHML4	erv	HERV-K-HML4	pro	1	3930	4649		1	1	720	240	240	true	false	false	false	false	false	true	false
+REF_HERVKHML4|pol	REF_HERVKHML4	erv	HERV-K-HML4	pol	1	4652	7249		1	1	2598	866	866	true	true	true	false	false	false	true	false
+REF_HERVKHML4|PBS	REF_HERVKHML4	erv	HERV-K-HML4	PBS	1	1024	1041		1	1	18			false			false			false	false
+REF_HERVKHML4|p21	REF_HERVKHML4	erv	HERV-K-HML4	p21	1	1471	2496		1	1	1026	342	342	true	false	false	false	false	false	true	false
+REF_HERVKHML4|LEA	REF_HERVKHML4	erv	HERV-K-HML4	LEA	1	933	1170		1	1	238			false			false			false	true
+REF_HERVKHML4|gag	REF_HERVKHML4	erv	HERV-K-HML4	gag	1	1171	3927		1	1	2757	919	919	true	true	false	false	false	false	true	false
+REF_HERVKHML4|env	REF_HERVKHML4	erv	HERV-K-HML4	env	1	7176	9296		1	1	2121	707	707	true	true	false	false	false	false	true	false
+REF_HERVKHML4|5LTR	REF_HERVKHML4	erv	HERV-K-HML4	5LTR	1	1	1021		1	1	1021			false			false			false	true
+REF_HERVKHML4|3LTR	REF_HERVKHML4	erv	HERV-K-HML4	3LTR	1	9223	10243		1	1	1021			false			false			false	true
+REF_HERVKHML4|TM	REF_HERVKHML4	erv	HERV-K-HML4	TM	1	8547	9296		1	1	750	250	250	true	true	false	false	false	false	true	false
+REF_HERVKHML4|SU	REF_HERVKHML4	erv	HERV-K-HML4	SU	1	7176	8546		1	1	1371	457	457	true	false	false	false	false	false	true	false
+REF_HERVKHML4|NC	REF_HERVKHML4	erv	HERV-K-HML4	NC	1	3424	3927		1	1	504	168	168	true	true	false	false	false	false	true	false
+REF_HERVKHML4|MA	REF_HERVKHML4	erv	HERV-K-HML4	MA	1	1171	1470		1	1	300	100	100	true	false	false	false	false	false	true	false
+REF_HERVKHML4|CA	REF_HERVKHML4	erv	HERV-K-HML4	CA	1	2497	3423		1	1	927	309	309	true	false	false	false	false	false	true	false
+REF_HERVKHML4|5U5	REF_HERVKHML4	erv	HERV-K-HML4	5U5	1	933	1021		1	1	89			false			false			false	true
+REF_HERVKHML4|5U3	REF_HERVKHML4	erv	HERV-K-HML4	5U3	1	1	839		1	1	839			false			false			false	true
+REF_HERVKHML4|5R	REF_HERVKHML4	erv	HERV-K-HML4	5R	1	841	932		1	1	92			false			false			false	true
+REF_HERVKHML4|3U5	REF_HERVKHML4	erv	HERV-K-HML4	3U5	1	10155	10243		1	1	89			false			false			false	true
+REF_HERVKHML4|3U3	REF_HERVKHML4	erv	HERV-K-HML4	3U3	1	9223	10058		1	1	836			false			false			false	true
+REF_HERVKHML4|3R	REF_HERVKHML4	erv	HERV-K-HML4	3R	1	10059	10154		1	1	96			false			false			false	true
+REF_HERVKHML5|whole_genome	REF_HERVKHML5	erv	HERV-K-HML5	whole_genome	1	1	7875		1	1				false						false	false
+REF_HERVKHML5|pro	REF_HERVKHML5	erv	HERV-K-HML5	pro	1	2536	2853		1	1	318	106	106	true	true	false	false	false	false	true	false
+REF_HERVKHML5|PPT	REF_HERVKHML5	erv	HERV-K-HML5	PPT	1	7329	7349		1	1	21			false			false			false	false
+REF_HERVKHML5|pol	REF_HERVKHML5	erv	HERV-K-HML5	pol	1	2856	5528		1	1	2673	891	891	true	true	false	false	false	false	true	false
+REF_HERVKHML5|PBS	REF_HERVKHML5	erv	HERV-K-HML5	PBS	1	529	546		1	1	18			false			false			false	false
+REF_HERVKHML5|gag	REF_HERVKHML5	erv	HERV-K-HML5	gag	1	671	2218		1	1	1548	516	516	true	true	false	false	false	false	true	false
+REF_HERVKHML5|env	REF_HERVKHML5	erv	HERV-K-HML5	env	1	5584	7386		1	1	1803	601	601	true	true	false	false	false	false	true	false
+REF_HERVKHML5|DU	REF_HERVKHML5	erv	HERV-K-HML5	DU	1	2059	2535		1	1	477	159	159	true	false	false	false	false	false	true	false
+REF_HERVKHML5|5LTR	REF_HERVKHML5	erv	HERV-K-HML5	5LTR	1	1	526		1	1	526			false			false			false	true
+REF_HERVKHML5|3LTR	REF_HERVKHML5	erv	HERV-K-HML5	3LTR	1	7350	7875		1	1	526			false			false			false	true
+REF_HERVKHML5|TM	REF_HERVKHML5	erv	HERV-K-HML5	TM	1	6724	7386		1	1	663	221	221	true	true	false	false	false	false	true	false
+REF_HERVKHML5|SU	REF_HERVKHML5	erv	HERV-K-HML5	SU	1	5584	6723		1	1	1140	380	380	true	false	false	false	false	false	true	false
+REF_HERVKHML5|RT	REF_HERVKHML5	erv	HERV-K-HML5	RT	1	2856	3545		1	1	690	230	230	true	false	false	false	false	false	true	false
+REF_HERVKHML5|NC	REF_HERVKHML5	erv	HERV-K-HML5	NC	1	1814	2218		1	1	405	135	135	true	true	false	false	false	false	true	false
+REF_HERVKHML5|MA	REF_HERVKHML5	erv	HERV-K-HML5	MA	1	671	1213		1	1	543	181	181	true	false	false	false	false	false	true	false
+REF_HERVKHML5|IN	REF_HERVKHML5	erv	HERV-K-HML5	IN	1	4752	5219		1	1	468	156	156	true	false	false	false	false	false	true	false
+REF_HERVKHML5|CA	REF_HERVKHML5	erv	HERV-K-HML5	CA	1	1214	1813		1	1	600	200	200	true	false	false	false	false	false	true	false
+REF_HERVKHML6|whole_genome	REF_HERVKHML6	erv	HERV-K-HML6	whole_genome	1	1	8166		1	1				false						false	false
+REF_HERVKHML6|pro	REF_HERVKHML6	erv	HERV-K-HML6	pro	1	2641	3147		1	1	507	169	169	true	false	false	false	false	false	true	false
+REF_HERVKHML6|pol	REF_HERVKHML6	erv	HERV-K-HML6	pol	1	3148	5610		1	1	2463	821	821	true	true	true	false	false	false	true	false
+REF_HERVKHML6|gag	REF_HERVKHML6	erv	HERV-K-HML6	gag	1	736	2052		1	1	1317	439	439	true	true	true	false	false	false	true	false
+REF_HERVKHML6|env	REF_HERVKHML6	erv	HERV-K-HML6	env	1	5779	7683		1	1	1905	635	635	true	true	true	false	false	false	true	false
+REF_HERVKHML6|DU	REF_HERVKHML6	erv	HERV-K-HML6	DU	1	2053	2628		1	1	576	192	192	true	true	false	false	false	false	true	false
+REF_HERVKHML6|5LTR	REF_HERVKHML6	erv	HERV-K-HML6	5LTR	1	1	484		1	1	484			false			true			false	true
+REF_HERVKHML6|3LTR	REF_HERVKHML6	erv	HERV-K-HML6	3LTR	1	7683	8166		1	1	484			false			true			false	true
+REF_HERVKHML7|whole_genome	REF_HERVKHML7	erv	HERV-K-HML7	whole_genome	1	1	8355		1	1				false						false	false
+REF_HERVKHML7|pol	REF_HERVKHML7	erv	HERV-K-HML7	pol	1	2333	6076		1	1	3744	1248	1248	true	true	true	false	false	false	true	false
+REF_HERVKHML7|gag	REF_HERVKHML7	erv	HERV-K-HML7	gag	1	413	2332		1	1	1920	640	640	true	true	true	false	false	false	true	false
+REF_HERVKHML7|env	REF_HERVKHML7	erv	HERV-K-HML7	env	1	6077	8119		1	1	2043	681	681	true	true	true	false	false	false	true	false
+REF_HERVKHML7|5LTR	REF_HERVKHML7	erv	HERV-K-HML7	5LTR	1	1	234		1	1	234			false			false			false	true
+REF_HERVKHML7|3LTR	REF_HERVKHML7	erv	HERV-K-HML7	3LTR	1	8122	8355		1	1	234			false			false			false	true
+REF_HERVKHML8|whole_genome	REF_HERVKHML8	erv	HERV-K-HML8	whole_genome	1	1	7274		1	1				false						false	false
+REF_HERVKHML8|pol	REF_HERVKHML8	erv	HERV-K-HML8	pol	1	1743	4448		1	1	2706	902	902	true	true	true	false	false	false	true	false
+REF_HERVKHML8|gag	REF_HERVKHML8	erv	HERV-K-HML8	gag	1	1027	1755		1	1	729	243	243	true	true	false	false	false	false	true	false
+REF_HERVKHML8|env	REF_HERVKHML8	erv	HERV-K-HML8	env	1	4450	6405		1	1	1956	652	652	true	true	false	false	false	false	true	false
+REF_HERVKHML8|5LTR	REF_HERVKHML8	erv	HERV-K-HML8	5LTR	1	1	865		1	1	865			false			false			false	true
+REF_HERVKHML8|3LTR	REF_HERVKHML8	erv	HERV-K-HML8	3LTR	1	6406	7274		1	1	869			false			false			false	true
+REF_HERVKHML9|whole_genome	REF_HERVKHML9	erv	HERV-K-HML9	whole_genome	1	1	8608		1	1				false						false	false
+REF_HERVKHML9|rec	REF_HERVKHML9	erv	HERV-K-HML9	rec	1	7911	7967		1	1	57	19	19	true	true	false	false	false	false	true	false
+REF_HERVKHML9|pro	REF_HERVKHML9	erv	HERV-K-HML9	pro	1	2971	3438		1	1	468	156	156	true	true	false	false	false	false	true	false
+REF_HERVKHML9|PPT	REF_HERVKHML9	erv	HERV-K-HML9	PPT	1	8008	8021		1	1	14			false			false			false	false
+REF_HERVKHML9|pol	REF_HERVKHML9	erv	HERV-K-HML9	pol	1	3411	5966		1	1	2556	852	852	true	true	true	false	false	false	true	false
+REF_HERVKHML9|p21	REF_HERVKHML9	erv	HERV-K-HML9	p21	1	1058	1528		1	1	471	157	157	true	false	false	true	false	false	true	false
+REF_HERVKHML9|gag	REF_HERVKHML9	erv	HERV-K-HML9	gag	1	758	2632		1	1	1875	625	625	true	true	false	true	false	false	true	false
+REF_HERVKHML9|env	REF_HERVKHML9	erv	HERV-K-HML9	env	1	5975	8155		1	1	2181	727	727	true	true	false	false	false	false	true	false
+REF_HERVKHML9|DU	REF_HERVKHML9	erv	HERV-K-HML9	DU	1	2452	2970		1	1	519	173	173	true	false	false	false	false	false	true	false
+REF_HERVKHML9|5LTR	REF_HERVKHML9	erv	HERV-K-HML9	5LTR	1	1	587		1	1	587			false			false			false	true
+REF_HERVKHML9|3LTR	REF_HERVKHML9	erv	HERV-K-HML9	3LTR	1	8022	8608		1	1	587			false			false			false	true
+REF_HERVKHML9|TM	REF_HERVKHML9	erv	HERV-K-HML9	TM	1	7322	8155		1	1	834	278	278	true	true	false	false	false	false	true	false
+REF_HERVKHML9|SU	REF_HERVKHML9	erv	HERV-K-HML9	SU	1	6251	7321		1	1	1071	357	357	true	false	false	false	false	false	true	false
+REF_HERVKHML9|SP	REF_HERVKHML9	erv	HERV-K-HML9	SP	1	5975	6250		1	1	276	92	92	true	false	false	false	false	false	true	false
+REF_HERVKHML9|NC	REF_HERVKHML9	erv	HERV-K-HML9	NC	1	2231	2632		1	1	402	134	134	true	true	false	false	false	false	true	false
+REF_HERVKHML9|MA	REF_HERVKHML9	erv	HERV-K-HML9	MA	1	758	1057		1	1	300	100	100	true	false	false	false	false	false	true	false
+REF_HERVKHML9|CA	REF_HERVKHML9	erv	HERV-K-HML9	CA	1	1529	2230		1	1	702	234	234	true	false	false	false	false	false	true	false
+REF_HERVL|whole_genome	REF_HERVL	erv	HERV-L	whole_genome	1	1	6489		1	1				false						false	false
+REF_HERVL|pro-pol	REF_HERVL	erv	HERV-L	pro-pol	1	2235	5675		1	1	3441	1147	1147	true	true	true	false	false	false	true	false
+REF_HERVL|pro	REF_HERVL	erv	HERV-L	pro	1	2235	2588		1	1	354	118	118	true	true	true	false	false	false	true	false
+REF_HERVL|pol	REF_HERVL	erv	HERV-L	pol	1	2589	5675		1	1	3087	1029	1029	true	true	true	false	false	false	true	false
+REF_HERVL|gag	REF_HERVL	erv	HERV-L	gag	1	489	2234		1	1	1746	582	582	true	true	true	false	false	false	true	false
+REF_HERVL|DU	REF_HERVL	erv	HERV-L	DU	1	5169	5675		1	1	507	169	169	true	true	false	false	false	false	true	false
+REF_HERVL|5LTR	REF_HERVL	erv	HERV-L	5LTR	1	1	444		1	1	444			false			false			false	true
+REF_HERVL|3LTR	REF_HERVL	erv	HERV-L	3LTR	1	6083	6489		1	1	407			false			false			false	true
+REF_HERVL|RT	REF_HERVL	erv	HERV-L	RT	1	2589	3569		1	1	981	327	327	true	false	false	false	false	false	true	false
+REF_HERVL|RNaseH	REF_HERVL	erv	HERV-L	RNaseH	1	3570	4688		1	1	1119	373	373	true	true	true	false	false	false	true	false
+REF_HERVL|IN	REF_HERVL	erv	HERV-L	IN	1	4689	5168		1	1	480	160	160	true	false	false	false	false	false	true	false
+REF_HERVLb|whole_genome	REF_HERVLb	erv	HERV-Lb	whole_genome	1	1	9773		1	1				false						false	false
+REF_HERVLb|pro-pol	REF_HERVLb	erv	HERV-Lb	pro-pol	1	2885	6739		1	1	3855	1285	1285	true	true	true	false	false	false	true	false
+REF_HERVLb|pro	REF_HERVLb	erv	HERV-Lb	pro	1	2885	3286		1	1	402	134	134	true	false	false	false	false	false	true	false
+REF_HERVLb|pol	REF_HERVLb	erv	HERV-Lb	pol	1	3287	6739		1	1	3453	1151	1151	true	true	true	false	false	false	true	false
+REF_HERVLb|gag	REF_HERVLb	erv	HERV-Lb	gag	1	1466	2884		1	1	1419	473	473	true	true	false	false	false	false	true	false
+REF_HERVLb|env	REF_HERVLb	erv	HERV-Lb	env	1	6740	8866		1	1	2127	709	709	true	true	false	false	false	false	true	false
+REF_HERVLb|5LTR	REF_HERVLb	erv	HERV-Lb	5LTR	1	1	690		1	1	690			false			false			false	true
+REF_HERVLb|3LTR	REF_HERVLb	erv	HERV-Lb	3LTR	1	9084	9773		1	1	690			false			false			false	true
+REF_HERVLb|RT	REF_HERVLb	erv	HERV-Lb	RT	1	3287	4819		1	1	1533	511	511	true	false	false	false	false	false	true	false
+REF_HERVLb|RNaseH	REF_HERVLb	erv	HERV-Lb	RNaseH	1	4820	5260		1	1	441	147	147	true	false	false	false	false	false	true	false
+REF_HERVLb|NC	REF_HERVLb	erv	HERV-Lb	NC	1	2699	2884		1	1	186	62	62	true	true	false	false	false	false	true	false
+REF_HERVLb|MA	REF_HERVLb	erv	HERV-Lb	MA	1	1466	1987		1	1	522	174	174	true	false	false	false	false	false	true	false
+REF_HERVLb|IN	REF_HERVLb	erv	HERV-Lb	IN	1	5261	6739		1	1	1479	493	493	true	true	true	false	false	false	true	false
+REF_HERVLb|CA	REF_HERVLb	erv	HERV-Lb	CA	1	1988	2698		1	1	711	237	237	true	false	false	false	false	false	true	false
+REF_HERVP|whole_genome	REF_HERVP	erv	HERV-P	whole_genome	1	1	10437		1	1				false						false	false
+REF_HERVP|pol	REF_HERVP	erv	HERV-P	pol	1	3788	7276		1	1	3489	1163	1163	true	true	true	true	false	false	true	false
+REF_HERVP|gag	REF_HERVP	erv	HERV-P	gag	1	1466	3787		1	1	2322	774	774	true	true	true	true	false	false	true	false
+REF_HERVP|env	REF_HERVP	erv	HERV-P	env	1	7277	9541		1	1	2265	755	755	true	true	true	true	false	false	true	false
+REF_HERVP|5LTR	REF_HERVP	erv	HERV-P	5LTR	1	1	794		1	1	794			false			true			false	true
+REF_HERVP|3LTR	REF_HERVP	erv	HERV-P	3LTR	1	9648	10437		1	1	790			false			true			false	true
+REF_HERVR|whole_genome	REF_HERVR	erv	HERV-R	whole_genome	1	1	9608		1	1				false						false	false
+REF_HERVR|pro	REF_HERVR	erv	HERV-R	pro	1	3025	3540		1	1	516	172	172	true	false	false	false	false	false	true	false
+REF_HERVR|PPT	REF_HERVR	erv	HERV-R	PPT	1	9006	9016		1	1	11			false			false			false	false
+REF_HERVR|pol	REF_HERVR	erv	HERV-R	pol	1	3552	6704		1	1	3153	1051	1051	true	true	false	false	false	false	true	false
+REF_HERVR|PBS	REF_HERVR	erv	HERV-R	PBS	1	597	614		1	1	18			false			false			false	false
+REF_HERVR|p12	REF_HERVR	erv	HERV-R	p12	1	1753	2019		1	1	267	89	89	true	false	false	false	false	false	true	false
+REF_HERVR|LEA	REF_HERVR	erv	HERV-R	LEA	1	465	1338		1	1	874			false			false			false	true
+REF_HERVR|gag	REF_HERVR	erv	HERV-R	gag	1	1339	3024		1	1	1686	562	562	true	true	false	false	false	false	true	false
+REF_HERVR|env	REF_HERVR	erv	HERV-R	env	1	6795	8921		1	1	2127	709	709	true	true	false	false	false	false	true	false
+REF_HERVR|5LTR	REF_HERVR	erv	HERV-R	5LTR	1	1	593		1	1	593			false			false			false	true
+REF_HERVR|3LTR	REF_HERVR	erv	HERV-R	3LTR	1	9017	9608		1	1	592			false			false			false	true
+REF_HERVR|NC	REF_HERVR	erv	HERV-R	NC	1	2473	3024		1	1	552	184	184	true	true	false	false	false	false	true	false
+REF_HERVR|MA	REF_HERVR	erv	HERV-R	MA	1	1339	1752		1	1	414	138	138	true	false	false	false	false	false	true	false
+REF_HERVR|CA	REF_HERVR	erv	HERV-R	CA	1	2020	2472		1	1	453	151	151	true	false	false	false	false	false	true	false
+REF_HERVR|5U5	REF_HERVR	erv	HERV-R	5U5	1	560	593		1	1	34			false			false			false	false
+REF_HERVR|5U3	REF_HERVR	erv	HERV-R	5U3	1	1	489		1	1	489			false			false			false	true
+REF_HERVR|5R	REF_HERVR	erv	HERV-R	5R	1	490	559		1	1	70			false			false			false	true
+REF_HERVR|3U5	REF_HERVR	erv	HERV-R	3U5	1	9575	9608		1	1	34			false			false			false	false
+REF_HERVR|3U3	REF_HERVR	erv	HERV-R	3U3	1	9017	9504		1	1	488			false			false			false	true
+REF_HERVR|3R	REF_HERVR	erv	HERV-R	3R	1	9505	9574		1	1	70			false			false			false	true
+REF_HERVRb|whole_genome	REF_HERVRb	erv	HERV-Rb	whole_genome	1	1	8338		1	1				false						false	false
+REF_HERVRb|PPT	REF_HERVRb	erv	HERV-Rb	PPT	1	7666	7672		1	1	7			false			false			false	false
+REF_HERVRb|pol	REF_HERVRb	erv	HERV-Rb	pol	1	2535	6416		1	1	3882	1294	1294	true	true	false	false	false	false	true	false
+REF_HERVRb|PBS	REF_HERVRb	erv	HERV-Rb	PBS	1	668	685		1	1	18			false			false			false	false
+REF_HERVRb|gag	REF_HERVRb	erv	HERV-Rb	gag	1	738	2534		1	1	1797	599	599	true	true	true	false	false	false	true	false
+REF_HERVRb|env	REF_HERVRb	erv	HERV-Rb	env	1	6501	7523		1	1	1023	341	341	true	true	false	false	false	false	true	false
+REF_HERVRb|5LTR	REF_HERVRb	erv	HERV-Rb	5LTR	1	1	660		1	1	660			false			true			false	true
+REF_HERVRb|3LTR	REF_HERVRb	erv	HERV-Rb	3LTR	1	7679	8338		1	1	660			false			true			false	true
+REF_HERVS|whole_genome	REF_HERVS	erv	HERV-S	whole_genome	1	1	6935		1	1				false						false	false
+REF_HERVS|TSS	REF_HERVS	erv	HERV-S	TSS	1	335	340		1	1	6			false			false			false	false
+REF_HERVS|pro-pol	REF_HERVS	erv	HERV-S	pro-pol	1	1934	5479		1	1	3546	1182	1182	true	true	true	false	false	false	true	false
+REF_HERVS|pro	REF_HERVS	erv	HERV-S	pro	1	1934	2446		1	1	513	171	171	true	false	false	false	false	false	true	false
+REF_HERVS|PPT	REF_HERVS	erv	HERV-S	PPT	1	6483	6492		1	1	10			false			false			false	false
+REF_HERVS|pol	REF_HERVS	erv	HERV-S	pol	1	2447	5479		1	1	3033	1011	1011	true	true	true	false	false	false	true	false
+REF_HERVS|PBS	REF_HERVS	erv	HERV-S	PBS	1	444	461		1	1	18			false			false			false	false
+REF_HERVS|gag	REF_HERVS	erv	HERV-S	gag	1	503	1933		1	1	1431	477	477	true	true	true	true	false	false	true	false
+REF_HERVS|env	REF_HERVS	erv	HERV-S	env	1	5480	6484		1	1	1005	335	335	true	true	true	false	false	false	true	false
+REF_HERVS|5LTR	REF_HERVS	erv	HERV-S	5LTR	1	1	6935		1	1	6935			false			true			false	true
+REF_HERVS|3LTR	REF_HERVS	erv	HERV-S	3LTR	1	1	6935		1	1	6935			false			true			false	true
+REF_HERVS|TATA_box	REF_HERVS	erv	HERV-S	TATA_box	1	248	253		1	1	6			false			false			false	false
+REF_HERVT|whole_genome	REF_HERVT	erv	HERV-T	whole_genome	1	1	9826		1	1				false						false	false
+REF_HERVT|PPT	REF_HERVT	erv	HERV-T	PPT	1	9247	9262		1	1	16			false			false			false	false
+REF_HERVT|pol	REF_HERVT	erv	HERV-T	pol	1	3939	7802		1	1	3864	1288	1288	true	true	true	false	false	false	true	false
+REF_HERVT|gag	REF_HERVT	erv	HERV-T	gag	1	2382	3938		1	1	1557	519	519	true	true	true	false	false	false	true	false
+REF_HERVT|env	REF_HERVT	erv	HERV-T	env	1	7517	9232		1	1	1716	572	572	true	true	false	false	false	false	true	false
+REF_HERVT|5LTR	REF_HERVT	erv	HERV-T	5LTR	1	1	564		1	1	564			false			true			false	true
+REF_HERVT|3LTR	REF_HERVT	erv	HERV-T	3LTR	1	9263	9826		1	1	564			false			true			false	true
+REF_HERVU3|whole_genome	REF_HERVU3	erv	HERV-U3	whole_genome	1	1	7378		1	1				false						false	false
+REF_HERVU3|pro	REF_HERVU3	erv	HERV-U3	pro	1	3026	3550		1	1	525	175	175	true	false	false	false	false	false	true	false
+REF_HERVU3|pol	REF_HERVU3	erv	HERV-U3	pol	1	2138	5410		1	1	3273	1091	1091	true	true	true	false	false	false	true	false
+REF_HERVU3|gag	REF_HERVU3	erv	HERV-U3	gag	1	590	2137		1	1	1548	516	516	true	true	true	false	false	false	true	false
+REF_HERVU3|env	REF_HERVU3	erv	HERV-U3	env	1	5549	6841		1	1	1293	431	431	true	true	true	false	false	false	true	false
+REF_HERVU3|5LTR	REF_HERVU3	erv	HERV-U3	5LTR	1	1	511		1	1	511			false			false			false	true
+REF_HERVU3|3LTR	REF_HERVU3	erv	HERV-U3	3LTR	1	6866	7378		1	1	513			false			false			false	true
+REF_HERVW|whole_genome	REF_HERVW	erv	HERV-W	whole_genome	1	1	10123		1	1				false						false	false
+REF_HERVW|pro-pol	REF_HERVW	erv	HERV-W	pro-pol	1	4139	7636		1	1	3498	1166	1166	true	true	false	false	false	false	true	false
+REF_HERVW|pro	REF_HERVW	erv	HERV-W	pro	1	4139	4603		1	1	465	155	155	true	false	false	false	false	false	true	false
+REF_HERVW|pol	REF_HERVW	erv	HERV-W	pol	1	4604	7636		1	1	3033	1011	1011	true	true	false	false	false	false	true	false
+REF_HERVW|LEA	REF_HERVW	erv	HERV-W	LEA	1	255	2719		1	1	2465			false			true			false	true
+REF_HERVW|gag	REF_HERVW	erv	HERV-W	gag	1	2720	4138		1	1	1419	473	473	true	true	true	false	false	false	true	false
+REF_HERVW|env	REF_HERVW	erv	HERV-W	env	1	7664	9295		1	1	1632	544	544	true	true	true	true	false	false	true	false
+REF_HERVW|5LTR	REF_HERVW	erv	HERV-W	5LTR	1	1	771		1	1	771			false			false			false	true
+REF_HERVW|3LTR	REF_HERVW	erv	HERV-W	3LTR	1	9353	10123		1	1	771			false			false			false	true
+REF_HERVW|NC	REF_HERVW	erv	HERV-W	NC	1	3542	4138		1	1	597	199	199	true	true	true	false	false	false	true	false
+REF_HERVW|MA	REF_HERVW	erv	HERV-W	MA	1	2720	3115		1	1	396	132	132	true	false	false	false	false	false	true	false
+REF_HERVW|CA	REF_HERVW	erv	HERV-W	CA	1	3116	3541		1	1	426	142	142	true	false	false	false	false	false	true	false
+REF_HERVW|5U5	REF_HERVW	erv	HERV-W	5U5	1	326	771		1	1	446			false			false			false	true
+REF_HERVW|5U3	REF_HERVW	erv	HERV-W	5U3	1	1	254		1	1	254			false			false			false	true
+REF_HERVW|5R	REF_HERVW	erv	HERV-W	5R	1	255	325		1	1	71			false			false			false	true
+REF_HERVW|3U5	REF_HERVW	erv	HERV-W	3U5	1	9677	10123		1	1	447			false			false			false	true
+REF_HERVW|3U3	REF_HERVW	erv	HERV-W	3U3	1	9353	9607		1	1	255			false			false			false	true
+REF_HERVW|3R	REF_HERVW	erv	HERV-W	3R	1	9608	9676		1	1	69			false			false			false	true
+REF_HERVXA|whole_genome	REF_HERVXA	erv	HERV-XA	whole_genome	1	1	8821		1	1				false						false	false
+REF_HERVXA|TSS	REF_HERVXA	erv	HERV-XA	TSS	1	437	442		1	1	6			false			false			false	false
+REF_HERVXA|pro	REF_HERVXA	erv	HERV-XA	pro	1	2542	2871		1	1	330	110	110	true	false	false	false	false	false	true	false
+REF_HERVXA|PPT	REF_HERVXA	erv	HERV-XA	PPT	1	8306	8310		1	1	5			false			false			false	false
+REF_HERVXA|pol	REF_HERVXA	erv	HERV-XA	pol	1	2542	6180		1	1	3639	1213	1213	true	true	true	false	false	false	true	false
+REF_HERVXA|PBS	REF_HERVXA	erv	HERV-XA	PBS	1	515	532		1	1	18			false			false			false	false
+REF_HERVXA|glygag	REF_HERVXA	erv	HERV-XA	glygag	1	805	2286		1	1	1482	494	494	true	true	true	false	false	false	true	false
+REF_HERVXA|gag	REF_HERVXA	erv	HERV-XA	gag	1	979	2541		1	1	1563	521	521	true	true	true	false	false	false	true	false
+REF_HERVXA|env	REF_HERVXA	erv	HERV-XA	env	1	6181	8310		1	1	2130	710	710	true	true	true	false	false	false	true	false
+REF_HERVXA|5LTR	REF_HERVXA	erv	HERV-XA	5LTR	1	1	511		1	1	511			false			true			false	true
+REF_HERVXA|3LTR	REF_HERVXA	erv	HERV-XA	3LTR	1	8311	8821		1	1	511			false			true			false	true
+REF_HERVXA|TATA_box	REF_HERVXA	erv	HERV-XA	TATA_box	1	362	367		1	1	6			false			false			false	false
+REF_HERVXA|RT	REF_HERVXA	erv	HERV-XA	RT	1	2872	4416		1	1	1545	515	515	true	true	true	false	false	false	true	false
+REF_HERVXA|RNaseH	REF_HERVXA	erv	HERV-XA	RNaseH	1	4417	4902		1	1	486	162	162	true	false	false	false	false	false	true	false
+REF_HERVXA|NC	REF_HERVXA	erv	HERV-XA	NC	1	2287	2541		1	1	255	85	85	true	true	false	false	false	false	true	false
+REF_HERVXA|MA	REF_HERVXA	erv	HERV-XA	MA	1	979	1581		1	1	603	201	201	true	true	true	false	false	false	true	false
+REF_HERVXA|IN	REF_HERVXA	erv	HERV-XA	IN	1	4903	6180		1	1	1278	426	426	true	true	true	false	false	false	true	false
+REF_HERVXA|CA	REF_HERVXA	erv	HERV-XA	CA	1	1582	2286		1	1	705	235	235	true	true	true	false	false	false	true	false
+REF_IAPE|whole_genome	REF_IAPE	erv	IAPE	whole_genome	1	1	8320		1	1				false						false	false
+REF_IAPE|pro	REF_IAPE	erv	IAPE	pro	1	2461	3276		1	1	816	272	272	true	true	false	false	false	false	true	false
+REF_IAPE|pol	REF_IAPE	erv	IAPE	pol	1	3249	5888		1	1	2640	880	880	true	true	false	false	false	false	true	false
+REF_IAPE|gag	REF_IAPE	erv	IAPE	gag	1	683	2461		1	1	1779	593	593	true	true	false	false	false	false	true	false
+REF_IAPE|env	REF_IAPE	erv	IAPE	env	1	5974	7581		1	1	1608	536	536	true	true	false	false	false	false	true	false
+REF_IAPE|5LTR	REF_IAPE	erv	IAPE	5LTR	1	1	326		1	1	326			false			false			false	true
+REF_IAPE|3LTR	REF_IAPE	erv	IAPE	3LTR	1	7995	8320		1	1	326			false			false			false	true
+REF_KwERV|whole_genome	REF_KwERV	erv	KwERV	whole_genome	1	1	8273		1	1				false						false	false
+REF_KwERV|pol	REF_KwERV	erv	KwERV	pol	1	2433	5936		1	1	3504	1168	1168	true	true	true	false	false	false	true	false
+REF_KwERV|gag	REF_KwERV	erv	KwERV	gag	1	849	2432		1	1	1584	528	528	true	true	false	false	false	false	true	false
+REF_KwERV|env	REF_KwERV	erv	KwERV	env	1	5651	7795		1	1	2145	715	715	true	true	false	false	false	false	true	false
+REF_KwERV|5LTR	REF_KwERV	erv	KwERV	5LTR	1	1	435		1	1	435			false			false			false	true
+REF_KwERV|3LTR	REF_KwERV	erv	KwERV	3LTR	1	7839	8273		1	1	435			false			false			false	true
+REF_MELVmpf|whole_genome	REF_MELVmpf	erv	MELVmpf	whole_genome	1	1	9113		1	1				false						false	false
+REF_MELVmpf|vif	REF_MELVmpf	erv	MELVmpf	vif	1	5401	5850		1	1	450	150	150	true	true	false	false	false	false	true	false
+REF_MELVmpf|pro-pol	REF_MELVmpf	erv	MELVmpf	pro-pol	1	1944	5261		1	1	3318	1106	1106	true	true	false	false	false	false	true	false
+REF_MELVmpf|pro	REF_MELVmpf	erv	MELVmpf	pro	1	1944	2468		1	1	525	175	175	true	false	false	false	false	false	true	false
+REF_MELVmpf|pol	REF_MELVmpf	erv	MELVmpf	pol	1	2469	5261		1	1	2793	931	931	true	true	false	false	false	false	true	false
+REF_MELVmpf|PBS	REF_MELVmpf	erv	MELVmpf	PBS	1	587	606		1	1	20			false			false			false	false
+REF_MELVmpf|gag-pol	REF_MELVmpf	erv	MELVmpf	gag-pol	1	724	2070		1	1	4539	1513	1513	true	true	false	false	false	false	true	false
+REF_MELVmpf|gag-pol	REF_MELVmpf	erv	MELVmpf	gag-pol	2	2071	2075	lentiGagPolTranslationModifier	2	1	4539	1513	1513	true	true	false	false	false	false	true	false
+REF_MELVmpf|gag-pol	REF_MELVmpf	erv	MELVmpf	gag-pol	3	2076	5261		3	1	4539	1513	1513	true	true	false	false	false	false	true	false
+REF_MELVmpf|gag	REF_MELVmpf	erv	MELVmpf	gag	1	724	2097		1	1	1374	458	458	true	true	false	false	false	false	true	false
+REF_MELVmpf|env	REF_MELVmpf	erv	MELVmpf	env	1	6083	8665		1	1	2583	861	861	true	true	true	false	false	false	true	false
+REF_MELVmpf|5LTR	REF_MELVmpf	erv	MELVmpf	5LTR	1	1	584		1	1	584			false			false			false	true
+REF_MELVmpf|3LTR	REF_MELVmpf	erv	MELVmpf	3LTR	1	8873	9113		1	1	241			false			false			false	true
+REF_MELVmpf|TATA_box	REF_MELVmpf	erv	MELVmpf	TATA_box	1	239	245		1	1	7			false			false			false	false
+REF_MELVmpf|TAR	REF_MELVmpf	erv	MELVmpf	TAR	1	281	442		1	1	162			false			false			false	true
+REF_MELVmpf|SP	REF_MELVmpf	erv	MELVmpf	SP	1	6083	6310		1	1	228	76	76	true	false	false	false	false	false	true	false
+REF_MELVmpf|RRE	REF_MELVmpf	erv	MELVmpf	RRE	1	8041	8281		1	1	241			false			false			false	true
+REF_MELVmpf|FS	REF_MELVmpf	erv	MELVmpf	FS	1	2065	2169		1	1	105			false			false			false	true
+REF_MELVmpf|FS-stemloop	REF_MELVmpf	erv	MELVmpf	FS-stemloop	1	2084	2169		1	1	86			false			false			false	true
+REF_MELVmpf|FS-slippery-seq	REF_MELVmpf	erv	MELVmpf	FS-slippery-seq	1	2065	2071		1	1	7			false			false			false	false
+REF_MER34|whole_genome	REF_MER34	erv	MER-34	whole_genome	1	1	8936		1	1				false						false	false
+REF_MER34|pol	REF_MER34	erv	MER-34	pol	1	3370	6642		1	1	3273	1091	1091	true	true	true	true	false	false	true	false
+REF_MER34|gag	REF_MER34	erv	MER-34	gag	1	1560	3218		1	1	1659	553	553	true	true	true	true	false	false	true	false
+REF_MER34|env	REF_MER34	erv	MER-34	env	1	6643	8328		1	1	1686	562	562	true	true	true	true	false	false	true	false
+REF_MER34|5LTR	REF_MER34	erv	MER-34	5LTR	1	1	609		1	1	609			false			false			false	true
+REF_MER34|3LTR	REF_MER34	erv	MER-34	3LTR	1	8328	8936		1	1	609			false			false			false	true
+REF_MER66|whole_genome	REF_MER66	erv	MER-66	whole_genome	1	1	10372		1	1				false						false	false
+REF_MER66|pro	REF_MER66	erv	MER-66	pro	1	3724	4314		1	1	591	197	197	true	true	true	false	false	false	true	false
+REF_MER66|pol	REF_MER66	erv	MER-66	pol	1	4315	7275		1	1	2961	987	987	true	true	true	false	false	false	true	false
+REF_MER66|gag	REF_MER66	erv	MER-66	gag	1	1102	3723		1	1	2622	874	874	true	true	true	false	false	false	true	false
+REF_MER66|env	REF_MER66	erv	MER-66	env	1	7450	9882		1	1	2433	811	811	true	true	true	false	false	false	true	false
+REF_MER66|5LTR	REF_MER66	erv	MER-66	5LTR	1	1	242		1	1	242			false			false			false	true
+REF_MER66|3LTR	REF_MER66	erv	MER-66	3LTR	1	10154	10360		1	1	207			false			false			false	true
+REF_MinERVa|whole_genome	REF_MinERVa	erv	MinERVa	whole_genome	1	1	2910		1	1				false						false	false
+REF_MinERVa|gag	REF_MinERVa	erv	MinERVa	gag	1	802	2091		1	1	1290	430	430	true	true	true	false	false	false	true	false
+REF_MinERVa|5LTR	REF_MinERVa	erv	MinERVa	5LTR	1	1	599		1	1	599			false			false			false	true
+REF_MuERVL|whole_genome	REF_MuERVL	erv	MuERV-L	whole_genome	1	1	6471		1	1				false						false	false
+REF_MuERVL|pro-pol	REF_MuERVL	erv	MuERV-L	pro-pol	1	2218	5799		1	1	3582	1194	1194	true	true	true	false	false	false	true	false
+REF_MuERVL|pro	REF_MuERVL	erv	MuERV-L	pro	1	2218	2637		1	1	420	140	140	true	true	true	false	false	false	true	false
+REF_MuERVL|pol	REF_MuERVL	erv	MuERV-L	pol	1	2638	5799		1	1	3162	1054	1054	true	false	false	false	false	false	true	false
+REF_MuERVL|gag	REF_MuERVL	erv	MuERV-L	gag	1	538	2286		1	1	1749	583	583	true	true	true	false	false	false	true	false
+REF_MuERVL|DU	REF_MuERVL	erv	MuERV-L	DU	1	5215	5799		1	1	585	195	195	true	false	false	false	false	false	true	false
+REF_MuERVL|5LTR	REF_MuERVL	erv	MuERV-L	5LTR	1	1	495		1	1	495			false			false			false	true
+REF_MuERVL|3LTR	REF_MuERVL	erv	MuERV-L	3LTR	1	5977	6471		1	1	495			false			false			false	true
+REF_MuERVL|RT	REF_MuERVL	erv	MuERV-L	RT	1	2638	3618		1	1	981	327	327	true	false	false	false	false	false	true	false
+REF_MuERVL|RNaseH	REF_MuERVL	erv	MuERV-L	RNaseH	1	3619	4734		1	1	1116	372	372	true	false	false	false	false	false	true	false
+REF_MuERVL|IN	REF_MuERVL	erv	MuERV-L	IN	1	4735	5214		1	1	480	160	160	true	false	false	false	false	false	true	false
+REF_mysTR|whole_genome	REF_mysTR	erv	mysTR	whole_genome	1	1	7806		1	1				false						false	false
+REF_mysTR|pro	REF_mysTR	erv	mysTR	pro	1	2024	2428		1	1	405	135	135	true	true	false	false	false	false	true	false
+REF_mysTR|pol	REF_mysTR	erv	mysTR	pol	1	2429	5095		1	1	2667	889	889	true	true	false	false	false	false	true	false
+REF_mysTR|gag	REF_mysTR	erv	mysTR	gag	1	648	2021		1	1	1374	458	458	true	true	true	false	false	false	true	false
+REF_mysTR|env	REF_mysTR	erv	mysTR	env	1	5372	7519		1	1	2148	716	716	true	true	true	false	false	false	true	false
+REF_mysTR|5LTR	REF_mysTR	erv	mysTR	5LTR	1	1	283		1	1	283			false			false			false	true
+REF_mysTR|3LTR	REF_mysTR	erv	mysTR	3LTR	1	7520	7806		1	1	287			false			false			false	true
+REF_PERVC|whole_genome	REF_PERVC	erv	PERV-C	whole_genome	1	1	8769		1	1				false						false	false
+REF_PERVC|pol	REF_PERVC	erv	PERV-C	pol	1	2803	6240		1	1	3438	1146	1146	true	true	false	false	false	false	true	false
+REF_PERVC|gag	REF_PERVC	erv	PERV-C	gag	1	1081	2655		1	1	1575	525	525	true	true	false	false	false	false	true	false
+REF_PERVC|env	REF_PERVC	erv	PERV-C	env	1	6116	8080		1	1	1965	655	655	true	true	false	false	false	false	true	false
+REF_PERVC|5LTR	REF_PERVC	erv	PERV-C	5LTR	1	8	559		1	1	552			false			false			false	true
+REF_PERVC|3LTR	REF_PERVC	erv	PERV-C	3LTR	1	8145	8769		1	1	625			false			false			false	true
+REF_PERVE|whole_genome	REF_PERVE	erv	PERV-E	whole_genome	1	1	8057		1	1				false						false	false
+REF_PERVE|pro-pol	REF_PERVE	erv	PERV-E	pro-pol	1	2652	6245		1	1	3594	1198	1198	true	true	true	false	false	false	true	false
+REF_PERVE|pro	REF_PERVE	erv	PERV-E	pro	1	2652	3080		1	1	429	143	143	true	false	false	false	false	false	true	false
+REF_PERVE|pol	REF_PERVE	erv	PERV-E	pol	1	3081	6245		1	1	3165	1055	1055	true	true	true	false	false	false	true	false
+REF_PERVE|p12	REF_PERVE	erv	PERV-E	p12	1	1452	1709		1	1	258	86	86	true	false	false	false	false	false	true	false
+REF_PERVE|gag	REF_PERVE	erv	PERV-E	gag	1	1059	2651		1	1	1593	531	531	true	true	true	false	false	false	true	false
+REF_PERVE|env	REF_PERVE	erv	PERV-E	env	1	6246	7589		1	1	1344	448	448	true	true	true	false	false	false	true	false
+REF_PERVE|5LTR	REF_PERVE	erv	PERV-E	5LTR	1	1	434		1	1	434			false			false			false	true
+REF_PERVE|3LTR	REF_PERVE	erv	PERV-E	3LTR	1	7627	8057		1	1	431			false			false			false	true
+REF_PERVE|NC	REF_PERVE	erv	PERV-E	NC	1	2148	2651		1	1	504	168	168	true	true	false	false	false	false	true	false
+REF_PERVE|MA	REF_PERVE	erv	PERV-E	MA	1	1059	1451		1	1	393	131	131	true	true	true	false	false	false	true	false
+REF_PERVE|CA	REF_PERVE	erv	PERV-E	CA	1	1710	2147		1	1	438	146	146	true	true	true	false	false	false	true	false
+REF_PRIMA41|whole_genome	REF_PRIMA41	erv	PRIMA-41	whole_genome	1	1	8838		1	1				false						false	false
+REF_PRIMA41|pro	REF_PRIMA41	erv	PRIMA-41	pro	1	3216	3653		1	1	438	146	146	true	true	true	false	false	false	true	false
+REF_PRIMA41|pol	REF_PRIMA41	erv	PRIMA-41	pol	1	3654	5951		1	1	2298	766	766	true	true	true	false	false	false	true	false
+REF_PRIMA41|gag	REF_PRIMA41	erv	PRIMA-41	gag	1	876	3215		1	1	2340	780	780	true	true	true	true	false	false	true	false
+REF_PRIMA41|env	REF_PRIMA41	erv	PRIMA-41	env	1	5952	8834		1	1	2883	961	961	true	true	true	true	false	false	true	false
+REF_PRIMA41|5LTR	REF_PRIMA41	erv	PRIMA-41	5LTR	1	1	554		1	1	554			false			true			false	true
+REF_PRIMA41|3LTR	REF_PRIMA41	erv	PRIMA-41	3LTR	1	8385	8838		1	1	454			false			true			false	true
+REF_PSIV2|whole_genome	REF_PSIV2	erv	PSIV2	whole_genome	1	1	8102		1	1				false						false	false
+REF_PSIV2|vif	REF_PSIV2	erv	PSIV2	vif	1	4970	5569		1	1	600	200	200	true	true	false	false	false	false	true	false
+REF_PSIV2|pro-pol	REF_PSIV2	erv	PSIV2	pro-pol	1	1795	4977		1	1	3183	1061	1061	true	true	true	false	false	false	true	false
+REF_PSIV2|pro	REF_PSIV2	erv	PSIV2	pro	1	1795	2091		1	1	297	99	99	true	false	false	false	false	false	true	false
+REF_PSIV2|PPT	REF_PSIV2	erv	PSIV2	PPT	1	7659	7675		1	1	17			false			false			false	false
+REF_PSIV2|pol	REF_PSIV2	erv	PSIV2	pol	1	2092	4977		1	1	2886	962	962	true	true	true	false	false	false	true	false
+REF_PSIV2|PBS	REF_PSIV2	erv	PSIV2	PBS	1	407	424		1	1	18			false			false			false	false
+REF_PSIV2|orfx	REF_PSIV2	erv	PSIV2	orfx	1	7606	7950		1	1	345	115	115	true	false	false	false	false	false	true	false
+REF_PSIV2|gag-pol	REF_PSIV2	erv	PSIV2	gag-pol	1	473	1672		1	1	4506	1502	1502	true	true	true	false	false	false	true	false
+REF_PSIV2|gag-pol	REF_PSIV2	erv	PSIV2	gag-pol	2	1673	1677	lentiGagPolTranslationModifier	2	1	4506	1502	1502	true	true	true	false	false	false	true	false
+REF_PSIV2|gag-pol	REF_PSIV2	erv	PSIV2	gag-pol	3	1678	4977		3	1	4506	1502	1502	true	true	true	false	false	false	true	false
+REF_PSIV2|gag	REF_PSIV2	erv	PSIV2	gag	1	473	1795		1	1	1323	441	441	true	true	false	false	false	false	true	false
+REF_PSIV2|env	REF_PSIV2	erv	PSIV2	env	1	5727	7646		1	1	1920	640	640	true	true	false	false	false	false	true	false
+REF_PSIV2|DU	REF_PSIV2	erv	PSIV2	DU	1	3757	4149		1	1	393	131	131	true	true	true	false	false	false	true	false
+REF_PSIV2|5LTR	REF_PSIV2	erv	PSIV2	5LTR	1	1	404		1	1	404			false			false			false	true
+REF_PSIV2|3LTR	REF_PSIV2	erv	PSIV2	3LTR	1	7681	8102		1	1	422			false			false			false	true
+REF_PSIV2|TM	REF_PSIV2	erv	PSIV2	TM	1	7014	7646		1	1	633	211	211	true	true	false	false	false	false	true	false
+REF_PSIV2|SU	REF_PSIV2	erv	PSIV2	SU	1	5727	7013		1	1	1287	429	429	true	false	false	false	false	false	true	false
+REF_PSIV2|RT	REF_PSIV2	erv	PSIV2	RT	1	2092	3402		1	1	1311	437	437	true	true	true	false	false	false	true	false
+REF_PSIV2|RNaseH	REF_PSIV2	erv	PSIV2	RNaseH	1	3403	3756		1	1	354	118	118	true	false	false	false	false	false	true	false
+REF_PSIV2|NC	REF_PSIV2	erv	PSIV2	NC	1	1505	1795		1	1	291	97	97	true	true	false	false	false	false	true	false
+REF_PSIV2|MA	REF_PSIV2	erv	PSIV2	MA	1	473	844		1	1	372	124	124	true	false	false	false	false	false	true	false
+REF_PSIV2|IN	REF_PSIV2	erv	PSIV2	IN	1	4150	4977		1	1	828	276	276	true	true	false	false	false	false	true	false
+REF_PSIV2|FS	REF_PSIV2	erv	PSIV2	FS	1	1669	1772		1	1	104			false			false			false	true
+REF_PSIV2|CA	REF_PSIV2	erv	PSIV2	CA	1	845	1504		1	1	660	220	220	true	false	false	false	false	false	true	false
+REF_PSIV2|FS-stemloop	REF_PSIV2	erv	PSIV2	FS-stemloop	1	1681	1772		1	1	92			false			false			false	true
+REF_PSIV2|FS-slippery-seq	REF_PSIV2	erv	PSIV2	FS-slippery-seq	1	1669	1675		1	1	7			false			false			false	false
+REF_pSIVgml|whole_genome	REF_pSIVgml	erv	pSIVgml	whole_genome	1	1	7380		1	1				false						false	false
+REF_pSIVgml|vif	REF_pSIVgml	erv	pSIVgml	vif	1	4720	5016		1	1	297	99	99	true	true	false	false	false	false	true	false
+REF_pSIVgml|tat	REF_pSIVgml	erv	pSIVgml	tat	1	4947	5165		1	1	219	73	73	true	true	false	false	false	false	true	false
+REF_pSIVgml|pro-pol	REF_pSIVgml	erv	pSIVgml	pro-pol	1	1454	4711		1	1	3258	1086	1086	true	true	true	false	false	false	true	false
+REF_pSIVgml|pro	REF_pSIVgml	erv	pSIVgml	pro	1	1454	1843		1	1	390	130	130	true	false	false	false	false	false	true	false
+REF_pSIVgml|pol	REF_pSIVgml	erv	pSIVgml	pol	1	1844	4711		1	1	2868	956	956	true	true	true	false	false	false	true	false
+REF_pSIVgml|PBS	REF_pSIVgml	erv	pSIVgml	PBS	1	427	444		1	1	18			false			false			false	false
+REF_pSIVgml|orfx	REF_pSIVgml	erv	pSIVgml	orfx	1	7000	7272		1	1	273	91	91	true	true	true	false	false	false	true	false
+REF_pSIVgml|gag-pol	REF_pSIVgml	erv	pSIVgml	gag-pol	1	492	1454		1	1	4221	1407	1407	true	true	true	true	false	false	true	false
+REF_pSIVgml|gag-pol	REF_pSIVgml	erv	pSIVgml	gag-pol	2	1455	1459	lentiGagPolTranslationModifier	2	1	4221	1407	1407	true	true	true	true	false	false	true	false
+REF_pSIVgml|gag-pol	REF_pSIVgml	erv	pSIVgml	gag-pol	3	1460	4711		3	1	4221	1407	1407	true	true	true	true	false	false	true	false
+REF_pSIVgml|gag	REF_pSIVgml	erv	pSIVgml	gag	1	492	1544		1	1	1053	351	351	true	true	true	true	false	false	true	false
+REF_pSIVgml|env	REF_pSIVgml	erv	pSIVgml	env	1	5279	6976		1	1	1698	566	566	true	false	false	true	false	false	true	false
+REF_pSIVgml|DU	REF_pSIVgml	erv	pSIVgml	DU	1	3512	3904		1	1	393	131	131	true	true	true	false	false	false	true	false
+REF_pSIVgml|5LTR	REF_pSIVgml	erv	pSIVgml	5LTR	1	1	424		1	1	424			false			false			false	true
+REF_pSIVgml|3LTR	REF_pSIVgml	erv	pSIVgml	3LTR	1	6999	7380		1	1	382			false			false			false	true
+REF_pSIVgml|TATA_box	REF_pSIVgml	erv	pSIVgml	TATA_box	1	251	257		1	1	7			false			false			false	false
+REF_pSIVgml|TAR	REF_pSIVgml	erv	pSIVgml	TAR	1	280	396		1	1	117			false			false			false	true
+REF_pSIVgml|RT	REF_pSIVgml	erv	pSIVgml	RT	1	1844	3157		1	1	1314	438	438	true	true	true	false	false	false	true	false
+REF_pSIVgml|RNaseH	REF_pSIVgml	erv	pSIVgml	RNaseH	1	3158	3511		1	1	354	118	118	true	false	false	false	false	false	true	false
+REF_pSIVgml|NC	REF_pSIVgml	erv	pSIVgml	NC	1	1452	1544		1	1	93	31	31	true	false	false	false	false	false	true	false
+REF_pSIVgml|MA	REF_pSIVgml	erv	pSIVgml	MA	1	492	869		1	1	378	126	126	true	false	false	true	false	false	true	false
+REF_pSIVgml|IN	REF_pSIVgml	erv	pSIVgml	IN	1	3905	4711		1	1	807	269	269	true	true	false	false	false	false	true	false
+REF_pSIVgml|CA	REF_pSIVgml	erv	pSIVgml	CA	1	870	1451		1	1	582	194	194	true	true	true	false	false	false	true	false
+REF_PyERV|whole_genome	REF_PyERV	erv	PyERV	whole_genome	1	1	7050		1	1				false						false	false
+REF_PyERV|pro	REF_PyERV	erv	PyERV	pro	1	1700	2380		1	1	681	227	227	true	false	false	false	false	false	true	false
+REF_PyERV|pol	REF_PyERV	erv	PyERV	pol	1	2383	5088		1	1	2706	902	902	true	true	false	false	false	false	true	false
+REF_PyERV|PBS	REF_PyERV	erv	PyERV	PBS	1	59	76		1	1	18			false			false			false	false
+REF_PyERV|gag	REF_PyERV	erv	PyERV	gag	1	177	1700		1	1	1524	508	508	true	false	false	false	false	false	true	false
+REF_RD114|whole_genome	REF_RD114	erv	RD114	whole_genome	1	1	8406		1	1				false						false	false
+REF_RD114|pol	REF_RD114	erv	RD114	pol	1	3123	6167		1	1	3045	1015	1015	true	false	false	false	false	false	true	false
+REF_RD114|gag	REF_RD114	erv	RD114	gag	1	948	2600		1	1	1653	551	551	true	false	false	false	false	false	true	false
+REF_RD114|env	REF_RD114	erv	RD114	env	1	6271	7899		1	1	1629	543	543	true	false	false	false	false	false	true	false
+REF_RD114|5LTR	REF_RD114	erv	RD114	5LTR	1	1	482		1	1	482			false			false			false	true
+REF_RD114|3LTR	REF_RD114	erv	RD114	3LTR	1	7925	8406		1	1	482			false			false			false	true
+REF_RELIK|whole_genome	REF_RELIK	erv	RELIK	whole_genome	1	1	8867		1	1				false						false	false
+REF_RELIK|vif	REF_RELIK	erv	RELIK	vif	1	5215	5469		1	1	255	85	85	true	true	true	true	false	false	true	false
+REF_RELIK|tat	REF_RELIK	erv	RELIK	tat	1	5597	5821		1	1	225	75	75	true	true	true	false	false	false	true	false
+REF_RELIK|rev	REF_RELIK	erv	RELIK	rev	1	8143	8376		1	1	234	78	78	true	true	true	false	false	false	true	false
+REF_RELIK|pro-pol	REF_RELIK	erv	RELIK	pro-pol	1	1880	5212		1	1	3333	1111	1111	true	true	false	false	false	false	true	false
+REF_RELIK|pro	REF_RELIK	erv	RELIK	pro	1	1880	2335		1	1	456	152	152	true	false	false	false	false	false	true	false
+REF_RELIK|PPT	REF_RELIK	erv	RELIK	PPT	1	8350	8371		1	1	22			false			false			false	false
+REF_RELIK|pol	REF_RELIK	erv	RELIK	pol	1	2336	5212		1	1	2877	959	959	true	true	false	false	false	false	true	false
+REF_RELIK|PBS	REF_RELIK	erv	RELIK	PBS	1	499	518		1	1	20			false			false			false	false
+REF_RELIK|gag-pol	REF_RELIK	erv	RELIK	gag-pol	1	597	1880		1	1	4617	1539	1539	true	true	false	false	false	false	true	false
+REF_RELIK|gag-pol	REF_RELIK	erv	RELIK	gag-pol	2	1881	1885	lentiGagPolTranslationModifier	2	1	4617	1539	1539	true	true	false	false	false	false	true	false
+REF_RELIK|gag-pol	REF_RELIK	erv	RELIK	gag-pol	3	1886	5212		3	1	4617	1539	1539	true	true	false	false	false	false	true	false
+REF_RELIK|gag	REF_RELIK	erv	RELIK	gag	1	597	2030		1	1	1434	478	478	true	true	false	false	false	false	true	false
+REF_RELIK|env	REF_RELIK	erv	RELIK	env	1	5732	8341		1	1	2610	870	870	true	true	true	false	false	false	true	false
+REF_RELIK|DU	REF_RELIK	erv	RELIK	DU	1	4019	4387		1	1	369	123	123	true	false	false	false	false	false	true	false
+REF_RELIK|5LTR	REF_RELIK	erv	RELIK	5LTR	1	1	496		1	1	496			false			false			false	true
+REF_RELIK|3LTR	REF_RELIK	erv	RELIK	3LTR	1	8371	8867		1	1	497			false			false			false	true
+REF_RELIK|TM	REF_RELIK	erv	RELIK	TM	1	7538	8341		1	1	804	268	268	true	false	false	false	false	false	true	false
+REF_RELIK|TATA_box	REF_RELIK	erv	RELIK	TATA_box	1	247	254		1	1	8			false			false			false	false
+REF_RELIK|TAR	REF_RELIK	erv	RELIK	TAR	1	278	385		1	1	108			false			false			false	true
+REF_RELIK|SU	REF_RELIK	erv	RELIK	SU	1	5732	7537		1	1	1806	602	602	true	true	true	false	false	false	true	false
+REF_RELIK|SP	REF_RELIK	erv	RELIK	SP	1	5732	5941		1	1	210	70	70	true	true	true	false	false	false	true	false
+REF_RELIK|RT	REF_RELIK	erv	RELIK	RT	1	2336	3631		1	1	1296	432	432	true	false	false	false	false	false	true	false
+REF_RELIK|RRE	REF_RELIK	erv	RELIK	RRE	1	7459	7750		1	1	292			false			false			false	true
+REF_RELIK|RNaseH	REF_RELIK	erv	RELIK	RNaseH	1	3632	4018		1	1	387	129	129	true	false	false	false	false	false	true	false
+REF_RELIK|NC	REF_RELIK	erv	RELIK	NC	1	1749	2030		1	1	282	94	94	true	true	false	false	false	false	true	false
+REF_RELIK|MA	REF_RELIK	erv	RELIK	MA	1	597	1025		1	1	429	143	143	true	false	false	false	false	false	true	false
+REF_RELIK|IN	REF_RELIK	erv	RELIK	IN	1	4388	5212		1	1	825	275	275	true	true	false	false	false	false	true	false
+REF_RELIK|FS	REF_RELIK	erv	RELIK	FS	1	1880	1912		1	1	33			false			false			false	false
+REF_RELIK|CA	REF_RELIK	erv	RELIK	CA	1	1026	1748		1	1	723	241	241	true	false	false	false	false	false	true	false
+REF_RELIK|FS-stemloop	REF_RELIK	erv	RELIK	FS-stemloop	1	1887	1912		1	1	26			false			false			false	false
+REF_RELIK|FS-slippery-seq	REF_RELIK	erv	RELIK	FS-slippery-seq	1	1880	1886		1	1	7			false			false			false	false
+REF_RERVH|whole_genome	REF_RERVH	erv	RERV-H	whole_genome	1	1	6440		1	1				false						false	false
+REF_RERVH|pro	REF_RERVH	erv	RERV-H	pro	1	2298	3374		1	1	1077	359	359	true	true	true	false	false	false	true	false
+REF_RERVH|pol	REF_RERVH	erv	RERV-H	pol	1	3251	5842		1	1	2592	864	864	true	true	false	false	false	false	true	false
+REF_RERVH|gag	REF_RERVH	erv	RERV-H	gag	1	673	2541		1	1	1869	623	623	true	true	false	false	false	false	true	false
+REF_RERVH|5LTR	REF_RERVH	erv	RERV-H	5LTR	1	1	434		1	1	434			false			false			false	true
+REF_RERVH|3LTR	REF_RERVH	erv	RERV-H	3LTR	1	6006	6439		1	1	434			false			false			false	true
+REF_SloEFV|whole_genome	REF_SloEFV	erv	SloEFV	whole_genome	1	1	11498		1	1				false						false	false
+REF_SloEFV|pol	REF_SloEFV	erv	SloEFV	pol	1	2929	6186		1	1	3258	1086	1086	true	true	true	false	false	false	true	false
+REF_SloEFV|LEA	REF_SloEFV	erv	SloEFV	LEA	1	1159	1289		1	1	131			false			false			false	true
+REF_SloEFV|gag	REF_SloEFV	erv	SloEFV	gag	1	1290	2879		1	1	1590	530	530	true	true	true	false	false	false	true	false
+REF_SloEFV|env	REF_SloEFV	erv	SloEFV	env	1	6278	9214		1	1	2937	979	979	true	true	true	false	false	false	true	false
+REF_SloEFV|5LTR	REF_SloEFV	erv	SloEFV	5LTR	1	1	1158		1	1	1158			false			false			false	true
+REF_SloEFV|3LTR	REF_SloEFV	erv	SloEFV	3LTR	1	10378	11498		1	1	1121			false			false			false	true
+REF_SpELV|whole_genome	REF_SpELV	erv	SpELV	whole_genome	1	1	4110		1	1				false						false	false
+REF_SpELV|pro-pol	REF_SpELV	erv	SpELV	pro-pol	1	2092	4110		1	1	2019	673	673	true	true	true	false	false	false	true	false
+REF_SpELV|pro	REF_SpELV	erv	SpELV	pro	1	2092	2424		1	1	333	111	111	true	true	true	false	false	false	true	false
+REF_SpELV|pol	REF_SpELV	erv	SpELV	pol	1	2425	4110		1	1	1686	562	562	true	true	true	false	false	false	true	false
+REF_SpELV|PBS	REF_SpELV	erv	SpELV	PBS	1	506	523		1	1	18			false			false			false	false
+REF_SpELV|gag-pol	REF_SpELV	erv	SpELV	gag-pol	1	713	2098		1	1	3399	1133	1133	true	true	true	false	false	false	true	false
+REF_SpELV|gag-pol	REF_SpELV	erv	SpELV	gag-pol	2	2099	2103	lentiGagPolTranslationModifier	2	1	3399	1133	1133	true	true	true	false	false	false	true	false
+REF_SpELV|gag-pol	REF_SpELV	erv	SpELV	gag-pol	3	2104	4110		3	1	3399	1133	1133	true	true	true	false	false	false	true	false
+REF_SpELV|gag	REF_SpELV	erv	SpELV	gag	1	713	2098		1	1	1386	462	462	true	true	false	false	false	false	true	false
+REF_SpELV|DU	REF_SpELV	erv	SpELV	DU	1	4069	4110		1	1	42	14	14	true	false	false	false	false	false	true	false
+REF_SpELV|5LTR	REF_SpELV	erv	SpELV	5LTR	1	1	481		1	1	481			false			false			false	true
+REF_SpELV|TAR	REF_SpELV	erv	SpELV	TAR	1	196	268		1	1	73			false			false			false	true
+REF_SpELV|RT	REF_SpELV	erv	SpELV	RT	1	2425	3717		1	1	1293	431	431	true	true	true	false	false	false	true	false
+REF_SpELV|RNaseH	REF_SpELV	erv	SpELV	RNaseH	1	3718	4068		1	1	351	117	117	true	true	true	false	false	false	true	false
+REF_SpELV|NC	REF_SpELV	erv	SpELV	NC	1	1787	2098		1	1	312	104	104	true	true	false	false	false	false	true	false
+REF_SpELV|MA	REF_SpELV	erv	SpELV	MA	1	713	1219		1	1	507	169	169	true	false	false	false	false	false	true	false
+REF_SpELV|CA	REF_SpELV	erv	SpELV	CA	1	1220	1786		1	1	567	189	189	true	false	false	false	false	false	true	false
+REF_SpumaAmeb|whole_genome	REF_SpumaAmeb	erv	Spuma-Ame.b	whole_genome	1	1	11632		1	1				false						false	false
+REF_SpumaAmeb|PPT	REF_SpumaAmeb	erv	Spuma-Ame.b	PPT	1	10334	10340		1	1	7			false			false			false	false
+REF_SpumaAmeb|pol	REF_SpumaAmeb	erv	Spuma-Ame.b	pol	1	3001	6420		1	1	3420	1140	1140	true	true	false	false	false	false	true	false
+REF_SpumaAmeb|gag	REF_SpumaAmeb	erv	Spuma-Ame.b	gag	1	1485	2999		1	1	1515	505	505	true	true	false	true	false	false	true	false
+REF_SpumaAmeb|env	REF_SpumaAmeb	erv	Spuma-Ame.b	env	1	6440	10273		1	1	3834	1278	1278	true	true	true	true	false	false	true	false
+REF_SpumaAmeb|5LTR	REF_SpumaAmeb	erv	Spuma-Ame.b	5LTR	1	1	1299		1	1	1299			false			true			false	true
+REF_SpumaAmeb|3LTR	REF_SpumaAmeb	erv	Spuma-Ame.b	3LTR	1	10341	11632		1	1	1292			false			false			false	true
+REF_SpumaRbi|whole_genome	REF_SpumaRbi	erv	Spuma-Rbi	whole_genome	1	1	11200		1	1				false						false	false
+REF_SpumaRbi|PPT	REF_SpumaRbi	erv	Spuma-Rbi	PPT	1	10077	10083		1	1	7			false			false			false	false
+REF_SpumaRbi|pol	REF_SpumaRbi	erv	Spuma-Rbi	pol	1	2705	6055		1	1	3351	1117	1117	true	true	false	false	false	false	true	false
+REF_SpumaRbi|gag	REF_SpumaRbi	erv	Spuma-Rbi	gag	1	1323	2543		1	1	1221	407	407	true	true	false	false	false	false	true	false
+REF_SpumaRbi|env	REF_SpumaRbi	erv	Spuma-Rbi	env	1	6259	8784		1	1	2526	842	842	true	true	true	false	false	false	true	false
+REF_SpumaRbi|bet	REF_SpumaRbi	erv	Spuma-Rbi	bet	1	8807	9475		1	1	669	223	223	true	true	false	false	false	false	true	false
+REF_SpumaRbi|5LTR	REF_SpumaRbi	erv	Spuma-Rbi	5LTR	1	1	1226		1	1	1226			false			false			false	true
+REF_SpumaRbi|3LTR	REF_SpumaRbi	erv	Spuma-Rbi	3LTR	1	10084	11200		1	1	1117			false			false			false	true
+REF_SpumaSpu|whole_genome	REF_SpumaSpu	erv	Spuma-Spu	whole_genome	1	1	10034		1	1				false						false	false
+REF_SpumaSpu|pol	REF_SpumaSpu	erv	Spuma-Spu	pol	1	2525	6022		1	1	3498	1166	1166	true	true	false	true	false	false	true	false
+REF_SpumaSpu|gag	REF_SpumaSpu	erv	Spuma-Spu	gag	1	1084	2388		1	1	1305	435	435	true	true	false	true	false	false	true	false
+REF_SpumaSpu|env	REF_SpumaSpu	erv	Spuma-Spu	env	1	6036	8951		1	1	2916	972	972	true	true	false	true	false	false	true	false
+REF_SpumaSpu|5LTR	REF_SpumaSpu	erv	Spuma-Spu	5LTR	1	1	934		1	1	934			false			true			false	true
+REF_SpumaSpu|3LTR	REF_SpumaSpu	erv	Spuma-Spu	3LTR	1	9100	10034		1	1	935			false			true			false	true
+REF_TgERVF|whole_genome	REF_TgERVF	erv	TgERV-F	whole_genome	1	1	8164		1	1				false						false	false
+REF_TgERVF|pro	REF_TgERVF	erv	TgERV-F	pro	1	2828	3172		1	1	345	115	115	true	true	false	false	false	false	true	false
+REF_TgERVF|pol	REF_TgERVF	erv	TgERV-F	pol	1	3178	5733		1	1	2556	852	852	true	true	false	false	false	false	true	false
+REF_TgERVF|gag	REF_TgERVF	erv	TgERV-F	gag	1	501	2825		1	1	2325	775	775	true	true	false	false	false	false	true	false
+REF_TgERVF|env	REF_TgERVF	erv	TgERV-F	env	1	5748	7640		1	1	1893	631	631	true	true	false	false	false	false	true	false
+REF_TgERVF|5LTR	REF_TgERVF	erv	TgERV-F	5LTR	1	1	356		1	1	356			false			false			false	true
+REF_TgERVF|3LTR	REF_TgERVF	erv	TgERV-F	3LTR	1	7809	8164		1	1	356			false			false			false	true
