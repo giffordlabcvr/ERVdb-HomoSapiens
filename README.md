@@ -61,7 +61,7 @@ Profiles of clades, lineages, and loci as Markdown:
 
 Metadata describing ERV lineage reference sequences are exported separately from the lineage entities themselves:
 
-- [`web-app/erv_lineage_references.tsv`](https:/github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_references.tsv)
+- [`web-app/erv_lineage_references.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_references.tsv)
 
 Annotations associated with reference sequences are exported as:
 
