@@ -1,6 +1,4 @@
-# Export data for ERV web application
-
-project ervdb
+  # Export data for ERV web application
   
   # Locus-level export
 
@@ -15,6 +13,3 @@ project ervdb
   # Export alignments 
   run file glue/export/exportAlignments.glue
     
-  validate
-  
-  exit
