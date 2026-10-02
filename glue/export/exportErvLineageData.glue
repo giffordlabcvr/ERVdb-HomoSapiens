@@ -12,8 +12,6 @@ list custom-table-row erv_lineage \
   status \
   parent_lineage \
   human_erv \
-  description \
-  notes \
   rv_major_clade.id \
   rv_minor_clade.id \
   rv_genus.id \

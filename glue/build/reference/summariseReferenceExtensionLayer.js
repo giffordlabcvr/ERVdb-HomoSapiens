@@ -23,10 +23,10 @@ var INPUT_PATH =
 	"tabular/reference/sublineage/herv_sublineage_data.tsv";
 
 var ERV_SOURCE =
-	"erv-sub";
+	"erv_sub";
 
 var LTR_SOURCE =
-	"ltr-sub";
+	"ltr_sub";
 
 var SUBLINEAGE_ASSOCIATION_EVIDENCE =
 	"curated_sublineage_ltr_table";
@@ -819,7 +819,7 @@ _.each(
 
 
 // ============================================================================
-// Load sequences in source ltr-sub
+// Load sequences in source ltr_sub
 // ============================================================================
 
 var ltrSequenceRows =

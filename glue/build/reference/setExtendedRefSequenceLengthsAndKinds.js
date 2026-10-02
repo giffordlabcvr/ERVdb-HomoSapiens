@@ -4,8 +4,8 @@
  * Rules:
  * - source 'erv' gets sequence_kind = 'erv_ref'
  * - source 'ltr' gets sequence_kind = 'ltr_ref'
- * - source 'erv-sub' gets sequence_kind = 'erv_sub_ref'
- * - source 'ltr-sub' gets sequence_kind = 'ltr_sub_ref'
+ * - source 'erv_sub' gets sequence_kind = 'erv_sub_ref'
+ * - source 'ltr_sub' gets sequence_kind = 'ltr_sub_ref'
  * - source 'ervr' gets sequence_kind = 'ervr_ref'
  * - source 'repeat' gets sequence_kind = 'repeat_ref'
  *
@@ -24,11 +24,11 @@ function getSequenceKindForSource(sourceName) {
 		return "ltr_ref";
 	}
 
-	if(sourceName === "erv-sub") {
+	if(sourceName === "erv_sub") {
 		return "erv_sub_ref";
 	}
 
-	if(sourceName === "ltr-sub") {
+	if(sourceName === "ltr_sub") {
 		return "ltr_sub_ref";
 	}
 
