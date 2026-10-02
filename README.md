@@ -83,7 +83,7 @@ Reference reconstruction and curation notes may additionally be supplied as Mark
 
 The principal human locus table contains one row per ERV locus in the specified human genome assembly:
 
-- [`web-app/hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/tabular/locus/hg19_loci_ervdb.tsv)
+- [`web-app/hg19_loci_ervdb.tsv`]
 
 Information representing relationships between loci and other ERVdb entities is exported separately:
 
