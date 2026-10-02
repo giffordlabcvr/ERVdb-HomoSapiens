@@ -7,6 +7,11 @@ project ervdb
   
   # Export age calibration data 
   run script glue/export/exportErvAgeCalibrationsForNavigator.js
+
+  # Export reference sequences
+  module fastaExporter export -w \
+    "sequence_kind = 'erv_ref' or sequence_kind = 'erv_sub'" \
+    -f web-app/ltr_reference_seqs.fna
   
   # Export LTR reference sequences
   module fastaExporter export -w \

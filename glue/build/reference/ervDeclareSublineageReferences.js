@@ -2,8 +2,8 @@
 //
 // Declare references for:
 //
-//   1. ERV sublineage reference sequences in source erv-sub
-//   2. LTR lineages associated with ERV sublineages in source ltr-sub
+//   1. ERV sublineage reference sequences in source erv_sub
+//   2. LTR lineages associated with ERV sublineages in source ltr_sub
 //
 // Naming conventions:
 //
@@ -15,10 +15,10 @@
 //
 // Examples:
 //
-//   erv-sub/HERV-39
+//   erv_sub/HERV-39
 //     -> REF_HERV39
 //
-//   ltr-sub/LTR19B
+//   ltr_sub/LTR19B
 //     -> LTR_REF_LTR19B
 //
 // Important distinction:
@@ -425,7 +425,7 @@ declareReferences({
         "source.name",
         "erv_lineage_reference.erv_lineage.id",
         "-w",
-        "source.name = 'erv-sub' and " +
+        "source.name = 'erv_sub' and " +
             "erv_lineage_reference.reference_role = 'canonical' and " +
             "erv_lineage_reference.reference_status = 'active'",
         "-s",
@@ -447,7 +447,7 @@ declareReferences({
         "source.name",
         "ltr_lineage_reference.ltr_lineage.id",
         "-w",
-        "source.name = 'ltr-sub' and " +
+        "source.name = 'ltr_sub' and " +
             "ltr_lineage_reference.reference_role = 'canonical' and " +
             "ltr_lineage_reference.reference_status = 'active'",
         "-s",

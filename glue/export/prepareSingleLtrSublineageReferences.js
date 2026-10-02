@@ -29,8 +29,8 @@ var SKIPPED_TSV =
     OUTPUT_DIR +
     "/sublineage-full-length-single-ltr-skipped.tsv";
 
-var INTERNAL_SOURCE_NAME = "erv-sub";
-var LTR_SOURCE_NAME = "ltr-sub";
+var INTERNAL_SOURCE_NAME = "erv_sub";
+var LTR_SOURCE_NAME = "ltr_sub";
 
 var FASTA_LINE_WIDTH = 80;
 
