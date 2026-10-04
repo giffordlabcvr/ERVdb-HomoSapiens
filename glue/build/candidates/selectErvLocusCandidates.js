@@ -12,7 +12,7 @@
  */
 
 var INPUT_FILE =
-    "/Users/rob/Sources/erv/HERVs-RBRT-name_new.tsv";
+    "tabular/merge/HERVs-RBRT-name_new.tsv";
 
 var OUTPUT_FILE =
 	"tabular/locus/HERVs-RBRT-filtered.tsv";
