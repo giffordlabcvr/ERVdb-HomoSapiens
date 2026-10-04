@@ -32,7 +32,7 @@ var REPRESENTED_FORMS = [
 ];
 var REFERENCE_COMPLETENESS_VALUES =
     ["complete", "fragmentary", "unknown"];
-    
+
 var FRAGMENT_EXTENTS =
     ["five_prime", "three_prime", "internal", "envelope", "other", "unknown"];
 
@@ -438,6 +438,10 @@ _.each(rows, function(row) {
                 row["entity_type"]
             );
             setStringFieldIfPresent(
+                "classification_basis",
+                row["classification_basis"]
+            );
+            setStringFieldIfPresent(
                 "status",
                 row["status"]
             );
@@ -585,4 +589,3 @@ log(
     " records had no reference sequence"
 );
 log("ERV sublineage loading complete");
-
