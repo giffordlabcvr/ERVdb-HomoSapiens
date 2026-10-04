@@ -10,7 +10,7 @@ module legacyLocusImporter invoke-function clearLegacySource wang_hervh_hg19
 
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/locus/legacy/dbm-gifford-legacy-list-hg19.tsv \
+    tabular/legacy/dbm-gifford-legacy-list-hg19.tsv \
     compiled_human_erv_loci_hg19 \
     null \
     "Homo sapiens" \
@@ -18,7 +18,7 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
     false
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/locus/legacy/grandi-hervw-hg19.tsv \
+    tabular/legacy/grandi-hervw-hg19.tsv \
     grandi_hervw_hg19 \
     27613107 \
     "Homo sapiens" \
@@ -26,7 +26,7 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
     false
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/locus/legacy/coffin-hml2-hg19.tsv \
+    tabular/legacy/coffin-hml2-hg19.tsv \
     coffin_hml2_hg19 \
     22067224 \
     "Homo sapiens" \
@@ -34,7 +34,7 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
     false
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/locus/legacy/grandi-hml10-hg19.tsv \
+    tabular/legacy/grandi-hml10-hg19.tsv \
     grandi_hml10_hg19 \
     29118853 \
     "Homo sapiens" \
@@ -42,7 +42,7 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
     false
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/locus/legacy/grandi-hml6-hg19.tsv \
+    tabular/legacy/grandi-hml6-hg19.tsv \
     grandi_hml6_hg19 \
     31167914 \
     "Homo sapiens" \
@@ -50,7 +50,7 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
     false
     
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/locus/legacy/wang-hervh-hg19.tsv \
+    tabular/legacy/wang-hervh-hg19.tsv \
     wang_hervh_hg19 \
     25317556 \
     "Homo sapiens" \
