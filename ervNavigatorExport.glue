@@ -22,9 +22,10 @@ project ervdb
 
   # Export XRV reference sequence data
   run file glue/export/exportXrvSpeciesData.glue
-
+  
   # Export ERV lineage aliases
-  run file glue/export/exportErvLineageAliases.glue
+  #run file glue/export/exportErvLineageAliases.glue
+  run script glue/export/exportErvLineageAliases.glue
   
   # Export ERV LTR lineage associations
   run file glue/export/exportErvLtrLineageAssociations.glue
