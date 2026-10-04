@@ -17,12 +17,9 @@ list sequence \
   xrv_isolate.rv_species.id \
   xrv_isolate.rv_species.name \
   xrv_isolate.rv_species.full_name \
-  xrv_isolate.rv_species.taxon_status \
   xrv_isolate.rv_species.rv_major_clade.id \
   xrv_isolate.rv_species.rv_minor_clade.id \
   xrv_isolate.rv_species.rv_genus.id \
-  xrv_isolate.rv_species.rv_genus.taxon_status \
   xrv_isolate.rv_species.rv_subgenus.id \
-  xrv_isolate.rv_species.rv_subgenus.taxon_status \
   -w "sequence_kind = 'xrv_ref'" \
   -s xrv_isolate.rv_species.id,sequenceID

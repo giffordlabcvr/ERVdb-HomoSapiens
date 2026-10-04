@@ -1,58 +1,58 @@
-sequenceID	length	xrv_isolate.id	xrv_isolate.isolate_name	xrv_isolate.sampled_host	xrv_isolate.isolation_source	xrv_isolate.molecule_type	xrv_isolate.geo_loc_name	xrv_isolate.collection_date	xrv_isolate.pubmed_id	xrv_isolate.rv_species.id	xrv_isolate.rv_species.name	xrv_isolate.rv_species.full_name	xrv_isolate.rv_species.taxon_status	xrv_isolate.rv_species.rv_major_clade.id	xrv_isolate.rv_species.rv_minor_clade.id	xrv_isolate.rv_species.rv_genus.id	xrv_isolate.rv_species.rv_genus.taxon_status	xrv_isolate.rv_species.rv_subgenus.id	xrv_isolate.rv_species.rv_subgenus.taxon_status
-M37980	7286	M37980	-	-	-	-	-	-	1311072	Alpharetrovirus avileu	ALV	avian leukosis virus - RSA	-	II	Alpha-Beta	Alpharetrovirus	-	-	-
-AF033808	9392	AF033808	-	-	-	-	-	-	-	Alpharetrovirus avirousar	RSV	Rous sarcoma virus	-	II	Alpha-Beta	Alpharetrovirus	-	-	-
-OR951378	6911	OR951378	-	Rousettus leschenaultii	-	-	China	-	-	BatFV	BatFV	Rousettus leschenaultii metagenome spumavirus	-	III	-	Spumavirus	-	Mammal	-
-AF033815	8557	AF033815	-	-	-	-	-	-	-	Betaretrovirus maspfimon	MPMV	Mason-Pfizer monkey virus	-	II	Alpha-Beta	Betaretrovirus	-	D	-
-AF033807	8805	AF033807	-	-	-	-	-	-	-	Betaretrovirus murmamtum	MMTV	mouse mammary tumor virus	-	II	Alpha-Beta	Betaretrovirus	-	B	-
-M80216	7462	M80216	-	-	-	-	-	-	1629959	Betaretrovirus ovijaa	JSRV	Jaagsiekte sheep retrovirus	-	II	Alpha-Beta	Betaretrovirus	-	D	-
-M23385	8785	M23385	-	-	-	-	-	-	3201749	Betaretrovirus squmon	SMRVH	squirrel monkey retrovirus-H	-	II	Alpha-Beta	Betaretrovirus	-	D	-
-U94514	12002	U94514	-	-	-	-	-	-	8289332	Bovispumavirus bostau	BFV	bovine foamy virus Bos taurus	-	III	-	Spumavirus	-	Mammal	-
-AF033818	8419	AF033818	-	-	-	-	-	-	-	Deltaretrovirus bovleu	BLV	bovine leukemia virus	-	II	-	Deltaretrovirus	-	Cetartiodactyl	-
-MT700539	6597	MT700539	-	Eptesicus fuscus	-	-	USA	-	-	Deltaretrovirus eptfus	EfDRV	Eptesicus fuscus deltaretrovirus	-	II	-	Deltaretrovirus	-	Chiropteran	-
-AF033817	8507	AF033817	-	-	-	-	-	-	-	Deltaretrovirus priTlym1	PTLV1	primate T-lymphotropic virus 1	-	II	-	Deltaretrovirus	-	Primate	-
-M10060	8952	M10060	-	-	-	-	-	-	6322188	Deltaretrovirus priTlym2	PTLV2	human T-lymphotropic virus 2	-	II	-	Deltaretrovirus	-	Primate	-
-DQ093792	8917	DQ093792	-	-	-	-	-	-	16840323	Deltaretrovirus priTlym3	PTLV3	primate T-lymphotropic virus 3	-	II	-	Deltaretrovirus	-	Primate	-
-PP271290	10695	PP271290	-	Tursiops truncatus	-	-	-	-	-	DolphinFV	DolphinFV	Tursiops truncatus spumavirus	-	III	-	Spumavirus	-	Mammal	-
-AF033822	12708	AF033822	-	-	-	-	-	-	-	Epsilonretrovirus waldersar	WDSV	walleye dermal sarcoma virus	-	I	-	Epsilonretrovirus	-	-	-
-AF133051	12999	AF133051	-	-	-	-	-	-	10516048	Epsilonretrovirus walepihyp1	WEHV1	walleye epidermal hyperplasia virus type 1	-	I	-	Epsilonretrovirus	-	-	-
-AF133052	13125	AF133052	-	-	-	-	-	-	10516048	Epsilonretrovirus walepihyp2	WEHV2	walleye epidermal hyperplasia virus type 2	-	I	-	Epsilonretrovirus	-	-	-
-AF201902	12035	AF201902	-	-	-	-	-	-	10756018	Equispumavirus equcab	EFV	equine foamy virus Equus caballus	-	III	-	Spumavirus	-	Mammal	-
-AJ564746	11658	AJ564746	-	-	-	-	United Kingdom	-	14557618	Felispumavirus felcat	FFV	feline foamy virus Felis catus	-	III	-	Spumavirus	-	Mammal	-
-AY842951	8295	AY842951	-	Gallus gallus	-	-	China	-	-	Gammaretrovirus aviretend	REV	reticuloendotheliosis virus	-	I	Gamma-Eta	Gammaretrovirus	-	REV	-
-AF052723	8448	AF052723	-	-	-	-	-	-	9696797	Gammaretrovirus felleu	FeLV	feline leukemia virus	-	I	Gamma-Eta	Gammaretrovirus	-	MLV_FeLV	-
-M26927	8088	M26927	-	-	-	-	-	-	2683360	Gammaretrovirus gibleu	GaLV	gibbon ape leukemia virus	-	I	Gamma-Eta	Gammaretrovirus	-	Korv_GALV	-
-AF151794	8431	AF151794	-	-	-	-	-	-	10756041	Gammaretrovirus koa	KoRV	koala retrovirus	-	I	Gamma-Eta	Gammaretrovirus	-	Korv_GALV	-
-AF033811	8332	AF033811	-	-	-	-	-	-	-	Gammaretrovirus murleu	MLV	Moloney murine leukemia virus	-	I	Gamma-Eta	Gammaretrovirus	-	MLV_FeLV	-
-M32690	8482	M32690	-	-	-	-	-	-	2183467	Lentivirus bovimdef	BIV	bovine immunodeficiency virus	-	II	-	Lentivirus	-	-	-
-U21603	7732	U21603	-	Bos javanicus	-	-	-	-	9049370	Lentivirus bovjem	JDV	Jembrana disease virus	-	II	-	Lentivirus	-	-	-
-M33677	9189	M33677	-	-	-	-	-	-	2171210	Lentivirus capartenc	SRLVB	small ruminant lentivirus genotype B (Caprine arthritis-encephalitis virus)	-	II	-	Lentivirus	-	-	-
-M16575	8407	M16575	-	-	-	-	-	-	-	Lentivirus equinfane	EIAV	equine infectious anemia virus America strain	-	II	-	Lentivirus	-	-	-
-M25381	9474	M25381	-	-	-	-	-	-	2928341	Lentivirus felimdef	FIVP	feline immunodeficiency virus Petaluma strain	-	II	-	Lentivirus	-	-	-
-AF033819	9181	AF033819	-	-	-	-	-	-	-	Lentivirus humimdef1	HIV1M	human immunodeficiency virus 1	-	II	-	Lentivirus	-	-	-
-M30502	10359	M30502	-	-	-	-	-	-	-	Lentivirus humimdef2	HIV2	human immunodeficiency virus 2	-	II	-	Lentivirus	-	-	-
-M60609	9221	M60609	-	-	-	-	-	-	1847257	Lentivirus ovivismae	SRLVA	small ruminant lentivirus genotype A (Visna-Maedi Virus)	-	II	-	Lentivirus	-	-	-
-U03982	9100	U03982	-	Felis concolor coryi (Florida puma)	-	-	-	-	8030248	Lentivirus pum	PLV	puma lentivirus 14	-	II	-	Lentivirus	-	-	-
-M58410	9623	M58410	-	-	-	-	-	-	2024476	Lentivirus simimdef	SIV	simian immunodeficiency virus	-	II	-	Lentivirus	-	-	-
-U09568	7143	U09568	-	Meleagris gallopavo	-	-	-	-	7941337	LPDV	LPDV	lymphoproliferative disease virus	-	II	Alpha-Beta	Alpharetrovirus	-	-	-
-KM233624	12118	KM233624	-	Otolemur crassicaudatus panganiensis	-	-	USA	-	25091111	Prosimiispumavirus otocra	PSFVgal	simian foamy virus Otolemur crassicaudatus	-	III	-	Spumavirus	-	Mammal	-
-EF488483	8791	EF488483	-	Homo_sapiens	-	-	-	-	-	PTLV4	PTLV4	primate T-lymphotropic virus 4	-	II	-	Deltaretrovirus	-	Primate	-
-JQ303225	8389	JQ303225	-	Rhinolophus ferrumequinum	-	-	-	-	22318134	RfRV	RfRV	Rhinolophus ferrumequinum retrovirus	-	I	Gamma-Eta	Gammaretrovirus	-	RfRV	-
-PP271289	10552	PP271289	-	Otaria byronia	-	-	-	-	-	SeaLionFV	SeaLionFV	Otaria byronia spumavirus	-	III	-	Spumavirus	-	Mammal	-
-EU010385	12212	EU010385	-	-	-	-	-	-	17765280	Simiispumavirus atespp	SFVspi	simian foamy virus Ateles spp.	-	III	-	Spumavirus	-	Mammal	-
-GU356395	11744	GU356395	-	Callithrix jacchus (common marmoset)	-	-	USA	-	20130055	Simiispumavirus caljac	SFVmarm	simian foamy virus Callithrix jacchus	-	III	-	Spumavirus	-	Mammal	-
-JQ867466	13072	JQ867466	-	Homo_sapiens	-	-	Cameroon	-	23015714	Simiispumavirus cernic	SFVgue	simian foamy virus Cercopithecus nictitans	-	III	-	Spumavirus	-	Mammal	-
-M74895	13111	M74895	-	-	-	-	-	-	1310187	Simiispumavirus chlaet	SFV3	simian foamy virus Chlorocebus aethiops	-	III	-	Spumavirus	-	Mammal	-
-HM245790	12258	HM245790	-	Gorilla gorilla gorilla (Western lowland gorilla)	-	-	-	-	21106805	Simiispumavirus gorgorgor	SFVgor	simian foamy virus Gorilla gorilla gorilla	-	III	-	Spumavirus	-	Mammal	-
-X54482	12972	X54482	-	-	-	-	-	-	1647358	Simiispumavirus maccyc	SFV1	simian foamy virus Macaca cyclopis	-	III	-	Spumavirus	-	Mammal	-
-LC094267	12965	LC094267	-	Macaca fascicularis	-	-	-	-	27908992	Simiispumavirus macfas	SFV	simian foamy virus Macaca fascicularis	-	III	-	Spumavirus	-	Mammal	-
-AB923518	12957	AB923518	-	-	-	-	Japan	-	25017058	Simiispumavirus macfus	SFVjmac	simian foamy virus Macaca fuscata	-	III	-	Spumavirus	-	Mammal	-
-MF280817	12983	MF280817	-	Macaca mulatta (rhesus macaque)	-	-	USA	-	-	Simiispumavirus macmul	SFVrmac	simian foamy virus Macaca mulatta	-	III	-	Spumavirus	-	Mammal	-
-KX087159	11954	KX087159	-	Homo_sapiens	-	-	-	-	28040837	Simiispumavirus pantrosch	SFVcpze	simian foamy virus Pan troglodytes schweinfurthii	-	III	-	Spumavirus	-	Mammal	-
-JQ867463	13220	JQ867463	-	Homo_sapiens	-	-	Cameroon	-	23015714	Simiispumavirus pantrotro	SFVcptt	simian foamy virus Pan troglodytes troglodytes	-	III	-	Spumavirus	-	Mammal	-
-U04327	13246	U04327	-	Pan troglodytes	-	-	-	-	8184531	Simiispumavirus pantrover	SFVcpz	simian foamy virus Pan troglodytes verus	-	III	-	Spumavirus	-	Mammal	-
-AJ544579	12823	AJ544579	-	Pongo pygmaeus pygmaeus	-	-	Indonesia	-	12857929	Simiispumavirus ponpygpyg	SFVora	simian foamy virus Pongo pygmaeus pygmaeus	-	III	-	Spumavirus	-	Mammal	-
-GU356394	11684	GU356394	-	squirrel monkey	-	-	USA	-	20130055	Simiispumavirus saisci	SFVsqu	simian foamy virus Saimiri sciureus	-	III	-	Spumavirus	-	Mammal	-
-KP143760	11764	KP143760	-	Sapajus xanthosternos	-	-	Brazil	-	26047587	Simiispumavirus sapxan	SFVcapu	simian foamy virus Sapajus xanthosternos	-	III	-	Spumavirus	-	Mammal	-
-U26458	10688	U26458	-	-	-	-	-	-	8648695	SnRV	SnRV	snakehead retrovirus	-	III	Sigma-Lambda	Omegaretrovirus	-	-	-
-M11841	8173	M11841	-	-	-	-	-	-	3006247	SRV1	SRV1	simian SRV-1 type D retrovirus	-	II	Alpha-Beta	Betaretrovirus	-	D	-
-DQ174103	10305	DQ174103	-	Atlantic salmon	-	-	USA	-	16501103	SSSV	SSSV	salmon swim bladder sarcoma virus	-	I	-	Xiretrovirus	-	-	-
+sequenceID	length	xrv_isolate.id	xrv_isolate.isolate_name	xrv_isolate.sampled_host	xrv_isolate.isolation_source	xrv_isolate.molecule_type	xrv_isolate.geo_loc_name	xrv_isolate.collection_date	xrv_isolate.pubmed_id	xrv_isolate.rv_species.id	xrv_isolate.rv_species.name	xrv_isolate.rv_species.full_name	xrv_isolate.rv_species.rv_major_clade.id	xrv_isolate.rv_species.rv_minor_clade.id	xrv_isolate.rv_species.rv_genus.id	xrv_isolate.rv_species.rv_subgenus.id
+M37980	7286	M37980	-	-	-	-	-	-	1311072	Alpharetrovirus avileu	ALV	avian leukosis virus - RSA	II	Alpha-Beta	Alpharetrovirus	-
+AF033808	9392	AF033808	-	-	-	-	-	-	-	Alpharetrovirus avirousar	RSV	Rous sarcoma virus	II	Alpha-Beta	Alpharetrovirus	-
+OR951378	6911	OR951378	-	Rousettus leschenaultii	-	-	China	-	-	BatFV	BatFV	Rousettus leschenaultii metagenome spumavirus	III	-	Spumavirus	Mammal
+AF033815	8557	AF033815	-	-	-	-	-	-	-	Betaretrovirus maspfimon	MPMV	Mason-Pfizer monkey virus	II	Alpha-Beta	Betaretrovirus	D
+AF033807	8805	AF033807	-	-	-	-	-	-	-	Betaretrovirus murmamtum	MMTV	mouse mammary tumor virus	II	Alpha-Beta	Betaretrovirus	B
+M80216	7462	M80216	-	-	-	-	-	-	1629959	Betaretrovirus ovijaa	JSRV	Jaagsiekte sheep retrovirus	II	Alpha-Beta	Betaretrovirus	D
+M23385	8785	M23385	-	-	-	-	-	-	3201749	Betaretrovirus squmon	SMRVH	squirrel monkey retrovirus-H	II	Alpha-Beta	Betaretrovirus	D
+U94514	12002	U94514	-	-	-	-	-	-	8289332	Bovispumavirus bostau	BFV	bovine foamy virus Bos taurus	III	-	Spumavirus	Mammal
+AF033818	8419	AF033818	-	-	-	-	-	-	-	Deltaretrovirus bovleu	BLV	bovine leukemia virus	II	-	Deltaretrovirus	Cetartiodactyl
+AF033817	8507	AF033817	-	-	-	-	-	-	-	Deltaretrovirus priTlym1	PTLV1	primate T-lymphotropic virus 1	II	-	Deltaretrovirus	Primate
+M10060	8952	M10060	-	-	-	-	-	-	6322188	Deltaretrovirus priTlym2	PTLV2	human T-lymphotropic virus 2	II	-	Deltaretrovirus	Primate
+DQ093792	8917	DQ093792	-	-	-	-	-	-	16840323	Deltaretrovirus priTlym3	PTLV3	primate T-lymphotropic virus 3	II	-	Deltaretrovirus	Primate
+PP271290	10695	PP271290	-	Tursiops truncatus	-	-	-	-	-	DolphinFV	DolphinFV	Tursiops truncatus spumavirus	III	-	Spumavirus	Mammal
+MT700539	6597	MT700539	-	Eptesicus fuscus	-	-	USA	-	-	EfDRV	EfDRV	Eptesicus fuscus deltaretrovirus	II	-	Deltaretrovirus	Chiropteran
+AF033822	12708	AF033822	-	-	-	-	-	-	-	Epsilonretrovirus waldersar	WDSV	walleye dermal sarcoma virus	I	-	Epsilonretrovirus	-
+AF133051	12999	AF133051	-	-	-	-	-	-	10516048	Epsilonretrovirus walepihyp1	WEHV1	walleye epidermal hyperplasia virus type 1	I	-	Epsilonretrovirus	-
+AF133052	13125	AF133052	-	-	-	-	-	-	10516048	Epsilonretrovirus walepihyp2	WEHV2	walleye epidermal hyperplasia virus type 2	I	-	Epsilonretrovirus	-
+AF201902	12035	AF201902	-	-	-	-	-	-	10756018	Equispumavirus equcab	EFV	equine foamy virus Equus caballus	III	-	Spumavirus	Mammal
+AJ564746	11658	AJ564746	-	-	-	-	United Kingdom	-	14557618	Felispumavirus felcat	FFV	feline foamy virus Felis catus	III	-	Spumavirus	Mammal
+AY842951	8295	AY842951	-	Gallus gallus	-	-	China	-	-	Gammaretrovirus aviretend	REV	reticuloendotheliosis virus	I	Gamma-Eta	Gammaretrovirus	REV
+AF052723	8448	AF052723	-	-	-	-	-	-	9696797	Gammaretrovirus felleu	FeLV	feline leukemia virus	I	Gamma-Eta	Gammaretrovirus	MLV_FeLV
+M26927	8088	M26927	-	-	-	-	-	-	2683360	Gammaretrovirus gibleu	GaLV	gibbon ape leukemia virus	I	Gamma-Eta	Gammaretrovirus	Korv_GALV
+AF151794	8431	AF151794	-	-	-	-	-	-	10756041	Gammaretrovirus koa	KoRV	koala retrovirus	I	Gamma-Eta	Gammaretrovirus	Korv_GALV
+AF033811	8332	AF033811	-	-	-	-	-	-	-	Gammaretrovirus murleu	MLV	Moloney murine leukemia virus	I	Gamma-Eta	Gammaretrovirus	MLV_FeLV
+M32690	8482	M32690	-	-	-	-	-	-	2183467	Lentivirus bovimdef	BIV	bovine immunodeficiency virus	II	-	Lentivirus	-
+U21603	7732	U21603	-	Bos javanicus	-	-	-	-	9049370	Lentivirus bovjem	JDV	Jembrana disease virus	II	-	Lentivirus	-
+M33677	9189	M33677	-	-	-	-	-	-	2171210	Lentivirus capartenc	SRLVB	small ruminant lentivirus genotype B (Caprine arthritis-encephalitis virus)	II	-	Lentivirus	-
+M16575	8407	M16575	-	-	-	-	-	-	-	Lentivirus equinfane	EIAV	equine infectious anemia virus America strain	II	-	Lentivirus	-
+M25381	9474	M25381	-	-	-	-	-	-	2928341	Lentivirus felimdef	FIVP	feline immunodeficiency virus Petaluma strain	II	-	Lentivirus	-
+AF033819	9181	AF033819	-	-	-	-	-	-	-	Lentivirus humimdef1	HIV1M	human immunodeficiency virus 1	II	-	Lentivirus	-
+M30502	10359	M30502	-	-	-	-	-	-	-	Lentivirus humimdef2	HIV2	human immunodeficiency virus 2	II	-	Lentivirus	-
+M60609	9221	M60609	-	-	-	-	-	-	1847257	Lentivirus ovivismae	SRLVA	small ruminant lentivirus genotype A (Visna-Maedi Virus)	II	-	Lentivirus	-
+U03982	9100	U03982	-	Felis concolor coryi (Florida puma)	-	-	-	-	8030248	Lentivirus pum	PLV	puma lentivirus 14	II	-	Lentivirus	-
+M58410	9623	M58410	-	-	-	-	-	-	2024476	Lentivirus simimdef	SIV	simian immunodeficiency virus	II	-	Lentivirus	-
+U09568	7143	U09568	-	Meleagris gallopavo	-	-	-	-	7941337	LPDV	LPDV	lymphoproliferative disease virus	II	Alpha-Beta	Alpharetrovirus	-
+KM233624	12118	KM233624	-	Otolemur crassicaudatus panganiensis	-	-	USA	-	25091111	Prosimiispumavirus otocra	PSFVgal	simian foamy virus Otolemur crassicaudatus	III	-	Spumavirus	Mammal
+EF488483	8791	EF488483	-	Homo_sapiens	-	-	-	-	-	PTLV4	PTLV4	primate T-lymphotropic virus 4	II	-	Deltaretrovirus	Primate
+JQ303225	8389	JQ303225	-	Rhinolophus ferrumequinum	-	-	-	-	22318134	RfRV	RfRV	Rhinolophus ferrumequinum retrovirus	I	Gamma-Eta	Gammaretrovirus	RfRV
+PP271289	10552	PP271289	-	Otaria byronia	-	-	-	-	-	SeaLionFV	SeaLionFV	Otaria byronia spumavirus	III	-	Spumavirus	Mammal
+EU010385	12212	EU010385	-	-	-	-	-	-	17765280	Simiispumavirus atespp	SFVspi	simian foamy virus Ateles spp.	III	-	Spumavirus	Mammal
+GU356395	11744	GU356395	-	Callithrix jacchus (common marmoset)	-	-	USA	-	20130055	Simiispumavirus caljac	SFVmarm	simian foamy virus Callithrix jacchus	III	-	Spumavirus	Mammal
+JQ867466	13072	JQ867466	-	Homo_sapiens	-	-	Cameroon	-	23015714	Simiispumavirus cernic	SFVgue	simian foamy virus Cercopithecus nictitans	III	-	Spumavirus	Mammal
+M74895	13111	M74895	-	-	-	-	-	-	1310187	Simiispumavirus chlaet	SFV3	simian foamy virus Chlorocebus aethiops	III	-	Spumavirus	Mammal
+HM245790	12258	HM245790	-	Gorilla gorilla gorilla (Western lowland gorilla)	-	-	-	-	21106805	Simiispumavirus gorgorgor	SFVgor	simian foamy virus Gorilla gorilla gorilla	III	-	Spumavirus	Mammal
+X54482	12972	X54482	-	-	-	-	-	-	1647358	Simiispumavirus maccyc	SFV1	simian foamy virus Macaca cyclopis	III	-	Spumavirus	Mammal
+LC094267	12965	LC094267	-	Macaca fascicularis	-	-	-	-	27908992	Simiispumavirus macfas	SFV	simian foamy virus Macaca fascicularis	III	-	Spumavirus	Mammal
+AB923518	12957	AB923518	-	-	-	-	Japan	-	25017058	Simiispumavirus macfus	SFVjmac	simian foamy virus Macaca fuscata	III	-	Spumavirus	Mammal
+MF280817	12983	MF280817	-	Macaca mulatta (rhesus macaque)	-	-	USA	-	-	Simiispumavirus macmul	SFVrmac	simian foamy virus Macaca mulatta	III	-	Spumavirus	Mammal
+KX087159	11954	KX087159	-	Homo_sapiens	-	-	-	-	28040837	Simiispumavirus pantrosch	SFVcpze	simian foamy virus Pan troglodytes schweinfurthii	III	-	Spumavirus	Mammal
+JQ867463	13220	JQ867463	-	Homo_sapiens	-	-	Cameroon	-	23015714	Simiispumavirus pantrotro	SFVcptt	simian foamy virus Pan troglodytes troglodytes	III	-	Spumavirus	Mammal
+U04327	13246	U04327	-	Pan troglodytes	-	-	-	-	8184531	Simiispumavirus pantrover	SFVcpz	simian foamy virus Pan troglodytes verus	III	-	Spumavirus	Mammal
+AJ544579	12823	AJ544579	-	Pongo pygmaeus pygmaeus	-	-	Indonesia	-	12857929	Simiispumavirus ponpygpyg	SFVora	simian foamy virus Pongo pygmaeus pygmaeus	III	-	Spumavirus	Mammal
+GU356394	11684	GU356394	-	squirrel monkey	-	-	USA	-	20130055	Simiispumavirus saisci	SFVsqu	simian foamy virus Saimiri sciureus	III	-	Spumavirus	Mammal
+KP143760	11764	KP143760	-	Sapajus xanthosternos	-	-	Brazil	-	26047587	Simiispumavirus sapxan	SFVcapu	simian foamy virus Sapajus xanthosternos	III	-	Spumavirus	Mammal
+U26458	10688	U26458	-	-	-	-	-	-	8648695	SnRV	SnRV	snakehead retrovirus	III	Sigma-Lambda	Omegaretrovirus	-
+M11841	8173	M11841	-	-	-	-	-	-	3006247	SRV1	SRV1	simian SRV-1 type D retrovirus	II	Alpha-Beta	Betaretrovirus	D
+DQ174103	10305	DQ174103	-	Atlantic salmon	-	-	USA	-	16501103	SSSV	SSSV	salmon swim bladder sarcoma virus	I	-	Xiretrovirus	-

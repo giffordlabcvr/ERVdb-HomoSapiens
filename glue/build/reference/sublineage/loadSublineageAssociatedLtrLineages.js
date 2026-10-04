@@ -6,7 +6,7 @@
  *   tabular/reference/sublineage/herv_sublineage_ltr_data_all.tsv
  *
  * LTR_name identifies the ltr_lineage row. The reference row is identified
- * by the actual sequenceID found in source ltr-sub. Usually this is
+ * by the actual sequenceID found in source ltr_sub. Usually this is
  * LTR_name, but original_name is also searched as a fallback.
  *
  * linked_lineage_id identifies an existing erv_lineage row. An LTR lineage
@@ -14,7 +14,7 @@
  */
 
 var INPUT_FILE = "tabular/reference/sublineage/herv_sublineage_ltr_data_all.tsv";
-var LTR_SOURCE = "ltr-sub";
+var LTR_SOURCE = "ltr_sub";
 var LTR_CATEGORY = "erv";
 var DRY_RUN = false;
 

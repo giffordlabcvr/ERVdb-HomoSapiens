@@ -2,13 +2,13 @@
   # ERV-derived repeats
 
   # Create ERVR rows, populate their metadata and taxonomy,
-  # and link representative sequences from source erv-sub
+  # and link representative sequences from source erv_sub
   run script glue/build/reference/ervr/loadErvDerivedRepeats.js
 
   # Populate aliases for the ERV sublineages
   run script glue/build/reference/ervr/loadErvrAliases.js
   
   # Load LTR lineages associated with ERV-derived repeats,
-  # link their representative sequences from source ltr-sub,
+  # link their representative sequences from source ltr_sub,
   # and create ERV-sublineage-to-LTR associations
   run script glue/build/reference/ervr/loadErvrAssociatedLtrLineages.js

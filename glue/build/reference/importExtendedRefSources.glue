@@ -1,10 +1,10 @@
 
   #~# Import sublineage reference sequences (FASTA)
 
-  import source sources/reference/erv-sub/
+  import source sources/reference/erv_sub/
   import source sources/reference/ervr/
   import source sources/reference/repeat/
 
   #~# Import sublineage LTR sequences (FASTA)
   
-  import source sources/reference/ltr-sub/
+  import source sources/reference/ltr_sub/

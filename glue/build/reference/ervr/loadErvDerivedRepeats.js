@@ -5,7 +5,7 @@
  * tabular/reference/ervr/herv_sublineage_data.tsv.
  *
  * lineage_id identifies an erv_lineage record.
- * sequenceID identifies its sequence in source erv-sub and is used as
+ * sequenceID identifies its sequence in source erv_sub and is used as
  * the erv_lineage_reference row ID.
  */
 
