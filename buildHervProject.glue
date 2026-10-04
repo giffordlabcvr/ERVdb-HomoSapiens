@@ -17,6 +17,6 @@ schema-project ervdb
 project ervdb
 
   # Incorporate HERV locus data
-  #run file glue/build/buildLocusLayer.glue
+  run file glue/build/buildLocusLayer.glue
   
   exit
