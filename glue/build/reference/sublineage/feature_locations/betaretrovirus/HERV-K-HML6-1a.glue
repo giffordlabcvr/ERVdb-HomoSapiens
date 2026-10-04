@@ -1,8 +1,0 @@
-reference REF_HERVKHML61a
-
-  add feature-location whole_genome
-  feature-location whole_genome
-    add segment 1 8166
-    exit
-
-  exit

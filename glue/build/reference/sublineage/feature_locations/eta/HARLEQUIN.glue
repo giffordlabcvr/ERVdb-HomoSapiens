@@ -1,8 +1,0 @@
-reference REF_HARLEQUIN
-
-  add feature-location whole_genome
-  feature-location whole_genome
-    add segment 1 8405
-    exit
-        
-  exit

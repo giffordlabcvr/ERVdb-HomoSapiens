@@ -16,10 +16,7 @@ schema-project ervdb
 # Build ERVdb-HomoSapiens extension to ERVdb project  
 project ervdb
 
-  # Incorporate HERV sublineage data
-  run file glue/build/reference/buildReferenceExtensionLayer.glue
-
   # Incorporate HERV locus data
-  #run file glue/build/locus/buildLocusLayer.glue
+  #run file glue/build/buildLocusLayer.glue
   
   exit

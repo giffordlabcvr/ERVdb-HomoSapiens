@@ -16,7 +16,7 @@ import source sources/locus/filtered_2026_07
 # 2. Instantiate locus-layer modules
 # -------------------------------------------------------------------------
 
-run file glue/build/locus/locusLayerModules.glue
+run file glue/build/locusLayerModules.glue
 
 
 # -------------------------------------------------------------------------
@@ -24,14 +24,14 @@ run file glue/build/locus/locusLayerModules.glue
 # -------------------------------------------------------------------------
 
 # Load the source candidate dataset.
-run script glue/build/locus/candidates/loadErvLocusCandidates.js
+run script glue/build/candidates/loadErvLocusCandidates.js
 
 # Set locus sequence lengths and kinds.
-run script glue/build/locus/setLocusSeqLengthsAndKinds.js
+run script glue/build/setLocusSeqLengthsAndKinds.js
 
 # Create permanent erv_locus rows from selected candidates,
 # populate their metadata, and link the imported sequences.
-run script glue/build/locus/loadErvLoci.js
+run script glue/build/loadErvLoci.js
 
 
 # -------------------------------------------------------------------------
@@ -39,20 +39,20 @@ run script glue/build/locus/loadErvLoci.js
 # -------------------------------------------------------------------------
 
 # Create curated locus-to-ERV-lineage associations.
-run script glue/build/locus/loadErvLocusLineageAssociations.js
+run script glue/build/loadErvLocusLineageAssociations.js
 
 # Create curated locus-to-LTR-lineage associations, where available.
-run script glue/build/locus/loadErvLocusLtrAssociations.js
+run script glue/build/loadErvLocusLtrAssociations.js
 
 # Load source-specific provenance records and connect them to ERV loci.
-run file glue/build/locus/loadErvLocusProvenance.glue
+run file glue/build/loadErvLocusProvenance.glue
 
 
 # -------------------------------------------------------------------------
 # 5. Create locus alignments
 # -------------------------------------------------------------------------
 
-run file glue/build/locus/hervAlignmentSteps.glue
+run file glue/build/hervAlignmentSteps.glue
 
 
 # =========================================================================
@@ -91,7 +91,7 @@ run file glue/build/locus/hervAlignmentSteps.glue
 # persistent registry, this input should no longer control routine builds.
 #
 
-# run file glue/build/locus/missillac/importLegacyMappings.glue
+# run file glue/build/missillac/importLegacyMappings.glue
 
 
 # -------------------------------------------------------------------------
@@ -112,7 +112,7 @@ run file glue/build/locus/hervAlignmentSteps.glue
 # Import the persistent Missillac ID registry and restore previous
 # assignments to matching erv_locus records.
 #
-# run script glue/build/locus/missillac/importMissillacRegistry.js
+# run script glue/build/missillac/importMissillacRegistry.js
 
 
 # -------------------------------------------------------------------------
@@ -133,7 +133,7 @@ run file glue/build/locus/hervAlignmentSteps.glue
 #
 
 # [TO WRITE]
-# run script glue/build/locus/missillac/validateImportedMissillacIds.js
+# run script glue/build/missillac/validateImportedMissillacIds.js
 
 
 # -------------------------------------------------------------------------
@@ -149,7 +149,7 @@ run file glue/build/locus/hervAlignmentSteps.glue
 # recycle identifiers belonging to retired/disappeared loci.
 #
 
-run script glue/build/locus/missillac/applyErvLocusNames.js
+run script glue/build/missillac/applyErvLocusNames.js
 
 
 # -------------------------------------------------------------------------
@@ -168,7 +168,7 @@ run script glue/build/locus/missillac/applyErvLocusNames.js
 #
 
 # [TO WRITE]
-# run script glue/build/locus/missillac/validateMissillacAssignments.js
+# run script glue/build/missillac/validateMissillacAssignments.js
 
 
 # -------------------------------------------------------------------------
@@ -193,7 +193,7 @@ run script glue/build/locus/missillac/applyErvLocusNames.js
 #
 
 # [TO WRITE]
-# run script glue/build/locus/missillac/exportMissillacRegistry.js
+# run script glue/build/missillac/exportMissillacRegistry.js
 
 
 # =========================================================================
@@ -201,7 +201,7 @@ run script glue/build/locus/missillac/applyErvLocusNames.js
 # =========================================================================
 
 # Summarise and check the completed locus layer.
-run script glue/build/locus/summariseErvLocusLayer.js
+run script glue/build/summariseErvLocusLayer.js
 
 validate
 
