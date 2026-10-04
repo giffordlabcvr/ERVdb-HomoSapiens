@@ -21,8 +21,8 @@
 // Resolution order:
 //
 //   1. Exact erv_lineage.id
-//   2. Exact erv_lineage.name
-//   3. Exact erv_lineage.full_name
+//   2. Exact erv_lineage.legacy_name
+//   3. Exact erv_lineage.legacy_full_name
 //   4. Exact erv_lineage_alias.alias_name
 //   5. Established legacy-name translation
 //   6. Conservative punctuation-normalised lineage matching
@@ -329,7 +329,8 @@ function makeUnresolved(
 // -------------------------------------------------------------------------
 //
 // These translate source nomenclature into curated names. The translated
-// name is then resolved through the current lineage IDs, names and aliases.
+// name is then resolved through the current lineage IDs, legacy names and
+// aliases.
 
 var lineageTranslationByKey = {
 
@@ -397,22 +398,22 @@ var lineageTranslationByKey = {
 // -------------------------------------------------------------------------
 
 var lineageById = {};
-var lineageByName = {};
-var lineageByFullName = {};
+var lineageByLegacyName = {};
+var lineageByLegacyFullName = {};
 var lineageByAlias = {};
 
-var ambiguousNames = {};
-var ambiguousFullNames = {};
+var ambiguousLegacyNames = {};
+var ambiguousLegacyFullNames = {};
 var ambiguousAliases = {};
 
 var lineageByNormalisedId = {};
-var lineageByNormalisedName = {};
-var lineageByNormalisedFullName = {};
+var lineageByNormalisedLegacyName = {};
+var lineageByNormalisedLegacyFullName = {};
 var lineageByNormalisedAlias = {};
 
 var ambiguousNormalisedIds = {};
-var ambiguousNormalisedNames = {};
-var ambiguousNormalisedFullNames = {};
+var ambiguousNormalisedLegacyNames = {};
+var ambiguousNormalisedLegacyFullNames = {};
 var ambiguousNormalisedAliases = {};
 
 
@@ -422,8 +423,8 @@ var lineageRows = glue.tableToObjects(
 		"custom-table-row",
 		LINEAGE_TABLE,
 		"id",
-		"name",
-		"full_name"
+		"legacy_name",
+		"legacy_full_name"
 	])
 );
 
@@ -431,8 +432,8 @@ var lineageRows = glue.tableToObjects(
 _.each(lineageRows, function(row) {
 
 	var lineageId = norm(row["id"]);
-	var lineageName = norm(row["name"]);
-	var fullName = norm(row["full_name"]);
+	var legacyName = norm(row["legacy_name"]);
+	var legacyFullName = norm(row["legacy_full_name"]);
 
 	if(lineageId === null) {
 		return;
@@ -448,30 +449,30 @@ _.each(lineageRows, function(row) {
 	);
 
 	addUniqueResolution(
-		lineageByName,
-		ambiguousNames,
-		lineageName,
+		lineageByLegacyName,
+		ambiguousLegacyNames,
+		legacyName,
 		lineageId
 	);
 
 	addUniqueResolution(
-		lineageByNormalisedName,
-		ambiguousNormalisedNames,
-		normalisedLookupKey(lineageName),
+		lineageByNormalisedLegacyName,
+		ambiguousNormalisedLegacyNames,
+		normalisedLookupKey(legacyName),
 		lineageId
 	);
 
 	addUniqueResolution(
-		lineageByFullName,
-		ambiguousFullNames,
-		fullName,
+		lineageByLegacyFullName,
+		ambiguousLegacyFullNames,
+		legacyFullName,
 		lineageId
 	);
 
 	addUniqueResolution(
-		lineageByNormalisedFullName,
-		ambiguousNormalisedFullNames,
-		normalisedLookupKey(fullName),
+		lineageByNormalisedLegacyFullName,
+		ambiguousNormalisedLegacyFullNames,
+		normalisedLookupKey(legacyFullName),
 		lineageId
 	);
 });
@@ -597,19 +598,19 @@ function resolveWithoutTranslation(rawName) {
 		);
 	}
 
-	if(lineageByName[rawName]) {
+	if(lineageByLegacyName[rawName]) {
 		return makeResolved(
-			lineageByName[rawName],
-			"erv_lineage.name",
+			lineageByLegacyName[rawName],
+			"erv_lineage.legacy_name",
 			rawName,
 			rawName
 		);
 	}
 
-	if(lineageByFullName[rawName]) {
+	if(lineageByLegacyFullName[rawName]) {
 		return makeResolved(
-			lineageByFullName[rawName],
-			"erv_lineage.full_name",
+			lineageByLegacyFullName[rawName],
+			"erv_lineage.legacy_full_name",
 			rawName,
 			rawName
 		);
@@ -635,19 +636,25 @@ function resolveWithoutTranslation(rawName) {
 		);
 	}
 
-	if(key !== null && lineageByNormalisedName[key]) {
+	if(
+		key !== null &&
+		lineageByNormalisedLegacyName[key]
+	) {
 		return makeResolved(
-			lineageByNormalisedName[key],
-			"normalised_erv_lineage.name",
+			lineageByNormalisedLegacyName[key],
+			"normalised_erv_lineage.legacy_name",
 			rawName,
 			rawName
 		);
 	}
 
-	if(key !== null && lineageByNormalisedFullName[key]) {
+	if(
+		key !== null &&
+		lineageByNormalisedLegacyFullName[key]
+	) {
 		return makeResolved(
-			lineageByNormalisedFullName[key],
-			"normalised_erv_lineage.full_name",
+			lineageByNormalisedLegacyFullName[key],
+			"normalised_erv_lineage.legacy_full_name",
 			rawName,
 			rawName
 		);
@@ -681,16 +688,16 @@ function resolveWithoutTranslation(rawName) {
 	}
 
 	var ambiguous = (
-		ambiguousNames[rawName] ||
-		ambiguousFullNames[rawName] ||
+		ambiguousLegacyNames[rawName] ||
+		ambiguousLegacyFullNames[rawName] ||
 		ambiguousAliases[rawName] ||
 		ambiguousLtrIds[rawName] ||
 		(
 			key !== null &&
 			(
 				ambiguousNormalisedIds[key] ||
-				ambiguousNormalisedNames[key] ||
-				ambiguousNormalisedFullNames[key] ||
+				ambiguousNormalisedLegacyNames[key] ||
+				ambiguousNormalisedLegacyFullNames[key] ||
 				ambiguousNormalisedAliases[key] ||
 				ambiguousNormalisedLtrIds[key]
 			)

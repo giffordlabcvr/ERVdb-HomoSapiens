@@ -1,22 +1,25 @@
 
+# Set log level
+console set log-level INFO
+
 # Define project-specific DB schema extensions
 schema-project ervdb
-
+ 
   # Permanent locus provenance tables
   run file schema/ervdbProvenanceTables.glue
-
+ 
   # Temporary/staging candidate table
   run file schema/ervdbStagingTables.glue
-
+ 
   # Legacy locus cross-referencing tables
   run file schema/ervdbLocusLegacyXrefTables.glue
-
+ 
   exit
 
 # Build ERVdb-HomoSapiens extension to ERVdb project  
 project ervdb
-
-  # Incorporate HERV locus data
-  run file glue/build/buildLocusLayer.glue
+ 
+  #run file glue/build/buildLocusLayer.glue
+  run file glue/build/buildLocusLayerTest.glue
   
   exit

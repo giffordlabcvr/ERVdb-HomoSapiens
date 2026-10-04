@@ -2,7 +2,7 @@
 //
 // Load DIGS provenance records from the two DIGS merge-database tables:
 //
-//   tabular/locus/digs_consolidated.tsv
+//   tabular/merge/digs_consolidated.tsv
 //   tabular/locus/digs-name-decision.tsv
 //
 // The files are joined on `idx`. Each DIGS record is linked to the

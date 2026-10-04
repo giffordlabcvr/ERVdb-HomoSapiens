@@ -2,7 +2,7 @@ delete module legacyAgeCalibrationImporter
 create module -f modules/build/legacyAgeCalibrationImporter.xml
 
 module legacyAgeCalibrationImporter invoke-function importGrandiHml6Dates \
-    tabular/locus/legacy/grandi-hml6-hg19-dates.tsv \
+    tabular/legacy/grandi-hml6-hg19-dates.tsv \
     grandi_hml6_hg19 \
     31167914
     

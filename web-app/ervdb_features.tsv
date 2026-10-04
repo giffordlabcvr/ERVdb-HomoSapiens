@@ -78,7 +78,7 @@ tas	whole_genome	Trans-activator gene	coding	true	true
 src	whole_genome	src protein	coding	true	true
 SL4	whole_genome	stem loop 4	noncoding	false	false
 SL3	whole_genome	stem loop 3	noncoding	false	false
-ZK	gag	gag Zinc Knuckle	coding	true	true
+ZK	gag	Gag zinc knuckle	coding	true	true
 U5_5LTR	5LTR	U5 region of 5' LTR	noncoding	false	false
 U3_5LTR	5LTR	U3 region of 5' LTR	noncoding	false	false
 TM	env	transmembrane domain	coding	true	true
@@ -93,10 +93,10 @@ RNaseH	pol	RNaseH	coding	true	true
 PP12	gag	RNA-binding phosphoprotein p12	coding	true	true
 NC	gag	nucleocapsid	coding	true	true
 FS	gag-pol	Frameshift signal	noncoding	false	false
-MHR	gag	gag Major homology region	coding	true	true
+MHR	gag	Gag major homology region	coding	true	true
 MA	gag	matrix	coding	true	true
 ISD	env	immunosuppressive domain	coding	true	true
-IN	pol	integrase	coding	true	true
+IN	pol	Integrase	coding	true	true
 g_patch	pro	G-patch	coding	true	true
 CA	gag	capsid	coding	true	true
 5U5	5LTR	5' LTR unique 5' region	noncoding	false	false
