@@ -18,7 +18,7 @@ var OUTPUT_FILE =
 	"tabular/locus/HERVs-RBRT-filtered.tsv";
 
 var BUILD_DIR =
-	"tabular/locus/build/";
+	"tabular/build/";
 
 var SUMMARY_FILE =
 	BUILD_DIR + "candidate_selection_summary.tsv";
