@@ -7,18 +7,25 @@
 //
 //   1. Reads the complete locus TSV.
 //   2. Excludes loci for which no corresponding FASTA is available.
-//   3. Classifies remaining loci as LTR or non-LTR using `status`.
-//   4. Uses `names_decision` as the current annotation-group key.
-//   5. Selects a diverse ~1000-locus test set.
-//   6. Caps representation of any one annotation group.
-//   7. Biases the set towards non-LTR / provirus-like loci.
-//   8. Writes the selected original TSV rows unchanged.
-//   9. Copies the corresponding <locus_id>.fas files into a
+//   3. Excludes loci that are not cleanly resolved:
+//        - case must be "Fully resolved"
+//        - makes_mosaic must not indicate a mosaic
+//   4. Classifies remaining loci as LTR or non-LTR using `status`.
+//   5. Uses `names_decision` as the current annotation-group key.
+//   6. Selects a diverse ~1000-locus test set.
+//   7. Caps representation of any one annotation group.
+//   8. Biases the set towards non-LTR / provirus-like loci.
+//   9. Writes the selected original TSV rows unchanged.
+//  10. Copies the corresponding <locus_id>.fas files into a
 //      separate GLUE source directory.
 //
 // IMPORTANT:
 //
-// `names_decision` is being used here as a practical sampling category.
+// This is deliberately a CLEAN integration-test dataset. It is intended
+// to exercise the normal locus-layer build across a broad range of
+// classifications without testing mosaic or unresolved-locus handling.
+//
+// `names_decision` is used here as a practical sampling category.
 // It is NOT assumed to correspond exactly to either an ERV lineage or
 // an LTR lineage.
 //
@@ -66,9 +73,9 @@ var TARGET_LTR = 300;
 var MAX_PER_GROUP = 50;
 
 
-// Number of unavailable FASTA examples to report.
+// Number of exclusion examples to report.
 
-var MAX_UNAVAILABLE_EXAMPLES = 20;
+var MAX_EXCLUSION_EXAMPLES = 20;
 
 
 // Reproducible pseudo-random selection.
@@ -199,6 +206,92 @@ function isLtrLocus(row) {
 }
 
 
+function isTrueValue(value) {
+
+	value =
+		norm(
+			value
+		);
+
+	if(value === null) {
+		return false;
+	}
+
+	var lower =
+		value.toLowerCase();
+
+	return (
+		lower === "true" ||
+		lower === "yes" ||
+		lower === "1"
+	);
+}
+
+
+function isCleanlyResolvedLocus(row) {
+
+	var caseValue =
+		norm(
+			row["case"]
+		);
+
+	if(
+		caseValue !==
+		"Fully resolved"
+	) {
+		return false;
+	}
+
+
+	if(
+		isTrueValue(
+			row["makes_mosaic"]
+		)
+	) {
+		return false;
+	}
+
+
+	return true;
+}
+
+
+function cleanResolutionExclusionReason(row) {
+
+	var caseValue =
+		norm(
+			row["case"]
+		);
+
+	if(
+		caseValue !==
+		"Fully resolved"
+	) {
+
+		return (
+			"case=" +
+			(
+				caseValue === null
+					? "<empty>"
+					: caseValue
+			)
+		);
+	}
+
+
+	if(
+		isTrueValue(
+			row["makes_mosaic"]
+		)
+	) {
+		return "makes_mosaic=true";
+	}
+
+
+	return "not cleanly resolved";
+}
+
+
 function annotationGroup(row) {
 
 	var value =
@@ -308,7 +401,7 @@ function shuffleArray(
 
 
 // -----------------------------------------------------------------------------
-// Read complete TSV and establish the sequence-bearing sampling universe
+// Read complete TSV and establish the clean sequence-bearing sampling universe
 // -----------------------------------------------------------------------------
 
 log(
@@ -363,9 +456,23 @@ var locusIdsSeen = {};
 
 var totalInputRows = 0;
 
+
+// FASTA exclusions.
+
 var unavailableSequenceCount = 0;
 
 var unavailableSequenceExamples = [];
+
+
+// Classification exclusions.
+
+var excludedClassificationCount = 0;
+
+var excludedClassificationExamples = [];
+
+var excludedByCase = {};
+
+var excludedMosaicCount = 0;
 
 
 for(
@@ -435,11 +542,6 @@ for(
 
 	// ---------------------------------------------------------------------
 	// Only sequence-bearing loci can participate in the locus-layer test.
-	//
-	// Some loci remain in the classified locus TSV even though sequence
-	// extraction failed after updates to the upstream merged dataset.
-	// These are legitimate records, but they cannot be used in this
-	// sequence-based integration test.
 	// ---------------------------------------------------------------------
 
 	var sourceFastaPath =
@@ -460,12 +562,82 @@ for(
 
 		if(
 			unavailableSequenceExamples.length <
-			MAX_UNAVAILABLE_EXAMPLES
+			MAX_EXCLUSION_EXAMPLES
 		) {
 
 			unavailableSequenceExamples.push(
 				locusId
 			);
+		}
+
+
+		continue;
+	}
+
+
+	// ---------------------------------------------------------------------
+	// Restrict the test set to cleanly resolved loci.
+	//
+	// We are not currently trying to exercise mosaic resolution or other
+	// difficult classification cases. Those can be tested separately.
+	// ---------------------------------------------------------------------
+
+	if(
+		!isCleanlyResolvedLocus(
+			row
+		)
+	) {
+
+		excludedClassificationCount++;
+
+
+		var caseValue =
+			norm(
+				row["case"]
+			);
+
+
+		if(
+			caseValue !==
+			"Fully resolved"
+		) {
+
+			var caseKey =
+				caseValue === null
+					? "<empty>"
+					: caseValue;
+
+
+			if(
+				excludedByCase[caseKey] ===
+				undefined
+			) {
+				excludedByCase[caseKey] = 0;
+			}
+
+
+			excludedByCase[caseKey]++;
+		}
+
+
+		if(
+			isTrueValue(
+				row["makes_mosaic"]
+			)
+		) {
+			excludedMosaicCount++;
+		}
+
+
+		if(
+			excludedClassificationExamples.length <
+			MAX_EXCLUSION_EXAMPLES
+		) {
+
+			excludedClassificationExamples.push({
+				locusId: locusId,
+				reason: cleanResolutionExclusionReason(row)
+			});
 		}
 
 
@@ -491,18 +663,12 @@ for(
 
 
 // -----------------------------------------------------------------------------
-// Report sequence availability
+// Report sampling-universe exclusions
 // -----------------------------------------------------------------------------
 
 log(
 	"Full TSV locus rows: " +
 	totalInputRows
-);
-
-
-log(
-	"Sequence-bearing loci available for sampling: " +
-	rows.length
 );
 
 
@@ -551,6 +717,73 @@ if(
 }
 
 
+log(
+	"Loci excluded because they were not cleanly resolved: " +
+	excludedClassificationCount
+);
+
+
+var excludedCaseNames =
+	Object.keys(
+		excludedByCase
+	);
+
+
+excludedCaseNames.sort();
+
+
+_.each(
+	excludedCaseNames,
+	function(caseName) {
+
+		log(
+			"  case=" +
+			caseName +
+			": " +
+			excludedByCase[
+				caseName
+			]
+		);
+	}
+);
+
+
+log(
+	"  makes_mosaic=true: " +
+	excludedMosaicCount
+);
+
+
+if(
+	excludedClassificationExamples.length > 0
+) {
+
+	log(
+		"Examples of loci excluded by classification:"
+	);
+
+
+	_.each(
+		excludedClassificationExamples,
+		function(example) {
+
+			log(
+				"  " +
+				example.locusId +
+				": " +
+				example.reason
+			);
+		}
+	);
+}
+
+
+log(
+	"Clean sequence-bearing loci available for sampling: " +
+	rows.length
+);
+
+
 if(
 	rows.length <
 	TARGET_TOTAL
@@ -559,7 +792,7 @@ if(
 	throw new Error(
 		"Only " +
 		rows.length +
-		" sequence-bearing loci are available, fewer than TARGET_TOTAL=" +
+		" clean sequence-bearing loci are available, fewer than TARGET_TOTAL=" +
 		TARGET_TOTAL
 	);
 }
@@ -597,9 +830,32 @@ _.each(
 
 
 log(
+	"Clean non-LTR loci available: " +
+	_.filter(
+		rows,
+		function(row) {
+			return !row._isLtr;
+		}
+	).length
+);
+
+
+log(
+	"Clean LTR loci available: " +
+	_.filter(
+		rows,
+		function(row) {
+			return row._isLtr;
+		}
+	).length
+);
+
+
+log(
 	"Non-LTR annotation groups available: " +
 	Object.keys(nonLtrGroups).length
 );
+
 
 log(
 	"LTR annotation groups available: " +
@@ -1309,14 +1565,20 @@ log(
 
 
 log(
-	"Sequence-bearing loci eligible for sampling: " +
-	rows.length
+	"Loci excluded because FASTA was unavailable: " +
+	unavailableSequenceCount
 );
 
 
 log(
-	"Loci excluded because FASTA was unavailable: " +
-	unavailableSequenceCount
+	"Loci excluded because not cleanly resolved: " +
+	excludedClassificationCount
+);
+
+
+log(
+	"Clean sequence-bearing loci eligible for sampling: " +
+	rows.length
 );
 
 
