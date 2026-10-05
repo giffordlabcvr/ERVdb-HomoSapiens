@@ -2,7 +2,7 @@
 //
 // Load RetroTector provenance records from:
 //
-//   tabular/merge/retrotector.tsv
+//   tabular/provenance/retrotector.tsv
 //
 // Each RetroTector record is connected to the permanent ERV locus that
 // references it through erv_locus_candidate.retrotector_ids.
@@ -29,7 +29,7 @@
 // Existing records are updated. Stale records are not deleted.
 
 var INPUT_FILE =
-	"tabular/merge/retrotector.tsv";
+	"tabular/provenance/retrotector.tsv";
 
 var CANDIDATE_TABLE =
 	"erv_locus_candidate";

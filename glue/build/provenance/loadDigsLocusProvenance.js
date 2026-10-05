@@ -3,7 +3,7 @@
 // Load DIGS provenance records from the two DIGS merge-database tables:
 //
 //   tabular/merge/digs_consolidated.tsv
-//   tabular/locus/digs-name-decision.tsv
+//   tabular/provenance/digs-name-decision.tsv
 //
 // The files are joined on `idx`. Each DIGS record is linked to the
 // permanent erv_locus referenced through erv_locus_candidate.digs_ids.
@@ -19,10 +19,10 @@
 //   digs_locus -> erv_locus
 
 var CONSOLIDATED_FILE =
-	"tabular/locus/digs_consolidated.tsv";
+	"tabular/provenance/digs_consolidated.tsv";
 
 var NAME_DECISION_FILE =
-	"tabular/locus/digs-name-decision.tsv";
+	"tabular/provenance/digs-name-decision.tsv";
 
 var CANDIDATE_TABLE =
 	"erv_locus_candidate";

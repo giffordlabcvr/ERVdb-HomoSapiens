@@ -1,35 +1,34 @@
-// glue/build/locus/msa/addResolvedLociToAlignments.js
+// glue/build/msa/addResolvedLociToAlignments.js
 //
-// Add permanent ERV locus sequences to their resolved ERV lineage,
-// ERV sublineage, or LTR alignments.
+// Add permanent ERV locus sequences to the appropriate ERV-lineage,
+// ERV-sublineage, ERV-derived-repeat, or LTR-lineage alignments.
 //
-// ERV alignment names are derived directly from the standard
-// erv_lineage.id:
+// ERV locus placement is determined from erv_locus_lineage_assoc and the
+// entity_type of the associated erv_lineage:
 //
-//   ERV-1.Eta.1       -> AL_LINEAGE_1_Eta_1
-//   ERV-1.Zeta.19     -> AL_SUBLINEAGE_1_Zeta_19
-//   ERVR-1.Theta.101  -> AL_SUBLINEAGE_1R_Theta_101
+//   lineage             -> AL_LINEAGE_*
+//   sublineage          -> AL_SUBLINEAGE_*
+//   erv_derived_repeat  -> AL_ERV_DERIVED_REPEAT_*
+//   uncertain           -> excluded
 //
-// LTR alignments are matched by normalising the suffix of existing
-// AL_LTR_* alignment names and comparing it with ltr_lineage.id.
+// LTR locus placement is determined from erv_locus_ltr_assoc.
 //
-// This script deliberately uses permanent locus associations rather than
-// the original staging classifications:
+// Only loci having an unambiguous target at the relevant level are added.
+// Existing alignment members are not added again.
 //
-//   sequence -> erv_locus
-//   erv_locus <- erv_locus_lineage_assoc -> erv_lineage
-//   erv_locus <- erv_locus_ltr_assoc     -> ltr_lineage
-//
-// A locus is assigned only when:
-//
-//   1. exactly one sequence is linked to the erv_locus row;
-//   2. exactly one distinct target lineage is identified;
-//   3. the expected alignment exists.
-//
-// Loci with conflicting lineage associations are reported and skipped.
+// ERV-derived-repeat alignments are treated as independent alignment
+// objects here. Their eventual placement within, or outside, the broader
+// alignment hierarchy can be decided separately.
 
-var DRY_RUN = false;
-var BATCH_SIZE = 250;
+
+var LOCUS_TABLE =
+	"erv_locus";
+
+var LINEAGE_ASSOC_TABLE =
+	"erv_locus_lineage_assoc";
+
+var LTR_ASSOC_TABLE =
+	"erv_locus_ltr_assoc";
 
 
 // -------------------------------------------------------------------------
@@ -43,25 +42,30 @@ function log(message) {
 
 function norm(value) {
 
-	if(value === null || value === undefined) {
+	if(value === null ||
+		value === undefined) {
+
 		return null;
 	}
 
-	var result = ("" + value).trim();
+	var result =
+		("" + value).trim();
 
 	if(result === "") {
 		return null;
 	}
 
-	var lower = result.toLowerCase();
+	var lower =
+		result.toLowerCase();
 
 	if(lower === "n/a" ||
 		lower === "na" ||
 		lower === "n/k" ||
 		lower === "nk" ||
-		lower === "unknown" ||
 		lower === "null" ||
-		lower === "none") {
+		lower === "none" ||
+		lower === "unknown" ||
+		result === "-") {
 
 		return null;
 	}
@@ -70,37 +74,29 @@ function norm(value) {
 }
 
 
-function escapeQuotes(value) {
+function queryObjects(commandWords) {
 
-	return ("" + value)
-		.replace(/\\/g, "\\\\")
-		.replace(/'/g, "\\'");
+	return glue.tableToObjects(
+		glue.command(
+			commandWords
+		)
+	);
 }
 
 
-function runCommand(commandWords) {
-
-	if(DRY_RUN) {
-
-		log(
-			"[DRY RUN] " +
-			commandWords.join(" ")
-		);
-
-		return null;
-	}
-
-	return glue.command(commandWords);
-}
-
-
-function addUniqueValue(map, key, value) {
+function addUniqueValue(
+	map,
+	key,
+	value
+) {
 
 	if(map[key] === undefined) {
 		map[key] = [];
 	}
 
-	for(var i = 0; i < map[key].length; i++) {
+	for(var i = 0;
+		i < map[key].length;
+		i++) {
 
 		if(map[key][i] === value) {
 			return;
@@ -113,7 +109,9 @@ function addUniqueValue(map, key, value) {
 
 function sortedKeys(map) {
 
-	var keys = Object.keys(map);
+	var keys =
+		Object.keys(map);
+
 	keys.sort();
 
 	return keys;
@@ -121,50 +119,50 @@ function sortedKeys(map) {
 
 
 // -------------------------------------------------------------------------
-// ERV alignment naming
+// Alignment-name utilities
 // -------------------------------------------------------------------------
 
-function standardErvAlignmentSuffix(lineageId) {
+function standardErvAlignmentSuffix(
+	lineageId
+) {
 
-	lineageId = norm(lineageId);
+	lineageId =
+		norm(lineageId);
 
 	if(lineageId === null) {
 		return null;
 	}
 
-	var suffix = lineageId
+	/*
+	 * ERV entity IDs use dots as hierarchical separators, whereas
+	 * alignment names use underscores.
+	 *
+	 * Examples:
+	 *
+	 *   ERV-1.Eta.1
+	 *       -> 1_Eta_1
+	 *
+	 *   ERV-1.Zeta.W9P.P.1
+	 *       -> 1_Zeta_W9P_P_1
+	 *
+	 *   ERVR-1.Theta.101
+	 *       -> 1_Theta_101
+	 */
 
-		// ERVR-1.Theta.101 -> 1R.Theta.101
-		.replace(
-			/^ERVR-([A-Za-z0-9]+)(?=\.|$)/i,
-			"$1R"
-		)
+	var suffix =
+		lineageId;
 
-		// ERV-1.Eta.1 -> 1.Eta.1
-		.replace(
-			/^ERV-/i,
-			""
-		)
-
-		// Replace dots, hyphens and other separators with underscores.
-		.replace(
-			/[^A-Za-z0-9]+/g,
-			"_"
-		)
-
-		.replace(
-			/^_+/,
-			""
-		)
-
-		.replace(
-			/_+$/,
+	suffix =
+		suffix.replace(
+			/^ERVR?-/,
 			""
 		);
 
-	if(suffix === "") {
-		return null;
-	}
+	suffix =
+		suffix.replace(
+			/\./g,
+			"_"
+		);
 
 	return suffix;
 }
@@ -172,7 +170,7 @@ function standardErvAlignmentSuffix(lineageId) {
 
 function expectedErvAlignmentName(
 	lineageId,
-	entityLevel
+	entityType
 ) {
 
 	var suffix =
@@ -180,20 +178,19 @@ function expectedErvAlignmentName(
 			lineageId
 		);
 
-	if(suffix === null) {
+	entityType =
+		norm(entityType);
+
+	if(suffix === null ||
+		entityType === null) {
+
 		return null;
 	}
 
-	entityLevel = norm(entityLevel);
+	entityType =
+		entityType.toLowerCase();
 
-	if(entityLevel === null) {
-		return null;
-	}
-
-	var lowerLevel =
-		entityLevel.toLowerCase();
-
-	if(lowerLevel === "lineage") {
+	if(entityType === "lineage") {
 
 		return (
 			"AL_LINEAGE_" +
@@ -201,7 +198,7 @@ function expectedErvAlignmentName(
 		);
 	}
 
-	if(lowerLevel === "sublineage") {
+	if(entityType === "sublineage") {
 
 		return (
 			"AL_SUBLINEAGE_" +
@@ -209,29 +206,39 @@ function expectedErvAlignmentName(
 		);
 	}
 
+	if(entityType === "erv_derived_repeat") {
+
+		return (
+			"AL_ERV_DERIVED_REPEAT_" +
+			suffix
+		);
+	}
+
+	/*
+	 * In particular, entity_type = "uncertain" has no resolved
+	 * alignment target.
+	 */
 	return null;
 }
 
 
-// -------------------------------------------------------------------------
-// LTR alignment-name matching
-//
-// Existing LTR alignment names are retained. We normalise both the
-// ltr_lineage.id and the suffix of AL_LTR_* so that punctuation differences
-// do not prevent a match.
-// -------------------------------------------------------------------------
+function normaliseLtrAlignmentKey(
+	ltrLineageId
+) {
 
-function normalisedLtrKey(value) {
+	ltrLineageId =
+		norm(ltrLineageId);
 
-	value = norm(value);
-
-	if(value === null) {
+	if(ltrLineageId === null) {
 		return null;
 	}
 
-	return value
-		.replace(/[^A-Za-z0-9]/g, "")
-		.toLowerCase();
+	return ltrLineageId
+		.toUpperCase()
+		.replace(
+			/[^A-Z0-9]/g,
+			""
+		);
 }
 
 
@@ -239,55 +246,61 @@ function normalisedLtrKey(value) {
 // Load existing alignments
 // -------------------------------------------------------------------------
 
-log("Loading existing alignments");
+log(
+	"Loading existing alignments"
+);
 
 var alignmentRows =
-	glue.tableToObjects(
-		glue.command([
-			"list",
-			"alignment",
-			"name"
-		])
-	);
+	queryObjects([
+		"list",
+		"alignment",
+		"name",
+		"-s",
+		"name"
+	]);
 
-var alignmentExists = {};
-var ltrAlignmentByKey = {};
-var duplicateLtrAlignmentKeys = {};
+var existingAlignmentByName = {};
 
-for(var i = 0; i < alignmentRows.length; i++) {
+var ltrAlignmentNamesByNormalisedKey = {};
+
+for(var i = 0;
+	i < alignmentRows.length;
+	i++) {
 
 	var alignmentName =
-		norm(alignmentRows[i].name);
+		norm(
+			alignmentRows[i].name
+		);
 
 	if(alignmentName === null) {
 		continue;
 	}
 
-	alignmentExists[alignmentName] = true;
+	existingAlignmentByName[
+		alignmentName
+	] = true;
 
-	if(alignmentName.indexOf("AL_LTR_") === 0) {
+	if(alignmentName.indexOf(
+		"AL_LTR_"
+	) === 0) {
 
-		var ltrSuffix =
+		var ltrPart =
 			alignmentName.substring(
 				"AL_LTR_".length
 			);
 
-		var ltrKey =
-			normalisedLtrKey(
-				ltrSuffix
+		var normalisedKey =
+			normaliseLtrAlignmentKey(
+				ltrPart
 			);
 
-		if(ltrKey === null) {
-			continue;
-		}
+		if(normalisedKey !== null) {
 
-		if(ltrAlignmentByKey[ltrKey] !== undefined &&
-			ltrAlignmentByKey[ltrKey] !== alignmentName) {
-
-			duplicateLtrAlignmentKeys[ltrKey] = true;
-		}
-		else {
-			ltrAlignmentByKey[ltrKey] = alignmentName;
+			addUniqueValue(
+				ltrAlignmentNamesByNormalisedKey,
+				normalisedKey,
+				alignmentName
+			);
 		}
 	}
 }
@@ -297,9 +310,32 @@ log(
 	alignmentRows.length
 );
 
+
+var ambiguousLtrAlignmentKeyCount = 0;
+
+var ltrKeys =
+	sortedKeys(
+		ltrAlignmentNamesByNormalisedKey
+	);
+
+for(var i = 0;
+	i < ltrKeys.length;
+	i++) {
+
+	var ltrKey =
+		ltrKeys[i];
+
+	if(ltrAlignmentNamesByNormalisedKey[
+		ltrKey
+	].length > 1) {
+
+		ambiguousLtrAlignmentKeyCount++;
+	}
+}
+
 log(
 	"Ambiguous normalised LTR alignment keys: " +
-	Object.keys(duplicateLtrAlignmentKeys).length
+	ambiguousLtrAlignmentKeyCount
 );
 
 
@@ -307,94 +343,137 @@ log(
 // Load permanent ERV loci
 // -------------------------------------------------------------------------
 
-log("Loading permanent erv_locus rows");
+log(
+	"Loading permanent erv_locus rows"
+);
 
 var locusRows =
-	glue.tableToObjects(
-		glue.command([
-			"list",
-			"custom-table-row",
-			"erv_locus",
-			"id",
-			"locus_type",
-			"taxonomic_resolution",
-			"structural_profile"
-		])
-	);
+	queryObjects([
+		"list",
+		"custom-table-row",
+		LOCUS_TABLE,
+		"id",
+		"locus_type",
+		"taxonomic_resolution",
+		"-s",
+		"id"
+	]);
 
 var locusById = {};
 
-for(var i = 0; i < locusRows.length; i++) {
+for(var i = 0;
+	i < locusRows.length;
+	i++) {
+
+	var locusRow =
+		locusRows[i];
 
 	var locusId =
-		norm(locusRows[i].id);
+		norm(
+			locusRow.id
+		);
 
-	if(locusId !== null) {
-		locusById[locusId] = locusRows[i];
+	if(locusId === null) {
+		continue;
 	}
+
+	locusById[
+		locusId
+	] = {
+		locus_id:
+			locusId,
+
+		locus_type:
+			norm(
+				locusRow.locus_type
+			),
+
+		taxonomic_resolution:
+			norm(
+				locusRow.taxonomic_resolution
+			)
+	};
 }
 
 log(
 	"Permanent ERV loci loaded: " +
-	locusRows.length
+	Object.keys(locusById).length
 );
 
 
 // -------------------------------------------------------------------------
-// Load locus sequences
+// Load sequences linked to permanent ERV loci
 // -------------------------------------------------------------------------
 
-log("Loading sequences linked to permanent ERV loci");
+log(
+	"Loading sequences linked to permanent ERV loci"
+);
 
 var sequenceRows =
-	glue.tableToObjects(
-		glue.command([
-			"list",
-			"sequence",
-			"source.name",
-			"sequenceID",
-			"erv_locus.id",
-			"-w",
-			"erv_locus.id != null"
-		])
-	);
+	queryObjects([
+		"list",
+		"sequence",
+		"source.name",
+		"sequenceID",
+		"erv_locus.id",
+		"-w",
+		"erv_locus.id != null",
+		"-s",
+		"erv_locus.id,source.name,sequenceID"
+	]);
 
-var sequencesByLocus = {};
+var sequenceRefsByLocus = {};
 
-for(var i = 0; i < sequenceRows.length; i++) {
+for(var i = 0;
+	i < sequenceRows.length;
+	i++) {
 
 	var sequenceRow =
 		sequenceRows[i];
 
-	var sequenceLocusId =
+	var locusId =
 		norm(
-			sequenceRow["erv_locus.id"]
+			sequenceRow[
+				"erv_locus.id"
+			]
 		);
 
 	var sourceName =
 		norm(
-			sequenceRow["source.name"]
+			sequenceRow[
+				"source.name"
+			]
 		);
 
-	var sequenceId =
+	var sequenceID =
 		norm(
 			sequenceRow.sequenceID
 		);
 
-	if(sequenceLocusId === null ||
+	if(locusId === null ||
 		sourceName === null ||
-		sequenceId === null) {
+		sequenceID === null) {
 
 		continue;
 	}
 
-	if(sequencesByLocus[sequenceLocusId] === undefined) {
-		sequencesByLocus[sequenceLocusId] = [];
+	if(sequenceRefsByLocus[
+		locusId
+	] === undefined) {
+
+		sequenceRefsByLocus[
+			locusId
+		] = [];
 	}
 
-	sequencesByLocus[sequenceLocusId].push({
-		sourceName: sourceName,
-		sequenceId: sequenceId
+	sequenceRefsByLocus[
+		locusId
+	].push({
+		source_name:
+			sourceName,
+
+		sequence_id:
+			sequenceID
 	});
 }
 
@@ -405,70 +484,91 @@ log(
 
 
 // -------------------------------------------------------------------------
-// Load locus-to-ERV-lineage associations
+// Load ERV locus-to-lineage associations
 // -------------------------------------------------------------------------
 
-log("Loading ERV locus-to-lineage associations");
+log(
+	"Loading ERV locus-to-lineage associations"
+);
 
-var ervAssociationRows =
-	glue.tableToObjects(
-		glue.command([
-			"list",
-			"custom-table-row",
-			"erv_locus_lineage_assoc",
-			"id",
-			"erv_locus.id",
-			"erv_lineage.id",
-			"erv_lineage.entity_level",
-			"association_role",
-			"evidence",
-			"confidence"
-		])
-	);
+var lineageAssociationRows =
+	queryObjects([
+		"list",
+		"custom-table-row",
+		LINEAGE_ASSOC_TABLE,
+		"id",
+		"erv_locus.id",
+		"erv_lineage.id",
+		"erv_lineage.entity_type",
+		"association_role",
+		"evidence",
+		"confidence",
+		"-s",
+		"erv_locus.id,erv_lineage.id"
+	]);
 
 var ervTargetsByLocus = {};
 var ervTargetDetailsByKey = {};
 
-for(var i = 0; i < ervAssociationRows.length; i++) {
+var excludedUncertainAssociationCount = 0;
+var excludedUnsupportedEntityTypeCount = 0;
+
+for(var i = 0;
+	i < lineageAssociationRows.length;
+	i++) {
 
 	var associationRow =
-		ervAssociationRows[i];
+		lineageAssociationRows[i];
 
 	var associatedLocusId =
 		norm(
-			associationRow["erv_locus.id"]
+			associationRow[
+				"erv_locus.id"
+			]
 		);
 
 	var ervLineageId =
 		norm(
-			associationRow["erv_lineage.id"]
+			associationRow[
+				"erv_lineage.id"
+			]
 		);
 
-	var entityLevel =
+	var entityType =
 		norm(
 			associationRow[
-				"erv_lineage.entity_level"
+				"erv_lineage.entity_type"
 			]
 		);
 
 	if(associatedLocusId === null ||
 		ervLineageId === null ||
-		entityLevel === null) {
+		entityType === null) {
 
 		continue;
 	}
 
-	var lowerEntityLevel =
-		entityLevel.toLowerCase();
+	var lowerEntityType =
+		entityType.toLowerCase();
 
-	if(lowerEntityLevel !== "lineage" &&
-		lowerEntityLevel !== "sublineage") {
+	if(lowerEntityType ===
+		"uncertain") {
 
+		excludedUncertainAssociationCount++;
+		continue;
+	}
+
+	if(lowerEntityType !== "lineage" &&
+		lowerEntityType !== "sublineage" &&
+		lowerEntityType !==
+			"erv_derived_repeat") {
+
+		excludedUnsupportedEntityTypeCount++;
 		continue;
 	}
 
 	var targetKey =
-		lowerEntityLevel +
+		lowerEntityType +
 		"\t" +
 		ervLineageId;
 
@@ -478,57 +578,80 @@ for(var i = 0; i < ervAssociationRows.length; i++) {
 		targetKey
 	);
 
-	ervTargetDetailsByKey[targetKey] = {
-		lineageId: ervLineageId,
-		entityLevel: lowerEntityLevel
+	ervTargetDetailsByKey[
+		targetKey
+	] = {
+		lineage_id:
+			ervLineageId,
+
+		entity_type:
+			lowerEntityType
 	};
 }
 
 log(
-	"ERV locus-lineage association rows loaded: " +
-	ervAssociationRows.length
+	"ERV locus-to-lineage association rows loaded: " +
+	lineageAssociationRows.length
+);
+
+log(
+	"Uncertain ERV-lineage associations excluded: " +
+	excludedUncertainAssociationCount
+);
+
+log(
+	"Unsupported ERV entity-type associations excluded: " +
+	excludedUnsupportedEntityTypeCount
 );
 
 
 // -------------------------------------------------------------------------
-// Load locus-to-LTR associations
+// Load ERV locus-to-LTR-lineage associations
 // -------------------------------------------------------------------------
 
-log("Loading ERV locus-to-LTR associations");
+log(
+	"Loading ERV locus-to-LTR-lineage associations"
+);
 
 var ltrAssociationRows =
-	glue.tableToObjects(
-		glue.command([
-			"list",
-			"custom-table-row",
-			"erv_locus_ltr_assoc",
-			"id",
-			"erv_locus.id",
-			"ltr_lineage.id",
-			"association_role",
-			"evidence",
-			"confidence"
-		])
-	);
+	queryObjects([
+		"list",
+		"custom-table-row",
+		LTR_ASSOC_TABLE,
+		"id",
+		"erv_locus.id",
+		"ltr_lineage.id",
+		"association_role",
+		"evidence",
+		"confidence",
+		"-s",
+		"erv_locus.id,ltr_lineage.id"
+	]);
 
 var ltrTargetsByLocus = {};
 
-for(var i = 0; i < ltrAssociationRows.length; i++) {
+for(var i = 0;
+	i < ltrAssociationRows.length;
+	i++) {
 
-	var ltrAssociationRow =
+	var associationRow =
 		ltrAssociationRows[i];
 
-	var ltrLocusId =
+	var associatedLocusId =
 		norm(
-			ltrAssociationRow["erv_locus.id"]
+			associationRow[
+				"erv_locus.id"
+			]
 		);
 
 	var ltrLineageId =
 		norm(
-			ltrAssociationRow["ltr_lineage.id"]
+			associationRow[
+				"ltr_lineage.id"
+			]
 		);
 
-	if(ltrLocusId === null ||
+	if(associatedLocusId === null ||
 		ltrLineageId === null) {
 
 		continue;
@@ -536,145 +659,288 @@ for(var i = 0; i < ltrAssociationRows.length; i++) {
 
 	addUniqueValue(
 		ltrTargetsByLocus,
-		ltrLocusId,
+		associatedLocusId,
 		ltrLineageId
 	);
 }
 
 log(
-	"ERV locus-LTR association rows loaded: " +
+	"ERV locus-to-LTR-lineage association rows loaded: " +
 	ltrAssociationRows.length
 );
 
 
 // -------------------------------------------------------------------------
-// Resolve locus assignments
+// Resolve an LTR-lineage ID to an existing LTR alignment
 // -------------------------------------------------------------------------
 
-var assignments = [];
+function resolveLtrAlignmentName(
+	ltrLineageId
+) {
 
-var lociWithoutSequence = [];
-var lociWithMultipleSequences = [];
-var lociWithoutTarget = [];
-var lociWithMultipleTargets = [];
-var lociWithMissingAlignment = [];
-var lociWithUnsupportedType = [];
+	var directName =
+		"AL_LTR_" +
+		ltrLineageId;
+
+	if(existingAlignmentByName[
+		directName
+	] === true) {
+
+		return {
+			status:
+				"resolved",
+
+			alignment_name:
+				directName
+		};
+	}
+
+	var normalisedKey =
+		normaliseLtrAlignmentKey(
+			ltrLineageId
+		);
+
+	if(normalisedKey === null) {
+
+		return {
+			status:
+				"missing",
+
+			alignment_name:
+				null
+		};
+	}
+
+	var candidates =
+		ltrAlignmentNamesByNormalisedKey[
+			normalisedKey
+		];
+
+	if(candidates === undefined ||
+		candidates.length === 0) {
+
+		return {
+			status:
+				"missing",
+
+			alignment_name:
+				null
+		};
+	}
+
+	if(candidates.length > 1) {
+
+		return {
+			status:
+				"ambiguous",
+
+			alignment_name:
+				null,
+
+			candidates:
+				candidates
+		};
+	}
+
+	return {
+		status:
+			"resolved",
+
+		alignment_name:
+			candidates[0]
+	};
+}
+
+
+
+// -------------------------------------------------------------------------
+// Determine required alignment placements
+// -------------------------------------------------------------------------
+
+log(
+	"Determining resolved locus alignment placements"
+);
+
+var placements = [];
+
+var skippedNoSequence = [];
+var skippedMultipleSequences = [];
+
+var skippedNoErvTarget = [];
+var skippedMultipleErvTargets = [];
+var skippedMissingErvAlignment = [];
+
+var skippedNoLtrTarget = [];
+var skippedMultipleLtrTargets = [];
+var skippedMissingLtrAlignment = [];
+var skippedAmbiguousLtrAlignment = [];
 
 var locusIds =
 	sortedKeys(
 		locusById
 	);
 
-for(var i = 0; i < locusIds.length; i++) {
+for(var i = 0;
+	i < locusIds.length;
+	i++) {
 
 	var locusId =
 		locusIds[i];
 
-	var locusRow =
-		locusById[locusId];
+	var locus =
+		locusById[
+			locusId
+		];
 
-	var locusType =
-		norm(
-			locusRow.locus_type
-		);
+	var sequenceRefs =
+		sequenceRefsByLocus[
+			locusId
+		];
 
-	var locusSequences =
-		sequencesByLocus[locusId];
+	if(sequenceRefs === undefined ||
+		sequenceRefs.length === 0) {
 
-	if(locusSequences === undefined ||
-		locusSequences.length === 0) {
-
-		lociWithoutSequence.push(
+		skippedNoSequence.push(
 			locusId
 		);
 
 		continue;
 	}
 
-	if(locusSequences.length !== 1) {
+	if(sequenceRefs.length !== 1) {
 
-		lociWithMultipleSequences.push({
-			locusId: locusId,
-			count: locusSequences.length
-		});
+		skippedMultipleSequences.push(
+			locusId
+		);
 
 		continue;
 	}
 
 	var sequenceRef =
-		locusSequences[0];
+		sequenceRefs[0];
 
-	var alignmentName = null;
-	var targetDescription = null;
+	var locusType =
+		locus.locus_type !== null
+			? locus.locus_type.toLowerCase()
+			: null;
 
-	if(locusType !== null &&
-		locusType.toLowerCase() === "erv") {
+
+	// -----------------------------------------------------------------
+	// ERV / internal locus placement
+	// -----------------------------------------------------------------
+
+	if(locusType === "erv") {
 
 		var ervTargets =
-			ervTargetsByLocus[locusId];
+			ervTargetsByLocus[
+				locusId
+			];
 
 		if(ervTargets === undefined ||
 			ervTargets.length === 0) {
 
-			lociWithoutTarget.push({
-				locusId: locusId,
-				locusType: locusType
-			});
+			skippedNoErvTarget.push(
+				locusId
+			);
 
 			continue;
 		}
 
 		if(ervTargets.length !== 1) {
 
-			lociWithMultipleTargets.push({
-				locusId: locusId,
-				locusType: locusType,
-				targets: ervTargets.join(",")
+			skippedMultipleErvTargets.push(
+				locusId
+			);
+
+			continue;
+		}
+
+		var ervTargetKey =
+			ervTargets[0];
+
+		var ervTarget =
+			ervTargetDetailsByKey[
+				ervTargetKey
+			];
+
+		var ervAlignmentName =
+			expectedErvAlignmentName(
+				ervTarget.lineage_id,
+				ervTarget.entity_type
+			);
+
+		if(ervAlignmentName === null ||
+			existingAlignmentByName[
+				ervAlignmentName
+			] !== true) {
+
+			skippedMissingErvAlignment.push({
+				locus_id:
+					locusId,
+
+				lineage_id:
+					ervTarget.lineage_id,
+
+				entity_type:
+					ervTarget.entity_type,
+
+				expected_alignment:
+					ervAlignmentName
 			});
 
 			continue;
 		}
 
-		var ervTarget =
-			ervTargetDetailsByKey[
-				ervTargets[0]
-			];
+		placements.push({
+			locus_id:
+				locusId,
 
-		alignmentName =
-			expectedErvAlignmentName(
-				ervTarget.lineageId,
-				ervTarget.entityLevel
-			);
+			source_name:
+				sequenceRef.source_name,
 
-		targetDescription =
-			ervTarget.entityLevel +
-			":" +
-			ervTarget.lineageId;
+			sequence_id:
+				sequenceRef.sequence_id,
+
+			alignment_name:
+				ervAlignmentName,
+
+			target_type:
+				ervTarget.entity_type,
+
+			target_id:
+				ervTarget.lineage_id
+		});
+
+		continue;
 	}
-	else if(locusType !== null &&
-		locusType.toLowerCase() === "solo_ltr") {
+
+
+	// -----------------------------------------------------------------
+	// Solo-LTR locus placement
+	// -----------------------------------------------------------------
+
+	if(locusType === "solo_ltr") {
 
 		var ltrTargets =
-			ltrTargetsByLocus[locusId];
+			ltrTargetsByLocus[
+				locusId
+			];
 
 		if(ltrTargets === undefined ||
 			ltrTargets.length === 0) {
 
-			lociWithoutTarget.push({
-				locusId: locusId,
-				locusType: locusType
-			});
+			skippedNoLtrTarget.push(
+				locusId
+			);
 
 			continue;
 		}
 
 		if(ltrTargets.length !== 1) {
 
-			lociWithMultipleTargets.push({
-				locusId: locusId,
-				locusType: locusType,
-				targets: ltrTargets.join(",")
-			});
+			skippedMultipleLtrTargets.push(
+				locusId
+			);
 
 			continue;
 		}
@@ -682,211 +948,254 @@ for(var i = 0; i < locusIds.length; i++) {
 		var ltrLineageId =
 			ltrTargets[0];
 
-		var ltrKey =
-			normalisedLtrKey(
+		var ltrResolution =
+			resolveLtrAlignmentName(
 				ltrLineageId
 			);
 
-		if(duplicateLtrAlignmentKeys[ltrKey] === true) {
+		if(ltrResolution.status ===
+			"missing") {
 
-			lociWithMultipleTargets.push({
-				locusId: locusId,
-				locusType: locusType,
-				targets:
-					"ambiguous AL_LTR key " +
-					ltrKey
+			skippedMissingLtrAlignment.push({
+				locus_id:
+					locusId,
+
+				ltr_lineage_id:
+					ltrLineageId
 			});
 
 			continue;
 		}
 
-		alignmentName =
-			ltrAlignmentByKey[ltrKey];
+		if(ltrResolution.status ===
+			"ambiguous") {
 
-		targetDescription =
-			"ltr_lineage:" +
-			ltrLineageId;
-	}
-	else {
+			skippedAmbiguousLtrAlignment.push({
+				locus_id:
+					locusId,
 
-		lociWithUnsupportedType.push({
-			locusId: locusId,
-			locusType: locusType
+				ltr_lineage_id:
+					ltrLineageId,
+
+				candidates:
+					ltrResolution.candidates
+			});
+
+			continue;
+		}
+
+		placements.push({
+			locus_id:
+				locusId,
+
+			source_name:
+				sequenceRef.source_name,
+
+			sequence_id:
+				sequenceRef.sequence_id,
+
+			alignment_name:
+				ltrResolution.alignment_name,
+
+			target_type:
+				"ltr_lineage",
+
+			target_id:
+				ltrLineageId
 		});
-
-		continue;
 	}
-
-	if(alignmentName === null ||
-		alignmentName === undefined ||
-		alignmentExists[alignmentName] !== true) {
-
-		lociWithMissingAlignment.push({
-			locusId: locusId,
-			target: targetDescription,
-			expectedAlignment: alignmentName
-		});
-
-		continue;
-	}
-
-	assignments.push({
-		locusId: locusId,
-		sourceName: sequenceRef.sourceName,
-		sequenceId: sequenceRef.sequenceId,
-		alignmentName: alignmentName,
-		target: targetDescription
-	});
 }
 
 
 // -------------------------------------------------------------------------
-// Group assignments by target alignment
+// Group required placements by alignment
 // -------------------------------------------------------------------------
 
-var assignmentsByAlignment = {};
+log(
+	"Grouping resolved locus placements by alignment"
+);
 
-for(var i = 0; i < assignments.length; i++) {
+var placementsByAlignment = {};
 
-	var assignment =
-		assignments[i];
+for(var i = 0;
+	i < placements.length;
+	i++) {
 
-	if(assignmentsByAlignment[
-		assignment.alignmentName
+	var placement =
+		placements[i];
+
+	if(placementsByAlignment[
+		placement.alignment_name
 	] === undefined) {
 
-		assignmentsByAlignment[
-			assignment.alignmentName
+		placementsByAlignment[
+			placement.alignment_name
 		] = [];
 	}
 
-	assignmentsByAlignment[
-		assignment.alignmentName
+	placementsByAlignment[
+		placement.alignment_name
 	].push(
-		assignment
+		placement
 	);
 }
 
 
 // -------------------------------------------------------------------------
-// Build sequence where clause
+// Add missing members alignment by alignment
 // -------------------------------------------------------------------------
 
-function buildSequenceWhereClause(
-	alignmentAssignments,
-	startIndex,
-	endIndex
-) {
+log(
+	"Adding resolved locus sequences to alignments"
+);
 
-	var conditions = [];
-
-	for(var i = startIndex; i < endIndex; i++) {
-
-		var assignment =
-			alignmentAssignments[i];
-
-		conditions.push(
-			"(" +
-			"source.name = '" +
-			escapeQuotes(
-				assignment.sourceName
-			) +
-			"' and sequenceID = '" +
-			escapeQuotes(
-				assignment.sequenceId
-			) +
-			"'" +
-			")"
-		);
-	}
-
-	return conditions.join(" or ");
-}
-
-
-// -------------------------------------------------------------------------
-// Add sequence assignments
-// -------------------------------------------------------------------------
+var addedCount = 0;
+var alreadyPresentCount = 0;
 
 var targetAlignmentNames =
 	sortedKeys(
-		assignmentsByAlignment
+		placementsByAlignment
 	);
 
-var addedAssignmentCount = 0;
+for(var alignmentIndex = 0;
+	alignmentIndex < targetAlignmentNames.length;
+	alignmentIndex++) {
 
-for(var i = 0;
-		i < targetAlignmentNames.length;
-		i++) {
-
-	var targetAlignmentName =
-		targetAlignmentNames[i];
-
-	var alignmentAssignments =
-		assignmentsByAlignment[
-			targetAlignmentName
+	var alignmentName =
+		targetAlignmentNames[
+			alignmentIndex
 		];
 
-	log(
-		"Adding " +
-		alignmentAssignments.length +
-		" locus sequences to " +
-		targetAlignmentName
-	);
+	var alignmentPlacements =
+		placementsByAlignment[
+			alignmentName
+		];
 
-	for(var startIndex = 0;
-		startIndex < alignmentAssignments.length;
-		startIndex += BATCH_SIZE) {
+	/*
+	 * Alignment members are queried from within the alignment mode.
+	 * There is no project-mode "list member" command.
+	 */
+	glue.inMode(
+		"alignment/" +
+		alignmentName,
 
-		var endIndex =
-			Math.min(
-				startIndex + BATCH_SIZE,
-				alignmentAssignments.length
-			);
+		function() {
 
-		var whereClause =
-			buildSequenceWhereClause(
-				alignmentAssignments,
-				startIndex,
-				endIndex
-			);
+			var memberRows =
+				queryObjects([
+					"list",
+					"member",
+					"sequence.source.name",
+					"sequence.sequenceID"
+				]);
 
-		glue.inMode(
-			"/alignment/" +
-			targetAlignmentName,
-			function() {
+			var existingMembership = {};
 
-				runCommand([
+			for(var memberIndex = 0;
+				memberIndex < memberRows.length;
+				memberIndex++) {
+
+				var memberRow =
+					memberRows[
+						memberIndex
+					];
+
+				var sourceName =
+					norm(
+						memberRow[
+							"sequence.source.name"
+						]
+					);
+
+				var sequenceID =
+					norm(
+						memberRow[
+							"sequence.sequenceID"
+						]
+					);
+
+				if(sourceName === null ||
+					sequenceID === null) {
+
+					continue;
+				}
+
+				var membershipKey =
+					sourceName +
+					"\t" +
+					sequenceID;
+
+				existingMembership[
+					membershipKey
+				] = true;
+			}
+
+			for(var placementIndex = 0;
+				placementIndex < alignmentPlacements.length;
+				placementIndex++) {
+
+				var placement =
+					alignmentPlacements[
+						placementIndex
+					];
+
+				var membershipKey =
+					placement.source_name +
+					"\t" +
+					placement.sequence_id;
+
+				if(existingMembership[
+					membershipKey
+				] === true) {
+
+					alreadyPresentCount++;
+					continue;
+				}
+
+				glue.command([
 					"add",
 					"member",
-					"--whereClause",
-					whereClause
+					placement.source_name,
+					placement.sequence_id
 				]);
+
+				existingMembership[
+					membershipKey
+				] = true;
+
+				addedCount++;
+
+				if(addedCount % 10000 === 0) {
+
+					log(
+						"Added " +
+						addedCount +
+						" locus sequences to alignments"
+					);
+				}
 			}
-		);
-
-		addedAssignmentCount +=
-			endIndex - startIndex;
-
-		log(
-			"Added batch " +
-			(startIndex + 1) +
-			"-" +
-			endIndex +
-			" to " +
-			targetAlignmentName
-		);
-	}
+		}
+	);
 }
+
+
 
 
 // -------------------------------------------------------------------------
 // Summary
 // -------------------------------------------------------------------------
 
-log("============================================================");
-log("Resolved locus alignment assignment summary");
-log("============================================================");
+log(
+	"============================================================"
+);
+
+log(
+	"Resolved locus alignment summary"
+);
+
+log(
+	"============================================================"
+);
 
 log(
 	"Permanent ERV loci examined: " +
@@ -894,150 +1203,160 @@ log(
 );
 
 log(
-	"Resolved assignments: " +
-	assignments.length
+	"Resolved alignment placements identified: " +
+	placements.length
 );
 
 log(
-	"Assignments submitted: " +
-	addedAssignmentCount
+	"New alignment members added: " +
+	addedCount
 );
 
 log(
-	"Target alignments used: " +
-	targetAlignmentNames.length
+	"Members already present: " +
+	alreadyPresentCount
 );
 
 log(
-	"Loci without a linked sequence: " +
-	lociWithoutSequence.length
+	"Loci skipped because no linked sequence exists: " +
+	skippedNoSequence.length
 );
 
 log(
-	"Loci with multiple linked sequences: " +
-	lociWithMultipleSequences.length
+	"Loci skipped because multiple linked sequences exist: " +
+	skippedMultipleSequences.length
 );
 
 log(
-	"Loci without a lineage/LTR target: " +
-	lociWithoutTarget.length
+	"ERV loci skipped because no resolved ERV target exists: " +
+	skippedNoErvTarget.length
 );
 
 log(
-	"Loci with multiple targets: " +
-	lociWithMultipleTargets.length
+	"ERV loci skipped because multiple ERV targets exist: " +
+	skippedMultipleErvTargets.length
 );
 
 log(
-	"Loci whose expected alignment is missing: " +
-	lociWithMissingAlignment.length
+	"ERV loci skipped because the expected ERV alignment is missing: " +
+	skippedMissingErvAlignment.length
 );
 
 log(
-	"Loci with an unsupported locus_type: " +
-	lociWithUnsupportedType.length
+	"Solo-LTR loci skipped because no LTR target exists: " +
+	skippedNoLtrTarget.length
+);
+
+log(
+	"Solo-LTR loci skipped because multiple LTR targets exist: " +
+	skippedMultipleLtrTargets.length
+);
+
+log(
+	"Solo-LTR loci skipped because the expected LTR alignment is missing: " +
+	skippedMissingLtrAlignment.length
+);
+
+log(
+	"Solo-LTR loci skipped because LTR alignment resolution is ambiguous: " +
+	skippedAmbiguousLtrAlignment.length
 );
 
 
 // -------------------------------------------------------------------------
-// Detailed review output
+// Detailed reports
 // -------------------------------------------------------------------------
 
-for(var i = 0; i < lociWithMultipleSequences.length; i++) {
+for(var i = 0;
+	i < skippedMultipleErvTargets.length;
+	i++) {
 
-	var multipleSequenceRow =
-		lociWithMultipleSequences[i];
+	var locusId =
+		skippedMultipleErvTargets[i];
 
 	log(
-		"MULTIPLE_SEQUENCES\t" +
-		multipleSequenceRow.locusId +
+		"SKIP_MULTIPLE_ERV_TARGETS\t" +
+		locusId +
 		"\t" +
-		multipleSequenceRow.count
+		ervTargetsByLocus[
+			locusId
+		].join(",")
 	);
 }
 
 
-for(var i = 0; i < lociWithoutTarget.length; i++) {
+for(var i = 0;
+	i < skippedMissingErvAlignment.length;
+	i++) {
 
-	var missingTargetRow =
-		lociWithoutTarget[i];
+	var item =
+		skippedMissingErvAlignment[i];
 
 	log(
-		"NO_TARGET\t" +
-		missingTargetRow.locusId +
+		"SKIP_MISSING_ERV_ALIGNMENT\t" +
+		item.locus_id +
 		"\t" +
-		missingTargetRow.locusType
+		item.entity_type +
+		"\t" +
+		item.lineage_id +
+		"\t" +
+		item.expected_alignment
 	);
 }
 
 
-for(var i = 0; i < lociWithMultipleTargets.length; i++) {
+for(var i = 0;
+	i < skippedMultipleLtrTargets.length;
+	i++) {
 
-	var multipleTargetRow =
-		lociWithMultipleTargets[i];
+	var locusId =
+		skippedMultipleLtrTargets[i];
 
 	log(
-		"MULTIPLE_TARGETS\t" +
-		multipleTargetRow.locusId +
+		"SKIP_MULTIPLE_LTR_TARGETS\t" +
+		locusId +
 		"\t" +
-		multipleTargetRow.locusType +
-		"\t" +
-		multipleTargetRow.targets
+		ltrTargetsByLocus[
+			locusId
+		].join(",")
 	);
 }
 
 
-for(var i = 0; i < lociWithMissingAlignment.length; i++) {
+for(var i = 0;
+	i < skippedMissingLtrAlignment.length;
+	i++) {
 
-	var missingAlignmentRow =
-		lociWithMissingAlignment[i];
+	var item =
+		skippedMissingLtrAlignment[i];
 
 	log(
-		"MISSING_ALIGNMENT\t" +
-		missingAlignmentRow.locusId +
+		"SKIP_MISSING_LTR_ALIGNMENT\t" +
+		item.locus_id +
 		"\t" +
-		missingAlignmentRow.target +
-		"\t" +
-		missingAlignmentRow.expectedAlignment
+		item.ltr_lineage_id
 	);
 }
 
 
-for(var i = 0; i < lociWithUnsupportedType.length; i++) {
+for(var i = 0;
+	i < skippedAmbiguousLtrAlignment.length;
+	i++) {
 
-	var unsupportedTypeRow =
-		lociWithUnsupportedType[i];
+	var item =
+		skippedAmbiguousLtrAlignment[i];
 
 	log(
-		"UNSUPPORTED_LOCUS_TYPE\t" +
-		unsupportedTypeRow.locusId +
+		"SKIP_AMBIGUOUS_LTR_ALIGNMENT\t" +
+		item.locus_id +
 		"\t" +
-		unsupportedTypeRow.locusType
+		item.ltr_lineage_id +
+		"\t" +
+		item.candidates.join(",")
 	);
 }
 
-
-for(var i = 0; i < assignments.length; i++) {
-
-	var resolvedAssignment =
-		assignments[i];
-
-	log(
-		"ASSIGN\t" +
-		resolvedAssignment.locusId +
-		"\t" +
-		resolvedAssignment.sourceName +
-		"/" +
-		resolvedAssignment.sequenceId +
-		"\t" +
-		resolvedAssignment.target +
-		"\t" +
-		resolvedAssignment.alignmentName
-	);
-}
 
 log(
-	DRY_RUN
-		? "Dry run finished; no alignment members were added"
-		: "Finished adding resolved locus sequences to alignments"
+	"Finished adding resolved ERV loci to alignments"
 );

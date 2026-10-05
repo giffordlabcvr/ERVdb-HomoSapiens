@@ -38,7 +38,7 @@ run script glue/build/setLocusSeqLengthsAndKinds.js
 
 # Create permanent erv_locus rows from selected candidates,
 # populate their metadata, and link the imported sequences.
-run script glue/build/loadErvLoci.js
+run script glue/build/loadErvLociTest.js
 
 
 # -------------------------------------------------------------------------
@@ -98,7 +98,7 @@ run file glue/build/hervAlignmentSteps.glue
 # persistent registry, this input should no longer control routine builds.
 #
 
-# run file glue/build/missillac/importLegacyMappings.glue
+run file glue/build/missillac/importLegacyMappings.glue
 
 
 # -------------------------------------------------------------------------
@@ -139,8 +139,7 @@ run file glue/build/hervAlignmentSteps.glue
 # In normal builds, unexpected reassignment should cause the build to fail.
 #
 
-# [TO WRITE]
-# run script glue/build/missillac/validateImportedMissillacIds.js
+run script glue/build/missillac/validateImportedMissillacIds.js
 
 
 # -------------------------------------------------------------------------

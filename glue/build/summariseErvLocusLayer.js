@@ -1,399 +1,660 @@
-// glue/build/locus/summariseErvLocusLayer.js
+// glue/build/summariseErvLocusLayer.js
 //
-// Read-only summary and integrity checks for the completed ERV locus layer.
+// Summarise and perform consistency checks on the completed permanent
+// ERV locus layer.
+//
+// Current ERV entity types:
+//
+//   lineage
+//   sublineage
+//   erv_derived_repeat
+//   uncertain
+//
+// The first three are treated as resolved ERV entity associations.
+// "uncertain" is reported but is not treated as a resolved target.
+//
+// This script is read-only.
 
-var DETAIL_LIMIT = 100;
+
+// -------------------------------------------------------------------------
+// General utilities
+// -------------------------------------------------------------------------
 
 function log(message) {
 	glue.logInfo(message);
 }
 
+
 function norm(value) {
-	if(value === null || value === undefined) {
+
+	if(value === null ||
+		value === undefined) {
+
 		return null;
 	}
-	var result = ("" + value).trim();
+
+	var result =
+		("" + value).trim();
+
 	if(result === "") {
 		return null;
 	}
-	var lower = result.toLowerCase();
-	if(lower === "n/a" || lower === "na" ||
-		lower === "n/k" || lower === "nk" ||
-		lower === "null" || lower === "none" ||
-		lower === "unknown" || result === "-") {
+
+	var lower =
+		result.toLowerCase();
+
+	if(lower === "n/a" ||
+		lower === "na" ||
+		lower === "n/k" ||
+		lower === "nk" ||
+		lower === "null" ||
+		lower === "none" ||
+		lower === "unknown" ||
+		result === "-") {
+
 		return null;
 	}
+
 	return result;
 }
 
+
 function normInt(value) {
-	value = norm(value);
+
+	value =
+		norm(value);
+
 	if(value === null) {
 		return null;
 	}
-	var number = parseInt(value, 10);
-	return isNaN(number) ? null : number;
+
+	var number =
+		parseInt(
+			value,
+			10
+		);
+
+	return isNaN(number)
+		? null
+		: number;
 }
 
+
 function query(commandWords) {
+
 	return glue.tableToObjects(
-		glue.command(commandWords)
+		glue.command(
+			commandWords
+		)
 	);
 }
 
-function increment(map, key) {
-	key = norm(key);
-	if(key === null) {
-		key = "(not set)";
+
+function increment(
+	map,
+	key
+) {
+
+	if(key === null ||
+		key === undefined) {
+
+		key = "(null)";
 	}
-	map[key] = (map[key] || 0) + 1;
+
+	if(map[key] === undefined) {
+		map[key] = 0;
+	}
+
+	map[key]++;
 }
 
-function addUnique(map, key, value) {
+
+function addUnique(
+	map,
+	key,
+	value
+) {
+
 	if(map[key] === undefined) {
 		map[key] = [];
 	}
-	for(var i = 0; i < map[key].length; i++) {
+
+	for(var i = 0;
+		i < map[key].length;
+		i++) {
+
 		if(map[key][i] === value) {
 			return;
 		}
 	}
+
 	map[key].push(value);
 }
 
+
 function sortedKeys(map) {
-	var keys = Object.keys(map);
+
+	var keys =
+		Object.keys(map);
+
 	keys.sort();
+
 	return keys;
 }
 
-function heading(title) {
-	log("");
-	log("============================================================");
-	log(title);
-	log("============================================================");
-}
 
-function printCounts(label, counts) {
-	var keys = sortedKeys(counts);
-	log(label + ":");
-	for(var i = 0; i < keys.length; i++) {
-		log("  " + keys[i] + ": " + counts[keys[i]]);
+function printCounts(
+	title,
+	counts
+) {
+
+	log("");
+	log(title);
+
+	var keys =
+		sortedKeys(counts);
+
+	if(keys.length === 0) {
+
+		log("  (none)");
+		return;
+	}
+
+	for(var i = 0;
+		i < keys.length;
+		i++) {
+
+		var key =
+			keys[i];
+
+		log(
+			"  " +
+			key +
+			": " +
+			counts[key]
+		);
 	}
 }
 
-function printExamples(label, rows, formatter) {
-	log(label + ": " + rows.length);
 
-	var limit = Math.min(
-		rows.length,
-		DETAIL_LIMIT
+function printExamples(
+	title,
+	items,
+	formatter
+) {
+
+	log("");
+	log(
+		title +
+		": " +
+		items.length
 	);
 
-	for(var i = 0; i < limit; i++) {
-		log("  " + formatter(rows[i]));
+	var limit =
+		Math.min(
+			items.length,
+			20
+		);
+
+	for(var i = 0;
+		i < limit;
+		i++) {
+
+		log(
+			"  " +
+			formatter(
+				items[i]
+			)
+		);
 	}
 
-	if(rows.length > limit) {
+	if(items.length > limit) {
+
 		log(
 			"  ... " +
-			(rows.length - limit) +
+			(items.length - limit) +
 			" more"
 		);
 	}
 }
 
-function standardErvAlignmentSuffix(lineageId) {
-	lineageId = norm(lineageId);
+
+// -------------------------------------------------------------------------
+// Alignment-name utilities
+// -------------------------------------------------------------------------
+
+function standardErvAlignmentSuffix(
+	lineageId
+) {
+
+	lineageId =
+		norm(lineageId);
 
 	if(lineageId === null) {
 		return null;
 	}
 
-	var suffix = lineageId
-		.replace(
-			/^ERVR-([A-Za-z0-9]+)(?=\.|$)/i,
-			"$1R"
-		)
-		.replace(
-			/^ERV-/i,
-			""
-		)
-		.replace(
-			/[^A-Za-z0-9]+/g,
-			"_"
-		)
-		.replace(/^_+/, "")
-		.replace(/_+$/, "");
+	var suffix =
+		lineageId;
 
-	return suffix === "" ? null : suffix;
+	suffix =
+		suffix.replace(
+			/^ERVR?-/,
+			""
+		);
+
+	suffix =
+		suffix.replace(
+			/\./g,
+			"_"
+		);
+
+	return suffix;
 }
+
 
 function expectedErvAlignmentName(
 	lineageId,
-	entityLevel
+	entityType
 ) {
+
 	var suffix =
 		standardErvAlignmentSuffix(
 			lineageId
 		);
 
-	entityLevel = norm(entityLevel);
+	entityType =
+		norm(entityType);
 
-	if(suffix === null || entityLevel === null) {
+	if(suffix === null ||
+		entityType === null) {
+
 		return null;
 	}
 
-	entityLevel = entityLevel.toLowerCase();
+	entityType =
+		entityType.toLowerCase();
 
-	if(entityLevel === "lineage") {
-		return "AL_LINEAGE_" + suffix;
+	if(entityType === "lineage") {
+
+		return (
+			"AL_LINEAGE_" +
+			suffix
+		);
 	}
 
-	if(entityLevel === "sublineage") {
-		return "AL_SUBLINEAGE_" + suffix;
+	if(entityType === "sublineage") {
+
+		return (
+			"AL_SUBLINEAGE_" +
+			suffix
+		);
 	}
 
+	if(entityType === "erv_derived_repeat") {
+
+		return (
+			"AL_ERV_DERIVED_REPEAT_" +
+			suffix
+		);
+	}
+
+	/*
+	 * In particular, entity_type = "uncertain"
+	 * has no resolved alignment target.
+	 */
 	return null;
 }
 
 
-// ========================================================================
-// Permanent locus inventory
-// ========================================================================
+function normaliseLtrAlignmentKey(
+	ltrLineageId
+) {
 
-heading("Permanent ERV locus inventory");
+	ltrLineageId =
+		norm(ltrLineageId);
 
-var locusRows = query([
-	"list",
-	"custom-table-row",
-	"erv_locus",
-	"id",
-	"host_species",
-	"genome_build",
-	"scaffold",
-	"start_position",
-	"end_position",
-	"orientation",
-	"locus_type",
-	"structural_profile",
-	"taxonomic_resolution",
-	"mosaic_component",
-	"is_high_support",
-	"curation_tier",
-	"orthology_group",
-	"missillac_id",
-	"-s",
-	"id"
-]);
+	if(ltrLineageId === null) {
+		return null;
+	}
+
+	return ltrLineageId
+		.toUpperCase()
+		.replace(
+			/[^A-Z0-9]/g,
+			""
+		);
+}
+
+
+// -------------------------------------------------------------------------
+// Header
+// -------------------------------------------------------------------------
+
+log("");
+log("============================================================");
+log("Permanent ERV locus inventory");
+log("============================================================");
+
+
+// -------------------------------------------------------------------------
+// Load permanent ERV loci
+// -------------------------------------------------------------------------
+
+var locusRows =
+	query([
+		"list",
+		"custom-table-row",
+		"erv_locus",
+		"id",
+		"host_species",
+		"genome_build",
+		"scaffold",
+		"start_position",
+		"end_position",
+		"orientation",
+		"locus_type",
+		"structural_profile",
+		"taxonomic_resolution",
+		"is_high_support",
+		"curation_tier",
+		"orthology_group",
+		"missillac_id",
+		"-s",
+		"id"
+	]);
 
 var loci = {};
+
 var locusTypeCounts = {};
-var resolutionCounts = {};
-var profileCounts = {};
-var supportCounts = {};
-var tierCounts = {};
-var invalidLocusRows = [];
+var structuralProfileCounts = {};
+var taxonomicResolutionCounts = {};
+var highSupportCounts = {};
+var curationTierCounts = {};
 
-for(var i = 0; i < locusRows.length; i++) {
-	var row = locusRows[i];
-	var id = norm(row.id);
+for(var i = 0;
+	i < locusRows.length;
+	i++) {
 
-	if(id === null) {
+	var row =
+		locusRows[i];
+
+	var locusId =
+		norm(
+			row.id
+		);
+
+	if(locusId === null) {
 		continue;
 	}
 
 	var locus = {
-		id: id,
-		host: norm(row.host_species),
-		build: norm(row.genome_build),
-		scaffold: norm(row.scaffold),
-		start: normInt(row.start_position),
-		end: normInt(row.end_position),
-		orientation: norm(row.orientation),
-		type: norm(row.locus_type),
-		profile: norm(row.structural_profile),
-		resolution: norm(row.taxonomic_resolution),
-		mosaicComponent: norm(row.mosaic_component),
-		highSupport: norm(row.is_high_support),
-		tier: norm(row.curation_tier),
-		group: normInt(row.orthology_group),
-		missillacId: norm(row.missillac_id)
+
+		id:
+			locusId,
+
+		hostSpecies:
+			norm(
+				row.host_species
+			),
+
+		genomeBuild:
+			norm(
+				row.genome_build
+			),
+
+		scaffold:
+			norm(
+				row.scaffold
+			),
+
+		startPosition:
+			normInt(
+				row.start_position
+			),
+
+		endPosition:
+			normInt(
+				row.end_position
+			),
+
+		orientation:
+			norm(
+				row.orientation
+			),
+
+		locusType:
+			norm(
+				row.locus_type
+			),
+
+		structuralProfile:
+			norm(
+				row.structural_profile
+			),
+
+		taxonomicResolution:
+			norm(
+				row.taxonomic_resolution
+			),
+
+		isHighSupport:
+			norm(
+				row.is_high_support
+			),
+
+		curationTier:
+			norm(
+				row.curation_tier
+			),
+
+		orthologyGroup:
+			normInt(
+				row.orthology_group
+			),
+
+		missillacId:
+			norm(
+				row.missillac_id
+			)
 	};
 
-	loci[id] = locus;
+	loci[
+		locusId
+	] = locus;
 
-	increment(locusTypeCounts, locus.type);
-	increment(resolutionCounts, locus.resolution);
-	increment(profileCounts, locus.profile);
-	increment(supportCounts, locus.highSupport);
-	increment(tierCounts, locus.tier);
+	increment(
+		locusTypeCounts,
+		locus.locusType
+	);
 
-	var problems = [];
+	increment(
+		structuralProfileCounts,
+		locus.structuralProfile
+	);
 
-	if(locus.host === null) {
-		problems.push("host_species");
-	}
-	if(locus.build === null) {
-		problems.push("genome_build");
-	}
-	if(locus.scaffold === null) {
-		problems.push("scaffold");
-	}
-	if(locus.start === null || locus.start < 1) {
-		problems.push("start_position");
-	}
-	if(locus.end === null ||
-		(locus.start !== null &&
-			locus.end < locus.start)) {
-		problems.push("end_position");
-	}
-	if(locus.orientation !== "+" &&
-		locus.orientation !== "-") {
-		problems.push("orientation");
-	}
-	if(locus.type === null) {
-		problems.push("locus_type");
-	}
-	if(locus.profile === null) {
-		problems.push("structural_profile");
-	}
-	if(locus.resolution === null) {
-		problems.push("taxonomic_resolution");
-	}
+	increment(
+		taxonomicResolutionCounts,
+		locus.taxonomicResolution
+	);
 
-	if(problems.length > 0) {
-		invalidLocusRows.push({
-			id: id,
-			problems: problems
-		});
-	}
+	increment(
+		highSupportCounts,
+		locus.isHighSupport
+	);
+
+	increment(
+		curationTierCounts,
+		locus.curationTier
+	);
 }
 
-log("Permanent erv_locus rows: " + locusRows.length);
-printCounts("Counts by locus_type", locusTypeCounts);
-printCounts("Counts by taxonomic_resolution", resolutionCounts);
-printCounts("Counts by structural_profile", profileCounts);
-printCounts("Counts by is_high_support", supportCounts);
-printCounts("Counts by curation_tier", tierCounts);
 
-printExamples(
-	"Loci with missing or invalid core fields",
-	invalidLocusRows,
-	function(x) {
-		return x.id +
-			" [" +
-			x.problems.join(",") +
-			"]";
-	}
+log(
+	"Permanent ERV loci: " +
+	Object.keys(loci).length
+);
+
+printCounts(
+	"Locus counts by locus_type",
+	locusTypeCounts
+);
+
+printCounts(
+	"Locus counts by structural_profile",
+	structuralProfileCounts
+);
+
+printCounts(
+	"Locus counts by taxonomic_resolution",
+	taxonomicResolutionCounts
+);
+
+printCounts(
+	"Locus counts by is_high_support",
+	highSupportCounts
+);
+
+printCounts(
+	"Locus counts by curation_tier",
+	curationTierCounts
 );
 
 
-// ========================================================================
-// Sequence coverage
-// ========================================================================
+// -------------------------------------------------------------------------
+// Load sequences linked to permanent loci
+// -------------------------------------------------------------------------
 
-heading("Permanent locus sequence coverage");
+log("");
+log("============================================================");
+log("Permanent locus sequence links");
+log("============================================================");
 
-var sequenceRows = query([
-	"list",
-	"sequence",
-	"source.name",
-	"sequenceID",
-	"length",
-	"erv_locus.id",
-	"-w",
-	"erv_locus.id != null"
-]);
+var sequenceRows =
+	query([
+		"list",
+		"sequence",
+		"source.name",
+		"sequenceID",
+		"erv_locus.id",
+		"-w",
+		"erv_locus.id != null",
+		"-s",
+		"erv_locus.id,source.name,sequenceID"
+	]);
 
-var sequencesByLocus = {};
+var sequenceRefsByLocus = {};
+var orphanSequenceLinks = [];
 
-for(i = 0; i < sequenceRows.length; i++) {
+for(i = 0;
+	i < sequenceRows.length;
+	i++) {
+
+	row =
+		sequenceRows[i];
+
 	var sequenceLocusId =
 		norm(
-			sequenceRows[i]["erv_locus.id"]
+			row[
+				"erv_locus.id"
+			]
 		);
 
-	if(sequenceLocusId === null) {
+	var sourceName =
+		norm(
+			row[
+				"source.name"
+			]
+		);
+
+	var sequenceId =
+		norm(
+			row.sequenceID
+		);
+
+	if(sequenceLocusId === null ||
+		loci[sequenceLocusId] === undefined) {
+
+		orphanSequenceLinks.push({
+			sourceName:
+				sourceName,
+
+			sequenceId:
+				sequenceId,
+
+			locusId:
+				sequenceLocusId
+		});
+
 		continue;
 	}
 
-	if(sequencesByLocus[sequenceLocusId] === undefined) {
-		sequencesByLocus[sequenceLocusId] = [];
+	if(sequenceRefsByLocus[
+		sequenceLocusId
+	] === undefined) {
+
+		sequenceRefsByLocus[
+			sequenceLocusId
+		] = [];
 	}
 
-	sequencesByLocus[
+	sequenceRefsByLocus[
 		sequenceLocusId
-	].push(sequenceRows[i]);
+	].push({
+		sourceName:
+			sourceName,
+
+		sequenceId:
+			sequenceId
+	});
 }
+
 
 var lociWithoutSequence = [];
 var lociWithMultipleSequences = [];
-var sequenceLengthMismatches = [];
-var unknownSequenceLocusLinks = [];
 
-var locusIds = sortedKeys(loci);
+var locusIds =
+	sortedKeys(loci);
 
-for(i = 0; i < locusIds.length; i++) {
-	var locusId = locusIds[i];
-	var linkedSequences =
-		sequencesByLocus[locusId] || [];
+for(i = 0;
+	i < locusIds.length;
+	i++) {
 
-	if(linkedSequences.length === 0) {
-		lociWithoutSequence.push(locusId);
-		continue;
-	}
+	var locusId =
+		locusIds[i];
 
-	if(linkedSequences.length > 1) {
-		lociWithMultipleSequences.push({
-			id: locusId,
-			count: linkedSequences.length
-		});
-	}
+	var sequenceRefs =
+		sequenceRefsByLocus[
+			locusId
+		];
 
-	if(linkedSequences.length === 1) {
-		var sequenceLength =
-			normInt(
-				linkedSequences[0].length
-			);
+	if(sequenceRefs === undefined ||
+		sequenceRefs.length === 0) {
 
-		var locusLength =
-			loci[locusId].start !== null &&
-			loci[locusId].end !== null
-				? loci[locusId].end -
-					loci[locusId].start + 1
-				: null;
-
-		if(sequenceLength !== null &&
-			locusLength !== null &&
-			sequenceLength !== locusLength) {
-			sequenceLengthMismatches.push({
-				id: locusId,
-				sequenceLength: sequenceLength,
-				locusLength: locusLength
-			});
-		}
-	}
-}
-
-var sequenceLocusIds =
-	sortedKeys(sequencesByLocus);
-
-for(i = 0; i < sequenceLocusIds.length; i++) {
-	if(loci[sequenceLocusIds[i]] === undefined) {
-		unknownSequenceLocusLinks.push(
-			sequenceLocusIds[i]
+		lociWithoutSequence.push(
+			locusId
 		);
 	}
+	else if(sequenceRefs.length > 1) {
+
+		lociWithMultipleSequences.push({
+			locusId:
+				locusId,
+
+			count:
+				sequenceRefs.length
+		});
+	}
 }
 
+
 log(
-	"Sequences linked to an erv_locus: " +
+	"Sequences linked to permanent loci: " +
 	sequenceRows.length
 );
 
 printExamples(
-	"Loci without a linked sequence",
+	"Permanent loci without a linked sequence",
 	lociWithoutSequence,
 	function(x) {
 		return x;
@@ -401,85 +662,171 @@ printExamples(
 );
 
 printExamples(
-	"Loci with multiple linked sequences",
+	"Permanent loci with multiple linked sequences",
 	lociWithMultipleSequences,
 	function(x) {
-		return x.id + " [" + x.count + "]";
+		return (
+			x.locusId +
+			" [" +
+			x.count +
+			"]"
+		);
 	}
 );
 
 printExamples(
-	"Sequence/locus coordinate-length mismatches",
-	sequenceLengthMismatches,
+	"Sequence links pointing to missing permanent loci",
+	orphanSequenceLinks,
 	function(x) {
-		return x.id +
-			" [sequence=" +
-			x.sequenceLength +
-			", coordinates=" +
-			x.locusLength +
-			"]";
-	}
-);
-
-printExamples(
-	"Sequence links to unknown erv_locus IDs",
-	unknownSequenceLocusLinks,
-	function(x) {
-		return x;
+		return (
+			x.sourceName +
+			"/" +
+			x.sequenceId +
+			" -> " +
+			x.locusId
+		);
 	}
 );
 
 
-// ========================================================================
-// ERV lineage associations
-// ========================================================================
+// -------------------------------------------------------------------------
+// Load ERV locus-to-lineage associations
+// -------------------------------------------------------------------------
 
-heading("ERV locus-to-lineage associations");
+log("");
+log("============================================================");
+log("ERV locus-to-entity associations");
+log("============================================================");
 
-var lineageAssocRows = query([
-	"list",
-	"custom-table-row",
-	"erv_locus_lineage_assoc",
-	"id",
-	"erv_locus.id",
-	"erv_lineage.id",
-	"erv_lineage.entity_level",
-	"association_role",
-	"evidence",
-	"confidence"
-]);
+var lineageAssocRows =
+	query([
+		"list",
+		"custom-table-row",
+		"erv_locus_lineage_assoc",
+		"id",
+		"erv_locus.id",
+		"erv_lineage.id",
+		"erv_lineage.entity_type",
+		"association_role",
+		"evidence",
+		"confidence",
+		"-s",
+		"erv_locus.id,erv_lineage.id"
+	]);
 
 var lineageTargetsByLocus = {};
 var lineageDetails = {};
-var lineageCounts = {};
-var entityLevelCounts = {};
-var orphanLineageAssocs = [];
 
-for(i = 0; i < lineageAssocRows.length; i++) {
-	row = lineageAssocRows[i];
+var lineageCounts = {};
+var entityTypeCounts = {};
+
+var orphanLineageAssocs = [];
+var uncertainLineageAssocs = [];
+var unsupportedEntityTypeAssocs = [];
+
+for(i = 0;
+	i < lineageAssocRows.length;
+	i++) {
+
+	row =
+		lineageAssocRows[i];
 
 	var assocLocusId =
-		norm(row["erv_locus.id"]);
+		norm(
+			row[
+				"erv_locus.id"
+			]
+		);
 
 	var lineageId =
-		norm(row["erv_lineage.id"]);
-
-	var entityLevel =
 		norm(
-			row["erv_lineage.entity_level"]
+			row[
+				"erv_lineage.id"
+			]
+		);
+
+	var entityType =
+		norm(
+			row[
+				"erv_lineage.entity_type"
+			]
 		);
 
 	if(assocLocusId === null ||
 		loci[assocLocusId] === undefined ||
-		lineageId === null) {
+		lineageId === null ||
+		entityType === null) {
+
 		orphanLineageAssocs.push(
-			norm(row.id)
+			norm(
+				row.id
+			)
 		);
+
+		continue;
+	}
+
+	entityType =
+		entityType.toLowerCase();
+
+	increment(
+		lineageCounts,
+		lineageId
+	);
+
+	increment(
+		entityTypeCounts,
+		entityType
+	);
+
+	/*
+	 * "uncertain" is deliberately not considered a resolved
+	 * ERV entity target.
+	 */
+	if(entityType === "uncertain") {
+
+		uncertainLineageAssocs.push({
+			id:
+				norm(
+					row.id
+				),
+
+			locusId:
+				assocLocusId,
+
+			lineageId:
+				lineageId
+		});
+
+		continue;
+	}
+
+	if(entityType !== "lineage" &&
+		entityType !== "sublineage" &&
+		entityType !==
+			"erv_derived_repeat") {
+
+		unsupportedEntityTypeAssocs.push({
+			id:
+				norm(
+					row.id
+				),
+
+			locusId:
+				assocLocusId,
+
+			lineageId:
+				lineageId,
+
+			entityType:
+				entityType
+		});
+
 		continue;
 	}
 
 	var targetKey =
-		(entityLevel || "") +
+		entityType +
 		"\t" +
 		lineageId;
 
@@ -489,72 +836,64 @@ for(i = 0; i < lineageAssocRows.length; i++) {
 		targetKey
 	);
 
-	lineageDetails[targetKey] = {
-		id: lineageId,
-		entityLevel: entityLevel
+	lineageDetails[
+		targetKey
+	] = {
+		id:
+			lineageId,
+
+		entityType:
+			entityType
 	};
-
-	increment(lineageCounts, lineageId);
-	increment(entityLevelCounts, entityLevel);
 }
 
-var noLineage = [];
-var multipleLineages = [];
-
-for(i = 0; i < locusIds.length; i++) {
-	locusId = locusIds[i];
-
-	var targets =
-		lineageTargetsByLocus[locusId] || [];
-
-	if(targets.length === 0) {
-		noLineage.push(locusId);
-	}
-
-	if(targets.length > 1) {
-		multipleLineages.push({
-			id: locusId,
-			targets: targets
-		});
-	}
-}
 
 log(
-	"erv_locus_lineage_assoc rows: " +
+	"ERV locus-to-entity association rows: " +
 	lineageAssocRows.length
 );
 
 printCounts(
-	"Association counts by erv_lineage.id",
-	lineageCounts
-);
-
-printCounts(
-	"Association counts by entity_level",
-	entityLevelCounts
+	"Association counts by entity_type",
+	entityTypeCounts
 );
 
 printExamples(
-	"Loci without an ERV lineage/sublineage association",
-	noLineage,
+	"Uncertain ERV-lineage associations excluded from resolved targets",
+	uncertainLineageAssocs,
 	function(x) {
-		return x;
-	}
-);
 
-printExamples(
-	"Loci with multiple distinct lineage targets",
-	multipleLineages,
-	function(x) {
-		return x.id +
+		return (
+			x.id +
 			" [" +
-			x.targets.join(",") +
-			"]";
+			x.locusId +
+			" -> " +
+			x.lineageId +
+			"]"
+		);
 	}
 );
 
 printExamples(
-	"Invalid or orphan lineage associations",
+	"Associations with unsupported ERV entity_type",
+	unsupportedEntityTypeAssocs,
+	function(x) {
+
+		return (
+			x.id +
+			" [" +
+			x.locusId +
+			" -> " +
+			x.lineageId +
+			"; " +
+			x.entityType +
+			"]"
+		);
+	}
+);
+
+printExamples(
+	"Orphan/incomplete ERV-lineage associations",
 	orphanLineageAssocs,
 	function(x) {
 		return x;
@@ -562,187 +901,150 @@ printExamples(
 );
 
 
-// ========================================================================
-// LTR associations
-// ========================================================================
+// -------------------------------------------------------------------------
+// Summarise resolved ERV targets per locus
+// -------------------------------------------------------------------------
 
-heading("ERV locus-to-LTR associations");
+var lociWithoutResolvedErvTarget = [];
+var lociWithMultipleResolvedErvTargets = [];
 
-var ltrAssocRows = query([
-	"list",
-	"custom-table-row",
-	"erv_locus_ltr_assoc",
-	"id",
-	"erv_locus.id",
-	"ltr_lineage.id",
-	"association_role",
-	"evidence",
-	"confidence",
-	"region_start",
-	"region_end"
-]);
+for(i = 0;
+	i < locusIds.length;
+	i++) {
 
-var ltrByLocus = {};
-var ltrRoleCounts = {};
+	locusId =
+		locusIds[i];
+
+	var targets =
+		lineageTargetsByLocus[
+			locusId
+		];
+
+	if(targets === undefined ||
+		targets.length === 0) {
+
+		lociWithoutResolvedErvTarget.push(
+			locusId
+		);
+	}
+	else if(targets.length > 1) {
+
+		lociWithMultipleResolvedErvTargets.push({
+			locusId:
+				locusId,
+
+			targets:
+				targets
+		});
+	}
+}
+
+
+printExamples(
+	"Loci without a resolved ERV entity association",
+	lociWithoutResolvedErvTarget,
+	function(x) {
+		return x;
+	}
+);
+
+printExamples(
+	"Loci with multiple resolved ERV entity associations",
+	lociWithMultipleResolvedErvTargets,
+	function(x) {
+
+		return (
+			x.locusId +
+			" [" +
+			x.targets.join(",") +
+			"]"
+		);
+	}
+);
+
+
+// -------------------------------------------------------------------------
+// Load locus-to-LTR-lineage associations
+// -------------------------------------------------------------------------
+
+log("");
+log("============================================================");
+log("ERV locus-to-LTR-lineage associations");
+log("============================================================");
+
+var ltrAssocRows =
+	query([
+		"list",
+		"custom-table-row",
+		"erv_locus_ltr_assoc",
+		"id",
+		"erv_locus.id",
+		"ltr_lineage.id",
+		"association_role",
+		"evidence",
+		"confidence",
+		"-s",
+		"erv_locus.id,ltr_lineage.id"
+	]);
+
+var ltrTargetsByLocus = {};
+var ltrLineageCounts = {};
 var orphanLtrAssocs = [];
 
-for(i = 0; i < ltrAssocRows.length; i++) {
-	row = ltrAssocRows[i];
+for(i = 0;
+	i < ltrAssocRows.length;
+	i++) {
 
-	assocLocusId =
-		norm(row["erv_locus.id"]);
+	row =
+		ltrAssocRows[i];
 
-	var ltrId =
-		norm(row["ltr_lineage.id"]);
-
-	var role =
-		norm(row.association_role);
-
-	if(assocLocusId === null ||
-		loci[assocLocusId] === undefined ||
-		ltrId === null) {
-		orphanLtrAssocs.push(
-			norm(row.id)
+	var ltrAssocLocusId =
+		norm(
+			row[
+				"erv_locus.id"
+			]
 		);
+
+	var ltrLineageId =
+		norm(
+			row[
+				"ltr_lineage.id"
+			]
+		);
+
+	if(ltrAssocLocusId === null ||
+		loci[ltrAssocLocusId] === undefined ||
+		ltrLineageId === null) {
+
+		orphanLtrAssocs.push(
+			norm(
+				row.id
+			)
+		);
+
 		continue;
 	}
 
-	if(ltrByLocus[assocLocusId] === undefined) {
-		ltrByLocus[assocLocusId] = [];
-	}
+	addUnique(
+		ltrTargetsByLocus,
+		ltrAssocLocusId,
+		ltrLineageId
+	);
 
-	ltrByLocus[assocLocusId].push({
-		ltrId: ltrId,
-		role: role
-	});
-
-	increment(ltrRoleCounts, role);
+	increment(
+		ltrLineageCounts,
+		ltrLineageId
+	);
 }
 
-var soloLtrWithoutAssoc = [];
-var ervWithoutLtrAssoc = [];
-var matchedPairedLtrs = [];
-var mismatchedPairedLtrs = [];
-var oneSidedLtrs = [];
-
-for(i = 0; i < locusIds.length; i++) {
-	locusId = locusIds[i];
-
-	var locusType =
-		loci[locusId].type === null
-			? null
-			: loci[locusId].type.toLowerCase();
-
-	var ltrAssocs =
-		ltrByLocus[locusId] || [];
-
-	if(locusType === "solo_ltr" &&
-		ltrAssocs.length === 0) {
-		soloLtrWithoutAssoc.push(locusId);
-	}
-
-	if(locusType === "erv" &&
-		ltrAssocs.length === 0) {
-		ervWithoutLtrAssoc.push(locusId);
-	}
-
-	if(locusType !== "erv") {
-		continue;
-	}
-
-	var five = {};
-	var three = {};
-
-	for(var j = 0; j < ltrAssocs.length; j++) {
-		if(ltrAssocs[j].role ===
-			"five_prime_ltr") {
-			five[ltrAssocs[j].ltrId] = true;
-		}
-
-		if(ltrAssocs[j].role ===
-			"three_prime_ltr") {
-			three[ltrAssocs[j].ltrId] = true;
-		}
-	}
-
-	var fiveIds = sortedKeys(five);
-	var threeIds = sortedKeys(three);
-
-	if(fiveIds.length === 1 &&
-		threeIds.length === 1) {
-		if(fiveIds[0] === threeIds[0]) {
-			matchedPairedLtrs.push(locusId);
-		} else {
-			mismatchedPairedLtrs.push({
-				id: locusId,
-				five: fiveIds[0],
-				three: threeIds[0]
-			});
-		}
-	} else if(
-		(fiveIds.length > 0 &&
-			threeIds.length === 0) ||
-		(fiveIds.length === 0 &&
-			threeIds.length > 0)
-	) {
-		oneSidedLtrs.push(locusId);
-	}
-}
 
 log(
-	"erv_locus_ltr_assoc rows: " +
+	"ERV locus-to-LTR-lineage association rows: " +
 	ltrAssocRows.length
 );
 
-printCounts(
-	"LTR associations by role",
-	ltrRoleCounts
-);
-
-log(
-	"ERV loci with one matching 5'/3' LTR lineage: " +
-	matchedPairedLtrs.length
-);
-
 printExamples(
-	"ERV loci with mismatched 5'/3' LTR lineages",
-	mismatchedPairedLtrs,
-	function(x) {
-		return x.id +
-			" [5'=" +
-			x.five +
-			", 3'=" +
-			x.three +
-			"]";
-	}
-);
-
-printExamples(
-	"ERV loci with only one positioned LTR side",
-	oneSidedLtrs,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"ERV loci without an LTR association",
-	ervWithoutLtrAssoc,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"Solo-LTR loci without an LTR association",
-	soloLtrWithoutAssoc,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"Invalid or orphan LTR associations",
+	"Orphan/incomplete LTR-lineage associations",
 	orphanLtrAssocs,
 	function(x) {
 		return x;
@@ -750,725 +1052,643 @@ printExamples(
 );
 
 
-// ========================================================================
-// Expected alignment objects
-// ========================================================================
+// -------------------------------------------------------------------------
+// Solo-LTR association checks
+// -------------------------------------------------------------------------
 
-heading("Expected ERV alignment coverage");
+var soloLtrWithoutTarget = [];
+var soloLtrMultipleTargets = [];
 
-var alignmentRows = query([
-	"list",
-	"alignment",
-	"name"
-]);
+for(i = 0;
+	i < locusIds.length;
+	i++) {
 
-var alignmentExists = {};
+	locusId =
+		locusIds[i];
 
-for(i = 0; i < alignmentRows.length; i++) {
-	var alignmentName =
-		norm(alignmentRows[i].name);
+	var locus =
+		loci[
+			locusId
+		];
 
-	if(alignmentName !== null) {
-		alignmentExists[alignmentName] = true;
-	}
-}
+	var locusType =
+		locus.locusType !== null
+			? locus.locusType.toLowerCase()
+			: null;
 
-var missingExpectedAlignments = [];
-var expectedAlignmentCounts = {};
-
-for(i = 0; i < locusIds.length; i++) {
-	locusId = locusIds[i];
-	targets = lineageTargetsByLocus[locusId] || [];
-
-	if(targets.length !== 1) {
+	if(locusType !== "solo_ltr") {
 		continue;
 	}
 
+	var ltrTargets =
+		ltrTargetsByLocus[
+			locusId
+		];
+
+	if(ltrTargets === undefined ||
+		ltrTargets.length === 0) {
+
+		soloLtrWithoutTarget.push(
+			locusId
+		);
+	}
+	else if(ltrTargets.length > 1) {
+
+		soloLtrMultipleTargets.push({
+			locusId:
+				locusId,
+
+			targets:
+				ltrTargets
+		});
+	}
+}
+
+
+printExamples(
+	"Solo-LTR loci without an LTR-lineage association",
+	soloLtrWithoutTarget,
+	function(x) {
+		return x;
+	}
+);
+
+printExamples(
+	"Solo-LTR loci with multiple LTR-lineage associations",
+	soloLtrMultipleTargets,
+	function(x) {
+
+		return (
+			x.locusId +
+			" [" +
+			x.targets.join(",") +
+			"]"
+		);
+	}
+);
+
+
+// -------------------------------------------------------------------------
+// Missillac naming summary
+// -------------------------------------------------------------------------
+
+log("");
+log("============================================================");
+log("Missillac identifier summary");
+log("============================================================");
+
+var namedLoci = [];
+var unnamedEligibleLoci = [];
+var namedIneligibleLoci = [];
+
+var missillacIdToLoci = {};
+var lineageNumberToLoci = {};
+
+for(i = 0;
+	i < locusIds.length;
+	i++) {
+
+	locusId =
+		locusIds[i];
+
+	locus =
+		loci[
+			locusId
+		];
+
+	targets =
+		lineageTargetsByLocus[
+			locusId
+		];
+
+	if(targets === undefined) {
+		targets = [];
+	}
+
+	locusType =
+		locus.locusType !== null
+			? locus.locusType.toLowerCase()
+			: null;
+
+	/*
+	 * Current Missillac eligibility rule:
+	 *
+	 *   - exactly one resolved ERV entity association;
+	 *   - locus_type = erv or solo_ltr.
+	 *
+	 * NOTE:
+	 *
+	 * Because erv_derived_repeat is currently treated as a resolved ERV
+	 * entity type, such loci are included by this rule. If ERV-derived
+	 * repeats are later excluded from Missillac nomenclature, this rule
+	 * should be changed here and in applyErvLocusNames.js together.
+	 */
+	var eligible =
+		targets.length === 1 &&
+		(
+			locusType === "erv" ||
+			locusType === "solo_ltr"
+		);
+
+	var hasOrthologyGroup =
+		locus.orthologyGroup !== null;
+
+	var hasMissillacId =
+		locus.missillacId !== null;
+
+	var isNamed =
+		hasOrthologyGroup &&
+		hasMissillacId;
+
+	if(isNamed) {
+
+		namedLoci.push(
+			locusId
+		);
+
+		if(!eligible) {
+
+			namedIneligibleLoci.push(
+				locusId
+			);
+		}
+
+		if(missillacIdToLoci[
+			locus.missillacId
+		] === undefined) {
+
+			missillacIdToLoci[
+				locus.missillacId
+			] = [];
+		}
+
+		missillacIdToLoci[
+			locus.missillacId
+		].push(
+			locusId
+		);
+
+		if(targets.length === 1) {
+
+			var targetDetail =
+				lineageDetails[
+					targets[0]
+				];
+
+			if(targetDetail !== undefined) {
+
+				var lineageNumberKey =
+					targetDetail.id +
+					"\t" +
+					locus.orthologyGroup;
+
+				if(lineageNumberToLoci[
+					lineageNumberKey
+				] === undefined) {
+
+					lineageNumberToLoci[
+						lineageNumberKey
+					] = [];
+				}
+
+				lineageNumberToLoci[
+					lineageNumberKey
+				].push(
+					locusId
+				);
+			}
+		}
+	}
+	else if(eligible) {
+
+		unnamedEligibleLoci.push(
+			locusId
+		);
+	}
+}
+
+
+var duplicateMissillacIds = [];
+
+var missillacIds =
+	sortedKeys(
+		missillacIdToLoci
+	);
+
+for(i = 0;
+	i < missillacIds.length;
+	i++) {
+
+	var missillacId =
+		missillacIds[i];
+
+	if(missillacIdToLoci[
+		missillacId
+	].length > 1) {
+
+		duplicateMissillacIds.push({
+			missillacId:
+				missillacId,
+
+			loci:
+				missillacIdToLoci[
+					missillacId
+				]
+		});
+	}
+}
+
+
+var duplicateLineageNumbers = [];
+
+var lineageNumberKeys =
+	sortedKeys(
+		lineageNumberToLoci
+	);
+
+for(i = 0;
+	i < lineageNumberKeys.length;
+	i++) {
+
+	var lineageNumberKey =
+		lineageNumberKeys[i];
+
+	if(lineageNumberToLoci[
+		lineageNumberKey
+	].length > 1) {
+
+		duplicateLineageNumbers.push({
+			key:
+				lineageNumberKey,
+
+			loci:
+				lineageNumberToLoci[
+					lineageNumberKey
+				]
+		});
+	}
+}
+
+
+log(
+	"Named loci: " +
+	namedLoci.length
+);
+
+printExamples(
+	"Eligible loci without a Missillac identifier",
+	unnamedEligibleLoci,
+	function(x) {
+		return x;
+	}
+);
+
+printExamples(
+	"Named loci that are not currently eligible",
+	namedIneligibleLoci,
+	function(x) {
+		return x;
+	}
+);
+
+printExamples(
+	"Duplicate Missillac identifiers",
+	duplicateMissillacIds,
+	function(x) {
+
+		return (
+			x.missillacId +
+			" [" +
+			x.loci.join(",") +
+			"]"
+		);
+	}
+);
+
+printExamples(
+	"Duplicate orthology-group numbers within an ERV entity",
+	duplicateLineageNumbers,
+	function(x) {
+
+		return (
+			x.key +
+			" [" +
+			x.loci.join(",") +
+			"]"
+		);
+	}
+);
+
+
+// -------------------------------------------------------------------------
+// Load existing alignments
+// -------------------------------------------------------------------------
+
+log("");
+log("============================================================");
+log("Alignment coverage");
+log("============================================================");
+
+var alignmentRows =
+	query([
+		"list",
+		"alignment",
+		"name",
+		"-s",
+		"name"
+	]);
+
+var alignmentByName = {};
+var ltrAlignmentNamesByNormalisedKey = {};
+
+for(i = 0;
+	i < alignmentRows.length;
+	i++) {
+
+	var alignmentName =
+		norm(
+			alignmentRows[i].name
+		);
+
+	if(alignmentName === null) {
+		continue;
+	}
+
+	alignmentByName[
+		alignmentName
+	] = true;
+
+	if(alignmentName.indexOf(
+		"AL_LTR_"
+	) === 0) {
+
+		var ltrPart =
+			alignmentName.substring(
+				"AL_LTR_".length
+			);
+
+		var normalisedKey =
+			normaliseLtrAlignmentKey(
+				ltrPart
+			);
+
+		if(normalisedKey !== null) {
+
+			addUnique(
+				ltrAlignmentNamesByNormalisedKey,
+				normalisedKey,
+				alignmentName
+			);
+		}
+	}
+}
+
+
+// -------------------------------------------------------------------------
+// Expected resolved ERV alignments
+// -------------------------------------------------------------------------
+
+var expectedErvAlignmentNames = {};
+var missingErvAlignments = [];
+
+var targetKeys =
+	sortedKeys(
+		lineageDetails
+	);
+
+for(i = 0;
+	i < targetKeys.length;
+	i++) {
+
+	var targetKey =
+		targetKeys[i];
+
 	var detail =
-		lineageDetails[targets[0]];
+		lineageDetails[
+			targetKey
+		];
 
 	var expectedAlignment =
 		expectedErvAlignmentName(
 			detail.id,
-			detail.entityLevel
+			detail.entityType
 		);
 
 	if(expectedAlignment === null) {
 		continue;
 	}
 
-	increment(
-		expectedAlignmentCounts,
+	expectedErvAlignmentNames[
 		expectedAlignment
-	);
+	] = true;
 
-	if(alignmentExists[expectedAlignment] !== true) {
-		missingExpectedAlignments.push({
-			id: locusId,
-			lineageId: detail.id,
-			expected: expectedAlignment
+	if(alignmentByName[
+		expectedAlignment
+	] !== true) {
+
+		missingErvAlignments.push({
+			lineageId:
+				detail.id,
+
+			entityType:
+				detail.entityType,
+
+			alignmentName:
+				expectedAlignment
 		});
 	}
 }
 
-log(
-	"Existing alignment objects: " +
-	alignmentRows.length
-);
 
 log(
-	"Distinct expected lineage/sublineage alignments used by loci: " +
-	Object.keys(expectedAlignmentCounts).length
+	"Distinct expected resolved ERV alignments used by loci: " +
+	Object.keys(
+		expectedErvAlignmentNames
+	).length
 );
 
 printExamples(
-	"Resolved loci whose expected alignment object is missing",
-	missingExpectedAlignments,
+	"Expected resolved ERV alignments that are missing",
+	missingErvAlignments,
 	function(x) {
-		return x.id +
-			" [" +
+
+		return (
+			x.entityType +
+			":" +
 			x.lineageId +
 			" -> " +
-			x.expected +
-			"]";
-	}
-);
-
-
-// ========================================================================
-// Missillac nomenclature
-// ========================================================================
-
-heading("Missillac nomenclature checks");
-
-var eligibleNamingCount = 0;
-var eligibleUnnamed = [];
-var ineligibleNamed = [];
-var inconsistentNames = [];
-var lociByMissillacId = {};
-var lociByGroupKey = {};
-
-for(i = 0; i < locusIds.length; i++) {
-	locusId = locusIds[i];
-
-	var current =
-		loci[locusId];
-
-	targets =
-		lineageTargetsByLocus[locusId] || [];
-
-	locusType =
-		current.type === null
-			? null
-			: current.type.toLowerCase();
-
-	var eligible =
-		targets.length === 1 &&
-		(locusType === "erv" ||
-			locusType === "solo_ltr");
-
-	if(eligible) {
-		eligibleNamingCount++;
-		detail =
-			lineageDetails[targets[0]];
-
-		if(current.group === null ||
-			current.missillacId === null) {
-			eligibleUnnamed.push(locusId);
-		} else {
-			var expectedId =
-				detail.id +
-				"-" +
-				current.group +
-				(
-					locusType === "solo_ltr"
-						? "(LTR)"
-						: ""
-				);
-
-			if(current.missillacId !== expectedId) {
-				inconsistentNames.push({
-					id: locusId,
-					observed:
-						current.missillacId,
-					expected:
-						expectedId
-				});
-			}
-
-			addUnique(
-				lociByMissillacId,
-				current.missillacId,
-				locusId
-			);
-
-			var groupKey =
-				(current.host || "") +
-				"\t" +
-				(current.build || "") +
-				"\t" +
-				detail.id +
-				"\t" +
-				current.group;
-
-			addUnique(
-				lociByGroupKey,
-				groupKey,
-				locusId
-			);
-		}
-	} else if(current.group !== null ||
-		current.missillacId !== null) {
-		ineligibleNamed.push(locusId);
-	}
-}
-
-var duplicateMissillacIds = [];
-var keys =
-	sortedKeys(lociByMissillacId);
-
-for(i = 0; i < keys.length; i++) {
-	if(lociByMissillacId[keys[i]].length > 1) {
-		duplicateMissillacIds.push({
-			key: keys[i],
-			loci: lociByMissillacId[keys[i]]
-		});
-	}
-}
-
-var duplicateGroups = [];
-keys = sortedKeys(lociByGroupKey);
-
-for(i = 0; i < keys.length; i++) {
-	if(lociByGroupKey[keys[i]].length > 1) {
-		duplicateGroups.push({
-			key: keys[i],
-			loci: lociByGroupKey[keys[i]]
-		});
-	}
-}
-
-log(
-	"Loci eligible for Missillac nomenclature: " +
-	eligibleNamingCount
-);
-
-log(
-	"Eligible loci with complete nomenclature: " +
-	(
-		eligibleNamingCount -
-		eligibleUnnamed.length
-	)
-);
-
-printExamples(
-	"Eligible loci missing orthology_group or missillac_id",
-	eligibleUnnamed,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"Ineligible loci carrying nomenclature",
-	ineligibleNamed,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"Missillac IDs inconsistent with lineage/group/type",
-	inconsistentNames,
-	function(x) {
-		return x.id +
-			" [observed=" +
-			x.observed +
-			", expected=" +
-			x.expected +
-			"]";
-	}
-);
-
-printExamples(
-	"Duplicate Missillac IDs",
-	duplicateMissillacIds,
-	function(x) {
-		return x.key +
-			" [" +
-			x.loci.join(",") +
-			"]";
-	}
-);
-
-printExamples(
-	"Duplicate lineage/orthology groups within a host build",
-	duplicateGroups,
-	function(x) {
-		return x.key +
-			" [" +
-			x.loci.join(",") +
-			"]";
-	}
-);
-
-
-// ========================================================================
-// Provenance
-// ========================================================================
-
-heading("Source provenance coverage");
-
-function loadProvenanceLocusSet(tableName) {
-	var rows = query([
-		"list",
-		"custom-table-row",
-		tableName,
-		"id",
-		"erv_locus.id"
-	]);
-
-	var set = {};
-	var orphan = [];
-
-	for(var p = 0; p < rows.length; p++) {
-		var linkedId =
-			norm(rows[p]["erv_locus.id"]);
-
-		if(linkedId === null ||
-			loci[linkedId] === undefined) {
-			orphan.push(
-				norm(rows[p].id)
-			);
-		} else {
-			set[linkedId] = true;
-		}
-	}
-
-	return {
-		rows: rows,
-		set: set,
-		orphan: orphan
-	};
-}
-
-var digs =
-	loadProvenanceLocusSet(
-		"digs_locus"
-	);
-
-var repbase =
-	loadProvenanceLocusSet(
-		"erv_locus_repbase_assoc"
-	);
-
-var retrotector =
-	loadProvenanceLocusSet(
-		"retrotector_locus"
-	);
-
-var provenanceCombinationCounts = {};
-var lociWithoutProvenance = [];
-
-for(i = 0; i < locusIds.length; i++) {
-	locusId = locusIds[i];
-
-	var sources = [];
-
-	if(digs.set[locusId]) {
-		sources.push("DIGS");
-	}
-	if(repbase.set[locusId]) {
-		sources.push("Repbase");
-	}
-	if(retrotector.set[locusId]) {
-		sources.push("RetroTector");
-	}
-
-	var combination =
-		sources.length === 0
-			? "none"
-			: sources.join("+");
-
-	increment(
-		provenanceCombinationCounts,
-		combination
-	);
-
-	if(sources.length === 0) {
-		lociWithoutProvenance.push(locusId);
-	}
-}
-
-log(
-	"DIGS provenance rows: " +
-	digs.rows.length
-);
-
-log(
-	"Repbase provenance rows: " +
-	repbase.rows.length
-);
-
-log(
-	"RetroTector provenance rows: " +
-	retrotector.rows.length
-);
-
-printCounts(
-	"Locus counts by provenance combination",
-	provenanceCombinationCounts
-);
-
-printExamples(
-	"Loci without source provenance",
-	lociWithoutProvenance,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"Orphan DIGS provenance rows",
-	digs.orphan,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"Orphan Repbase provenance rows",
-	repbase.orphan,
-	function(x) {
-		return x;
-	}
-);
-
-printExamples(
-	"Orphan RetroTector provenance rows",
-	retrotector.orphan,
-	function(x) {
-		return x;
-	}
-);
-
-
-var legacyRows = query([
-	"list",
-	"custom-table-row",
-	"erv_locus_legacy_xref",
-	"id",
-	"legacy_source",
-	"mapping_status",
-	"erv_locus.id"
-]);
-
-var legacyStatusCounts = {};
-var legacySourceCounts = {};
-var orphanLegacyRows = [];
-
-for(i = 0; i < legacyRows.length; i++) {
-	increment(
-		legacyStatusCounts,
-		legacyRows[i].mapping_status
-	);
-
-	increment(
-		legacySourceCounts,
-		legacyRows[i].legacy_source
-	);
-
-	var legacyLinkedId =
-		norm(
-			legacyRows[i]["erv_locus.id"]
-		);
-
-	if(legacyLinkedId !== null &&
-		loci[legacyLinkedId] === undefined) {
-		orphanLegacyRows.push(
-			norm(legacyRows[i].id)
+			x.alignmentName
 		);
 	}
-}
-
-printCounts(
-	"Legacy xrefs by mapping_status",
-	legacyStatusCounts
-);
-
-printCounts(
-	"Legacy xrefs by source",
-	legacySourceCounts
-);
-
-printExamples(
-	"Legacy xrefs linked to unknown loci",
-	orphanLegacyRows,
-	function(x) {
-		return x;
-	}
 );
 
 
-var aliasRows = query([
-	"list",
-	"custom-table-row",
-	"erv_locus_alias",
-	"id",
-	"alias_source",
-	"erv_locus.id"
-]);
+// -------------------------------------------------------------------------
+// Expected LTR alignments
+// -------------------------------------------------------------------------
 
-var aliasSourceCounts = {};
-var orphanAliasRows = [];
+var missingLtrAlignments = [];
+var ambiguousLtrAlignments = [];
 
-for(i = 0; i < aliasRows.length; i++) {
-	increment(
-		aliasSourceCounts,
-		aliasRows[i].alias_source
+var ltrIds =
+	sortedKeys(
+		ltrLineageCounts
 	);
 
-	var aliasLocusId =
-		norm(
-			aliasRows[i]["erv_locus.id"]
-		);
+for(i = 0;
+	i < ltrIds.length;
+	i++) {
 
-	if(aliasLocusId === null ||
-		loci[aliasLocusId] === undefined) {
-		orphanAliasRows.push(
-			norm(aliasRows[i].id)
-		);
-	}
-}
+	ltrLineageId =
+		ltrIds[i];
 
-log(
-	"ERV locus aliases: " +
-	aliasRows.length
-);
+	var directName =
+		"AL_LTR_" +
+		ltrLineageId;
 
-printCounts(
-	"Aliases by source",
-	aliasSourceCounts
-);
+	if(alignmentByName[
+		directName
+	] === true) {
 
-printExamples(
-	"Orphan locus aliases",
-	orphanAliasRows,
-	function(x) {
-		return x;
-	}
-);
-
-
-// ========================================================================
-// Staging-to-permanent reconciliation
-// ========================================================================
-
-heading("Staging-to-permanent reconciliation");
-
-var candidateRows = query([
-	"list",
-	"custom-table-row",
-	"erv_locus_candidate",
-	"id",
-	"chrom",
-	"start_position",
-	"end_position",
-	"strand",
-	"status"
-]);
-
-var candidates = {};
-
-for(i = 0; i < candidateRows.length; i++) {
-	var candidateId =
-		norm(candidateRows[i].id);
-
-	if(candidateId !== null) {
-		candidates[candidateId] =
-			candidateRows[i];
-	}
-}
-
-var candidatesWithoutLocus = [];
-var lociWithoutCandidate = [];
-var stagingDisagreements = [];
-
-var candidateIds =
-	sortedKeys(candidates);
-
-for(i = 0; i < candidateIds.length; i++) {
-	candidateId = candidateIds[i];
-
-	if(loci[candidateId] === undefined) {
-		candidatesWithoutLocus.push(
-			candidateId
-		);
-	}
-}
-
-for(i = 0; i < locusIds.length; i++) {
-	locusId = locusIds[i];
-
-	if(candidates[locusId] === undefined) {
-		lociWithoutCandidate.push(locusId);
 		continue;
 	}
 
-	var candidate =
-		candidates[locusId];
+	var normalisedKey =
+		normaliseLtrAlignmentKey(
+			ltrLineageId
+		);
 
-	current =
-		loci[locusId];
+	var candidates =
+		ltrAlignmentNamesByNormalisedKey[
+			normalisedKey
+		];
 
-	var differences = [];
+	if(candidates === undefined ||
+		candidates.length === 0) {
 
-	if(norm(candidate.chrom) !==
-		current.scaffold) {
-		differences.push("scaffold");
+		missingLtrAlignments.push(
+			ltrLineageId
+		);
 	}
+	else if(candidates.length > 1) {
 
-	if(normInt(candidate.start_position) !==
-		current.start) {
-		differences.push("start");
-	}
+		ambiguousLtrAlignments.push({
+			ltrLineageId:
+				ltrLineageId,
 
-	if(normInt(candidate.end_position) !==
-		current.end) {
-		differences.push("end");
-	}
-
-	if(norm(candidate.strand) !==
-		current.orientation) {
-		differences.push("orientation");
-	}
-
-	var expectedType =
-		norm(candidate.status);
-
-	if(expectedType !== null) {
-		expectedType =
-			expectedType.toUpperCase() === "LTR"
-				? "solo_ltr"
-				: (
-					expectedType.toUpperCase() === "ERV"
-						? "erv"
-						: expectedType.toLowerCase()
-				);
-	}
-
-	if(expectedType !== current.type) {
-		differences.push("locus_type");
-	}
-
-	if(differences.length > 0) {
-		stagingDisagreements.push({
-			id: locusId,
-			differences: differences
+			candidates:
+				candidates
 		});
 	}
 }
 
-log(
-	"Staging erv_locus_candidate rows: " +
-	candidateRows.length
-);
-
-log(
-	"Permanent erv_locus rows: " +
-	locusRows.length
-);
 
 printExamples(
-	"Staging candidates without a permanent locus",
-	candidatesWithoutLocus,
+	"LTR lineages used by loci but lacking an LTR alignment",
+	missingLtrAlignments,
 	function(x) {
 		return x;
 	}
 );
 
 printExamples(
-	"Permanent loci without a staging candidate",
-	lociWithoutCandidate,
+	"LTR lineages with ambiguous alignment resolution",
+	ambiguousLtrAlignments,
 	function(x) {
-		return x;
-	}
-);
 
-printExamples(
-	"Staging/permanent field disagreements",
-	stagingDisagreements,
-	function(x) {
-		return x.id +
+		return (
+			x.ltrLineageId +
 			" [" +
-			x.differences.join(",") +
-			"]";
+			x.candidates.join(",") +
+			"]"
+		);
 	}
 );
 
 
-// ========================================================================
-// Final summary
-// ========================================================================
+// -------------------------------------------------------------------------
+// Overall QA summary
+// -------------------------------------------------------------------------
 
-heading("Final locus-layer check totals");
+log("");
+log("============================================================");
+log("ERV locus layer QA summary");
+log("============================================================");
 
-var criticalIssueCount =
-	invalidLocusRows.length +
+var warningCount =
 	lociWithoutSequence.length +
 	lociWithMultipleSequences.length +
-	unknownSequenceLocusLinks.length +
+	orphanSequenceLinks.length +
 	orphanLineageAssocs.length +
+	uncertainLineageAssocs.length +
+	unsupportedEntityTypeAssocs.length +
+	lociWithMultipleResolvedErvTargets.length +
 	orphanLtrAssocs.length +
-	missingExpectedAlignments.length +
-	eligibleUnnamed.length +
-	ineligibleNamed.length +
-	inconsistentNames.length +
+	soloLtrWithoutTarget.length +
+	soloLtrMultipleTargets.length +
+	unnamedEligibleLoci.length +
+	namedIneligibleLoci.length +
 	duplicateMissillacIds.length +
-	duplicateGroups.length +
-	digs.orphan.length +
-	repbase.orphan.length +
-	retrotector.orphan.length +
-	orphanLegacyRows.length +
-	orphanAliasRows.length +
-	lociWithoutCandidate.length +
-	stagingDisagreements.length;
+	duplicateLineageNumbers.length +
+	missingErvAlignments.length +
+	missingLtrAlignments.length +
+	ambiguousLtrAlignments.length;
+
 
 log(
-	"Critical integrity issues: " +
-	criticalIssueCount
+	"Permanent ERV loci: " +
+	locusIds.length
 );
 
 log(
-	"Review-only: candidates without permanent loci: " +
-	candidatesWithoutLocus.length
+	"Permanent loci with exactly one linked sequence: " +
+	(
+		locusIds.length -
+		lociWithoutSequence.length -
+		lociWithMultipleSequences.length
+	)
 );
 
 log(
-	"Review-only: loci without lineage association: " +
-	noLineage.length
+	"Loci without a resolved ERV entity association: " +
+	lociWithoutResolvedErvTarget.length
 );
 
 log(
-	"Review-only: loci with multiple lineage associations: " +
-	multipleLineages.length
+	"Loci with multiple resolved ERV entity associations: " +
+	lociWithMultipleResolvedErvTargets.length
 );
 
 log(
-	"Review-only: ERV loci without LTR association: " +
-	ervWithoutLtrAssoc.length
+	"Uncertain ERV entity associations: " +
+	uncertainLineageAssocs.length
 );
 
 log(
-	"Review-only: mismatched paired LTR lineages: " +
-	mismatchedPairedLtrs.length
+	"Named loci: " +
+	namedLoci.length
 );
 
 log(
-	"Review-only: loci without provenance: " +
-	lociWithoutProvenance.length
+	"Eligible but unnamed loci: " +
+	unnamedEligibleLoci.length
 );
 
 log(
-	"Finished summarising the ERV locus layer"
+	"QA warnings/issues detected: " +
+	warningCount
 );
+
+
+if(warningCount === 0) {
+
+	log(
+		"ERV locus layer summary completed with no detected QA issues"
+	);
+}
+else {
+
+	log(
+		"ERV locus layer summary completed; review the QA items above"
+	);
+}
