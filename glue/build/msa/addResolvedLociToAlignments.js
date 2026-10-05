@@ -8,7 +8,7 @@
 //
 //   lineage             -> AL_LINEAGE_*
 //   sublineage          -> AL_SUBLINEAGE_*
-//   erv_derived_repeat  -> AL_ERV_DERIVED_REPEAT_*
+//   erv_derived_repeat  -> AL_ERVR_*
 //   uncertain           -> excluded
 //
 // LTR locus placement is determined from erv_locus_ltr_assoc.
@@ -209,7 +209,7 @@ function expectedErvAlignmentName(
 	if(entityType === "erv_derived_repeat") {
 
 		return (
-			"AL_ERV_DERIVED_REPEAT_" +
+			"AL_ERVR_" +
 			suffix
 		);
 	}

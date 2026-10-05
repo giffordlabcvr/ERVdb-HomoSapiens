@@ -294,7 +294,7 @@ function expectedErvAlignmentName(
 	if(entityType === "erv_derived_repeat") {
 
 		return (
-			"AL_ERV_DERIVED_REPEAT_" +
+			"AL_ERVR_" +
 			suffix
 		);
 	}

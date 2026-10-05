@@ -47,7 +47,7 @@ run script glue/build/loadErvLocusLineageAssociations.js
 run script glue/build/loadErvLocusLtrAssociations.js
 
 # Load source-specific provenance records and connect them to ERV loci.
-run file glue/build/loadErvLocusProvenance.glue
+#run file glue/build/loadErvLocusProvenance.glue
 
 
 # -------------------------------------------------------------------------
