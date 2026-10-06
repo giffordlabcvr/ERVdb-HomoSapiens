@@ -1301,7 +1301,11 @@ if(
 
 
 // -----------------------------------------------------------------------------
-// Prepare output directories
+// Validate output locations before writing anything
+//
+// The TSV and FASTA directory must be treated as a single generated dataset.
+// Refuse to overwrite either component so that an old TSV can never become
+// paired with new FASTAs, or vice versa.
 // -----------------------------------------------------------------------------
 
 var outputTsvPath =
@@ -1309,6 +1313,23 @@ var outputTsvPath =
 		OUTPUT_TSV
 	);
 
+
+// Refuse to overwrite an existing generated TSV.
+
+if(
+	Files.exists(outputTsvPath)
+) {
+
+	throw new Error(
+		"Output TSV already exists: " +
+		OUTPUT_TSV +
+		". Remove both the existing test TSV and FASTA directory before " +
+		"regenerating the test set. No output files have been written."
+	);
+}
+
+
+// Prepare the parent directory for the TSV.
 
 var outputTsvParent =
 	outputTsvPath.getParent();
@@ -1322,14 +1343,12 @@ if(outputTsvParent !== null) {
 }
 
 
+// Prepare/check the FASTA output directory.
+
 ensureDirectory(
 	OUTPUT_FASTA_DIR
 );
 
-
-// -----------------------------------------------------------------------------
-// Refuse to mix a newly generated set with old FASTA files
-// -----------------------------------------------------------------------------
 
 var outputFastaPath =
 	Paths.get(
@@ -1368,7 +1387,8 @@ if(existingCount > 0) {
 	throw new Error(
 		"Output FASTA directory is not empty: " +
 		OUTPUT_FASTA_DIR +
-		". Remove the existing test set before regenerating it."
+		". Remove both the existing test TSV and FASTA directory before " +
+		"regenerating the test set. No output files have been written."
 	);
 }
 
@@ -1455,6 +1475,285 @@ log(
 	OUTPUT_FASTA_DIR
 );
 
+// -----------------------------------------------------------------------------
+// Validate generated test dataset
+//
+// The reduced TSV and FASTA source must describe exactly the same set of loci.
+// This is a hard integrity check: every TSV locus must have exactly one FASTA,
+// and every FASTA must correspond to exactly one TSV locus.
+// -----------------------------------------------------------------------------
+
+log(
+	"Validating generated TSV/FASTA test dataset"
+);
+
+
+// Build expected locus-ID set from the selected TSV rows.
+
+var expectedIds = {};
+
+
+_.each(
+	selected,
+	function(row) {
+
+		if(
+			expectedIds[
+				row._locusId
+			]
+		) {
+
+			throw new Error(
+				"Duplicate selected locus ID during final validation: " +
+				row._locusId
+			);
+		}
+
+
+		expectedIds[
+			row._locusId
+		] = true;
+	}
+);
+
+
+// Read actual FASTA filenames from the generated source directory.
+
+var actualFastaIds = {};
+
+var unexpectedFiles = [];
+
+var fastaStream =
+	Files.list(
+		outputFastaPath
+	);
+
+
+try {
+
+	var fastaIterator =
+		fastaStream.iterator();
+
+
+	while(
+		fastaIterator.hasNext()
+	) {
+
+		var path =
+			fastaIterator.next();
+
+
+		if(
+			!Files.isRegularFile(
+				path
+			)
+		) {
+			continue;
+		}
+
+
+		var filename =
+			"" +
+			path.getFileName();
+
+
+		// Ignore hidden filesystem metadata such as .DS_Store.
+
+		if(
+			filename.indexOf(".") === 0
+		) {
+			continue;
+		}
+
+
+		if(
+			!filename.endsWith(".fas")
+		) {
+
+			unexpectedFiles.push(
+				filename
+			);
+
+			continue;
+		}
+
+
+		var locusId =
+			filename.substring(
+				0,
+				filename.length - 4
+			);
+
+
+		if(
+			actualFastaIds[
+				locusId
+			]
+		) {
+
+			throw new Error(
+				"Duplicate FASTA locus ID during final validation: " +
+				locusId
+			);
+		}
+
+
+		actualFastaIds[
+			locusId
+		] = true;
+	}
+
+} finally {
+
+	fastaStream.close();
+}
+
+
+// Compare the two sets.
+
+var missingFastaIds = [];
+
+var extraFastaIds = [];
+
+
+_.each(
+	Object.keys(
+		expectedIds
+	),
+	function(locusId) {
+
+		if(
+			!actualFastaIds[
+				locusId
+			]
+		) {
+
+			missingFastaIds.push(
+				locusId
+			);
+		}
+	}
+);
+
+
+_.each(
+	Object.keys(
+		actualFastaIds
+	),
+	function(locusId) {
+
+		if(
+			!expectedIds[
+				locusId
+			]
+		) {
+
+			extraFastaIds.push(
+				locusId
+			);
+		}
+	}
+);
+
+
+var expectedCount =
+	Object.keys(
+		expectedIds
+	).length;
+
+var actualCount =
+	Object.keys(
+		actualFastaIds
+	).length;
+
+
+log(
+	"Expected loci from TSV: " +
+	expectedCount
+);
+
+log(
+	"FASTA loci generated: " +
+	actualCount
+);
+
+log(
+	"TSV loci without FASTA: " +
+	missingFastaIds.length
+);
+
+log(
+	"FASTA loci without TSV row: " +
+	extraFastaIds.length
+);
+
+log(
+	"Unexpected non-FASTA files: " +
+	unexpectedFiles.length
+);
+
+
+// Report discrepancies before aborting.
+
+_.each(
+	missingFastaIds,
+	function(locusId) {
+
+		log(
+			"  Missing FASTA: " +
+			locusId +
+			".fas"
+		);
+	}
+);
+
+
+_.each(
+	extraFastaIds,
+	function(locusId) {
+
+		log(
+			"  Extra FASTA: " +
+			locusId +
+			".fas"
+		);
+	}
+);
+
+
+_.each(
+	unexpectedFiles,
+	function(filename) {
+
+		log(
+			"  Unexpected file: " +
+			filename
+		);
+	}
+);
+
+
+if(
+	expectedCount !== selected.length ||
+	actualCount !== selected.length ||
+	missingFastaIds.length > 0 ||
+	extraFastaIds.length > 0 ||
+	unexpectedFiles.length > 0
+) {
+
+	throw new Error(
+		"Generated test dataset failed TSV/FASTA integrity validation"
+	);
+}
+
+
+log(
+	"Generated test dataset validated: " +
+	selected.length +
+	" TSV loci exactly match " +
+	actualCount +
+	" FASTA sequences"
+);
 
 // -----------------------------------------------------------------------------
 // Final statistics
