@@ -1,6 +1,6 @@
-# ERV-2.Lenti.RELIK (RELIK)
+# ERV-2-Lenti.Neo.Leporid (RELIK)
 
-**ERV-2.Lenti.RELIK (RELIK; Rabbit Endogenous Lentivirus type K)** is an endogenous lentivirus lineage identified in rabbits and hares. It was the first endogenous lentivirus to be discovered, demonstrating that lentiviruses have infected mammals since at least the Miocene.
+**ERV-2-Lenti.Neo.Leporid**, also known as Rabbit Endogenous Lentivirus type K (RELiK)* is an endogenous lentivirus lineage identified in rabbits and hares. It was the first endogenous lentivirus to be discovered, demonstrating that lentiviruses have infected mammals since at least the Miocene.
 
 Orthologous RELIK insertions shared by rabbits and hares indicate that the lineage entered the lagomorph germ line before their divergence approximately **12 million years ago**, providing the first robust minimum age calibration for the lentivirus genus.
 
