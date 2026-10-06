@@ -1,27 +1,28 @@
 id	legacy_name	legacy_full_name	entity_type	classification_basis	status	parent_lineage	human_erv	rv_major_clade.id	rv_minor_clade.id	rv_genus.id	rv_subgenus.id
-ERV-1-Gamma.Canis	CfERV	Canis familiaris endogenous gammaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	Megatherio
-ERV-1-Gamma.GLN	GLN	murine retrovirus using tRNAGln	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	Korv_GALV
-ERV-1-Gamma.Orca	KwERV	killer whale endogenous gammaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	Korv_GALV
-ERV-1-Gamma.Pan.1	CERV-1	Pan troglodytes endogenous retrovirus 1	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	Megatherio
-ERV-1-Gamma.Pan.2	CERV-2	chimpanzee endogenous retrovirus 2	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	RD114
-ERV-1-Gamma.RD114	RD114	RD114 retrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	RD114
-ERV-1-Gamma.Sus.C	PERV-C	porcine endogenous retrovirus C-C105	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	Korv_GALV
-ERV-1-Rho.Ceratotherium.Rb	Ceratotherium-Rb	rhino endogenous retrovirus Rb	lineage	ervdb_phylogeny	accepted	-	false	I	-	Rhoretrovirus	-
-ERV-1-Rho.Eq.Rb	EqERV-Rb	equine endogenous retrovirus Rb	lineage	ervdb_phylogeny	accepted	-	false	I	-	Rhoretrovirus	-
-ERV-1-Zeta.Canis.Fc	CfERV-Fc	Canis familiaris endogenous retrovirus Fc	lineage	ervdb_phylogeny	accepted	-	false	I	-	Zetaretrovirus	HF
-ERV-1-Zeta.Eq	EqERV-Zeta	equine endogenous zetaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	-	Zetaretrovirus	FRD
+ERV-1-Gamma.BR.1	BAEV	Baboon endogenous virus	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	BR
+ERV-1-Gamma.BR.114	RD114	RD114 retrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	BR
+ERV-1-Gamma.BR.2	CERV-2	chimpanzee endogenous retrovirus 2	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	BR
+ERV-1-Gamma.KG.3	PERV-C	porcine endogenous retrovirus C-C105	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	KG
+ERV-1-Gamma.KG.4	KwERV	killer whale endogenous gammaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	KG
+ERV-1-Gamma.KG.GLN	GLN	murine retrovirus using tRNAGln	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	KG
+ERV-1-Gamma.Mega.1	CERV-1	Pan troglodytes endogenous retrovirus 1	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	Mega
+ERV-1-Gamma.Mega.2	CfERV	Canis familiaris endogenous gammaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Gammaretrovirus	Mega
+ERV-1-Rho.Rb.2	Ceratotherium-Rb	rhino endogenous retrovirus Rb	lineage	ervdb_phylogeny	accepted	-	false	I	-	Rhoretrovirus	-
+ERV-1-Rho.Rb.3	EqERV-Rb	equine endogenous retrovirus Rb	lineage	ervdb_phylogeny	accepted	-	false	I	-	Rhoretrovirus	-
+ERV-1-Zeta.FRD.34	EqERV-Zeta	equine endogenous zetaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	I	-	Zetaretrovirus	FRD
+ERV-1-Zeta.HF.Fc.3	CfERV-Fc	Canis familiaris endogenous retrovirus Fc	lineage	ervdb_phylogeny	accepted	-	false	I	-	Zetaretrovirus	HF
 ERV-1.Eta.15	HERV-15	human endogenous retrovirus 15	lineage	ervdb_phylogeny	accepted	-	true	I	Gamma-Eta	Etaretrovirus	-
+ERV-1.Eta.2	PERV-E	porcine endogenous retrovirus E	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Etaretrovirus	-
 ERV-1.Eta.E	HERV-E	human endogenous retrovirus E	lineage	ervdb_phylogeny	accepted	-	true	I	Gamma-Eta	Etaretrovirus	-
 ERV-1.Eta.E.HQ	HARLEQUIN	HARLEQUIN	uncertain	repeat_family	excluded	ERV-1.Eta.E	true	I	Gamma-Eta	Gammaretrovirus	Eta
 ERV-1.Eta.R	HERV-R	human endogenous retrovirus R	lineage	ervdb_phylogeny	accepted	-	true	I	Gamma-Eta	Etaretrovirus	-
-ERV-1.Eta.Suidae	PERV-E	porcine endogenous retrovirus E	lineage	ervdb_phylogeny	accepted	-	false	I	Gamma-Eta	Etaretrovirus	-
-ERV-1.Gamma.T	HERV-T	human endogenous retrovirus T	lineage	ervdb_phylogeny	accepted	-	true	I	Gamma-Eta	Gammaretrovirus	REV
 ERV-1.Gamma.T2	HERV-T2	human endogenous retrovirus T2	sublineage	published_phylogeny	excluded	ERV-1.Gamma.T	true	I	Gamma-Eta	Gammaretrovirus	REV
 ERV-1.Gamma.T3	HERV-T3	human endogenous retrovirus T3	sublineage	published_phylogeny	excluded	ERV-1.Gamma.T	true	I	Gamma-Eta	Gammaretrovirus	REV
+ERV-1.Gamma.TR.T	HERV-T	human endogenous retrovirus T	lineage	ervdb_phylogeny	accepted	-	true	I	Gamma-Eta	Gammaretrovirus	TR
 ERV-1.Iota.ADP	HERV-ADP	human endogenous retrovirus ADP	lineage	ervdb_phylogeny	accepted	-	true	I	-	Iotaretrovirus	-
 ERV-1.Iota.I	HERV-I	human endogenous retrovirus I	lineage	ervdb_phylogeny	accepted	-	true	I	-	Iotaretrovirus	-
 ERV-1.Iota.I.Pb	HERV-Pb	human endogenous retrovirus Pb	uncertain	provisional_placement	excluded	ERV-1.Iota.I	true	I	-	Iotaretrovirus	-
-ERV-1.Rho.Rb	HERV-Rb	human endogenous retrovirus R(b)	lineage	ervdb_phylogeny	accepted	-	true	I	-	Rhoretrovirus	-
+ERV-1.Rho.Rb.1	HERV-Rb	human endogenous retrovirus R(b)	lineage	ervdb_phylogeny	accepted	-	true	I	-	Rhoretrovirus	-
 ERV-1.Rho.V	HERV-V	human endogenous retrovirus V	uncertain	provisional_placement	excluded	ERV-1.Rho	true	I	-	Rhoretrovirus	-
 ERV-1.Theta.24	HERV-24	human endogenous retrovirus 24	lineage	ervdb_phylogeny	accepted	-	true	I	-	Thetaretrovirus	-
 ERV-1.Theta.24b	HERV-24b	human endogenous retrovirus 24b	sublineage	repeat_family	excluded	ERV-1.Theta.24	true	I	-	Thetaretrovirus	-
@@ -32,62 +33,61 @@ ERV-1.Zeta.FRD.4	HERV-4	human endogenous retrovirus 4	lineage	ervdb_phylogeny	ac
 ERV-1.Zeta.FRD.41	PRIMA-41	human endogenous retrovirus PRIMA-41	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	FRD
 ERV-1.Zeta.FRD.66	MER-66	medium reiteration frequency repeat 66	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	FRD
 ERV-1.Zeta.HF.46	HERV-46	human endogenous retrovirus 46	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
-ERV-1.Zeta.HF.Fa	HERV-Fa	human endogenous retrovirus F(a)	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
-ERV-1.Zeta.HF.Fb	HERV-Fb	human endogenous retrovirus F(b)	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
+ERV-1.Zeta.HF.Fa.1	HERV-Fa	human endogenous retrovirus F(a)	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
+ERV-1.Zeta.HF.Fb.1	HERV-Fb	human endogenous retrovirus F(b)	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
 ERV-1.Zeta.HF.Fc.1	HERV-Fc1	human endogenous retrovirus F(c) 1	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
 ERV-1.Zeta.HF.Fc.2	HERV-Fc2	human endogenous retrovirus F(c) 2	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
-ERV-1.Zeta.HF.H	HERV-H	human endogenous retrovirus H	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
-ERV-1.Zeta.HF.XA	HERV-XA	human endogenous retrovirus XA	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
+ERV-1.Zeta.HF.H.1	HERV-H	human endogenous retrovirus H	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
+ERV-1.Zeta.HF.XA.1	HERV-XA	human endogenous retrovirus XA	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	HF
 ERV-1.Zeta.W9P.30	HERV-30	human endogenous retrovirus 30	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.9	HERV-9	human endogenous retrovirus 9	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.P	HERV-P	human endogenous retrovirus P	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.P.1	HUERS-P1	HUERS-P1	sublineage	published_sequence_group	excluded	ERV-1.Zeta.W9P.P	true	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.P.2	HUERS-P2	HUERS-P2	sublineage	published_sequence_group	excluded	ERV-1.Zeta.W9P.P	true	I	-	Zetaretrovirus	W9P
-ERV-1.Zeta.W9P.P.HuRRSp	HuRRS-P	HuRRS-P	uncertain	published_sequence_group	excluded	ERV-1.Zeta.W9P.P	true	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.W	HERV-W	human endogenous retrovirus W	lineage	ervdb_phylogeny	accepted	-	true	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.W.SG1	HERV-W-SG1	human endogenous retrovirus W SG1	sublineage	published_phylogeny	excluded	ERV-1.Zeta.W9P.W	true	I	-	Zetaretrovirus	W9P
 ERV-1.Zeta.W9P.W.SG2	HERV-W-SG2	human endogenous retrovirus W SG2	sublineage	published_phylogeny	excluded	ERV-1.Zeta.W9P.W	true	I	-	Zetaretrovirus	W9P
-ERV-2-Alpha.Tg.F	TgERV-F	Taeniopygia guttata endogenous retrovirus F	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Alpharetrovirus	-
-ERV-2-Beta.A.Mus	IAPE	intracisternal A-type particle	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Betaretrovirus	A
+ERV-2-Alpha.TGF.1	TgERV-F	Taeniopygia guttata endogenous retrovirus F	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Alpharetrovirus	-
+ERV-2-Beta.A.IAP	IAPE	intracisternal A-type particle	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Betaretrovirus	A
+ERV-2-Beta.K.Mys.TR	mysTR	Reithrodontomys fulvescens endogenous virus mysTR	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Betaretrovirus	K
 ERV-2-Beta.Lago.H	RERV-H	Oryctolagus cuniculus clone A rabbit endogenous retrovirus H	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Betaretrovirus	Lago
-ERV-2-Beta.Mys.TR	mysTR	Reithrodontomys fulvescens endogenous virus mysTR	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Betaretrovirus	Mys
-ERV-2-Beta.Py	PyERV	Python molurus endogenous retrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Betaretrovirus	Reptile
-ERV-2-Delta.MinNat	MinERVa	Miniopterus endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	Chiropteran
-ERV-2-Delta.MolMol	Delta.9-MolMol	Molossus endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	Chiropteran
-ERV-2-Delta.MurMur	Delta.3-MurAur	Murina endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	Chiropteran
-ERV-2-Delta.PlaMin	Delta.6-PlaMin	river dolphin endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	Cetartiodactyl
-ERV-2-Lenti.Dermoptera	DELV	dermopteran endogenous lentivirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Archaeo
-ERV-2-Lenti.Mustela	MELVmpf	mustelid endogenous lentivirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	-
-ERV-2-Lenti.PSIV1	pSIVgml	prosimian immunodeficieny virus (grey mouse lemur)	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	-
-ERV-2-Lenti.PSIV2	PSIV2	prosimian immunodeficieny virus 2	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	-
-ERV-2-Lenti.RELIK	RELIK	rabbit endogenous lentivirus type K	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	-
-ERV-2-Lenti.SpELV	SpELV	springhare endogenous lentivirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Archaeo
-ERV-2.Beta.Archeo.5	HERV-K-HML5	endogenous retrovirus K  HML5	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	Archaeo
-ERV-2.Beta.Archeo.6	HERV-K-HML6	endogenous retrovirus K  HML6	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	Archaeo
+ERV-2-Beta.Reptile.Py1	PyERV	Python molurus endogenous retrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	Alpha-Beta	Betaretrovirus	Reptile
+ERV-2-Delta.CetArt.6	Delta.6-PlaMin	river dolphin endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	CetArt
+ERV-2-Delta.Chiropt.1	MinERVa	Miniopterus endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	Chiropt
+ERV-2-Delta.Chiropt.3	Delta.3-MurAur	Murina endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	Chiropt
+ERV-2-Delta.Chiropt.9	Delta.9-MolMol	Molossus endogenous deltaretrovirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Deltaretrovirus	Chiropt
+ERV-2-Lenti.Archaeo.Dermoptera	DELV	dermopteran endogenous lentivirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Archaeo
+ERV-2-Lenti.Archaeo.Pedetes	SpELV	springhare endogenous lentivirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Archaeo
+ERV-2-Lenti.Neo.Leporid	RELIK	rabbit endogenous lentivirus type K	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Neo
+ERV-2-Lenti.Neo.Mustelid	MELVmpf	mustelid endogenous lentivirus	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Neo
+ERV-2-Lenti.Neo.Prosimian1	pSIVgml	prosimian immunodeficieny virus (grey mouse lemur)	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Neo
+ERV-2-Lenti.Neo.Prosimian2	PSIV2	prosimian immunodeficieny virus 2	lineage	ervdb_phylogeny	accepted	-	false	II	-	Lentivirus	Neo
+ERV-2.Beta.Archaeo.5	HERV-K-HML5	endogenous retrovirus K  HML5	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	Archaeo
+ERV-2.Beta.Archaeo.6	HERV-K-HML6	endogenous retrovirus K  HML6	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	Archaeo
+ERV-2.Beta.Archaeo.9	HERV-hako	endogenous retrovirus Hako	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	Archaeo
 ERV-2.Beta.Archeo.6.1a	HERV-K-HML6	endogenous retrovirus K HML6 type 1a	sublineage	published_phylogeny	excluded	ERV-2.Beta.Archeo.6	true	II	Alpha-Beta	Betaretrovirus	Archaeo
 ERV-2.Beta.Archeo.6.1b	HERV-K-HML6	endogenous retrovirus K HML6 type 1b	sublineage	published_phylogeny	excluded	ERV-2.Beta.Archeo.6	true	II	Alpha-Beta	Betaretrovirus	Archaeo
-ERV-2.Beta.Archeo.9	HERV-hako	endogenous retrovirus Hako	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	Archaeo
-ERV-2.Beta.K.HML1	HERV-K-HML1	endogenous retrovirus K HML1	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-2.Beta.K.HML10	HERV-K-HML10	endogenous retrovirus K HML10	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-2.Beta.K.HML2	HERV-K-HML2	endogenous retrovirus K HML2	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-2.Beta.K.HML3	HERV-K-HML3	endogenous retrovirus K HML3	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-2.Beta.K.HML4	HERV-K-HML4	endogenous retrovirus K HML4	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-2.Beta.K.HML7	HERV-K-HML7	endogenous retrovirus K HML7	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-2.Beta.K.HML8	HERV-K-HML8	endogenous retrovirus K HML8	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-2.Beta.K.HML9	HERV-K-HML9	endogenous retrovirus K HML9	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
-ERV-3-Lambda.MuERV.L	MuERV-L	Mus musculus endogenous retroviral sequence MuERV-L	lineage	ervdb_phylogeny	accepted	-	false	III	Sigma-Lambda	Lambdaretrovirus	-
-ERV-3-Lambda.U3.Eq	EqERV-U3	equine endogenous lambdaretrovirus U3	lineage	ervdb_phylogeny	accepted	-	false	III	Sigma-Lambda	Lambdaretrovirus	-
-ERV-3-Sigma.Eq	EqERV-S	equine endogenous retrovirus S	lineage	ervdb_phylogeny	accepted	-	false	III	Sigma-Lambda	Sigmaretrovirus	-
-ERV-3.Lambda.L	HERV-L	human endogenous retrovirus L	lineage	ervdb_phylogeny	accepted	-	true	III	Sigma-Lambda	Lambdaretrovirus	-
+ERV-2.Beta.K.HML.1	HERV-K-HML1	endogenous retrovirus K HML1	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-2.Beta.K.HML.10	HERV-K-HML10	endogenous retrovirus K HML10	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-2.Beta.K.HML.2	HERV-K-HML2	endogenous retrovirus K HML2	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-2.Beta.K.HML.3	HERV-K-HML3	endogenous retrovirus K HML3	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-2.Beta.K.HML.4	HERV-K-HML4	endogenous retrovirus K HML4	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-2.Beta.K.HML.7	HERV-K-HML7	endogenous retrovirus K HML7	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-2.Beta.K.HML.8	HERV-K-HML8	endogenous retrovirus K HML8	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-2.Beta.K.HML.9	HERV-K-HML9	endogenous retrovirus K HML9	lineage	ervdb_phylogeny	accepted	-	true	II	Alpha-Beta	Betaretrovirus	K
+ERV-3-Lambda.L.2	MuERV-L	Mus musculus endogenous retroviral sequence MuERV-L	lineage	ervdb_phylogeny	accepted	-	false	III	Sigma-Lambda	Lambdaretrovirus	L
+ERV-3-Lambda.U3.2	EqERV-U3	equine endogenous lambdaretrovirus U3	lineage	ervdb_phylogeny	accepted	-	false	III	Sigma-Lambda	Lambdaretrovirus	U3
+ERV-3-Sigma.2	EqERV-S	equine endogenous retrovirus S	lineage	ervdb_phylogeny	accepted	-	false	III	Sigma-Lambda	Sigmaretrovirus	-
+ERV-3.Lambda.L.1	HERV-L	human endogenous retrovirus L	lineage	ervdb_phylogeny	accepted	-	true	III	Sigma-Lambda	Lambdaretrovirus	-
 ERV-3.Lambda.Lb4	ERV-Lb4	endogenous retrovirus Lb4	sublineage	repeat_family	excluded	ERV-3.Lambda	true	III	Sigma-Lambda	Lambdaretrovirus	L
-ERV-3.Lambda.U3	HERV-U3	human endogenous retrovirus U3	lineage	ervdb_phylogeny	accepted	-	true	III	Sigma-Lambda	Lambdaretrovirus	-
+ERV-3.Lambda.U3.1	HERV-U3	human endogenous retrovirus U3	lineage	ervdb_phylogeny	accepted	-	true	III	Sigma-Lambda	Lambdaretrovirus	-
 ERV-3.Sigma.S	HERV-S	human endogenous retrovirus S	lineage	ervdb_phylogeny	accepted	-	true	III	Sigma-Lambda	Sigmaretrovirus	-
-ERV-3.Spuma.Ame.b	Spuma-Ame.b	axolotl endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Amphibian
-ERV-3.Spuma.Chrysochloris	ChrEFV	Chrysochloris endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Mammal
+ERV-3.Spuma.Amph.Ameb	Spuma-Ame.b	axolotl endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Amph
+ERV-3.Spuma.Amph.Rbi	Spuma-Rbi	caecilian endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Amph
 ERV-3.Spuma.Coelocanth	CoeEFV	coelocanth endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Coelocanth
-ERV-3.Spuma.Pilosa	SloEFV	sloth endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Mammal
-ERV-3.Spuma.Rbi	Spuma-Rbi	caecilian endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Amphibian
-ERV-3.Spuma.Spu	Spuma-Spu	tuatara endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Sphenodon
+ERV-3.Spuma.Mammal.Chrysochloris	ChrEFV	Chrysochloris endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Mammal
+ERV-3.Spuma.Mammal.Pilosa	SloEFV	sloth endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Mammal
+ERV-3.Spuma.Sphenodon	Spuma-Spu	tuatara endogenous foamy virus	lineage	ervdb_phylogeny	accepted	-	false	III	-	Spumavirus	Sphenodon
 ERVR-1.Theta.24.101	MER-101	medium reiteration frequency repeat 101	erv_derived_repeat	repeat_family	accepted	ERV-1.Theta.24	true	I	-	Thetaretrovirus	-
 ERVR-1.Theta.24.110	MER-110	medium reiteration frequency repeat 110	erv_derived_repeat	repeat_family	accepted	ERV-1.Theta.24	-	-	-	-	-
 ERVR-1.Theta.24.89	MER-89	medium reiteration frequency repeat 89	erv_derived_repeat	repeat_family	accepted	ERV-1.Theta.24	true	I	-	Thetaretrovirus	-

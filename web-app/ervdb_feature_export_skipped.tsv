@@ -1,4 +1,6 @@
 reference	source_name	sequence_id	feature	reason
+REF_BAEV	lineage	BAEV	PPT	noncoding_feature_shorter_than_50nt
+REF_BAEV	lineage	BAEV	PBS	noncoding_feature_shorter_than_50nt
 REF_Delta3MurAur	lineage	Delta.3-MurAur	PBS	noncoding_feature_shorter_than_50nt
 REF_Delta6PlaMin	lineage	Delta.6-PlaMin	PBS	noncoding_feature_shorter_than_50nt
 REF_Delta9MolMol	lineage	Delta.9-MolMol	PBS	noncoding_feature_shorter_than_50nt
@@ -18,9 +20,17 @@ REF_HERVADP	lineage	HERV-ADP	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVADP	lineage	HERV-ADP	PBS	noncoding_feature_shorter_than_50nt
 REF_HERVE	lineage	HERV-E	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVE	lineage	HERV-E	PBS	noncoding_feature_shorter_than_50nt
+REF_HERVFa	lineage	HERV-Fa	PPT	noncoding_feature_shorter_than_50nt
+REF_HERVFa	lineage	HERV-Fa	polyA	noncoding_feature_shorter_than_50nt
+REF_HERVFa	lineage	HERV-Fa	PBS	noncoding_feature_shorter_than_50nt
+REF_HERVFa	lineage	HERV-Fa	TATA_box	noncoding_feature_shorter_than_50nt
+REF_HERVFb	lineage	HERV-Fb	PPT	noncoding_feature_shorter_than_50nt
+REF_HERVFb	lineage	HERV-Fb	PBS	noncoding_feature_shorter_than_50nt
+REF_HERVFb	lineage	HERV-Fb	TATA_box	noncoding_feature_shorter_than_50nt
 REF_HERVFc2	lineage	HERV-Fc2	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVH	lineage	HERV-H	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVH	lineage	HERV-H	PBS	noncoding_feature_shorter_than_50nt
+REF_HERVH	lineage	HERV-H	TATA_box	noncoding_feature_shorter_than_50nt
 REF_HERVH	lineage	HERV-H	5U5	noncoding_feature_shorter_than_50nt
 REF_HERVH	lineage	HERV-H	3U5	noncoding_feature_shorter_than_50nt
 REF_HERVI	lineage	HERV-I	PPT	noncoding_feature_shorter_than_50nt
@@ -30,6 +40,9 @@ REF_HERVKHML4	lineage	HERV-K-HML4	PBS	noncoding_feature_shorter_than_50nt
 REF_HERVKHML5	lineage	HERV-K-HML5	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVKHML5	lineage	HERV-K-HML5	PBS	noncoding_feature_shorter_than_50nt
 REF_HERVKHML9	lineage	HERV-K-HML9	PPT	noncoding_feature_shorter_than_50nt
+REF_HERVP	lineage	HERV-P	PPT	noncoding_feature_shorter_than_50nt
+REF_HERVP	lineage	HERV-P	polyA	noncoding_feature_shorter_than_50nt
+REF_HERVP	lineage	HERV-P	TATA_box	noncoding_feature_shorter_than_50nt
 REF_HERVR	lineage	HERV-R	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVR	lineage	HERV-R	PBS	noncoding_feature_shorter_than_50nt
 REF_HERVR	lineage	HERV-R	5U5	noncoding_feature_shorter_than_50nt

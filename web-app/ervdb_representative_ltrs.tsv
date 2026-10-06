@@ -1,4 +1,5 @@
 reference	source_name	sequence_id	selected_feature	selected_length	five_prime_length	three_prime_length	selection_reason
+REF_BAEV	lineage	BAEV	5LTR	550	550	550	5ltr_preferred
 REF_CeratotheriumRb	lineage	Ceratotherium-Rb	5LTR	431	431	193	5ltr_preferred
 REF_CERV1	lineage	CERV-1	5LTR	380	380	319	5ltr_preferred
 REF_CERV2	lineage	CERV-2	3LTR	573	544	573	3ltr_at_least_10nt_longer
@@ -23,7 +24,7 @@ REF_HERV9	lineage	HERV-9	3LTR	826	565	826	3ltr_at_least_10nt_longer
 REF_HERVADP	lineage	HERV-ADP	5LTR	610	610	610	5ltr_preferred
 REF_HERVE	lineage	HERV-E	5LTR	495	495	449	5ltr_preferred
 REF_HERVFa	lineage	HERV-Fa	5LTR	470	470	470	5ltr_preferred
-REF_HERVFb	lineage	HERV-Fb	5LTR	448	448	385	5ltr_preferred
+REF_HERVFb	lineage	HERV-Fb	5LTR	382	382	384	5ltr_preferred
 REF_HERVFc1	lineage	HERV-Fc1	5LTR	346	346	346	5ltr_preferred
 REF_HERVFc2	lineage	HERV-Fc2	5LTR	374	374	374	5ltr_preferred
 REF_HERVFRD	lineage	HERV-FRD	5LTR	734	734	734	5ltr_preferred
@@ -42,7 +43,7 @@ REF_HERVKHML8	lineage	HERV-K-HML8	5LTR	865	865	869	5ltr_preferred
 REF_HERVKHML9	lineage	HERV-K-HML9	5LTR	587	587	587	5ltr_preferred
 REF_HERVL	lineage	HERV-L	5LTR	444	444	407	5ltr_preferred
 REF_HERVLb	lineage	HERV-Lb	5LTR	690	690	690	5ltr_preferred
-REF_HERVP	lineage	HERV-P	5LTR	794	794	790	5ltr_preferred
+REF_HERVP	lineage	HERV-P	5LTR	611	611	611	5ltr_preferred
 REF_HERVR	lineage	HERV-R	5LTR	593	593	592	5ltr_preferred
 REF_HERVRb	lineage	HERV-Rb	5LTR	660	660	660	5ltr_preferred
 REF_HERVS	lineage	HERV-S	5LTR	6935	6935	6935	5ltr_preferred

@@ -1,27 +1,28 @@
 sequenceID	length	erv_lineage_reference.erv_lineage.id	erv_lineage_reference.reference_role	erv_lineage_reference.reference_status	erv_lineage_reference.derivation_method	erv_lineage_reference.derivation_source	erv_lineage_reference.is_composite	erv_lineage_reference.num_input_sequences	erv_lineage_reference.represented_form	erv_lineage_reference.reference_completeness	erv_lineage_reference.fragment_extent	erv_lineage_reference.architecture_level	erv_lineage_reference.coding_level	erv_lineage_reference.validation_level	erv_lineage_reference.accession	erv_lineage_reference.pubmed_id	erv_lineage_reference.reconstruction_notes	erv_lineage_reference.curation_notes
-CfERV	6045	ERV-1-Gamma.Canis	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	2	0	-	23021955	Input reference_method: not_known	-
-GLN	8415	ERV-1-Gamma.GLN	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	5	0	-	18287236	Input reference_method: not_known	-
-KwERV	8273	ERV-1-Gamma.Orca	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	GQ222416	-	Input reference_method: not_known	-
-CERV-1	8278	ERV-1-Gamma.Pan.1	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: not_known	-
-CERV-2	8708	ERV-1-Gamma.Pan.2	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: not_known	-
-RD114	8818	ERV-1-Gamma.RD114	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	AB705393	-	Input reference_method: not_known	-
-PERV-C	8774	ERV-1-Gamma.Sus.C	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: not_known	-
-Ceratotherium-Rb	8390	ERV-1-Rho.Ceratotherium.Rb	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	2	0	-	-	Input reference_method: most_intact	-
-EqERV-Rb	8705	ERV-1-Rho.Eq.Rb	canonical	active	consensus	-	false	5	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
-CfERV-Fc	6711	ERV-1-Zeta.Canis.Fc	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	2	1	-	30845962	Input reference_method: not_known	-
-EqERV-Zeta	8758	ERV-1-Zeta.Eq	canonical	active	consensus	-	false	8	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
+BAEV	8502	ERV-1-Gamma.BR.1	canonical	active	consensus	-	false	1	proviral_genome	complete	-	2	3	0	AB705393	-	Input reference_method: not_known	-
+RD114	8818	ERV-1-Gamma.BR.114	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	AB705393	-	Input reference_method: not_known	-
+CERV-2	8708	ERV-1-Gamma.BR.2	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: not_known	-
+PERV-C	8774	ERV-1-Gamma.KG.3	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: not_known	-
+KwERV	8273	ERV-1-Gamma.KG.4	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	GQ222416	-	Input reference_method: not_known	-
+GLN	8415	ERV-1-Gamma.KG.GLN	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	5	0	-	18287236	Input reference_method: not_known	-
+CERV-1	8278	ERV-1-Gamma.Mega.1	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: not_known	-
+CfERV	6045	ERV-1-Gamma.Mega.2	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	2	0	-	23021955	Input reference_method: not_known	-
+Ceratotherium-Rb	8390	ERV-1-Rho.Rb.2	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	2	0	-	-	Input reference_method: most_intact	-
+EqERV-Rb	8705	ERV-1-Rho.Rb.3	canonical	active	consensus	-	false	5	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
+EqERV-Zeta	8758	ERV-1-Zeta.FRD.34	canonical	active	consensus	-	false	8	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
+CfERV-Fc	6711	ERV-1-Zeta.HF.Fc.3	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	2	1	-	30845962	Input reference_method: not_known	-
 HERV-15	9693	ERV-1.Eta.15	canonical	active	consensus	-	true	-	proviral_genome	complete	-	3	4	2	-	1920638	Input reference_method: REPBASE	-
+PERV-E	8057	ERV-1.Eta.2	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	4	1	AF356697	-	Input reference_method: not_known	-
 HERV-E	8793	ERV-1.Eta.E	canonical	active	consensus	-	true	38	proviral_genome	complete	-	2	4	2	-	-	Input reference_method: majority_consensus	-
 HARLEQUIN	8405	ERV-1.Eta.E.HQ	canonical	active	consensus	REPBASE	-	-	proviral_genome	complete	-	-	-	1	-	-	-	-
 HERV-R	9608	ERV-1.Eta.R	canonical	active	consensus	-	true	14	proviral_genome	complete	-	3	4	2	-	-	Input reference_method: majority_consensus	-
-PERV-E	8057	ERV-1.Eta.Suidae	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	4	1	AF356697	-	Input reference_method: not_known	-
-HERV-T	9826	ERV-1.Gamma.T	canonical	active	consensus	-	true	7	proviral_genome	complete	-	1	3	2	-	10729147	Input reference_method: majority_consensus	-
 HERV-T2	10013	ERV-1.Gamma.T2	canonical	active	ancestral_reconstruction	majority_consensus	-	-	proviral_genome	complete	-	-	-	0	-	28397686	-	-
 HERV-T3	9883	ERV-1.Gamma.T3	canonical	active	ancestral_reconstruction	majority_consensus	-	-	proviral_genome	complete	-	-	-	0	-	28397686	-	-
+HERV-T	9826	ERV-1.Gamma.TR.T	canonical	active	consensus	-	true	7	proviral_genome	complete	-	1	3	2	-	10729147	Input reference_method: majority_consensus	-
 HERV-ADP	8810	ERV-1.Iota.ADP	canonical	active	consensus	-	true	13	proviral_genome	complete	-	2	3	1	-	-	Input reference_method: majority_consensus	-
 HERV-I	9068	ERV-1.Iota.I	canonical	active	consensus	-	true	13	proviral_genome	complete	-	1	4	1	-	-	Input reference_method: majority_consensus	-
 HERV-Pb	6523	ERV-1.Iota.I.Pb	canonical	active	representative_locus	reference	-	-	proviral_genome	fragmentary	envelope	-	-	1	-	-	-	-
-HERV-Rb	8338	ERV-1.Rho.Rb	canonical	active	consensus	-	true	7	proviral_genome	complete	-	2	3	1	-	10729147	Input reference_method: majority_consensus	-
+HERV-Rb	8338	ERV-1.Rho.Rb.1	canonical	active	consensus	-	true	7	proviral_genome	complete	-	2	3	1	-	10729147	Input reference_method: majority_consensus	-
 HERV-V	3922	ERV-1.Rho.V	canonical	active	consensus	reference	-	-	proviral_genome	fragmentary	envelope	-	-	1	-	-	-	-
 HERV-24	8552	ERV-1.Theta.24	canonical	active	consensus	-	true	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: REPBASE	-
 HERV-24b	8765	ERV-1.Theta.24b	canonical	active	consensus	REPBASE	-	-	proviral_genome	complete	-	-	-	1	-	-	-	-
@@ -32,59 +33,58 @@ HERV-4	7807	ERV-1.Zeta.FRD.4	canonical	active	consensus	-	true	-	proviral_genome
 PRIMA-41	8838	ERV-1.Zeta.FRD.41	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: REPBASE	-
 MER-66	10372	ERV-1.Zeta.FRD.66	canonical	active	consensus	-	true	-	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: REPBASE	-
 HERV-46	7864	ERV-1.Zeta.HF.46	canonical	active	consensus	-	true	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: REPBASE	-
-HERV-Fa	8661	ERV-1.Zeta.HF.Fa	canonical	active	consensus	-	true	-	proviral_genome	complete	-	1	4	1	-	-	Input reference_method: REPBASE	-
-HERV-Fb	7109	ERV-1.Zeta.HF.Fb	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: REPBASE	-
+HERV-Fa	8657	ERV-1.Zeta.HF.Fa.1	canonical	active	consensus	-	true	-	proviral_genome	complete	-	2	4	1	-	-	Input reference_method: REPBASE	-
+HERV-Fb	7079	ERV-1.Zeta.HF.Fb.1	canonical	active	consensus	-	false	-	proviral_genome	complete	-	2	4	1	-	-	Input reference_method: REPBASE	-
 HERV-Fc1	5320	ERV-1.Zeta.HF.Fc.1	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: REPBASE	-
 HERV-Fc2	7993	ERV-1.Zeta.HF.Fc.2	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	4	1	-	-	Input reference_method: REPBASE	-
-HERV-H	9021	ERV-1.Zeta.HF.H	canonical	active	consensus	-	false	-	proviral_genome	complete	-	3	4	1	-	-	Input reference_method: majority_consensus	-
-HERV-XA	8821	ERV-1.Zeta.HF.XA	canonical	active	consensus	-	true	-	proviral_genome	complete	-	2	4	1	-	-	Input reference_method: majority_consensus	-
+HERV-H	9020	ERV-1.Zeta.HF.H.1	canonical	active	consensus	-	false	-	proviral_genome	complete	-	3	4	1	-	-	Input reference_method: majority_consensus	-
+HERV-XA	8821	ERV-1.Zeta.HF.XA.1	canonical	active	consensus	-	true	-	proviral_genome	complete	-	2	4	1	-	-	Input reference_method: majority_consensus	-
 HERV-30	9069	ERV-1.Zeta.W9P.30	canonical	active	consensus	-	true	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: majority_consensus	-
 HERV-9	8630	ERV-1.Zeta.W9P.9	canonical	active	consensus	-	false	117	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: majority_consensus	-
-HERV-P	10437	ERV-1.Zeta.W9P.P	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: REPBASE	-
+HERV-P	9950	ERV-1.Zeta.W9P.P	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	4	1	-	-	Input reference_method: REPBASE	-
 HUERS-P1	11027	ERV-1.Zeta.W9P.P.1	canonical	active	consensus	REPBASE	-	-	proviral_genome	fragmentary	internal	-	-	0	-	2825129	-	-
 HUERS-P2	8987	ERV-1.Zeta.W9P.P.2	canonical	active	consensus	REPBASE	-	-	proviral_genome	fragmentary	internal	-	-	0	-	2825129	-	-
-HuRRS-P	8099	ERV-1.Zeta.W9P.P.HuRRSp	canonical	active	representative_locus	reference	-	-	proviral_genome	complete	-	-	-	0	-	-	-	-
 HERV-W	10123	ERV-1.Zeta.W9P.W	canonical	active	consensus	-	false	59	proviral_genome	complete	-	1	4	1	-	9882319	Input reference_method: majority_consensus	-
 HERV-W-SG1	10149	ERV-1.Zeta.W9P.W.SG1	canonical	active	consensus	majority_consensus	-	-	proviral_genome	complete	-	-	-	0	-	-	-	-
 HERV-W-SG2	10431	ERV-1.Zeta.W9P.W.SG2	canonical	active	consensus	majority_consensus	-	-	proviral_genome	complete	-	-	-	0	-	-	-	-
-TgERV-F	8164	ERV-2-Alpha.Tg.F	canonical	active	consensus	-	false	14	proviral_genome	complete	-	1	3	0	-	24352464	Input reference_method: majority_consensus	-
-IAPE	8320	ERV-2-Beta.A.Mus	canonical	active	consensus	-	false	1	env_less_genome	complete	-	1	3	1	-	18256233	Input reference_method: most_intact	-
+TgERV-F	8164	ERV-2-Alpha.TGF.1	canonical	active	consensus	-	false	14	proviral_genome	complete	-	1	3	0	-	24352464	Input reference_method: majority_consensus	-
+IAPE	8320	ERV-2-Beta.A.IAP	canonical	active	consensus	-	false	1	env_less_genome	complete	-	1	3	1	-	18256233	Input reference_method: most_intact	-
+mysTR	7806	ERV-2-Beta.K.Mys.TR	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: not_known	-
 RERV-H	6440	ERV-2-Beta.Lago.H	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	2	0	AF480925	-	Input reference_method: not_known	-
-mysTR	7806	ERV-2-Beta.Mys.TR	canonical	active	consensus	-	false	1	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: not_known	-
-PyERV	7050	ERV-2-Beta.Py	canonical	active	consensus	-	false	1	proviral_genome	complete	-	0	2	0	AF500296	12097574	Input reference_method: not_known	-
-MinERVa	2996	ERV-2-Delta.MinNat	canonical	active	representative_locus	-	false	1	proviral_genome	fragmentary	five_prime	0	2	1	-	28280099	Input reference_method: most_intact	-
-Delta.9-MolMol	9177	ERV-2-Delta.MolMol	canonical	active	representative_locus	-	false	1	proviral_genome	complete	-	1	4	1	-	31775783	Input reference_method: most_intact	-
-Delta.3-MurAur	6586	ERV-2-Delta.MurMur	canonical	active	representative_locus	-	false	1	proviral_genome	complete	-	0	2	1	-	31775783	Input reference_method: most_intact	-
-Delta.6-PlaMin	8242	ERV-2-Delta.PlaMin	canonical	active	representative_locus	-	false	1	proviral_genome	complete	-	0	4	1	-	31775783	Input reference_method: most_intact	-
-DELV	10002	ERV-2-Lenti.Dermoptera	canonical	active	consensus	-	false	3	proviral_genome	complete	-	2	5	1	-	25280529	Input reference_method: majority_consensus	-
-MELVmpf	9113	ERV-2-Lenti.Mustela	canonical	active	consensus	-	false	6	proviral_genome	complete	-	1	4	1	-	22522310	Input reference_method: majority_consensus	-
-pSIVgml	7385	ERV-2-Lenti.PSIV1	canonical	active	consensus	-	false	31	proviral_genome	complete	-	1	4	1	-	19075221	Input reference_method: majority_consensus	-
-PSIV2	8102	ERV-2-Lenti.PSIV2	canonical	active	consensus	-	false	1	proviral_genome	complete	-	2	5	1	-	19300488	Input reference_method: most_intact	-
-RELIK	8912	ERV-2-Lenti.RELIK	canonical	active	consensus	-	false	34	proviral_genome	complete	-	2	5	2	-	19070882	Input reference_method: majority_consensus	-
-SpELV	4110	ERV-2-Lenti.SpELV	canonical	active	consensus	-	false	20	proviral_genome	fragmentary	five_prime	0	2	1	-	36539757	Input reference_method: majority_consensus	-
-HERV-K-HML5	7875	ERV-2.Beta.Archeo.5	canonical	active	consensus	-	true	62	proviral_genome	complete	-	2	4	0	-	15280487	Input reference_method: majority_consensus	-
-HERV-K-HML6	8166	ERV-2.Beta.Archeo.6	canonical	active	consensus	-	true	20	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
+PyERV	7050	ERV-2-Beta.Reptile.Py1	canonical	active	consensus	-	false	1	proviral_genome	complete	-	0	2	0	AF500296	12097574	Input reference_method: not_known	-
+Delta.6-PlaMin	8242	ERV-2-Delta.CetArt.6	canonical	active	representative_locus	-	false	1	proviral_genome	complete	-	0	4	1	-	31775783	Input reference_method: most_intact	-
+MinERVa	2996	ERV-2-Delta.Chiropt.1	canonical	active	representative_locus	-	false	1	proviral_genome	fragmentary	five_prime	0	2	1	-	28280099	Input reference_method: most_intact	-
+Delta.3-MurAur	6586	ERV-2-Delta.Chiropt.3	canonical	active	representative_locus	-	false	1	proviral_genome	complete	-	0	2	1	-	31775783	Input reference_method: most_intact	-
+Delta.9-MolMol	9177	ERV-2-Delta.Chiropt.9	canonical	active	representative_locus	-	false	1	proviral_genome	complete	-	1	4	1	-	31775783	Input reference_method: most_intact	-
+DELV	10002	ERV-2-Lenti.Archaeo.Dermoptera	canonical	active	consensus	-	false	3	proviral_genome	complete	-	2	5	1	-	25280529	Input reference_method: majority_consensus	-
+SpELV	4110	ERV-2-Lenti.Archaeo.Pedetes	canonical	active	consensus	-	false	20	proviral_genome	fragmentary	five_prime	0	2	1	-	36539757	Input reference_method: majority_consensus	-
+RELIK	8912	ERV-2-Lenti.Neo.Leporid	canonical	active	consensus	-	false	34	proviral_genome	complete	-	2	5	2	-	19070882	Input reference_method: majority_consensus	-
+MELVmpf	9113	ERV-2-Lenti.Neo.Mustelid	canonical	active	consensus	-	false	6	proviral_genome	complete	-	1	4	1	-	22522310	Input reference_method: majority_consensus	-
+pSIVgml	7385	ERV-2-Lenti.Neo.Prosimian1	canonical	active	consensus	-	false	31	proviral_genome	complete	-	1	4	1	-	19075221	Input reference_method: majority_consensus	-
+PSIV2	8102	ERV-2-Lenti.Neo.Prosimian2	canonical	active	consensus	-	false	1	proviral_genome	complete	-	2	5	1	-	19300488	Input reference_method: most_intact	-
+HERV-K-HML5	7875	ERV-2.Beta.Archaeo.5	canonical	active	consensus	-	true	62	proviral_genome	complete	-	2	4	0	-	15280487	Input reference_method: majority_consensus	-
+HERV-K-HML6	8166	ERV-2.Beta.Archaeo.6	canonical	active	consensus	-	true	20	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
+HERV-hako	8277	ERV-2.Beta.Archaeo.9	canonical	active	consensus	-	true	104	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
 HERV-K-HML6-1a	9112	ERV-2.Beta.Archeo.6.1a	canonical	active	ancestral_reconstruction	majority_consensus	-	20	proviral_genome	complete	-	-	-	0	-	31167914	-	-
 HERV-K-HML6-1b	3350	ERV-2.Beta.Archeo.6.1b	canonical	active	ancestral_reconstruction	majority_consensus	-	20	proviral_genome	fragmentary	internal	-	-	0	-	31167914	-	-
-HERV-hako	8277	ERV-2.Beta.Archeo.9	canonical	active	consensus	-	true	104	proviral_genome	complete	-	1	3	0	-	-	Input reference_method: majority_consensus	-
-HERV-K-HML1	7048	ERV-2.Beta.K.HML1	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	4	1	-	7692084	Input reference_method: REPBASE	-
-HERV-K-HML10	6364	ERV-2.Beta.K.HML10	canonical	active	consensus	-	false	7	proviral_genome	complete	-	1	3	1	-	19540319	Input reference_method: majority_consensus	-
-HERV-K-HML2	9472	ERV-2.Beta.K.HML2	canonical	active	ancestral_reconstruction	-	false	47	proviral_genome	complete	-	3	5	3	-	7692084	Input reference_method: maximum likelihood	-
-HERV-K-HML3	7045	ERV-2.Beta.K.HML3	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	7692084	Input reference_method: REPBASE	-
-HERV-K-HML4	10243	ERV-2.Beta.K.HML4	canonical	active	consensus	-	false	7	env_less_genome	complete	-	1	4	1	-	7692084	Input reference_method: majority_consensus	-
-HERV-K-HML7	8355	ERV-2.Beta.K.HML7	canonical	active	consensus	-	false	25	proviral_genome	complete	-	1	3	1	-	9934709	Input reference_method: majority_consensus	-
-HERV-K-HML8	7274	ERV-2.Beta.K.HML8	canonical	active	consensus	-	false	10	proviral_genome	complete	-	1	3	1	-	9934709	Input reference_method: majority_consensus	-
-HERV-K-HML9	8608	ERV-2.Beta.K.HML9	canonical	active	consensus	-	false	104	proviral_genome	complete	-	1	4	1	-	19540319	Input reference_method: majority_consensus	-
-MuERV-L	6471	ERV-3-Lambda.MuERV.L	canonical	active	ancestral_reconstruction	-	false	-	env_less_genome	complete	-	1	2	2	Y12713	9188643	Input reference_method: maximum likelihood	-
-EqERV-U3	8639	ERV-3-Lambda.U3.Eq	canonical	active	consensus	-	false	3	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: majority_consensus	-
-EqERV-S	6620	ERV-3-Sigma.Eq	canonical	active	consensus	-	false	3	proviral_genome	complete	-	1	2	0	-	-	Input reference_method: majority_consensus	-
-HERV-L	6489	ERV-3.Lambda.L	canonical	active	consensus	-	false	-	env_less_genome	complete	-	1	2	1	-	7543594	Input reference_method: REPBASE	-
+HERV-K-HML1	7048	ERV-2.Beta.K.HML.1	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	4	1	-	7692084	Input reference_method: REPBASE	-
+HERV-K-HML10	6364	ERV-2.Beta.K.HML.10	canonical	active	consensus	-	false	7	proviral_genome	complete	-	1	3	1	-	19540319	Input reference_method: majority_consensus	-
+HERV-K-HML2	9472	ERV-2.Beta.K.HML.2	canonical	active	ancestral_reconstruction	-	false	47	proviral_genome	complete	-	3	5	3	-	7692084	Input reference_method: maximum likelihood	-
+HERV-K-HML3	7045	ERV-2.Beta.K.HML.3	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	7692084	Input reference_method: REPBASE	-
+HERV-K-HML4	10243	ERV-2.Beta.K.HML.4	canonical	active	consensus	-	false	7	env_less_genome	complete	-	1	4	1	-	7692084	Input reference_method: majority_consensus	-
+HERV-K-HML7	8355	ERV-2.Beta.K.HML.7	canonical	active	consensus	-	false	25	proviral_genome	complete	-	1	3	1	-	9934709	Input reference_method: majority_consensus	-
+HERV-K-HML8	7274	ERV-2.Beta.K.HML.8	canonical	active	consensus	-	false	10	proviral_genome	complete	-	1	3	1	-	9934709	Input reference_method: majority_consensus	-
+HERV-K-HML9	8608	ERV-2.Beta.K.HML.9	canonical	active	consensus	-	false	104	proviral_genome	complete	-	1	4	1	-	19540319	Input reference_method: majority_consensus	-
+MuERV-L	6471	ERV-3-Lambda.L.2	canonical	active	ancestral_reconstruction	-	false	-	env_less_genome	complete	-	1	2	2	Y12713	9188643	Input reference_method: maximum likelihood	-
+EqERV-U3	8639	ERV-3-Lambda.U3.2	canonical	active	consensus	-	false	3	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: majority_consensus	-
+EqERV-S	6620	ERV-3-Sigma.2	canonical	active	consensus	-	false	3	proviral_genome	complete	-	1	2	0	-	-	Input reference_method: majority_consensus	-
+HERV-L	6489	ERV-3.Lambda.L.1	canonical	active	consensus	-	false	-	env_less_genome	complete	-	1	2	1	-	7543594	Input reference_method: REPBASE	-
 ERV-Lb4	6828	ERV-3.Lambda.Lb4	canonical	active	consensus	REPBASE	-	-	proviral_genome	complete	-	-	-	0	-	-	-	-
-HERV-U3	7378	ERV-3.Lambda.U3	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: majority_consensus	-
+HERV-U3	7378	ERV-3.Lambda.U3.1	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	1	-	-	Input reference_method: majority_consensus	-
 HERV-S	6935	ERV-3.Sigma.S	canonical	active	consensus	-	true	-	proviral_genome	complete	-	2	3	1	-	10729147	Input reference_method: majority_consensus	-
-Spuma-Ame.b	11632	ERV-3.Spuma.Ame.b	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	0	-	33910951	Input reference_method: not_known	-
-ChrEFV	6363	ERV-3.Spuma.Chrysochloris	canonical	active	representative_locus	-	false	3	proviral_genome	complete	-	0	0	0	-	-	Input reference_method: majority_consensus	-
+Spuma-Ame.b	11632	ERV-3.Spuma.Amph.Ameb	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	3	0	-	33910951	Input reference_method: not_known	-
+Spuma-Rbi	11200	ERV-3.Spuma.Amph.Rbi	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	4	0	-	33910951	Input reference_method: not_known	-
 CoeEFV	10428	ERV-3.Spuma.Coelocanth	canonical	active	representative_locus	-	false	1	proviral_genome	complete	-	1	4	0	-	-	Input reference_method: most_intact	-
-SloEFV	11498	ERV-3.Spuma.Pilosa	canonical	active	consensus	-	false	35	proviral_genome	complete	-	1	3	1	-	19762636	Input reference_method: majority_consensus	-
-Spuma-Rbi	11200	ERV-3.Spuma.Rbi	canonical	active	consensus	-	false	-	proviral_genome	complete	-	1	4	0	-	33910951	Input reference_method: not_known	-
-Spuma-Spu	10034	ERV-3.Spuma.Spu	canonical	active	consensus	-	false	20	proviral_genome	complete	-	1	3	0	-	31336856	Input reference_method: majority_consensus	-
+ChrEFV	6363	ERV-3.Spuma.Mammal.Chrysochloris	canonical	active	representative_locus	-	false	3	proviral_genome	complete	-	0	0	0	-	-	Input reference_method: majority_consensus	-
+SloEFV	11498	ERV-3.Spuma.Mammal.Pilosa	canonical	active	consensus	-	false	35	proviral_genome	complete	-	1	3	1	-	19762636	Input reference_method: majority_consensus	-
+Spuma-Spu	10034	ERV-3.Spuma.Sphenodon	canonical	active	consensus	-	false	20	proviral_genome	complete	-	1	3	0	-	31336856	Input reference_method: majority_consensus	-

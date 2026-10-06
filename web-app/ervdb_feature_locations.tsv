@@ -1,4 +1,16 @@
 record_id	reference	source_name	sequence_id	feature	segment_index	ref_start	ref_end	translation_modifier_name	splice_index	transcription_index	nt_length	aa_length	codon_count	has_translation	has_stop	has_internal_stop	has_ambiguity	missing_codon_nts	missing_amino_acid	exported_coding_fasta	exported_noncoding_fasta
+REF_BAEV|whole_genome	REF_BAEV	lineage	BAEV	whole_genome	1	1	8502		1	1				false						false	false
+REF_BAEV|pro	REF_BAEV	lineage	BAEV	pro	1	2596	2925		1	1	330	110	110	true	false	false	false	false	false	true	false
+REF_BAEV|pregag	REF_BAEV	lineage	BAEV	pregag	1	400	981		1	1	582	194	194	true	true	true	false	false	false	true	false
+REF_BAEV|PPT	REF_BAEV	lineage	BAEV	PPT	1	7937	7952		1	1	16			false			false			false	false
+REF_BAEV|pol	REF_BAEV	lineage	BAEV	pol	1	2926	6165		1	1	3240	1080	1080	true	true	false	false	false	false	true	false
+REF_BAEV|PBS	REF_BAEV	lineage	BAEV	PBS	1	657	680		1	1	24			false			false			false	false
+REF_BAEV|glygag	REF_BAEV	lineage	BAEV	glygag	1	400	2595		1	1	2196	732	732	true	true	true	false	false	false	true	false
+REF_BAEV|gag-pro-pol	REF_BAEV	lineage	BAEV	gag-pro-pol	1	982	6165		1	1	5184	1728	1728	true	true	true	false	false	false	true	false
+REF_BAEV|gag	REF_BAEV	lineage	BAEV	gag	1	982	2595		1	1	1614	538	538	true	true	false	false	false	false	true	false
+REF_BAEV|env	REF_BAEV	lineage	BAEV	env	1	6232	7923		1	1	1692	564	564	true	true	false	false	false	false	true	false
+REF_BAEV|5LTR	REF_BAEV	lineage	BAEV	5LTR	1	1	550		1	1	550			false			false			false	true
+REF_BAEV|3LTR	REF_BAEV	lineage	BAEV	3LTR	1	7953	8502		1	1	550			false			false			false	true
 REF_CeratotheriumRb|whole_genome	REF_CeratotheriumRb	lineage	Ceratotherium-Rb	whole_genome	1	1	8390		1	1				false						false	false
 REF_CeratotheriumRb|pol	REF_CeratotheriumRb	lineage	Ceratotherium-Rb	pol	1	4135	7272		1	1	3138	1046	1046	true	true	true	false	false	false	true	false
 REF_CeratotheriumRb|gag	REF_CeratotheriumRb	lineage	Ceratotherium-Rb	gag	1	2049	3605		1	1	1557	519	519	true	true	true	false	false	false	true	false
@@ -224,21 +236,43 @@ REF_HERVE|NC	REF_HERVE	lineage	HERV-E	NC	1	2143	2655		1	1	513	171	171	true	true	
 REF_HERVE|MA	REF_HERVE	lineage	HERV-E	MA	1	1048	1440		1	1	393	131	131	true	false	false	false	false	false	true	false
 REF_HERVE|IN	REF_HERVE	lineage	HERV-E	IN	1	5035	6249		1	1	1215	405	405	true	true	true	false	false	false	true	false
 REF_HERVE|CA	REF_HERVE	lineage	HERV-E	CA	1	1699	2142		1	1	444	148	148	true	false	false	false	false	false	true	false
-REF_HERVFa|whole_genome	REF_HERVFa	lineage	HERV-Fa	whole_genome	1	1	8661		1	1				false						false	false
-REF_HERVFa|pol	REF_HERVFa	lineage	HERV-Fa	pol	1	2378	6454		1	1	4077	1359	1359	true	true	true	true	false	false	true	false
-REF_HERVFa|gag	REF_HERVFa	lineage	HERV-Fa	gag	1	1072	2736		1	1	1665	555	555	true	true	true	false	false	false	true	false
-REF_HERVFa|env	REF_HERVFa	lineage	HERV-Fa	env	1	6473	8140		1	1	1668	556	556	true	true	false	false	false	false	true	false
+REF_HERVFa|whole_genome	REF_HERVFa	lineage	HERV-Fa	whole_genome	1	1	8657		1	1				false						false	false
+REF_HERVFa|pro-pol	REF_HERVFa	lineage	HERV-Fa	pro-pol	1	2728	6450		1	1	3723	1241	1241	true	true	true	true	false	false	true	false
+REF_HERVFa|pro	REF_HERVFa	lineage	HERV-Fa	pro	1	2728	3141		1	1	414	138	138	true	false	false	false	false	false	true	false
+REF_HERVFa|PPT	REF_HERVFa	lineage	HERV-Fa	PPT	1	8177	8186		1	1	10			false			false			false	false
+REF_HERVFa|polyA	REF_HERVFa	lineage	HERV-Fa	polyA	1	406	411		1	1	6			false			false			false	false
+REF_HERVFa|pol	REF_HERVFa	lineage	HERV-Fa	pol	1	3142	6450		1	1	3309	1103	1103	true	true	true	true	false	false	true	false
+REF_HERVFa|PBS	REF_HERVFa	lineage	HERV-Fa	PBS	1	473	490		1	1	18			false			false			false	false
+REF_HERVFa|gag	REF_HERVFa	lineage	HERV-Fa	gag	1	1072	2727		1	1	1656	552	552	true	false	false	false	false	false	true	false
+REF_HERVFa|env	REF_HERVFa	lineage	HERV-Fa	env	1	6469	8136		1	1	1668	556	556	true	true	false	false	false	false	true	false
 REF_HERVFa|5LTR	REF_HERVFa	lineage	HERV-Fa	5LTR	1	1	470		1	1	470			false			false			false	true
-REF_HERVFa|3LTR	REF_HERVFa	lineage	HERV-Fa	3LTR	1	8192	8661		1	1	470			false			false			false	true
-REF_HERVFa|NC	REF_HERVFa	lineage	HERV-Fa	NC	1	2492	2734		1	1	243	81	81	true	false	false	false	false	false	true	false
+REF_HERVFa|3LTR	REF_HERVFa	lineage	HERV-Fa	3LTR	1	8188	8657		1	1	470			false			false			false	true
+REF_HERVFa|TATA_box	REF_HERVFa	lineage	HERV-Fa	TATA_box	1	329	334		1	1	6			false			false			false	false
+REF_HERVFa|RT	REF_HERVFa	lineage	HERV-Fa	RT	1	3142	4611		1	1	1470	490	490	true	true	true	false	false	false	true	false
+REF_HERVFa|RNaseH	REF_HERVFa	lineage	HERV-Fa	RNaseH	1	4612	5082		1	1	471	157	157	true	false	false	false	false	false	true	false
+REF_HERVFa|NC	REF_HERVFa	lineage	HERV-Fa	NC	1	2491	2727		1	1	237	79	79	true	false	false	false	false	false	true	false
 REF_HERVFa|MA	REF_HERVFa	lineage	HERV-Fa	MA	1	1072	1737		1	1	666	222	222	true	false	false	false	false	false	true	false
-REF_HERVFa|CA	REF_HERVFa	lineage	HERV-Fa	CA	1	1738	2490		1	1	753	251	251	true	true	true	false	false	false	true	false
-REF_HERVFb|whole_genome	REF_HERVFb	lineage	HERV-Fb	whole_genome	1	1	7081		1	1				false						false	false
-REF_HERVFb|pol	REF_HERVFb	lineage	HERV-Fb	pol	1	4544	5578		1	1	1035	345	345	true	true	true	false	false	false	true	false
-REF_HERVFb|gag	REF_HERVFb	lineage	HERV-Fb	gag	1	720	2543		1	1	1824	608	608	true	false	false	false	false	false	true	false
-REF_HERVFb|env	REF_HERVFb	lineage	HERV-Fb	env	1	5579	6592		1	1	1014	338	338	true	true	true	false	false	false	true	false
-REF_HERVFb|5LTR	REF_HERVFb	lineage	HERV-Fb	5LTR	1	1	448		1	1	448			false			true			false	true
-REF_HERVFb|3LTR	REF_HERVFb	lineage	HERV-Fb	3LTR	1	6697	7081		1	1	385			false			true			false	true
+REF_HERVFa|IN	REF_HERVFa	lineage	HERV-Fa	IN	1	5083	6450		1	1	1368	456	456	true	true	true	true	false	false	true	false
+REF_HERVFa|CA	REF_HERVFa	lineage	HERV-Fa	CA	1	1738	2490		1	1	753	251	251	true	false	false	false	false	false	true	false
+REF_HERVFb|whole_genome	REF_HERVFb	lineage	HERV-Fb	whole_genome	1	1	7079		1	1				false						false	false
+REF_HERVFb|pro-pol	REF_HERVFb	lineage	HERV-Fb	pro-pol	1	2543	5986		1	1	3444	1148	1148	true	true	true	false	false	false	true	false
+REF_HERVFb|pro	REF_HERVFb	lineage	HERV-Fb	pro	1	2543	2902		1	1	360	120	120	true	false	false	false	false	false	true	false
+REF_HERVFb|pregag	REF_HERVFb	lineage	HERV-Fb	pregag	1	542	805		1	1	264	88	88	true	false	false	false	false	false	true	false
+REF_HERVFb|PPT	REF_HERVFb	lineage	HERV-Fb	PPT	1	6683	6695		1	1	13			false			false			false	false
+REF_HERVFb|pol	REF_HERVFb	lineage	HERV-Fb	pol	1	2903	5986		1	1	3084	1028	1028	true	true	true	false	false	false	true	false
+REF_HERVFb|PBS	REF_HERVFb	lineage	HERV-Fb	PBS	1	385	402		1	1	18			false			false			false	false
+REF_HERVFb|glygag	REF_HERVFb	lineage	HERV-Fb	glygag	1	542	2542		1	1	2001	667	667	true	true	false	false	false	false	true	false
+REF_HERVFb|gag	REF_HERVFb	lineage	HERV-Fb	gag	1	806	2542		1	1	1737	579	579	true	true	false	false	false	false	true	false
+REF_HERVFb|env	REF_HERVFb	lineage	HERV-Fb	env	1	5987	6592		1	1	606	202	202	true	true	false	false	false	false	true	false
+REF_HERVFb|5LTR	REF_HERVFb	lineage	HERV-Fb	5LTR	1	1	382		1	1	382			false			false			false	true
+REF_HERVFb|3LTR	REF_HERVFb	lineage	HERV-Fb	3LTR	1	6696	7079		1	1	384			false			false			false	true
+REF_HERVFb|TATA_box	REF_HERVFb	lineage	HERV-Fb	TATA_box	1	226	231		1	1	6			false			false			false	false
+REF_HERVFb|RT	REF_HERVFb	lineage	HERV-Fb	RT	1	2903	4480		1	1	1578	526	526	true	true	true	false	false	false	true	false
+REF_HERVFb|RNaseH	REF_HERVFb	lineage	HERV-Fb	RNaseH	1	4481	4780		1	1	300	100	100	true	false	false	false	false	false	true	false
+REF_HERVFb|NC	REF_HERVFb	lineage	HERV-Fb	NC	1	2318	2542		1	1	225	75	75	true	true	false	false	false	false	true	false
+REF_HERVFb|MA	REF_HERVFb	lineage	HERV-Fb	MA	1	806	1573		1	1	768	256	256	true	false	false	false	false	false	true	false
+REF_HERVFb|IN	REF_HERVFb	lineage	HERV-Fb	IN	1	4781	5986		1	1	1206	402	402	true	true	true	false	false	false	true	false
+REF_HERVFb|CA	REF_HERVFb	lineage	HERV-Fb	CA	1	1574	2317		1	1	744	248	248	true	false	false	false	false	false	true	false
 REF_HERVFc1|whole_genome	REF_HERVFc1	lineage	HERV-Fc1	whole_genome	1	1	5320		1	1				false						false	false
 REF_HERVFc1|pro	REF_HERVFc1	lineage	HERV-Fc1	pro	1	1477	2067		1	1	591	197	197	true	true	true	false	false	false	true	false
 REF_HERVFc1|pol	REF_HERVFc1	lineage	HERV-Fc1	pol	1	2068	3159		1	1	1092	364	364	true	true	true	false	false	false	true	false
@@ -263,30 +297,32 @@ REF_HERVFRD|gag	REF_HERVFRD	lineage	HERV-FRD	gag	1	1322	4258		1	1	2937	979	979	t
 REF_HERVFRD|env	REF_HERVFRD	lineage	HERV-FRD	env	1	8018	9748		1	1	1731	577	577	true	true	true	false	false	false	true	false
 REF_HERVFRD|5LTR	REF_HERVFRD	lineage	HERV-FRD	5LTR	1	1	734		1	1	734			false			true			false	true
 REF_HERVFRD|3LTR	REF_HERVFRD	lineage	HERV-FRD	3LTR	1	9881	10614		1	1	734			false			true			false	true
-REF_HERVH|whole_genome	REF_HERVH	lineage	HERV-H	whole_genome	1	1	9021		1	1				false						false	false
+REF_HERVH|whole_genome	REF_HERVH	lineage	HERV-H	whole_genome	1	1	9020		1	1				false						false	false
 REF_HERVH|zh_xorf1	REF_HERVH	lineage	HERV-H	zh_xorf1	1	309	1022		1	1	714	238	238	true	true	false	false	false	false	true	false
-REF_HERVH|pro-pol	REF_HERVH	lineage	HERV-H	pro-pol	1	2908	6552		1	1	3645	1215	1215	true	true	true	false	false	false	true	false
+REF_HERVH|pro-pol	REF_HERVH	lineage	HERV-H	pro-pol	1	2908	6372		1	1	3465	1155	1155	true	true	false	false	false	false	true	false
 REF_HERVH|pro	REF_HERVH	lineage	HERV-H	pro	1	2908	3240		1	1	333	111	111	true	false	false	false	false	false	true	false
 REF_HERVH|pregag	REF_HERVH	lineage	HERV-H	pregag	1	904	1254		1	1	351	117	117	true	false	false	false	false	false	true	false
-REF_HERVH|PPT	REF_HERVH	lineage	HERV-H	PPT	1	8572	8584		1	1	13			false			false			false	false
-REF_HERVH|pol	REF_HERVH	lineage	HERV-H	pol	1	3241	6552		1	1	3312	1104	1104	true	true	true	false	false	false	true	false
+REF_HERVH|PPT	REF_HERVH	lineage	HERV-H	PPT	1	8571	8583		1	1	13			false			false			false	false
+REF_HERVH|pol	REF_HERVH	lineage	HERV-H	pol	1	3154	6372		1	1	3219	1073	1073	true	true	false	false	false	false	true	false
 REF_HERVH|PBS	REF_HERVH	lineage	HERV-H	PBS	1	456	473		1	1	18			false			false			false	false
-REF_HERVH|LEA	REF_HERVH	lineage	HERV-H	LEA	1	345	903		1	1	559			false			false			false	true
-REF_HERVH|internal_region	REF_HERVH	lineage	HERV-H	internal_region	1	345	8584		1	1				false						false	false
 REF_HERVH|glygag	REF_HERVH	lineage	HERV-H	glygag	1	904	2853		1	1	1950	650	650	true	true	false	false	false	false	true	false
 REF_HERVH|gag	REF_HERVH	lineage	HERV-H	gag	1	1255	2853		1	1	1599	533	533	true	true	false	false	false	false	true	false
-REF_HERVH|env	REF_HERVH	lineage	HERV-H	env	1	6668	8422		1	1	1755	585	585	true	true	false	false	false	false	true	false
+REF_HERVH|env	REF_HERVH	lineage	HERV-H	env	1	6553	8421		1	1	1869	623	623	true	true	true	false	false	false	true	false
 REF_HERVH|5LTR	REF_HERVH	lineage	HERV-H	5LTR	1	1	438		1	1	438			false			false			false	true
-REF_HERVH|3LTR	REF_HERVH	lineage	HERV-H	3LTR	1	8585	9021		1	1	437			false			false			false	true
+REF_HERVH|3LTR	REF_HERVH	lineage	HERV-H	3LTR	1	8584	9020		1	1	437			false			false			false	true
+REF_HERVH|TATA_box	REF_HERVH	lineage	HERV-H	TATA_box	1	317	322		1	1	6			false			false			false	false
+REF_HERVH|RT	REF_HERVH	lineage	HERV-H	RT	1	3154	4710		1	1	1557	519	519	true	false	false	false	false	false	true	false
+REF_HERVH|RNaseH	REF_HERVH	lineage	HERV-H	RNaseH	1	4711	5163		1	1	453	151	151	true	false	false	false	false	false	true	false
 REF_HERVH|NC	REF_HERVH	lineage	HERV-H	NC	1	2617	2853		1	1	237	79	79	true	true	false	false	false	false	true	false
 REF_HERVH|MA	REF_HERVH	lineage	HERV-H	MA	1	1255	1851		1	1	597	199	199	true	false	false	false	false	false	true	false
+REF_HERVH|IN	REF_HERVH	lineage	HERV-H	IN	1	5164	6372		1	1	1209	403	403	true	true	false	false	false	false	true	false
 REF_HERVH|CA	REF_HERVH	lineage	HERV-H	CA	1	1852	2616		1	1	765	255	255	true	false	false	false	false	false	true	false
 REF_HERVH|5U5	REF_HERVH	lineage	HERV-H	5U5	1	410	438		1	1	29			false			false			false	false
 REF_HERVH|5U3	REF_HERVH	lineage	HERV-H	5U3	1	1	344		1	1	344			false			false			false	true
 REF_HERVH|5R	REF_HERVH	lineage	HERV-H	5R	1	345	409		1	1	65			false			false			false	true
-REF_HERVH|3U5	REF_HERVH	lineage	HERV-H	3U5	1	8993	9021		1	1	29			false			false			false	false
-REF_HERVH|3U3	REF_HERVH	lineage	HERV-H	3U3	1	8585	8928		1	1	344			false			false			false	true
-REF_HERVH|3R	REF_HERVH	lineage	HERV-H	3R	1	8929	8992		1	1	64			false			false			false	true
+REF_HERVH|3U5	REF_HERVH	lineage	HERV-H	3U5	1	8992	9020		1	1	29			false			false			false	false
+REF_HERVH|3U3	REF_HERVH	lineage	HERV-H	3U3	1	8584	8927		1	1	344			false			false			false	true
+REF_HERVH|3R	REF_HERVH	lineage	HERV-H	3R	1	8928	8991		1	1	64			false			false			false	true
 REF_HERVhako|whole_genome	REF_HERVhako	lineage	HERV-hako	whole_genome	1	1	8277		1	1				false						false	false
 REF_HERVhako|pro	REF_HERVhako	lineage	HERV-hako	pro	1	2630	3016		1	1	387	129	129	true	true	true	false	false	false	true	false
 REF_HERVhako|pol	REF_HERVhako	lineage	HERV-hako	pol	1	3017	5929		1	1	2913	971	971	true	true	true	false	false	false	true	false
@@ -460,12 +496,24 @@ REF_HERVLb|NC	REF_HERVLb	lineage	HERV-Lb	NC	1	2699	2884		1	1	186	62	62	true	true
 REF_HERVLb|MA	REF_HERVLb	lineage	HERV-Lb	MA	1	1466	1987		1	1	522	174	174	true	false	false	false	false	false	true	false
 REF_HERVLb|IN	REF_HERVLb	lineage	HERV-Lb	IN	1	5261	6739		1	1	1479	493	493	true	true	true	false	false	false	true	false
 REF_HERVLb|CA	REF_HERVLb	lineage	HERV-Lb	CA	1	1988	2698		1	1	711	237	237	true	false	false	false	false	false	true	false
-REF_HERVP|whole_genome	REF_HERVP	lineage	HERV-P	whole_genome	1	1	10437		1	1				false						false	false
-REF_HERVP|pol	REF_HERVP	lineage	HERV-P	pol	1	3788	7276		1	1	3489	1163	1163	true	true	true	true	false	false	true	false
-REF_HERVP|gag	REF_HERVP	lineage	HERV-P	gag	1	1466	3787		1	1	2322	774	774	true	true	true	true	false	false	true	false
-REF_HERVP|env	REF_HERVP	lineage	HERV-P	env	1	7277	9541		1	1	2265	755	755	true	true	true	true	false	false	true	false
-REF_HERVP|5LTR	REF_HERVP	lineage	HERV-P	5LTR	1	1	794		1	1	794			false			true			false	true
-REF_HERVP|3LTR	REF_HERVP	lineage	HERV-P	3LTR	1	9648	10437		1	1	790			false			true			false	true
+REF_HERVP|whole_genome	REF_HERVP	lineage	HERV-P	whole_genome	1	1	9950		1	1				false						false	false
+REF_HERVP|pro-pol	REF_HERVP	lineage	HERV-P	pro-pol	1	3605	7069		1	1	3465	1155	1155	true	true	true	false	false	false	true	false
+REF_HERVP|pro	REF_HERVP	lineage	HERV-P	pro	1	3605	3967		1	1	363	121	121	true	false	false	false	false	false	true	false
+REF_HERVP|PPT	REF_HERVP	lineage	HERV-P	PPT	1	9329	9339		1	1	11			false			false			false	false
+REF_HERVP|polyA	REF_HERVP	lineage	HERV-P	polyA	1	506	512		1	1	7			false			false			false	false
+REF_HERVP|pol	REF_HERVP	lineage	HERV-P	pol	1	3968	7069		1	1	3102	1034	1034	true	true	true	false	false	false	true	false
+REF_HERVP|gag-pro-pol	REF_HERVP	lineage	HERV-P	gag-pro-pol	1	1271	7069		1	1	5799	1933	1933	true	true	true	true	false	false	true	false
+REF_HERVP|gag	REF_HERVP	lineage	HERV-P	gag	1	1271	3604		1	1	2334	778	778	true	true	true	true	false	false	true	false
+REF_HERVP|env	REF_HERVP	lineage	HERV-P	env	1	7070	9328		1	1	2259	753	753	true	true	true	true	false	false	true	false
+REF_HERVP|5LTR	REF_HERVP	lineage	HERV-P	5LTR	1	1	611		1	1	611			false			false			false	true
+REF_HERVP|3LTR	REF_HERVP	lineage	HERV-P	3LTR	1	9340	9950		1	1	611			false			true			false	true
+REF_HERVP|TATA_box	REF_HERVP	lineage	HERV-P	TATA_box	1	409	414		1	1	6			false			false			false	false
+REF_HERVP|RT	REF_HERVP	lineage	HERV-P	RT	1	3968	5434		1	1	1467	489	489	true	true	true	false	false	false	true	false
+REF_HERVP|RNaseH	REF_HERVP	lineage	HERV-P	RNaseH	1	5435	5905		1	1	471	157	157	true	false	false	false	false	false	true	false
+REF_HERVP|NC	REF_HERVP	lineage	HERV-P	NC	1	3038	3604		1	1	567	189	189	true	true	false	true	false	false	true	false
+REF_HERVP|MA	REF_HERVP	lineage	HERV-P	MA	1	1271	1672		1	1	402	134	134	true	false	false	false	false	false	true	false
+REF_HERVP|IN	REF_HERVP	lineage	HERV-P	IN	1	5906	7069		1	1	1164	388	388	true	true	true	false	false	false	true	false
+REF_HERVP|CA	REF_HERVP	lineage	HERV-P	CA	1	1673	3037		1	1	1365	455	455	true	true	true	true	false	false	true	false
 REF_HERVR|whole_genome	REF_HERVR	lineage	HERV-R	whole_genome	1	1	9608		1	1				false						false	false
 REF_HERVR|pro	REF_HERVR	lineage	HERV-R	pro	1	3025	3540		1	1	516	172	172	true	false	false	false	false	false	true	false
 REF_HERVR|PPT	REF_HERVR	lineage	HERV-R	PPT	1	9006	9016		1	1	11			false			false			false	false
