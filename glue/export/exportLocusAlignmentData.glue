@@ -1,8 +1,4 @@
   # Export data for ERV web application
-  
-  # Locus-level export
-
-  # Export locus table
 
   # Export all locus sequences as a single FASTA-formatted file
   module fastaExporter export -w "sequence_kind = 'proviral_locus'" -f web-app/proviral_locus_seqs.fas
