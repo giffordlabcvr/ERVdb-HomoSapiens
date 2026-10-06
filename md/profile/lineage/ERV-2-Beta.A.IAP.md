@@ -1,6 +1,6 @@
-# ERV-2-Beta.A.Mus (IAP)
+# ERV-2-Beta.A.IAP (IAP)
 
-**ERV-2.Beta.Mus.IAP (IAP)** is one of the most abundant and biologically important endogenous retrovirus lineages in the mouse genome. First recognised through the characteristic intracellular particles observed in mouse tumour cells, IAPs remain among the most active mobile genetic elements in mice and have been responsible for numerous spontaneous insertional mutations in both laboratory and wild populations.
+**ERV-2-Beta.A.IAP**, also known as the *intracisternal A-type particle (IAP) element* lineage, is one of the most abundant and biologically important endogenous retrovirus lineages in the mouse genome. First recognised through the characteristic intracellular particles observed in mouse tumour cells, IAPs remain among the most active mobile genetic elements in mice and have been responsible for numerous spontaneous insertional mutations in both laboratory and wild populations.
 
 Unlike conventional betaretroviruses, IAPs lack an *env* gene and do not produce extracellular infectious virus. Instead, they assemble virus-like particles on the membranes of the endoplasmic reticulum and propagate exclusively by intracellular retrotransposition. Hundreds of IAP copies remain capable of autonomous mobilization, making the lineage one of the most successful endogenous retroelements known in mammals.
 
