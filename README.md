@@ -92,11 +92,7 @@ Information representing relationships between loci and other ERVdb entities is 
 - `web-app/erv_locus_age_calibrations.tsv`
 - [`web-app/hg19_locus_ltr_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/hg19_locus_ltr_assoc.tsv)
 
-Feature coverage information used to display the structural composition of loci is provided separately for the three major retroviral clades:
-
-- `tabular/locus/locus-feature-coverage-clade-I.tsv`
-- `tabular/locus/locus-feature-coverage-clade-II.tsv`
-- `tabular/locus/locus-feature-coverage-clade-III.tsv`
+Alignment segment data map individual locus sequences to ERV and LTR reference sequences. Together with the reference feature annotations, these mappings support visualisation of locus structural composition. Because of their size, alignment segment files will be distributed separately from this GitHub repository. Download locations and file-format documentation will be added when available.
 
 ### Supporting retrovirus taxonomy data
 
