@@ -7,6 +7,8 @@ list custom-table-row erv_locus \
   -w "genome_build = 'hg19'" \
   -s id \
   id \
+  missillac_id \
+  orthology_group \
   host_species \
   genome_build \
   scaffold \
@@ -19,8 +21,6 @@ list custom-table-row erv_locus \
   taxonomic_resolution \
   is_high_support \
   curation_tier \
-  orthology_group \
-  missillac_id \
   sequence.source.name \
   sequence.sequenceID \
   sequence.length
