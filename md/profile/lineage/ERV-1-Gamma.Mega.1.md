@@ -1,0 +1,11 @@
+# ERV-1-Gamma.Mega.1 (PtERV / CERV-1)
+
+ERV-1-Gamma.Mega.1, commonly known as *Pan troglodytes ERV (PtERV)* or *chimpanzee endogenous retrovirus 1 (CERV-1)*, is an endogenous gammaretrovirus lineage first characterised from the chimpanzee (*Pan troglodytes*) genome. More than 100 copies occur in chimpanzees, including relatively complete proviruses approximately 5--9 kb in length. The lineage has also colonised the genomes of bonobos, gorillas and several Old World monkey species, but is conspicuously absent from humans and Asian apes (PMID: 15737067; PMID: 16805923).
+
+The unusual distribution of PtERV provides evidence for comparatively recent cross-species transmission of a gammaretrovirus among primates. Mapping of 287 PtERV insertions in African apes and Old World monkeys showed that approximately 96% occupied non-orthologous genomic positions between species. Thus, most copies cannot represent integrations inherited from a common primate ancestor. Instead, the evidence indicates that related exogenous viruses independently invaded the germlines of several primate lineages, with particularly extensive expansions occurring in chimpanzees and gorillas. The African great ape invasions have been estimated to have occurred approximately 3--4 million years ago (PMID: 15737067).
+
+PtERV is particularly notable for what did not happen during its evolution: despite its presence in the germ line of closely related primates, no PtERV integrations are known from the human genome. This contrast has made PtERV an important model for investigating ancient host-retrovirus interactions. Differences in intrinsic antiviral defence, including the activities of TRIM5α and APOBEC3 proteins, have been investigated as possible explanations for the differing susceptibility of primate lineages, although the precise factors responsible for the absence of PtERV from humans remain unresolved.
+
+Known PtERV proviruses are defective and no replication-competent virus has been recovered. Nevertheless, their relatively recent origin preserves an unusually detailed genomic record of an extinct gammaretroviral epidemic. PtERV therefore provides a striking example of how endogenous retroviruses can reveal episodes of viral transmission that affected some closely related host lineages while completely bypassing others.
+
+* * * * * 
