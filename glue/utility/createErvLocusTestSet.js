@@ -45,7 +45,7 @@ var INPUT_TSV =
 	"tabular/locus/HERVs-RBRT-filtered.tsv";
 
 var INPUT_FASTA_DIR =
-	"sources/filtered_2026_07";
+	"sources/filtered_2026_10";
 
 var OUTPUT_TSV =
 	"tabular/locus/test/HERVs-RBRT-filtered.tsv";

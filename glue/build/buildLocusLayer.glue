@@ -26,7 +26,7 @@ run file glue/build/locusLayerModules.glue
 # -------------------------------------------------------------------------
 
 # Load the source candidate dataset.
-#run script glue/build/candidates/loadErvLocusCandidates.js
+run script glue/build/candidates/loadErvLocusCandidates.js
 
 # Set locus sequence lengths and kinds.
 run script glue/build/setLocusSeqLengthsAndKinds.js

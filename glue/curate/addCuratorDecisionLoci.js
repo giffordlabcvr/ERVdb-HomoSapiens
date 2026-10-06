@@ -9,7 +9,7 @@
 var DRY_RUN = true;
 
 var DECISIONS_PATH = "tabular/locus/erv_curator_decisions.tsv";
-var LOCUS_SOURCE = "filtered_2026_07"; // Change to the source containing RBRT sequences.
+var LOCUS_SOURCE = "filtered_2026_10"; // Change to the source containing RBRT sequences.
 
 // -----------------------------------------------------------------------------
 // Read decisions and build reference-name -> lineage-ID lookup

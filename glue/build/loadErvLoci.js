@@ -76,7 +76,7 @@ var DETAIL_LIMIT =
 
 var LOCUS_SOURCES = [
 
-	"filtered_2026_07"
+	"filtered_2026_10"
 
 ];
 
