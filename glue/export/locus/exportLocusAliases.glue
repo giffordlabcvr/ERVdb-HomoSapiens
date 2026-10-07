@@ -1,0 +1,14 @@
+
+console set cmd-output-file-format tab
+
+# Locus aliases.
+console set next-cmd-output-file web-app/erv_locus_alias.tsv
+list custom-table-row erv_locus_alias \
+  -w "erv_locus.genome_build = 'hg19'" \
+  -s id \
+  id \
+  erv_locus.id \
+  alias_name \
+  alias_source
+  
+  
