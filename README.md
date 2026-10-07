@@ -35,11 +35,31 @@ This layered design enables direct comparison of ERV diversity across species an
 * * * * *
 
 
- ## Data for ERV Navigator
+## Data for ERV Navigator
 
 Scripts in the [FredHutch/hervdbex](https:/github.com/FredHutch/hervdbex) repository obtain ERV Navigator data from the files listed below. These files constitute the exported ERVdb data interface used by the web application.
 
-The export is organised around three principal entities: **ERV lineages**, **ERV lineage reference sequences**, and **ERV loci**. Information representing one-to-many or many-to-many relationships is provided in separate association tables rather than encoded as multiple values within individual fields.
+The export is organised around three principal entities: **ERV lineages**, **ERV lineage reference sequences**, and **ERV loci**.
+
+### How the principal entities are related
+
+The core relationship is:
+
+**ERV locus → ERV lineage → ERV lineage reference sequence**
+
+Each ERV locus is assigned to an ERV lineage. Multiple loci may therefore be assigned to the same lineage. Each lineage has a single designated reference sequence, which provides the reference sequence and feature annotation used to represent that lineage.
+
+These relationships can be followed between the principal export tables as follows:
+
+- `hg19_loci_ervdb.tsv` contains one row per human ERV locus. The `missillac_id` field identifies the ERV lineage to which the locus is assigned.
+- `erv_lineage_data.tsv` contains one row per ERV lineage or sublineage, identified by the corresponding lineage ID.
+- `erv_lineage_references.tsv` associates each ERV lineage with its designated reference sequence.
+
+Thus, to obtain the reference sequence associated with a human ERV locus, first use the locus `missillac_id` to identify its lineage, then use the lineage-reference mapping to identify the reference sequence.
+
+The current ERV Navigator dataset contains **one designated reference sequence per ERV lineage**. The underlying ERVdb schema can accommodate additional reference sequences if required in future, but this is not currently used by the exported dataset.
+
+Other relationships that can genuinely be one-to-many or many-to-many - for example lineage names/aliases, lineage–LTR relationships, and locus–LTR relationships - are represented in separate association tables rather than encoded as multiple values within individual fields.
 
 ### ERV lineages
 
@@ -59,7 +79,7 @@ Profiles of clades, lineages, and loci as Markdown:
 
 ### ERV lineage reference sequences
 
-Metadata describing ERV lineage reference sequences are exported separately from the lineage entities themselves:
+Metadata describing the designated reference sequence for each ERV lineage are exported separately from the lineage entities themselves:
 
 - [`web-app/erv_lineage_references.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_lineage_references.tsv)
 
@@ -85,7 +105,9 @@ The principal human locus table contains one row per ERV locus in the specified 
 
 - [`web-app/hg19_loci_ervdb.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/hg19_loci_ervdb.tsv)
 
-Information representing relationships between loci and other ERVdb entities is exported separately:
+The `missillac_id` field provides the primary assignment of each locus to an ERV lineage.
+
+Additional relationships between loci and other ERVdb entities are exported separately:
 
 - [`web-app/erv_locus_alias.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_locus_alias.tsv)
 - [`web-app/hg19_locus_ltr_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/hg19_locus_ltr_assoc.tsv)
@@ -100,6 +122,7 @@ Additional data defining the wider retrovirus taxonomic framework used by ERVdb 
 - [`web-app/xrv_side_data.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/xrv_side_data.tsv)
 
 Files shown without links above form part of the intended ERV Navigator export interface but do not yet have a completed export process.
+
 
 
 * * * * *
