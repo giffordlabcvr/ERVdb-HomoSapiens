@@ -25,20 +25,6 @@ list custom-table-row erv_locus \
   sequence.sequenceID \
   sequence.length
 
-# Internal-lineage associations.
-console set next-cmd-output-file web-app/locus/hg19_locus_lineage_assoc.tsv
-list custom-table-row erv_locus_lineage_assoc \
-  -w "erv_locus.genome_build = 'hg19'" \
-  -s id \
-  id \
-  erv_locus.id \
-  erv_lineage.id \
-  association_role \
-  evidence \
-  confidence \
-  region_start \
-  region_end
-
 # LTR-lineage associations.
 console set next-cmd-output-file web-app/hg19_locus_ltr_assoc.tsv
 list custom-table-row erv_locus_ltr_assoc \
