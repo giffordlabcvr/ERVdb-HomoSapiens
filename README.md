@@ -87,16 +87,11 @@ The principal human locus table contains one row per ERV locus in the specified 
 
 Information representing relationships between loci and other ERVdb entities is exported separately:
 
-- [`web-app/locus/hg19_locus_lineage_assoc.tsv`]
 - [`web-app/erv_locus_alias.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/erv_locus_alias.tsv)
-- `web-app/erv_locus_age_calibrations.tsv`
 - [`web-app/hg19_locus_ltr_assoc.tsv`](https://github.com/giffordlabcvr/ERVdb-HomoSapiens/blob/main/web-app/hg19_locus_ltr_assoc.tsv)
+- `web-app/erv_locus_age_calibrations.tsv`
 
-Feature coverage information used to display the structural composition of loci is provided separately for the three major retroviral clades:
-
-- `tabular/locus/locus-feature-coverage-clade-I.tsv`
-- `tabular/locus/locus-feature-coverage-clade-II.tsv`
-- `tabular/locus/locus-feature-coverage-clade-III.tsv`
+Alignment segment data map individual locus sequences to ERV and LTR reference sequences. Together with the reference feature annotations, these mappings support visualisation of locus structural composition. Because of their size, alignment segment files will be distributed separately from this GitHub repository.
 
 ### Supporting retrovirus taxonomy data
 
