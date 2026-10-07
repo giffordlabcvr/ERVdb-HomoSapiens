@@ -93,7 +93,7 @@ run file glue/build/hervAlignmentSteps.glue
 # persistent registry, this input should no longer control routine builds.
 #
 
-# run file glue/build/missillac/importLegacyMappings.glue
+run file glue/build/missillac/importLegacyMappings.glue
 
 
 # -------------------------------------------------------------------------

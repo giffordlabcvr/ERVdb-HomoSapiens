@@ -1,9 +1,12 @@
 # Export data for ERV web application
 
 project ervdb
+
+  # Export XRV reference sequence data
+  run file glue/export/xrv/exportXrvSpeciesData.glue
   
   # Export features, feature locations, and FASTA 
-  run script glue/export/ervdbExportReferenceFeatures.js
+  run script glue/export/lineage/ervdbExportReferenceFeatures.js
 
   # Export reference sequences
   module fastaExporter export -w \
@@ -16,24 +19,21 @@ project ervdb
   module fastaExporter export -w \
     "sequence_kind = 'ltr_ref'" \
     -f web-app/ltr_reference_seqs.fna
-
-  # Export XRV reference sequence data
-  run file glue/export/exportXrvSpeciesData.glue
   
   # Export ERV lineage aliases
-  run file glue/export/exportErvLineageAliases.glue
+  run file glue/export/lineage/exportErvLineageAliases.glue
    
   # Export ERV LTR lineage associations
-  run file glue/export/exportErvLtrLineageAssociations.glue
+  run file glue/export/lineage/exportErvLtrLineageAssociations.glue
 
   # Export ERV lineage data
-  run file glue/export/exportErvLineageData.glue
+  run file glue/export/lineage/exportErvLineageData.glue
   
   # Export ERV lineage reference sequence data 
-  run file glue/export/exportErvLineageReferenceData.glue
+  run file glue/export/lineage/exportErvLineageReferenceData.glue
   
   # Export age calibration data 
-  run script glue/export/exportErvAgeCalibrationsForNavigator.js
+  run script glue/export/lineage/exportErvAgeCalibrationsForNavigator.js
 
   validate
   
