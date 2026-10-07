@@ -8,6 +8,7 @@ list custom-table-row erv_locus_alias \
   -s id \
   id \
   erv_locus.id \
+  erv_locus.missillac_id \
   alias_name \
   alias_source
   
