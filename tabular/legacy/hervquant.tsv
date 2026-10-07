@@ -1,4 +1,4 @@
-idx	chrom	strand	start	end	names	genes	size	idxOverlap	idxRBT	genes_uniq	names_re	names_re_unique	case	names_decision	clade	group	subgroup	phylogeny_name	phylo_level	db_support	curatedNS	status	nsLTRdef	herv_quant_idx
+idx	chrom	strand	start	end	names	genes	size	idxOverlap	idxRBT	genes_uniq	names_re	names_re_unique	case	names_decision	clade	group	subgroup	phylogeny_name	phylo_level	db_support	curatedNS	status	nsLTRdef	legacy_name
 RBRT85	chr1	+	1187647	1188589	LTR13_,LTR13-LTR13	ERVK,LTR-LTR	942	RB86	B130,R0	ERVK,LTR	LTR13,LTR13	LTR13	Fully resolved (same name)	HERV-K(HML4)	Clade II	Beta	Kappa	HERV-K(HML4)	Phylo.name	RB	1	ERV	nsLTR HERV	
 RBRT148	chr1	+	2556730	2557727	HERVL-int,HERV-L	ERVL,pol	997	RB149	B221,R3	ERVL,pol	HERVL,HERV-L	HERV-L,HERVL	Fully resolved (same name)	HERV-L	Clade III	Lambda	Lambda	HERV-L	Phylo.name	RB	1	ERV	nsLTR HERV	
 RBRT385	chr1	+	4982123	4982761	HERV-Khml4,HERVK13-int	gag,ERVK	638	RB386	R7,B525	ERVK,gag	HERV-K(HML4),HERVK13	HERV-K(HML4),HERVK13	Fully resolved (RT4-phylo : same row)	HERV-K(HML4)	Clade II	Beta	Kappa	HERV-K(HML4)	Phylo.name	RB	1	ERV	nsLTR HERV	
