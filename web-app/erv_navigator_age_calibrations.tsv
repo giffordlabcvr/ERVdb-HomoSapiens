@@ -7,7 +7,6 @@ LTRCLOCK_ERV-1.Zeta.W9P.9	ERV-1.Zeta.W9P.9	erv_lineage	paired_ltr_clock	minimum_
 LTRCLOCK_ERV-1.Zeta.W9P.P	ERV-1.Zeta.W9P.P	erv_lineage	paired_ltr_clock	minimum_age	53	53	87	10729147		medium	AC004022		22.6	percent	Paired-LTR molecular clock minimum age calibration for ERV-1.Zeta.W9P.P (HERV-P), based on reported locus AC004022
 LTRCLOCK_ERV-2.Beta.Archaeo.5	ERV-2.Beta.Archaeo.5	erv_lineage	paired_ltr_clock	minimum_age	24	24	38	10729147		medium	AC000378	9.2	10	percent	Paired-LTR molecular clock minimum age calibration for ERV-2.Beta.Archaeo.5 (HERV-K-HML5), based on reported locus AC000378
 LTRCLOCK_ERV-3.Sigma.S	ERV-3.Sigma.S	erv_lineage	paired_ltr_clock	minimum_age	32	32	52	10729147		medium	AC004385	12.4	13.6	percent	Paired-LTR molecular clock minimum age calibration for ERV-3.Sigma.S (HERV-S), based on reported locus AC004385
-LTRCLOCK_null	null	erv_lineage	paired_ltr_clock	minimum_age	24	24	38	10729147		medium	AC000378	9.2	10	percent	Paired-LTR molecular clock minimum age calibration for ERV-2.Beta.Archaeo.5, based on reported locus AC000378
 ORTHO_ERV-1.Eta.E	ERV-1.Eta.E	erv_lineage	orthology	minimum_age	28.82	26.8	30.6	25785516		high					Orthology-based minimum age calibration for ERV-1.Eta.E (HERV-E)
 ORTHO_ERV-1.Eta.R	ERV-1.Eta.R	erv_lineage	orthology	minimum_age	28.82	26.8	30.6	29379485		high					Orthology-based minimum age calibration for ERV-1.Eta.R (HERV-R)
 ORTHO_ERV-1.Gamma.TR.T	ERV-1.Gamma.TR.T	erv_lineage	orthology	minimum_age	15.2	14.5	16.3	28397686		high					Orthology-based minimum age calibration for ERV-1.Gamma.TR.T (HERV-T)
@@ -18,4 +17,3 @@ ORTHO_ERV-1.Zeta.HF.Fc.1	ERV-1.Zeta.HF.Fc.1	erv_lineage	orthology	minimum_age	15
 ORTHO_ERV-1.Zeta.HF.Xa.1	ERV-1.Zeta.HF.Xa.1	erv_lineage	orthology	minimum_age	42.9	40	44.2	10729147		high					Orthology-based minimum age calibration for ERV-1.Zeta.HF.Xa.1 (HERV-XA)
 ORTHO_ERV-1.Zeta.W9P.W	ERV-1.Zeta.W9P.W	erv_lineage	orthology	minimum_age	28.82	26.8	30.6	14757826		high					Orthology-based minimum age calibration for ERV-1.Zeta.W9P.W (HERV-W)
 ORTHO_ERV-3.Lambda.L.1	ERV-3.Lambda.L.1	erv_lineage	orthology	minimum_age	99.2	94.7	101.9	23938752		high					Orthology-based minimum age calibration for ERV-3.Lambda.L.1 (HERV-L)
-ORTHO_null	null	erv_lineage	orthology	minimum_age	42.9	40	44.2	10729147		high					Orthology-based minimum age calibration for ERV-1.Zeta.HF.Xa.1
