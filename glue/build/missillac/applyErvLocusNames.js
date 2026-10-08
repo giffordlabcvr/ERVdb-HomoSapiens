@@ -30,11 +30,9 @@
 //
 // Numbering:
 //
-//   1. Preserve an unambiguous source_numeric_id from the authoritative
-//      DBM/Gifford legacy source.
-//   2. Allocate the lowest unused positive integer within each
-//      erv_lineage.id namespace.
-//   3. Allocate new numbers deterministically in genomic order.
+//   1. Preserve unambiguous DBM/Gifford numbers.
+//   2. For ERV-1.Zeta.HF.H.1, preserve noncolliding Wang HERV-H numbers.
+//   3. Allocate remaining numbers deterministically in genomic order.
 //
 // This is the bootstrap allocation rule used to establish the initial
 // persistent Missillac namespace. In subsequent builds, previously issued
@@ -61,16 +59,22 @@
 var DRY_RUN = false;
 
 var LOCUS_TABLE =
-	"erv_locus";
+    "erv_locus";
 
 var LINEAGE_ASSOC_TABLE =
-	"erv_locus_lineage_assoc";
+    "erv_locus_lineage_assoc";
 
 var LEGACY_XREF_TABLE =
-	"erv_locus_legacy_xref";
+    "erv_locus_legacy_xref";
 
-var NUMBERING_LEGACY_SOURCE =
-	"compiled_human_erv_loci_hg19";
+var PRIMARY_NUMBERING_SOURCE =
+    "compiled_human_erv_loci_hg19";
+
+var SECONDARY_NUMBERING_SOURCE =
+    "wang_hervh_hg19";
+
+var SECONDARY_LINEAGE =
+    "ERV-1.Zeta.HF.H.1";
 
 
 // -------------------------------------------------------------------------
@@ -78,142 +82,142 @@ var NUMBERING_LEGACY_SOURCE =
 // -------------------------------------------------------------------------
 
 function log(message) {
-	glue.logInfo(message);
+    glue.logInfo(message);
 }
 
 
 function norm(value) {
 
-	if(value === null ||
-		value === undefined) {
+    if(value === null ||
+        value === undefined) {
 
-		return null;
-	}
+        return null;
+    }
 
-	var result =
-		("" + value).trim();
+    var result =
+        ("" + value).trim();
 
-	if(result === "") {
-		return null;
-	}
+    if(result === "") {
+        return null;
+    }
 
-	var lower =
-		result.toLowerCase();
+    var lower =
+        result.toLowerCase();
 
-	if(lower === "n/a" ||
-		lower === "na" ||
-		lower === "n/k" ||
-		lower === "nk" ||
-		lower === "null" ||
-		lower === "none" ||
-		lower === "unknown" ||
-		result === "-") {
+    if(lower === "n/a" ||
+        lower === "na" ||
+        lower === "n/k" ||
+        lower === "nk" ||
+        lower === "null" ||
+        lower === "none" ||
+        lower === "unknown" ||
+        result === "-") {
 
-		return null;
-	}
+        return null;
+    }
 
-	return result;
+    return result;
 }
 
 
 function normInt(value) {
 
-	value =
-		norm(value);
+    value =
+        norm(value);
 
-	if(value === null) {
-		return null;
-	}
+    if(value === null) {
+        return null;
+    }
 
-	var number =
-		parseInt(
-			value,
-			10
-		);
+    var number =
+        parseInt(
+            value,
+            10
+        );
 
-	return isNaN(number)
-		? null
-		: number;
+    return isNaN(number)
+        ? null
+        : number;
 }
 
 
 function positiveInt(value) {
 
-	var number =
-		normInt(value);
+    var number =
+        normInt(value);
 
-	if(number === null ||
-		number < 1) {
+    if(number === null ||
+        number < 1) {
 
-		return null;
-	}
+        return null;
+    }
 
-	return number;
+    return number;
 }
 
 
 function customRowPath(
-	tableName,
-	rowId
+    tableName,
+    rowId
 ) {
 
-	return (
-		"custom-table-row/" +
-		tableName +
-		"/" +
-		rowId
-	);
+    return (
+        "custom-table-row/" +
+        tableName +
+        "/" +
+        rowId
+    );
 }
 
 
 function runCommand(commandWords) {
 
-	if(DRY_RUN) {
+    if(DRY_RUN) {
 
-		log(
-			"[DRY RUN] " +
-			commandWords.join(" ")
-		);
+        log(
+            "[DRY RUN] " +
+            commandWords.join(" ")
+        );
 
-		return null;
-	}
+        return null;
+    }
 
-	return glue.command(
-		commandWords
-	);
+    return glue.command(
+        commandWords
+    );
 }
 
 
 function queryObjects(commandWords) {
 
-	return glue.tableToObjects(
-		glue.command(
-			commandWords
-		)
-	);
+    return glue.tableToObjects(
+        glue.command(
+            commandWords
+        )
+    );
 }
 
 
 function addUniqueValue(
-	map,
-	key,
-	value
+    map,
+    key,
+    value
 ) {
 
-	if(map[key] === undefined) {
-		map[key] = [];
-	}
+    if(map[key] === undefined) {
+        map[key] = [];
+    }
 
-	for(var i = 0;
-		i < map[key].length;
-		i++) {
+    for(var i = 0;
+        i < map[key].length;
+        i++) {
 
-		if(map[key][i] === value) {
-			return;
-		}
-	}
+        if(map[key][i] === value) {
+            return;
+        }
+    }
 
-	map[key].push(value);
+    map[key].push(value);
 }
 
 
@@ -223,151 +227,151 @@ function addUniqueValue(
 
 function chromosomeRank(scaffold) {
 
-	scaffold =
-		norm(scaffold);
+    scaffold =
+        norm(scaffold);
 
-	if(scaffold === null) {
-		return 1000;
-	}
+    if(scaffold === null) {
+        return 1000;
+    }
 
-	var value =
-		scaffold.replace(
-			/^chr/i,
-			""
-		);
+    var value =
+        scaffold.replace(
+            /^chr/i,
+            ""
+        );
 
-	var upper =
-		value.toUpperCase();
+    var upper =
+        value.toUpperCase();
 
-	if(upper === "X") {
-		return 23;
-	}
+    if(upper === "X") {
+        return 23;
+    }
 
-	if(upper === "Y") {
-		return 24;
-	}
+    if(upper === "Y") {
+        return 24;
+    }
 
-	if(upper === "M" ||
-		upper === "MT") {
+    if(upper === "M" ||
+        upper === "MT") {
 
-		return 25;
-	}
+        return 25;
+    }
 
-	var number =
-		parseInt(
-			value,
-			10
-		);
+    var number =
+        parseInt(
+            value,
+            10
+        );
 
-	return isNaN(number)
-		? 1000
-		: number;
+    return isNaN(number)
+        ? 1000
+        : number;
 }
 
 
 function compareNullableStrings(
-	a,
-	b
+    a,
+    b
 ) {
 
-	a = a === null ? "" : a;
-	b = b === null ? "" : b;
+    a = a === null ? "" : a;
+    b = b === null ? "" : b;
 
-	if(a < b) {
-		return -1;
-	}
+    if(a < b) {
+        return -1;
+    }
 
-	if(a > b) {
-		return 1;
-	}
+    if(a > b) {
+        return 1;
+    }
 
-	return 0;
+    return 0;
 }
 
 
 function genomicSort(
-	a,
-	b
+    a,
+    b
 ) {
 
-	/*
-	 * Keep ordering deterministic if additional host species or genome
-	 * builds are incorporated later.
-	 */
-	var comparison =
-		compareNullableStrings(
-			a.host_species,
-			b.host_species
-		);
+    /*
+     * Keep ordering deterministic if additional host species or genome
+     * builds are incorporated later.
+     */
+    var comparison =
+        compareNullableStrings(
+            a.host_species,
+            b.host_species
+        );
 
-	if(comparison !== 0) {
-		return comparison;
-	}
+    if(comparison !== 0) {
+        return comparison;
+    }
 
-	comparison =
-		compareNullableStrings(
-			a.genome_build,
-			b.genome_build
-		);
+    comparison =
+        compareNullableStrings(
+            a.genome_build,
+            b.genome_build
+        );
 
-	if(comparison !== 0) {
-		return comparison;
-	}
+    if(comparison !== 0) {
+        return comparison;
+    }
 
-	comparison =
-		chromosomeRank(
-			a.scaffold
-		) -
-		chromosomeRank(
-			b.scaffold
-		);
+    comparison =
+        chromosomeRank(
+            a.scaffold
+        ) -
+        chromosomeRank(
+            b.scaffold
+        );
 
-	if(comparison !== 0) {
-		return comparison;
-	}
+    if(comparison !== 0) {
+        return comparison;
+    }
 
-	comparison =
-		compareNullableStrings(
-			a.scaffold,
-			b.scaffold
-		);
+    comparison =
+        compareNullableStrings(
+            a.scaffold,
+            b.scaffold
+        );
 
-	if(comparison !== 0) {
-		return comparison;
-	}
+    if(comparison !== 0) {
+        return comparison;
+    }
 
-	var aStart =
-		a.start_position !== null
-			? a.start_position
-			: 0;
+    var aStart =
+        a.start_position !== null
+            ? a.start_position
+            : 0;
 
-	var bStart =
-		b.start_position !== null
-			? b.start_position
-			: 0;
+    var bStart =
+        b.start_position !== null
+            ? b.start_position
+            : 0;
 
-	if(aStart !== bStart) {
-		return aStart - bStart;
-	}
+    if(aStart !== bStart) {
+        return aStart - bStart;
+    }
 
-	var aEnd =
-		a.end_position !== null
-			? a.end_position
-			: 0;
+    var aEnd =
+        a.end_position !== null
+            ? a.end_position
+            : 0;
 
-	var bEnd =
-		b.end_position !== null
-			? b.end_position
-			: 0;
+    var bEnd =
+        b.end_position !== null
+            ? b.end_position
+            : 0;
 
-	if(aEnd !== bEnd) {
-		return aEnd - bEnd;
-	}
+    if(aEnd !== bEnd) {
+        return aEnd - bEnd;
+    }
 
-	return compareNullableStrings(
-		a.locus_id,
-		b.locus_id
-	);
+    return compareNullableStrings(
+        a.locus_id,
+        b.locus_id
+    );
 }
 
 
@@ -376,42 +380,42 @@ function genomicSort(
 // -------------------------------------------------------------------------
 
 function makeMissillacId(
-	lineageId,
-	orthologyGroup,
-	locusType
+    lineageId,
+    orthologyGroup,
+    locusType
 ) {
 
-	lineageId =
-		norm(lineageId);
+    lineageId =
+        norm(lineageId);
 
-	orthologyGroup =
-		positiveInt(
-			orthologyGroup
-		);
+    orthologyGroup =
+        positiveInt(
+            orthologyGroup
+        );
 
-	locusType =
-		norm(locusType);
+    locusType =
+        norm(locusType);
 
-	if(lineageId === null ||
-		orthologyGroup === null) {
+    if(lineageId === null ||
+        orthologyGroup === null) {
 
-		return null;
-	}
+        return null;
+    }
 
-	var missillacId =
-		lineageId +
-		"-" +
-		orthologyGroup;
+    var missillacId =
+        lineageId +
+        "-" +
+        orthologyGroup;
 
-	if(locusType !== null &&
-		locusType.toLowerCase() ===
-			"solo_ltr") {
+    if(locusType !== null &&
+        locusType.toLowerCase() ===
+            "solo_ltr") {
 
-		missillacId +=
-			"(LTR)";
-	}
+        missillacId +=
+            "(LTR)";
+    }
 
-	return missillacId;
+    return missillacId;
 }
 
 
@@ -420,48 +424,48 @@ function makeMissillacId(
 // -------------------------------------------------------------------------
 
 function writeLocusName(
-	locusId,
-	orthologyGroup,
-	missillacId
+    locusId,
+    orthologyGroup,
+    missillacId
 ) {
 
-	if(DRY_RUN) {
+    if(DRY_RUN) {
 
-		log(
-			"[DRY RUN] Set erv_locus/" +
-			locusId +
-			": orthology_group=" +
-			orthologyGroup +
-			", missillac_id=" +
-			missillacId
-		);
+        log(
+            "[DRY RUN] Set erv_locus/" +
+            locusId +
+            ": orthology_group=" +
+            orthologyGroup +
+            ", missillac_id=" +
+            missillacId
+        );
 
-		return;
-	}
+        return;
+    }
 
-	glue.inMode(
-		customRowPath(
-			LOCUS_TABLE,
-			locusId
-		),
+    glue.inMode(
+        customRowPath(
+            LOCUS_TABLE,
+            locusId
+        ),
 
-		function() {
+        function() {
 
-			glue.command([
-				"set",
-				"field",
-				"orthology_group",
-				"" + orthologyGroup
-			]);
+            glue.command([
+                "set",
+                "field",
+                "orthology_group",
+                "" + orthologyGroup
+            ]);
 
-			glue.command([
-				"set",
-				"field",
-				"missillac_id",
-				missillacId
-			]);
-		}
-	);
+            glue.command([
+                "set",
+                "field",
+                "missillac_id",
+                missillacId
+            ]);
+        }
+    );
 }
 
 
@@ -668,7 +672,7 @@ var legacyRows =
 		"erv_locus.id",
 		"-w",
 		"legacy_source = '" +
-			NUMBERING_LEGACY_SOURCE +
+			PRIMARY_NUMBERING_SOURCE +
 			"' and " +
 			"mapping_status = 'mapped' and " +
 			"source_numeric_id != null",
@@ -1215,7 +1219,7 @@ for(var lineageIndex = 0;
 				];
 
 			namingSource =
-				NUMBERING_LEGACY_SOURCE;
+				PRIMARY_NUMBERING_SOURCE;
 
 			preservedNumberCount++;
 		}

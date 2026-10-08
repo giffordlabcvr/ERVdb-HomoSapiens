@@ -61,7 +61,7 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
     tabular/legacy/hervquant-hg19.tsv \
     hervquant_hg19 \
-    null \
+    30137025 \
     "Homo sapiens" \
     hg19 \
     false 
