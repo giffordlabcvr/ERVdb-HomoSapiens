@@ -1,11 +1,11 @@
   # Export data for ERV web application
 
   # Export all locus sequences as a single FASTA-formatted file
-  module fastaExporter export -w "sequence_kind = 'proviral_locus'" -f web-app/proviral_locus_seqs.fas
+  module fastaExporter export -w "sequence_kind = 'proviral_locus'" -f web-app/big_files/proviral_locus_seqs.fas
 
   # Export aligned segments for lineage level alignments
-  run script glue/export/exportHervLineageAlignmentSegments.js
+  run script glue/export/locus/exportHervLineageAlignmentSegments.js
 
   # Export alignments 
-  run file glue/export/exportAlignments.glue
+  run script glue/export/exportErvLocusAlignments.js
     
