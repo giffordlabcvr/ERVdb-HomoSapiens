@@ -7,6 +7,7 @@ module legacyLocusImporter invoke-function clearLegacySource coffin_hml2_hg19
 module legacyLocusImporter invoke-function clearLegacySource grandi_hml10_hg19
 module legacyLocusImporter invoke-function clearLegacySource grandi_hml6_hg19
 module legacyLocusImporter invoke-function clearLegacySource wang_hervh_hg19
+module legacyLocusImporter invoke-function clearLegacySource hervquant_hg19
 
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
@@ -56,4 +57,11 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
     "Homo sapiens" \
     hg19 \
     false
-    
+
+module legacyLocusImporter invoke-function loadLegacyLocusFile \
+    tabular/legacy/hervquant-hg19.tsv \
+    hervquant_hg19 \
+    null \
+    "Homo sapiens" \
+    hg19 \
+    false 
