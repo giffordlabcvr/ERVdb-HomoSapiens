@@ -33,7 +33,7 @@ run script glue/build/setLocusSeqLengthsAndKinds.js
 run script glue/build/loadErvLoci.js
 
 # -------------------------------------------------------------------------
-# 4. Load locus classifications and provenance
+# 4. Load locus classifications and LTR associations
 # -------------------------------------------------------------------------
 
 # Create initial locus-to-ERV-lineage associations from source data.
@@ -46,6 +46,10 @@ run script glue/build/curation/applyErvLocusCuratorDecisions.js
 # Create locus-to-LTR-lineage associations using the curated
 # ERV-lineage assignments for compatibility assessment.
 run script glue/build/loadErvLocusLtrAssociations.js
+
+# -------------------------------------------------------------------------
+# 4. Load provenance tables
+# -------------------------------------------------------------------------
 
 # Load source-specific provenance records.
 #run file glue/build/loadErvLocusProvenance.glue

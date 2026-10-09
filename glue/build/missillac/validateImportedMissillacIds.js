@@ -1,733 +1,473 @@
-// glue/build/locus/missillac/validateImportedMissillacIds.js
+// glue/build/missillac/validateImportedMissillacIds.js
+// Read-only BOOTSTRAP preflight. Run after importLegacyMappings.glue and
+// before applyErvLocusNames.js. Uses bulk queries; writes no database fields.
 //
-// Validate Missillac identifiers that have been imported or otherwise
-// preassigned to erv_locus rows before allocation of identifiers to
-// previously unnamed loci.
+// Legacy import populates xrefs, NOT preassigned Missillac IDs. This checks
+// those numbering claims using the supplied bootstrap allocator's precedence.
+// Primary ambiguity/collisions are fatal; Wang fallback conflicts are warnings
+// because the allocator gives affected loci de novo numbers.
 //
-// This script is intended to run immediately before:
-//
-//   applyErvLocusNames.js
-//
-// It does NOT require every eligible locus to have a Missillac ID.
-// Unnamed loci are expected at this stage and will be handled by the
-// allocation step.
-//
-// It DOES require every imported/preassigned assignment to be internally
-// consistent.
-//
-// Checks:
-//
-//   1. orthology_group and missillac_id are either both present or both absent.
-//
-//   2. A named locus must have exactly one distinct erv_lineage association.
-//
-//   3. locus_type must be "erv" or "solo_ltr".
-//
-//   4. missillac_id must exactly match the identifier reconstructed from:
-//
-//          <erv_lineage.id>-<orthology_group>
-//
-//      with "(LTR)" appended for solo-LTR loci.
-//
-//   5. No Missillac ID may be assigned to more than one current locus.
-//
-//   6. No orthology-group number may be assigned to more than one current
-//      locus within the same ERV-lineage namespace.
-//
-// This script is read-only. Any validation error causes the build to fail.
-//
-// NOTE:
-//
-// Once the persistent Missillac registry is implemented, this script can
-// additionally validate imported assignments against the registry itself.
-// The checks below deliberately validate the database state independently
-// of how the assignments were imported.
-
-var LOCUS_TABLE =
-	"erv_locus";
-
-var LINEAGE_ASSOC_TABLE =
-	"erv_locus_lineage_assoc";
-
-
-// -------------------------------------------------------------------------
-// General utilities
-// -------------------------------------------------------------------------
-
-function log(message) {
-	glue.logInfo(message);
-}
-
-
-function norm(value) {
-
-	if(value === null ||
-		value === undefined) {
-
-		return null;
-	}
-
-	var result =
-		("" + value).trim();
-
-	if(result === "") {
-		return null;
-	}
-
-	var lower =
-		result.toLowerCase();
-
-	if(lower === "n/a" ||
-		lower === "na" ||
-		lower === "n/k" ||
-		lower === "nk" ||
-		lower === "null" ||
-		lower === "none" ||
-		lower === "unknown" ||
-		result === "-") {
-
-		return null;
-	}
-
-	return result;
-}
-
-
-function normInt(value) {
-
-	value =
-		norm(value);
-
-	if(value === null) {
-		return null;
-	}
-
-	var number =
-		parseInt(
-			value,
-			10
-		);
-
-	return isNaN(number)
-		? null
-		: number;
-}
-
-
-function positiveInt(value) {
-
-	var number =
-		normInt(value);
-
-	if(number === null ||
-		number < 1) {
-
-		return null;
-	}
-
-	return number;
-}
-
-
-function queryObjects(commandWords) {
-
-	return glue.tableToObjects(
-		glue.command(
-			commandWords
-		)
-	);
-}
-
-
-function addUniqueValue(
-	map,
-	key,
-	value
-) {
-
-	if(map[key] === undefined) {
-		map[key] = [];
-	}
-
-	for(var i = 0;
-		i < map[key].length;
-		i++) {
-
-		if(map[key][i] === value) {
-			return;
-		}
-	}
-
-	map[key].push(value);
-}
-
-
-function makeMissillacId(
-	lineageId,
-	orthologyGroup,
-	locusType
-) {
-
-	lineageId =
-		norm(lineageId);
-
-	orthologyGroup =
-		positiveInt(
-			orthologyGroup
-		);
-
-	locusType =
-		norm(locusType);
-
-	if(lineageId === null ||
-		orthologyGroup === null) {
-
-		return null;
-	}
-
-	var missillacId =
-		lineageId +
-		"-" +
-		orthologyGroup;
-
-	if(locusType !== null &&
-		locusType.toLowerCase() ===
-			"solo_ltr") {
-
-		missillacId +=
-			"(LTR)";
-	}
-
-	return missillacId;
-}
-
-
-// -------------------------------------------------------------------------
-// Validation-error collection
-// -------------------------------------------------------------------------
-
-var errors = [];
-
-
-function addError(
-	errorType,
-	message
-) {
-
-	errors.push({
-		error_type:
-			errorType,
-
-		message:
-			message
-	});
-}
-
-
-// -------------------------------------------------------------------------
-// Load permanent loci
-// -------------------------------------------------------------------------
-
-log(
-	"Loading permanent erv_locus rows for imported Missillac-ID validation"
-);
-
-var locusRows =
-	queryObjects([
-		"list",
-		"custom-table-row",
-		LOCUS_TABLE,
-		"id",
-		"locus_type",
-		"taxonomic_resolution",
-		"orthology_group",
-		"missillac_id",
-		"-s",
-		"id"
-	]);
-
-var locusById = {};
-
-for(var i = 0;
-	i < locusRows.length;
-	i++) {
-
-	var locusRow =
-		locusRows[i];
-
-	var locusId =
-		norm(
-			locusRow.id
-		);
-
-	if(locusId === null) {
-		continue;
-	}
-
-	locusById[locusId] = {
-		locus_id:
-			locusId,
-
-		locus_type:
-			norm(
-				locusRow.locus_type
-			),
-
-		taxonomic_resolution:
-			norm(
-				locusRow.taxonomic_resolution
-			),
-
-		orthology_group:
-			positiveInt(
-				locusRow.orthology_group
-			),
-
-		raw_orthology_group:
-			norm(
-				locusRow.orthology_group
-			),
-
-		missillac_id:
-			norm(
-				locusRow.missillac_id
-			)
-	};
-}
-
-log(
-	"Loaded " +
-	Object.keys(locusById).length +
-	" permanent ERV loci"
-);
-
-
-// -------------------------------------------------------------------------
-// Load locus-to-lineage associations
-// -------------------------------------------------------------------------
-
-log(
-	"Loading locus-to-lineage associations"
-);
-
-var associationRows =
-	queryObjects([
-		"list",
-		"custom-table-row",
-		LINEAGE_ASSOC_TABLE,
-		"id",
-		"erv_locus.id",
-		"erv_lineage.id",
-		"-s",
-		"erv_locus.id,erv_lineage.id"
-	]);
-
-var lineageTargetsByLocus = {};
-
-for(var i = 0;
-	i < associationRows.length;
-	i++) {
-
-	var associationRow =
-		associationRows[i];
-
-	var locusId =
-		norm(
-			associationRow[
-				"erv_locus.id"
-			]
-		);
-
-	var lineageId =
-		norm(
-			associationRow[
-				"erv_lineage.id"
-			]
-		);
-
-	if(locusId === null ||
-		lineageId === null) {
-
-		continue;
-	}
-
-	addUniqueValue(
-		lineageTargetsByLocus,
-		locusId,
-		lineageId
-	);
-}
-
-log(
-	"Loaded " +
-	associationRows.length +
-	" locus-to-lineage association rows"
-);
-
-
-// -------------------------------------------------------------------------
-// Validate individual imported/preassigned assignments
-// -------------------------------------------------------------------------
-
-log(
-	"Validating imported/preassigned Missillac identifiers"
-);
-
-var namedLocusCount = 0;
-var unnamedLocusCount = 0;
-
-var locusByMissillacId = {};
-var lociByLineageAndNumber = {};
-
-var locusIds =
-	Object.keys(
-		locusById
-	);
-
-locusIds.sort();
-
-for(var i = 0;
-	i < locusIds.length;
-	i++) {
-
-	var locusId =
-		locusIds[i];
-
-	var locus =
-		locusById[
-			locusId
-		];
-
-	var hasRawOrthologyGroup =
-		locus.raw_orthology_group !== null;
-
-	var hasValidOrthologyGroup =
-		locus.orthology_group !== null;
-
-	var hasMissillacId =
-		locus.missillac_id !== null;
-
-
-	// -----------------------------------------------------------------
-	// Reject malformed/non-positive orthology-group values
-	// -----------------------------------------------------------------
-
-	if(hasRawOrthologyGroup &&
-		!hasValidOrthologyGroup) {
-
-		addError(
-			"INVALID_ORTHOLOGY_GROUP",
-
-			locusId +
-			" has invalid orthology_group '" +
-			locus.raw_orthology_group +
-			"'"
-		);
-	}
-
-
-	// -----------------------------------------------------------------
-	// The two naming fields must occur together
-	// -----------------------------------------------------------------
-
-	if(hasRawOrthologyGroup !==
-		hasMissillacId) {
-
-		addError(
-			"PARTIAL_ASSIGNMENT",
-
-			locusId +
-			" has inconsistent naming fields: " +
-			"orthology_group=" +
-			(
-				locus.raw_orthology_group === null
-					? "null"
-					: locus.raw_orthology_group
-			) +
-			", missillac_id=" +
-			(
-				locus.missillac_id === null
-					? "null"
-					: locus.missillac_id
-			)
-		);
-
-		continue;
-	}
-
-
-	// -----------------------------------------------------------------
-	// Completely unnamed loci are expected before allocation
-	// -----------------------------------------------------------------
-
-	if(!hasRawOrthologyGroup &&
-		!hasMissillacId) {
-
-		unnamedLocusCount++;
-		continue;
-	}
-
-	namedLocusCount++;
-
-
-	// -----------------------------------------------------------------
-	// A named locus requires a valid positive orthology group
-	// -----------------------------------------------------------------
-
-	if(!hasValidOrthologyGroup) {
-
-		/*
-		 * The malformed value has already been reported above.
-		 * Do not attempt downstream reconstruction using it.
-		 */
-		continue;
-	}
-
-
-	// -----------------------------------------------------------------
-	// A named locus must have exactly one ERV-lineage identity
-	// -----------------------------------------------------------------
-
-	var lineageTargets =
-		lineageTargetsByLocus[
-			locusId
-		];
-
-	if(lineageTargets === undefined ||
-		lineageTargets.length === 0) {
-
-		addError(
-			"NAMED_LOCUS_WITHOUT_LINEAGE",
-
-			locusId +
-			" has Missillac ID '" +
-			locus.missillac_id +
-			"' but has no ERV-lineage association"
-		);
-
-		continue;
-	}
-
-	if(lineageTargets.length > 1) {
-
-		addError(
-			"NAMED_LOCUS_MULTIPLE_LINEAGES",
-
-			locusId +
-			" has Missillac ID '" +
-			locus.missillac_id +
-			"' but is associated with multiple ERV lineages: " +
-			lineageTargets.join(",")
-		);
-
-		continue;
-	}
-
-	var lineageId =
-		lineageTargets[0];
-
-
-	// -----------------------------------------------------------------
-	// Validate locus type
-	// -----------------------------------------------------------------
-
-	var locusType =
-		locus.locus_type !== null
-			? locus.locus_type.toLowerCase()
-			: null;
-
-	if(locusType !== "erv" &&
-		locusType !== "solo_ltr") {
-
-		addError(
-			"NAMED_UNSUPPORTED_LOCUS_TYPE",
-
-			locusId +
-			" has Missillac ID '" +
-			locus.missillac_id +
-			"' but locus_type is '" +
-			(
-				locus.locus_type === null
-					? "null"
-					: locus.locus_type
-			) +
-			"'"
-		);
-
-		continue;
-	}
-
-
-	// -----------------------------------------------------------------
-	// Reconstruct and verify the identifier
-	// -----------------------------------------------------------------
-
-	var expectedMissillacId =
-		makeMissillacId(
-			lineageId,
-			locus.orthology_group,
-			locusType
-		);
-
-	if(locus.missillac_id !==
-		expectedMissillacId) {
-
-		addError(
-			"MISSILLAC_ID_MISMATCH",
-
-			locusId +
-			" has Missillac ID '" +
-			locus.missillac_id +
-			"' but expected '" +
-			expectedMissillacId +
-			"' from lineage '" +
-			lineageId +
-			"', orthology_group " +
-			locus.orthology_group +
-			" and locus_type '" +
-			locusType +
-			"'"
-		);
-	}
-
-
-	// -----------------------------------------------------------------
-	// Record current Missillac-ID usage
-	// -----------------------------------------------------------------
-
-	if(locusByMissillacId[
-		locus.missillac_id
-	] !== undefined) {
-
-		addError(
-			"DUPLICATE_MISSILLAC_ID",
-
-			"Missillac ID '" +
-			locus.missillac_id +
-			"' is assigned to both " +
-			locusByMissillacId[
-				locus.missillac_id
-			] +
-			" and " +
-			locusId
-		);
-	}
-	else {
-
-		locusByMissillacId[
-			locus.missillac_id
-		] = locusId;
-	}
-
-
-	// -----------------------------------------------------------------
-	// Record lineage + orthology-group usage
-	// -----------------------------------------------------------------
-
-	var lineageNumberKey =
-		lineageId +
-		"\t" +
-		locus.orthology_group;
-
-	if(lociByLineageAndNumber[
-		lineageNumberKey
-	] === undefined) {
-
-		lociByLineageAndNumber[
-			lineageNumberKey
-		] = locusId;
-	}
-	else {
-
-		addError(
-			"DUPLICATE_LINEAGE_NUMBER",
-
-			"ERV lineage '" +
-			lineageId +
-			"' orthology_group " +
-			locus.orthology_group +
-			" is assigned to both " +
-			lociByLineageAndNumber[
-				lineageNumberKey
-			] +
-			" and " +
-			locusId
-		);
-	}
-}
-
-
-// -------------------------------------------------------------------------
-// Summary
-// -------------------------------------------------------------------------
-
-log(
-	"============================================================"
-);
-
-log(
-	"Imported Missillac-ID validation summary"
-);
-
-log(
-	"============================================================"
-);
-
-log(
-	"Permanent ERV loci examined: " +
-	locusIds.length
-);
-
-log(
-	"Preassigned/named loci examined: " +
-	namedLocusCount
-);
-
-log(
-	"Currently unnamed loci: " +
-	unnamedLocusCount
-);
-
-log(
-	"Validation errors: " +
-	errors.length
-);
-
-
-// -------------------------------------------------------------------------
-// Detailed error report
-// -------------------------------------------------------------------------
-
-for(var i = 0;
-	i < errors.length;
-	i++) {
-
-	var error =
-		errors[i];
-
-	log(
-		"ERROR\t" +
-		error.error_type +
-		"\t" +
-		error.message
-	);
-}
-
-
-// -------------------------------------------------------------------------
-// Fail the build if any imported assignment is invalid
-// -------------------------------------------------------------------------
-
-if(errors.length > 0) {
-
-	throw new Error(
-		"Imported Missillac-ID validation failed with " +
-		errors.length +
-		" error(s); see ERROR records above"
-	);
-}
-
-
-log(
-	"Imported Missillac-ID validation passed"
-);
+// This is NOT historical-registry validation: retired IDs, prior assignments,
+// orthology across species/assemblies and biological matches cannot be verified
+// from these tables alone. The supplied allocator is not registry-aware.
+// Existing assignments therefore block this bootstrap preflight deliberately.
+// A single species/assembly is required by this bootstrap workflow; that is
+// not a general restriction on species-independent Missillac orthology groups.
+
+(function() {
+    var PRIMARY = 'compiled_human_erv_loci_hg19';
+    var SECONDARY = 'wang_hervh_hg19';
+    var WANG_LINEAGE = 'ERV-1.Zeta.HF.H.1';
+    var MAX_DETAILS = 100;
+    var errors = 0, warnings = 0, shown = 0;
+    var counts = Object.create(null);
+
+    function clean(v) {
+        if(v === null || v === undefined) return null;
+        var s = String(v).trim();
+        return s === '' || /^(null|none|na|n\/a|-)$/i.test(s) ? null : s;
+    }
+
+    function integer(v) {
+        var s = clean(v);
+        if(s === null || !/^\d+$/.test(s)) return null;
+        var n = Number(s);
+        return isFinite(n) && n > 0 && Math.floor(n) === n &&
+            n <= 9007199254740991 ? n : null;
+    }
+
+    function map() {
+        return Object.create(null);
+    }
+
+    function key(parts) {
+        return JSON.stringify(parts);
+    }
+
+    function report(level, code, detail) {
+        if(level === 'ERROR') errors++;
+        else warnings++;
+
+        counts[level + ' ' + code] =
+            (counts[level + ' ' + code] || 0) + 1;
+
+        if(shown < MAX_DETAILS) {
+            glue.logInfo(level + ' ' + code + ': ' + detail);
+            shown++;
+        }
+    }
+
+    function query(table, fields) {
+        return glue.tableToObjects(glue.command(
+            ['list', 'custom-table-row', table].concat(fields)
+        ));
+    }
+
+    function addNumber(claims, locus, n) {
+        if(!claims[locus]) claims[locus] = map();
+        claims[locus][String(n)] = true;
+    }
+
+    glue.logInfo('Missillac bootstrap preflight: read-only');
+
+    var rows = query('erv_locus', [
+        'id',
+        'host_species',
+        'genome_build',
+        'scaffold',
+        'start_position',
+        'end_position',
+        'locus_type',
+        'orthology_group',
+        'missillac_id'
+    ]);
+
+    var loci = map();
+    var associations = map();
+    var scopes = map();
+
+    rows.forEach(function(r) {
+        var id = clean(r.id);
+
+        if(id === null || loci[id]) {
+            report(
+                'ERROR',
+                'locus_id',
+                'Missing or duplicate locus key: ' + id
+            );
+            return;
+        }
+
+        loci[id] = r;
+    });
+
+    if(rows.length === 0) {
+        report('ERROR', 'empty_loci', 'No permanent loci loaded');
+    }
+
+    query('erv_locus_lineage_assoc', [
+        'erv_locus.id',
+        'erv_lineage.id'
+    ]).forEach(function(r) {
+        var id = clean(r['erv_locus.id']);
+        var lineage = clean(r['erv_lineage.id']);
+
+        if(id === null || lineage === null || !loci[id]) {
+            report(
+                'ERROR',
+                'broken_association',
+                JSON.stringify(r)
+            );
+            return;
+        }
+
+        if(!associations[id]) associations[id] = map();
+        associations[id][lineage] = true;
+    });
+
+    var eligible = map();
+    var byLineage = map();
+    var existingGroups = map();
+    var eligibleCount = 0;
+    var existingCount = 0;
+
+    Object.keys(loci).sort().forEach(function(id) {
+        var r = loci[id];
+        var lineages = Object.keys(associations[id] || {});
+        var type = (clean(r.locus_type) || '').toLowerCase();
+
+        var ok = lineages.length === 1 &&
+            (type === 'erv' || type === 'solo_ltr');
+
+        if(ok) {
+            eligible[id] = lineages[0];
+
+            if(!byLineage[lineages[0]]) {
+                byLineage[lineages[0]] = [];
+            }
+
+            byLineage[lineages[0]].push(id);
+            eligibleCount++;
+
+            var species = clean(r.host_species);
+            var build = clean(r.genome_build);
+
+            if(
+                species === null ||
+                build === null ||
+                clean(r.scaffold) === null ||
+                integer(r.start_position) === null ||
+                integer(r.end_position) === null ||
+                Number(r.start_position) > Number(r.end_position)
+            ) {
+                report(
+                    'ERROR',
+                    'locus_identity',
+                    'Incomplete/invalid coordinates or host/build: ' + id
+                );
+            }
+
+            scopes[key([species, build])] = true;
+        }
+
+        var mid = clean(r.missillac_id);
+        var rawGroup = clean(r.orthology_group);
+
+        if(mid === null && rawGroup === null) return;
+
+        existingCount++;
+
+        var group = integer(rawGroup);
+
+        if(mid === null || group === null) {
+            report(
+                'ERROR',
+                'partial_assignment',
+                id + ': id=' + mid + ', group=' + rawGroup
+            );
+            return;
+        }
+
+        // Greedy lineage match handles hyphens in the lineage;
+        // the final integer is the group.
+        var parsed = /^(.+)-([1-9]\d*)(\(LTR\))?$/.exec(mid);
+
+        if(!parsed || integer(parsed[2]) !== group) {
+            report(
+                'ERROR',
+                'malformed_assignment',
+                id + ': ' + mid + ', group=' + rawGroup
+            );
+            return;
+        }
+
+        if(!ok) {
+            report(
+                'ERROR',
+                'assigned_ineligible',
+                id + ': ' + mid
+            );
+        } else if(
+            mid !== lineages[0] + '-' + group +
+                (type === 'solo_ltr' ? '(LTR)' : '')
+        ) {
+            report(
+                'ERROR',
+                'assignment_mismatch',
+                id + ': ID differs from current lineage/type: ' + mid
+            );
+        }
+
+        var gk = key([
+            parsed[1],
+            group,
+            clean(r.host_species),
+            clean(r.genome_build)
+        ]);
+
+        if(existingGroups[gk]) {
+            report(
+                'ERROR',
+                'duplicate_group_in_assembly',
+                existingGroups[gk] + ' and ' + id + ': ' + mid
+            );
+        } else {
+            existingGroups[gk] = id;
+        }
+    });
+
+    if(eligibleCount === 0) {
+        report(
+            'ERROR',
+            'no_eligible_loci',
+            'No lineage-resolved erv/solo_ltr loci'
+        );
+    }
+
+    if(Object.keys(scopes).length > 1) {
+        report(
+            'ERROR',
+            'multiple_scopes',
+            'Bootstrap allocator does not reconcile orthology ' +
+            'across species/assemblies'
+        );
+    }
+
+    if(existingCount > 0) {
+        report(
+            'ERROR',
+            'bootstrap_existing_assignments',
+            existingCount + ' loci already have naming fields. ' +
+            'Supplied allocator recalculates them; use a ' +
+            'registry-aware allocator before continuing.'
+        );
+    }
+
+    var primary = map();
+    var secondary = map();
+    var sourceCounts = map();
+    var statusCounts = map();
+    var outside = 0;
+
+    query('erv_locus_legacy_xref', [
+        'id',
+        'legacy_source',
+        'legacy_name',
+        'source_numeric_id',
+        'mapping_status',
+        'erv_locus.id'
+    ]).forEach(function(r) {
+        var source = clean(r.legacy_source);
+
+        if(source !== PRIMARY && source !== SECONDARY) return;
+
+        sourceCounts[source] = (sourceCounts[source] || 0) + 1;
+
+        var status = clean(r.mapping_status);
+        var sk = source + '/' + status;
+
+        statusCounts[sk] = (statusCounts[sk] || 0) + 1;
+
+        if(status !== 'mapped') return;
+
+        var id = clean(r['erv_locus.id']);
+
+        if(id === null || !loci[id]) {
+            report(
+                'ERROR',
+                'broken_legacy_link',
+                String(r.id)
+            );
+            return;
+        }
+
+        if(
+            !eligible[id] ||
+            (source === SECONDARY && eligible[id] !== WANG_LINEAGE)
+        ) {
+            outside++;
+            return;
+        }
+
+        var n = integer(r.source_numeric_id);
+
+        if(source === SECONDARY && n === null) {
+            var match = /^HERVH_(\d+)$/i.exec(
+                clean(r.legacy_name) || ''
+            );
+            n = match ? integer(match[1]) : null;
+        }
+
+        if(n === null) {
+            report(
+                'WARNING',
+                'unusable_legacy_number',
+                source + ': ' + r.id + ' -> ' + id
+            );
+            return;
+        }
+
+        addNumber(
+            source === PRIMARY ? primary : secondary,
+            id,
+            n
+        );
+    });
+
+    if(!sourceCounts[PRIMARY]) {
+        report(
+            'ERROR',
+            'missing_primary_import',
+            'No ' + PRIMARY + ' xrefs; check that legacy import ran'
+        );
+    }
+
+    if(!sourceCounts[SECONDARY]) {
+        report(
+            'WARNING',
+            'missing_wang_import',
+            'No ' + SECONDARY + ' xrefs'
+        );
+    }
+
+    Object.keys(byLineage).sort().forEach(function(lineage) {
+        var reserved = map();
+        var primaryLoci = map();
+        var wangNumbers = map();
+
+        byLineage[lineage].forEach(function(id) {
+            var nums = Object.keys(primary[id] || {});
+
+            if(nums.length === 0) return;
+
+            primaryLoci[id] = true;
+
+            if(nums.length > 1) {
+                report(
+                    'ERROR',
+                    'ambiguous_primary',
+                    id + ': ' + nums.join(', ')
+                );
+                return;
+            }
+
+            if(!reserved[nums[0]]) reserved[nums[0]] = [];
+            reserved[nums[0]].push(id);
+        });
+
+        Object.keys(reserved).forEach(function(n) {
+            if(reserved[n].length > 1) {
+                report(
+                    'ERROR',
+                    'primary_collision',
+                    lineage + '-' + n + ': ' +
+                    reserved[n].join(', ')
+                );
+            }
+        });
+
+        if(lineage !== WANG_LINEAGE) return;
+
+        byLineage[lineage].forEach(function(id) {
+            if(primaryLoci[id]) return;
+
+            var nums = Object.keys(secondary[id] || {});
+
+            if(nums.length > 1) {
+                report(
+                    'WARNING',
+                    'ambiguous_wang',
+                    id + ': ' + nums.join(', ') +
+                    '; allocator uses de novo numbering'
+                );
+            } else if(nums.length === 1) {
+                if(!wangNumbers[nums[0]]) {
+                    wangNumbers[nums[0]] = [];
+                }
+                wangNumbers[nums[0]].push(id);
+            }
+        });
+
+        Object.keys(wangNumbers).forEach(function(n) {
+            if(reserved[n]) {
+                report(
+                    'WARNING',
+                    'wang_reserved_by_primary',
+                    lineage + '-' + n + ': ' +
+                    wangNumbers[n].join(', ') +
+                    '; allocator uses de novo numbering'
+                );
+            } else if(wangNumbers[n].length > 1) {
+                report(
+                    'WARNING',
+                    'wang_collision',
+                    lineage + '-' + n + ': ' +
+                    wangNumbers[n].join(', ') +
+                    '; allocator uses de novo numbering'
+                );
+            }
+        });
+    });
+
+    glue.logInfo(
+        'Loci=' + rows.length +
+        ', eligible=' + eligibleCount +
+        ', existing naming fields=' + existingCount +
+        ', mapped xrefs outside numbering eligibility=' + outside
+    );
+
+    Object.keys(statusCounts).sort().forEach(function(k) {
+        glue.logInfo(
+            'Legacy mappings ' + k + ': ' + statusCounts[k]
+        );
+    });
+
+    Object.keys(counts).sort().forEach(function(k) {
+        glue.logInfo(k + ': ' + counts[k]);
+    });
+
+    if(errors + warnings > shown) {
+        glue.logInfo(
+            'Additional details suppressed; counts above ' +
+            'include all findings.'
+        );
+    }
+
+    glue.logInfo(
+        'Historical reservation and biological orthology checks: ' +
+        'NOT PERFORMED (no registry input).'
+    );
+
+    if(errors > 0) {
+        throw new Error(
+            'Missillac bootstrap preflight failed with ' +
+            errors + ' error(s) and ' + warnings +
+            ' warning(s). No database changes made.'
+        );
+    }
+
+    glue.logInfo(
+        'Missillac bootstrap preflight PASSED with ' +
+        warnings + ' warning(s). No database changes made.'
+    );
+}());

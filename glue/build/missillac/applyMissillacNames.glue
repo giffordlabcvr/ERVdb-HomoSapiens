@@ -1,5 +1,5 @@
 # =========================================================================
-# 7. MISSILLAC IDENTIFIER ASSIGNMENT
+# MISSILLAC IDENTIFIER ASSIGNMENT
 # =========================================================================
 #
 # Missillac identifiers are persistent identifiers.
@@ -21,7 +21,7 @@
 
 
 # -------------------------------------------------------------------------
-# 7A. BOOTSTRAP ONLY: import curated legacy Missillac mappings
+# A. BOOTSTRAP ONLY: import curated legacy Missillac mappings
 # -------------------------------------------------------------------------
 #
 # Enable this section ONLY when establishing the initial persistent
@@ -38,7 +38,7 @@ run file glue/build/missillac/importLegacyMappings.glue
 
 
 # -------------------------------------------------------------------------
-# 7B. NORMAL BUILDS: restore persistent Missillac assignments
+# B. NORMAL BUILDS: restore persistent Missillac assignments
 # -------------------------------------------------------------------------
 #
 # Enable this section for routine builds after the initial namespace has
@@ -96,7 +96,7 @@ run script glue/build/missillac/applyErvLocusNames.js
 
 
 # -------------------------------------------------------------------------
-# 7E. Validate completed Missillac namespace
+# E. Validate completed Missillac namespace
 # -------------------------------------------------------------------------
 #
 # Validate the state after new identifiers have been assigned.
@@ -115,7 +115,7 @@ run script glue/build/missillac/applyErvLocusNames.js
 
 
 # -------------------------------------------------------------------------
-# 7F. Export persistent Missillac ID registry
+# F. Export persistent Missillac ID registry
 # -------------------------------------------------------------------------
 #
 # Export the complete registry required to reproduce identifier assignment
