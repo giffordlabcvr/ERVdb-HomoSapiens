@@ -13,8 +13,11 @@
 //   2. tabular/locus/erv_locus_name_mappings.tsv
 //
 // Missing loci are skipped and reported.
+// Historical classifications explicitly excluded from
+// ERVdb are skipped and reported.
+//
 // Invalid or ambiguous decisions for included loci
-// are fatal preflight errors.
+// remain fatal preflight errors.
 //
 // All changes are validated before writing.
 //
@@ -29,7 +32,10 @@ var INPUT_FILE =
 var MAPPINGS_FILE =
     "tabular/locus/erv_locus_name_mappings.tsv";
 
-var DRY_RUN = true;
+var MISSING_EXTRACTION_IDS_FILE =
+    "tabular/locus/extracted.fna.missing_ids.tsv";
+
+var DRY_RUN = false;
 
 var LOCUS_TABLE = "erv_locus";
 var LINEAGE_TABLE = "erv_lineage";
@@ -38,6 +44,18 @@ var ASSOC_TABLE = "erv_locus_lineage_assoc";
 var ASSOCIATION_ROLE = "primary";
 var ASSOCIATION_EVIDENCE = "curator_decision";
 var ASSOCIATION_CONFIDENCE = "high";
+
+// Historical repeat classifications deliberately excluded
+// from the current ERVdb reference set because they lack
+// detectable retroviral homology in internal regions.
+//
+// These names must not generate lineage associations.
+
+var EXCLUDED_CURATOR_NAMES = {
+    "MER-61": "no_internal_erv_homology",
+    "MER-4": "no_internal_erv_homology",
+    "HERV-39": "no_internal_erv_homology"
+};
 
 // ------------------------------------------------------------
 // Utilities
@@ -153,6 +171,103 @@ function requireColumns(tsv, columns, path) {
 }
 
 // ------------------------------------------------------------
+// Optional extracted-FASTA missing ID inventory
+// ------------------------------------------------------------
+
+function loadMissingExtractionIds(path) {
+    var Paths = Java.type("java.nio.file.Paths");
+    var Files = Java.type("java.nio.file.Files");
+    var StandardCharsets =
+        Java.type("java.nio.charset.StandardCharsets");
+
+    var filePath = Paths.get(path);
+    var ids = {};
+
+    if(!Files.exists(filePath)) {
+        log("No extraction missing-ID file: " + path);
+        return ids;
+    }
+
+    var lines = Files.readAllLines(
+        filePath,
+        StandardCharsets.UTF_8
+    );
+
+    if(lines.size() === 0) {
+        log("Extraction missing-ID file is empty: " + path);
+        return ids;
+    }
+
+    // Support either:
+    //   - one RBRT ID per line
+    //   - a TSV with a recognised ID column
+    //
+    // Do not treat an unrecognised header as a locus ID.
+
+    var first = String(lines.get(0))
+        .replace(/^\uFEFF/, "")
+        .split("\t");
+
+    var columns = [
+        "sequenceID",
+        "sequence_id",
+        "locus_id",
+        "missing_id",
+        "id"
+    ];
+
+    var idIndex = -1;
+
+    for(var j = 0; j < first.length; j++) {
+        if(columns.indexOf(first[j].trim()) >= 0) {
+            idIndex = j;
+            break;
+        }
+    }
+
+    var start = 0;
+
+    if(idIndex >= 0) {
+        start = 1;
+    } else if(
+        first.length === 1 &&
+        /^RBRT[0-9]+$/.test(first[0].trim())
+    ) {
+        idIndex = 0;
+    } else {
+        throw new Error(
+            "Cannot identify locus ID column in " +
+            path +
+            "; expected sequenceID, sequence_id, " +
+            "locus_id, missing_id, id, or a " +
+            "headerless list of RBRT IDs"
+        );
+    }
+
+    for(var i = start; i < lines.size(); i++) {
+        var line = String(lines.get(i));
+
+        if(!line.trim()) {
+            continue;
+        }
+
+        var cells = line.split("\t");
+        var id = norm(cells[idIndex]);
+
+        if(id !== null) {
+            ids[id] = true;
+        }
+    }
+
+    log(
+        "Loaded " + Object.keys(ids).length +
+        " IDs missing from extracted FASTA"
+    );
+
+    return ids;
+}
+
+// ------------------------------------------------------------
 // 1. Load canonical ERV lineage identifiers
 // ------------------------------------------------------------
 
@@ -201,7 +316,11 @@ var mappingTsv = readTsv(MAPPINGS_FILE);
 
 requireColumns(
     mappingTsv,
-    ["source_name", "entity_type", "erv_lineage_id"],
+    [
+        "source_name",
+        "entity_type",
+        "erv_lineage_id"
+    ],
     MAPPINGS_FILE
 );
 
@@ -254,10 +373,13 @@ function resolveLineage(name) {
     name = norm(name);
 
     if(name === null) {
-        return { status: "missing" };
+        return {
+            status: "missing"
+        };
     }
 
     // Canonical IDs take precedence.
+
     if(validLineages[name]) {
         return {
             status: "resolved",
@@ -268,7 +390,9 @@ function resolveLineage(name) {
     var mapped = nameMappings[name];
 
     if(!mapped) {
-        return { status: "missing" };
+        return {
+            status: "missing"
+        };
     }
 
     var ids = Object.keys(mapped);
@@ -362,6 +486,14 @@ log(
     " existing locus-lineage associations"
 );
 
+// Read optional extraction inventory once,
+// before curator validation.
+
+var missingExtractionIds =
+    loadMissingExtractionIds(
+        MISSING_EXTRACTION_IDS_FILE
+    );
+
 // ------------------------------------------------------------
 // 6. Read and validate curator decisions
 // ------------------------------------------------------------
@@ -372,7 +504,10 @@ var tsv = readTsv(INPUT_FILE);
 
 requireColumns(
     tsv,
-    ["sequenceID", "curator_decision"],
+    [
+        "sequenceID",
+        "curator_decision"
+    ],
     INPUT_FILE
 );
 
@@ -386,6 +521,9 @@ var stats = {
     blank: 0,
     nonblank: 0,
     missingLoci: 0,
+    knownExtractionMissing: 0,
+    unexpectedMissing: 0,
+    excludedClassifications: 0,
     unresolvedNames: 0,
     ambiguousNames: 0,
     unchanged: 0,
@@ -430,15 +568,62 @@ tsv.rows.forEach(function(row) {
     if(!loci[locusId]) {
         stats.missingLoci++;
 
+        var extractionMissing =
+            missingExtractionIds[locusId] === true;
+
+        if(extractionMissing) {
+            stats.knownExtractionMissing++;
+        } else {
+            stats.unexpectedMissing++;
+
+            skipped.push({
+                line: row._line,
+                locus_id: locusId,
+                decision: decision,
+                reason: "locus_not_selected"
+            });
+        }
+
+        return;
+    }
+
+    // --------------------------------------------------------
+    // Explicit biological exclusions
+    // --------------------------------------------------------
+    //
+    // These repeat classifications were deliberately removed
+    // from the ERV reference set because their internal regions
+    // lack detectable retroviral homology.
+    //
+    // They must not be resolved as ERV lineages, must not
+    // generate associations, and must not cause preflight
+    // failure.
+    //
+    // Their exclusion is recorded separately from genuine
+    // missing or ambiguous classification names.
+    //
+
+    if(
+        Object.prototype.hasOwnProperty.call(
+            EXCLUDED_CURATOR_NAMES,
+            decision
+        )
+    ) {
+        stats.excludedClassifications++;
+
         skipped.push({
             line: row._line,
             locus_id: locusId,
             decision: decision,
-            reason: "locus_not_selected"
+            reason: EXCLUDED_CURATOR_NAMES[decision]
         });
 
         return;
     }
+
+    // --------------------------------------------------------
+    // Resolve included curator decisions
+    // --------------------------------------------------------
 
     var resolution = resolveLineage(decision);
 
@@ -454,9 +639,12 @@ tsv.rows.forEach(function(row) {
             ": cannot resolve '" + decision +
             "' for " + locusId +
             " (" + resolution.status + ")" +
-            (resolution.candidates
-                ? ": " + resolution.candidates.join(", ")
-                : "")
+            (
+                resolution.candidates
+                    ? ": " +
+                      resolution.candidates.join(", ")
+                    : ""
+            )
         );
 
         return;
@@ -495,11 +683,14 @@ decisions.forEach(function(decision) {
             ": duplicate associations to " +
             lineageId
         );
+
         return;
     }
 
     var retained =
-        matching.length === 1 ? matching[0] : null;
+        matching.length === 1
+            ? matching[0]
+            : null;
 
     var obsolete = existing.filter(function(a) {
         return retained === null ||
@@ -508,8 +699,9 @@ decisions.forEach(function(decision) {
 
     // These associations should not have region
     // coordinates at this stage of the build.
-    // Unexpected coordinates are a schema/build-order
-    // problem, not something to interpret as mosaics.
+    //
+    // Unexpected coordinates indicate a schema or
+    // build-order problem, not a mosaic to reinterpret.
 
     var regionSpecific = existing.filter(function(a) {
         return a.region_start !== null ||
@@ -522,6 +714,7 @@ decisions.forEach(function(decision) {
             ": unexpected region-specific associations " +
             "before curator overrides"
         );
+
         return;
     }
 
@@ -537,6 +730,7 @@ decisions.forEach(function(decision) {
         errors.push(
             "Association ID collision: " + desiredId
         );
+
         return;
     }
 
@@ -583,23 +777,100 @@ log("==============================================");
 log("ERV locus curator decisions");
 log("==============================================");
 
-log("TSV rows:                  " + stats.rows);
-log("Blank decisions:           " + stats.blank);
-log("Nonblank decisions:        " + stats.nonblank);
-log("Applicable decisions:      " + decisions.length);
-log("Unchanged:                 " + stats.unchanged);
-log("New associations:          " + stats.created);
-log("Existing associations updated: " + stats.updated);
-log("Assignments replaced:      " + stats.replaced);
+log(
+    "TSV rows:                  " +
+    stats.rows
+);
+
+log(
+    "Blank decisions:           " +
+    stats.blank
+);
+
+log(
+    "Nonblank decisions:        " +
+    stats.nonblank
+);
+
+log(
+    "Applicable decisions:      " +
+    decisions.length
+);
+
+log(
+    "Unchanged:                 " +
+    stats.unchanged
+);
+
+log(
+    "New associations:          " +
+    stats.created
+);
+
+log(
+    "Existing associations updated: " +
+    stats.updated
+);
+
+log(
+    "Assignments replaced:      " +
+    stats.replaced
+);
 
 log("----------------------------------------------");
 
-log("Missing loci (skipped):    " + stats.missingLoci);
-log("Unresolved names:          " + stats.unresolvedNames);
-log("Ambiguous names:           " + stats.ambiguousNames);
-log("Preflight errors:          " + errors.length);
+log(
+    "Missing loci (skipped):    " +
+    stats.missingLoci
+);
+
+log(
+    "  Extraction-missing IDs: " +
+    stats.knownExtractionMissing
+);
+
+log(
+    "  Other missing IDs:      " +
+    stats.unexpectedMissing
+);
+
+log(
+    "Excluded classifications: " +
+    stats.excludedClassifications
+);
+
+log(
+    "Unresolved names:          " +
+    stats.unresolvedNames
+);
+
+log(
+    "Ambiguous names:           " +
+    stats.ambiguousNames
+);
+
+log(
+    "Preflight errors:          " +
+    errors.length
+);
+
+// ------------------------------------------------------------
+// Report skipped records
+// ------------------------------------------------------------
+
+// Group deliberate exclusions by historical name.
+// Avoid printing hundreds of individual MER-61 messages.
+
+var excludedSkipCounts = {};
 
 skipped.forEach(function(item) {
+    if(item.reason === "no_internal_erv_homology") {
+        excludedSkipCounts[item.decision] =
+            (excludedSkipCounts[item.decision] || 0) + 1;
+
+        return;
+    }
+
     log(
         "SKIP: Line " + item.line +
         " " + item.locus_id +
@@ -607,6 +878,20 @@ skipped.forEach(function(item) {
         " reason=" + item.reason
     );
 });
+
+Object.keys(excludedSkipCounts)
+    .sort()
+    .forEach(function(name) {
+        log(
+            "SKIP EXCLUDED: " + name +
+            " count=" + excludedSkipCounts[name] +
+            " reason=no_internal_erv_homology"
+        );
+    });
+
+// ------------------------------------------------------------
+// Abort if genuine preflight errors remain
+// ------------------------------------------------------------
 
 if(errors.length > 0) {
     errors.forEach(function(message) {
@@ -619,6 +904,10 @@ if(errors.length > 0) {
         " error(s). No changes written."
     );
 }
+
+// ------------------------------------------------------------
+// Report planned curator assignments
+// ------------------------------------------------------------
 
 plans.forEach(function(plan) {
     log(
@@ -642,7 +931,9 @@ if(DRY_RUN) {
     );
 
     plans.forEach(function(plan) {
+
         // Create the new association if necessary.
+
         if(plan.retained_id === null) {
             glue.command([
                 "create",
@@ -654,6 +945,8 @@ if(DRY_RUN) {
 
         var targetId =
             plan.retained_id || plan.new_id;
+
+        // Apply the curator-selected lineage and metadata.
 
         if(plan.needs_update) {
             setLink(
@@ -695,6 +988,7 @@ if(DRY_RUN) {
         }
 
         // Remove superseded initial associations.
+
         plan.obsolete.forEach(function(a) {
             glue.command([
                 "delete",
