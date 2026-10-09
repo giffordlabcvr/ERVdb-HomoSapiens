@@ -32,7 +32,6 @@ run script glue/build/setLocusSeqLengthsAndKinds.js
 # populate their metadata, and link the imported sequences.
 run script glue/build/loadErvLoci.js
 
-
 # -------------------------------------------------------------------------
 # 4. Load locus classifications and provenance
 # -------------------------------------------------------------------------
@@ -51,18 +50,17 @@ run script glue/build/loadErvLocusLtrAssociations.js
 # Load source-specific provenance records.
 #run file glue/build/loadErvLocusProvenance.glue
 
-
-# -------------------------------------------------------------------------
-# 5. Create locus alignments
-# -------------------------------------------------------------------------
-
-run file glue/build/hervAlignmentSteps.glue
-
 # =========================================================================
-# 6. MISSILLAC IDENTIFIER ASSIGNMENT
+# 5. MISSILLAC IDENTIFIER ASSIGNMENT
 # =========================================================================
 
 run file glue/build/missillac/applyMissillacNames.glue
+
+# -------------------------------------------------------------------------
+# 6. Create locus alignments
+# -------------------------------------------------------------------------
+
+run file glue/build/hervAlignmentSteps.glue
 
 # =========================================================================
 # 8. LOCUS-LAYER SUMMARY AND VALIDATION

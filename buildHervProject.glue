@@ -19,7 +19,7 @@ schema-project ervdb
 # Build ERVdb-HomoSapiens extension to ERVdb project  
 project ervdb
  
-  #run file glue/build/buildLocusLayer.glue
+  srun file glue/build/buildLocusLayer.glue
   #run file glue/build/buildLocusLayerTest.glue
   
   exit

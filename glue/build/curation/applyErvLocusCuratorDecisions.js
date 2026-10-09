@@ -1,22 +1,23 @@
+//
 // glue/build/curation/applyErvLocusCuratorDecisions.js
 //
-// Apply curator-selected ERV lineage classifications to existing
-// erv_locus records.
+// Apply curator-selected ERV lineage associations to
+// existing erv_locus records.
 //
-// Input TSV columns used:
-//   sequenceID
-//   curator_decision
+// Curator decisions override initial whole-locus ERV
+// lineage associations. They do not modify locus-level
+// classification, including mosaic status.
 //
-// Run after loadErvLocusLineageAssociations.js and before
-// loadErvLocusLtrAssociations.js.
+// Name resolution uses only:
+//   1. Canonical erv_lineage.id values
+//   2. tabular/locus/erv_locus_name_mappings.tsv
 //
-// Blank curator decisions are ignored.
+// Missing loci are skipped and reported.
+// Invalid or ambiguous decisions for included loci
+// are fatal preflight errors.
 //
-// Nonblank decisions override existing whole-locus lineage
-// associations. Region-specific component associations are
-// protected against automatic replacement.
+// All changes are validated before writing.
 //
-// The script validates all proposed changes before writing.
 
 // ------------------------------------------------------------
 // Configuration
@@ -25,17 +26,18 @@
 var INPUT_FILE =
     "tabular/curation/erv_curator_decisions.tsv";
 
+var MAPPINGS_FILE =
+    "tabular/locus/erv_locus_name_mappings.tsv";
+
 var DRY_RUN = true;
 
 var LOCUS_TABLE = "erv_locus";
 var LINEAGE_TABLE = "erv_lineage";
-var ALIAS_TABLE = "erv_lineage_alias";
 var ASSOC_TABLE = "erv_locus_lineage_assoc";
 
 var ASSOCIATION_ROLE = "primary";
 var ASSOCIATION_EVIDENCE = "curator_decision";
 var ASSOCIATION_CONFIDENCE = "high";
-
 
 // ------------------------------------------------------------
 // Utilities
@@ -70,17 +72,9 @@ function rowPath(table, id) {
     return "custom-table-row/" + table + "/" + id;
 }
 
-function sanitiseId(value) {
-    return String(value).replace(
-        /[^A-Za-z0-9._-]/g,
-        "_"
-    );
-}
-
 function associationId(locusId, lineageId) {
-    return sanitiseId(
-        locusId + "__" + lineageId
-    );
+    return String(locusId + "__" + lineageId)
+        .replace(/[^A-Za-z0-9._-]/g, "_");
 }
 
 function setField(table, id, field, value) {
@@ -147,70 +141,114 @@ function readTsv(path) {
     };
 }
 
-
-// ------------------------------------------------------------
-// Lineage name resolution
-// ------------------------------------------------------------
-//
-// Use exact canonical IDs, legacy names and aliases.
-//
-// A normalised lookup is allowed only when it identifies
-// exactly one lineage.
-//
-// No fuzzy or substring matching is performed.
-// ------------------------------------------------------------
-
-function normaliseName(value) {
-    value = norm(value);
-
-    if(value === null) {
-        return null;
-    }
-
-    return value
-        .toLowerCase()
-        .replace(/[\s_]+/g, "-")
-        .replace(/[^a-z0-9-]+/g, "")
-        .replace(/-+/g, "-")
-        .replace(/^-+|-+$/g, "");
+function requireColumns(tsv, columns, path) {
+    columns.forEach(function(column) {
+        if(tsv.headers.indexOf(column) < 0) {
+            throw new Error(
+                "Missing column '" + column +
+                "' in " + path
+            );
+        }
+    });
 }
 
-var exactNames = {};
-var normalisedNames = {};
+// ------------------------------------------------------------
+// 1. Load canonical ERV lineage identifiers
+// ------------------------------------------------------------
 
-function addName(map, name, lineageId) {
-    if(name === null || lineageId === null) {
+log("Loading canonical ERV lineages");
+
+var lineageRows = query([
+    "list", "custom-table-row", LINEAGE_TABLE,
+    "id",
+    "entity_type"
+]);
+
+var validLineages = {};
+var lineageTypes = {};
+
+lineageRows.forEach(function(row) {
+    var id = norm(row.id);
+    var type = norm(row.entity_type);
+
+    if(id === null) {
         return;
     }
 
-    if(!map[name]) {
-        map[name] = {};
+    lineageTypes[id] = type;
+
+    if(
+        type === "lineage" ||
+        type === "sublineage" ||
+        type === "erv_derived_repeat"
+    ) {
+        validLineages[id] = true;
+    }
+});
+
+log(
+    "Loaded " + Object.keys(validLineages).length +
+    " active ERV lineage entities"
+);
+
+// ------------------------------------------------------------
+// 2. Load explicit locus name mappings
+// ------------------------------------------------------------
+
+log("Reading name mappings from " + MAPPINGS_FILE);
+
+var mappingTsv = readTsv(MAPPINGS_FILE);
+
+requireColumns(
+    mappingTsv,
+    ["source_name", "entity_type", "erv_lineage_id"],
+    MAPPINGS_FILE
+);
+
+// A source name may map to more than one lineage.
+// Preserve this information so ambiguity is explicit.
+
+var nameMappings = {};
+var mappingRowsAccepted = 0;
+var mappingRowsSkipped = 0;
+
+mappingTsv.rows.forEach(function(row) {
+    var name = norm(row.source_name);
+    var id = norm(row.erv_lineage_id);
+    var type = norm(row.entity_type);
+
+    if(type === "ervr") {
+        type = "erv_derived_repeat";
     }
 
-    map[name][lineageId] = true;
-}
-
-function resolveFromMap(map, key) {
-    if(key === null || !map[key]) {
-        return {
-            status: "missing"
-        };
+    if(
+        name === null ||
+        id === null ||
+        !validLineages[id] ||
+        (
+            type !== "lineage" &&
+            type !== "sublineage" &&
+            type !== "erv_derived_repeat"
+        )
+    ) {
+        mappingRowsSkipped++;
+        return;
     }
 
-    var ids = Object.keys(map[key]);
-
-    if(ids.length !== 1) {
-        return {
-            status: "ambiguous",
-            candidates: ids
-        };
+    if(!nameMappings[name]) {
+        nameMappings[name] = {};
     }
 
-    return {
-        status: "resolved",
-        lineage_id: ids[0]
-    };
-}
+    nameMappings[name][id] = true;
+    mappingRowsAccepted++;
+});
+
+log("Accepted mapping rows: " + mappingRowsAccepted);
+log("Skipped mapping rows: " + mappingRowsSkipped);
+
+// ------------------------------------------------------------
+// 3. Resolve curator decisions
+// ------------------------------------------------------------
 
 function resolveLineage(name) {
     name = norm(name);
@@ -219,88 +257,44 @@ function resolveLineage(name) {
         return { status: "missing" };
     }
 
-    var exact = resolveFromMap(exactNames, name);
-
-    if(exact.status !== "missing") {
-        return exact;
+    // Canonical IDs take precedence.
+    if(validLineages[name]) {
+        return {
+            status: "resolved",
+            lineage_id: name
+        };
     }
 
-    return resolveFromMap(
-        normalisedNames,
-        normaliseName(name)
-    );
+    var mapped = nameMappings[name];
+
+    if(!mapped) {
+        return { status: "missing" };
+    }
+
+    var ids = Object.keys(mapped);
+
+    if(ids.length === 1) {
+        return {
+            status: "resolved",
+            lineage_id: ids[0]
+        };
+    }
+
+    return {
+        status: "ambiguous",
+        candidates: ids.sort()
+    };
 }
 
-function registerName(name, lineageId) {
-    name = norm(name);
-
-    if(name === null) {
-        return;
-    }
-
-    addName(exactNames, name, lineageId);
-
-    addName(
-        normalisedNames,
-        normaliseName(name),
-        lineageId
-    );
-}
-
-
 // ------------------------------------------------------------
-// 1. Load canonical lineage names
+// 4. Load existing ERV loci
 // ------------------------------------------------------------
 
-log("Loading ERV lineage nomenclature");
-
-var lineageRows = query([
-    "list", "custom-table-row", LINEAGE_TABLE,
-    "id",
-    "legacy_name",
-    "legacy_full_name"
-]);
-
-var validLineages = {};
-
-lineageRows.forEach(function(row) {
-    var id = norm(row.id);
-
-    if(id === null) return;
-
-    validLineages[id] = true;
-
-    registerName(id, id);
-    registerName(row.legacy_name, id);
-    registerName(row.legacy_full_name, id);
-});
-
-var aliasRows = query([
-    "list", "custom-table-row", ALIAS_TABLE,
-    "alias_name",
-    "erv_lineage.id"
-]);
-
-aliasRows.forEach(function(row) {
-    var id = norm(row["erv_lineage.id"]);
-
-    if(id !== null && validLineages[id]) {
-        registerName(row.alias_name, id);
-    }
-});
-
-log("Loaded " + lineageRows.length + " ERV lineages");
-log("Loaded " + aliasRows.length + " lineage aliases");
-
-
-// ------------------------------------------------------------
-// 2. Load existing loci
-// ------------------------------------------------------------
+log("Loading existing ERV loci");
 
 var locusRows = query([
     "list", "custom-table-row", LOCUS_TABLE,
-    "id",
-    "taxonomic_resolution"
+    "id"
 ]);
 
 var loci = {};
@@ -309,20 +303,17 @@ locusRows.forEach(function(row) {
     var id = norm(row.id);
 
     if(id !== null) {
-        loci[id] = {
-            id: id,
-            taxonomic_resolution:
-                norm(row.taxonomic_resolution)
-        };
+        loci[id] = true;
     }
 });
 
 log("Loaded " + locusRows.length + " ERV loci");
 
+// ------------------------------------------------------------
+// 5. Load existing lineage associations
+// ------------------------------------------------------------
 
-// ------------------------------------------------------------
-// 3. Load existing lineage associations
-// ------------------------------------------------------------
+log("Loading existing locus-lineage associations");
 
 var assocRows = query([
     "list", "custom-table-row", ASSOC_TABLE,
@@ -337,18 +328,26 @@ var assocRows = query([
 ]);
 
 var associationsByLocus = {};
+var associationIds = {};
 
 assocRows.forEach(function(row) {
     var locusId = norm(row["erv_locus.id"]);
+    var id = norm(row.id);
 
-    if(locusId === null) return;
+    if(id !== null) {
+        associationIds[id] = true;
+    }
+
+    if(locusId === null) {
+        return;
+    }
 
     if(!associationsByLocus[locusId]) {
         associationsByLocus[locusId] = [];
     }
 
     associationsByLocus[locusId].push({
-        id: norm(row.id),
+        id: id,
         lineage_id: norm(row["erv_lineage.id"]),
         role: norm(row.association_role),
         evidence: norm(row.evidence),
@@ -363,41 +362,36 @@ log(
     " existing locus-lineage associations"
 );
 
-
 // ------------------------------------------------------------
-// 4. Read curator decisions
+// 6. Read and validate curator decisions
 // ------------------------------------------------------------
 
 log("Reading curator decisions from " + INPUT_FILE);
 
 var tsv = readTsv(INPUT_FILE);
 
-if(
-    tsv.headers.indexOf("sequenceID") < 0 ||
-    tsv.headers.indexOf("curator_decision") < 0
-) {
-    throw new Error(
-        "Curator TSV must contain sequenceID " +
-        "and curator_decision columns"
-    );
-}
+requireColumns(
+    tsv,
+    ["sequenceID", "curator_decision"],
+    INPUT_FILE
+);
 
 var decisions = [];
 var errors = [];
+var skipped = [];
 var seenLoci = {};
 
 var stats = {
     rows: tsv.rows.length,
     blank: 0,
-    decisions: 0,
+    nonblank: 0,
     missingLoci: 0,
     unresolvedNames: 0,
     ambiguousNames: 0,
-    protectedAssociations: 0,
     unchanged: 0,
     created: 0,
     replaced: 0,
-    metadataUpdates: 0
+    updated: 0
 };
 
 tsv.rows.forEach(function(row) {
@@ -409,7 +403,7 @@ tsv.rows.forEach(function(row) {
         return;
     }
 
-    stats.decisions++;
+    stats.nonblank++;
 
     if(locusId === null) {
         errors.push(
@@ -421,20 +415,27 @@ tsv.rows.forEach(function(row) {
 
     if(seenLoci[locusId]) {
         errors.push(
-            "Duplicate curator decision for " + locusId
+            "Line " + row._line +
+            ": duplicate curator decision for " +
+            locusId
         );
         return;
     }
 
     seenLoci[locusId] = true;
 
+    // Decisions for loci outside the selected dataset
+    // are not applicable to this build.
+
     if(!loci[locusId]) {
         stats.missingLoci++;
 
-        errors.push(
-            "Line " + row._line +
-            ": locus not found: " + locusId
-        );
+        skipped.push({
+            line: row._line,
+            locus_id: locusId,
+            decision: decision,
+            reason: "locus_not_selected"
+        });
 
         return;
     }
@@ -450,8 +451,8 @@ tsv.rows.forEach(function(row) {
 
         errors.push(
             "Line " + row._line +
-            ": cannot resolve curator_decision '" +
-            decision + "' for " + locusId +
+            ": cannot resolve '" + decision +
+            "' for " + locusId +
             " (" + resolution.status + ")" +
             (resolution.candidates
                 ? ": " + resolution.candidates.join(", ")
@@ -468,9 +469,8 @@ tsv.rows.forEach(function(row) {
     });
 });
 
-
 // ------------------------------------------------------------
-// 5. Plan association changes
+// 7. Plan curator overrides
 // ------------------------------------------------------------
 
 var plans = [];
@@ -482,41 +482,17 @@ decisions.forEach(function(decision) {
     var existing =
         associationsByLocus[locusId] || [];
 
-    // Do not overwrite region-specific mosaic components.
-    var protectedRows = existing.filter(function(a) {
-        return (
-            a.region_start !== null ||
-            a.region_end !== null
-        );
-    });
-
-    if(protectedRows.length > 0) {
-        stats.protectedAssociations++;
-
-        errors.push(
-            "Locus " + locusId +
-            " has region-specific lineage associations; " +
-            "manual review required"
-        );
-
-        return;
-    }
-
-    var desiredId = associationId(
-        locusId,
-        lineageId
-    );
+    // Curator decisions replace the initial lineage
+    // assignment. No mosaic interpretation is made.
 
     var matching = existing.filter(function(a) {
         return a.lineage_id === lineageId;
     });
 
-    // Multiple associations to the same lineage should
-    // not be silently consolidated.
     if(matching.length > 1) {
         errors.push(
             "Locus " + locusId +
-            " has duplicate associations to " +
+            ": duplicate associations to " +
             lineageId
         );
         return;
@@ -526,13 +502,45 @@ decisions.forEach(function(decision) {
         matching.length === 1 ? matching[0] : null;
 
     var obsolete = existing.filter(function(a) {
-        return !retained || a.id !== retained.id;
+        return retained === null ||
+            a.id !== retained.id;
     });
 
-    var needsMetadata =
-        loci[locusId].taxonomic_resolution !== "lineage";
+    // These associations should not have region
+    // coordinates at this stage of the build.
+    // Unexpected coordinates are a schema/build-order
+    // problem, not something to interpret as mosaics.
 
-    var needsAssociationUpdate =
+    var regionSpecific = existing.filter(function(a) {
+        return a.region_start !== null ||
+            a.region_end !== null;
+    });
+
+    if(regionSpecific.length > 0) {
+        errors.push(
+            "Locus " + locusId +
+            ": unexpected region-specific associations " +
+            "before curator overrides"
+        );
+        return;
+    }
+
+    var desiredId = associationId(
+        locusId,
+        lineageId
+    );
+
+    if(
+        retained === null &&
+        associationIds[desiredId]
+    ) {
+        errors.push(
+            "Association ID collision: " + desiredId
+        );
+        return;
+    }
+
+    var needsUpdate =
         retained === null ||
         retained.role !== ASSOCIATION_ROLE ||
         retained.evidence !== ASSOCIATION_EVIDENCE ||
@@ -540,8 +548,7 @@ decisions.forEach(function(decision) {
 
     if(
         obsolete.length === 0 &&
-        !needsAssociationUpdate &&
-        !needsMetadata
+        !needsUpdate
     ) {
         stats.unchanged++;
         return;
@@ -549,14 +556,12 @@ decisions.forEach(function(decision) {
 
     if(retained === null) {
         stats.created++;
+    } else if(needsUpdate) {
+        stats.updated++;
     }
 
     if(obsolete.length > 0) {
         stats.replaced++;
-    }
-
-    if(needsMetadata) {
-        stats.metadataUpdates++;
     }
 
     plans.push({
@@ -566,15 +571,12 @@ decisions.forEach(function(decision) {
         retained_id: retained ? retained.id : null,
         new_id: desiredId,
         obsolete: obsolete,
-        needs_association_update:
-            needsAssociationUpdate,
-        needs_metadata: needsMetadata
+        needs_update: needsUpdate
     });
 });
 
-
 // ------------------------------------------------------------
-// 6. Preflight summary
+// 8. Preflight summary
 // ------------------------------------------------------------
 
 log("==============================================");
@@ -583,19 +585,28 @@ log("==============================================");
 
 log("TSV rows:                  " + stats.rows);
 log("Blank decisions:           " + stats.blank);
-log("Nonblank decisions:        " + stats.decisions);
+log("Nonblank decisions:        " + stats.nonblank);
+log("Applicable decisions:      " + decisions.length);
 log("Unchanged:                 " + stats.unchanged);
 log("New associations:          " + stats.created);
-log("Associations replaced:     " + stats.replaced);
-log("Resolution updates:        " + stats.metadataUpdates);
+log("Existing associations updated: " + stats.updated);
+log("Assignments replaced:      " + stats.replaced);
 
 log("----------------------------------------------");
 
-log("Missing loci:              " + stats.missingLoci);
+log("Missing loci (skipped):    " + stats.missingLoci);
 log("Unresolved names:          " + stats.unresolvedNames);
 log("Ambiguous names:           " + stats.ambiguousNames);
-log("Protected associations:    " + stats.protectedAssociations);
 log("Preflight errors:          " + errors.length);
+
+skipped.forEach(function(item) {
+    log(
+        "SKIP: Line " + item.line +
+        " " + item.locus_id +
+        " [" + item.decision + "]" +
+        " reason=" + item.reason
+    );
+});
 
 if(errors.length > 0) {
     errors.forEach(function(message) {
@@ -604,7 +615,8 @@ if(errors.length > 0) {
 
     throw new Error(
         "Curator decision preflight failed with " +
-        errors.length + " error(s). No changes written."
+        errors.length +
+        " error(s). No changes written."
     );
 }
 
@@ -617,21 +629,20 @@ plans.forEach(function(plan) {
     );
 });
 
-
 // ------------------------------------------------------------
-// 7. Apply decisions
+// 9. Apply curator decisions
 // ------------------------------------------------------------
 
 if(DRY_RUN) {
     log("DRY RUN: no database changes made");
 } else {
-
-    log("Applying " + plans.length + " curator updates");
+    log(
+        "Applying " + plans.length +
+        " curator updates"
+    );
 
     plans.forEach(function(plan) {
-
-        // Create the desired association before removing
-        // superseded whole-locus associations.
+        // Create the new association if necessary.
         if(plan.retained_id === null) {
             glue.command([
                 "create",
@@ -644,7 +655,7 @@ if(DRY_RUN) {
         var targetId =
             plan.retained_id || plan.new_id;
 
-        if(plan.needs_association_update) {
+        if(plan.needs_update) {
             setLink(
                 ASSOC_TABLE,
                 targetId,
@@ -683,6 +694,7 @@ if(DRY_RUN) {
             );
         }
 
+        // Remove superseded initial associations.
         plan.obsolete.forEach(function(a) {
             glue.command([
                 "delete",
@@ -691,15 +703,6 @@ if(DRY_RUN) {
                 a.id
             ]);
         });
-
-        if(plan.needs_metadata) {
-            setField(
-                LOCUS_TABLE,
-                plan.locus_id,
-                "taxonomic_resolution",
-                "lineage"
-            );
-        }
     });
 
     log("Curator decisions applied successfully");
