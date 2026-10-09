@@ -1,0 +1,140 @@
+# =========================================================================
+# 7. MISSILLAC IDENTIFIER ASSIGNMENT
+# =========================================================================
+#
+# Missillac identifiers are persistent identifiers.
+#
+# There are two conceptually different workflows:
+#
+#   A. BOOTSTRAP
+#      Used once to establish the persistent Missillac namespace.
+#      Curated legacy mappings are imported first, after which identifiers
+#      are assigned to all remaining eligible loci.
+#
+#   B. NORMAL / MAINTENANCE BUILD
+#      Used for all subsequent builds. Previously assigned identifiers are
+#      restored from the persistent Missillac ID registry before identifiers
+#      are assigned to genuinely new loci.
+#
+# Only ONE of the two import paths below should normally be enabled.
+# =========================================================================
+
+
+# -------------------------------------------------------------------------
+# 7A. BOOTSTRAP ONLY: import curated legacy Missillac mappings
+# -------------------------------------------------------------------------
+#
+# Enable this section ONLY when establishing the initial persistent
+# Missillac namespace.
+#
+# Legacy mappings preassign particular historical Missillac numbers to
+# loci that have been confidently cross-matched to the current locus set.
+#
+# Once the initial namespace has been established and exported as the
+# persistent registry, this input should no longer control routine builds.
+#
+
+run file glue/build/missillac/importLegacyMappings.glue
+
+
+# -------------------------------------------------------------------------
+# 7B. NORMAL BUILDS: restore persistent Missillac assignments
+# -------------------------------------------------------------------------
+#
+# Enable this section for routine builds after the initial namespace has
+# been established.
+#
+# The registry records all Missillac identifiers that have previously been
+# issued, including identifiers belonging to loci that are no longer active.
+#
+# Existing loci recover their previous identifiers from this registry.
+# Retired identifiers remain reserved and must never be recycled.
+#
+
+# [TO WRITE]
+# Import the persistent Missillac ID registry and restore previous
+# assignments to matching erv_locus records.
+#
+# run script glue/build/missillac/importMissillacRegistry.js
+
+
+# -------------------------------------------------------------------------
+# 7C. Validate imported/preassigned Missillac identifiers
+# -------------------------------------------------------------------------
+#
+# Perform checks BEFORE allocating any new identifiers.
+#
+# Checks should include:
+#   - no Missillac ID assigned to more than one current locus
+#   - no current locus matched to more than one persistent ID
+#   - lineage component of an existing ID remains compatible with the locus
+#   - no malformed identifiers
+#   - no contradictory legacy/registry mappings
+#   - previously issued identifiers are recognised as reserved
+#
+# In normal builds, unexpected reassignment should cause the build to fail.
+#
+
+# [TO WRITE]
+# run script glue/build/missillac/validateImportedMissillacIds.js
+
+
+# -------------------------------------------------------------------------
+# 7D. Assign identifiers to new loci
+# -------------------------------------------------------------------------
+#
+# Preserve all identifiers restored/preassigned above.
+#
+# Assign identifiers only to eligible lineage-resolved loci that do not
+# already possess a persistent Missillac identifier.
+#
+# New numbers must be allocated from the unused namespace and MUST NOT
+# recycle identifiers belonging to retired/disappeared loci.
+#
+
+run script glue/build/missillac/applyErvLocusNames.js
+
+
+# -------------------------------------------------------------------------
+# 7E. Validate completed Missillac namespace
+# -------------------------------------------------------------------------
+#
+# Validate the state after new identifiers have been assigned.
+#
+# Checks should include:
+#   - every eligible locus has exactly one Missillac ID
+#   - all current Missillac IDs are unique
+#   - no previously issued ID has been reassigned
+#   - no retired ID has been recycled
+#   - new assignments are internally consistent
+#   - orthology-group assignments are valid
+#
+
+# [TO WRITE]
+# run script glue/build/missillac/validateMissillacAssignments.js
+
+
+# -------------------------------------------------------------------------
+# 7F. Export persistent Missillac ID registry
+# -------------------------------------------------------------------------
+#
+# Export the complete registry required to reproduce identifier assignment
+# in future builds.
+#
+# The registry should contain both:
+#
+#   - active IDs associated with current ERV loci
+#   - previously issued IDs that are now retired
+#
+# It should contain sufficient locus identity information to allow future
+# builds to verify locus matches rather than relying on the Missillac ID
+# alone.
+#
+# During the BOOTSTRAP build this creates the initial canonical registry.
+# During NORMAL builds it creates the updated registry containing any newly
+# issued identifiers.
+#
+
+# [TO WRITE]
+# run script glue/build/missillac/exportMissillacRegistry.js
+

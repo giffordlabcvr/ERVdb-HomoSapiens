@@ -1,0 +1,7 @@
+console set cmd-output-file-format tab 
+console set next-cmd-output-file tabular/locus/test/erv_locus_candidate_names.tsv
+list custom-table-row erv_locus_candidate \
+  id \
+  case_status \
+  names_decision \
+  makes_mosaic

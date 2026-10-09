@@ -1,552 +1,347 @@
+
 /**
  * selectErvLocusCandidates.js
  *
- * Stream-select ERV locus candidates from the full merged locus TSV.
+ * Select ERV locus candidates from the merged RBRT TSV.
  *
- * Selection rule:
- *   retain a locus if any comma-separated token in `names` matches either:
- *     1. an erv_lineage.id
- *     2. an ltr_lineage.id explicitly linked through erv_lineage_ltr_assoc
+ * Include a locus when any token in its `names` field:
+ *   1. Matches an erv_lineage.id;
+ *   2. Matches an ERV-associated ltr_lineage.id;
+ *   3. Resolves via erv_locus_name_mappings.tsv to a
+ *      recognised ERV lineage, sublineage or ERVR.
  *
- * `names_decision` is used only for summary/audit output.
+ * All case_status / taxonomic resolution levels are eligible.
+ * names_decision is used for reporting, not filtering.
+ *
+ * Original input rows are written verbatim.
  */
 
 var INPUT_FILE =
     "tabular/merge/HERVs-RBRT-name_new.tsv";
 
-var OUTPUT_FILE =
-	"tabular/locus/HERVs-RBRT-filtered.tsv";
+var MAPPINGS_FILE =
+    "tabular/locus/erv_locus_name_mappings.tsv";
 
-var BUILD_DIR =
-	"tabular/build/";
+var OUTPUT_FILE =
+    "tabular/locus/HERVs-RBRT-filtered.tsv";
+
+var BUILD_DIR = "tabular/build/";
 
 var SUMMARY_FILE =
-	BUILD_DIR + "candidate_selection_summary.tsv";
+    BUILD_DIR + "candidate_selection_summary.tsv";
 
 var RAW_NAME_SUMMARY_FILE =
-	BUILD_DIR + "candidate_selection_by_raw_name.tsv";
+    BUILD_DIR + "candidate_selection_by_raw_name.tsv";
 
 var NAMES_DECISION_SUMMARY_FILE =
-	BUILD_DIR + "candidate_selection_by_names_decision.tsv";
+    BUILD_DIR + "candidate_selection_by_names_decision.tsv";
 
 var RAW_NAME_VS_DECISION_FILE =
-	BUILD_DIR + "candidate_selection_raw_name_vs_decision.tsv";
+    BUILD_DIR + "candidate_selection_raw_name_vs_decision.tsv";
 
 var NAME_SET_SUMMARY_FILE =
-	BUILD_DIR + "candidate_selection_by_name_set.tsv";
+    BUILD_DIR + "candidate_selection_by_name_set.tsv";
 
-var LTR_STATUS_FILE =
-	BUILD_DIR + "candidate_selection_ltr_status.tsv";
+var MATCH_TYPE_FILE =
+    BUILD_DIR + "candidate_selection_by_match_type.tsv";
 
 var PROGRESS_INTERVAL = 50000;
 
+var BufferedReader = Java.type("java.io.BufferedReader");
+var FileReader = Java.type("java.io.FileReader");
+var BufferedWriter = Java.type("java.io.BufferedWriter");
+var FileWriter = Java.type("java.io.FileWriter");
 
-// ============================================================================
-// Java I/O
-// ============================================================================
+// ============================================================
+// Helpers
+// ============================================================
 
-var FileReader =
-	Java.type("java.io.FileReader");
-
-var BufferedReader =
-	Java.type("java.io.BufferedReader");
-
-var FileWriter =
-	Java.type("java.io.FileWriter");
-
-var BufferedWriter =
-	Java.type("java.io.BufferedWriter");
-
-
-// ============================================================================
-// Basic helpers
-// ============================================================================
-
-function log(msg) {
-	glue.logInfo(msg);
+function log(message) {
+    glue.logInfo("" + message);
 }
 
 function norm(value) {
+    if(value === null || value === undefined) return null;
 
-	if(value === null || value === undefined) {
-		return null;
-	}
+    var s = ("" + value).trim();
 
-	var s =
-		("" + value).trim();
+    if(!s || /^(n\/a|na|null|none)$/i.test(s))
+        return null;
 
-	if(s === "") {
-		return null;
-	}
-
-	var low =
-		s.toLowerCase();
-
-	if(low === "n/a" ||
-	   low === "na" ||
-	   low === "null" ||
-	   low === "none") {
-		return null;
-	}
-
-	return s;
+    return s;
 }
 
 function percentage(part, total) {
-
-	if(total === 0) {
-		return 0;
-	}
-
-	return 100.0 * part / total;
+    return total ? 100.0 * part / total : 0;
 }
 
+function listIds(table) {
+    var rows = glue.tableToObjects(
+        glue.command([
+            "list", "custom-table-row", table, "id"
+        ])
+    );
 
-// ============================================================================
-// GLUE table output helper
-// ============================================================================
+    var result = {};
 
-function objectsToTabularData(
-	rows,
-	columns,
-	resultName
-) {
+    _.each(rows, function(row) {
+        var id = norm(row.id);
+        if(id !== null) result[id] = true;
+    });
 
-	var resultRows = [];
-
-	for(var i = 0; i < rows.length; i++) {
-
-		var row =
-			rows[i];
-
-		var values = [];
-
-		for(var j = 0; j < columns.length; j++) {
-
-			var value =
-				row[columns[j]];
-
-			if(value === undefined) {
-				value = null;
-			}
-
-			values.push(value);
-		}
-
-		resultRows.push({
-			"value": values
-		});
-	}
-
-	var tabularData = {};
-
-	tabularData[resultName] = {
-		"column": columns,
-		"row": resultRows
-	};
-
-	return tabularData;
+    return result;
 }
 
-function saveTabular(
-	path,
-	rows,
-	columns,
-	resultName
-) {
+function saveTabular(file, rows, columns, resultName) {
+    var dataRows = [];
 
-	var tabularData =
-		objectsToTabularData(
-			rows,
-			columns,
-			resultName
-		);
+    _.each(rows, function(row) {
+        dataRows.push({
+            value: _.map(columns, function(column) {
+                var value = row[column];
+                return value === undefined ? null : value;
+            })
+        });
+    });
 
-	glue.inMode(
-		"module/tabularUtility",
-		function() {
+    var tabularData = {};
+    tabularData[resultName] = {
+        column: columns,
+        row: dataRows
+    };
 
-			glue.command({
-				"save-tabular": {
-					"fileName": path,
-					"tabularData": tabularData
-				}
-			});
-		}
-	);
+    glue.inMode("module/tabularUtility", function() {
+        glue.command({
+            "save-tabular": {
+                "fileName": file,
+                "tabularData": tabularData
+            }
+        });
+    });
 
-	log(
-		"Wrote " +
-		path +
-		" (" +
-		rows.length +
-		" rows)"
-	);
+    log("Wrote " + file + " (" + rows.length + " rows)");
 }
 
+function readTsv(file, requiredColumns) {
+    var reader = new BufferedReader(new FileReader(file));
 
-// ============================================================================
-// Curated ERV / LTR repertoire
-// ============================================================================
+    try {
+        var header = reader.readLine();
 
-function listCustomTableIds(tableName) {
+        if(header === null)
+            throw new Error("Empty TSV: " + file);
 
-	var rows =
-		glue.tableToObjects(
-			glue.command([
-				"list",
-				"custom-table-row",
-				tableName,
-				"id"
-			])
-		);
+        var columns = header
+            .replace(/^\uFEFF/, "")
+            .split("\t");
 
-	var ids = [];
+        _.each(requiredColumns, function(column) {
+            if(columns.indexOf(column) < 0)
+                throw new Error(
+                    file + ": missing column " + column
+                );
+        });
 
-	_.each(
-		rows,
-		function(row) {
+        var result = [];
+        var line;
+        var lineNo = 1;
 
-			var id =
-				norm(row.id);
+        while((line = reader.readLine()) !== null) {
+            lineNo++;
 
-			if(id !== null) {
-				ids.push(id);
-			}
-		}
-	);
+            if(!line.trim()) continue;
 
-	return ids;
+            var values = line.split("\t");
+            var row = {_line: lineNo};
+
+            _.each(columns, function(column, index) {
+                row[column] = values[index] || "";
+            });
+
+            result.push(row);
+        }
+
+        return result;
+
+    } finally {
+        reader.close();
+    }
 }
 
-function listErvAssociatedLtrIds() {
+function splitNames(value) {
+    var s = norm(value);
+    if(s === null) return [];
 
-	var rows =
-		glue.tableToObjects(
-			glue.command([
-				"list",
-				"custom-table-row",
-				"erv_lineage_ltr_assoc",
-				"erv_lineage.id",
-				"ltr_lineage.id"
-			])
-		);
+    var seen = {};
+    var result = [];
 
-	var seen = {};
-	var ids = [];
+    _.each(s.split(","), function(token) {
+        var name = norm(token);
 
-	_.each(
-		rows,
-		function(row) {
+        if(name !== null && !seen[name]) {
+            seen[name] = true;
+            result.push(name);
+        }
+    });
 
-			var ervId =
-				norm(
-					row["erv_lineage.id"]
-				);
-
-			var ltrId =
-				norm(
-					row["ltr_lineage.id"]
-				);
-
-			if(
-				ervId !== null &&
-				ltrId !== null &&
-				!seen[ltrId]
-			) {
-
-				seen[ltrId] = true;
-				ids.push(ltrId);
-			}
-		}
-	);
-
-	return ids;
+    return result;
 }
 
-function buildRecognisedNames() {
-
-	var recognisedNames = {};
-	var recognisedTypes = {};
-
-	var ervIds =
-		listCustomTableIds(
-			"erv_lineage"
-		);
-
-	var allLtrIds =
-		listCustomTableIds(
-			"ltr_lineage"
-		);
-
-	var associatedLtrIds =
-		listErvAssociatedLtrIds();
-
-
-	_.each(
-		ervIds,
-		function(id) {
-			recognisedNames[id] = true;
-			recognisedTypes[id] = "ERV";
-		}
-	);
-
-	_.each(
-		associatedLtrIds,
-		function(id) {
-			recognisedNames[id] = true;
-			recognisedTypes[id] = "ERV-associated LTR";
-		}
-	);
-
-
-	var associatedSet = {};
-
-	_.each(
-		associatedLtrIds,
-		function(id) {
-			associatedSet[id] = true;
-		}
-	);
-
-	var unassociatedLtrIds =
-		_.filter(
-			allLtrIds,
-			function(id) {
-				return !associatedSet[id];
-			}
-		);
-
-	return {
-		recognisedNames: recognisedNames,
-		recognisedTypes: recognisedTypes,
-		ervIds: ervIds,
-		allLtrIds: allLtrIds,
-		associatedLtrIds: associatedLtrIds,
-		unassociatedLtrIds: unassociatedLtrIds
-	};
+function nameSet(names) {
+    if(names.length === 0) return "(none)";
+    return names.slice().sort().join(" + ");
 }
 
+function increment(map, key, included) {
+    if(!map[key])
+        map[key] = {included: 0, excluded: 0};
 
-// ============================================================================
-// Name parsing
-// ============================================================================
-
-function splitRawNames(value) {
-
-	var s =
-		norm(value);
-
-	if(s === null) {
-		return [];
-	}
-
-	var seen = {};
-	var names = [];
-
-	_.each(
-		s.split(","),
-		function(token) {
-
-			var name =
-				norm(token);
-
-			if(
-				name !== null &&
-				!seen[name]
-			) {
-
-				seen[name] = true;
-				names.push(name);
-			}
-		}
-	);
-
-	return names;
+    if(included)
+        map[key].included++;
+    else
+        map[key].excluded++;
 }
 
-function makeNameSet(names) {
+function summaryRows(map, keyColumn) {
+    var result = [];
 
-	if(names.length === 0) {
-		return "(none)";
-	}
+    _.each(_.keys(map), function(key) {
+        var item = map[key];
+        var row = {};
 
-	var sorted =
-		names.slice();
+        row[keyColumn] = key;
+        row.included_loci = item.included;
+        row.excluded_loci = item.excluded;
+        row.total_loci = item.included + item.excluded;
 
-	sorted.sort();
+        result.push(row);
+    });
 
-	return sorted.join(" + ");
+    result.sort(function(a, b) {
+        if(b.total_loci !== a.total_loci)
+            return b.total_loci - a.total_loci;
+
+        return a[keyColumn].localeCompare(b[keyColumn]);
+    });
+
+    return result;
 }
 
+// ============================================================
+// 1. Build recognised ERV repertoire
+// ============================================================
 
-// ============================================================================
-// Summary counters
-// ============================================================================
+log("Loading recognised ERV lineages");
 
-function newStatusCounter() {
-	return {
-		included: 0,
-		excluded: 0
-	};
-}
+var ervIds = listIds("erv_lineage");
+var ltrIds = listIds("ltr_lineage");
 
-function incrementStatusCounter(
-	map,
-	key,
-	included
-) {
+var recognisedNames = {};
+var recognisedTypes = {};
 
-	if(map[key] === undefined) {
-		map[key] = newStatusCounter();
-	}
+_.each(_.keys(ervIds), function(id) {
+    recognisedNames[id] = true;
+    recognisedTypes[id] = "ERV";
+});
 
-	if(included) {
-		map[key].included++;
-	} else {
-		map[key].excluded++;
-	}
-}
-
-function incrementPairCounter(
-	map,
-	key1,
-	key2,
-	included
-) {
-
-	var compoundKey =
-		key1 + "\t" + key2;
-
-	if(map[compoundKey] === undefined) {
-
-		map[compoundKey] = {
-			raw_name: key1,
-			names_decision: key2,
-			included: 0,
-			excluded: 0
-		};
-	}
-
-	if(included) {
-		map[compoundKey].included++;
-	} else {
-		map[compoundKey].excluded++;
-	}
-}
-
-
-// ============================================================================
-// Build recognised repertoire
-// ============================================================================
-
-var repertoire =
-	buildRecognisedNames();
-
-var recognisedNames =
-	repertoire.recognisedNames;
-
-var recognisedTypes =
-	repertoire.recognisedTypes;
-
-
-log(
-	"Loaded " +
-	repertoire.ervIds.length +
-	" ERV lineage/sublineage names"
+var associations = glue.tableToObjects(
+    glue.command([
+        "list",
+        "custom-table-row",
+        "erv_lineage_ltr_assoc",
+        "erv_lineage.id",
+        "ltr_lineage.id"
+    ])
 );
 
-log(
-	"Loaded " +
-	repertoire.allLtrIds.length +
-	" total LTR lineage names"
-);
+var associatedLtrIds = {};
 
-log(
-	"Of these, " +
-	repertoire.associatedLtrIds.length +
-	" LTRs are explicitly associated with ERV lineages"
-);
+_.each(associations, function(row) {
+    var ervId = norm(row["erv_lineage.id"]);
+    var ltrId = norm(row["ltr_lineage.id"]);
 
-log(
-	repertoire.unassociatedLtrIds.length +
-	" LTRs are currently unassociated and will NOT trigger locus inclusion"
-);
+    if(
+        ervId !== null &&
+        ltrId !== null &&
+        ervIds[ervId] === true &&
+        ltrIds[ltrId] === true
+    ) {
+        associatedLtrIds[ltrId] = true;
+        recognisedNames[ltrId] = true;
+        recognisedTypes[ltrId] = "ERV-associated LTR";
+    }
+});
 
-log(
-	"Loaded " +
-	_.keys(recognisedNames).length +
-	" unique recognised ERV/ERV-associated-LTR names"
-);
+log("ERV lineages/sublineages/ERVRs: " +
+    _.keys(ervIds).length);
 
+log("LTR lineages: " + _.keys(ltrIds).length);
 
-// ============================================================================
-// LTR association-status audit
-// ============================================================================
+log("ERV-associated LTR lineages: " +
+    _.keys(associatedLtrIds).length);
 
-var associatedLtrSet = {};
+log("Recognised direct names: " +
+    _.keys(recognisedNames).length);
 
-_.each(
-	repertoire.associatedLtrIds,
-	function(id) {
-		associatedLtrSet[id] = true;
-	}
-);
+// ============================================================
+// 2. Load source-name mappings
+// ============================================================
 
-var ltrStatusRows = [];
+log("Loading locus name mappings from " + MAPPINGS_FILE);
 
-var sortedAllLtrIds =
-	repertoire.allLtrIds.slice();
+var mappingRows = readTsv(MAPPINGS_FILE, [
+    "source_name",
+    "entity_type",
+    "erv_lineage_id"
+]);
 
-sortedAllLtrIds.sort();
+var mappedNames = {};
+var acceptedMappings = 0;
+var rejectedMappings = 0;
 
-_.each(
-	sortedAllLtrIds,
-	function(ltrId) {
+_.each(mappingRows, function(row) {
+    var sourceName = norm(row.source_name);
+    var type = norm(row.entity_type);
+    var target = norm(row.erv_lineage_id);
 
-		var associated =
-			associatedLtrSet[ltrId] === true;
+    if(type === "ervr")
+        type = "erv_derived_repeat";
 
-		ltrStatusRows.push({
-			ltr_lineage_id: ltrId,
-			erv_associated:
-				associated ? "yes" : "no",
-			eligible_for_locus_selection:
-				associated ? "yes" : "no"
-		});
-	}
-);
+    var validType =
+        type === "lineage" ||
+        type === "sublineage" ||
+        type === "erv_derived_repeat";
 
-saveTabular(
-	LTR_STATUS_FILE,
-	ltrStatusRows,
-	[
-		"ltr_lineage_id",
-		"erv_associated",
-		"eligible_for_locus_selection"
-	],
-	"candidateSelectionLtrStatus"
-);
+    if(
+        sourceName === null ||
+        target === null ||
+        !validType ||
+        ervIds[target] !== true
+    ) {
+        rejectedMappings++;
+        return;
+    }
 
+    if(
+        mappedNames[sourceName] !== undefined &&
+        mappedNames[sourceName] !== target
+    ) {
+        throw new Error(
+            "Conflicting mapping for " + sourceName +
+            " at line " + row._line
+        );
+    }
 
-// ============================================================================
-// Streaming locus selection
-// ============================================================================
+    mappedNames[sourceName] = target;
+    acceptedMappings++;
+});
 
-var reader =
-	new BufferedReader(
-		new FileReader(
-			INPUT_FILE
-		)
-	);
+log("Accepted name mappings: " + acceptedMappings);
+log("Rejected name mappings: " + rejectedMappings);
 
-var writer =
-	new BufferedWriter(
-		new FileWriter(
-			OUTPUT_FILE
-		)
-	);
-
+// ============================================================
+// 3. Initialise selection counters
+// ============================================================
 
 var processedCount = 0;
 var includedCount = 0;
@@ -554,523 +349,336 @@ var excludedCount = 0;
 
 var rawNameCounts = {};
 var decisionCounts = {};
-var rawNameDecisionCounts = {};
+var pairCounts = {};
 var nameSetCounts = {};
+var matchTypeCounts = {};
 
+// ============================================================
+// 4. Stream merged locus TSV
+// ============================================================
+
+var reader = new BufferedReader(
+    new FileReader(INPUT_FILE)
+);
+
+var writer = new BufferedWriter(
+    new FileWriter(OUTPUT_FILE)
+);
 
 try {
+    var header = reader.readLine();
 
-	// ---------------------------------------------------------------------
-	// Header
-	// ---------------------------------------------------------------------
+    if(header === null)
+        throw new Error("Empty input: " + INPUT_FILE);
 
-	var headerLine =
-		reader.readLine();
+    var columns = header
+        .replace(/^\uFEFF/, "")
+        .split("\t");
 
-	if(headerLine === null) {
-		throw "Input file is empty: " + INPUT_FILE;
-	}
+    var namesIndex = columns.indexOf("names");
+    var decisionIndex = columns.indexOf("names_decision");
 
-	writer.write(headerLine);
-	writer.newLine();
+    if(namesIndex < 0)
+        throw new Error("Missing names column");
 
+    if(decisionIndex < 0)
+        throw new Error("Missing names_decision column");
 
-	var columns =
-		headerLine.split("\t");
+    writer.write(header);
+    writer.newLine();
 
-	var namesIndex =
-		columns.indexOf("names");
+    log("Streaming loci from " + INPUT_FILE);
 
-	var namesDecisionIndex =
-		columns.indexOf("names_decision");
+    var line;
 
+    while((line = reader.readLine()) !== null) {
+        processedCount++;
 
-	if(namesIndex < 0) {
-		throw "Required column 'names' not found in " + INPUT_FILE;
-	}
+        var values = line.split("\t");
 
-	if(namesDecisionIndex < 0) {
-		throw "Required column 'names_decision' not found in " + INPUT_FILE;
-	}
+        var rawNames = splitNames(values[namesIndex]);
 
+        var directMatches = _.filter(
+            rawNames,
+            function(name) {
+                return recognisedNames[name] === true;
+            }
+        );
 
-	log(
-		"Streaming loci from " +
-		INPUT_FILE
-	);
+        var mappedMatches = _.filter(
+            rawNames,
+            function(name) {
+                return mappedNames[name] !== undefined;
+            }
+        );
 
+        // ----------------------------------------------------
+        // Inclusion rule
+        //
+        // No filtering by case_status or names_decision.
+        // Any recognised name is sufficient.
+        // ----------------------------------------------------
 
-	// ---------------------------------------------------------------------
-	// Rows
-	// ---------------------------------------------------------------------
+        var direct = directMatches.length > 0;
+        var mapped = mappedMatches.length > 0;
 
-	var line;
+        var included = direct || mapped;
 
-	while(
-		(line = reader.readLine()) !== null
-	) {
+        var matchType;
 
-		processedCount++;
+        if(direct && mapped)
+            matchType = "direct_and_mapped";
+        else if(direct)
+            matchType = "direct_only";
+        else if(mapped)
+            matchType = "mapped_only";
+        else
+            matchType = "unrecognised";
 
+        increment(matchTypeCounts, matchType, included);
 
-		/*
-		 * Preserve trailing empty fields.
-		 *
-		 * JavaScript's split with a simple "\t" works here
-		 * for the pipeline-generated TSV structure.
-		 */
-		var values =
-			line.split("\t");
+        if(included) {
+            writer.write(line);
+            writer.newLine();
+            includedCount++;
+        } else {
+            excludedCount++;
+        }
 
+        // ----------------------------------------------------
+        // Audit by individual raw name
+        // ----------------------------------------------------
 
-		var rawNames =
-			splitRawNames(
-				values[namesIndex]
-			);
+        if(rawNames.length === 0) {
+            increment(rawNameCounts, "(none)", included);
+        } else {
+            _.each(rawNames, function(name) {
+                increment(rawNameCounts, name, included);
+            });
+        }
 
+        // ----------------------------------------------------
+        // Audit by original names_decision
+        // ----------------------------------------------------
 
-		var matchingNames =
-			_.filter(
-				rawNames,
-				function(name) {
-					return recognisedNames[name] === true;
-				}
-			);
+        var decision = norm(values[decisionIndex]);
 
+        if(decision === null)
+            decision = "(none)";
 
-		var included =
-			matchingNames.length > 0;
+        increment(decisionCounts, decision, included);
 
+        // ----------------------------------------------------
+        // Raw name versus names_decision
+        // ----------------------------------------------------
 
-		if(included) {
+        var namesForPairs =
+            rawNames.length ? rawNames : ["(none)"];
 
-			includedCount++;
+        _.each(namesForPairs, function(name) {
+            var key = name + "\t" + decision;
+            increment(pairCounts, key, included);
+        });
 
-			/*
-			 * Write original line verbatim.
-			 */
-			writer.write(line);
-			writer.newLine();
+        // ----------------------------------------------------
+        // Audit by complete name set
+        // ----------------------------------------------------
 
-		} else {
+        increment(
+            nameSetCounts,
+            nameSet(rawNames),
+            included
+        );
 
-			excludedCount++;
-		}
-
-
-		// -----------------------------------------------------------------
-		// Summary by raw name
-		// -----------------------------------------------------------------
-
-		if(rawNames.length === 0) {
-
-			incrementStatusCounter(
-				rawNameCounts,
-				"(none)",
-				included
-			);
-
-		} else {
-
-			_.each(
-				rawNames,
-				function(name) {
-
-					incrementStatusCounter(
-						rawNameCounts,
-						name,
-						included
-					);
-				}
-			);
-		}
-
-
-		// -----------------------------------------------------------------
-		// Summary by names_decision
-		// -----------------------------------------------------------------
-
-		var namesDecision =
-			norm(
-				values[namesDecisionIndex]
-			);
-
-		if(namesDecision === null) {
-			namesDecision = "(none)";
-		}
-
-
-		incrementStatusCounter(
-			decisionCounts,
-			namesDecision,
-			included
-		);
-
-
-		// -----------------------------------------------------------------
-		// Raw-name versus names_decision
-		// -----------------------------------------------------------------
-
-		if(rawNames.length === 0) {
-
-			incrementPairCounter(
-				rawNameDecisionCounts,
-				"(none)",
-				namesDecision,
-				included
-			);
-
-		} else {
-
-			_.each(
-				rawNames,
-				function(name) {
-
-					incrementPairCounter(
-						rawNameDecisionCounts,
-						name,
-						namesDecision,
-						included
-					);
-				}
-			);
-		}
-
-
-		// -----------------------------------------------------------------
-		// Name-set summary
-		// -----------------------------------------------------------------
-
-		var nameSet =
-			makeNameSet(
-				rawNames
-			);
-
-		incrementStatusCounter(
-			nameSetCounts,
-			nameSet,
-			included
-		);
-
-
-		// -----------------------------------------------------------------
-		// Progress logging
-		// -----------------------------------------------------------------
-
-		if(
-			processedCount %
-			PROGRESS_INTERVAL ===
-			0
-		) {
-
-			log(
-				"Processed " +
-				processedCount +
-				" loci: " +
-				includedCount +
-				" included, " +
-				excludedCount +
-				" excluded"
-			);
-		}
-	}
+        if(processedCount % PROGRESS_INTERVAL === 0) {
+            log(
+                "Processed " + processedCount +
+                ": " + includedCount + " included, " +
+                excludedCount + " excluded"
+            );
+        }
+    }
 
 } finally {
-
-	reader.close();
-	writer.close();
+    reader.close();
+    writer.close();
 }
 
-
-log(
-	"Finished streaming " +
-	processedCount +
-	" loci"
-);
-
-log(
-	"Wrote selected loci directly to " +
-	OUTPUT_FILE
-);
-
-
-// ============================================================================
-// Overall selection summary
-// ============================================================================
-
-var overallSummary = [
-
-	{
-		status: "included",
-		count: includedCount,
-		percent:
-			percentage(
-				includedCount,
-				processedCount
-			)
-	},
-
-	{
-		status: "excluded",
-		count: excludedCount,
-		percent:
-			percentage(
-				excludedCount,
-				processedCount
-			)
-	},
-
-	{
-		status: "total",
-		count: processedCount,
-		percent: 100.0
-	}
-];
+// ============================================================
+// 5. Overall summary
+// ============================================================
 
 saveTabular(
-	SUMMARY_FILE,
-	overallSummary,
-	[
-		"status",
-		"count",
-		"percent"
-	],
-	"candidateSelectionSummary"
+    SUMMARY_FILE,
+    [
+        {
+            status: "included",
+            count: includedCount,
+            percent: percentage(includedCount, processedCount)
+        },
+        {
+            status: "excluded",
+            count: excludedCount,
+            percent: percentage(excludedCount, processedCount)
+        },
+        {
+            status: "total",
+            count: processedCount,
+            percent: 100.0
+        }
+    ],
+    ["status", "count", "percent"],
+    "candidateSelectionSummary"
 );
 
+// ============================================================
+// 6. Match-type audit
+// ============================================================
 
-// ============================================================================
-// Raw-name summary
-// ============================================================================
+var matchRows = [];
 
-var rawNameSummary = [];
-
-_.each(
-	_.keys(rawNameCounts),
-	function(name) {
-
-		var counts =
-			rawNameCounts[name];
-
-		rawNameSummary.push({
-			raw_name: name,
-			recognised_type:
-				recognisedTypes[name] !== undefined
-					? recognisedTypes[name]
-					: "",
-			included_loci: counts.included,
-			excluded_loci: counts.excluded,
-			total_loci:
-				counts.included +
-				counts.excluded
-		});
-	}
-);
-
-rawNameSummary.sort(
-	function(a, b) {
-
-		if(b.total_loci !== a.total_loci) {
-			return b.total_loci - a.total_loci;
-		}
-
-		return a.raw_name.localeCompare(
-			b.raw_name
-		);
-	}
-);
+_.each(_.keys(matchTypeCounts).sort(), function(type) {
+    matchRows.push({
+        match_type: type,
+        included_loci: matchTypeCounts[type].included,
+        excluded_loci: matchTypeCounts[type].excluded
+    });
+});
 
 saveTabular(
-	RAW_NAME_SUMMARY_FILE,
-	rawNameSummary,
-	[
-		"raw_name",
-		"recognised_type",
-		"included_loci",
-		"excluded_loci",
-		"total_loci"
-	],
-	"candidateSelectionByRawName"
+    MATCH_TYPE_FILE,
+    matchRows,
+    ["match_type", "included_loci", "excluded_loci"],
+    "candidateSelectionByMatchType"
 );
 
+// ============================================================
+// 7. Raw-name summary
+// ============================================================
 
-// ============================================================================
-// names_decision summary
-// ============================================================================
-
-var decisionSummary = [];
-
-_.each(
-	_.keys(decisionCounts),
-	function(decision) {
-
-		var counts =
-			decisionCounts[decision];
-
-		decisionSummary.push({
-			names_decision: decision,
-			included_loci: counts.included,
-			excluded_loci: counts.excluded,
-			total_loci:
-				counts.included +
-				counts.excluded
-		});
-	}
+var rawRows = summaryRows(
+    rawNameCounts,
+    "raw_name"
 );
 
-decisionSummary.sort(
-	function(a, b) {
+_.each(rawRows, function(row) {
+    var name = row.raw_name;
 
-		if(b.total_loci !== a.total_loci) {
-			return b.total_loci - a.total_loci;
-		}
-
-		return a.names_decision.localeCompare(
-			b.names_decision
-		);
-	}
-);
+    if(recognisedTypes[name] !== undefined)
+        row.recognised_type = recognisedTypes[name];
+    else if(mappedNames[name] !== undefined)
+        row.recognised_type = "Mapped ERV name";
+    else
+        row.recognised_type = "";
+});
 
 saveTabular(
-	NAMES_DECISION_SUMMARY_FILE,
-	decisionSummary,
-	[
-		"names_decision",
-		"included_loci",
-		"excluded_loci",
-		"total_loci"
-	],
-	"candidateSelectionByNamesDecision"
+    RAW_NAME_SUMMARY_FILE,
+    rawRows,
+    [
+        "raw_name",
+        "recognised_type",
+        "included_loci",
+        "excluded_loci",
+        "total_loci"
+    ],
+    "candidateSelectionByRawName"
 );
 
-
-// ============================================================================
-// Raw-name vs names_decision summary
-// ============================================================================
-
-var rawNameDecisionSummary = [];
-
-_.each(
-	_.keys(rawNameDecisionCounts),
-	function(key) {
-
-		var item =
-			rawNameDecisionCounts[key];
-
-		rawNameDecisionSummary.push({
-			raw_name:
-				item.raw_name,
-			names_decision:
-				item.names_decision,
-			included_loci:
-				item.included,
-			excluded_loci:
-				item.excluded,
-			total_loci:
-				item.included +
-				item.excluded
-		});
-	}
-);
-
-rawNameDecisionSummary.sort(
-	function(a, b) {
-
-		if(b.total_loci !== a.total_loci) {
-			return b.total_loci - a.total_loci;
-		}
-
-		var nameCmp =
-			a.raw_name.localeCompare(
-				b.raw_name
-			);
-
-		if(nameCmp !== 0) {
-			return nameCmp;
-		}
-
-		return a.names_decision.localeCompare(
-			b.names_decision
-		);
-	}
-);
+// ============================================================
+// 8. names_decision summary
+// ============================================================
 
 saveTabular(
-	RAW_NAME_VS_DECISION_FILE,
-	rawNameDecisionSummary,
-	[
-		"raw_name",
-		"names_decision",
-		"included_loci",
-		"excluded_loci",
-		"total_loci"
-	],
-	"candidateSelectionRawNameVsDecision"
+    NAMES_DECISION_SUMMARY_FILE,
+    summaryRows(decisionCounts, "names_decision"),
+    [
+        "names_decision",
+        "included_loci",
+        "excluded_loci",
+        "total_loci"
+    ],
+    "candidateSelectionByNamesDecision"
 );
 
+// ============================================================
+// 9. Raw name versus names_decision
+// ============================================================
 
-// ============================================================================
-// Name-set summary
-// ============================================================================
+var pairRows = [];
 
-var nameSetSummary = [];
+_.each(_.keys(pairCounts), function(key) {
+    var parts = key.split("\t");
+    var counts = pairCounts[key];
 
-_.each(
-	_.keys(nameSetCounts),
-	function(nameSet) {
+    pairRows.push({
+        raw_name: parts[0],
+        names_decision: parts[1],
+        included_loci: counts.included,
+        excluded_loci: counts.excluded,
+        total_loci: counts.included + counts.excluded
+    });
+});
 
-		var counts =
-			nameSetCounts[nameSet];
+pairRows.sort(function(a, b) {
+    if(b.total_loci !== a.total_loci)
+        return b.total_loci - a.total_loci;
 
-		nameSetSummary.push({
-			name_set: nameSet,
-			included_loci:
-				counts.included,
-			excluded_loci:
-				counts.excluded,
-			total_loci:
-				counts.included +
-				counts.excluded
-		});
-	}
-);
+    var c = a.raw_name.localeCompare(b.raw_name);
 
-nameSetSummary.sort(
-	function(a, b) {
-
-		if(b.total_loci !== a.total_loci) {
-			return b.total_loci - a.total_loci;
-		}
-
-		return a.name_set.localeCompare(
-			b.name_set
-		);
-	}
-);
+    return c !== 0
+        ? c
+        : a.names_decision.localeCompare(b.names_decision);
+});
 
 saveTabular(
-	NAME_SET_SUMMARY_FILE,
-	nameSetSummary,
-	[
-		"name_set",
-		"included_loci",
-		"excluded_loci",
-		"total_loci"
-	],
-	"candidateSelectionByNameSet"
+    RAW_NAME_VS_DECISION_FILE,
+    pairRows,
+    [
+        "raw_name",
+        "names_decision",
+        "included_loci",
+        "excluded_loci",
+        "total_loci"
+    ],
+    "candidateSelectionRawNameVsDecision"
 );
 
+// ============================================================
+// 10. Name-set summary
+// ============================================================
 
-// ============================================================================
-// Final logging
-// ============================================================================
-
-log(
-	"Selection complete: " +
-	includedCount +
-	" included, " +
-	excludedCount +
-	" excluded, " +
-	processedCount +
-	" total"
+saveTabular(
+    NAME_SET_SUMMARY_FILE,
+    summaryRows(nameSetCounts, "name_set"),
+    [
+        "name_set",
+        "included_loci",
+        "excluded_loci",
+        "total_loci"
+    ],
+    "candidateSelectionByNameSet"
 );
+
+// ============================================================
+// 11. Final report
+// ============================================================
+
+log("==============================================");
+log("ERV locus candidate selection complete");
+log("==============================================");
+
+log("Total loci:    " + processedCount);
+log("Included loci: " + includedCount);
+log("Excluded loci: " + excludedCount);
+
+_.each(_.keys(matchTypeCounts).sort(), function(type) {
+    log(
+        type + ": " +
+        matchTypeCounts[type].included + " included, " +
+        matchTypeCounts[type].excluded + " excluded"
+    );
+});
+
+log("Output: " + OUTPUT_FILE);
+log("Finished.");
