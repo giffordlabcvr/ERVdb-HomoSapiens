@@ -17,7 +17,7 @@ REF_EqERVZeta	lineage	EqERV-Zeta	5LTR	644	644	450	5ltr_preferred
 REF_GLN	lineage	GLN	5LTR	431	431	430	5ltr_preferred
 REF_HERV15	lineage	HERV-15	5LTR	493	493	493	5ltr_preferred
 REF_HERV24	lineage	HERV-24	5LTR	490	490	490	5ltr_preferred
-REF_HERV30	lineage	HERV-30	3LTR	690	397	690	3ltr_at_least_10nt_longer
+REF_HERV30	lineage	HERV-30	3LTR	693	395	693	3ltr_at_least_10nt_longer
 REF_HERV4	lineage	HERV-4	5LTR	634	634	634	5ltr_preferred
 REF_HERV46	lineage	HERV-46	5LTR	461	461	461	5ltr_preferred
 REF_HERV9	lineage	HERV-9	3LTR	826	565	826	3ltr_at_least_10nt_longer

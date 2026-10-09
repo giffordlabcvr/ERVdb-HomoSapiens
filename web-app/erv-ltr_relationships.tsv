@@ -9,7 +9,7 @@ ERV-1-Gamma.Mega.1	CERV1_LTR	-	-
 ERV-1-Gamma.Mega.2	CfERV_LTR	-	-
 ERV-1-Rho.Rb.2	CeratotheriumRb_LTR	-	-
 ERV-1-Rho.Rb.3	EqERVRb_LTR	-	-
-ERV-1-Zeta.FRD.34	EqERVZeta_LTR	-	-
+ERV-1-Zeta.FRD.5	EqERVZeta_LTR	-	-
 ERV-1-Zeta.HF.Fc.3	CfERVFc_LTR	-	-
 ERV-1.Eta.15	LTR15	-	-
 ERV-1.Eta.2	PERVE_LTR	-	-
@@ -39,11 +39,11 @@ ERV-1.Rho.Rb.1	PABL_A	-	-
 ERV-1.Rho.Rb.1	PABL_B	-	-
 ERV-1.Theta.24	LTR24	-	-
 ERV-1.Theta.24	LTR24B	-	-
-ERV-1.Theta.34	MER34	-	-
-ERV-1.Theta.34	MER34A	-	-
-ERV-1.Theta.34	MER34A1	-	-
-ERV-1.Theta.34	MER34D	-	-
 ERV-1.Theta.Lb	PRIMA4_LTR	-	-
+ERV-1.Valera.34	MER34	-	-
+ERV-1.Valera.34	MER34A	-	-
+ERV-1.Valera.34	MER34A1	-	-
+ERV-1.Valera.34	MER34D	-	-
 ERV-1.Zeta.FRD.1	MER50	-	-
 ERV-1.Zeta.FRD.4	MER51A	-	-
 ERV-1.Zeta.FRD.4	MER51B	-	-
@@ -157,7 +157,7 @@ ERV-3.Lambda.L.1	MLT2C2	-	-
 ERV-3.Lambda.L.1	MLT2D	-	-
 ERV-3.Lambda.L.1	MLT2E	-	-
 ERV-3.Lambda.L.1	MLT2F	-	-
-ERV-3.Lambda.Lb4	MLT2B4	-	-
+ERV-3.Lambda.L.1.b4	MLT2B4	-	-
 ERV-3.Lambda.U3.1	LTR66	-	-
 ERV-3.Sigma.S	LTR18A	-	-
 ERV-3.Sigma.S	LTR18B	-	-

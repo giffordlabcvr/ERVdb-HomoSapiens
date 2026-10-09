@@ -14,6 +14,7 @@ REF_HERV15	lineage	HERV-15	5U5	noncoding_feature_shorter_than_50nt
 REF_HERV15	lineage	HERV-15	5R	noncoding_feature_shorter_than_50nt
 REF_HERV15	lineage	HERV-15	3U5	noncoding_feature_shorter_than_50nt
 REF_HERV15	lineage	HERV-15	3R	noncoding_feature_shorter_than_50nt
+REF_HERV30	lineage	HERV-30	PPT	noncoding_feature_shorter_than_50nt
 REF_HERV4	lineage	HERV-4	PPT	noncoding_feature_shorter_than_50nt
 REF_HERV46	lineage	HERV-46	PPT	noncoding_feature_shorter_than_50nt
 REF_HERVADP	lineage	HERV-ADP	PPT	noncoding_feature_shorter_than_50nt
