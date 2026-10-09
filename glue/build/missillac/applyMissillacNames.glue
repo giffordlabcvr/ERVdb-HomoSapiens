@@ -51,7 +51,6 @@ run file glue/build/missillac/importLegacyMappings.glue
 # Retired identifiers remain reserved and must never be recycled.
 #
 
-# [TO WRITE]
 # Import the persistent Missillac ID registry and restore previous
 # assignments to matching erv_locus records.
 #
@@ -110,7 +109,6 @@ run script glue/build/missillac/applyErvLocusNames.js
 #   - orthology-group assignments are valid
 #
 
-# [TO WRITE]
 # run script glue/build/missillac/validateMissillacAssignments.js
 
 
@@ -135,6 +133,5 @@ run script glue/build/missillac/applyErvLocusNames.js
 # issued identifiers.
 #
 
-# [TO WRITE]
-# run script glue/build/missillac/exportMissillacRegistry.js
+run script glue/build/missillac/exportMissillacRegistry.js
 
