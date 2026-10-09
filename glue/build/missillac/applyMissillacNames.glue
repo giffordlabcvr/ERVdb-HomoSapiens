@@ -108,7 +108,7 @@ run script glue/build/missillac/applyErvLocusNames.js
 #   - orthology-group assignments are valid
 #
 
-# run script glue/build/missillac/validateMissillacAssignments.js
+run script glue/build/missillac/validateMissillacAssignments.js
 
 
 # -------------------------------------------------------------------------
