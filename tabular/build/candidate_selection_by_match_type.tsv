@@ -1,5 +1,4 @@
 match_type	included_loci	excluded_loci
-direct_and_mapped	2712	0
-direct_only	96406	0
-mapped_only	902	0
-unrecognised	0	413467
+direct_only	7169	0
+mapped_only	118939	0
+unrecognised	0	387379

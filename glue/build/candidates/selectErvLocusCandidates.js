@@ -4,14 +4,32 @@
  *
  * Select ERV locus candidates from the merged RBRT TSV.
  *
- * Include a locus when any token in its `names` field:
- *   1. Matches an erv_lineage.id;
- *   2. Matches an ERV-associated ltr_lineage.id;
- *   3. Resolves via erv_locus_name_mappings.tsv to a
- *      recognised ERV lineage, sublineage or ERVR.
+ * Selection evidence, in priority order:
  *
- * All case_status / taxonomic resolution levels are eligible.
- * names_decision is used for reporting, not filtering.
+ *   1. phylogeny_name
+ *   2. subgroup_out
+ *   3. names
+ *
+ * Each field may contain multiple comma-separated names.
+ * A locus is included if ANY name in ANY of these fields
+ * resolves to a recognised ERV lineage, sublineage, ERVR,
+ * or ERV-associated LTR lineage.
+ *
+ * Name resolution:
+ *
+ *   - Direct erv_lineage.id match
+ *   - Direct ERV-associated ltr_lineage.id match
+ *   - source_name -> erv_lineage_id via
+ *     erv_locus_name_mappings.tsv
+ *
+ * The mapped erv_lineage_id must exist in erv_lineage.
+ *
+ * Exact matches take precedence over normalised matches.
+ * Normalisation ignores case, spaces, hyphens and underscores.
+ * Conflicting normalised mappings are fatal.
+ *
+ * names_decision is used for reporting, not selection.
+ * No filtering by case or taxonomic resolution.
  *
  * Original input rows are written verbatim.
  */
@@ -45,6 +63,9 @@ var NAME_SET_SUMMARY_FILE =
 var MATCH_TYPE_FILE =
     BUILD_DIR + "candidate_selection_by_match_type.tsv";
 
+var FIELD_SUMMARY_FILE =
+    BUILD_DIR + "candidate_selection_by_evidence_field.tsv";
+
 var PROGRESS_INTERVAL = 50000;
 
 var BufferedReader = Java.type("java.io.BufferedReader");
@@ -61,7 +82,8 @@ function log(message) {
 }
 
 function norm(value) {
-    if(value === null || value === undefined) return null;
+    if(value === null || value === undefined)
+        return null;
 
     var s = ("" + value).trim();
 
@@ -69,6 +91,15 @@ function norm(value) {
         return null;
 
     return s;
+}
+
+function normaliseName(value) {
+    var s = norm(value);
+
+    if(s === null)
+        return null;
+
+    return s.toUpperCase().trim();
 }
 
 function percentage(part, total) {
@@ -86,7 +117,9 @@ function listIds(table) {
 
     _.each(rows, function(row) {
         var id = norm(row.id);
-        if(id !== null) result[id] = true;
+
+        if(id !== null)
+            result[id] = true;
     });
 
     return result;
@@ -99,12 +132,14 @@ function saveTabular(file, rows, columns, resultName) {
         dataRows.push({
             value: _.map(columns, function(column) {
                 var value = row[column];
+
                 return value === undefined ? null : value;
             })
         });
     });
 
     var tabularData = {};
+
     tabularData[resultName] = {
         column: columns,
         row: dataRows
@@ -149,7 +184,8 @@ function readTsv(file, requiredColumns) {
         while((line = reader.readLine()) !== null) {
             lineNo++;
 
-            if(!line.trim()) continue;
+            if(!line.trim())
+                continue;
 
             var values = line.split("\t");
             var row = {_line: lineNo};
@@ -170,7 +206,9 @@ function readTsv(file, requiredColumns) {
 
 function splitNames(value) {
     var s = norm(value);
-    if(s === null) return [];
+
+    if(s === null)
+        return [];
 
     var seen = {};
     var result = [];
@@ -188,7 +226,9 @@ function splitNames(value) {
 }
 
 function nameSet(names) {
-    if(names.length === 0) return "(none)";
+    if(names.length === 0)
+        return "(none)";
+
     return names.slice().sort().join(" + ");
 }
 
@@ -280,9 +320,6 @@ log("LTR lineages: " + _.keys(ltrIds).length);
 log("ERV-associated LTR lineages: " +
     _.keys(associatedLtrIds).length);
 
-log("Recognised direct names: " +
-    _.keys(recognisedNames).length);
-
 // ============================================================
 // 2. Load source-name mappings
 // ============================================================
@@ -296,6 +333,8 @@ var mappingRows = readTsv(MAPPINGS_FILE, [
 ]);
 
 var mappedNames = {};
+var normalisedMappings = {};
+
 var acceptedMappings = 0;
 var rejectedMappings = 0;
 
@@ -333,14 +372,101 @@ _.each(mappingRows, function(row) {
     }
 
     mappedNames[sourceName] = target;
+
+    var key = normaliseName(sourceName);
+
+    if(
+        normalisedMappings[key] !== undefined &&
+        normalisedMappings[key] !== target
+    ) {
+        throw new Error(
+            "Conflicting normalised mappings for " +
+            sourceName + " at line " + row._line +
+            ": " + normalisedMappings[key] +
+            " versus " + target
+        );
+    }
+
+    normalisedMappings[key] = target;
     acceptedMappings++;
+});
+
+// Also allow normalised matching to direct canonical IDs.
+// Check for conflicts with existing source-name mappings.
+
+_.each(_.keys(recognisedNames), function(id) {
+    var key = normaliseName(id);
+
+    if(
+        normalisedMappings[key] !== undefined &&
+        normalisedMappings[key] !== id
+    ) {
+        throw new Error(
+            "Normalised name collision for canonical ID " +
+            id + ": maps to " + normalisedMappings[key]
+        );
+    }
+
+    normalisedMappings[key] = id;
 });
 
 log("Accepted name mappings: " + acceptedMappings);
 log("Rejected name mappings: " + rejectedMappings);
 
 // ============================================================
-// 3. Initialise selection counters
+// 3. Name resolution
+// ============================================================
+
+function resolveName(name) {
+    if(recognisedNames[name] === true) {
+        return {
+            target: name,
+            method: "direct"
+        };
+    }
+
+    if(mappedNames[name] !== undefined) {
+        return {
+            target: mappedNames[name],
+            method: "mapped"
+        };
+    }
+
+    var key = normaliseName(name);
+
+    if(
+        key !== null &&
+        normalisedMappings[key] !== undefined
+    ) {
+        return {
+            target: normalisedMappings[key],
+            method: "normalised"
+        };
+    }
+
+    return null;
+}
+
+function evaluateNames(names) {
+    var matches = [];
+
+    _.each(names, function(name) {
+        var resolved = resolveName(name);
+
+        if(resolved !== null) {
+            matches.push({
+                source_name: name,
+                target: resolved.target,
+                method: resolved.method
+            });
+        }
+    });
+
+    return matches;
+}
+
+// ============================================================
+// 4. Initialise counters
 // ============================================================
 
 var processedCount = 0;
@@ -352,9 +478,10 @@ var decisionCounts = {};
 var pairCounts = {};
 var nameSetCounts = {};
 var matchTypeCounts = {};
+var fieldCounts = {};
 
 // ============================================================
-// 4. Stream merged locus TSV
+// 5. Stream merged locus TSV
 // ============================================================
 
 var reader = new BufferedReader(
@@ -376,10 +503,18 @@ try {
         .split("\t");
 
     var namesIndex = columns.indexOf("names");
+    var subgroupIndex = columns.indexOf("subgroup_out");
+    var phylogenyIndex = columns.indexOf("phylogeny_name");
     var decisionIndex = columns.indexOf("names_decision");
 
     if(namesIndex < 0)
         throw new Error("Missing names column");
+
+    if(subgroupIndex < 0)
+        throw new Error("Missing subgroup_out column");
+
+    if(phylogenyIndex < 0)
+        throw new Error("Missing phylogeny_name column");
 
     if(decisionIndex < 0)
         throw new Error("Missing names_decision column");
@@ -388,6 +523,7 @@ try {
     writer.newLine();
 
     log("Streaming loci from " + INPUT_FILE);
+    log("Selection priority: phylogeny_name > subgroup_out > names");
 
     var line;
 
@@ -396,46 +532,87 @@ try {
 
         var values = line.split("\t");
 
-        var rawNames = splitNames(values[namesIndex]);
+        var phylogenyNames =
+            splitNames(values[phylogenyIndex]);
 
-        var directMatches = _.filter(
-            rawNames,
-            function(name) {
-                return recognisedNames[name] === true;
-            }
-        );
+        var subgroupNames =
+            splitNames(values[subgroupIndex]);
 
-        var mappedMatches = _.filter(
-            rawNames,
-            function(name) {
-                return mappedNames[name] !== undefined;
-            }
-        );
+        var rawNames =
+            splitNames(values[namesIndex]);
 
-        // ----------------------------------------------------
-        // Inclusion rule
-        //
-        // No filtering by case_status or names_decision.
-        // Any recognised name is sufficient.
-        // ----------------------------------------------------
+        // Evaluate all three fields independently.
 
-        var direct = directMatches.length > 0;
-        var mapped = mappedMatches.length > 0;
+        var phylogenyMatches =
+            evaluateNames(phylogenyNames);
 
-        var included = direct || mapped;
+        var subgroupMatches =
+            evaluateNames(subgroupNames);
+
+        var rawMatches =
+            evaluateNames(rawNames);
+
+        // Select the highest-priority field with
+        // at least one recognised match.
+
+        var selectedMatches = [];
+        var evidenceField = "none";
+
+        if(phylogenyMatches.length > 0) {
+            selectedMatches = phylogenyMatches;
+            evidenceField = "phylogeny_name";
+
+        } else if(subgroupMatches.length > 0) {
+            selectedMatches = subgroupMatches;
+            evidenceField = "subgroup_out";
+
+        } else if(rawMatches.length > 0) {
+            selectedMatches = rawMatches;
+            evidenceField = "names";
+        }
+
+        var included = selectedMatches.length > 0;
+
+        // Classify how the winning field matched.
+
+        var hasDirect = false;
+        var hasMapped = false;
+        var hasNormalised = false;
+
+        _.each(selectedMatches, function(match) {
+            if(match.method === "direct")
+                hasDirect = true;
+
+            if(match.method === "mapped")
+                hasMapped = true;
+
+            if(match.method === "normalised")
+                hasNormalised = true;
+        });
 
         var matchType;
 
-        if(direct && mapped)
-            matchType = "direct_and_mapped";
-        else if(direct)
-            matchType = "direct_only";
-        else if(mapped)
-            matchType = "mapped_only";
-        else
+        if(!included) {
             matchType = "unrecognised";
 
+        } else if(hasDirect && (hasMapped || hasNormalised)) {
+            matchType = "direct_and_mapped";
+
+        } else if(hasDirect) {
+            matchType = "direct_only";
+
+        } else if(hasMapped && hasNormalised) {
+            matchType = "mapped_and_normalised";
+
+        } else if(hasMapped) {
+            matchType = "mapped_only";
+
+        } else {
+            matchType = "normalised_only";
+        }
+
         increment(matchTypeCounts, matchType, included);
+        increment(fieldCounts, evidenceField, included);
 
         if(included) {
             writer.write(line);
@@ -458,7 +635,7 @@ try {
         }
 
         // ----------------------------------------------------
-        // Audit by original names_decision
+        // Audit by names_decision
         // ----------------------------------------------------
 
         var decision = norm(values[decisionIndex]);
@@ -476,12 +653,15 @@ try {
             rawNames.length ? rawNames : ["(none)"];
 
         _.each(namesForPairs, function(name) {
-            var key = name + "\t" + decision;
-            increment(pairCounts, key, included);
+            increment(
+                pairCounts,
+                name + "\t" + decision,
+                included
+            );
         });
 
         // ----------------------------------------------------
-        // Audit by complete name set
+        // Audit by complete raw-name set
         // ----------------------------------------------------
 
         increment(
@@ -505,7 +685,7 @@ try {
 }
 
 // ============================================================
-// 5. Overall summary
+// 6. Overall summary
 // ============================================================
 
 saveTabular(
@@ -532,7 +712,7 @@ saveTabular(
 );
 
 // ============================================================
-// 6. Match-type audit
+// 7. Match-type audit
 // ============================================================
 
 var matchRows = [];
@@ -553,7 +733,36 @@ saveTabular(
 );
 
 // ============================================================
-// 7. Raw-name summary
+// 8. Evidence-field audit
+// ============================================================
+
+var fieldRows = [];
+
+_.each(_.keys(fieldCounts).sort(), function(field) {
+    fieldRows.push({
+        evidence_field: field,
+        included_loci: fieldCounts[field].included,
+        excluded_loci: fieldCounts[field].excluded,
+        total_loci:
+            fieldCounts[field].included +
+            fieldCounts[field].excluded
+    });
+});
+
+saveTabular(
+    FIELD_SUMMARY_FILE,
+    fieldRows,
+    [
+        "evidence_field",
+        "included_loci",
+        "excluded_loci",
+        "total_loci"
+    ],
+    "candidateSelectionByEvidenceField"
+);
+
+// ============================================================
+// 9. Raw-name summary
 // ============================================================
 
 var rawRows = summaryRows(
@@ -563,13 +772,18 @@ var rawRows = summaryRows(
 
 _.each(rawRows, function(row) {
     var name = row.raw_name;
+    var resolved = resolveName(name);
 
-    if(recognisedTypes[name] !== undefined)
+    if(recognisedTypes[name] !== undefined) {
         row.recognised_type = recognisedTypes[name];
-    else if(mappedNames[name] !== undefined)
-        row.recognised_type = "Mapped ERV name";
-    else
+
+    } else if(resolved !== null) {
+        row.recognised_type =
+            "Mapped ERV name (" + resolved.method + ")";
+
+    } else {
         row.recognised_type = "";
+    }
 });
 
 saveTabular(
@@ -586,7 +800,7 @@ saveTabular(
 );
 
 // ============================================================
-// 8. names_decision summary
+// 10. names_decision summary
 // ============================================================
 
 saveTabular(
@@ -602,7 +816,7 @@ saveTabular(
 );
 
 // ============================================================
-// 9. Raw name versus names_decision
+// 11. Raw name versus names_decision
 // ============================================================
 
 var pairRows = [];
@@ -645,7 +859,7 @@ saveTabular(
 );
 
 // ============================================================
-// 10. Name-set summary
+// 12. Raw-name-set summary
 // ============================================================
 
 saveTabular(
@@ -661,7 +875,7 @@ saveTabular(
 );
 
 // ============================================================
-// 11. Final report
+// 13. Final report
 // ============================================================
 
 log("==============================================");
@@ -672,6 +886,20 @@ log("Total loci:    " + processedCount);
 log("Included loci: " + includedCount);
 log("Excluded loci: " + excludedCount);
 
+log("----------------------------------------------");
+log("Selection by evidence field:");
+
+_.each(_.keys(fieldCounts).sort(), function(field) {
+    log(
+        field + ": " +
+        fieldCounts[field].included + " included, " +
+        fieldCounts[field].excluded + " excluded"
+    );
+});
+
+log("----------------------------------------------");
+log("Selection by match type:");
+
 _.each(_.keys(matchTypeCounts).sort(), function(type) {
     log(
         type + ": " +
@@ -680,5 +908,6 @@ _.each(_.keys(matchTypeCounts).sort(), function(type) {
     );
 });
 
+log("----------------------------------------------");
 log("Output: " + OUTPUT_FILE);
 log("Finished.");

@@ -1,68 +1,73 @@
-source_name	candidate_count	entity_type	erv_lineage_id
-MER-101	286	ervr	ERVR-1.Theta.24.101
-MER-89	1011	ervr	ERVR-1.Theta.24.89
-LTR-43	477	ervr	ERVR-1.Zeta.43
-MER-83A	348	ervr	ERVR-1.Zeta.83A
-MER-83B	225	ervr	ERVR-1.Zeta.83B
-MER-84	212	ervr	ERVR-1.Zeta.84
-HERV-19	302	ervr	ERVR-1.Zeta.HF.19
-MER-52A	2486	ervr	ERVR-1.Zeta.HF.52A
-HERV-16	50	ervr	ERVR-3.Lambda.16
-ERV3-16A3	23884	ervr	ERVR-3.Lambda.16A3
-HERVL40	418	ervr	ERVR-3.Lambda.40
-HERV52	884	ervr	ERVR-3.Lambda.52
-MER-70	1028	ervr	ERVR-3.Lambda.70
-HERVL74	188	ervr	ERVR-3.Lambda.74
-MER-76	540	ervr	ERVR-3.Lambda.76
-ERV-L47	329	ervr	ERVR-3.Sigma.47
-HERV57	202	ervr	ERVR-3.Sigma.57
-RRHERV-I	200	lineage	ERV-1.Eta.15
-HERV-1	57	lineage	ERV-1.Eta.E
-HERV-E	537	lineage	ERV-1.Eta.E
-HERV-Ea	362	lineage	ERV-1.Eta.E
-HERV-R	354	lineage	ERV-1.Eta.R
-HERV-T	312	lineage	ERV-1.Gamma.TR.T
-HERV-ADP	260	lineage	ERV-1.Iota.ADP
-HERV-I	913	lineage	ERV-1.Iota.ADP
-HERV-IP	607	lineage	ERV-1.Iota.ADP
-HERV-Rb1	262	lineage	ERV-1.Rho.Rb.1
-HERV-Rb2	414	lineage	ERV-1.Rho.Rb.1
-HERV-24	218	lineage	ERV-1.Theta.24
-MER-34	1063	lineage	ERV-1.Theta.34
-MER34A	1036	lineage	ERV-1.Theta.34
-MER34A1	534	lineage	ERV-1.Theta.34
-HERV-Lb1	261	lineage	ERV-1.Theta.Lb
-HERV-FRD	1678	lineage	ERV-1.Zeta.FRD.1
-HERV-4	1667	lineage	ERV-1.Zeta.FRD.4
-PRIMA41	491	lineage	ERV-1.Zeta.FRD.41
-MER-66	2079	lineage	ERV-1.Zeta.FRD.66
-HERV-46	188	lineage	ERV-1.Zeta.HF.46
-HERV-Fb	711	lineage	ERV-1.Zeta.HF.Fb.1
-HERV-H	1411	lineage	ERV-1.Zeta.HF.H.1
-HERV-XA	32	lineage	ERV-1.Zeta.HF.XA.1
-HERV-30	92	lineage	ERV-1.Zeta.W9P.30
-HERV-9	4051	lineage	ERV-1.Zeta.W9P.9
-HERV-P	1445	lineage	ERV-1.Zeta.W9P.P
-HUERS-P3B	1530	lineage	ERV-1.Zeta.W9P.P
-HERV-W	608	lineage	ERV-1.Zeta.W9P.W
-HERV-K(HML5)	662	lineage	ERV-2.Beta.Archaeo.5
-HERV-K(HML6)	264	lineage	ERV-2.Beta.Archaeo.6
-HERV-K(HML1)	336	lineage	ERV-2.Beta.K.HML.1
-HERV-K(HML10)	68	lineage	ERV-2.Beta.K.HML.10
-HERV-K(HML2)	981	lineage	ERV-2.Beta.K.HML.2
-HERV-K(HML3)	908	lineage	ERV-2.Beta.K.HML.3
-HERV-K(HML4)	593	lineage	ERV-2.Beta.K.HML.4
-HERV-K(HML7)	220	lineage	ERV-2.Beta.K.HML.7
-HERV-K(HML8)	2105	lineage	ERV-2.Beta.K.HML.8
-HERV-K(HML9)	101	lineage	ERV-2.Beta.K.HML.9
-ERV-L	1585	lineage	ERV-3.Lambda.L.1
-ERV-Le	308	lineage	ERV-3.Lambda.L.1
-HERV-L	12874	lineage	ERV-3.Lambda.L.1
-HERV-U3	278	lineage	ERV-3.Lambda.U3.1
-HERV-S	448	lineage	ERV-3.Sigma.S
-Unclassified	618	n/a	Unclassified
-HARLEQUIN	192	sublineage	ERV-1.Eta.E.HQ
-HERV-24b	292	lineage	ERV-1.Theta.24
-HUERS-P1	5002	lineage	ERV-1.Zeta.W9P.P
-HUERS-P2	3404	lineage	ERV-1.Zeta.W9P.P
-ERV-Lb4	2947	sublineage	ERV-3.Lambda.L.b4
+source_name	entity_type	erv_lineage_id
+MER-101	ervr	ERVR-1.Theta.24.101
+MER-89	ervr	ERVR-1.Theta.24.89
+LTR-43	ervr	ERVR-1.Zeta.43
+MER-83A	ervr	ERVR-1.Zeta.83A
+MER-83B	ervr	ERVR-1.Zeta.83B
+MER-84	ervr	ERVR-1.Zeta.84
+HERV-19	ervr	ERVR-1.Zeta.HF.19
+MER-52A	ervr	ERVR-1.Zeta.HF.52A
+HERV-16	ervr	ERVR-3.Lambda.16
+ERV3-16A3	ervr	ERVR-3.Lambda.16A3
+HERVL40	ervr	ERVR-3.Lambda.40
+HERV52	ervr	ERVR-3.Lambda.52
+MER-70	ervr	ERVR-3.Lambda.70
+HERVL74	ervr	ERVR-3.Lambda.74
+MER-76	ervr	ERVR-3.Lambda.76
+ERV-L47	ervr	ERVR-3.Sigma.47
+HERV57	ervr	ERVR-3.Sigma.57
+RRHERV-I	lineage	ERV-1.Eta.15
+HERV-15	lineage	ERV-1.Eta.15
+HERV-1	lineage	ERV-1.Eta.E
+HERV-E	lineage	ERV-1.Eta.E
+HERV-Ea	lineage	ERV-1.Eta.E
+HERV-R	lineage	ERV-1.Eta.R
+HERV-T	lineage	ERV-1.Gamma.TR.T
+HERV-ADP	lineage	ERV-1.Iota.ADP
+HERV-I	lineage	ERV-1.Iota.ADP
+HERV-IP	lineage	ERV-1.Iota.ADP
+HERV-Rb	lineage	ERV-1.Rho.Rb.1
+HERV-Rb1	lineage	ERV-1.Rho.Rb.1
+HERV-Rb2	lineage	ERV-1.Rho.Rb.1
+HERV-24	lineage	ERV-1.Theta.24
+MER-34	lineage	ERV-1.Theta.34
+MER34A	lineage	ERV-1.Theta.34
+MER34A1	lineage	ERV-1.Theta.34
+HERV-Lb	lineage	ERV-1.Theta.Lb
+HERV-Lb1	lineage	ERV-1.Theta.Lb
+HERV-Lb2	lineage	ERV-1.Theta.Lb
+HERV-FRD	lineage	ERV-1.Zeta.FRD.1
+HERV-4	lineage	ERV-1.Zeta.FRD.4
+PRIMA-41	lineage	ERV-1.Zeta.FRD.41
+MER-66	lineage	ERV-1.Zeta.FRD.66
+HERV-46	lineage	ERV-1.Zeta.HF.46
+HERV-Fb	lineage	ERV-1.Zeta.HF.Fb.1
+HERV-H	lineage	ERV-1.Zeta.HF.H.1
+HERV-XA	lineage	ERV-1.Zeta.HF.XA.1
+HERV-Xa	lineage	ERV-1.Zeta.HF.XA.1
+HERV-30	lineage	ERV-1.Zeta.W9P.30
+HERV-9	lineage	ERV-1.Zeta.W9P.9
+HERV-P	lineage	ERV-1.Zeta.W9P.P
+HUERS-P3B	lineage	ERV-1.Zeta.W9P.P
+HERV-W	lineage	ERV-1.Zeta.W9P.W
+HERV-K(HML5)	lineage	ERV-2.Beta.Archaeo.5
+HERV-K(HML6)	lineage	ERV-2.Beta.Archaeo.6
+HERV-K(HML1)	lineage	ERV-2.Beta.K.HML.1
+HERV-K(HML10)	lineage	ERV-2.Beta.K.HML.10
+HERV-K(HML2)	lineage	ERV-2.Beta.K.HML.2
+HERV-K(HML3)	lineage	ERV-2.Beta.K.HML.3
+HERV-K(HML4)	lineage	ERV-2.Beta.K.HML.4
+HERV-K(HML7)	lineage	ERV-2.Beta.K.HML.7
+HERV-K(HML8)	lineage	ERV-2.Beta.K.HML.8
+HERV-K(HML9)	lineage	ERV-2.Beta.K.HML.9
+ERV-L	lineage	ERV-3.Lambda.L.1
+ERV-Le	lineage	ERV-3.Lambda.L.1
+HERV-L	lineage	ERV-3.Lambda.L.1
+HERV-U3	lineage	ERV-3.Lambda.U3.1
+HERV-S	lineage	ERV-3.Sigma.S
+Unclassified	n/a	Unclassified
+HARLEQUIN	sublineage	ERV-1.Eta.E.HQ
+HERV-24b	lineage	ERV-1.Theta.24
+HUERS-P1	lineage	ERV-1.Zeta.W9P.P
+HUERS-P2	lineage	ERV-1.Zeta.W9P.P
+ERV-Lb4	sublineage	ERV-3.Lambda.L.b4
