@@ -1,0 +1,35 @@
+
+# Export ERV lineage reference metadata for manuscript
+# Supplementary Table: Canonical ERV lineage references
+
+console set cmd-output-file-format tab
+console set next-cmd-output-file tabular/manuscript/erv_lineage_references.tsv
+
+list sequence \
+  sequenceID \
+  erv_lineage_reference.erv_lineage.id \
+  erv_lineage_reference.erv_lineage.legacy_name \
+  erv_lineage_reference.erv_lineage.human_erv \
+  erv_lineage_reference.erv_lineage.rv_major_clade.id \
+  erv_lineage_reference.erv_lineage.rv_minor_clade.id \
+  erv_lineage_reference.erv_lineage.rv_genus.id \
+  erv_lineage_reference.erv_lineage.rv_subgenus.id \
+  length \
+  erv_lineage_reference.represented_form \
+  erv_lineage_reference.reference_completeness \
+  erv_lineage_reference.fragment_extent \
+  erv_lineage_reference.derivation_method \
+  erv_lineage_reference.derivation_source \
+  erv_lineage_reference.num_input_sequences \
+  erv_lineage_reference.accession \
+  erv_lineage_reference.pubmed_id \
+  erv_lineage_reference.is_composite \
+  erv_lineage_reference.ltr_lineage_reference.id \
+  erv_lineage_reference.architecture_level \
+  erv_lineage_reference.coding_level \
+  erv_lineage_reference.validation_level \
+  erv_lineage_reference.reconstruction_notes \
+  erv_lineage_reference.curation_notes \
+  -w "erv_lineage_reference.id != null and erv_lineage_reference.reference_role = 'canonical' and erv_lineage_reference.reference_status = 'active'" \
+  -s erv_lineage_reference.erv_lineage.id,sequenceID
+
