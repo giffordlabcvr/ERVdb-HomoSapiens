@@ -84,7 +84,6 @@ var header = String(rawLines.get(0))
 
 var expected = [
   "source_name",
-  "candidate_count",
   "entity_type",
   "erv_lineage_id"
 ];
@@ -113,17 +112,17 @@ for (var i = 1; i < rawLines.size(); i++) {
 
   var c = line.split("\t");
 
-  if (c.length !== 4) {
-    problems.push(
-      "Mapping line " + (i + 1) +
-      ": expected 4 columns"
-    );
-    continue;
+  if (c.length !== 3) {
+	problems.push(
+	  "Mapping line " + (i + 1) +
+	  ": expected 3 columns"
+	);
+	continue;
   }
 
   var source = trim(c[0]);
-  var type = trim(c[2]);
-  var target = trim(c[3]);
+  var type = trim(c[1]);
+  var target = trim(c[2]);
 
   if (!source) {
     problems.push(
