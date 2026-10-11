@@ -35,17 +35,17 @@ module legacyLocusImporter invoke-function loadLegacyLocusFile \
     false
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/legacy/grandi-hml10-hg19.tsv \
-    grandi_hml10_hg19 \
-    29118853 \
+    tabular/legacy/grandi-hml6-hg19.tsv \
+    grandi_hml6_hg19 \
+    31167914 \
     "Homo sapiens" \
     hg19 \
     false
 
 module legacyLocusImporter invoke-function loadLegacyLocusFile \
-    tabular/legacy/grandi-hml6-hg19.tsv \
-    grandi_hml6_hg19 \
-    31167914 \
+    tabular/legacy/grandi-hml10-hg19.tsv \
+    grandi_hml10_hg19 \
+    29118853 \
     "Homo sapiens" \
     hg19 \
     false

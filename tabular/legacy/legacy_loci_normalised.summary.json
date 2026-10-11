@@ -1,0 +1,54 @@
+{
+  "sources": [
+    {
+      "source": "compiled_human_erv_loci_hg19",
+      "input_rows": 142,
+      "accepted": 142,
+      "rejected": 0,
+      "duplicate_legacy_names": 2
+    },
+    {
+      "source": "coffin_hml2_hg19",
+      "input_rows": 91,
+      "accepted": 91,
+      "rejected": 0,
+      "duplicate_legacy_names": 0
+    },
+    {
+      "source": "grandi_hervw_hg19",
+      "input_rows": 29,
+      "accepted": 29,
+      "rejected": 0,
+      "duplicate_legacy_names": 0
+    },
+    {
+      "source": "grandi_hml6_hg19",
+      "input_rows": 66,
+      "accepted": 66,
+      "rejected": 0,
+      "duplicate_legacy_names": 0
+    },
+    {
+      "source": "grandi_hml10_hg19",
+      "input_rows": 10,
+      "accepted": 10,
+      "rejected": 0,
+      "duplicate_legacy_names": 0
+    },
+    {
+      "source": "wang_hervh_hg19",
+      "input_rows": 1225,
+      "accepted": 1225,
+      "rejected": 0,
+      "duplicate_legacy_names": 0
+    },
+    {
+      "source": "hervquant_hg19",
+      "input_rows": 3173,
+      "accepted": 3173,
+      "rejected": 0,
+      "duplicate_legacy_names": 0
+    }
+  ],
+  "invalid_rows": []
+}

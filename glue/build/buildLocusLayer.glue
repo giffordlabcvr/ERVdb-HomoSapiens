@@ -54,20 +54,20 @@ run script glue/build/loadErvLocusLtrAssociations.js
 # Load source-specific provenance records.
 #run file glue/build/loadErvLocusProvenance.glue
 
-# =========================================================================
-# 5. MISSILLAC IDENTIFIER ASSIGNMENT
-# =========================================================================
-
-run file glue/build/missillac/applyMissillacNames.glue
-
 # -------------------------------------------------------------------------
-# 6. Create locus alignments
+# 5. Create locus alignments
 # -------------------------------------------------------------------------
 
 run file glue/build/hervAlignmentSteps.glue
 
 # =========================================================================
-# 8. LOCUS-LAYER SUMMARY AND VALIDATION
+# 6. MISSILLAC IDENTIFIER ASSIGNMENT
+# =========================================================================
+
+run file glue/build/missillac/applyMissillacNames.glue
+
+# =========================================================================
+# 7. LOCUS-LAYER SUMMARY AND VALIDATION
 # =========================================================================
 
 # Summarise and check the completed locus layer.
