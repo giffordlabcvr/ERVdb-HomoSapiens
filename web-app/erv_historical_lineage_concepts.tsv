@@ -1,0 +1,179 @@
+historical_name	historical_full_name	recorded_name_source	historical_definition_or_scope	historical_source_citation	historical_reference_sequences	corresponding_ervdb_lineage_ids	ervdb_legacy_names	ervdb_entity_types	ervdb_statuses	human_erv	correspondence_relationship	reconciliation_evidence	reconciliation_supporting_references	ervdb_reference_sequences	ervdb_reference_accessions	ervdb_reference_pubmed_ids	ervdb_reference_derivation	ervdb_reference_notes	curator_notes	export_name_types
+ADP-pol		repbase				ERV-1.Iota.ADP	HERV-ADP	lineage	accepted	TRUE				lineage/HERV-ADP			method=consensus	majority_consensus		alias
+BAEV	Baboon endogenous virus					ERV-1-Gamma.BR.1	BAEV	lineage	accepted	FALSE				lineage/BAEV	AB705393		method=consensus			legacy_name
+CERV-1	Pan troglodytes endogenous retrovirus 1					ERV-1-Gamma.Mega.1	CERV-1	lineage	accepted	FALSE				lineage/CERV-1			method=consensus			legacy_name
+CERV-2	chimpanzee endogenous retrovirus 2					ERV-1-Gamma.BR.2	CERV-2	lineage	accepted	FALSE				lineage/CERV-2			method=consensus			legacy_name
+Ceratotherium-Rb	rhino endogenous retrovirus Rb					ERV-1-Rho.Rb.2	Ceratotherium-Rb	lineage	accepted	FALSE				lineage/Ceratotherium-Rb			method=consensus	most_intact		legacy_name
+CfERV	Canis familiaris endogenous gammaretrovirus					ERV-1-Gamma.Mega.2	CfERV	lineage	accepted	FALSE				lineage/CfERV		23021955	method=consensus			legacy_name
+CfERV-Fc	Canis familiaris endogenous retrovirus Fc					ERV-1-Zeta.HF.Fc.3	CfERV-Fc	lineage	accepted	FALSE				lineage/CfERV-Fc		30845962	method=consensus			legacy_name
+ChrEFV	Chrysochloris endogenous foamy virus					ERV-3.Spuma.Mammal.Chrysochloris	ChrEFV	lineage	accepted	FALSE				lineage/ChrEFV			method=representative_locus	majority_consensus		legacy_name
+CoeEFV	coelocanth endogenous foamy virus					ERV-3.Spuma.Coelocanth	CoeEFV	lineage	accepted	FALSE				lineage/CoeEFV			method=representative_locus	most_intact		legacy_name
+DELV	dermopteran endogenous lentivirus					ERV-2-Lenti.Archaeo.Dermoptera	DELV	lineage	accepted	FALSE				lineage/DELV		25280529	method=consensus	majority_consensus		legacy_name
+Delta.3-MurAur	Murina endogenous deltaretrovirus					ERV-2-Delta.Chiropt.3	Delta.3-MurAur	lineage	accepted	FALSE				lineage/Delta.3-MurAur		31775783	method=representative_locus	most_intact		legacy_name
+Delta.6-PlaMin	river dolphin endogenous deltaretrovirus					ERV-2-Delta.CetArt.6	Delta.6-PlaMin	lineage	accepted	FALSE				lineage/Delta.6-PlaMin		31775783	method=representative_locus	most_intact		legacy_name
+Delta.9-MolMol	Molossus endogenous deltaretrovirus					ERV-2-Delta.Chiropt.9	Delta.9-MolMol	lineage	accepted	FALSE				lineage/Delta.9-MolMol		31775783	method=representative_locus	most_intact		legacy_name
+ELVmpf		other				ERV-2-Lenti.Neo.Mustelid	MELVmpf	lineage	accepted	FALSE				lineage/MELVmpf		22522310	method=consensus	majority_consensus		alias
+ERV-3		other				ERV-1.Eta.R	HERV-R	lineage	accepted	TRUE				lineage/HERV-R			method=consensus	majority_consensus		alias
+ERV-FTD		other				ERV-1.Iota.I	HERV-I	lineage	accepted	TRUE				lineage/HERV-I			method=consensus	majority_consensus		alias
+ERV-L47	endogenous retrovirus L47					ERVR-3.Sigma.47	ERV-L47	erv_derived_repeat	accepted	TRUE				ervr/ERV-L47			"method=consensus, source=REPBASE"			legacy_name
+ERV-Lb4	endogenous retrovirus Lb4					ERV-3.Lambda.L.1.b4	ERV-Lb4	sublineage	excluded	TRUE				sublineage/ERV-Lb4			"method=consensus, source=REPBASE"			legacy_name
+ERV24_Prim		repbase				ERV-1.Theta.24	HERV-24	lineage	accepted	TRUE				lineage/HERV-24			method=consensus	REPBASE		alias
+ERV3-16A3	ERV3-16A3					ERVR-3.Lambda.16A3	ERV3-16A3	erv_derived_repeat	accepted	TRUE				ervr/ERV3-16A3			"method=consensus, source=REPBASE"			legacy_name
+ERVA		other				ERV-1.Eta.E	HERV-E	lineage	accepted	TRUE				lineage/HERV-E			method=consensus	majority_consensus		alias
+ERVL-B4		repbase				ERV-3.Lambda.L.1.b4	ERV-Lb4	sublineage	excluded	TRUE				sublineage/ERV-Lb4			"method=consensus, source=REPBASE"			alias
+EqERV-Rb	equine endogenous retrovirus Rb					ERV-1-Rho.Rb.3	EqERV-Rb	lineage	accepted	FALSE				lineage/EqERV-Rb			method=consensus	majority_consensus		legacy_name
+EqERV-S	equine endogenous retrovirus S					ERV-3-Sigma.2	EqERV-S	lineage	accepted	FALSE				lineage/EqERV-S			method=consensus	majority_consensus		legacy_name
+EqERV-U3	equine endogenous lambdaretrovirus U3					ERV-3-Lambda.U3.2	EqERV-U3	lineage	accepted	FALSE				lineage/EqERV-U3			method=consensus	majority_consensus		legacy_name
+EqERV-Zeta	equine endogenous zetaretrovirus					ERV-1-Zeta.FRD.5	EqERV-Zeta	lineage	accepted	FALSE				lineage/EqERV-Zeta			method=consensus	majority_consensus		legacy_name
+GLN	murine retrovirus using tRNAGln					ERV-1-Gamma.KG.GLN	GLN	lineage	accepted	FALSE				lineage/GLN		18287236	method=consensus			legacy_name
+GvaELV		other				ERV-2-Lenti.Archaeo.Dermoptera	DELV	lineage	accepted	FALSE				lineage/DELV		25280529	method=consensus	majority_consensus		alias
+HARLEQUIN	HARLEQUIN					ERV-1.Eta.E.HQ	HARLEQUIN	sublineage	excluded	TRUE				sublineage/HARLEQUIN			"method=consensus, source=REPBASE"			legacy_name
+HERV(HS49C23)		retrotector				ERV-1.Theta.Lb	HERV-Lb	lineage	accepted	TRUE				lineage/HERV-Lb		10729147	method=consensus	majority_consensus		alias
+HERV-15	human endogenous retrovirus 15					ERV-1.Eta.15	HERV-15	lineage	accepted	TRUE				lineage/HERV-15		1920638	method=consensus	REPBASE		legacy_name
+HERV-16	human endogenous retrovirus 16					ERVR-3.Lambda.16	HERV-16	erv_derived_repeat	accepted	TRUE				ervr/HERV-16			"method=consensus, source=REPBASE"			legacy_name
+HERV-19	human endogenous retrovirus 19					ERVR-1.Zeta.HF.19	HERV-19	erv_derived_repeat	accepted	TRUE				ervr/HERV-19			"method=consensus, source=REPBASE"			legacy_name
+HERV-24	human endogenous retrovirus 24					ERV-1.Theta.24	HERV-24	lineage	accepted	TRUE				lineage/HERV-24			method=consensus	REPBASE		legacy_name
+HERV-24b	human endogenous retrovirus 24b					ERV-1.Theta.24.b	HERV-24b	sublineage	excluded	TRUE				sublineage/HERV-24b			"method=consensus, source=REPBASE"			legacy_name
+HERV-30	human endogenous retrovirus 30					ERV-1.Zeta.W9P.30	HERV-30	lineage	accepted	TRUE				lineage/HERV-30			method=consensus	majority_consensus		legacy_name
+HERV-4	human endogenous retrovirus 4					ERV-1.Zeta.FRD.4	HERV-4	lineage	accepted	TRUE				lineage/HERV-4			method=consensus	REPBASE		legacy_name
+HERV-46	human endogenous retrovirus 46					ERV-1.Zeta.HF.46	HERV-46	lineage	accepted	TRUE				lineage/HERV-46			method=consensus	REPBASE		legacy_name
+HERV-52	human endogenous retrovirus 52					ERVR-3.Lambda.52	HERV-52	erv_derived_repeat	accepted	TRUE				ervr/HERV-52			"method=consensus, source=REPBASE"			legacy_name
+HERV-57	human endogenous retrovirus 57					ERVR-3.Sigma.57	HERV-57	erv_derived_repeat	accepted	TRUE				ervr/HERV-57			"method=consensus, source=REPBASE"			legacy_name
+HERV-9	human endogenous retrovirus 9					ERV-1.Zeta.W9P.9	HERV-9	lineage	accepted	TRUE				lineage/HERV-9			method=consensus	majority_consensus		legacy_name
+HERV-A		other				ERV-1.Zeta.FRD.66	MER-66	lineage	accepted	TRUE				lineage/MER-66			method=consensus	REPBASE		alias
+HERV-ADP	human endogenous retrovirus ADP					ERV-1.Iota.ADP	HERV-ADP	lineage	accepted	TRUE				lineage/HERV-ADP			method=consensus	majority_consensus		legacy_name
+HERV-E	human endogenous retrovirus E					ERV-1.Eta.E	HERV-E	lineage	accepted	TRUE				lineage/HERV-E			method=consensus	majority_consensus		legacy_name
+HERV-F(XA-34)		other				ERV-1.Zeta.HF.XA.1	HERV-XA	lineage	accepted	TRUE				lineage/HERV-XA			method=consensus	majority_consensus		alias
+HERV-FRD	human endogenous retrovirus FRD					ERV-1.Zeta.FRD.1	HERV-FRD	lineage	accepted	TRUE				lineage/HERV-FRD			method=consensus	reference		legacy_name
+HERV-FTD		other				ERV-1.Iota.I	HERV-I	lineage	accepted	TRUE				lineage/HERV-I			method=consensus	majority_consensus		alias
+HERV-Fa	human endogenous retrovirus F(a)					ERV-1.Zeta.HF.Fa.1	HERV-Fa	lineage	accepted	TRUE				lineage/HERV-Fa			method=consensus	REPBASE		legacy_name
+HERV-Fb	human endogenous retrovirus F(b)					ERV-1.Zeta.HF.Fb.1	HERV-Fb	lineage	accepted	TRUE				lineage/HERV-Fb			method=consensus	REPBASE		legacy_name
+HERV-Fc		repbase				ERV-1.Zeta.HF.Fc.1; ERV-1.Zeta.HF.Fc.2	HERV-Fc1; HERV-Fc2	lineage	accepted	TRUE				lineage/HERV-Fc1; lineage/HERV-Fc2			method=consensus	REPBASE		alias
+HERV-Fc1	human endogenous retrovirus F(c) 1					ERV-1.Zeta.HF.Fc.1	HERV-Fc1	lineage	accepted	TRUE				lineage/HERV-Fc1			method=consensus	REPBASE		legacy_name
+HERV-Fc2	human endogenous retrovirus F(c) 2					ERV-1.Zeta.HF.Fc.2	HERV-Fc2	lineage	accepted	TRUE				lineage/HERV-Fc2			method=consensus	REPBASE		legacy_name
+HERV-G25	human endogenous retrovirus G25					ERVR-1.Zeta.W9P.P.G25	HERV-G25	erv_derived_repeat	accepted	TRUE				ervr/HERV-G25			"method=consensus, source=REPBASE"			legacy_name
+HERV-H	human endogenous retrovirus H					ERV-1.Zeta.HF.H.1	HERV-H	lineage	accepted	TRUE				lineage/HERV-H			method=consensus	majority_consensus		legacy_name
+HERV-I	human endogenous retrovirus I					ERV-1.Iota.I	HERV-I	lineage	accepted	TRUE				lineage/HERV-I			method=consensus	majority_consensus		legacy_name
+HERV-IP		other				ERV-1.Iota.I	HERV-I	lineage	accepted	TRUE				lineage/HERV-I			method=consensus	majority_consensus		alias
+HERV-IP-T47D		other				ERV-1.Iota.I	HERV-I	lineage	accepted	TRUE				lineage/HERV-I			method=consensus	majority_consensus		alias
+HERV-K-HML1	human endogenous retrovirus K HML1					ERV-2.Beta.K.HML.1	HERV-K-HML1	lineage	accepted	TRUE				lineage/HERV-K-HML1		7692084	method=consensus	REPBASE		legacy_name
+HERV-K-HML10	human endogenous retrovirus K HML10					ERV-2.Beta.K.HML.10	HERV-K-HML10	lineage	accepted	TRUE				lineage/HERV-K-HML10		19540319	method=consensus	majority_consensus		legacy_name
+HERV-K-HML2	human endogenous retrovirus K HML2					ERV-2.Beta.K.HML.2	HERV-K-HML2	lineage	accepted	TRUE				lineage/HERV-K-HML2		7692084	method=ancestral_reconstruction	maximum likelihood		legacy_name
+HERV-K-HML3	human endogenous retrovirus K HML3					ERV-2.Beta.K.HML.3	HERV-K-HML3	lineage	accepted	TRUE				lineage/HERV-K-HML3		7692084	method=consensus	REPBASE		legacy_name
+HERV-K-HML4	human endogenous retrovirus K HML4					ERV-2.Beta.K.HML.4	HERV-K-HML4	lineage	accepted	TRUE				lineage/HERV-K-HML4		7692084	method=consensus	majority_consensus		legacy_name
+HERV-K-HML5	human endogenous retrovirus K HML5					ERV-2.Beta.Archaeo.5	HERV-K-HML5	lineage	accepted	TRUE				lineage/HERV-K-HML5		15280487	method=consensus	majority_consensus		legacy_name
+HERV-K-HML6	endogenous retrovirus K HML6 type 1a; endogenous retrovirus K HML6 type 1b; human endogenous retrovirus K HML6					ERV-2.Beta.Archaeo.6; ERV-2.Beta.Archaeo.6.1a; ERV-2.Beta.Archaeo.6.1b	HERV-K-HML6	lineage; sublineage	accepted; excluded	TRUE				lineage/HERV-K-HML6; sublineage/HERV-K-HML6-1a; sublineage/HERV-K-HML6-1b		31167914	"method=ancestral_reconstruction, source=majority_consensus; method=consensus"	majority_consensus		legacy_name
+HERV-K-HML7	human endogenous retrovirus K HML7					ERV-2.Beta.K.HML.7	HERV-K-HML7	lineage	accepted	TRUE				lineage/HERV-K-HML7		9934709	method=consensus	majority_consensus		legacy_name
+HERV-K-HML8	human endogenous retrovirus K HML8					ERV-2.Beta.K.HML.8	HERV-K-HML8	lineage	accepted	TRUE				lineage/HERV-K-HML8		9934709	method=consensus	majority_consensus		legacy_name
+HERV-K-HML9	human endogenous retrovirus K HML9					ERV-2.Beta.K.HML.9	HERV-K-HML9	lineage	accepted	TRUE				lineage/HERV-K-HML9		19540319	method=consensus	majority_consensus		legacy_name
+HERV-Kb		other				ERV-1.Zeta.FRD.66	MER-66	lineage	accepted	TRUE				lineage/MER-66			method=consensus	REPBASE		alias
+HERV-L	human endogenous retrovirus L					ERV-3.Lambda.L.1	HERV-L	lineage	accepted	TRUE				lineage/HERV-L		7543594	method=consensus	REPBASE		legacy_name
+HERV-L40	human endogenous retrovirus L40					ERVR-3.Lambda.40	HERV-L40	erv_derived_repeat	accepted	TRUE				ervr/HERV-L40			"method=consensus, source=REPBASE"			legacy_name
+HERV-L53	human endogenous retrovirus L53					ERVR-3.Lambda.53	HERV-L53	erv_derived_repeat	accepted	TRUE				ervr/HERV-L53			"method=consensus, source=REPBASE"			legacy_name
+HERV-L74	human endogenous retrovirus L74					ERVR-3.Lambda.74	HERV-L74	erv_derived_repeat	accepted	TRUE				ervr/HERV-L74			"method=consensus, source=REPBASE"			legacy_name
+HERV-Lb	human endogenous retrovirus L(b)					ERV-1.Theta.Lb	HERV-Lb	lineage	accepted	TRUE				lineage/HERV-Lb		10729147	method=consensus	majority_consensus		legacy_name
+HERV-P	human endogenous retrovirus P					ERV-1.Zeta.W9P.P	HERV-P	lineage	accepted	TRUE				lineage/HERV-P			method=consensus	REPBASE		legacy_name
+HERV-Pb	human endogenous retrovirus Pb					ERV-1.Iota.I.Pb	HERV-Pb	uncertain	excluded	TRUE				sublineage/HERV-Pb			"method=representative_locus, source=reference"			legacy_name
+HERV-R	human endogenous retrovirus R					ERV-1.Eta.R	HERV-R	lineage	accepted	TRUE				lineage/HERV-R			method=consensus	majority_consensus		legacy_name
+HERV-Rb	human endogenous retrovirus R(b)					ERV-1.Rho.Rb.1	HERV-Rb	lineage	accepted	TRUE				lineage/HERV-Rb		10729147	method=consensus	majority_consensus		legacy_name
+HERV-S	human endogenous retrovirus S					ERV-3.Sigma.S	HERV-S	lineage	accepted	TRUE				lineage/HERV-S		10729147	method=consensus	majority_consensus		legacy_name
+HERV-T	human endogenous retrovirus T					ERV-1.Gamma.TR.T	HERV-T	lineage	accepted	TRUE				lineage/HERV-T		10729147	method=consensus	majority_consensus		legacy_name
+HERV-T2	human endogenous retrovirus T2					ERV-1.Gamma.TR.T.2	HERV-T2	sublineage	excluded	TRUE				sublineage/HERV-T2		28397686	"method=ancestral_reconstruction, source=majority_consensus"			legacy_name
+HERV-T3	human endogenous retrovirus T3					ERV-1.Gamma.TR.T.3	HERV-T3	sublineage	excluded	TRUE				sublineage/HERV-T3		28397686	"method=ancestral_reconstruction, source=majority_consensus"			legacy_name
+HERV-U3	human endogenous retrovirus U3					ERV-3.Lambda.U3.1	HERV-U3	lineage	accepted	TRUE				lineage/HERV-U3			method=consensus	majority_consensus		legacy_name
+HERV-V	human endogenous retrovirus V					ERV-1.Rho.V	HERV-V	uncertain	excluded	TRUE				sublineage/HERV-V			"method=consensus, source=reference"			legacy_name
+HERV-W	human endogenous retrovirus W					ERV-1.Zeta.W9P.W	HERV-W	lineage	accepted	TRUE				lineage/HERV-W		9882319	method=consensus	majority_consensus		legacy_name
+HERV-W-SG1	human endogenous retrovirus W SG1					ERV-1.Zeta.W9P.W.SG1	HERV-W-SG1	sublineage	excluded	TRUE				sublineage/HERV-W-SG1			"method=consensus, source=majority_consensus"			legacy_name
+HERV-W-SG2	human endogenous retrovirus W SG2					ERV-1.Zeta.W9P.W.SG2	HERV-W-SG2	sublineage	excluded	TRUE				sublineage/HERV-W-SG2			"method=consensus, source=majority_consensus"			legacy_name
+HERV-XA	human endogenous retrovirus XA					ERV-1.Zeta.HF.XA.1	HERV-XA	lineage	accepted	TRUE				lineage/HERV-XA			method=consensus	majority_consensus		legacy_name
+HERV-Z69907		other				ERV-1.Zeta.FRD.66	MER-66	lineage	accepted	TRUE				lineage/MER-66			method=consensus	REPBASE		alias
+HERV-hako	endogenous retrovirus Hako					ERV-2.Beta.Archaeo.9	HERV-hako	lineage	accepted	TRUE				lineage/HERV-hako			method=consensus	majority_consensus		legacy_name
+HERV17		repbase				ERV-1.Zeta.W9P.W	HERV-W	lineage	accepted	TRUE				lineage/HERV-W		9882319	method=consensus	majority_consensus		alias
+HERV18		repbase				ERV-3.Sigma.S	HERV-S	lineage	accepted	TRUE				lineage/HERV-S		10729147	method=consensus	majority_consensus		alias
+HERV3		repbase				ERV-1.Eta.R	HERV-R	lineage	accepted	TRUE				lineage/HERV-R			method=consensus	majority_consensus		alias
+HERVE_a		repbase				ERV-1.Eta.E	HERV-E	lineage	accepted	TRUE				lineage/HERV-E			method=consensus	majority_consensus		alias
+HERVFH19		repbase				ERV-1.Zeta.HF.Fa.1	HERV-Fa	lineage	accepted	TRUE				lineage/HERV-Fa			method=consensus	REPBASE		alias
+HERVFH21		repbase				ERV-1.Zeta.HF.XA.1	HERV-XA	lineage	accepted	TRUE				lineage/HERV-XA			method=consensus	majority_consensus		alias
+HERVH48		repbase				ERV-1.Zeta.HF.Fb.1	HERV-Fb	lineage	accepted	TRUE				lineage/HERV-Fb			method=consensus	REPBASE		alias
+HERVIP10F		other				ERV-1.Iota.I	HERV-I	lineage	accepted	TRUE				lineage/HERV-I			method=consensus	majority_consensus		alias
+HERVIP10FH		repbase				ERV-1.Iota.I	HERV-I	lineage	accepted	TRUE				lineage/HERV-I			method=consensus	majority_consensus		alias
+HERVK		repbase				ERV-2.Beta.K.HML.2	HERV-K-HML2	lineage	accepted	TRUE				lineage/HERV-K-HML2		7692084	method=ancestral_reconstruction	maximum likelihood		alias
+HERVK11		repbase				ERV-2.Beta.K.HML.8	HERV-K-HML8	lineage	accepted	TRUE				lineage/HERV-K-HML8		9934709	method=consensus	majority_consensus		alias
+HERVK11D		repbase				ERV-2.Beta.K.HML.7	HERV-K-HML7	lineage	accepted	TRUE				lineage/HERV-K-HML7		9934709	method=consensus	majority_consensus		alias
+HERVK13		repbase				ERV-2.Beta.K.HML.4	HERV-K-HML4	lineage	accepted	TRUE				lineage/HERV-K-HML4		7692084	method=consensus	majority_consensus		alias
+HERVK14		repbase				ERV-2.Beta.K.HML.1	HERV-K-HML1	lineage	accepted	TRUE				lineage/HERV-K-HML1		7692084	method=consensus	REPBASE		alias
+HERVK14C		repbase				ERV-2.Beta.K.HML.9	HERV-K-HML9	lineage	accepted	TRUE				lineage/HERV-K-HML9		19540319	method=consensus	majority_consensus		alias
+HERVK22		repbase				ERV-2.Beta.Archaeo.5	HERV-K-HML5	lineage	accepted	TRUE				lineage/HERV-K-HML5		15280487	method=consensus	majority_consensus		alias
+HERVK3		repbase				ERV-2.Beta.Archaeo.6	HERV-K-HML6	lineage	accepted	TRUE				lineage/HERV-K-HML6			method=consensus	majority_consensus		alias
+HERVK9		repbase				ERV-2.Beta.K.HML.3	HERV-K-HML3	lineage	accepted	TRUE				lineage/HERV-K-HML3		7692084	method=consensus	REPBASE		alias
+HERVKC4		repbase				ERV-2.Beta.K.HML.10	HERV-K-HML10	lineage	accepted	TRUE				lineage/HERV-K-HML10		19540319	method=consensus	majority_consensus		alias
+HERVL66		repbase				ERV-3.Lambda.U3.1	HERV-U3	lineage	accepted	TRUE				lineage/HERV-U3			method=consensus	majority_consensus		alias
+HERVP71A		repbase				ERV-1.Iota.ADP	HERV-ADP	lineage	accepted	TRUE				lineage/HERV-ADP			method=consensus	majority_consensus		alias
+HERVS71		repbase				ERV-1.Gamma.TR.T	HERV-T	lineage	accepted	TRUE				lineage/HERV-T		10729147	method=consensus	majority_consensus		alias
+HRV-5		other				ERV-2-Beta.Lago.H	RERV-H	lineage	accepted	FALSE				lineage/RERV-H	AF480925		method=consensus			alias
+HUERS-P1	HUERS-P1					ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	excluded	TRUE				sublineage/HUERS-P1		2825129	"method=consensus, source=REPBASE"			legacy_name
+HUERS-P2	HUERS-P2					ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	excluded	TRUE				sublineage/HUERS-P2		2825129	"method=consensus, source=REPBASE"			legacy_name
+HUERS-P3		other				ERV-1.Zeta.W9P.P	HERV-P	lineage	accepted	TRUE				lineage/HERV-P			method=consensus	REPBASE		alias
+HUERS-P3		repbase				ERV-1.Zeta.W9P.P	HERV-P	lineage	accepted	TRUE				lineage/HERV-P			method=consensus	REPBASE		alias
+HUERS-P3B		repbase				ERV-1.Zeta.W9P.P	HERV-P	lineage	accepted	TRUE				lineage/HERV-P			method=consensus	REPBASE		alias
+HUMRIRT		other				ERV-1.Eta.15	HERV-15	lineage	accepted	TRUE				lineage/HERV-15		1920638	method=consensus	REPBASE		alias
+Hs-5		other				ERV-1.Eta.E	HERV-E	lineage	accepted	TRUE				lineage/HERV-E			method=consensus	majority_consensus		alias
+HuRRS-P		repbase				ERV-1.Zeta.W9P.P	HERV-P	lineage	accepted	TRUE				lineage/HERV-P			method=consensus	REPBASE		alias
+IAP		other				ERV-2-Beta.A.IAP	IAPE	lineage	accepted	FALSE				lineage/IAPE		18256233	method=consensus	most_intact		alias
+IAPE	intracisternal A-type particle					ERV-2-Beta.A.IAP	IAPE	lineage	accepted	FALSE				lineage/IAPE		18256233	method=consensus	most_intact		legacy_name
+KwERV	killer whale endogenous gammaretrovirus					ERV-1-Gamma.KG.4	KwERV	lineage	accepted	FALSE				lineage/KwERV	GQ222416		method=consensus			legacy_name
+LOR-1	LOR-1					ERVR-1.Theta.24.LOR1	LOR-1	erv_derived_repeat	accepted	TRUE				ervr/LOR-1			"method=consensus, source=REPBASE"			legacy_name
+LTR-43	LTR-43					ERVR-1.Zeta.43	LTR-43	erv_derived_repeat	accepted	TRUE				ervr/LTR-43			"method=consensus, source=REPBASE"			legacy_name
+MELVmpf	mustelid endogenous lentivirus					ERV-2-Lenti.Neo.Mustelid	MELVmpf	lineage	accepted	FALSE				lineage/MELVmpf		22522310	method=consensus	majority_consensus		legacy_name
+MER-101	medium reiteration frequency repeat 101					ERVR-1.Theta.24.101	MER-101	erv_derived_repeat	accepted	TRUE				ervr/MER-101			"method=consensus, source=REPBASE"			legacy_name
+MER-110	medium reiteration frequency repeat 110					ERVR-1.Theta.24.110	MER-110	erv_derived_repeat	accepted					ervr/MER-110			"method=consensus, source=REPBASE"			legacy_name
+MER-34	medium reiteration frequency repeat 34					ERV-1.Valera.34	MER-34	lineage	accepted	TRUE				lineage/MER-34			method=consensus	REPBASE		legacy_name
+MER-52A	medium reiteration frequency repeat 52A					ERVR-1.Zeta.HF.52A	MER-52A	erv_derived_repeat	accepted	TRUE				ervr/MER-52A			"method=consensus, source=REPBASE"			legacy_name
+MER-66	medium reiteration frequency repeat 66					ERV-1.Zeta.FRD.66	MER-66	lineage	accepted	TRUE				lineage/MER-66			method=consensus	REPBASE		legacy_name
+MER-70	medium reiteration frequency repeat 70					ERVR-3.Lambda.70	MER-70	erv_derived_repeat	accepted	TRUE				ervr/MER-70			"method=consensus, source=REPBASE"			legacy_name
+MER-76	medium reiteration frequency repeat 76					ERVR-3.Lambda.76	MER-76	erv_derived_repeat	accepted	TRUE				ervr/MER-76			"method=consensus, source=REPBASE"			legacy_name
+MER-83A	medium reiteration frequency repeat 83A					ERVR-1.Zeta.83A	MER-83A	erv_derived_repeat	accepted	TRUE				ervr/MER-83A			"method=consensus, source=REPBASE"			legacy_name
+MER-83B	medium reiteration frequency repeat 83B					ERVR-1.Zeta.83B	MER-83B	erv_derived_repeat	accepted	TRUE				ervr/MER-83B			"method=consensus, source=REPBASE"			legacy_name
+MER-84	medium reiteration frequency repeat 84					ERVR-1.Zeta.84	MER-84	erv_derived_repeat	accepted	TRUE				ervr/MER-84			"method=consensus, source=REPBASE"			legacy_name
+MER-89	medium reiteration frequency repeat 89					ERVR-1.Theta.24.89	MER-89	erv_derived_repeat	accepted	TRUE				ervr/MER-89			"method=consensus, source=REPBASE"			legacy_name
+MER51		repbase				ERV-1.Zeta.FRD.4	HERV-4	lineage	accepted	TRUE				lineage/HERV-4			method=consensus	REPBASE		alias
+MSRV		repbase				ERV-1.Zeta.W9P.W	HERV-W	lineage	accepted	TRUE				lineage/HERV-W		9882319	method=consensus	majority_consensus		alias
+MinERVa	Miniopterus endogenous deltaretrovirus					ERV-2-Delta.Chiropt.1	MinERVa	lineage	accepted	FALSE				lineage/MinERVa		28280099	method=representative_locus	most_intact		legacy_name
+MuERV-L	Mus musculus endogenous retroviral sequence MuERV-L					ERV-3-Lambda.L.2	MuERV-L	lineage	accepted	FALSE				lineage/MuERV-L	Y12713	9188643	method=ancestral_reconstruction	maximum likelihood		legacy_name
+NP-2		other				ERV-1.Eta.E	HERV-E	lineage	accepted	TRUE				lineage/HERV-E			method=consensus	majority_consensus		alias
+PABL_A		repbase				ERV-1.Rho.Rb.1	HERV-Rb	lineage	accepted	TRUE				lineage/HERV-Rb		10729147	method=consensus	majority_consensus		alias
+PABL_B		repbase				ERV-1.Rho.Rb.1	HERV-Rb	lineage	accepted	TRUE				lineage/HERV-Rb		10729147	method=consensus	majority_consensus		alias
+PERV-C	porcine endogenous retrovirus C-C105					ERV-1-Gamma.KG.3	PERV-C	lineage	accepted	FALSE				lineage/PERV-C			method=consensus			legacy_name
+PERV-E	porcine endogenous retrovirus E					ERV-1.Eta.2	PERV-E	lineage	accepted	FALSE				lineage/PERV-E	AF356697		method=consensus			legacy_name
+PRIMA-41	human endogenous retrovirus PRIMA-41					ERV-1.Zeta.FRD.41	PRIMA-41	lineage	accepted	TRUE				lineage/PRIMA-41			method=consensus	REPBASE		legacy_name
+PRIMA4		repbase				ERV-1.Theta.Lb	HERV-Lb	lineage	accepted	TRUE				lineage/HERV-Lb		10729147	method=consensus	majority_consensus		alias
+PSIV1		other				ERV-2-Lenti.Neo.Prosimian1	pSIVgml	lineage	accepted	FALSE				lineage/pSIVgml		19075221	method=consensus	majority_consensus		alias
+PSIV2	prosimian immunodeficieny virus 2					ERV-2-Lenti.Neo.Prosimian2	PSIV2	lineage	accepted	FALSE				lineage/PSIV2		19300488	method=consensus	most_intact		legacy_name
+PTR5		repbase				ERV-1.Zeta.W9P.9	HERV-9	lineage	accepted	TRUE				lineage/HERV-9			method=consensus	majority_consensus		alias
+PyERV	Python molurus endogenous retrovirus					ERV-2-Beta.Reptile.Py1	PyERV	lineage	accepted	FALSE				lineage/PyERV	AF500296	12097574	method=consensus			legacy_name
+RD114	RD114 retrovirus					ERV-1-Gamma.BR.114	RD114	lineage	accepted	FALSE				lineage/RD114	AB705393		method=consensus			legacy_name
+RELIK	rabbit endogenous lentivirus type K					ERV-2-Lenti.Neo.Leporid	RELIK	lineage	accepted	FALSE				lineage/RELIK		19070882	method=consensus	majority_consensus		legacy_name
+RERV-H	Oryctolagus cuniculus clone A rabbit endogenous retrovirus H					ERV-2-Beta.Lago.H	RERV-H	lineage	accepted	FALSE				lineage/RERV-H	AF480925		method=consensus			legacy_name
+RHERVI		other				ERV-1.Eta.15	HERV-15	lineage	accepted	TRUE				lineage/HERV-15		1920638	method=consensus	REPBASE		alias
+RRHERV-I		other				ERV-1.Eta.15	HERV-15	lineage	accepted	TRUE				lineage/HERV-15		1920638	method=consensus	REPBASE		alias
+RTVL-I		other				ERV-1.Eta.15	HERV-15	lineage	accepted	TRUE				lineage/HERV-15		1920638	method=consensus	REPBASE		alias
+SloEFV	sloth endogenous foamy virus					ERV-3.Spuma.Mammal.Pilosa	SloEFV	lineage	accepted	FALSE				lineage/SloEFV		19762636	method=consensus	majority_consensus		legacy_name
+SpELV	springhare endogenous lentivirus					ERV-2-Lenti.Archaeo.Pedetes	SpELV	lineage	accepted	FALSE				lineage/SpELV		36539757	method=consensus	majority_consensus		legacy_name
+SpuEFV		other				ERV-3.Spuma.Sphenodon	Spuma-Spu	lineage	accepted	FALSE				lineage/Spuma-Spu		31336856	method=consensus	majority_consensus		alias
+Spuma-Ame.b	axolotl endogenous foamy virus					ERV-3.Spuma.Amph.Ameb	Spuma-Ame.b	lineage	accepted	FALSE				lineage/Spuma-Ame.b		33910951	method=consensus			legacy_name
+Spuma-Rbi	caecilian endogenous foamy virus					ERV-3.Spuma.Amph.Rbi	Spuma-Rbi	lineage	accepted	FALSE				lineage/Spuma-Rbi		33910951	method=consensus			legacy_name
+Spuma-Spu	tuatara endogenous foamy virus					ERV-3.Spuma.Sphenodon	Spuma-Spu	lineage	accepted	FALSE				lineage/Spuma-Spu		31336856	method=consensus	majority_consensus		legacy_name
+TgERV-F	Taeniopygia guttata endogenous retrovirus F					ERV-2-Alpha.TGF.1	TgERV-F	lineage	accepted	FALSE				lineage/TgERV-F		24352464	method=consensus	majority_consensus		legacy_name
+hepsi1		retrotector				ERV-1.Theta.Lb	HERV-Lb	lineage	accepted	TRUE				lineage/HERV-Lb		10729147	method=consensus	majority_consensus		alias
+hepsi2		retrotector				ERV-1.Theta.24	HERV-24	lineage	accepted	TRUE				lineage/HERV-24			method=consensus	REPBASE		alias
+hepsi3		retrotector				ERV-1.Theta.Lb	HERV-Lb	lineage	accepted	TRUE				lineage/HERV-Lb		10729147	method=consensus	majority_consensus		alias
+herv_rb		retrotector				ERV-1.Eta.R	HERV-R	lineage	accepted	TRUE				lineage/HERV-R			method=consensus	majority_consensus		alias
+hervr		retrotector				ERV-1.Rho.Rb.1	HERV-Rb	lineage	accepted	TRUE				lineage/HERV-Rb		10729147	method=consensus	majority_consensus		alias
+hml5		retrotector				ERV-2.Beta.Archaeo.5	HERV-K-HML5	lineage	accepted	TRUE				lineage/HERV-K-HML5		15280487	method=consensus	majority_consensus		alias
+hml6		retrotector				ERV-2.Beta.Archaeo.6	HERV-K-HML6	lineage	accepted	TRUE				lineage/HERV-K-HML6			method=consensus	majority_consensus		alias
+huersp1		retrotector				ERV-1.Zeta.W9P.P.1	HUERS-P1	sublineage	excluded	TRUE				sublineage/HUERS-P1		2825129	"method=consensus, source=REPBASE"			alias
+huersp2		retrotector				ERV-1.Zeta.W9P.P.2	HUERS-P2	sublineage	excluded	TRUE				sublineage/HUERS-P2		2825129	"method=consensus, source=REPBASE"			alias
+mysTR	Reithrodontomys fulvescens endogenous virus mysTR					ERV-2-Beta.K.Mys.TR	mysTR	lineage	accepted	FALSE				lineage/mysTR			method=consensus			legacy_name
+pSIVgml	prosimian immunodeficieny virus (grey mouse lemur)					ERV-2-Lenti.Neo.Prosimian1	pSIVgml	lineage	accepted	FALSE				lineage/pSIVgml		19075221	method=consensus	majority_consensus		legacy_name
+pabl		retrotector				ERV-1.Rho.Rb.1	HERV-Rb	lineage	accepted	TRUE				lineage/HERV-Rb		10729147	method=consensus	majority_consensus		alias
+ptERV		other				ERV-1-Gamma.Mega.1	CERV-1	lineage	accepted	FALSE				lineage/CERV-1			method=consensus			alias
