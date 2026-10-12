@@ -37,6 +37,22 @@ This layered design enables direct comparison of ERV diversity across species an
 
 ## Data for ERV Navigator
 
+ERV Navigator is an interactive, publicly accessible resource for exploring human endogenous retroviruses (HERVs) within a unified evolutionary and genomic framework.
+
+It addresses a longstanding problem in HERV research: existing annotation resources use different approaches to identify, classify and name ERV-derived sequences, making it difficult to compare results across studies.
+
+ERV Navigator brings these resources together by connecting three principal types of information:
+
+1.  Evolutionary classification: ERV lineages are organised according to their phylogenetic relationships, including relationships to exogenous retroviruses and non-human ERVs.
+
+2.  Reference sequences: Curated sequences provide models of ancestral proviral genome organisation and common coordinates for comparing related insertions.
+
+3.  Genomic loci: Individual HERV insertions are assigned standardised identifiers and linked to evolutionary classifications, genomic coordinates, structural annotations and historical nomenclatures.
+
+The resource allows researchers to browse evolutionary classifications, examine phylogenetic trees, explore individual ERV lineages and genomic loci, compare annotations from existing resources, and access reference sequences and alignments.
+
+### Data contract
+
 Scripts in the [FredHutch/hervdbex](https:/github.com/FredHutch/hervdbex) repository obtain ERV Navigator data from the files listed below. These files constitute the exported ERVdb data interface used by the web application.
 
 The export is organised around three principal entities: **ERV lineages**, **ERV lineage reference sequences**, and **ERV loci**.
