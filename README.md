@@ -35,7 +35,7 @@ This layered design enables direct comparison of ERV diversity across species an
 * * * * *
 
 
-## Data for ERV Navigator
+## Relationship to ERV Navigator
 
 ERV Navigator is an interactive, publicly accessible resource for exploring human endogenous retroviruses (HERVs) within a unified evolutionary and genomic framework.
 
@@ -51,7 +51,7 @@ ERV Navigator brings these resources together by connecting three principal type
 
 The resource allows researchers to browse evolutionary classifications, examine phylogenetic trees, explore individual ERV lineages and genomic loci, compare annotations from existing resources, and access reference sequences and alignments.
 
-### Data contract
+### ERV Navigator data contract
 
 Scripts in the [FredHutch/hervdbex](https:/github.com/FredHutch/hervdbex) repository obtain ERV Navigator data from the files listed below. These files constitute the exported ERVdb data interface used by the web application.
 
