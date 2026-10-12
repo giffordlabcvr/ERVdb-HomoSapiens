@@ -5,8 +5,6 @@
 
 It anchors these loci to the **reconstructed ancestral reference genomes** and **phylogenetic alignments** defined in ERVdb, creating a reproducible framework for studying retroviral diversity within the *Homo sapiens* genome.
 
-* * * * *
-
 ## Purpose and scope  
 
 HERVdb aims to:  
@@ -17,8 +15,6 @@ HERVdb aims to:
 - and **Provide a foundation** for comparative ERV genomics, population studies, and locus-level annotation.
 
 > In essence, HERVdb represents the **human instantiation** of the ERVdb scaffold — turning reconstructed viral lineages into a detailed, locus-resolved catalogue of the HERV complement in the human genome.
-
-* * * * *
 
 ## Scientific background  
 
@@ -31,9 +27,6 @@ HERVdb organizes these relationships explicitly:
 - Loci that are **mosaic**, **unresolved**, or **MaLR-related** are flagged and routed to dedicated holding alignments for future curation.  
 
 This layered design enables direct comparison of ERV diversity across species and lineages while preserving the unique genomic context of human loci.
-
-* * * * *
-
 
 ## Relationship to ERV Navigator
 
