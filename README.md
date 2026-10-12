@@ -30,7 +30,7 @@ This layered design enables direct comparison of ERV diversity across species an
 
 ## Relationship to ERV Navigator
 
-ERV Navigator is an interactive, publicly accessible resource for exploring human endogenous retroviruses (HERVs) within a unified evolutionary and genomic framework.
+**[ERV Navigator](https://ervnavigator.fredhutch.org)** is an interactive, publicly accessible resource for exploring human endogenous retroviruses (HERVs) within a unified evolutionary and genomic framework.
 
 It addresses a longstanding problem in HERV research: existing annotation resources use different approaches to identify, classify and name ERV-derived sequences, making it difficult to compare results across studies.
 
