@@ -43,11 +43,11 @@ It addresses a longstanding problem in HERV research: existing annotation resour
 
 ERV Navigator brings these resources together by connecting three principal types of information:
 
-1.  Evolutionary classification: ERV lineages are organised according to their phylogenetic relationships, including relationships to exogenous retroviruses and non-human ERVs.
+1.  **Evolutionary classification**: ERV lineages are organised according to their phylogenetic relationships, including relationships to exogenous retroviruses and non-human ERVs.
 
-2.  Reference sequences: Curated sequences provide models of ancestral proviral genome organisation and common coordinates for comparing related insertions.
+2.  **Reference sequences**: Curated sequences provide models of ancestral proviral genome organisation and common coordinates for comparing related insertions.
 
-3.  Genomic loci: Individual HERV insertions are assigned standardised identifiers and linked to evolutionary classifications, genomic coordinates, structural annotations and historical nomenclatures.
+3.  **Genomic loci**: Individual HERV insertions are assigned standardised identifiers and linked to evolutionary classifications, genomic coordinates, structural annotations and historical nomenclatures.
 
 The resource allows researchers to browse evolutionary classifications, examine phylogenetic trees, explore individual ERV lineages and genomic loci, compare annotations from existing resources, and access reference sequences and alignments.
 
