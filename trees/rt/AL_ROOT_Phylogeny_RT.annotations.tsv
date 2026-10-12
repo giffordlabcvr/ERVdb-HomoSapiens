@@ -1,0 +1,129 @@
+taxon	sequenceID	name	species	full_name	subfamily	genus	subgenus
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AB923518_SFVjmac_RT	AB923518_SFVjmac_RT	SFVjmac	Simiispumavirus macfus	simian foamy virus Macaca fuscata	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033807_MMTV_RT	AF033807_MMTV_RT	MMTV	Betaretrovirus murmamtum	mouse mammary tumor virus	Orthoretrovirinae	Betaretrovirus	Btype
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033808_RSV_RT	AF033808_RSV_RT	RSV	Alpharetrovirus avirousar	Rous sarcoma virus	Orthoretrovirinae	Alpharetrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033811_MLV_RT	AF033811_MLV_RT	MLV	Gammaretrovirus murleu	Moloney murine leukemia virus	Orthoretrovirinae	Gammaretrovirus	MLV_FeLV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033815_MPMV_RT	AF033815_MPMV_RT	MPMV	Betaretrovirus maspfimon	Mason-Pfizer monkey virus	Orthoretrovirinae	Betaretrovirus	Dtype
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033817_PTLV1_RT	AF033817_PTLV1_RT	PTLV1	Deltaretrovirus priTlym1	primate T-lymphotropic virus 1	Orthoretrovirinae	Deltaretrovirus	Primate
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033818_BLV_RT	AF033818_BLV_RT	BLV	Deltaretrovirus bovleu	bovine leukemia virus	Orthoretrovirinae	Deltaretrovirus	Cetartiodactyl
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033819_HIV1M_RT	AF033819_HIV1M_RT	HIV1M 	Lentivirus humimdef1	human immunodeficiency virus 2	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF033822_WDSV_RT	AF033822_WDSV_RT	WDSV	Epsilonretrovirus waldersar	walleye dermal sarcoma virus	Orthoretrovirinae	Epsilonretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF052723_FeLV_RT	AF052723_FeLV_RT	FeLV	Gammaretrovirus felleu	feline leukemia virus	Orthoretrovirinae	Gammaretrovirus	MLV_FeLV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF133051_WEHV1_RT	AF133051_WEHV1_RT	WEHV1	Epsilonretrovirus walepihyp1	walleye epidermal hyperplasia virus type 1	Orthoretrovirinae	Epsilonretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF133052_WEHV2_RT	AF133052_WEHV2_RT	WEHV2	Epsilonretrovirus walepihyp2	walleye epidermal hyperplasia virus type 2	Orthoretrovirinae	Epsilonretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF151794_Korv_RT	AF151794_Korv_RT	KoRV	Gammaretrovirus koa	koala retrovirus	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF201902_EFV_RT	AF201902_EFV_RT	EFV	Equispumavirus equcab	equine foamy virus Equus caballus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AF356697_PERVE_RT	AF356697_PERVE_RT	PERVE	Gammaretrovirus porConc	porcine endogenous retrovirus E	Orthoretrovirinae	Gammaretrovirus	Eta
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AJ544579_SFVora_RT	AJ544579_SFVora_RT	SFVora	Simiispumavirus ponpygpyg	simian foamy virus Pongo pygmaeus pygmaeus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AJ564746_FFV_RT	AJ564746_FFV_RT	FFV	Felispumavirus felcat	feline foamy virus Felis catus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/AY842951_REV_RT	AY842951_REV_RT	REV	Gammaretrovirus aviretend	reticuloendotheliosis virus	Orthoretrovirinae	Gammaretrovirus	REV
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-rho-set1/Ceratotherium-Rb_RT	Ceratotherium-Rb_RT	Ceratotherium-Rb	Ceratotherium-Rb	rhino endogenous retrovirus Rb	Orthoretrovirinae	Rhoretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/CERV-1_RT	CERV-1_RT	CERV-1	CERV-1	Pan troglodytes endogenous retrovirus 1	Orthoretrovirinae	Gammaretrovirus	BB
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/CERV-2_RT	CERV-2_RT	CERV-2	CERV-2	chimpanzee endogenous retrovirus 2	Orthoretrovirinae	Gammaretrovirus	RD114
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/CfERV-Fc_RT	CfERV-Fc_RT	CfERV-Fc	CfERV-Fc	Canis familiaris endogenous retrovirus Fc	Orthoretrovirinae	Zetaretrovirus	HERVHF
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/CfERV_RT	CfERV_RT	CfERV	CfERV	Canis familiaris endogenous gammaretrovirus	Orthoretrovirinae	Gammaretrovirus	BB
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-spuma-set1/ChrEFV_RT	ChrEFV_RT	ChrEFV	ChrEFV	Chrysochloris endogenous foamy virus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-spuma-set1/CoeEFV_RT	CoeEFV_RT	CoeEFV	CoeEFV	coelocanth endogenous foamy virus	Spumaretrovirinae	Spumavirus	Coelocanth
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-delta-set1/Delta.6-PlaMin_RT	Delta.6-PlaMin_RT	Delta.6-PlaMin	Deltaretrovirus plamin	river dolphin endogenous deltaretrovirus	Orthoretrovirinae	Deltaretrovirus	Cetartiodactyl
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lenti-set1/DELV_RT	DELV_RT	DELV	DELV	dermopteran endogenous lentivirus	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/DQ093792_PTLV3_RT	DQ093792_PTLV3_RT	PTLV3	Deltaretrovirus priTlym3	primate T-lymphotropic virus 3	Orthoretrovirinae	Deltaretrovirus	Primate
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/DQ174103_SSSV_RT	DQ174103_SSSV_RT	SSSV	SSSV	salmon swim bladder sarcoma virus	Orthoretrovirinae	Xiretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/EF488483_PTLV4_RT	EF488483_PTLV4_RT	PTLV4	Deltaretrovirus priTlym4	primate T-lymphotropic virus 4	Orthoretrovirinae	Deltaretrovirus	Primate
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-theta-set1/EqERV-Lb_RT	EqERV-Lb_RT	EqERV-Lb	EqERV-Lb	equine endogenous retrovirus Lb	Orthoretrovirinae	Thetaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lambda-set1/EqERV-L_RT	EqERV-L_RT	EqERV-L	EqERV-L	equine endogenous retrovirus L	Orthoretrovirinae	Lambdaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-rho-set1/EqERV-Rb_RT	EqERV-Rb_RT	EqERV-Rb	EqERV-Rb	equine endogenous retrovirus Rb	Orthoretrovirinae	Rhoretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-sigma-set1/EqERV-S_RT	EqERV-S_RT	EqERV-S	EqERV-S	equine endogenous retrovirus S	Orthoretrovirinae	Sigmaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/EqERV-Zeta_RT	EqERV-Zeta_RT	EqERV-Zeta	EqERV-Zeta	equine endogenous zetaretrovirus	Orthoretrovirinae	Zetaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/EU010385_SFVspi_RT	EU010385_SFVspi_RT	SFVspi	Simiispumavirus atespp	simian foamy virus Ateles spp.	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/GLN_RT	GLN_RT	GLN	GLN	murine retrovirus using tRNAGln	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/GU356394_SFVsqu_RT	GU356394_SFVsqu_RT	SFVsqu	Simiispumavirus saisci	simian foamy virus Saimiri sciureus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/GU356395_SFVmarm_RT	GU356395_SFVmarm_RT	SFVmarm	Simiispumavirus caljac	simian foamy virus Callithrix jacchus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/HERV-15_RT	HERV-15_RT	HERV-R	Gammaretrovirus etacatarrhini	human endogenous retrovirus R	Orthoretrovirinae	Gammaretrovirus	Eta
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-theta-set1/HERV-24_RT	HERV-24_RT	HERV-24	HERV-24	human endogenous retrovirus 24	Orthoretrovirinae	Thetaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-30_RT	HERV-30_RT	HERV-30	HERV-30	human endogenous retrovirus 30	Orthoretrovirinae	Zetaretrovirus	HERVW9
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-46_RT	HERV-46_RT	HERV-46	HERV-46	human endogenous retrovirus 46	Orthoretrovirinae	Zetaretrovirus	HERVHF
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-4_RT	HERV-4_RT	HERV-4	HERV-4	human endogenous retrovirus 4	Orthoretrovirinae	Zetaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-9_RT	HERV-9_RT	HERV-9	HERV-9	human endogenous retrovirus 9	Orthoretrovirinae	Zetaretrovirus	HERVW9
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-iota-set1/HERV-ADP_RT	HERV-ADP_RT	HERV-ADP	HERV-ADP	human endogenous retrovirus ADP	Orthoretrovirinae	Iotaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/HERV-E_RT	HERV-E_RT	HERV-R	Gammaretrovirus etacatarrhini	human endogenous retrovirus R	Orthoretrovirinae	Gammaretrovirus	Eta
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-Fa_RT	HERV-Fa_RT	HERV-Fa	HERV-Fa	human endogenous retrovirus F(a)	Orthoretrovirinae	Zetaretrovirus	HERVHF
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-Fb_RT	HERV-Fb_RT	HERV-Fb	HERV-Fb	human endogenous retrovirus F(b)	Orthoretrovirinae	Zetaretrovirus	HERVHF
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-Fc_RT	HERV-Fc_RT	HERV-Fc	HERV-Fc	human endogenous retrovirus F(c)	Orthoretrovirinae	Zetaretrovirus	HERVHF
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-FRD_RT	HERV-FRD_RT	HERV-FRD	HERV-FRD	human endogenous retrovirus FRD	Orthoretrovirinae	Zetaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-H_RT	HERV-H_RT	HERV-H	HERV-H	human endogenous retrovirus H	Orthoretrovirinae	Zetaretrovirus	HERVHF
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-iota-set1/HERV-I_RT	HERV-I_RT	HERV-I	HERV-I	human endogenous retrovirus I	Orthoretrovirinae	Iotaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML10_RT	HERV-K-HML10_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML1_RT	HERV-K-HML1_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML2_RT	HERV-K-HML2_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML3_RT	HERV-K-HML3_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML4_RT	HERV-K-HML4_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML5_RT	HERV-K-HML5_RT	HERV-K-HML5	Archaeobetaretrovirus kappacatarrhini5	endogenous archeobetaretrovirus K Catarrhini type 5	Orthoretrovirinae	Betaretrovirus	Archaeobeta
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML6_RT	HERV-K-HML6_RT	HERV-K-HML6	Archaeobetaretrovirus kappacatarrhini6	endogenous archeobetaretrovirus K Catarrhini type 6	Orthoretrovirinae	Betaretrovirus	Archaeobeta
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML7_RT	HERV-K-HML7_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML8_RT	HERV-K-HML8_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/HERV-K-HML9_RT	HERV-K-HML9_RT	HERV-K-HML9	Betaretrovirus kappacatarrhini	endogenous betaretrovirus K Catarrhini (HML9)	Orthoretrovirinae	Betaretrovirus	Kappa
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-theta-set1/HERV-Lb_RT	HERV-Lb_RT	HERV-Lb	HERV-Lb	human endogenous retrovirus Lb1	Orthoretrovirinae	Thetaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lambda-set1/HERV-L_RT	HERV-L_RT	HERV-L	HERV-L	human endogenous retrovirus L	Orthoretrovirinae	Lambdaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-P_RT	HERV-P_RT	HERV-P	HERV-P	human endogenous retrovirus P	Orthoretrovirinae	Zetaretrovirus	HERVW9
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-rho-set1/HERV-Rb_RT	HERV-Rb_RT	HERV-Rb	HERV-Rb	human endogenous retrovirus Rb1	Orthoretrovirinae	Rhoretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/HERV-R_RT	HERV-R_RT	HERV-R	Gammaretrovirus etacatarrhini	human endogenous retrovirus R	Orthoretrovirinae	Gammaretrovirus	Eta
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-sigma-set1/HERV-S_RT	HERV-S_RT	HERV-S	HERV-S	human endogenous retrovirus S	Orthoretrovirinae	Sigmaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/HERV-T_RT	HERV-T_RT	HERV-T	HERV-T	human endogenous retrovirus T	Orthoretrovirinae	Gammaretrovirus	HERVT
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lambda-set1/HERV-U3_RT	HERV-U3_RT	HERV-U3	HERV-U3	human endogenous retrovirus U3	Orthoretrovirinae	Lambdaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-W_RT	HERV-W_RT	HERV-W	HERV-W	human endogenous retrovirus W	Orthoretrovirinae	Zetaretrovirus	HERVW9
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-zeta-set1/HERV-XA_RT	HERV-XA_RT	HERV-XA	HERV-XA	human endogenous retrovirus XA	Orthoretrovirinae	Zetaretrovirus	HERVHF
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/HM245790_SFVgor_RT	HM245790_SFVgor_RT	SFVgor	Simiispumavirus gorgorgor	simian foamy virus Gorilla gorilla gorilla	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/IAPE_RT	IAPE_RT	IAPE	IAPE	intracisternal A-type particle	Orthoretrovirinae	Betaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/JQ303225_RfRV_RT	JQ303225_RfRV_RT	RfRV	Gammaretrovirus rhifer	Rhinolophus ferrumequinum retrovirus	Orthoretrovirinae	Gammaretrovirus	RfRV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/JQ867463_SFVcptt_RT	JQ867463_SFVcptt_RT	SFVcptt	Simiispumavirus pantrotro	simian foamy virus Pan troglodytes troglodytes	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/JQ867466_SFVgue_RT	JQ867466_SFVgue_RT	SFVgue	Simiispumavirus cernic	simian foamy virus Cercopithecus nictitans	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/KM233624_PSFVgal_RT	KM233624_PSFVgal_RT	PSFVgal	Prosimiispumavirus otocra	simian foamy virus Otolemur crassicaudatus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/KP143760_SFVcapu_RT	KP143760_SFVcapu_RT	SFVcapu	Simiispumavirus sapxan	simian foamy virus Sapajus xanthosternos	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/KwERV_RT	KwERV_RT	KwERV	KwERV	killer whale endogenous gammaretrovirus	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/KX087159_SFVcpze_RT	KX087159_SFVcpze_RT	SFVcpze	Simiispumavirus pantrosch	simian foamy virus Pan troglodytes schweinfurthii	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/LC094267_SFV_RT	LC094267_SFV_RT	SFV	Simiispumavirus macfas	simian foamy virus Macaca fascicularis	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M10060_PTLV2_RT	M10060_PTLV2_RT	PTLV2	Deltaretrovirus priTlym2	human T-lymphotropic virus 2	Orthoretrovirinae	Deltaretrovirus	Primate
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M11841_SRV1_RT	M11841_SRV1_RT	SRV1	SRV1	simian SRV-1 type D retrovirus	Orthoretrovirinae	Betaretrovirus	Dtype
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M16575_EIAV_RT	M16575_EIAV_RT	EIAV 	Lentivirus equinfane	equine infectious anemia virus America strain	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M23385_SMRVH_RT	M23385_SMRVH_RT	SMRVH	Betaretrovirus squmon	squirrel monkey retrovirus-H	Orthoretrovirinae	Betaretrovirus	Dtype
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M25381_FIV-P_RT	M25381_FIV-P_RT	FIVP	Lentivirus felimdef	feline immunodeficiency virus Petaluma strain	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M26927_GaLV_RT	M26927_GaLV_RT	GaLV	Gammaretrovirus gibleu	gibbon ape leukemia virus	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M30502_HIV2_RT	M30502_HIV2_RT	HIV2	Lentivirus humimdef2	human immunodeficiency virus 2	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M32690_BIV_RT	M32690_BIV_RT	BIV 	Lentivirus bovimdef	bovine immunodeficiency virus	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M33677_SRLV-B_RT	M33677_SRLV-B_RT	SRLVB 	Lentivirus capartenc	small ruminant lentivirus genotype B (Caprine arthritis-encephalitis virus)	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M37980_ALV_RT	M37980_ALV_RT	ALV	Alpharetrovirus avileu	avian leukosis virus - RSA	Orthoretrovirinae	Alpharetrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M60609_SRLV-A_RT	M60609_SRLV-A_RT	SRLVA 	Lentivirus ovivismae	small ruminant lentivirus genotype A (Visna-Maedi Virus)	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M74895_SFV3_RT	M74895_SFV3_RT	SFV3	Simiispumavirus chlaet	simian foamy virus Chlorocebus aethiops	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/M80216_JSRV_RT	M80216_JSRV_RT	JSRV	Betaretrovirus ovijaa	Jaagsiekte sheep retrovirus	Orthoretrovirinae	Betaretrovirus	Dtype
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lenti-set1/MELVmpf_RT	MELVmpf_RT	MELVmpf	MELVmpf	mustelid endogenous lentivirus	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-theta-set1/MER-34_RT	MER-34_RT	MER-34	MER-34	mammalian endogenous retrovirus 34	Orthoretrovirinae	Thetaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/MF280817_SFVrmac_RT	MF280817_SFVrmac_RT	SFVrmac	Simiispumavirus macmul	simian foamy virus Macaca mulatta	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/MMERV_RT	MMERV_RT	MMERV	MMERV	Mus musculus endogenous retroviral sequence	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/MuERV-C_RT	MuERV-C_RT	MuERV-C	MuERV-C	murine endogenous retrovirus C-C105	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lambda-set1/MuERV-L_RT	MuERV-L_RT	MuERV-L	MuERV-L	Mus musculus endogenous retroviral sequence MuERV-L	Orthoretrovirinae	Lambdaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/MuRRS_RT	MuRRS_RT	MuRRS	MuRRS	mouse retrovirus-related DNA sequence	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/MusD_RT	MusD_RT	MusD	MusD	Mus Musculus type D-like endogenous retrovirus MusD2	Orthoretrovirinae	Betaretrovirus	Dtype
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/mysTR_RT	mysTR_RT	mysTR	mysTR	Reithrodontomys fulvescens endogenous virus mysTR	Orthoretrovirinae	Betaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-spuma-set1/newtEFV_RT	newtEFV_RT	newtEFV	newtEFV	newt endogenous foamy virus	Spumaretrovirinae	Spumavirus	Amphibian
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/OR951378_BatFV_RT	OR951378_BatFV_RT	BatFV	BatFV	Rousettus leschenaultii metagenome spumavirus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/PERV-C_RT	PERV-C_RT	PERV-C	PERV-C	porcine endogenous retrovirus C-C105	Orthoretrovirinae	Gammaretrovirus	Korv_GALV
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/PP271289_SeaLionFV_RT	PP271289_SeaLionFV_RT	SeaLionFV	SeaLionFV	Otaria byronia spumavirus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/PP271290_DolphinFV_RT	PP271290_DolphinFV_RT	DolphinFV	DolphinFV	Tursiops truncatus spumavirus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lenti-set1/PSIV2_RT	PSIV2_RT	PSIV2	PSIV2	prosimian immunodeficieny virus 2	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lenti-set1/pSIVgml_RT	pSIVgml_RT	pSIVgml	pSIVgml	prosimian immunodeficieny virus (grey mouse lemur)	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-gamma-set1/RD114_RT	RD114_RT	RD114	RD114	RD114 retrovirus	Orthoretrovirinae	Gammaretrovirus	RD114
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lenti-set1/RELIK_RT	RELIK_RT	RELIK	RELIK	rabbit endogenous lentivirus type K	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-beta-set1/RERV-H_RT	RERV-H_RT	RERV-H	RERV-H	Oryctolagus cuniculus clone A rabbit endogenous retrovirus H	Orthoretrovirinae	Betaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-spuma-set1/SloEFV_RT	SloEFV_RT	SloEFV	SloEFV	sloth endogenous foamy virus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-lenti-set1/SpELV_RT	SpELV_RT	SpELV	SpELV	springhare endogenous lentivirus	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-spuma-set1/Spuma-Ame.b_RT	Spuma-Ame.b_RT	Spuma-Ame.b	Spuma-Ame.b	axolotl endogenous foamy virus	Spumaretrovirinae	Spumavirus	Amphibian
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-spuma-set1/Spuma-Rbi_RT	Spuma-Rbi_RT	Spuma-Rbi	Spuma-Rbi	caecilian endogenous foamy virus	Spumaretrovirinae	Spumavirus	Amphibian
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-alpha-set1/TgERV-F_RT	TgERV-F_RT	TgERV-F	TgERV-F	Taeniopygia guttata endogenous retrovirus F	Orthoretrovirinae	Alpharetrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/erv-refseqs-rt-spuma-set1/TuataraEFV_RT	TuataraEFV_RT	TuataraEFV	TuataraEFV	tuatara endogenous foamy virus	Spumaretrovirinae	Spumavirus	Sphenodon
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/U03982_PLV_RT	U03982_PLV_RT	PLV	Lentivirus pum	puma lentivirus 14	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/U04327_SFVcpz_RT	U04327_SFVcpz_RT	SFVcpz	Simiispumavirus pantrover	simian foamy virus Pan troglodytes verus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/U09568_LPDV_RT	U09568_LPDV_RT	LPDV	LPDV	lymphoproliferative disease virus	Orthoretrovirinae	Alpharetrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/U21603_JDV_RT	U21603_JDV_RT	JDV 	Lentivirus bovjem	Jembrana disease virus	Orthoretrovirinae	Lentivirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/U26458_SnRV_RT	U26458_SnRV_RT	SnRV	SnRV	snakehead retrovirus	Spumaretrovirinae	Omegaretrovirus	-
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/U94514_BFV_RT	U94514_BFV_RT	BFV	Bovispumavirus bostau	bovine foamy virus Bos taurus	Spumaretrovirinae	Spumavirus	Mammal
+alignment/AL_ROOT_Phylogeny_RT/member/fasta-refseqs-xrv-rt/X54482_SFV1_RT	X54482_SFV1_RT	SFV1	Simiispumavirus maccyc	simian foamy virus Macaca cyclopis	Spumaretrovirinae	Spumavirus	Mammal
