@@ -52,9 +52,15 @@ var ASSOCIATION_CONFIDENCE = "high";
 // These names must not generate lineage associations.
 
 var EXCLUDED_CURATOR_NAMES = {
+
     "MER-61": "no_internal_erv_homology",
     "MER-4": "no_internal_erv_homology",
-    "HERV-39": "no_internal_erv_homology"
+    "MER-31": "no_internal_erv_homology",
+    "MER-57": "no_internal_erv_homology",
+    "MER-4": "no_internal_erv_homology",
+    "HERV-39": "no_internal_erv_homology",
+    "HERV-L68": "no_internal_erv_homology"
+
 };
 
 // ------------------------------------------------------------

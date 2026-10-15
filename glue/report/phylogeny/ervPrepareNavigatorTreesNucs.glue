@@ -1,0 +1,71 @@
+  delete module ervPhyloUtility
+  delete module ervFigTreeAnnotationExporterLineage
+  
+  create module -f modules/analyse/ervPhyloUtility.xml
+  create module -f modules/analyse/ervFigTreeAnnotationExporterLineage.xml
+
+  module ervPhyloUtility
+  
+	# midpoint rooting
+    
+    # Clade I
+	reroot-phylogeny \
+      --inputFile trees/navigator/ervCladeIPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/navigator/ervCladeIPolNucs_MidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+   # Clade II
+	reroot-phylogeny \
+      --inputFile trees/navigator/ervAlphaBetaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/navigator/ervAlphaBetaPolNucs_MidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	reroot-phylogeny \
+      --inputFile trees/navigator/ervDeltaPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/navigator/ervDeltaPolNucs_MidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+	reroot-phylogeny \
+      --inputFile trees/navigator/ervLentiPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/navigator/ervLentiPolNucs_MidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+    
+    # Clade III
+	reroot-phylogeny \
+      --inputFile trees/navigator/ervCladeIIIPolNucs.tree NEWICK_BOOTSTRAPS \
+      --midpoint \
+      --outputFile trees/navigator/ervCladeIIIPolNucs_MidpointRerootedNucs.tree NEWICK_BOOTSTRAPS
+
+    exit   
+  
+  # Export annotations
+  module ervFigTreeAnnotationExporterLineage 
+  	
+  	export figtree-annotation AL_ROOT_CLADE_I  \
+	  -c \
+	  -w "alignment.reference_set = true and sequence.sequenceID != 'HERV-Fc1'" \
+	  -f trees/navigator/AL_ROOT_CLADE_I.annotations.tsv
+
+  	export figtree-annotation AL_MINOR_CLADE_Alpha_Beta  \
+	  -c \
+	  -w "alignment.reference_set = true" \
+	  -f trees/navigator/AL_MINOR_CLADE_Alpha_Beta.annotations.tsv
+ 
+   	export figtree-annotation AL_GENUS_Lentivirus  \
+	  -c \
+	  -w "alignment.reference_set = true" \
+	  -f trees/navigator/AL_GENUS_Lentivirus.annotations.tsv
+
+  	export figtree-annotation AL_GENUS_Deltaretrovirus  \
+	  -c \
+	  -w "alignment.reference_set = true" \
+	  -f trees/navigator/AL_GENUS_Deltaretrovirus.annotations.tsv
+       
+    export figtree-annotation AL_ROOT_CLADE_III \
+	  -c \
+	  -w "alignment.reference_set = true" \
+      -f trees/navigator/AL_ROOT_CLADE_III.annotations.tsv
+    
+    exit   
+
+

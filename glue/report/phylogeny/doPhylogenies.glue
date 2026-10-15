@@ -1,0 +1,15 @@
+
+  #~# Clean-up
+  delete module ervRaxmlPhylogenyGeneratorAa
+  delete module ervRaxmlPhylogenyGeneratorNucs
+
+  #~# Create phylogeny build modules
+  create module -f modules/analyse/ervRaxmlPhylogenyGeneratorNucs.xml
+  create module -f modules/analyse/ervRaxmlPhylogenyGeneratorAa.xml
+
+  # Compute phylogenies
+  #run file glue/analyse/phylogeny/ervReconstructNavigatorPhylogeniesNucs.glue
+
+  # Re-root phylogenies and export FigTree annotations
+  run file glue/analyse/phylogeny/ervPrepareNavigatorTreesNucs.glue
+

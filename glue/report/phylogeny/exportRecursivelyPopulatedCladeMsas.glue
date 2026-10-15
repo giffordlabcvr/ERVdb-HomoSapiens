@@ -1,0 +1,41 @@
+delete module fastaAlignmentExporterLineage
+
+# Export recursively populated clade MSAs
+
+create module -f modules/build/rv/fastaAlignmentExporterLineage.xml
+module fastaAlignmentExporterLineage 
+
+  export AL_ROOT_CLADE_I \
+	-r REF_MLV \
+	-f pol \
+	-w "alignment.reference_set = true and sequence.sequenceID != 'HERV-Fc1'" \
+	-c \
+	-o alignments/recursive_root/AL_ROOT_CLADE_I.fna
+
+  #export AL_ROOT_CLADE_II \
+  #	-r REF_ALV \
+  #	-f pol \
+  #	-w "alignment.reference_set = true and sequence.sequenceID != 'MinERVa'"  \
+  #	-c \
+  #	-o alignments/recursive_root/AL_ROOT_CLADE_II.fna
+
+  export AL_ROOT_CLADE_III \
+	-r REF_SFVcpz \
+	-f pol \
+	-w "alignment.reference_set = true" \
+	-c \
+	-o alignments/recursive_root/AL_ROOT_CLADE_III.fna
+  
+  export AL_MINOR_CLADE_Alpha_Beta \
+	-r REF_ALV \
+	-f pol \
+	-w "alignment.reference_set = true"  \
+	-c \
+	-o alignments/recursive_root/AL_MINOR_CLADE_Alpha_Beta.fna
+
+  
+  exit
+
+
+ 
+  
