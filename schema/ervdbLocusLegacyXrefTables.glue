@@ -29,6 +29,7 @@ table erv_locus_legacy_xref
 
 	create field mapping_status        VARCHAR 50
 	create field mapping_method        VARCHAR 50
+	create field mapping_relationship  VARCHAR 50
 
 exit
 
