@@ -1,4 +1,3 @@
-
 /**
  * loadLegacyLocusMappings.js
  *
@@ -6,6 +5,7 @@
  *
  * Input:
  *   tabular/legacy/legacy_loci_reconciled.tsv
+ *   tabular/legacy/legacy_locus_component_mappings.tsv
  *
  * Tables:
  *   erv_locus_legacy_xref
@@ -29,9 +29,11 @@
 
 var INPUT =
     "tabular/legacy/legacy_loci_reconciled.tsv";
+var COMPONENT_INPUT =
+    "tabular/legacy/legacy_locus_component_mappings.tsv";
 
-// Change to false after checking the dry-run report.
-var DRY_RUN = false;
+// Run dry first; this importer does not delete obsolete xref rows.
+var DRY_RUN = true;
 
 var XREF_TABLE = "erv_locus_legacy_xref";
 var ALIAS_TABLE = "erv_locus_alias";
@@ -60,7 +62,8 @@ var XREF_FIELDS = [
     "source_band",
     "source_note",
     "mapping_status",
-    "mapping_method"
+    "mapping_method",
+    "mapping_relationship"
 ];
 
 var FIELD_LIMITS = {
@@ -77,7 +80,8 @@ var FIELD_LIMITS = {
     source_band: 50,
     source_note: 200,
     mapping_status: 50,
-    mapping_method: 50
+    mapping_method: 50,
+    mapping_relationship: 50
 };
 
 
@@ -172,10 +176,15 @@ function aliasId(locus, source, name) {
     );
 }
 
-function xrefId(row) {
-    // source_record_id was generated during Python
-    // normalisation and is stable for that source row.
-    return "lx_" + str(row.source_record_id);
+function xrefId(row, locusId, componentIndex) {
+    // Preserve existing IDs for ordinary mappings and the first
+    // component. Additional component rows have distinct stable IDs.
+    var base = "lx_" + str(row.source_record_id);
+    if(componentIndex === undefined || componentIndex === null ||
+       componentIndex === 0) {
+        return base;
+    }
+    return base + "__" + locusId;
 }
 
 function isAccepted(row) {
@@ -209,10 +218,86 @@ function splitAliases(value) {
 
 
 // ------------------------------------------------------------
+// Explicit curator component mappings
+// ------------------------------------------------------------
+
+function loadComponentMappings(rows, sourceRows) {
+    var sourceById = {};
+    for(var i = 0; i < sourceRows.length; i++) {
+        sourceById[str(sourceRows[i].source_record_id)] = sourceRows[i];
+    }
+
+    var groups = {};
+    var seen = {};
+    var errors = [];
+    var acceptedRelationships = {
+        ervdb_component: true,
+        legacy_component: true,
+        equivalent: true,
+        overlap: true
+    };
+
+    for(var j = 0; j < rows.length; j++) {
+        var r = rows[j];
+        var id = str(r.source_record_id);
+        var locus = str(r.erv_locus_id);
+        var relationship = str(r.mapping_relationship);
+        var label = "Component mapping row " + (j + 2) + ": ";
+
+        if(!id || !sourceById[id]) {
+            errors.push(label + "unknown source_record_id: " + id);
+        }
+        if(!/^RBRT[0-9]+$/.test(locus)) {
+            errors.push(label + "invalid erv_locus_id: " + locus);
+        }
+        if(!acceptedRelationships[relationship]) {
+            errors.push(label + "invalid mapping_relationship: " + relationship);
+        }
+        var key = id + "|" + locus;
+        if(seen[key]) {
+            errors.push(label + "duplicate source/locus pair: " + key);
+        }
+        seen[key] = true;
+        if(!groups[id]) {
+            groups[id] = [];
+        }
+        groups[id].push({
+            locus: locus,
+            relationship: relationship
+        });
+    }
+
+    Object.keys(groups).forEach(function(id) {
+        groups[id].sort(function(a, b) {
+            return a.locus < b.locus ? -1 : (a.locus > b.locus ? 1 : 0);
+        });
+    });
+
+    if(errors.length) {
+        errors.slice(0, 30).forEach(function(e) {
+            glue.log("WARNING", e);
+        });
+        throw new Error("Invalid component mappings: " + errors.length);
+    }
+    return groups;
+}
+
+function mappingsFor(row, componentGroups) {
+    var id = str(row.source_record_id);
+    if(componentGroups[id]) {
+        return componentGroups[id];
+    }
+    if(isAccepted(row)) {
+        return [{ locus: str(row.matched_locus), relationship: "" }];
+    }
+    return [];
+}
+
+// ------------------------------------------------------------
 // Input validation
 // ------------------------------------------------------------
 
-function validateRows(rows) {
+function validateRows(rows, componentGroups) {
     var errors = [];
     var seen = {};
 
@@ -269,7 +354,7 @@ function validateRows(rows) {
             errors.push(label + "unknown status: " + status);
         }
 
-        if(isAccepted(row) &&
+        if(isAccepted(row) && !componentGroups[recordId] &&
            str(row.matched_locus) === "") {
             errors.push(
                 label + "accepted mapping has no matched_locus"
@@ -318,17 +403,16 @@ function validateRows(rows) {
         }
     }
 
-	if(errors.length > 0) {
-		for(var n = 0; n < Math.min(errors.length, 30); n++) {
-			glue.log("WARNING", errors[n]);
-		}
-	
-		throw new Error(
-			"Legacy mapping validation failed: " +
-			errors.length + " errors"
-		);
-	}
+    if(errors.length > 0) {
+        for(var n = 0; n < Math.min(errors.length, 30); n++) {
+            glue.log("WARNING", errors[n]);
+        }
 
+        throw new Error(
+            "Legacy mapping validation failed: " +
+            errors.length + " errors"
+        );
+    }
 
     glue.logInfo(
         "Input validation passed: " + rows.length + " rows"
@@ -340,22 +424,30 @@ function validateRows(rows) {
 // Create historical cross-reference
 // ------------------------------------------------------------
 
-function loadXref(row) {
-    var id = xrefId(row);
+function loadXref(row, mapping, componentIndex) {
+    var id = xrefId(row, mapping ? mapping.locus : null, componentIndex);
     var created = createIfAbsent(XREF_TABLE, id);
 
     glue.inMode(rowPath(XREF_TABLE, id), function() {
         for(var i = 0; i < XREF_FIELDS.length; i++) {
             var field = XREF_FIELDS[i];
-            setField(field, row[field]);
+            if(field === "mapping_relationship") {
+                setField(field, mapping ? mapping.relationship : "");
+            }
+            else if(field === "mapping_status" && mapping) {
+                setField(field, "mapped");
+            }
+            else if(field === "mapping_method" && mapping &&
+                    mapping.relationship !== "") {
+                setField(field, "curator");
+            }
+            else {
+                setField(field, row[field]);
+            }
         }
 
-        if(isAccepted(row)) {
-            setLink(
-                "erv_locus",
-                LOCUS_TABLE,
-                str(row.matched_locus)
-            );
+        if(mapping) {
+            setLink("erv_locus", LOCUS_TABLE, mapping.locus);
         }
     });
 
@@ -399,7 +491,9 @@ glue.logInfo(
     "Loaded " + input.length + " reconciled legacy records"
 );
 
-validateRows(input);
+var componentRows = loadTsv(COMPONENT_INPUT);
+var componentGroups = loadComponentMappings(componentRows, input);
+validateRows(input, componentGroups);
 
 var summary = {
     input_records: input.length,
@@ -407,7 +501,9 @@ var summary = {
     unresolved_records: 0,
     proposed_aliases: 0,
     xrefs_created: 0,
-    aliases_created: 0
+    aliases_created: 0,
+    component_source_records: Object.keys(componentGroups).length,
+    component_links: componentRows.length
 };
 
 var aliases = {};
@@ -415,29 +511,22 @@ var acceptedLoci = {};
 
 for(var i = 0; i < input.length; i++) {
     var row = input[i];
-
-    if(isAccepted(row)) {
+    var mappings = mappingsFor(row, componentGroups);
+    if(mappings.length) {
         summary.accepted_records++;
-
-        var locus = str(row.matched_locus);
         var source = str(row.legacy_source);
-
-        acceptedLoci[locus] = true;
-
         var names = splitAliases(row.aliases);
-
-        for(var j = 0; j < names.length; j++) {
-            var name = names[j];
-            var id = aliasId(locus, source, name);
-
-            // Deduplicate only identical locus/source/name
-            // associations, not historical source records.
-            if(!aliases[id]) {
-                aliases[id] = {
-                    locus: locus,
-                    source: source,
-                    name: name
-                };
+        for(var m = 0; m < mappings.length; m++) {
+            var locus = mappings[m].locus;
+            acceptedLoci[locus] = true;
+            for(var j = 0; j < names.length; j++) {
+                var name = names[j];
+                var id = aliasId(locus, source, name);
+                if(!aliases[id]) {
+                    aliases[id] = {
+                        locus: locus, source: source, name: name
+                    };
+                }
             }
         }
     }
@@ -482,8 +571,19 @@ else {
 
     // First preserve every historical record.
     for(var r = 0; r < input.length; r++) {
-        if(loadXref(input[r])) {
-            summary.xrefs_created++;
+        var row = input[r];
+        var mappings = mappingsFor(row, componentGroups);
+        if(mappings.length === 0) {
+            if(loadXref(row, null, null)) {
+                summary.xrefs_created++;
+            }
+        }
+        else {
+            for(var m = 0; m < mappings.length; m++) {
+                if(loadXref(row, mappings[m], m)) {
+                    summary.xrefs_created++;
+                }
+            }
         }
 
         if((r + 1) % 500 === 0) {
