@@ -1,0 +1,18 @@
+<ecmaFunctionInvoker>
+    <scriptFileName>ervLocusLineageCurator.js</scriptFileName>
+    <function>
+        <name>previewOverrides</name>
+        <parameter><name>tsvFile</name></parameter>
+        <tableFromObjectsResultType/>
+    </function>
+    <function>
+        <name>applyOverrides</name>
+        <parameter><name>tsvFile</name></parameter>
+        <tableFromObjectsResultType/>
+    </function>
+    <function>
+        <name>listPrimaryAssociations</name>
+        <parameter><name>locusId</name></parameter>
+        <tableFromObjectsResultType/>
+    </function>
+</ecmaFunctionInvoker>
