@@ -1,0 +1,17 @@
+<ecmaFunctionInvoker>
+    <scriptFileName>ervLocusSupplementImporter.js</scriptFileName>
+    <function>
+        <name>previewLoci</name>
+        <parameter><name>tsvFile</name></parameter>
+        <parameter><name>hostSpecies</name></parameter>
+        <parameter><name>genomeBuild</name></parameter>
+        <tableFromObjectsResultType/>
+    </function>
+    <function>
+        <name>importLoci</name>
+        <parameter><name>tsvFile</name></parameter>
+        <parameter><name>hostSpecies</name></parameter>
+        <parameter><name>genomeBuild</name></parameter>
+        <tableFromObjectsResultType/>
+    </function>
+</ecmaFunctionInvoker>
