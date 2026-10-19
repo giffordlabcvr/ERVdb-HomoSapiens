@@ -36,12 +36,16 @@ run script glue/build/loadErvLoci.js
 # 4. Load locus classifications and LTR associations
 # -------------------------------------------------------------------------
 
-# Apply curator decisions, overriding or supplementing the
-# initial ERV-lineage assignments where explicitly specified.
-run script glue/build/curation/applyErvLocusCuratorDecisions.js
-
 # Create initial locus-to-ERV-lineage associations from source data.
 run script glue/build/loadErvLocusLineageAssociations.js
+
+# Curator override
+create module -f modules/build/ervLocusLineageCurator.xml
+module ervLocusLineageCurator invoke-function applyOverrides \
+	tabular/curation/erv_locus_lineage_overrides.tsv
+
+# Apply curator decisions for unresolved/mosaic set
+run script glue/build/curation/applyErvLocusCuratorDecisions.js
 
 # Create locus-to-LTR-lineage associations using the curated
 # ERV-lineage assignments for compatibility assessment.
@@ -52,7 +56,7 @@ run script glue/build/loadErvLocusLtrAssociations.js
 # -------------------------------------------------------------------------
 
 # Load source-specific provenance records.
-run file glue/build/loadErvLocusProvenance.glue
+#run file glue/build/loadErvLocusProvenance.glue
 
 # -------------------------------------------------------------------------
 # 5. Create locus alignments

@@ -227,6 +227,38 @@ def run(args):
                 "source": name, "input_rows": count, "accepted": accepted,
                 "rejected": rejected, "duplicate_legacy_names": len(duplicate_names),
             })
+    # Curated records are already in the canonical normalised format.
+    # Preserve their stable source_record_id verbatim; never hash or renumber them.
+    curated_path = Path(args.curated_file)
+    if not curated_path.is_absolute() and not curated_path.exists():
+        curated_path = input_dir / curated_path.name
+    if not curated_path.is_file():
+        raise ValueError(f"curated-locus input missing: {curated_path}; refusing to overwrite normalised output")
+    with curated_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        if reader.fieldnames != FIELDS:
+            raise ValueError(f"{curated_path}: expected normalised TSV columns: {FIELDS}")
+        existing_ids = {row["source_record_id"] for row in output_rows}
+        curated_count = 0
+        for row_number, row in enumerate(reader, start=2):
+            record_id = tidy(row["source_record_id"])
+            if not record_id or record_id in existing_ids:
+                raise ValueError(f"{curated_path}:{row_number}: missing or duplicate source_record_id {record_id!r}")
+            for field in REQUIRED:
+                if not tidy(row[field]):
+                    raise ValueError(f"{curated_path}:{row_number}: missing {field}")
+            try:
+                start = int(row["start_position"])
+                end = int(row["end_position"])
+            except (TypeError, ValueError):
+                raise ValueError(f"{curated_path}:{row_number}: invalid coordinates")
+            if start < 1 or end < start:
+                raise ValueError(f"{curated_path}:{row_number}: invalid interval")
+            output_rows.append(row)
+            existing_ids.add(record_id)
+            curated_count += 1
+        summary.append({"source": "misc_curated_loci", "input_rows": curated_count,
+                        "accepted": curated_count, "rejected": 0, "duplicate_legacy_names": 0})
     if invalid and not args.allow_invalid:
         print(json.dumps({"errors": invalid[:30], "total_invalid": len(invalid)}, indent=2), file=sys.stderr)
         raise ValueError("invalid rows: output not written (use --allow-invalid to skip them)")
@@ -245,6 +277,7 @@ def main():
     parser.add_argument("--input-dir", default="tabular/legacy")
     parser.add_argument("--output", default="tabular/legacy/legacy_loci_normalised.tsv")
     parser.add_argument("--sources", nargs="+", choices=sorted(SOURCES))
+    parser.add_argument("--curated-file", default="tabular/legacy/misc_curated_loci.tsv")
     parser.add_argument("--allow-invalid", action="store_true")
     args = parser.parse_args()
     try:

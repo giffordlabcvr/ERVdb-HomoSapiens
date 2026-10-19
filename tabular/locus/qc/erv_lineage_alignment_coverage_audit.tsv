@@ -77,6 +77,7 @@ AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT255993	ERV-1.Eta.E	RBRT255993__ERV-1.Eta
 AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT264533	ERV-1.Eta.E	RBRT264533__ERV-1.Eta.E	primary	candidate_names_decision	high	8.9276	83.5106	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT267896	ERV-1.Eta.E	RBRT267896__ERV-1.Eta.E	primary	curator_decision	high	51.5524	69.7599	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT267897	ERV-1.Eta.E	RBRT267897__ERV-1.Eta.E	primary	candidate_names_decision	high	46.0139	94.2904	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT267915	ERV-1.Eta.E	RBRT267915__ERV-1.Eta.E	primary	curator_decision	high	89.1846	60.2027	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT267933	ERV-1.Eta.E	RBRT267933__ERV-1.Eta.E	primary	candidate_names_decision	high	46.0935	99.5823	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT267949	ERV-1.Eta.E	RBRT267949__ERV-1.Eta.E	primary	candidate_names_decision	high	46.1390	94.2612	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Eta_E	filtered_2026_10	RBRT267955	ERV-1.Eta.E	RBRT267955__ERV-1.Eta.E	primary	curator_decision	high	32.4235	58.4821	50	FALSE	RETAIN	NOT_ATTEMPTED	
@@ -2803,7 +2804,6 @@ AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT263978	ERV-1.Zeta.HF.H.1	RBRT26397
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT26512	ERV-1.Zeta.HF.H.1	RBRT26512__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	67.9047	97.0374	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT265165	ERV-1.Zeta.HF.H.1	RBRT265165__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	4.9557	89.4000	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT265612	ERV-1.Zeta.HF.H.1	RBRT265612__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	28.3481	32.7401	50	FALSE	REMOVE	REMOVED	
-AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT267915	ERV-1.Zeta.HF.H.1	RBRT267915__ERV-1.Zeta.HF.H.1	primary	curator_decision	high	61.5743	42.6378	50	FALSE	CURATOR_CONFLICT	REMOVED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT268202	ERV-1.Zeta.HF.H.1	RBRT268202__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	67.5721	96.4399	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT268296	ERV-1.Zeta.HF.H.1	RBRT268296__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	62.9157	93.2009	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT268542	ERV-1.Zeta.HF.H.1	RBRT268542__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	56.6962	74.3855	50	FALSE	RETAIN	NOT_ATTEMPTED	
@@ -2900,7 +2900,7 @@ AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT298346	ERV-1.Zeta.HF.H.1	RBRT29834
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT298441	ERV-1.Zeta.HF.H.1	RBRT298441__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	59.3016	85.9277	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT298941	ERV-1.Zeta.HF.H.1	RBRT298941__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	63.3703	97.3102	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT299356	ERV-1.Zeta.HF.H.1	RBRT299356__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	55.3104	74.8313	50	FALSE	RETAIN	NOT_ATTEMPTED	
-AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT30139	ERV-1.Zeta.HF.H.1	RBRT30139__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	47.1951	46.7648	50	FALSE	REMOVE	REMOVED	
+AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT30139	ERV-1.Zeta.HF.H.1	RBRT30139__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	46.8847	46.4572	50	FALSE	REMOVE	REMOVED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT30140	ERV-1.Zeta.HF.H.1	RBRT30140__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	54.6563	97.7205	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT302608	ERV-1.Zeta.HF.H.1	RBRT302608__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	69.9667	99.2452	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_HF_H_1	filtered_2026_10	RBRT302796	ERV-1.Zeta.HF.H.1	RBRT302796__ERV-1.Zeta.HF.H.1	primary	candidate_names_decision	high	22.5166	98.6880	50	FALSE	RETAIN	NOT_ATTEMPTED	
@@ -4877,7 +4877,6 @@ AL_LINEAGE_1_Zeta_W9P_W	filtered_2026_10	RBRT93895	ERV-1.Zeta.W9P.W	RBRT93895__E
 AL_LINEAGE_1_Zeta_W9P_W	filtered_2026_10	RBRT94726	ERV-1.Zeta.W9P.W	RBRT94726__ERV-1.Zeta.W9P.W	primary	candidate_names_decision	high	63.3409	69.0279	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_W9P_W	filtered_2026_10	RBRT97941	ERV-1.Zeta.W9P.W	RBRT97941__ERV-1.Zeta.W9P.W	primary	candidate_names_decision	high	59.0635	65.9424	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_1_Zeta_W9P_W	filtered_2026_10	RBRT99287	ERV-1.Zeta.W9P.W	RBRT99287__ERV-1.Zeta.W9P.W	primary	curator_decision	high	23.2342	25.8178	50	FALSE	CURATOR_CONFLICT	REMOVED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT10760	ERV-2.Beta.Archaeo.5	RBRT10760__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	5.3333	39.2523	50	FALSE	REMOVE	REMOVED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT117701	ERV-2.Beta.Archaeo.5	RBRT117701__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	14.3365	78.0235	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT123306	ERV-2.Beta.Archaeo.5	RBRT123306__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	53.5238	72.4600	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT126086	ERV-2.Beta.Archaeo.5	RBRT126086__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	47.7714	82.9548	50	FALSE	RETAIN	NOT_ATTEMPTED	
@@ -4911,11 +4910,8 @@ AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT219974	ERV-2.Beta.Archaeo.5	RBR
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT22056	ERV-2.Beta.Archaeo.5	RBRT22056__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	4.5968	55.5215	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT222887	ERV-2.Beta.Archaeo.5	RBRT222887__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	13.2825	62.9362	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT225366	ERV-2.Beta.Archaeo.5	RBRT225366__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	90.0444	91.3318	50	FALSE	RETAIN	NOT_ATTEMPTED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT240773	ERV-2.Beta.Archaeo.5	RBRT240773__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	4.1524	89.8352	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT24174	ERV-2.Beta.Archaeo.5	RBRT24174__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	0.0000	0.0000	50	FALSE	REMOVE	REMOVED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT245338	ERV-2.Beta.Archaeo.5	RBRT245338__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	36.6857	77.3287	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT246613	ERV-2.Beta.Archaeo.5	RBRT246613__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	53.4857	80.7825	50	FALSE	RETAIN	NOT_ATTEMPTED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT24983	ERV-2.Beta.Archaeo.5	RBRT24983__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	11.0476	93.9525	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT25100	ERV-2.Beta.Archaeo.5	RBRT25100__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	61.7905	40.2515	50	FALSE	REMOVE	REMOVED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT25296	ERV-2.Beta.Archaeo.5	RBRT25296__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	53.3333	43.5911	50	FALSE	REMOVE	REMOVED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT261465	ERV-2.Beta.Archaeo.5	RBRT261465__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	46.9079	99.5419	50	FALSE	RETAIN	NOT_ATTEMPTED	
@@ -5001,15 +4997,11 @@ AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT511611	ERV-2.Beta.Archaeo.5	RBR
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT512030	ERV-2.Beta.Archaeo.5	RBRT512030__ERV-2.Beta.Archaeo.5	primary	curator_decision	high	81.7397	74.3045	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT512101	ERV-2.Beta.Archaeo.5	RBRT512101__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	14.8063	63.3696	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT51344	ERV-2.Beta.Archaeo.5	RBRT51344__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	93.2825	94.5675	50	FALSE	RETAIN	NOT_ATTEMPTED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT63085	ERV-2.Beta.Archaeo.5	RBRT63085__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	7.8095	93.1818	50	FALSE	RETAIN	NOT_ATTEMPTED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT63086	ERV-2.Beta.Archaeo.5	RBRT63086__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	12.5968	86.0364	50	FALSE	RETAIN	NOT_ATTEMPTED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT7197	ERV-2.Beta.Archaeo.5	RBRT7197__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	36.1143	76.4105	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT7197	ERV-2.Beta.Archaeo.5	RBRT7197__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	36.4952	77.2166	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT73655	ERV-2.Beta.Archaeo.5	RBRT73655__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	54.7937	87.4899	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT75892	ERV-2.Beta.Archaeo.5	RBRT75892__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	0.0000	0.0000	50	FALSE	REMOVE	REMOVED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT82863	ERV-2.Beta.Archaeo.5	RBRT82863__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	2.7810	47.4026	50	FALSE	REMOVE	REMOVED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT93243	ERV-2.Beta.Archaeo.5	RBRT93243__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	10.1841	42.6823	50	FALSE	REMOVE	REMOVED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT94316	ERV-2.Beta.Archaeo.5	RBRT94316__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	1.2571	96.1165	50	FALSE	RETAIN	NOT_ATTEMPTED	
-AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT94317	ERV-2.Beta.Archaeo.5	RBRT94317__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	8.1524	99.6894	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_5	filtered_2026_10	RBRT97876	ERV-2.Beta.Archaeo.5	RBRT97876__ERV-2.Beta.Archaeo.5	primary	candidate_names_decision	high	56.7111	94.6788	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_6	filtered_2026_10	RBRT107818	ERV-2.Beta.Archaeo.6	RBRT107818__ERV-2.Beta.Archaeo.6	primary	candidate_names_decision	high	96.9263	95.1208	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_6	filtered_2026_10	RBRT109257	ERV-2.Beta.Archaeo.6	RBRT109257__ERV-2.Beta.Archaeo.6	primary	curator_decision	high	17.8545	60.2230	50	FALSE	RETAIN	NOT_ATTEMPTED	
@@ -5094,6 +5086,14 @@ AL_LINEAGE_2_Beta_Archaeo_6	filtered_2026_10	RBRT82860	ERV-2.Beta.Archaeo.6	RBRT
 AL_LINEAGE_2_Beta_Archaeo_6	filtered_2026_10	RBRT82872	ERV-2.Beta.Archaeo.6	RBRT82872__ERV-2.Beta.Archaeo.6	primary	curator_decision	high	65.5645	75.5361	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_Archaeo_6	filtered_2026_10	RBRT8377	ERV-2.Beta.Archaeo.6	RBRT8377__ERV-2.Beta.Archaeo.6	primary	candidate_names_decision	high	5.6943	34.5725	50	FALSE	REMOVE	REMOVED	
 AL_LINEAGE_2_Beta_Archaeo_6	filtered_2026_10	RBRT8779	ERV-2.Beta.Archaeo.6	RBRT8779__ERV-2.Beta.Archaeo.6	primary	candidate_names_decision	high	17.6953	87.1007	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT10760	ERV-2.Beta.Archaeo.9	RBRT10760__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	4.3494	33.6449	50	FALSE	REMOVE	REMOVED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT240773	ERV-2.Beta.Archaeo.9	RBRT240773__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	4.3856	99.7253	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT245338	ERV-2.Beta.Archaeo.9	RBRT245338__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	42.1288	93.3351	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT24983	ERV-2.Beta.Archaeo.9	RBRT24983__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	11.1151	99.3521	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT63085	ERV-2.Beta.Archaeo.9	RBRT63085__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	7.9377	99.5455	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT63086	ERV-2.Beta.Archaeo.9	RBRT63086__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	13.2898	95.4033	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT94316	ERV-2.Beta.Archaeo.9	RBRT94316__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	1.1961	96.1165	50	FALSE	RETAIN	NOT_ATTEMPTED	
+AL_LINEAGE_2_Beta_Archaeo_9	filtered_2026_10	RBRT94317	ERV-2.Beta.Archaeo.9	RBRT94317__ERV-2.Beta.Archaeo.9	primary	manual_curation	high	7.3577	94.5652	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_K_HML_1	filtered_2026_10	RBRT105596	ERV-2.Beta.K.HML.1	RBRT105596__ERV-2.Beta.K.HML.1	primary	candidate_names_decision	high	30.2781	80.9560	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_K_HML_1	filtered_2026_10	RBRT131980	ERV-2.Beta.K.HML.1	RBRT131980__ERV-2.Beta.K.HML.1	primary	candidate_names_decision	high	7.3922	92.8699	50	FALSE	RETAIN	NOT_ATTEMPTED	
 AL_LINEAGE_2_Beta_K_HML_1	filtered_2026_10	RBRT14210	ERV-2.Beta.K.HML.1	RBRT14210__ERV-2.Beta.K.HML.1	primary	curator_decision	high	64.3729	67.9904	50	FALSE	RETAIN	NOT_ATTEMPTED	

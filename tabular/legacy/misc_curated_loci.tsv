@@ -1,0 +1,2 @@
+source_record_id	legacy_source	source_row_number	legacy_name	host_species	genome_build	scaffold	start_position	end_position	orientation	legacy_classification	source_numeric_id	source_aliases	source_orthology	source_band	source_note	approved_name	approved_symbol	hgnc_id	pubmed_id	aliases
+lee2013_hervl_001	lee_2013	1	Ancient HERV-L	Homo sapiens	hg19	chr17	69938532	69948088	+	HERV-L	100				Ancient orthologous ERV predating placental mammal divergence; provisional boundaries from flanking sequences				23938752	Ancient HERV-L

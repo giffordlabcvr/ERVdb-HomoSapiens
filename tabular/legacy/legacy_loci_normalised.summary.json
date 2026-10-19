@@ -2,8 +2,8 @@
   "sources": [
     {
       "source": "compiled_human_erv_loci_hg19",
-      "input_rows": 142,
-      "accepted": 142,
+      "input_rows": 141,
+      "accepted": 141,
       "rejected": 0,
       "duplicate_legacy_names": 2
     },
@@ -46,6 +46,13 @@
       "source": "hervquant_hg19",
       "input_rows": 3173,
       "accepted": 3173,
+      "rejected": 0,
+      "duplicate_legacy_names": 0
+    },
+    {
+      "source": "misc_curated_loci",
+      "input_rows": 1,
+      "accepted": 1,
       "rejected": 0,
       "duplicate_legacy_names": 0
     }

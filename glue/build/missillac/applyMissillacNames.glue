@@ -34,8 +34,8 @@
 # persistent registry, this input should no longer control routine builds.
 #
 
-#run file glue/build/legacy/importLegacyMappings.glue
-
+run script glue/build/legacy/loadLegacyLocusMappings.js
+#module ervLocusLineageCurator invoke-function applyOverrides tabular/curation/erv_locus_lineage_overrides.tsv
 
 # -------------------------------------------------------------------------
 # B. NORMAL BUILDS: restore persistent Missillac assignments

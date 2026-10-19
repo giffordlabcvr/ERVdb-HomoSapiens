@@ -33,7 +33,7 @@ var COMPONENT_INPUT =
     "tabular/legacy/legacy_locus_component_mappings.tsv";
 
 // Run dry first; this importer does not delete obsolete xref rows.
-var DRY_RUN = true;
+var DRY_RUN = false;
 
 var XREF_TABLE = "erv_locus_legacy_xref";
 var ALIAS_TABLE = "erv_locus_alias";
