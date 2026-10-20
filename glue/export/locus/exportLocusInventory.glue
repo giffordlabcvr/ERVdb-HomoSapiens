@@ -1,10 +1,10 @@
 
 console set cmd-output-file-format tab
 
-# Principal locus inventory.
+# Principal locus inventory: assigned Missillac IDs only.
 console set next-cmd-output-file web-app/hg19_loci_ervdb.tsv
 list custom-table-row erv_locus \
-  -w "genome_build = 'hg19'" \
+  -w "genome_build = 'hg19' and missillac_id != null" \
   -s id \
   id \
   missillac_id \
@@ -24,4 +24,3 @@ list custom-table-row erv_locus \
   sequence.source.name \
   sequence.sequenceID \
   sequence.length
-

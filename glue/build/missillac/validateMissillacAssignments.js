@@ -158,9 +158,10 @@
         //
         // ERV-1.Zeta.HF.H.1-123
         // ERV-1.Zeta.HF.H.1-123(LTR)
+        // ERV-2.Beta.K.HML.2-108(left) [special tandem case]
 
         var match =
-            /^(.+)-([1-9]\d*)(\(LTR\))?$/.exec(id);
+            /^(.+)-([1-9]\d*)(\((?:LTR|left|right)\))?$/.exec(id);
 
         if(!match) {
             return null;
@@ -176,7 +177,11 @@
             lineage_id: match[1],
             orthology_group: group,
             is_ltr: match[3] === '(LTR)',
-            group_key: match[1] + '-' + group
+            side: match[3] === '(left)' ? 'left' :
+                  (match[3] === '(right)' ? 'right' : null),
+            // A qualified K108 provirus is its own orthology group.
+            group_key: match[1] + '-' + group +
+                       ((match[3] === '(left)' || match[3] === '(right)') ? match[3] : '')
         };
     }
 
@@ -476,6 +481,23 @@
             return;
         }
 
+        // Only the documented K108 tandem insertion may use
+        // a left/right suffix. All other suffixes remain invalid.
+        if(parsed.side !== null) {
+            var expectedK108 =
+                (id === 'RBRT241290' && parsed.side === 'left') ||
+                (id === 'RBRT241289' && parsed.side === 'right');
+
+            if(!expectedK108 ||
+               parsed.lineage_id !== 'ERV-2.Beta.K.HML.2' ||
+               parsed.orthology_group !== 108 ||
+               type !== 'erv') {
+                error('invalid_tandem_qualifier', id + ': ' + mid);
+            }
+        } else if(id === 'RBRT241290' || id === 'RBRT241289') {
+            error('missing_tandem_qualifier', id + ': ' + mid);
+        }
+
         // ----------------------------------------------------
         // Group number consistency
         // ----------------------------------------------------
@@ -589,8 +611,8 @@
 
         groups[groupKey].push(id);
 
-        // The suffix distinguishes a solo-LTR identifier,
-        // but not the underlying orthology group.
+        // LTR suffix does not distinguish orthology groups.
+        // The validated K108 left/right suffixes do.
 
         var groupScopeKey = key([
             groupKey,
@@ -828,3 +850,5 @@
     );
 
 }());
+
+

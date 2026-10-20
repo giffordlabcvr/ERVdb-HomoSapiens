@@ -201,6 +201,20 @@
 
         var groupKey = ls[0] + '-' + n;
 
+        // K108 is an established tandem insertion: two independent
+        // proviruses retain the same historical number, distinguished
+        // by their verified left/right qualifiers. Keep the qualifier
+        // in the registry group_key so their identities stay distinct.
+        // Every other locus follows the standard naming rules.
+        if(ls[0] === 'ERV-2.Beta.K.HML.2' && n === 108 &&
+           type === 'erv') {
+            if(id === 'RBRT241290') {
+                groupKey += '(left)';
+            } else if(id === 'RBRT241289') {
+                groupKey += '(right)';
+            }
+        }
+
         var expected =
             groupKey +
             (type === 'solo_ltr' ? '(LTR)' : '');
@@ -310,7 +324,13 @@
             return a[5] < b[5] ? -1 : 1;
         }
 
-        return Number(a[6]) - Number(b[6]);
+        var byNumber = Number(a[6]) - Number(b[6]);
+        if(byNumber !== 0) {
+            return byNumber;
+        }
+
+        // Stable ordering for the two qualified K108 groups.
+        return a[3] < b[3] ? -1 : (a[3] > b[3] ? 1 : 0);
     });
 
 
@@ -395,3 +415,5 @@
     );
 
 }());
+
+

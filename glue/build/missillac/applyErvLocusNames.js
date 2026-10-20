@@ -18,7 +18,7 @@
 // This is a bootstrap allocator. A persistent registry will
 // subsequently protect previously issued and retired IDs.
 
-var DRY_RUN = false;
+var DRY_RUN = false; // Inspect output before applying to the database.
 
 var LOCUS_TABLE = "erv_locus";
 var ASSOC_TABLE = "erv_locus_lineage_assoc";
@@ -27,6 +27,14 @@ var XREF_TABLE = "erv_locus_legacy_xref";
 var PRIMARY_SOURCE = "compiled_human_erv_loci_hg19";
 var SECONDARY_SOURCE = "wang_hervh_hg19";
 var SECONDARY_LINEAGE = "ERV-1.Zeta.HF.H.1";
+
+// The two independently mapped halves of the historical K108 tandem.
+// Side is determined by the explicitly curated xref-to-locus mapping.
+var K108_LINEAGE = "ERV-2.Beta.K.HML.2";
+var K108_CLAIMS = {
+    "RBRT241290": { side: "left", xref: "lx_legacy_649d6e5562ae9e123d43" },
+    "RBRT241289": { side: "right", xref: "lx_legacy_3147a838b07aab6a4560" }
+};
 
 
 // ============================================================
@@ -83,8 +91,9 @@ function extractWangNumber(name) {
     return match ? positiveInt(match[1]) : null;
 }
 
-function makeMissillacId(lineage, number, type) {
+function makeMissillacId(lineage, number, type, side) {
     return lineage + "-" + number +
+        (side ? "(" + side + ")" : "") +
         (type === "solo_ltr" ? "(LTR)" : "");
 }
 
@@ -318,6 +327,12 @@ function loadClaims(source, isWang) {
         "' and mapping_status = 'mapped'";
 
     if(!isWang) {
+        // Normally only exact mappings are numbering claims. Explicitly
+        // include the two verified K108 best-match xrefs.
+        where = "(" + where + " or (legacy_source = '" + source +
+            "' and (id = '" + K108_CLAIMS.RBRT241290.xref +
+            "' or id = '" + K108_CLAIMS.RBRT241289.xref +
+            "') and mapping_status = 'mapped_best_match'))";
         where += " and source_numeric_id != null";
     }
 
@@ -325,6 +340,7 @@ function loadClaims(source, isWang) {
         "list", "custom-table-row", XREF_TABLE,
         "id",
         "legacy_name",
+        "source_aliases",
         "source_numeric_id",
         "erv_locus.id",
         "-w", where,
@@ -350,7 +366,8 @@ function loadClaims(source, isWang) {
         addToMap(claimsByLocus, locusId, {
             number: number,
             xref_id: norm(row.id),
-            legacy_name: norm(row.legacy_name)
+            legacy_name: norm(row.legacy_name),
+            source_aliases: norm(row.source_aliases)
         });
 
         usable++;
@@ -450,6 +467,50 @@ Object.keys(eligibleByLineage).sort().forEach(function(lineage) {
 
     Object.keys(primaryByNumber).forEach(function(key) {
         var claimants = primaryByNumber[key];
+
+        if(claimants.length === 2 &&
+           lineage === K108_LINEAGE && Number(key) === 108) {
+            var validK108 = true;
+            var sides = {};
+            claimants.forEach(function(item) {
+                var expected = K108_CLAIMS[item.locus_id];
+                var claims = primaryClaims[item.locus_id] || [];
+                var matching = claims.filter(function(claim) {
+                    return expected && claim.xref_id === expected.xref &&
+                        claim.number === 108;
+                });
+                if(!expected || matching.length !== 1 || sides[expected.side]) {
+                    validK108 = false;
+                } else {
+                    sides[expected.side] = true;
+                }
+            });
+            if(validK108 && sides.left && sides.right) {
+                claimants.forEach(function(item) {
+                    assigned[item.locus_id] = {
+                        number: 108,
+                        side: K108_CLAIMS[item.locus_id].side,
+                        source: PRIMARY_SOURCE
+                    };
+                    stats.primaryAssigned++;
+                });
+                used[key] = true;
+                log("K108 tandem accepted: RBRT241290 (left), RBRT241289 (right)");
+                return;
+            }
+            if(!validK108) {
+                log("K108 tandem evidence check failed; inspecting loaded claims");
+                claimants.forEach(function(item) {
+                    var claims = primaryClaims[item.locus_id] || [];
+                    claims.forEach(function(claim) {
+                        log("K108 CHECK locus=" + item.locus_id +
+                            " xref=" + claim.xref_id +
+                            " number=" + claim.number);
+                    });
+                });
+            }
+            // Invalid or missing curated mapping: retain normal collision block.
+        }
 
         if(claimants.length !== 1) {
             stats.primaryCollisions++;
@@ -615,7 +676,8 @@ Object.keys(eligibleByLineage).sort().forEach(function(lineage) {
         var missillacId = makeMissillacId(
             lineage,
             assignment.number,
-            item.locus_type
+            item.locus_type,
+            assignment.side || null
         );
 
         var unchanged =
@@ -632,6 +694,7 @@ Object.keys(eligibleByLineage).sort().forEach(function(lineage) {
             locus_id: item.locus_id,
             lineage_id: lineage,
             number: assignment.number,
+            side: assignment.side || null,
             missillac_id: missillacId,
             source: assignment.source,
             unchanged: unchanged,
@@ -663,7 +726,9 @@ assignments.forEach(function(a) {
 
     // Solo LTR and internal ERV loci share a numbering
     // namespace within each lineage.
-    var groupKey = a.lineage_id + "|" + a.number;
+    // K108 shares a historical number but each qualified half is unique.
+    var groupKey = a.lineage_id + "|" + a.number +
+        (a.side ? "|" + a.side : "");
 
     if(seenGroups[groupKey]) {
         duplicateErrors.push(
