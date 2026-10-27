@@ -9,7 +9,7 @@
 // Only alignments containing more than one member are exported.
 //
 // Output:
-//   web-app/alignments/<alignment-name>.aln.fna
+//   web-app/big_files/alignments/<alignment-name>.aln.fna
 //
 // The fastaAlignmentExporterLineage module is recreated from:
 //
@@ -27,7 +27,7 @@ var EXPORTER_MODULE_FILE =
 	"modules/export/fastaAlignmentExporterLineage.xml";
 
 var OUTPUT_DIRECTORY =
-	"web-app/alignments";
+	"web-app/big_files/alignments";
 
 
 // -----------------------------------------------------------------------------

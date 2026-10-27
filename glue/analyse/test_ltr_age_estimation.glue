@@ -3,13 +3,13 @@ console set cmd-output-file-format tab
     
 # LTR10E (HERV-I)
 
-console set next-cmd-output-file LTR10E_90.tsv
+console set next-cmd-output-file LTR10E_70.tsv
 module estimateLtrAges invoke-function estimateConsensusAges \
-    AL_LTR_LTR10E LTR_REF_LTR10E 90
+    AL_LTR_LTR10E LTR_REF_LTR10E 70
     
 # LTR6A (HERV-T)
 
-console set next-cmd-output-file LTR6A_90.tsv
+console set next-cmd-output-file LTR6A_70.tsv
 module estimateLtrAges invoke-function estimateConsensusAges \
-    AL_LTR_LTR6A LTR_REF_LTR6A 90
+    AL_LTR_LTR6A LTR_REF_LTR6A 70
 
