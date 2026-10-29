@@ -1,6 +1,6 @@
-# ERV-2.Beta.K.HML4 (HERV-K-HML4)
+# ERV-2.Beta.K.HML.4 (HERV-K-HML4)
 
-**ERV-2.Beta.K.HML4 (HERV-K-HML4)** is an ancient endogenous betaretrovirus lineage belonging to the **Kappa (K)** sublineage of betaretroviruses (genus *Betaretrovirus*). The first full-length representative of this lineage, **HERV-K-T47D**, was identified from retrovirus-like particles produced by the human breast carcinoma cell line **T47D**, establishing HML4 as a distinct lineage within the HERV-K superfamily.
+**ERV-2.Beta.K.HML.4 (HERV-K-HML4)** is an ancient endogenous betaretrovirus lineage belonging to the **Kappa (K)** sublineage of betaretroviruses (genus *Betaretrovirus*). The first full-length representative of this lineage, **HERV-K-T47D**, was identified from retrovirus-like particles produced by the human breast carcinoma cell line **T47D**, establishing HML4 as a distinct lineage within the HERV-K superfamily.
 
 Comparative studies indicate that HML4 entered primate genomes during the **late Eocene**, after the divergence of **New World and Old World monkeys** (approximately **35–40 million years ago**). 
 
