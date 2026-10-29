@@ -5,5 +5,5 @@
   # Exporters
 
   create module -t fastaExporter
-  create module -f modules/analyse/fastaAlignmentExporterLineage.xml
+  create module -f modules/export/fastaAlignmentExporterLineage.xml
   create module -f modules/analyse/ervFigTreeAnnotationExporterLocus.xml
