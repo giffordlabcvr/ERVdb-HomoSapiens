@@ -1,6 +1,6 @@
-# ERV-2.Beta.K.HML10 (HERV-K-HML10)
+# ERV-2.Beta.K.HML.10 (HERV-K-HML10)
 
-**ERV-2.Beta.K.HML10 (HERV-K-HML10)** is an ancient endogenous betaretrovirus lineage belonging to the **K** sublineage of betaretroviruses (*Betaretrovirus*). HML10 is a relatively small lineage, represented by approximately nine proviral loci in the human reference genome together with numerous derived solo LTRs. Comparative analyses indicate that the lineage entered primate genomes during the evolution of **Catarrhini (Old World monkeys and apes)**, with most integrations occurring approximately **20-40 million years ago**.
+**ERV-2.Beta.K.HML.10 (HERV-K-HML10)** is an ancient endogenous betaretrovirus lineage belonging to the **K** sublineage of betaretroviruses (*Betaretrovirus*). HML10 is a relatively small lineage, represented by approximately nine proviral loci in the human reference genome together with numerous derived solo LTRs. Comparative analyses indicate that the lineage entered primate genomes during the evolution of **Catarrhini (Old World monkeys and apes)**, with most integrations occurring approximately **20-40 million years ago**.
 
 The best-known member of the lineage is **HERV-K(C4)**, which is integrated within the **complement C4 locus** of the human major histocompatibility complex (MHC). This insertion contributes to the well-known long and short C4 gene polymorphism and was the first HML10 provirus to be characterised. Subsequent genome-wide analyses identified additional HML10 loci, many of which share a striking preference for **intronic integration in the antisense orientation** relative to host genes.
 
