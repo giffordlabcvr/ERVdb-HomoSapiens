@@ -93,8 +93,7 @@ function extractWangNumber(name) {
 
 function makeMissillacId(lineage, number, type, side) {
     return lineage + "-" + number +
-        (side ? "(" + side + ")" : "") +
-        (type === "solo_ltr" ? "(LTR)" : "");
+        (side ? "(" + side + ")" : "");
 }
 
 function addToMap(map, key, value) {
