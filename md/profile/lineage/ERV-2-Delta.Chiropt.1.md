@@ -1,6 +1,6 @@
-# ERV-2.Delta.MinNat (MinERVa)
+# ERV-2-Delta.Chiropt.1 (MinERVa)
 
-**ERV-2.Delta.MinNat (MinERVa)** is an endogenous deltaretrovirus identified in long-fingered bats (*Miniopterus* spp.). It was the first endogenous representative of the **Deltaretrovirus** genus to be identified, providing the first direct evidence that deltaretroviruses have entered mammalian germ lines.
+**ERV-2-Delta.Chiropt.1 (MinERVa)** is an endogenous deltaretrovirus identified in long-fingered bats (*Miniopterus* spp.). It was the first endogenous representative of the **Deltaretrovirus** genus to be identified, providing the first direct evidence that deltaretroviruses have entered mammalian germ lines.
 
 MinERVa is represented by a single orthologous proviral insertion shared by multiple *Miniopterus* species, indicating that the lineage entered the germ line of their common ancestor approximately **20–45 million years ago**. Unlike many endogenous retrovirus lineages, no evidence of subsequent genomic amplification has been identified.
 
