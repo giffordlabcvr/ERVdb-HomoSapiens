@@ -1,4 +1,4 @@
-# ERV-2-Beta.Mys.TR
+# ERV-2-Beta.K.Mys.TR
 
 **ERV-2.Beta.Mys.TR (mysTR)** is a highly amplified endogenous betaretrovirus lineage found in several species of sigmodontine rodents. In some species, mysTR has expanded to approximately 10,000 genomic copies, making it one of the most abundant endogenous retrovirus-derived lineages known in mammals.
 
