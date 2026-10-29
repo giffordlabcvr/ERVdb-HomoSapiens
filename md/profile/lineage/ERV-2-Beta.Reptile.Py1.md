@@ -1,6 +1,6 @@
-# ERV-2.Beta.Py (PyERV)
+# ERV-2-Beta.Reptile.Py1 (PyERV)
 
-**ERV-2.Beta.Py (PyERV)** is an endogenous betaretrovirus lineage identified in pythons. It was discovered during investigations of **boid inclusion body disease (BIBD)**, but subsequent studies found no evidence that PyERV is the causative agent.
+**ERV-2-Beta.Reptile.Py1 (PyERV)** is an endogenous betaretrovirus lineage identified in pythons. It was discovered during investigations of **boid inclusion body disease (BIBD)**, but subsequent studies found no evidence that PyERV is the causative agent.
 
 PyERV was first characterised in the Burmese python (*Python molurus*), where it retains intact *gag*, *pro*, *pol* and *env* open reading frames together with an additional open reading frame of unknown function overlapping *pol*. Despite being endogenous, PyERV is highly expressed, with viral transcripts and particle-associated reverse transcriptase activity detected in multiple tissues and cultured cells. However, infectious transmission has not been demonstrated.
 
