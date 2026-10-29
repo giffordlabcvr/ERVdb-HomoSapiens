@@ -1,6 +1,6 @@
-# ERV-1.Zeta.HF.Fc (HERV-Fc)
+# ERV-1.Zeta.HF.Fc.1 (HERV-Fc)
 
-**ERV-1.Zeta.HF.Fc (HERV-Fc)** is an ancient endogenous retrovirus lineage found in primates. It belongs to the broader ERV-Fc radiation, a group of related gammaretroviruses that independently colonised the germ lines of numerous placental mammal lineages during the Cenozoic.
+**ERV-1.Zeta.HF.Fc.1 (HERV-Fc)** is an ancient endogenous retrovirus lineage found in primates. It belongs to the broader ERV-Fc radiation, a group of related gammaretroviruses that independently colonised the germ lines of numerous placental mammal lineages during the Cenozoic.
 
 Analysis of paired long terminal repeats (LTRs) suggests that HERV-Fc entered the primate germ line approximately **15-24 million years ago**, making it one of the youngest of the classical HERV lineages. Although all known human loci are defective, several retain recognizable *gag*, *pro*, *pol* and *env* genes, providing insight into the genome organisation of the ancestral virus.
 
