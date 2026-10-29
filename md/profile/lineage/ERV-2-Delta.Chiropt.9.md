@@ -1,6 +1,6 @@
-# ERV-2.Delta.MolMol
+# ERV-2-Delta.Chiropt.9
 
-**ERV-2.Delta.MolMol** is an endogenous deltaretrovirus lineage identified in the velvety free-tailed bat (*Molossus molossus*). The lineage was first recognised through the Bat1K genome project and subsequently characterised from a relatively well-preserved proviral sequence.
+**ERV-2-Delta.Chiropt.9** is an endogenous deltaretrovirus lineage identified in the velvety free-tailed bat (*Molossus molossus*). The lineage was first recognised through the Bat1K genome project and subsequently characterised from a relatively well-preserved proviral sequence.
 
 MolMol is one of several endogenous deltaretrovirus lineages identified in bats, together with **MinERVa** and **MurMur**. Its discovery demonstrates that bats were infected by multiple distinct deltaretroviruses during their evolutionary history, extending the known host range of the endogenous deltaretrovirus fossil record beyond primates and ungulates.
 
