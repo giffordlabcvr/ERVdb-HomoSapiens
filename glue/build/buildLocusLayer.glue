@@ -56,7 +56,7 @@ run script glue/build/loadErvLocusLtrAssociations.js
 # -------------------------------------------------------------------------
 
 # Load source-specific provenance records.
-#run file glue/build/loadErvLocusProvenance.glue
+run file glue/build/loadErvLocusProvenance.glue
 
 # -------------------------------------------------------------------------
 # 5. Create locus alignments
